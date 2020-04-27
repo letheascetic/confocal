@@ -17,12 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    core.cpp
+    core_cfg.cpp
 
 HEADERS += \
+    core_cfg.h \
     core_def.h \
-    core_global.h \
-    core.h
+    core_global.h
 
 # Default rules for deployment.
 unix {

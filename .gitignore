@@ -72,3 +72,5 @@ Thumbs.db
 *.exe
 
 core_make/
+test_make/
+
