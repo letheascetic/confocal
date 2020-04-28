@@ -26,6 +26,8 @@ public:
 signals:
 
 private:
+    void reset();
+    void init();
     void extract();
     void calculate();
 

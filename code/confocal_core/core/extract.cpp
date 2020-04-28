@@ -3,11 +3,7 @@
 
 Extract::Extract()
 {
-    m_bRunning = false;
-    m_extractInfo.buffersComplated = 0;
-    m_extractInfo.startTickCount = 0;
-    m_extractInfo.buffersPerSecond = 0.0;
-    m_extractInfo.timespan = 0.0;
+    reset();
 }
 
 Extract::~Extract()
@@ -25,8 +21,7 @@ bool Extract::isRunning()
 
 void Extract::run()
 {
-    m_bRunning = true;
-    m_extractInfo.startTickCount = GetTickCount();
+    init();
     extract();
 }
 
@@ -50,6 +45,22 @@ void Extract::extract()
         //4. calculate
         calculate();
     }
+}
+
+void Extract::reset()
+{
+    m_bRunning = false;
+    m_extractInfo.buffersComplated = 0;
+    m_extractInfo.startTickCount = 0;
+    m_extractInfo.buffersPerSecond = 0.0;
+    m_extractInfo.timespan = 0.0;
+}
+
+void Extract::init()
+{
+    reset();
+    m_bRunning = true;
+    m_extractInfo.startTickCount = GetTickCount();
 }
 
 /* calculate extract info */
