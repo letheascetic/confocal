@@ -17,12 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    core_cfg.cpp
+    convert.cpp \
+    core_ats.cpp \
+    core_cfg.cpp \
+    dqueue.cpp \
+    extract.cpp
 
 HEADERS += \
+    convert.h \
+    core_ats.h \
     core_cfg.h \
     core_def.h \
-    core_global.h
+    core_global.h \
+    dqueue.h \
+    extract.h
 
 # Default rules for deployment.
 unix {
@@ -37,3 +45,11 @@ CONFIG(debug, debug|release) {
     DESTDIR = ../bin/Release
     LIBS += -L../bin/Release
 }
+
+INCLUDEPATH += ./inc/
+
+DEPENDPATH += $$PWD/lib/Win32/
+
+LIBS += -L$$PWD/lib/Win32/ -lAtsApi
+
+

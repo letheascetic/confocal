@@ -2,7 +2,7 @@
 #define CORE_DEF_H
 
 /* API Return Code Values */
-typedef enum _RETURN_CODE
+typedef enum _API_RETURN_CODE
 {
     API_SUCCESS = 0x00000000,
     API_FAILED,
@@ -36,7 +36,7 @@ typedef enum _RETURN_CODE
     API_FAILED_LASER_SET_POWER_FAILED,
     API_FAILED_LASER_UP_POWER_FAILED,
     API_FAILED_LASER_DOWN_POWER_FAILED
-} RETURN_CODE;
+} API_RETURN_CODE;
 
 
 #endif // CORE_DEF_H
