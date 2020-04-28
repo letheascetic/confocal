@@ -9,45 +9,16 @@
 #define ALAZAR_BOARD_SYSTEM_ID 0x01
 #define ALAZAR_BOARD_ID        0x01
 
-//class ATS: public QObject
-//{
-//    Q_OBJECT
-//public:
-//    explicit ATS(QObject *parent = nullptr);
-//    ~ATS();
 
-//public:
-//    HANDLE handle;       // handle for ats device
-//    ATS_QUEUE m_buffers; // buffers queue
-//    ATS_QUEUE m_images;  // images queue
-//    EXTRACT *m_extract;  // pointer to extract thread
-//    CONVERT *m_convert;  // pointer to convert thread
+ATS::ATS(QObject *parent) : QObject(parent)
+{
+    this->handle = NULL;
+}
 
-//signals:
-//    void BufferToConvert();
-
-//public slots:
-//    void BufferExtracted();
-
-//};
-
-//ATS m_ats;
-//HATS h_ats = &m_ats;
-
-//ATS::ATS(QObject *parent) : QObject(parent)
-//{
-//    this->handle = NULL;
-//}
-
-//ATS::~ATS()
-//{
-//    this->handle = NULL;
-//}
-
-//void ATS::BufferExtracted()
-//{
-//    //qDebug() << "[MIATS]: buffer extarcted.";
-//}
+ATS::~ATS()
+{
+    this->handle = NULL;
+}
 
 int AtsTest(int val)
 {

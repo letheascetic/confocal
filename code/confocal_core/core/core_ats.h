@@ -1,12 +1,16 @@
 #ifndef CORE_ATS_H
 #define CORE_ATS_H
 
+#include "core_global.h"
+
 #include <stdint.h>
 #include <QObject>
 
-#include "core_global.h"
 #include "core_cfg.h"
 #include "dqueue.h"
+#include "sampleq.h"
+#include "extract.h"
+#include "convert.h"
 
 typedef void* HATS;
 typedef void* HANDLE;
@@ -26,17 +30,20 @@ typedef struct _BOARD_INFO {
     uint8_t CPLD_MINOR_NUMBER;
 }Board_Info, *PBoard_Info;
 
-//class ATS: public QObject
-//{
-//    Q_OBJECT
-//public:
-//    explicit ATS(QObject *parent = nullptr);
-//    ~ATS();
+class ATS: public QObject
+{
+    Q_OBJECT
+public:
+    explicit ATS(QObject *parent = nullptr);
+    ~ATS();
 
-//private:
-//    HANDLE handle;         // handle for ats device
-//    DQueue m_bufferQ;      // buffers queue
-//};
+private:
+    HANDLE handle;         // handle for ats device
+    DQueue m_bufferQ;      // buffers queue
+    SampleQ m_sampleQ;     // samples queue
+    Extract m_extract;     // extract thread
+    Convert m_convert;     // convert thread
+};
 
 
 #pragma region APIs
