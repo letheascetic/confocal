@@ -41,6 +41,9 @@ namespace confocal_test
             
             HATS pAts = Ats.Open();
             Ats.Close();
+
+            Board_Info board_Info = new Board_Info();
+            Ats.AtsGetBoardInfo(pAts, ref board_Info);
         }
     }
 }

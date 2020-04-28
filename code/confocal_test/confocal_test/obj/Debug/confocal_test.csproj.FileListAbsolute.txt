@@ -1,0 +1,9 @@
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\test_make\bin\debug\confocal_test.exe
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\test_make\bin\debug\confocal_test.pdb
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\confocal_test\confocal_test\obj\Debug\confocal_test.FormEntry.resources
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\confocal_test\confocal_test\obj\Debug\confocal_test.Properties.Resources.resources
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\confocal_test\confocal_test\obj\Debug\confocal_test.csproj.GenerateResource.cache
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\confocal_test\confocal_test\obj\Debug\confocal_test.csproj.CoreCompileInputs.cache
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\confocal_test\confocal_test\obj\Debug\confocal_test.exe
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\confocal_test\confocal_test\obj\Debug\confocal_test.pdb
+H:\WorkSpace\work_space\git_repo_private\Confocal\code\confocal_test\confocal_test\obj\Debug\confocal_test.csprojAssemblyReference.cache

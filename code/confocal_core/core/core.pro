@@ -21,7 +21,8 @@ SOURCES += \
     core_ats.cpp \
     core_cfg.cpp \
     dqueue.cpp \
-    extract.cpp
+    extract.cpp \
+    sampleq.cpp
 
 HEADERS += \
     convert.h \
@@ -30,7 +31,8 @@ HEADERS += \
     core_def.h \
     core_global.h \
     dqueue.h \
-    extract.h
+    extract.h \
+    sampleq.h
 
 # Default rules for deployment.
 unix {

@@ -9,21 +9,6 @@
 #define ALAZAR_BOARD_SYSTEM_ID 0x01
 #define ALAZAR_BOARD_ID        0x01
 
-/* ats9440 board info */
-struct ATS_INFO {
-    uint32_t BOARD_MODEL;             // board model
-    uint8_t BOARD_MAJOR_NUMBER;       // board version
-    uint8_t BOARD_MINOR_NUMBER;
-    uint8_t SDK_MAJOR_NUMBER;         // sdk version
-    uint8_t SDK_MINOR_NUMBER;
-    uint8_t SDK_REVISION;
-    uint8_t DRIVER_MAJOR_NUMBER;      // driver version
-    uint8_t DRIVER_MINOR_NUMBER;
-    uint8_t DRIVER_REVISION;
-    uint8_t CPLD_MAJOR_NUMBER;        // CPLD version
-    uint8_t CPLD_MINOR_NUMBER;
-};
-
 //class ATS: public QObject
 //{
 //    Q_OBJECT
@@ -91,5 +76,26 @@ int AtsFind(void)
     return AlazarNumOfSystems();
 }
 
+int AtsGetBoardInfo(HATS pAts, PBoard_Info pInfo)
+{
+    if(pAts == NULL)
+    {
+        return API_FAILED_ATS_HANDLE_INVALID;
+    }
 
+    if(pInfo == NULL)
+    {
+        return API_FAILED_ATS_INFO_INSTANCE_INVALID;
+    }
+
+
+
+    pInfo->BOARD_MODEL = 0x01;
+    pInfo->BOARD_MAJOR_NUMBER = 0x02;
+    pInfo->BOARD_MINOR_NUMBER = 0x03;
+    pInfo->CPLD_MAJOR_NUMBER = 0x05;
+    pInfo->SDK_REVISION = 0x04;
+
+    return API_SUCCESS;
+}
 

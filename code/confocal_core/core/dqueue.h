@@ -5,6 +5,7 @@
 #include <QMutexLocker>
 #define QUEUE_SIZE_DEFAULT 8
 
+/* queue for original buffers */
 class DQueue
 {
 public:
@@ -23,8 +24,8 @@ public:
 
 private:
     QMutex m_mutex;
-    bool m_Initialized;
-    uint32_t m_elemSize;            // bytes per element[bytes per frame]
+    bool m_initialized;
+    uint32_t m_elemSize;            // bytes per element[bytes per frame], one buffer one frame
     uint32_t m_queueSize;           // maximum num of elements[frames]
     QQueue<uint16_t*> m_unusedQueue;
     QQueue<uint16_t*> m_usedQueue;

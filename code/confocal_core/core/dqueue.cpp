@@ -4,7 +4,7 @@ DQueue::DQueue()
 {
     m_elemSize = 0;
     m_queueSize = 0;
-    m_Initialized = false;
+    m_initialized = false;
 }
 
 DQueue::~DQueue()
@@ -25,6 +25,7 @@ void DQueue::InitQueue(uint32_t eSize, uint32_t qSize)
             m_unusedQueue.enqueue(buffer);
         }
     }
+    m_initialized = true;
 }
 
 void DQueue::ReleaseQueue(void)
@@ -52,14 +53,14 @@ void DQueue::ReleaseQueue(void)
 
     m_unusedQueue.clear();
     m_usedQueue.clear();
-    m_Initialized = false;
+    m_initialized = false;
     m_elemSize = 0;
     m_queueSize = 0;
 }
 
 bool DQueue::Initialized(void)
 {
-    return m_Initialized;
+    return m_initialized;
 }
 
 uint32_t DQueue::UsedSize(void)
@@ -81,7 +82,7 @@ uint32_t DQueue::ElementSize()
 
 uint16_t* DQueue::DequeueUnused()
 {
-   if(!m_Initialized)
+   if(!m_initialized)
    {
        return NULL;
    }
@@ -97,7 +98,7 @@ uint16_t* DQueue::DequeueUnused()
 
 uint16_t* DQueue::DequeueUsed()
 {
-   if(!m_Initialized)
+   if(!m_initialized)
    {
        return NULL;
    }
@@ -113,7 +114,7 @@ uint16_t* DQueue::DequeueUsed()
 
 void DQueue::EnqueueUsed(uint16_t *buffer)
 {
-    if(!m_Initialized || buffer == NULL)
+    if(!m_initialized || buffer == NULL)
     {
         return;
     }
@@ -124,7 +125,7 @@ void DQueue::EnqueueUsed(uint16_t *buffer)
 
 void DQueue::EnqueueUnused(uint16_t* buffer)
 {
-    if(!m_Initialized || buffer == NULL)
+    if(!m_initialized || buffer == NULL)
     {
         return;
     }

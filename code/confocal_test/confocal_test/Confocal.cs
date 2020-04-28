@@ -9,6 +9,21 @@ namespace Confocal
     using HCONFIG = System.IntPtr;
     using HATS = System.IntPtr;
 
+    public struct Board_Info
+    {
+        UInt32 BOARD_MODEL;            // board model
+        Byte BOARD_MAJOR_NUMBER;       // board version
+        Byte BOARD_MINOR_NUMBER;
+        Byte SDK_MAJOR_NUMBER;         // sdk version
+        Byte SDK_MINOR_NUMBER;
+        Byte SDK_REVISION;
+        Byte DRIVER_MAJOR_NUMBER;      // driver version
+        Byte DRIVER_MINOR_NUMBER;
+        Byte DRIVER_REVISION;
+        Byte CPLD_MAJOR_NUMBER;        // CPLD version
+        Byte CPLD_MINOR_NUMBER;
+    };
+
     public class Config
     {
         [DllImport("core.dll", EntryPoint = "Test", CallingConvention = CallingConvention.Cdecl)]
@@ -101,5 +116,8 @@ namespace Confocal
 
         [DllImport("core.dll", EntryPoint = "AtsClose", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Close();
+
+        [DllImport("core.dll", EntryPoint = "AtsGetBoardInfo", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AtsGetBoardInfo(HATS pAts, ref Board_Info pBoardInfo);
     };
 }
