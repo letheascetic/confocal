@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Confocal;
-
+using log4net;
 
 namespace confocal_test
 {
@@ -17,6 +17,10 @@ namespace confocal_test
 
     public partial class FormEntry : Form
     {
+        /************************************************************************************/
+        private static readonly ILog Logger = log4net.LogManager.GetLogger("info");
+        /************************************************************************************/
+
         public FormEntry()
         {
             InitializeComponent();
@@ -49,6 +53,12 @@ namespace confocal_test
         private void btnMain_Click(object sender, EventArgs e)
         {
             FormMain form = new FormMain();
+            form.ShowDialog();
+        }
+
+        private void btnLaser_Click(object sender, EventArgs e)
+        {
+            FormLaser form = new FormLaser();
             form.ShowDialog();
         }
     }

@@ -30,6 +30,7 @@
         {
             this.btnCfg = new System.Windows.Forms.Button();
             this.btnMain = new System.Windows.Forms.Button();
+            this.btnLaser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCfg
@@ -52,11 +53,22 @@
             this.btnMain.UseVisualStyleBackColor = true;
             this.btnMain.Click += new System.EventHandler(this.btnMain_Click);
             // 
+            // btnLaser
+            // 
+            this.btnLaser.Location = new System.Drawing.Point(145, 12);
+            this.btnLaser.Name = "btnLaser";
+            this.btnLaser.Size = new System.Drawing.Size(127, 35);
+            this.btnLaser.TabIndex = 2;
+            this.btnLaser.Text = "Laser Test";
+            this.btnLaser.UseVisualStyleBackColor = true;
+            this.btnLaser.Click += new System.EventHandler(this.btnLaser_Click);
+            // 
             // FormEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 353);
+            this.Controls.Add(this.btnLaser);
             this.Controls.Add(this.btnMain);
             this.Controls.Add(this.btnCfg);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -71,6 +83,7 @@
 
         private System.Windows.Forms.Button btnCfg;
         private System.Windows.Forms.Button btnMain;
+        private System.Windows.Forms.Button btnLaser;
     }
 }
 

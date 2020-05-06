@@ -60,16 +60,26 @@
     <Compile Include="FormEntry.Designer.cs">
       <DependentUpon>FormEntry.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLaser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLaser.Designer.cs">
+      <DependentUpon>FormLaser.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Laser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormEntry.resx">
       <DependentUpon>FormEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLaser.resx">
+      <DependentUpon>FormLaser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

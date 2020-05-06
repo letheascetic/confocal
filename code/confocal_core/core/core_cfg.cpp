@@ -15,11 +15,17 @@
 #define HOLE_SIZE_DEFAULT		(50)
 
 /* define laser struct */
-typedef struct _LASER {
+typedef struct _LASER_CHAN {
     uint16_t id;
     uint16_t status;
     float power;
-} LASER[LASER_CHAN_NUM];
+} LASER_CHAN[LASER_CHAN_NUM];
+
+typedef struct _LASER {
+    char* portName;
+    bool isOpen;
+    LASER_CHAN channels;
+}LASER;
 
 /* define pmt struct */
 typedef struct _PMT {
@@ -42,9 +48,9 @@ typedef struct _SCAN {
 } SCAN;
 
 /* define light hole struct */
-typedef struct _HOLE {
+typedef struct _PINHOLE {
     uint16_t size;
-} HOLE;
+} PINHOLE;
 
 /* define config struct */
 struct _Cfg
@@ -53,7 +59,7 @@ struct _Cfg
     PMT m_pmt;
     CRS m_crs;
     SCAN m_scan;
-    HOLE m_hole;
+    PINHOLE m_hole;
 
     _Cfg();
     void Init();
@@ -71,11 +77,13 @@ _Cfg::_Cfg()
 
 void _Cfg::Init()
 {
+    m_laser.isOpen = false;
+    m_laser.portName = NULL;
     for (int i = 0; i < LASER_CHAN_NUM; i++)
     {
-        m_laser[i].id = i;
-        m_laser[i].status = LASER_CHAN_SWITCH_ON;
-        m_laser[i].power = LASER_POWER_DEFAULT;
+        m_laser.channels[i].id = i;
+        m_laser.channels[i].status = LASER_CHAN_SWITCH_ON;
+        m_laser.channels[i].power = LASER_POWER_DEFAULT;
     }
 
     for (int i = 0; i < PMT_CHAN_NUM; i++)

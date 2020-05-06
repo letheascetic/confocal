@@ -34,6 +34,8 @@ typedef void* HCONFIG;
 extern "C" CORE_EXPORT int Test(int val);
 extern "C" CORE_EXPORT HCONFIG CfgGetConfig(void);
 extern "C" CORE_EXPORT uint16_t CfgGetChannelNum(void);
+//extern "C" CORE_EXPORT int CfgSetLaserPortName(char* portName);
+//extern "C" CORE_EXPORT char* CfgGetLaserPortName(char* portName);
 extern "C" CORE_EXPORT int CfgSetLaserSwitch(HCONFIG pConfig, uint16_t id, uint16_t status);
 extern "C" CORE_EXPORT uint16_t CfgGetLaserSwitch(HCONFIG pConfig, uint16_t id);
 extern "C" CORE_EXPORT int CfgSetLaserPower(HCONFIG pConfig, uint16_t id, float power);
