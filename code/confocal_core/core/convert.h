@@ -5,6 +5,8 @@
 #include <QThread>
 #include <QMutexLocker>
 
+class ATS;
+
 typedef struct _Convert_Info {
     int imagesComplated;       // num of images converted
     int startTickCount;        // start tick count
@@ -16,7 +18,7 @@ class Convert : public QThread
 {
     Q_OBJECT
 public:
-    Convert();
+    Convert(ATS* pAts);
     ~Convert();
     bool isRunning();
     void run();
@@ -33,6 +35,7 @@ private:
 
 private:
     QMutex m_mutex;
+    ATS* m_ats;
     bool m_bRunning;                // running flag
     Convert_Info m_convertInfo;     // convert info
 };

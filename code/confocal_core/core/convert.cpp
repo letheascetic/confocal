@@ -1,8 +1,9 @@
 #include "convert.h"
 #include <windows.h>
 
-Convert::Convert()
+Convert::Convert(ATS* pAts)
 {
+    m_ats = pAts;
     reset();
 }
 

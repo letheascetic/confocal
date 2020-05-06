@@ -5,6 +5,8 @@
 #include <QThread>
 #include <QMutexLocker>
 
+class ATS;
+
 typedef struct _Extract_Info {
     int buffersComplated;       // num of buffers extracted
     int startTickCount;         // start tick count
@@ -16,7 +18,7 @@ class Extract : public QThread
 {
     Q_OBJECT
 public:
-    Extract();
+    Extract(ATS* pAts);
     ~Extract();
     bool isRunning();
     void run();
@@ -33,6 +35,7 @@ private:
 
 private:
     QMutex m_mutex;
+    ATS* m_ats;
     bool m_bRunning;            // running flag
     Extrct_Info m_extractInfo;  // extract info
 };

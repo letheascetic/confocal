@@ -1,8 +1,9 @@
 #include "extract.h"
 #include <windows.h>
 
-Extract::Extract()
+Extract::Extract(ATS* pAts)
 {
+    m_ats = pAts;
     reset();
 }
 

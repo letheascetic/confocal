@@ -38,13 +38,20 @@ public:
     ~ATS();
 
 private:
-    HANDLE handle;         // handle for ats device
-    DQueue m_bufferQ;      // buffers queue
-    SampleQ m_sampleQ;     // samples queue
-    Extract m_extract;     // extract thread
-    Convert m_convert;     // convert thread
-};
+    void* handle;         // handle for ats device
+    DQueue* m_bufferQ;      // buffers queue
+    SampleQ* m_sampleQ;     // samples queue
+    Extract* m_extract;    // extract thread
+    Convert* m_convert;    // convert thread
 
+public:
+    void* GetHandle(void);
+    void SetHandle(void*);
+    DQueue* GetBufferQ(void);
+    SampleQ* GetSampleQ(void);
+    Extract* GetExtract(void);
+    Convert* GetConvert(void);
+};
 
 #pragma region APIs
 
@@ -53,8 +60,7 @@ extern "C" CORE_EXPORT int AtsFind(void);
 extern "C" CORE_EXPORT HATS AtsOpen(void);
 extern "C" CORE_EXPORT void AtsClose(void);
 extern "C" CORE_EXPORT int AtsGetBoardInfo(HATS pAts, PBoard_Info pInfo);
-
-//extern "C" CORE_EXPORT int AtsSetConfiguration(HATS pAts, HCONFIG pConfig);
+extern "C" CORE_EXPORT int AtsSetConfiguration(HATS pAts, HCONFIG pConfig);
 //extern "C" CORE_EXPORT int AtsStart(HATS pAts, HCONFIG pConfig);
 //extern "C" CORE_EXPORT int AtsStop(HATS pAts);
 
