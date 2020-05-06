@@ -45,5 +45,11 @@ namespace confocal_test
             Board_Info board_Info = new Board_Info();
             Ats.AtsGetBoardInfo(pAts, ref board_Info);
         }
+
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            FormMain form = new FormMain();
+            form.ShowDialog();
+        }
     }
 }
