@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Confocal;
 
 namespace confocal_test
 {
@@ -23,17 +24,29 @@ namespace confocal_test
 
         private void FormLaser_Load(object sender, EventArgs e)
         {
-
+            Init();
+            InitControlers();
         }
 
         private void Init()
         {
-
+            
         }
 
         private void InitControlers()
         {
-            cbxPort.SelectedIndex = 0;
+            cbxPort.SelectedIndex = Laser.PortName() == null ? 0 : cbxPort.FindString(Laser.PortName());
+            cbxPort.Enabled = Laser.IsConnected() ? false : true;
+
+            chbx405.Checked = Laser.GetChannelStatus(Laser.LASER_CHAN_ID_405_NM) == Laser.LASER_CHAN_SWITCH_ON ? true : false;
+            chbx488.Checked = Laser.GetChannelStatus(Laser.LASER_CHAN_ID_488_NM) == Laser.LASER_CHAN_SWITCH_ON ? true : false;
+            chbx561.Checked = Laser.GetChannelStatus(Laser.LASER_CHAN_ID_561_NM) == Laser.LASER_CHAN_SWITCH_ON ? true : false;
+            chbx640.Checked = Laser.GetChannelStatus(Laser.LASER_CHAN_ID_640_NM) == Laser.LASER_CHAN_SWITCH_ON ? true : false;
+
+            tbP405.Value = (int)Laser.GetChannelPower(Laser.LASER_CHAN_ID_405_NM);
+            tbP488.Value = (int)Laser.GetChannelPower(Laser.LASER_CHAN_ID_488_NM);
+            tbP561.Value = (int)Laser.GetChannelPower(Laser.LASER_CHAN_ID_561_NM);
+            tbP640.Value = (int)Laser.GetChannelPower(Laser.LASER_CHAN_ID_640_NM);
         }
 
 

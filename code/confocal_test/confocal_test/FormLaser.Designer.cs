@@ -50,7 +50,7 @@
             this.lb640 = new System.Windows.Forms.Label();
             this.tbG640 = new System.Windows.Forms.TrackBar();
             this.lbP640 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chbx640 = new System.Windows.Forms.CheckBox();
             this.tbP640 = new System.Windows.Forms.TrackBar();
             this.cbxPort = new System.Windows.Forms.ComboBox();
             this.lbLaser = new System.Windows.Forms.Label();
@@ -332,19 +332,19 @@
             this.lbP640.TabIndex = 20;
             this.lbP640.Text = "100%";
             // 
-            // checkBox1
+            // chbx640
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.Color.Red;
-            this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.checkBox1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Purple;
-            this.checkBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.checkBox1.Location = new System.Drawing.Point(12, 283);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(81, 24);
-            this.checkBox1.TabIndex = 18;
-            this.checkBox1.Text = "640nm";
-            this.checkBox1.UseVisualStyleBackColor = false;
+            this.chbx640.AutoSize = true;
+            this.chbx640.BackColor = System.Drawing.Color.Red;
+            this.chbx640.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.chbx640.FlatAppearance.CheckedBackColor = System.Drawing.Color.Purple;
+            this.chbx640.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.chbx640.Location = new System.Drawing.Point(12, 283);
+            this.chbx640.Name = "chbx640";
+            this.chbx640.Size = new System.Drawing.Size(81, 24);
+            this.chbx640.TabIndex = 18;
+            this.chbx640.Text = "640nm";
+            this.chbx640.UseVisualStyleBackColor = false;
             // 
             // tbP640
             // 
@@ -416,7 +416,7 @@
             this.Controls.Add(this.lb640);
             this.Controls.Add(this.tbG640);
             this.Controls.Add(this.lbP640);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chbx640);
             this.Controls.Add(this.tbP640);
             this.Controls.Add(this.lbG561);
             this.Controls.Add(this.lb561);
@@ -479,7 +479,7 @@
         private System.Windows.Forms.Label lb640;
         private System.Windows.Forms.TrackBar tbG640;
         private System.Windows.Forms.Label lbP640;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chbx640;
         private System.Windows.Forms.TrackBar tbP640;
         private System.Windows.Forms.ComboBox cbxPort;
         private System.Windows.Forms.Label lbLaser;

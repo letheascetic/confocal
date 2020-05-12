@@ -148,7 +148,28 @@ namespace Confocal
             return (int)RETURN_CODE.API_SUCCESS;
         }
 
+        public static int SetChannelPower(int id, float power)
+        {
+            if (!LaserLib2_SetPower(id + 1, power))
+            {
+                Logger.Info(string.Format("Laser set power [{0}] failed:[LaserLib2_SetPower][{1}].", id, RETURN_CODE.API_FAILED_LASER_SET_POWER_FAILED));
+                return (int)RETURN_CODE.API_FAILED_LASER_SET_POWER_FAILED;
+            }
 
+            m_channels[id].power = power;
+            Logger.Info(string.Format("Laser set power [{0}] success:[LaserLib2_SetPower][{1}].", id, RETURN_CODE.API_SUCCESS));
+            return (int)RETURN_CODE.API_SUCCESS;
+        }
+
+        public static float GetChannelPower(int id)
+        {
+            return m_channels[id].power;
+        }
+
+        public static int GetChannelStatus(int id)
+        {
+            return m_channels[id].status;
+        }
 
     }
 }
