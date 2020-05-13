@@ -226,6 +226,7 @@
             // 
             // dockPanel
             // 
+            this.dockPanel.BackColor = System.Drawing.Color.White;
             this.dockPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel.DockBottomPortion = 0.3D;
@@ -244,9 +245,11 @@
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Confocal Imaging v";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);
