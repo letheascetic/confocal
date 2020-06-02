@@ -288,7 +288,137 @@ namespace confocal_core
             return m_hole.Size;
         }
 
+        public API_RETURN_CODE SetScanMode(SCAN_MODE mode)
+        {
+            Logger.Info(string.Format("set scan mode: [{0}].", mode));
+            m_scan.Mode = mode;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
 
+        public SCAN_MODE GetScanMode()
+        {
+            return m_scan.Mode;
+        }
+
+        public API_RETURN_CODE SetScanStartegy(SCAN_STRATEGY strategy)
+        {
+            Logger.Info(string.Format("set scan strategy: [{0}].", strategy));
+            m_scan.Strategy = strategy;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public SCAN_STRATEGY GetScanStrategy()
+        {
+            return m_scan.Strategy;
+        }
+
+        public API_RETURN_CODE SetScanMirrorNum(SCAN_MIRROR_NUM mirrorNum)
+        {
+            Logger.Info(string.Format("set scan mirror num: [{0}].", mirrorNum));
+            m_scan.MirrorNum = mirrorNum;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public SCAN_MIRROR_NUM GetScanMirrorNum()
+        {
+            return m_scan.MirrorNum;
+        }
+
+        public API_RETURN_CODE SetScanFlag(int flag)
+        {
+            Logger.Info(string.Format("set scan flag: [{0}].", flag));
+            m_scan.Flag = flag;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public int GetScanFlag()
+        {
+            return m_scan.Flag;
+        }
+
+        public API_RETURN_CODE SetGalvResponseTime(double responeTime)
+        {
+            Logger.Info(string.Format("set galv response time: [{0}].", responeTime));
+            m_scan.GalvResponseTime = responeTime;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetGalvResponseTime()
+        {
+            return m_scan.GalvResponseTime;
+        }
+
+        public API_RETURN_CODE SetScanFieldSize(double fieldSize)
+        {
+            Logger.Info(string.Format("set scan field size: [{0}].", fieldSize));
+            m_scan.FieldSize = fieldSize;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetScanFieldSize()
+        {
+            return m_scan.FieldSize;
+        }
+
+        public API_RETURN_CODE SetScanPixelTime(double pixelTime)
+        {
+            Logger.Info(string.Format("set scan pixel time: [{0}].", pixelTime));
+            m_scan.PixelTime = pixelTime;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetScanPixelTime()
+        {
+            return m_scan.PixelTime;
+        }
+
+        public API_RETURN_CODE SetScanXPoints(int xPoints)
+        {
+            Logger.Info(string.Format("set scan x points: [{0}].", xPoints));
+            m_scan.XPoints = xPoints;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public int GetScanXPoints()
+        {
+            return m_scan.XPoints;
+        }
+
+        public API_RETURN_CODE SetScanYPoints(int yPoints)
+        {
+            Logger.Info(string.Format("set scan y points: [{0}].", yPoints));
+            m_scan.YPoints = yPoints;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public int GetScanYPoints()
+        {
+            return m_scan.YPoints;
+        }
+
+        public API_RETURN_CODE SetScanCalibrationVoltage(double calibrationVoltage)
+        {
+            Logger.Info(string.Format("set calibration voltage: [{0}].", calibrationVoltage));
+            m_scan.CalibrationVoltage = calibrationVoltage;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetScanCalibrationVoltage()
+        {
+            return m_scan.CalibrationVoltage;
+        }
+
+        public API_RETURN_CODE SetScanCurveCoff(double curveCoff)
+        {
+            Logger.Info(string.Format("set scan curve coff: [{0}].", curveCoff));
+            m_scan.CurveCoff = curveCoff;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetScanCurveCoff()
+        {
+            return m_scan.CurveCoff;
+        }
 
         #endregion
 
