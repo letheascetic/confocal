@@ -41,6 +41,6 @@ namespace confocal_core
 
         }
 
-        #region
+        #endregion
     }
 }
