@@ -18,7 +18,7 @@ namespace confocal_ui
         /************************************************************************************/
         private static readonly ILog Logger = log4net.LogManager.GetLogger("info");
         /************************************************************************************/
-        FormScan m_pFormSC = new FormScan();
+        FormScan m_pFormScan = new FormScan();
         FormROI m_pFormROI = new FormROI();
         FormMeasurement m_pFormMeas = new FormMeasurement();
         /************************************************************************************/
@@ -45,7 +45,8 @@ namespace confocal_ui
             this.Text += version;
             Logger.Info(string.Format("get software version: [{0}]", version));
 
-            m_pFormSC.Show(this.dockPanel, DockState.DockRight);
+            m_pFormScan.Show(this.dockPanel, DockState.DockRight);
+            m_pFormROI.Show(this.dockPanel, DockState.DockRight);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Left, 0.5);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Bottom, 0.5);
             //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);

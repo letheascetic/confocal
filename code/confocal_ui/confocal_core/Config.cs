@@ -434,9 +434,12 @@ namespace confocal_core
 
             for (int i = 0; i < CHAN_NUM; i++)
             {
-                m_laser.Channels[i].Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
-                m_laser.Channels[i].Power = LASER_POWER_DEFAULT;
-                m_laser.Channels[i].Status = LASER_CHAN_SWITCH.OFF;
+                m_laser.Channels[i] = new LaserChannel
+                {
+                    Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i),
+                    Power = LASER_POWER_DEFAULT,
+                    Status = LASER_CHAN_SWITCH.OFF
+                };
             }
 
             m_pmt = new Pmt
@@ -446,8 +449,11 @@ namespace confocal_core
 
             for (int i = 0; i < CHAN_NUM; i++)
             {
-                m_pmt.Channels[i].Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
-                m_pmt.Channels[i].Gain = PMT_GAIN_DEFAULT;
+                m_pmt.Channels[i] = new PmtChannel
+                {
+                    Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i),
+                    Gain = PMT_GAIN_DEFAULT
+                };
             }
 
             m_crs = new Crs

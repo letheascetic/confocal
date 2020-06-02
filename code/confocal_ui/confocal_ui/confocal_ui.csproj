@@ -113,5 +113,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\confocal_core\confocal_core.csproj">
+      <Project>{03f7aaea-27e2-4046-afa6-9da6dbbf98c7}</Project>
+      <Name>confocal_core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

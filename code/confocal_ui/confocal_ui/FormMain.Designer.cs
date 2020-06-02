@@ -226,9 +226,10 @@
             // 
             // dockPanel
             // 
-            this.dockPanel.BackColor = System.Drawing.Color.White;
+            this.dockPanel.BackColor = System.Drawing.SystemColors.Control;
             this.dockPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dockPanel.DockBackColor = System.Drawing.SystemColors.ActiveBorder;
             this.dockPanel.DockBottomPortion = 0.3D;
             this.dockPanel.Location = new System.Drawing.Point(0, 49);
             this.dockPanel.Name = "dockPanel";
