@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace confocal
+namespace confocal_ui
 {
     static class Program
     {

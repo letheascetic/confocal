@@ -11,14 +11,14 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace confocal
+namespace confocal_ui
 {
     public partial class FormMain : Form
     {
         /************************************************************************************/
         private static readonly ILog Logger = log4net.LogManager.GetLogger("info");
         /************************************************************************************/
-        FormScanControl m_pFormSC = new FormScanControl();
+        FormScan m_pFormSC = new FormScan();
         FormROI m_pFormROI = new FormROI();
         FormMeasurement m_pFormMeas = new FormMeasurement();
         /************************************************************************************/

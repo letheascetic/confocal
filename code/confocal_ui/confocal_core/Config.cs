@@ -1,0 +1,375 @@
+﻿using log4net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace confocal_core
+{
+    public enum API_RETURN_CODE : int
+    {
+        API_SUCCESS = 0x00000000,
+        API_FAILED = 0x00000001,
+        /* error for config */
+        API_FAILED_CONFIG_HANDLE_INVALID = 0x00000100,
+        API_FAILED_CONFIG_SET_LASER_SWITCH_FAILED,
+        API_FAILED_CONFIG_SET_LASER_POWER_FAILED,
+        /* error for ats9440 */
+        API_FAILED_ATS_HANDLE_INVALID,
+        API_FAILED_ATS_GET_BOARD_VERSION_FAILED,
+        API_FAILED_ATS_GET_SDK_VERSION_FAILED,
+        API_FIALED_ATS_GET_DRIVER_VERSION_FAILED,
+        API_FIALED_ATS_GET_CPLD_VERSION_FAILED,
+        API_FAILED_ATS_INFO_INSTANCE_INVALID,
+        API_FAILED_ATS_SET_CLOCK_FAILED,
+        API_FAILED_ATS_SET_INPUT_CHANNEL_FAILED,
+        API_FAILED_ATS_SET_TRIGGER_OPERATION_FAILED,
+        API_FAILED_ATS_SET_EXTERNAL_TRIGGER_FAILED,
+        API_FAILED_ATS_SET_TRIGGER_TIMEOUT_FAILED,
+        API_FAILED_ATS_SET_TRIGGER_DELAY_FAILED,
+        API_FAILED_ATS_SET_AUX_IO_FAILED,
+        API_FAILED_ATS_GET_CHANNEL_INFO_FAILED,
+        API_FAILED_ATS_MALLOC_BUFFER_FAILED,
+        API_FAILED_ATS_SET_RECORD_SIZE_FAILED,
+        API_FAILED_ATS_CONFIG_ASYNC_READ_FAILED,
+        API_FAILED_ATS_START_CAPTURE_FAILED,
+        API_FAILED_ATS_ENABLE_CRS_FAILED,
+        API_FAILED_ATS_ABORT_ASYNC_READ_FAILED,
+        API_FAILED_ATS_FORCE_TRIGGER_ENABLE_FAILED,
+        /* error for laser */
+        API_FAILED_LASER_LOAD_DLL_FAILED,
+        API_FAILED_LASER_CONNECT_FAILED,
+        API_FAILED_LASER_RELEASE_FAILED,
+        API_FAILED_LASER_OPEN_CHANNEL_FAILED,
+        API_FAILED_LASER_CLOSE_CHANNEL_FAILED,
+        API_FAILED_LASER_SET_POWER_FAILED,
+        API_FAILED_LASER_UP_POWER_FAILED,
+        API_FAILED_LASER_DOWN_POWER_FAILED
+    }
+
+    public enum CHAN_ID : int
+    {
+        WAVELENGTH_405_NM = 0,
+        WAVELENGTH_488_NM = 1,
+        WAVELENGTH_561_NM = 2,
+        WAVELENGTH_640_NM = 3
+    }
+
+    public enum LASER_CHAN_SWITCH : int
+    {
+        OFF = 0,
+        ON = 1
+    }
+
+    public enum SCAN_MODE : int
+    {
+        RESONANT = 0,
+        GALVANOMETER = 1
+    }
+
+    public enum SCAN_STRATEGY : int
+    {
+        Z_BIDIRECTION = 0,          // Z行双向
+        Z_UNIDIRECTION = 1          // Z行单向
+    }
+
+    public enum SCAN_MIRROR_NUM
+    {
+        TWO = 0,
+        THREEE
+    };
+
+    public class LaserChannel
+    {
+        private CHAN_ID id;
+        private LASER_CHAN_SWITCH status;
+        private double power;
+
+        public CHAN_ID Id
+        { get { return id; } set{ id = value; } }
+        public LASER_CHAN_SWITCH Status
+        { get { return status; } set { status = value; } }
+        public double Power
+        { get { return power; } set { power = value; } }
+    }
+
+    public class Laser
+    {
+        private string portName;
+        private LaserChannel[] channels;
+
+        public string PortName
+        { get { return portName; } set { portName = value; } }
+        public LaserChannel[] Channels
+        { get { return channels; } set { channels = value; } }
+
+    }
+
+    public class PmtChannel
+    {
+        private CHAN_ID id;
+        private double gain;
+
+        public CHAN_ID Id
+        { get { return id; } set { id = value; } }
+        public double Gain
+        { get { return gain; } set { gain = value; } }
+    }
+
+    public class Pmt
+    {
+        private PmtChannel[] channels;
+
+        public PmtChannel[] Channels
+        { get { return channels; } set { channels = value; } }
+    }
+
+    public class Crs
+    {
+        private double amplitude;
+
+        public double Amplitude
+        { get { return amplitude; } set { amplitude = value; } }
+    }
+
+    public class PinHole
+    {
+        private double size;
+
+        public double Size
+        { get{ return size; }set { size = value; } }
+    }
+
+    public class Scan
+    {
+        private SCAN_MODE mode;             // 扫描模式, Galv or Res
+        private SCAN_STRATEGY strategy;     // 扫描策略
+        private SCAN_MIRROR_NUM mirrorNum;  // 三振镜 or 两振镜
+        private int flag;                   // 扫描功能标志位
+        private double galvResponseTime;        // 振镜响应时间,us
+        private double fieldSize;               // 视场大小,um
+        private double pixelTime;               // 像素时间
+        private int xPoints;                    // x扫描像素
+        private int yPoints;                    // y扫描像素
+        private double calibrationVoltage;      // 校准[标定]电压,V
+        private double curveCoff;               // 曲线系数,%
+
+        public SCAN_MODE Mode
+        { get { return mode; } set { mode = value; } }
+        public SCAN_STRATEGY Strategy
+        { get { return strategy; } set { strategy = value; } }
+        public SCAN_MIRROR_NUM MirrorNum
+        { get { return mirrorNum; } set { mirrorNum = value; } }
+        public int Flag
+        { get { return flag; } set { flag = value; } }
+        public double GalvResponseTime
+        { get { return galvResponseTime; } set { galvResponseTime = value; } }
+        public double FieldSize
+        { get { return fieldSize; } set { fieldSize = value; } }
+        public double PixelTime
+        { get { return pixelTime; } set { pixelTime = value; } }
+        public int XPoints
+        { get { return xPoints; } set { xPoints = value; } }
+        public int YPoints
+        { get{ return yPoints; } set { yPoints = value; } }
+        public double CalibrationVoltage
+        { get { return calibrationVoltage; }set { calibrationVoltage = value; } }
+        public double CurveCoff
+        { get { return curveCoff; } set { curveCoff = value; } }
+    }
+
+    public class Config
+    {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        private volatile static Config pConfig = null;
+        private static readonly object locker = new object();
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly int CHAN_NUM = 4;
+        //private static readonly int LASER_CHAN_NUM = CHAN_NUM;
+        //private static readonly int PMT_CHAN_NUM = CHAN_NUM;
+        private static readonly double LASER_POWER_DEFAULT = 10.0;
+        private static readonly double PMT_GAIN_DEFAULT = 10.0;
+        private static readonly double CRS_AMPLITUDE_DEFAULT = 3.3;
+        private static readonly int SCAN_POINTS_DEFAULT = 512;
+        private static readonly double SCAN_PIXEL_TIME_DEFAULT = 2.0;       // 像素时间, us
+        private static readonly double PIN_HOLE_SIZE_DEFAULT = 50;          // 小孔尺寸
+        private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;  // 振镜响应时间, us
+        private static readonly double FIELD_SIZE_DEFAULT = 200.0;          // 视场大小, um
+        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 4.09855e-5;  // 校准[标定]电压,V
+        private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private Laser m_laser;              // 激光参数
+        private Pmt m_pmt;                  // PMT参数
+        private Crs m_crs;                  // CRS
+        private PinHole m_hole;             // 小孔
+        private Scan m_scan;                // 扫描参数
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
+        #region public apis
+
+        public static Config GetConfig()
+        {
+            if (pConfig == null)
+            {
+                lock (locker)
+                {
+                    if (pConfig == null)
+                    {
+                        pConfig = new Config();
+                    }
+                }
+            }
+            return pConfig;
+        }
+
+        public int GetChannelNum()
+        {
+            return CHAN_NUM;
+        }
+
+        public API_RETURN_CODE SetLaserSwitch(CHAN_ID id, LASER_CHAN_SWITCH status)
+        {
+            Logger.Info(string.Format("set laser swicth: [id:{0}], [status:{1}].", id, status));
+            GetLaserChannel(id).Status = status;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public LASER_CHAN_SWITCH GetLaserSwitch(CHAN_ID id)
+        {
+            return GetLaserChannel(id).Status;
+        }
+
+        public API_RETURN_CODE SetLaserPower(CHAN_ID id, double power)
+        {
+            Logger.Info(string.Format("set laser power: [id:{0}], [power:{1}].", id, power));
+            GetLaserChannel(id).Power = power;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetLaserPower(CHAN_ID id)
+        {
+            return GetLaserChannel(id).Power;
+        }
+
+        public API_RETURN_CODE SetPmtGain(CHAN_ID id, double gain)
+        {
+            Logger.Info(string.Format("set pmt gain: [id:{0}], [gain:{1}].", id, gain));
+            GetPmtChannel(id).Gain = gain;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetPmtGain(CHAN_ID id)
+        {
+            return GetPmtChannel(id).Gain;
+        }
+
+        public API_RETURN_CODE SetCrsAmplitude(double amplitude)
+        {
+            Logger.Info(string.Format("set crs amplitude: [{0}].", amplitude));
+            m_crs.Amplitude = amplitude;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetCrsAmplitude()
+        {
+            return m_crs.Amplitude;
+        }
+
+        public API_RETURN_CODE SetPinHoleSize(double size)
+        {
+            Logger.Info(string.Format("set pin hole size: [{0}].", size));
+            m_hole.Size = size;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public double GetPinHoleSize()
+        {
+            return m_hole.Size;
+        }
+
+
+
+        #endregion
+
+        #region private apis
+
+        private Config()
+        {
+            m_laser = new Laser
+            {
+                PortName = null,
+                Channels = new LaserChannel[CHAN_NUM]
+            };
+
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                m_laser.Channels[i].Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                m_laser.Channels[i].Power = LASER_POWER_DEFAULT;
+                m_laser.Channels[i].Status = LASER_CHAN_SWITCH.OFF;
+            }
+
+            m_pmt = new Pmt
+            {
+                Channels = new PmtChannel[CHAN_NUM]
+            };
+
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                m_pmt.Channels[i].Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                m_pmt.Channels[i].Gain = PMT_GAIN_DEFAULT;
+            }
+
+            m_crs = new Crs
+            {
+                Amplitude = CRS_AMPLITUDE_DEFAULT
+            };
+            m_hole = new PinHole
+            {
+                Size = PIN_HOLE_SIZE_DEFAULT
+            };
+
+            m_scan = new Scan
+            {
+                Mode = SCAN_MODE.GALVANOMETER,
+                Strategy = SCAN_STRATEGY.Z_UNIDIRECTION,
+                MirrorNum = SCAN_MIRROR_NUM.THREEE,
+                XPoints = SCAN_POINTS_DEFAULT,
+                YPoints = SCAN_POINTS_DEFAULT,
+                Flag = 0,
+                GalvResponseTime = GALV_RESPONSE_TIME_DEFAULT,
+                FieldSize = FIELD_SIZE_DEFAULT,
+                PixelTime = SCAN_PIXEL_TIME_DEFAULT,
+                CalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT,
+                CurveCoff = CURVE_COFF_DEFAULT
+            };
+        }
+
+        private LaserChannel GetLaserChannel(CHAN_ID id)
+        {
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                if (m_laser.Channels[i].Id == id)
+                {
+                    return m_laser.Channels[i];
+                }
+            }
+            return null;
+        }
+
+        private PmtChannel GetPmtChannel(CHAN_ID id)
+        {
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                if (m_pmt.Channels[i].Id == id)
+                {
+                    return m_pmt.Channels[i];
+                }
+            }
+            return null;
+        }
+
+        #endregion
+
+    }
+}

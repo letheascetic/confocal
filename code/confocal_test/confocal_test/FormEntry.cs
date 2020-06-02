@@ -61,5 +61,11 @@ namespace confocal_test
             FormLaser form = new FormLaser();
             form.ShowDialog();
         }
+
+        private void btnGalv_Click(object sender, EventArgs e)
+        {
+            FormGalv form = new FormGalv();
+            form.ShowDialog();
+        }
     }
 }

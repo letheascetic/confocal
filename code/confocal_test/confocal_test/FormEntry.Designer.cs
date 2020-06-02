@@ -31,6 +31,7 @@
             this.btnCfg = new System.Windows.Forms.Button();
             this.btnMain = new System.Windows.Forms.Button();
             this.btnLaser = new System.Windows.Forms.Button();
+            this.btnGalv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCfg
@@ -63,11 +64,22 @@
             this.btnLaser.UseVisualStyleBackColor = true;
             this.btnLaser.Click += new System.EventHandler(this.btnLaser_Click);
             // 
+            // btnGalv
+            // 
+            this.btnGalv.Location = new System.Drawing.Point(145, 53);
+            this.btnGalv.Name = "btnGalv";
+            this.btnGalv.Size = new System.Drawing.Size(127, 35);
+            this.btnGalv.TabIndex = 3;
+            this.btnGalv.Text = "Galv Test";
+            this.btnGalv.UseVisualStyleBackColor = true;
+            this.btnGalv.Click += new System.EventHandler(this.btnGalv_Click);
+            // 
             // FormEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 353);
+            this.ClientSize = new System.Drawing.Size(289, 353);
+            this.Controls.Add(this.btnGalv);
             this.Controls.Add(this.btnLaser);
             this.Controls.Add(this.btnMain);
             this.Controls.Add(this.btnCfg);
@@ -84,6 +96,7 @@
         private System.Windows.Forms.Button btnCfg;
         private System.Windows.Forms.Button btnMain;
         private System.Windows.Forms.Button btnLaser;
+        private System.Windows.Forms.Button btnGalv;
     }
 }
 

@@ -1,4 +1,4 @@
-﻿namespace confocal
+﻿namespace confocal_ui
 {
     partial class FormMain
     {
