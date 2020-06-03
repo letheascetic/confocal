@@ -225,7 +225,7 @@ namespace confocal_test
             double sinx = Math.Sqrt(1 - cosx * cosx);		    // 锯齿波正弦角度值
             double r = curveCoff / 100 * h / (1 - cosx);        // 前置扫描曲线的半径，曲线系数默认0.1
 
-            int previoussampleCountPerLine = (int)(2 * r * sinx / w * scanPixels);             // 从prev_x0到prev_xn总共的samples数量
+            int previousTotalSampleCount = (int)(2 * r * sinx / w * scanPixels);             // 从prev_x0到prev_xn总共的samples数量
             previousSampleCountPerLine = (int)Math.Ceiling(galvResponseTime / pixelTime) * 2;       // 前置扫描曲线的样本数量
 
             validSampleCountPerLine = scanPixels;
@@ -256,7 +256,7 @@ namespace confocal_test
 
             for (int i = 0; i < previousSampleCountPerLine / 2; i++)
             {
-                xn = prev_x0 + 2 * r * sinx / previoussampleCountPerLine * i;
+                xn = prev_x0 + 2 * r * sinx / previousTotalSampleCount * i;
                 previousSamplesPerLine[i] = -Math.Sqrt(r * r - (xn - prev_xc) * (xn - prev_xc)) + prev_yc;
                 previousSamplesPerLine[previousSampleCountPerLine - 1 - i] = previousSamplesPerLine[i];
             }

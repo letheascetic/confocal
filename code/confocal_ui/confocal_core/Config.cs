@@ -178,6 +178,8 @@ namespace confocal_core
         { get { return curveCoff; } set { curveCoff = value; } }
     }
 
+    public delegate void ConfigEventHandler(Config config, Object paras);
+
     public class Config
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
