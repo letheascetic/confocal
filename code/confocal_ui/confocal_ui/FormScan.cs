@@ -21,17 +21,13 @@ namespace confocal_ui
         private Dictionary<SCAN_MIRROR_NUM, string> mirrorNumDict;
         private Dictionary<SCAN_STRATEGY, string> scanStrategyDict;
         private Config m_config;
+        private Params m_params;
+        private Scheduler m_scheduler;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public FormScan()
         {
             InitializeComponent();
-        }
-
-        private void FormScan_Load(object sender, EventArgs e)
-        {
-            InitVariables();
-            InitControlers();
         }
 
         private void InitVariables()
@@ -52,6 +48,8 @@ namespace confocal_ui
             scanStrategyDict.Add(SCAN_STRATEGY.Z_BIDIRECTION, "双向");
 
             m_config = Config.GetConfig();
+            m_params = Params.GetParams();
+            m_scheduler = Scheduler.CreateInstance();
         }
 
         private void InitControlers()
@@ -84,6 +82,39 @@ namespace confocal_ui
             chbx488.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx561.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx640.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.ON ? true : false;
+        }
+
+        private void UpdateVariables()
+        {
+            m_config.SetScanPixelTime(double.Parse(tbxPixelTime.Text));
+            int scanPixels = ((KeyValuePair<int, string>)cbxScanPixels.SelectedItem).Key;
+            m_config.SetScanXPoints(scanPixels);
+            m_config.SetScanYPoints(scanPixels);
+
+            m_params.Calculate();
+        }
+
+        private void FormScan_Load(object sender, EventArgs e)
+        {
+            InitVariables();
+            InitControlers();
+        }
+
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            UpdateVariables();
+        }
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            if (m_scheduler.Scanning == false)
+            {
+                m_scheduler.StartToScan();
+            }
+            else
+            {
+                m_scheduler.Stop();
+            }
         }
     }
 }

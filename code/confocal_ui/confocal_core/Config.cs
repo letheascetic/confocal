@@ -15,7 +15,7 @@ namespace confocal_core
         API_FAILED_CONFIG_SET_LASER_SWITCH_FAILED,
         API_FAILED_CONFIG_SET_LASER_POWER_FAILED,
         /* error for ats9440 */
-        API_FAILED_ATS_HANDLE_INVALID,
+        API_FAILED_ATS_HANDLE_INVALID = 0x00000200,
         API_FAILED_ATS_GET_BOARD_VERSION_FAILED,
         API_FAILED_ATS_GET_SDK_VERSION_FAILED,
         API_FIALED_ATS_GET_DRIVER_VERSION_FAILED,
@@ -37,14 +37,19 @@ namespace confocal_core
         API_FAILED_ATS_ABORT_ASYNC_READ_FAILED,
         API_FAILED_ATS_FORCE_TRIGGER_ENABLE_FAILED,
         /* error for laser */
-        API_FAILED_LASER_LOAD_DLL_FAILED,
+        API_FAILED_LASER_LOAD_DLL_FAILED = 0x00000400,
         API_FAILED_LASER_CONNECT_FAILED,
         API_FAILED_LASER_RELEASE_FAILED,
         API_FAILED_LASER_OPEN_CHANNEL_FAILED,
         API_FAILED_LASER_CLOSE_CHANNEL_FAILED,
         API_FAILED_LASER_SET_POWER_FAILED,
         API_FAILED_LASER_UP_POWER_FAILED,
-        API_FAILED_LASER_DOWN_POWER_FAILED
+        API_FAILED_LASER_DOWN_POWER_FAILED,
+        /* error for ni card */
+        API_FAILED_NI_CONFIG_AO_TASK_EXCEPTION = 0x00000800,
+        API_FAILED_NI_CONFIG_DO_TASK_EXCEPTION,
+        API_FAILED_NI_CONFIG_AI_TASK_EXCEPTION,
+        API_FAILED_NI_START_TASK_EXCEPTION
     }
 
     public enum CHAN_ID : int
@@ -186,6 +191,8 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         private volatile static Config pConfig = null;
         private static readonly object locker = new object();
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        //public event ConfigEventHandler ScanChangedEvent;        // scan参数变化事件
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly int CHAN_NUM = 4;
         //private static readonly int LASER_CHAN_NUM = CHAN_NUM;

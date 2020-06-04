@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea26 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend26 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShowBox));
-            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbxGalv = new System.Windows.Forms.GroupBox();
             this.tbxCurveCoff = new System.Windows.Forms.TextBox();
             this.lbCurveCoff = new System.Windows.Forms.Label();
@@ -59,23 +62,41 @@
             this.lbPixelSize = new System.Windows.Forms.Label();
             this.tbxAORate = new System.Windows.Forms.TextBox();
             this.lbAORate = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.gbxGalv.SuspendLayout();
             this.gbxResults.SuspendLayout();
             this.SuspendLayout();
             // 
-            // chart1
+            // chart
             // 
-            chartArea26.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea26);
-            legend26.Name = "Legend1";
-            this.chart1.Legends.Add(legend26);
-            resources.ApplyResources(this.chart1, "chart1");
-            this.chart1.Name = "chart1";
-            series26.ChartArea = "ChartArea1";
-            series26.Legend = "Legend1";
-            series26.Name = "Series1";
-            this.chart1.Series.Add(series26);
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Name = "Legend1";
+            this.chart.Legends.Add(legend1);
+            resources.ApplyResources(this.chart, "chart");
+            this.chart.Name = "chart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "X振镜";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Y1振镜";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Y2振镜";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series4.Legend = "Legend1";
+            series4.Name = "触发";
+            this.chart.Series.Add(series1);
+            this.chart.Series.Add(series2);
+            this.chart.Series.Add(series3);
+            this.chart.Series.Add(series4);
             // 
             // gbxGalv
             // 
@@ -246,19 +267,27 @@
             resources.ApplyResources(this.lbAORate, "lbAORate");
             this.lbAORate.Name = "lbAORate";
             // 
+            // btnUpdate
+            // 
+            resources.ApplyResources(this.btnUpdate, "btnUpdate");
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // FormShowBox
             // 
             this.AutoHidePortion = 0.4D;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.gbxResults);
             this.Controls.Add(this.gbxGalv);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.chart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HideOnClose = true;
             this.Name = "FormShowBox";
             this.Load += new System.EventHandler(this.FormShowBox_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.gbxGalv.ResumeLayout(false);
             this.gbxGalv.PerformLayout();
             this.gbxResults.ResumeLayout(false);
@@ -269,7 +298,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private System.Windows.Forms.GroupBox gbxGalv;
         private System.Windows.Forms.TextBox tbxCurveCoff;
         private System.Windows.Forms.Label lbCurveCoff;
@@ -296,5 +325,6 @@
         private System.Windows.Forms.Label lbPixelSize;
         private System.Windows.Forms.TextBox tbxAORate;
         private System.Windows.Forms.Label lbAORate;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

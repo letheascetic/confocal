@@ -32,7 +32,7 @@
             this.btnScan = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnEyePort = new System.Windows.Forms.Button();
+            this.btnConfig = new System.Windows.Forms.Button();
             this.btnAG = new System.Windows.Forms.Button();
             this.cbxSkip = new System.Windows.Forms.ComboBox();
             this.lbControl = new System.Windows.Forms.Label();
@@ -83,8 +83,8 @@
             this.lb640 = new System.Windows.Forms.Label();
             this.chbx640 = new System.Windows.Forms.CheckBox();
             this.gbxMode = new System.Windows.Forms.GroupBox();
-            this.rbtnGalv = new System.Windows.Forms.RadioButton();
             this.rbtnRes = new System.Windows.Forms.RadioButton();
+            this.rbtnGalv = new System.Windows.Forms.RadioButton();
             this.cbxScanPixels = new System.Windows.Forms.ComboBox();
             this.cbxScanStrategy = new System.Windows.Forms.ComboBox();
             this.gbxParams.SuspendLayout();
@@ -108,6 +108,7 @@
             resources.ApplyResources(this.btnScan, "btnScan");
             this.btnScan.Name = "btnScan";
             this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // btnCapture
             // 
@@ -121,11 +122,12 @@
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // btnEyePort
+            // btnConfig
             // 
-            resources.ApplyResources(this.btnEyePort, "btnEyePort");
-            this.btnEyePort.Name = "btnEyePort";
-            this.btnEyePort.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.btnConfig, "btnConfig");
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.UseVisualStyleBackColor = true;
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
             // btnAG
             // 
@@ -480,19 +482,19 @@
             this.gbxMode.Name = "gbxMode";
             this.gbxMode.TabStop = false;
             // 
-            // rbtnGalv
-            // 
-            resources.ApplyResources(this.rbtnGalv, "rbtnGalv");
-            this.rbtnGalv.Name = "rbtnGalv";
-            this.rbtnGalv.TabStop = true;
-            this.rbtnGalv.UseVisualStyleBackColor = true;
-            // 
             // rbtnRes
             // 
             resources.ApplyResources(this.rbtnRes, "rbtnRes");
             this.rbtnRes.Name = "rbtnRes";
             this.rbtnRes.TabStop = true;
             this.rbtnRes.UseVisualStyleBackColor = true;
+            // 
+            // rbtnGalv
+            // 
+            resources.ApplyResources(this.rbtnGalv, "rbtnGalv");
+            this.rbtnGalv.Name = "rbtnGalv";
+            this.rbtnGalv.TabStop = true;
+            this.rbtnGalv.UseVisualStyleBackColor = true;
             // 
             // cbxScanPixels
             // 
@@ -532,7 +534,7 @@
             this.Controls.Add(this.lbControl);
             this.Controls.Add(this.cbxSkip);
             this.Controls.Add(this.btnAG);
-            this.Controls.Add(this.btnEyePort);
+            this.Controls.Add(this.btnConfig);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnCapture);
             this.Controls.Add(this.btnScan);
@@ -570,7 +572,7 @@
         private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnEyePort;
+        private System.Windows.Forms.Button btnConfig;
         private System.Windows.Forms.Button btnAG;
         private System.Windows.Forms.ComboBox cbxSkip;
         private System.Windows.Forms.Label lbControl;

@@ -224,28 +224,28 @@
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="btnEyePort.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnConfig.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 88</value>
   </data>
-  <data name="btnEyePort.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnConfig.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 35</value>
   </data>
-  <data name="btnEyePort.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnConfig.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="btnEyePort.Text" xml:space="preserve">
-    <value>Eye Port</value>
+  <data name="btnConfig.Text" xml:space="preserve">
+    <value>配置</value>
   </data>
-  <data name="&gt;&gt;btnEyePort.Name" xml:space="preserve">
-    <value>btnEyePort</value>
+  <data name="&gt;&gt;btnConfig.Name" xml:space="preserve">
+    <value>btnConfig</value>
   </data>
-  <data name="&gt;&gt;btnEyePort.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnEyePort.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnConfig.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnEyePort.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnConfig.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="btnAG.Location" type="System.Drawing.Point, System.Drawing">
