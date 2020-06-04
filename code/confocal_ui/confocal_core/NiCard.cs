@@ -278,7 +278,7 @@ namespace confocal_core
             try
             {
                 m_aiTask = new Task();
-                m_aiTask.AIChannels.CreateVoltageChannel("/Dev1/ai0","", AITerminalConfiguration.Differential, -10.0, 10.0, AIVoltageUnits.Volts);
+                m_aiTask.AIChannels.CreateVoltageChannel("/Dev1/ai0:3","", AITerminalConfiguration.Differential, -10.0, 10.0, AIVoltageUnits.Volts);
                 m_aiTask.Control(TaskAction.Verify);
 
                 m_aiTask.Timing.SampleClockRate = m_params.AoSampleRate;
@@ -289,18 +289,27 @@ namespace confocal_core
                     m_params.ValidSampleCountPerLine);
 
                 double x = m_aiTask.Timing.AIConvertMaximumRate;
+                double delay = m_aiTask.Timing.DelayFromSampleClock;
+                DelayFromSampleClockUnits delayunits = m_aiTask.Timing.DelayFromSampleClockUnits;
                 double y = m_aiTask.Timing.AIConvertRate;
 
                 // 设置Ai Start Trigger源为PFI4，PFI4与P0.0物理直连，接收Do的输出信号，作为触发
                 m_aiTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger("/Dev1/PFI4", DigitalEdgeStartTriggerEdge.Rising);
                 m_aiTask.Triggers.StartTrigger.Retriggerable = true;
 
+                // 路由Do Sample Clcok到PFI1
+                if (DebugFlag)
+                {
+                    m_aiTask.ExportSignals.SampleClockOutputTerminal = "/Dev1/PFI2";
+                    m_aiTask.ExportSignals.AIConvertClockOutputTerminal = "/Dev1/PFI3";
+                }
+
                 m_aiTaskCallback = new AsyncCallback(AnalogInCallback);
                 m_aiReader = new AnalogMultiChannelReader(m_aiTask.Stream);
                 m_aiReader.SynchronizeCallbacks = false;
 
                 m_dataInfo.GetReady();
-                m_dataInfo.Data = new double[1, m_params.ValidSampleCountPerLine];
+                m_dataInfo.Data = new double[4, m_params.ValidSampleCountPerLine];
                 m_aiReader.BeginMemoryOptimizedReadMultiSample(
                     m_params.ValidSampleCountPerLine, 
                     m_aiTaskCallback,
