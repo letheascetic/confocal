@@ -44,21 +44,27 @@ namespace confocal_core
             return pScheduler;
         }
 
-        public void StartToScan()
+        public API_RETURN_CODE StartToScan()
         {
             m_params.Calculate();
             m_waver.Generate();
-            if (m_card.Start() == API_RETURN_CODE.API_SUCCESS)
+            API_RETURN_CODE code = m_card.Start();
+            if (code != API_RETURN_CODE.API_SUCCESS)
             {
-                m_scanning = true;
-                Logger.Info(string.Format("start to scan success."));
+                Logger.Info(string.Format("start to scan failed: [{0}].", code));
+                return code;
             }
+
+            m_scanning = true;
+            Logger.Info(string.Format("start to scan success."));
+            return code;
         }
 
         public void Stop()
         {
             m_card.Stop();
             m_scanning = false;
+            Logger.Info(string.Format("stop scanning."));
         }
 
         #endregion

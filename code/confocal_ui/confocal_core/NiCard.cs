@@ -47,8 +47,8 @@ namespace confocal_core
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly string NI_CARD_NAME_DEFAULT = "Dev1";
-        private static readonly string TWO_MIRROR_AO_CHANNELS = "ai0:1";
-        private static readonly string THREE_MIRROR_AO_CHANNELS = "ai0:2";
+        private static readonly string TWO_MIRROR_AO_CHANNELS = "ao0:1";
+        private static readonly string THREE_MIRROR_AO_CHANNELS = "ao0:2";
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
         private Params m_params;
@@ -196,17 +196,7 @@ namespace confocal_core
             {
                 m_aoTask = new Task();
 
-                string physicalChannelName = string.Concat("/", NI_CARD_NAME_DEFAULT);
-                if (m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE)
-                {
-                    physicalChannelName = string.Concat(physicalChannelName, "/", THREE_MIRROR_AO_CHANNELS);
-                }
-                else
-                {
-                    physicalChannelName = string.Concat(physicalChannelName, "/", TWO_MIRROR_AO_CHANNELS);
-                }
-
-                m_aoTask.AOChannels.CreateVoltageChannel(physicalChannelName, "", -10.0, 10.0, AOVoltageUnits.Volts);
+                m_aoTask.AOChannels.CreateVoltageChannel(GetAoPhysicalChannelName(), "", -10.0, 10.0, AOVoltageUnits.Volts);
                 m_aoTask.Control(TaskAction.Verify);
 
                 m_aoTask.Timing.SampleClockRate = m_params.AoSampleRate;
@@ -219,6 +209,7 @@ namespace confocal_core
                 // 路由Ao Sample Clcok到PFI0
                 if (DebugFlag)
                 {
+                    Logger.Info(string.Format("route ao sample clock to PFI0."));
                     m_aoTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/", NI_CARD_NAME_DEFAULT, "/", "PFI0");
                 }
 
@@ -257,8 +248,7 @@ namespace confocal_core
             {
                 m_doTask = new Task();
 
-                string pyhsicalChannelName = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/port0/line0");
-                m_doTask.DOChannels.CreateChannel(pyhsicalChannelName, "", ChannelLineGrouping.OneChannelForEachLine);
+                m_doTask.DOChannels.CreateChannel(GetDoPhysicalChannelName(), "", ChannelLineGrouping.OneChannelForEachLine);
                 m_doTask.Control(TaskAction.Verify);
 
                 m_doTask.Timing.SampleClockRate = m_params.AoSampleRate;
@@ -275,6 +265,7 @@ namespace confocal_core
                 // 路由Do Sample Clcok到PFI1
                 if (DebugFlag)
                 {
+                    Logger.Info(string.Format("route do sample clock to PFI1."));
                     m_doTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI1");
                 }
 
@@ -299,6 +290,11 @@ namespace confocal_core
         private API_RETURN_CODE ConfigAiTask()
         {
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+            if (m_config.GetActivatedChannelNum() == 0)
+            {
+                Logger.Info(string.Format("no channel activated."));
+                return API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
+            }
             try
             {
                 m_aiTask = new Task();
@@ -470,7 +466,30 @@ namespace confocal_core
             {
                 activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai3"));
             }
-            return string.Join(",", activatedChannels);
+            string physicalChannelName = string.Join(",", activatedChannels);
+            Logger.Info(string.Format("ai physical channel name: [{0}].", physicalChannelName));
+            return physicalChannelName;
+        }
+
+        private string GetAoPhysicalChannelName()
+        {
+            string physicalChannelName = string.Concat("/", NI_CARD_NAME_DEFAULT);
+            if (m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE)
+            {
+
+                physicalChannelName = string.Concat(physicalChannelName, "/", THREE_MIRROR_AO_CHANNELS);
+            }
+            else
+            {
+                physicalChannelName = string.Concat(physicalChannelName, "/", TWO_MIRROR_AO_CHANNELS);
+            }
+            Logger.Info(string.Format("ao physical channel name: [{0}].", physicalChannelName));
+            return physicalChannelName;
+        }
+
+        private string GetDoPhysicalChannelName()
+        {
+            return string.Concat("/" + NI_CARD_NAME_DEFAULT + "/port0/line0");
         }
 
     }
