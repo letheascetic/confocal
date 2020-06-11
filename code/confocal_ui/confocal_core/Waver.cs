@@ -45,6 +45,83 @@ namespace confocal_core
         /// <param name="m_params"></param>
         public void Generate()
         {
+            if (Config.GetConfig().GetScanStrategy() == SCAN_STRATEGY.Z_UNIDIRECTION)
+            {
+                GenerateSScan();
+            }
+            else
+            {
+                GenerateBScan();
+            }
+        }
+
+        private Waver()
+        {
+
+        }
+
+        /// <summary>
+        /// 生成双向扫描控制波形数据
+        /// </summary>
+        private void GenerateBScan()
+        {
+            Initialize();
+            Params m_params = Params.GetParams();
+
+            Array.Copy(m_params.DigitalTriggerSamplesPerLine, TriggerWave, m_params.SampleCountPerLine);
+            int offset = -m_params.SampleCountPerLine, index = 0, halfIndex = 0;
+
+            for (int i = 0; i < m_params.ScanRows; i++)
+            {
+                offset += m_params.SampleCountPerLine;
+                Array.Copy(m_params.XSamplesPerLine, 0, XWave, offset, m_params.SampleCountPerLine);
+
+                for (int j = 0; j < m_params.SampleCountPerLine; j++)
+                {
+                    index = offset + j;
+                    halfIndex = m_params.PreviousSampleCountPerLine + m_params.ValidSampleCountPerLine;
+
+                    if (j < halfIndex)
+                    {
+                        Y1Wave[index] = m_params.Y1SamplesPerRow[i];
+                        Y2Wave[index] = m_params.Y2SamplesPerRow[i];
+                    }
+                    else
+                    {
+                        Y1Wave[index] = m_params.Y1SamplesPerRow[i] + m_params.VoltagePerPixel;
+                        Y2Wave[index] = Y1Wave[index] * 2;
+                    }
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 生成单向扫描控制波形数据
+        /// </summary>
+        private void GenerateSScan()
+        {
+            Initialize();
+            Params m_params = Params.GetParams();
+
+            Array.Copy(m_params.DigitalTriggerSamplesPerLine, TriggerWave, m_params.SampleCountPerLine);
+
+            int offset = -m_params.SampleCountPerLine;
+            for (int i = 0; i < m_params.ScanRows; i++)
+            {
+                offset += m_params.SampleCountPerLine;
+                Array.Copy(m_params.XSamplesPerLine, 0, XWave, offset, m_params.SampleCountPerLine);
+
+                for (int j = 0; j < m_params.SampleCountPerLine; j++)
+                {
+                    Y1Wave[offset + j] = m_params.Y1SamplesPerRow[i];
+                    Y2Wave[offset + j] = m_params.Y2SamplesPerRow[i];
+                }
+            }
+        }
+
+        private void Initialize()
+        {
             Params m_params = Params.GetParams();
 
             if (TriggerWave == null || TriggerWave.Length != m_params.SampleCountPerLine)
@@ -63,27 +140,6 @@ namespace confocal_core
             {
                 Y2Wave = new double[m_params.SampleCountPerFrame];
             }
-
-            Array.Copy(m_params.DigitalTriggerSamplesPerLine, TriggerWave, m_params.SampleCountPerLine);
-
-            int offset = -m_params.SampleCountPerLine;
-            for (int i = 0; i < Config.GetConfig().GetScanYPoints(); i++)
-            {
-                offset += m_params.SampleCountPerLine;
-                Array.Copy(m_params.XSamplesPerLine, 0, XWave, offset, m_params.SampleCountPerLine);
-
-                for (int j = 0; j < m_params.SampleCountPerLine; j++)
-                {
-
-                    Y1Wave[offset + j] = m_params.Y1SamplesPerRow[i];
-                    Y2Wave[offset + j] = m_params.Y2SamplesPerRow[i];
-                }
-            }
-        }
-
-        private Waver()
-        {
-
         }
 
         #endregion

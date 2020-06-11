@@ -153,11 +153,12 @@ namespace confocal_core
         private int flag;                   // 扫描功能标志位
         private double galvResponseTime;        // 振镜响应时间,us
         private double fieldSize;               // 视场大小,um
-        private double pixelTime;               // 像素时间
+        private double dwellTime;               // 停留时间
         private int xPoints;                    // x扫描像素
         private int yPoints;                    // y扫描像素
         private double calibrationVoltage;      // 校准[标定]电压,V
         private double curveCoff;               // 曲线系数,%
+        private int bScanPixelComp;             // Z形双向扫描中有效像素补偿
 
         public SCAN_MODE Mode
         { get { return mode; } set { mode = value; } }
@@ -171,8 +172,8 @@ namespace confocal_core
         { get { return galvResponseTime; } set { galvResponseTime = value; } }
         public double FieldSize
         { get { return fieldSize; } set { fieldSize = value; } }
-        public double PixelTime
-        { get { return pixelTime; } set { pixelTime = value; } }
+        public double DwellTime
+        { get { return dwellTime; } set { dwellTime = value; } }
         public int XPoints
         { get { return xPoints; } set { xPoints = value; } }
         public int YPoints
@@ -181,6 +182,8 @@ namespace confocal_core
         { get { return calibrationVoltage; }set { calibrationVoltage = value; } }
         public double CurveCoff
         { get { return curveCoff; } set { curveCoff = value; } }
+        public int BScanPixelComp
+        { get { return bScanPixelComp; } set { bScanPixelComp = value; } }
     }
 
     public delegate void ConfigEventHandler(Config config, Object paras);
@@ -207,6 +210,7 @@ namespace confocal_core
         private static readonly double FIELD_SIZE_DEFAULT = 200.0;          // 视场大小, um
         private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 4.09855e-5;  // 校准[标定]电压,V
         private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
+        private static readonly int BIDIRECTION_SCAN_PIXEL_COMPENSATION = 64;    // Z形双向扫描中有效像素补偿
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Laser m_laser;              // 激光参数
         private Pmt m_pmt;                  // PMT参数
@@ -235,6 +239,20 @@ namespace confocal_core
         public int GetChannelNum()
         {
             return CHAN_NUM;
+        }
+
+        public int GetActivatedChannelNum()
+        {
+            int activatedChannelNum = 0;
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                if (GetLaserSwitch(id) == LASER_CHAN_SWITCH.ON)
+                {
+                    activatedChannelNum++;
+                }
+            }
+            return activatedChannelNum;
         }
 
         public API_RETURN_CODE SetLaserSwitch(CHAN_ID id, LASER_CHAN_SWITCH status)
@@ -369,16 +387,16 @@ namespace confocal_core
             return m_scan.FieldSize;
         }
 
-        public API_RETURN_CODE SetScanPixelTime(double pixelTime)
+        public API_RETURN_CODE SetScanDwellTime(double dwellTime)
         {
-            Logger.Info(string.Format("set scan pixel time: [{0}].", pixelTime));
-            m_scan.PixelTime = pixelTime;
+            Logger.Info(string.Format("set scan dwell time: [{0}].", dwellTime));
+            m_scan.DwellTime = dwellTime;
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        public double GetScanPixelTime()
+        public double GetScanDwellTime()
         {
-            return m_scan.PixelTime;
+            return m_scan.DwellTime;
         }
 
         public API_RETURN_CODE SetScanXPoints(int xPoints)
@@ -427,6 +445,18 @@ namespace confocal_core
         public double GetScanCurveCoff()
         {
             return m_scan.CurveCoff;
+        }
+
+        public API_RETURN_CODE SetBScanPixelCompensation(int bScanPixelComp)
+        {
+            Logger.Info(string.Format("set bidirection scan pixel compensation: [{0}].", bScanPixelComp));
+            m_scan.BScanPixelComp = bScanPixelComp;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public int GetBScanPixelCompensation()
+        {
+            return m_scan.BScanPixelComp;
         }
 
         #endregion
@@ -484,9 +514,10 @@ namespace confocal_core
                 Flag = 0,
                 GalvResponseTime = GALV_RESPONSE_TIME_DEFAULT,
                 FieldSize = FIELD_SIZE_DEFAULT,
-                PixelTime = SCAN_PIXEL_TIME_DEFAULT,
+                DwellTime = SCAN_PIXEL_TIME_DEFAULT,
                 CalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT,
-                CurveCoff = CURVE_COFF_DEFAULT
+                CurveCoff = CURVE_COFF_DEFAULT,
+                BScanPixelComp = BIDIRECTION_SCAN_PIXEL_COMPENSATION
             };
         }
 

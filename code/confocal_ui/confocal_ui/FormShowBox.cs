@@ -65,6 +65,7 @@ namespace confocal_ui
             chart.Series[3].Points.Clear();
 
             Params m_params = Params.GetParams();
+            SCAN_STRATEGY strategy = Config.GetConfig().GetScanStrategy();
 
             int pointCount = m_params.SampleCountPerLine * 3;
             double aoSampleTime = 1.0 / m_params.AoSampleRate;
@@ -77,8 +78,25 @@ namespace confocal_ui
                 index = i % m_params.SampleCountPerLine;
                 xValue = aoSampleTime * i;
                 chart.Series[0].Points.AddXY(xValue, m_params.XSamplesPerLine[index]);
-                chart.Series[1].Points.AddXY(xValue, m_params.Y1SamplesPerRow[line]);
-                chart.Series[2].Points.AddXY(xValue, m_params.Y2SamplesPerRow[line]);
+
+                if (strategy == SCAN_STRATEGY.Z_UNIDIRECTION)
+                {
+                    chart.Series[1].Points.AddXY(xValue, m_params.Y1SamplesPerRow[line]);
+                    chart.Series[2].Points.AddXY(xValue, m_params.Y2SamplesPerRow[line]);
+                }
+                else
+                {
+                    if (index < m_params.PreviousSampleCountPerLine + m_params.ValidSampleCountPerLine)
+                    {
+                        chart.Series[1].Points.AddXY(xValue, m_params.Y1SamplesPerRow[line]);
+                        chart.Series[2].Points.AddXY(xValue, m_params.Y2SamplesPerRow[line]);
+                    }
+                    else
+                    {
+                        chart.Series[1].Points.AddXY(xValue, m_params.Y1SamplesPerRow[line] + m_params.VoltagePerPixel);
+                        chart.Series[2].Points.AddXY(xValue, m_params.Y2SamplesPerRow[line] + m_params.VoltagePerPixel * 2);
+                    }
+                }
                 chart.Series[3].Points.AddXY(xValue, m_params.DigitalTriggerSamplesPerLine[index]);
             }
 

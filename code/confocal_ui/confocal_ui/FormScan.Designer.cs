@@ -36,8 +36,8 @@
             this.btnAG = new System.Windows.Forms.Button();
             this.cbxSkip = new System.Windows.Forms.ComboBox();
             this.lbControl = new System.Windows.Forms.Label();
-            this.lbPixelTime = new System.Windows.Forms.Label();
-            this.tbxPixelTime = new System.Windows.Forms.TextBox();
+            this.lbDwellTime = new System.Windows.Forms.Label();
+            this.tbxDwellTime = new System.Windows.Forms.TextBox();
             this.lbScanPixels = new System.Windows.Forms.Label();
             this.btnScanFlagNormal = new System.Windows.Forms.Button();
             this.btnScanFlagMulti = new System.Windows.Forms.Button();
@@ -87,6 +87,9 @@
             this.rbtnGalv = new System.Windows.Forms.RadioButton();
             this.cbxScanPixels = new System.Windows.Forms.ComboBox();
             this.cbxScanStrategy = new System.Windows.Forms.ComboBox();
+            this.gbxMirror = new System.Windows.Forms.GroupBox();
+            this.rbtnThree = new System.Windows.Forms.RadioButton();
+            this.rbtnTwo = new System.Windows.Forms.RadioButton();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Cp)).BeginInit();
@@ -101,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             this.gbxMode.SuspendLayout();
+            this.gbxMirror.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnScan
@@ -147,16 +151,16 @@
             resources.ApplyResources(this.lbControl, "lbControl");
             this.lbControl.Name = "lbControl";
             // 
-            // lbPixelTime
+            // lbDwellTime
             // 
-            resources.ApplyResources(this.lbPixelTime, "lbPixelTime");
-            this.lbPixelTime.Name = "lbPixelTime";
+            resources.ApplyResources(this.lbDwellTime, "lbDwellTime");
+            this.lbDwellTime.Name = "lbDwellTime";
             // 
-            // tbxPixelTime
+            // tbxDwellTime
             // 
-            this.tbxPixelTime.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbxPixelTime, "tbxPixelTime");
-            this.tbxPixelTime.Name = "tbxPixelTime";
+            this.tbxDwellTime.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbxDwellTime, "tbxDwellTime");
+            this.tbxDwellTime.Name = "tbxDwellTime";
             // 
             // lbScanPixels
             // 
@@ -510,12 +514,35 @@
             this.cbxScanStrategy.FormattingEnabled = true;
             this.cbxScanStrategy.Name = "cbxScanStrategy";
             // 
+            // gbxMirror
+            // 
+            this.gbxMirror.Controls.Add(this.rbtnThree);
+            this.gbxMirror.Controls.Add(this.rbtnTwo);
+            resources.ApplyResources(this.gbxMirror, "gbxMirror");
+            this.gbxMirror.Name = "gbxMirror";
+            this.gbxMirror.TabStop = false;
+            // 
+            // rbtnThree
+            // 
+            resources.ApplyResources(this.rbtnThree, "rbtnThree");
+            this.rbtnThree.Name = "rbtnThree";
+            this.rbtnThree.TabStop = true;
+            this.rbtnThree.UseVisualStyleBackColor = true;
+            // 
+            // rbtnTwo
+            // 
+            resources.ApplyResources(this.rbtnTwo, "rbtnTwo");
+            this.rbtnTwo.Name = "rbtnTwo";
+            this.rbtnTwo.TabStop = true;
+            this.rbtnTwo.UseVisualStyleBackColor = true;
+            // 
             // FormScan
             // 
             this.AutoHidePortion = 0.4D;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.gbxMirror);
             this.Controls.Add(this.cbxScanStrategy);
             this.Controls.Add(this.cbxScanPixels);
             this.Controls.Add(this.gbxMode);
@@ -529,8 +556,8 @@
             this.Controls.Add(this.btnScanFlagMulti);
             this.Controls.Add(this.btnScanFlagNormal);
             this.Controls.Add(this.lbScanPixels);
-            this.Controls.Add(this.tbxPixelTime);
-            this.Controls.Add(this.lbPixelTime);
+            this.Controls.Add(this.tbxDwellTime);
+            this.Controls.Add(this.lbDwellTime);
             this.Controls.Add(this.lbControl);
             this.Controls.Add(this.cbxSkip);
             this.Controls.Add(this.btnAG);
@@ -562,6 +589,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
             this.gbxMode.ResumeLayout(false);
             this.gbxMode.PerformLayout();
+            this.gbxMirror.ResumeLayout(false);
+            this.gbxMirror.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -576,8 +605,8 @@
         private System.Windows.Forms.Button btnAG;
         private System.Windows.Forms.ComboBox cbxSkip;
         private System.Windows.Forms.Label lbControl;
-        private System.Windows.Forms.Label lbPixelTime;
-        private System.Windows.Forms.TextBox tbxPixelTime;
+        private System.Windows.Forms.Label lbDwellTime;
+        private System.Windows.Forms.TextBox tbxDwellTime;
         private System.Windows.Forms.Label lbScanPixels;
         private System.Windows.Forms.Button btnScanFlagNormal;
         private System.Windows.Forms.Button btnScanFlagMulti;
@@ -627,5 +656,8 @@
         private System.Windows.Forms.RadioButton rbtnRes;
         private System.Windows.Forms.ComboBox cbxScanPixels;
         private System.Windows.Forms.ComboBox cbxScanStrategy;
+        private System.Windows.Forms.GroupBox gbxMirror;
+        private System.Windows.Forms.RadioButton rbtnThree;
+        private System.Windows.Forms.RadioButton rbtnTwo;
     }
 }

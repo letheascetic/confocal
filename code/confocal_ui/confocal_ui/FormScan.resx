@@ -168,7 +168,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="btnCapture.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -195,7 +195,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCapture.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="button2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -222,7 +222,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="btnConfig.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 88</value>
@@ -246,7 +246,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnConfig.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="btnAG.Location" type="System.Drawing.Point, System.Drawing">
     <value>184, 88</value>
@@ -270,7 +270,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnAG.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cbxSkip.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
@@ -280,7 +280,7 @@
     <value>15</value>
   </data>
   <data name="cbxSkip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 95</value>
+    <value>268, 181</value>
   </data>
   <data name="cbxSkip.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -301,7 +301,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxSkip.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="lbControl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -328,55 +328,55 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbControl.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
-  <data name="lbPixelTime.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lbDwellTime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lbPixelTime.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lbDwellTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 209</value>
   </data>
-  <data name="lbPixelTime.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lbDwellTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 15</value>
   </data>
-  <data name="lbPixelTime.TabIndex" type="System.Int32, mscorlib">
+  <data name="lbDwellTime.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="lbPixelTime.Text" xml:space="preserve">
-    <value>像素时间（us）：</value>
+  <data name="lbDwellTime.Text" xml:space="preserve">
+    <value>停留时间（us）：</value>
   </data>
-  <data name="&gt;&gt;lbPixelTime.Name" xml:space="preserve">
-    <value>lbPixelTime</value>
+  <data name="&gt;&gt;lbDwellTime.Name" xml:space="preserve">
+    <value>lbDwellTime</value>
   </data>
-  <data name="&gt;&gt;lbPixelTime.Type" xml:space="preserve">
+  <data name="&gt;&gt;lbDwellTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbPixelTime.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lbDwellTime.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lbPixelTime.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="&gt;&gt;lbDwellTime.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
-  <data name="tbxPixelTime.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbxDwellTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 206</value>
   </data>
-  <data name="tbxPixelTime.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbxDwellTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 25</value>
   </data>
-  <data name="tbxPixelTime.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbxDwellTime.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;tbxPixelTime.Name" xml:space="preserve">
-    <value>tbxPixelTime</value>
+  <data name="&gt;&gt;tbxDwellTime.Name" xml:space="preserve">
+    <value>tbxDwellTime</value>
   </data>
-  <data name="&gt;&gt;tbxPixelTime.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbxDwellTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbxPixelTime.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbxDwellTime.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tbxPixelTime.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;tbxDwellTime.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="lbScanPixels.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,7 +403,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbScanPixels.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="btnScanFlagNormal.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 284</value>
@@ -427,7 +427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnScanFlagNormal.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="btnScanFlagMulti.Location" type="System.Drawing.Point, System.Drawing">
     <value>88, 284</value>
@@ -451,7 +451,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnScanFlagMulti.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="btnScanFlagSum.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 284</value>
@@ -475,6 +475,51 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnScanFlagSum.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.Name" xml:space="preserve">
+    <value>lbFrameTime</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.Parent" xml:space="preserve">
+    <value>gbxParams</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lbFps.Name" xml:space="preserve">
+    <value>lbFps</value>
+  </data>
+  <data name="&gt;&gt;lbFps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbFps.Parent" xml:space="preserve">
+    <value>gbxParams</value>
+  </data>
+  <data name="&gt;&gt;lbFps.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbxParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 325</value>
+  </data>
+  <data name="gbxParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 46</value>
+  </data>
+  <data name="gbxParams.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;gbxParams.Name" xml:space="preserve">
+    <value>gbxParams</value>
+  </data>
+  <data name="&gt;&gt;gbxParams.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxParams.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxParams.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="lbFrameTime.AutoSize" type="System.Boolean, mscorlib">
@@ -531,27 +576,6 @@
   <data name="&gt;&gt;lbFps.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="gbxParams.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 325</value>
-  </data>
-  <data name="gbxParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 46</value>
-  </data>
-  <data name="gbxParams.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;gbxParams.Name" xml:space="preserve">
-    <value>gbxParams</value>
-  </data>
-  <data name="&gt;&gt;gbxParams.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxParams.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxParams.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="cbxChannels.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -580,7 +604,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxChannels.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="chbx405.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -607,6 +631,111 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;chbx405.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;tb405Cp.Name" xml:space="preserve">
+    <value>tb405Cp</value>
+  </data>
+  <data name="&gt;&gt;tb405Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb405Cp.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tb405Cp.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tb405HV.Name" xml:space="preserve">
+    <value>tb405HV</value>
+  </data>
+  <data name="&gt;&gt;tb405HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb405HV.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tb405HV.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx405Cp.Name" xml:space="preserve">
+    <value>tbx405Cp</value>
+  </data>
+  <data name="&gt;&gt;tbx405Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx405Cp.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tbx405Cp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lb405Cp.Name" xml:space="preserve">
+    <value>lb405Cp</value>
+  </data>
+  <data name="&gt;&gt;lb405Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb405Cp.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;lb405Cp.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx405HV.Name" xml:space="preserve">
+    <value>tbx405HV</value>
+  </data>
+  <data name="&gt;&gt;tbx405HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx405HV.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tbx405HV.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb405HV.Name" xml:space="preserve">
+    <value>lb405HV</value>
+  </data>
+  <data name="&gt;&gt;lb405HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb405HV.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;lb405HV.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb405.Name" xml:space="preserve">
+    <value>lb405</value>
+  </data>
+  <data name="&gt;&gt;lb405.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb405.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;lb405.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="gbxChan405.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 389</value>
+  </data>
+  <data name="gbxChan405.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 120</value>
+  </data>
+  <data name="gbxChan405.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Name" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="tb405Cp.Location" type="System.Drawing.Point, System.Drawing">
@@ -792,25 +921,121 @@
   <data name="&gt;&gt;lb405.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="gbxChan405.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 389</value>
+  <data name="&gt;&gt;trackBar1.Name" xml:space="preserve">
+    <value>trackBar1</value>
   </data>
-  <data name="gbxChan405.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;trackBar1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.Name" xml:space="preserve">
+    <value>trackBar2</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx488Cp.Name" xml:space="preserve">
+    <value>tbx488Cp</value>
+  </data>
+  <data name="&gt;&gt;tbx488Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx488Cp.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tbx488Cp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lb488Cp.Name" xml:space="preserve">
+    <value>lb488Cp</value>
+  </data>
+  <data name="&gt;&gt;lb488Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488Cp.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488Cp.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx488HV.Name" xml:space="preserve">
+    <value>tbx488HV</value>
+  </data>
+  <data name="&gt;&gt;tbx488HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx488HV.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tbx488HV.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb488HV.Name" xml:space="preserve">
+    <value>lb488HV</value>
+  </data>
+  <data name="&gt;&gt;lb488HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488HV.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488HV.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb488.Name" xml:space="preserve">
+    <value>lb488</value>
+  </data>
+  <data name="&gt;&gt;lb488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Name" xml:space="preserve">
+    <value>chbx488</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 515</value>
+  </data>
+  <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
   </data>
-  <data name="gbxChan405.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="gbx488.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.Name" xml:space="preserve">
-    <value>gbxChan405</value>
+  <data name="&gt;&gt;gbx488.Name" xml:space="preserve">
+    <value>gbx488</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbx488.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbx488.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gbx488.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="trackBar1.Location" type="System.Drawing.Point, System.Drawing">
@@ -1023,25 +1248,121 @@
   <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 515</value>
+  <data name="&gt;&gt;trackBar3.Name" xml:space="preserve">
+    <value>trackBar3</value>
   </data>
-  <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;trackBar3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar3.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;trackBar3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackBar4.Name" xml:space="preserve">
+    <value>trackBar4</value>
+  </data>
+  <data name="&gt;&gt;trackBar4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar4.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;trackBar4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx561Cp.Name" xml:space="preserve">
+    <value>tbx561Cp</value>
+  </data>
+  <data name="&gt;&gt;tbx561Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx561Cp.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tbx561Cp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lb561Cp.Name" xml:space="preserve">
+    <value>lb561Cp</value>
+  </data>
+  <data name="&gt;&gt;lb561Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb561Cp.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;lb561Cp.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx561HV.Name" xml:space="preserve">
+    <value>tbx561HV</value>
+  </data>
+  <data name="&gt;&gt;tbx561HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx561HV.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tbx561HV.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb561HV.Name" xml:space="preserve">
+    <value>lb561HV</value>
+  </data>
+  <data name="&gt;&gt;lb561HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb561HV.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;lb561HV.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb561.Name" xml:space="preserve">
+    <value>lb561</value>
+  </data>
+  <data name="&gt;&gt;lb561.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb561.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;lb561.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chbx561.Name" xml:space="preserve">
+    <value>chbx561</value>
+  </data>
+  <data name="&gt;&gt;chbx561.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx561.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;chbx561.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gbx561.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 641</value>
+  </data>
+  <data name="gbx561.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
   </data>
-  <data name="gbx488.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="gbx561.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
-  <data name="&gt;&gt;gbx488.Name" xml:space="preserve">
-    <value>gbx488</value>
+  <data name="&gt;&gt;gbx561.Name" xml:space="preserve">
+    <value>gbx561</value>
   </data>
-  <data name="&gt;&gt;gbx488.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbx561.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbx488.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbx561.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbx488.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gbx561.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="trackBar3.Location" type="System.Drawing.Point, System.Drawing">
@@ -1254,25 +1575,121 @@
   <data name="&gt;&gt;chbx561.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="gbx561.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 641</value>
+  <data name="&gt;&gt;trackBar5.Name" xml:space="preserve">
+    <value>trackBar5</value>
   </data>
-  <data name="gbx561.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;trackBar5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar5.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;trackBar5.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackBar6.Name" xml:space="preserve">
+    <value>trackBar6</value>
+  </data>
+  <data name="&gt;&gt;trackBar6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar6.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;trackBar6.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx640Cp.Name" xml:space="preserve">
+    <value>tbx640Cp</value>
+  </data>
+  <data name="&gt;&gt;tbx640Cp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx640Cp.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tbx640Cp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx640HV.Name" xml:space="preserve">
+    <value>tbx640HV</value>
+  </data>
+  <data name="&gt;&gt;tbx640HV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx640HV.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tbx640HV.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb640.Name" xml:space="preserve">
+    <value>lb640</value>
+  </data>
+  <data name="&gt;&gt;lb640.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Name" xml:space="preserve">
+    <value>chbx640</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;chbx640.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gbx640.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 767</value>
+  </data>
+  <data name="gbx640.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
   </data>
-  <data name="gbx561.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="gbx640.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="&gt;&gt;gbx561.Name" xml:space="preserve">
-    <value>gbx561</value>
+  <data name="&gt;&gt;gbx640.Name" xml:space="preserve">
+    <value>gbx640</value>
   </data>
-  <data name="&gt;&gt;gbx561.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbx640.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbx561.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbx640.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbx561.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gbx640.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="trackBar5.Location" type="System.Drawing.Point, System.Drawing">
@@ -1485,25 +1902,49 @@
   <data name="&gt;&gt;chbx640.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="gbx640.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 767</value>
+  <data name="&gt;&gt;rbtnRes.Name" xml:space="preserve">
+    <value>rbtnRes</value>
   </data>
-  <data name="gbx640.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 120</value>
+  <data name="&gt;&gt;rbtnRes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="gbx640.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="&gt;&gt;rbtnRes.Parent" xml:space="preserve">
+    <value>gbxMode</value>
   </data>
-  <data name="&gt;&gt;gbx640.Name" xml:space="preserve">
-    <value>gbx640</value>
+  <data name="&gt;&gt;rbtnRes.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;gbx640.Type" xml:space="preserve">
+  <data name="&gt;&gt;rbtnGalv.Name" xml:space="preserve">
+    <value>rbtnGalv</value>
+  </data>
+  <data name="&gt;&gt;rbtnGalv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnGalv.Parent" xml:space="preserve">
+    <value>gbxMode</value>
+  </data>
+  <data name="&gt;&gt;rbtnGalv.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbxMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 4</value>
+  </data>
+  <data name="gbxMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 68</value>
+  </data>
+  <data name="gbxMode.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;gbxMode.Name" xml:space="preserve">
+    <value>gbxMode</value>
+  </data>
+  <data name="&gt;&gt;gbxMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbx640.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbxMode.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbx640.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gbxMode.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="rbtnRes.AutoSize" type="System.Boolean, mscorlib">
@@ -1563,27 +2004,6 @@
   <data name="&gt;&gt;rbtnGalv.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="gbxMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 4</value>
-  </data>
-  <data name="gbxMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 68</value>
-  </data>
-  <data name="gbxMode.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.Name" xml:space="preserve">
-    <value>gbxMode</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="cbxScanPixels.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -1609,7 +2029,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxScanPixels.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cbxScanStrategy.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1618,7 +2038,7 @@
     <value>15</value>
   </data>
   <data name="cbxScanStrategy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 138</value>
+    <value>268, 152</value>
   </data>
   <data name="cbxScanStrategy.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -1636,7 +2056,112 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxScanStrategy.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Name" xml:space="preserve">
+    <value>rbtnThree</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Parent" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Name" xml:space="preserve">
+    <value>rbtnTwo</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Parent" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbxMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 78</value>
+  </data>
+  <data name="gbxMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 68</value>
+  </data>
+  <data name="gbxMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.Name" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbtnThree.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbtnThree.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rbtnThree.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="rbtnThree.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 19</value>
+  </data>
+  <data name="rbtnThree.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbtnThree.Text" xml:space="preserve">
+    <value>三振镜</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Name" xml:space="preserve">
+    <value>rbtnThree</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Parent" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbtnTwo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbtnTwo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rbtnTwo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="rbtnTwo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 19</value>
+  </data>
+  <data name="rbtnTwo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbtnTwo.Text" xml:space="preserve">
+    <value>双振镜</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Name" xml:space="preserve">
+    <value>rbtnTwo</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Parent" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

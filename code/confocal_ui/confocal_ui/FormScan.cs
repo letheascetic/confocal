@@ -54,30 +54,23 @@ namespace confocal_ui
 
         private void InitControlers()
         {
-            cbxScanPixels.DataSource = scanPixelsDict.ToList<KeyValuePair<int, string>>();
-            cbxScanPixels.DisplayMember = "Value";
-            cbxScanPixels.ValueMember = "Key";
-
+            // 扫描模式
+            rbtnGalv.Checked = m_config.GetScanMode() == SCAN_MODE.GALVANOMETER ? true : false;
+            // 扫描策略
             cbxScanStrategy.DataSource = scanStrategyDict.ToList<KeyValuePair<SCAN_STRATEGY, string>>();
             cbxScanStrategy.DisplayMember = "Value";
             cbxScanStrategy.ValueMember = "Key";
-
-            switch (m_config.GetScanMode())
-            {
-                case SCAN_MODE.GALVANOMETER:
-                    rbtnGalv.Checked = true;
-                    break;
-                case SCAN_MODE.RESONANT:
-                    rbtnRes.Checked = true;
-                    break;
-                default:
-                    rbtnGalv.Checked = true;
-                    break;
-            }
-
-            tbxPixelTime.Text = m_config.GetScanPixelTime().ToString();
             cbxScanStrategy.SelectedIndex = cbxScanStrategy.FindString(scanStrategyDict[m_config.GetScanStrategy()]);
-
+            // 扫描像素
+            cbxScanPixels.DataSource = scanPixelsDict.ToList<KeyValuePair<int, string>>();
+            cbxScanPixels.DisplayMember = "Value";
+            cbxScanPixels.ValueMember = "Key";
+            cbxScanPixels.SelectedIndex = cbxScanPixels.FindString(scanPixelsDict[m_config.GetScanXPoints()]);
+            // 振镜系统
+            rbtnThree.Checked = m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? true : false;
+            // 停留时间
+            tbxDwellTime.Text = m_config.GetScanDwellTime().ToString();
+            // 激光[通道]开关状态
             chbx405.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx488.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx561.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON ? true : false;
@@ -86,10 +79,30 @@ namespace confocal_ui
 
         private void UpdateVariables()
         {
-            m_config.SetScanPixelTime(double.Parse(tbxPixelTime.Text));
+            // 扫描模式
+            SCAN_MODE mode = rbtnGalv.Checked ? SCAN_MODE.GALVANOMETER : SCAN_MODE.RESONANT;
+            m_config.SetScanMode(mode);
+            // 扫描策略
+            SCAN_STRATEGY strategy = ((KeyValuePair<SCAN_STRATEGY, string>)cbxScanStrategy.SelectedItem).Key;
+            m_config.SetScanStartegy(strategy);
+            // 振镜系统
+            SCAN_MIRROR_NUM mirrorNum = rbtnThree.Checked ? SCAN_MIRROR_NUM.THREEE : SCAN_MIRROR_NUM.TWO;
+            m_config.SetScanMirrorNum(mirrorNum);
+            // Dwell Time
+            m_config.SetScanDwellTime(double.Parse(tbxDwellTime.Text));
+            // 扫描像素
             int scanPixels = ((KeyValuePair<int, string>)cbxScanPixels.SelectedItem).Key;
             m_config.SetScanXPoints(scanPixels);
             m_config.SetScanYPoints(scanPixels);
+            // 激光[通道]开关状态
+            LASER_CHAN_SWITCH status = chbx405.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM, status);
+            status = chbx488.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM, status);
+            status = chbx561.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM, status);
+            status = chbx640.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM, status);
 
             m_params.Calculate();
         }
@@ -109,6 +122,7 @@ namespace confocal_ui
         {
             if (m_scheduler.Scanning == false)
             {
+                UpdateVariables();
                 m_scheduler.StartToScan();
             }
             else
