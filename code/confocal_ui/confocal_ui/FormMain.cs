@@ -22,6 +22,7 @@ namespace confocal_ui
         FormROI m_pFormROI = new FormROI();
         FormMeas m_pFormMeas = new FormMeas();
         FormShowBox m_pFormShowBox = new FormShowBox();
+        FormImage m_pFormImage = new FormImage();
         /************************************************************************************/
 
         public FormMain()
@@ -49,6 +50,7 @@ namespace confocal_ui
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
             //m_pFormROI.Show(this.dockPanel, DockState.DockRight);
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
+            m_pFormImage.Show(this.dockPanel, DockState.Document);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Left, 0.5);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Bottom, 0.5);
             //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);

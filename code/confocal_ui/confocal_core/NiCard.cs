@@ -15,18 +15,18 @@ namespace confocal_core
         private double m_fps;                   // 扫描帧率
         private long m_line;                    // 扫描当前所在行
         private long m_frame;                   // 扫描当前所在帧
-        private double[,] m_nSamples;           // 当前获取到的有效样本
+        private ushort[,] m_nSamples;           // 当前获取到的有效样本
 
         public DateTime StartTime { get { return m_startTime; } }
         public Double TimeSpan { get { return m_timespan; } set { m_timespan = value; } }
         public double Fps { get { return m_fps; } set { m_fps = value; } }
         public long CurrentLine { get { return m_line; } set { m_line = value; } }
         public long CurrentFrame { get { return m_frame; } set { m_frame = value; } }
-        public double[,] NSamples { get { return m_nSamples; } set { m_nSamples = value; } }
+        public ushort[,] NSamples { get { return m_nSamples; } set { m_nSamples = value; } }
 
         public ScanInfo()
         {
-            m_startTime = DateTime.Now;
+            m_startTime = DateTime.Now; 
             m_timespan = 0;
             m_fps = 0;
             m_line = 0;
@@ -57,8 +57,7 @@ namespace confocal_core
         private Task m_aoTask;
         private Task m_doTask;
         private Task m_aiTask;
-        private AsyncCallback m_aiTaskCallback;
-        private AnalogMultiChannelReader m_aiReader;
+        private AnalogUnscaledReader m_aiUnscaledReader;
         private ScanInfo m_scanInfo;
 
         private double[,] tempData;
@@ -164,7 +163,7 @@ namespace confocal_core
                     Logger.Error("stop ai task exception: [{0}].", e);
                 }
                 m_aiTask = null;
-                m_aiReader = null;
+                m_aiUnscaledReader = null;
                 m_aiTaskCallback = null;
             }
         }
@@ -178,8 +177,7 @@ namespace confocal_core
             m_aoTask = null;
             m_doTask = null;
             m_aiTask = null;
-            m_aiReader = null;
-            m_aiTaskCallback = null;
+            m_aiUnscaledReader = null;
             m_scanInfo = new ScanInfo();
 
             DebugFlag = true;
@@ -295,6 +293,7 @@ namespace confocal_core
                 Logger.Info(string.Format("no channel activated."));
                 return API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
             }
+
             try
             {
                 m_aiTask = new Task();
@@ -330,10 +329,9 @@ namespace confocal_core
                 m_aiTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
                 m_aiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(EveryNSamplesRead);
 
-                //m_aiTaskCallback = new AsyncCallback(AnalogInCallback);
-                m_aiReader = new AnalogMultiChannelReader(m_aiTask.Stream);
-                m_aiReader.SynchronizeCallbacks = false;
-
+                m_aiUnscaledReader = new AnalogUnscaledReader(m_aiTask.Stream);
+                m_aiUnscaledReader.SynchronizeCallbacks = false;
+               
                 int activatedChannelNum = m_config.GetActivatedChannelNum();
                 tempData = new double[activatedChannelNum, m_params.ValidSampleCountPerLine];
                 m_scanInfo = new ScanInfo();
@@ -369,43 +367,6 @@ namespace confocal_core
             return code;
         }
 
-        private void AnalogInCallback(IAsyncResult ar)
-        {
-            try
-            {
-                m_scanInfo.NSamples = m_aiReader.EndMemoryOptimizedReadMultiSample(ar, out int readSampleCount);
-                ScanInfo dataInfo = ar.AsyncState as ScanInfo;
-                if (dataInfo != null)
-                {
-                    if (++m_scanInfo.CurrentLine % m_config.GetScanYPoints() == 0)
-                    {
-                        dataInfo.CurrentLine = 0;
-                        dataInfo.CurrentFrame++;
-
-                        dataInfo.TimeSpan = (DateTime.Now - dataInfo.StartTime).TotalSeconds;
-                        dataInfo.Fps = dataInfo.CurrentFrame / dataInfo.TimeSpan;
-
-                        Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", 
-                            dataInfo.CurrentFrame, dataInfo.TimeSpan, dataInfo.Fps));
-                    }
-
-                    double timePerLine = dataInfo.TimeSpan / (m_config.GetScanYPoints() * dataInfo.CurrentFrame + dataInfo.CurrentLine);
-                    Logger.Info(string.Format("scan info: frame[{0}], line[{1}], number of samples[{2}], time per line:[{3}].",
-                        dataInfo.CurrentFrame, dataInfo.CurrentLine, readSampleCount, timePerLine));
-                }
-
-                m_aiReader.BeginMemoryOptimizedReadMultiSample(
-                    m_params.ValidSampleCountPerLine,
-                    m_aiTaskCallback,
-                    m_scanInfo,
-                    m_scanInfo.NSamples);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(string.Format("analog in callback exception: [{0}].", e));
-            }
-        }
-
         /// <summary>
         /// 采集到N个样本的事件
         /// </summary>
@@ -415,8 +376,7 @@ namespace confocal_core
         {
             try
             {
-                m_aiReader.MemoryOptimizedReadMultiSample(m_params.ValidSampleCountPerLine, ref tempData, out int readSampleCount);
-                m_scanInfo.NSamples = tempData;
+                m_scanInfo.NSamples = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
 
                 if (m_scanInfo != null)
                 {
@@ -434,7 +394,7 @@ namespace confocal_core
 
                     double timePerLine = m_scanInfo.TimeSpan / (m_config.GetScanYPoints() * m_scanInfo.CurrentFrame + m_scanInfo.CurrentLine);
                     Logger.Info(string.Format("scan info: frame[{0}], line[{1}], number of samples[{2}], time per line:[{3}].",
-                        m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine, readSampleCount, timePerLine));
+                        m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine, m_scanInfo.NSamples.GetLength(1), timePerLine));
                 }
             }
             catch (Exception err)
