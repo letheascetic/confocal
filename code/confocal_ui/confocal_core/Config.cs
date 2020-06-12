@@ -219,7 +219,8 @@ namespace confocal_core
         private PinHole m_hole;             // 小孔
         private Scan m_scan;                // 扫描参数
         ///////////////////////////////////////////////////////////////////////////////////////////
-
+        public bool Debugging { get; set; } 
+        ///////////////////////////////////////////////////////////////////////////////////////////
         #region public apis
 
         public static Config GetConfig()
@@ -520,6 +521,8 @@ namespace confocal_core
                 CurveCoff = CURVE_COFF_DEFAULT,
                 BScanPixelComp = BIDIRECTION_SCAN_PIXEL_COMPENSATION
             };
+
+            Debugging = true;
         }
 
         private LaserChannel GetLaserChannel(CHAN_ID id)

@@ -8,33 +8,7 @@ using System.Text;
 
 namespace confocal_core
 {
-    public class ScanInfo
-    {
-        private DateTime m_startTime;           // 扫描开始时间
-        private double m_timespan;              // 扫描经过时间
-        private double m_fps;                   // 扫描帧率
-        private long m_line;                    // 扫描当前所在行
-        private long m_frame;                   // 扫描当前所在帧
-        private ushort[,] m_nSamples;           // 当前获取到的有效样本
-
-        public DateTime StartTime { get { return m_startTime; } }
-        public Double TimeSpan { get { return m_timespan; } set { m_timespan = value; } }
-        public double Fps { get { return m_fps; } set { m_fps = value; } }
-        public long CurrentLine { get { return m_line; } set { m_line = value; } }
-        public long CurrentFrame { get { return m_frame; } set { m_frame = value; } }
-        public ushort[,] NSamples { get { return m_nSamples; } set { m_nSamples = value; } }
-
-        public ScanInfo()
-        {
-            m_startTime = DateTime.Now; 
-            m_timespan = 0;
-            m_fps = 0;
-            m_line = 0;
-            m_frame = 0;
-            m_nSamples = null;
-        }
-
-    }
+    public delegate void SamplesReceivedEventHandler(object sender, ushort[,] samples);
 
     /// <summary>
     /// NI板卡接口层
@@ -50,6 +24,8 @@ namespace confocal_core
         private static readonly string TWO_MIRROR_AO_CHANNELS = "ao0:1";
         private static readonly string THREE_MIRROR_AO_CHANNELS = "ao0:2";
         ///////////////////////////////////////////////////////////////////////////////////////////
+        public event SamplesReceivedEventHandler SamplesReceived;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
         private Params m_params;
         private Waver m_waver;
@@ -58,11 +34,8 @@ namespace confocal_core
         private Task m_doTask;
         private Task m_aiTask;
         private AnalogUnscaledReader m_aiUnscaledReader;
-        private ScanInfo m_scanInfo;
-
-        private double[,] tempData;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public bool DebugFlag { get; set; }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         public static NiCard CreateInstance()
         {
@@ -164,7 +137,6 @@ namespace confocal_core
                 }
                 m_aiTask = null;
                 m_aiUnscaledReader = null;
-                m_aiTaskCallback = null;
             }
         }
 
@@ -178,9 +150,6 @@ namespace confocal_core
             m_doTask = null;
             m_aiTask = null;
             m_aiUnscaledReader = null;
-            m_scanInfo = new ScanInfo();
-
-            DebugFlag = true;
         }
 
         /// <summary>
@@ -205,7 +174,7 @@ namespace confocal_core
                     m_params.SampleCountPerFrame);
 
                 // 路由Ao Sample Clcok到PFI0
-                if (DebugFlag)
+                if (m_config.Debugging)
                 {
                     Logger.Info(string.Format("route ao sample clock to PFI0."));
                     m_aoTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/", NI_CARD_NAME_DEFAULT, "/", "PFI0");
@@ -261,7 +230,7 @@ namespace confocal_core
                 m_doTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
 
                 // 路由Do Sample Clcok到PFI1
-                if (DebugFlag)
+                if (m_config.Debugging)
                 {
                     Logger.Info(string.Format("route do sample clock to PFI1."));
                     m_doTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI1");
@@ -320,8 +289,9 @@ namespace confocal_core
                 m_aiTask.Triggers.StartTrigger.Retriggerable = true;        // 设置为允许重触发
 
                 // 路由Do Sample Clcok到PFI1
-                if (DebugFlag)
+                if (m_config.Debugging)
                 {
+                    Logger.Info(string.Format("route ai sample clock to FFI2, ai convert clock to PFI3."));
                     m_aiTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI2"); ;
                     m_aiTask.ExportSignals.AIConvertClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI3"); ;
                 }
@@ -331,10 +301,6 @@ namespace confocal_core
 
                 m_aiUnscaledReader = new AnalogUnscaledReader(m_aiTask.Stream);
                 m_aiUnscaledReader.SynchronizeCallbacks = false;
-               
-                int activatedChannelNum = m_config.GetActivatedChannelNum();
-                tempData = new double[activatedChannelNum, m_params.ValidSampleCountPerLine];
-                m_scanInfo = new ScanInfo();
 
             }
             catch (Exception e)
@@ -364,6 +330,7 @@ namespace confocal_core
                 Logger.Error(string.Format("start ni tasks exception: [{0}].", e));
                 code = API_RETURN_CODE.API_FAILED_NI_START_TASK_EXCEPTION;
             }
+
             return code;
         }
 
@@ -376,25 +343,11 @@ namespace confocal_core
         {
             try
             {
-                m_scanInfo.NSamples = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
+                ushort[,] samples = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
 
-                if (m_scanInfo != null)
+                if (SamplesReceived != null)
                 {
-                    if (++m_scanInfo.CurrentLine % m_config.GetScanYPoints() == 0)
-                    {
-                        m_scanInfo.CurrentLine = 0;
-                        m_scanInfo.CurrentFrame++;
-
-                        m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
-                        m_scanInfo.Fps = m_scanInfo.CurrentFrame / m_scanInfo.TimeSpan;
-
-                        Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].",
-                            m_scanInfo.CurrentFrame, m_scanInfo.TimeSpan, m_scanInfo.Fps));
-                    }
-
-                    double timePerLine = m_scanInfo.TimeSpan / (m_config.GetScanYPoints() * m_scanInfo.CurrentFrame + m_scanInfo.CurrentLine);
-                    Logger.Info(string.Format("scan info: frame[{0}], line[{1}], number of samples[{2}], time per line:[{3}].",
-                        m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine, m_scanInfo.NSamples.GetLength(1), timePerLine));
+                    SamplesReceived.Invoke(this, samples);
                 }
             }
             catch (Exception err)

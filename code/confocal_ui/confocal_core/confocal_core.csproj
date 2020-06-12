@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="DataPool.cs" />
     <Compile Include="NiCard.cs" />
     <Compile Include="Params.cs" />
     <Compile Include="Scheduler.cs" />
