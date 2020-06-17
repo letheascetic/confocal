@@ -115,13 +115,17 @@ namespace confocal_core
         /// </summary>
         public void Calculate()
         {
-            if (m_config.GetScanStrategy() == SCAN_STRATEGY.Z_UNIDIRECTION)
+            switch (m_config.GetScanStrategy())
             {
-                CalculateSScan();
-            }
-            else
-            {
-                CalculateBScan();
+                case SCAN_STRATEGY.Z_UNIDIRECTION:
+                    CalculateSScan();
+                    break;
+                case SCAN_STRATEGY.Z_BIDIRECTION:
+                    CalculateBScan();
+                    break;
+                default:
+                    CalculateSScan();
+                    break;
             }
         }
 

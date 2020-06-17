@@ -3,12 +3,13 @@ using NationalInstruments;
 using NationalInstruments.DAQmx;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace confocal_core
 {
-    public delegate void SamplesReceivedEventHandler(object sender, ushort[,] samples);
+    public delegate void SamplesReceivedEventHandler(object sender, ushort[][] samples);
 
     /// <summary>
     /// NI板卡接口层
@@ -24,7 +25,7 @@ namespace confocal_core
         private static readonly string TWO_MIRROR_AO_CHANNELS = "ao0:1";
         private static readonly string THREE_MIRROR_AO_CHANNELS = "ao0:2";
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public event SamplesReceivedEventHandler SamplesReceived;
+        public SamplesReceivedEventHandler SamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
         private Params m_params;
@@ -35,7 +36,7 @@ namespace confocal_core
         private Task m_aiTask;
         private AnalogUnscaledReader m_aiUnscaledReader;
         ///////////////////////////////////////////////////////////////////////////////////////////
-
+        
         ///////////////////////////////////////////////////////////////////////////////////////////
         public static NiCard CreateInstance()
         {
@@ -179,7 +180,7 @@ namespace confocal_core
                     Logger.Info(string.Format("route ao sample clock to PFI0."));
                     m_aoTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/", NI_CARD_NAME_DEFAULT, "/", "PFI0");
                 }
-
+                
                 // 写入波形
                 AnalogMultiChannelWriter writer = new AnalogMultiChannelWriter(m_aoTask.Stream);
                 AnalogWaveform<double>[] waves;
@@ -343,7 +344,14 @@ namespace confocal_core
         {
             try
             {
-                ushort[,] samples = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
+                ushort[,] originSamples = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
+                AnalogWaveform<ushort>[] waves = AnalogWaveform<ushort>.FromArray2D(originSamples);
+
+                ushort[][] samples = new ushort[waves.Length][];
+                for (int i = 0; i < waves.Length; i++)
+                {
+                    samples[i] = waves[i].GetRawData();
+                }
 
                 if (SamplesReceived != null)
                 {

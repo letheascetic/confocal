@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -115,19 +116,30 @@ namespace confocal_ui
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
+            byte[,] source = new byte[3, 5] { { 1,2,3,4,5},{ 6,7,8,9,10},{11,12,13,14,15 } };
+            byte[] dst = new byte[10];
+            int x = source.GetLowerBound(0);
+            int y = source.GetLowerBound(1);
+            int a = source.GetUpperBound(0);
+            int b = source.GetUpperBound(1);
+
+            //IntPtr ptr = Marshal.AllocHGlobal(10);
+            IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(source, 4);
+            Marshal.Copy(ptr, dst, 0, 4);
+
             UpdateVariables();
         }
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-            if (m_scheduler.Scanning == false)
+            if (ScanTask.Scannning == false)
             {
                 UpdateVariables();
-                m_scheduler.StartToScan();
+                m_scheduler.StartScanTask();
             }
             else
             {
-                m_scheduler.Stop();
+                m_scheduler.StopScanTask();
             }
         }
     }

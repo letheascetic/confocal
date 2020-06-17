@@ -57,6 +57,7 @@
     <Compile Include="DataPool.cs" />
     <Compile Include="NiCard.cs" />
     <Compile Include="Params.cs" />
+    <Compile Include="ScanTask.cs" />
     <Compile Include="Scheduler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Waver.cs" />
