@@ -64,6 +64,10 @@ namespace confocal_core
         /// </summary>
         public int SampleCountPerFrame { get; set; }
         /// <summary>
+        /// 单帧的有效样本数量
+        /// </summary>
+        public int ValidSampleCountPerFrame { get; set; }
+        /// <summary>
         /// 单行有效样本的扫描时间，单位：ms
         /// </summary>
         public double ValidSampleScanTimePerLine { get; set; }
@@ -147,7 +151,6 @@ namespace confocal_core
             // 从prev_x0到prev_xn总共的samples数量
             int previousTotalSampleCount = (int)(2 * r * sinx / w * m_config.GetScanXPoints());
             // 计算每行前置输出样本数量
-            //int previousSampleCountPerLine = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime()) * 2;
             int previousSampleCountPerLine = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
 
             // 计算每行有效输出样本数量
@@ -155,7 +158,6 @@ namespace confocal_core
 
             int postFirstTotalSampleCount = (int)(2 * r * sinx / w * m_config.GetScanXPoints());
             // 计算每行后置输出样本数量
-            // int postFirstSampleCount = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime()) * 2;
             int postFirstSampleCount = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
             int postSecondSampleCount = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime() / 2);
             int postSecondMinimumSampleCount = (int)(h / maximumVolatgeStep);
@@ -254,6 +256,7 @@ namespace confocal_core
             m_params.VoltagePerRow = h2;
 
             m_params.SampleCountPerFrame = sampleCountPerFrame;
+            m_params.ValidSampleCountPerFrame = m_params.ValidSampleCountPerLine * m_params.ScanRows;
             m_params.XSamplesPerLine = xSamplesPerLine;
             m_params.Y1SamplesPerRow = y1SamplesPerRow;
             m_params.Y2SamplesPerRow = y2SamplesPerRow;
@@ -384,6 +387,7 @@ namespace confocal_core
             m_params.VoltagePerRow = h2;
 
             m_params.SampleCountPerFrame = sampleCountPerFrame;
+            m_params.ValidSampleCountPerFrame = m_params.ValidSampleCountPerLine * m_params.ScanRows * 2;
             m_params.XSamplesPerLine = xSamplesPerLine;
             m_params.Y1SamplesPerRow = y1SamplesPerRow;
             m_params.Y2SamplesPerRow = y2SamplesPerRow;

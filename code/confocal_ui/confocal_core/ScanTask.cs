@@ -17,7 +17,7 @@ namespace confocal_core
         private DateTime m_startTime;           // 扫描开始时间
         private double m_timespan;              // 扫描经过时间
         private double m_fps;                   // 扫描帧率
-        private long m_line;                    // 扫描当前所在行
+        private int m_line;                     // 扫描当前所在行
         private long m_frame;                   // 扫描当前所在帧
         private ushort[][] m_nSamples;          // 当前获取到的有效样本
         private int m_405Index;                 // 405nm激光对应的采集通道
@@ -28,7 +28,7 @@ namespace confocal_core
         public DateTime StartTime { get { return m_startTime; } set { m_startTime = value; } }
         public Double TimeSpan { get { return m_timespan; } set { m_timespan = value; } }
         public double Fps { get { return m_fps; } set { m_fps = value; } }
-        public long CurrentLine { get { return m_line; } set { m_line = value; } }
+        public int CurrentLine { get { return m_line; } set { m_line = value; } }
         public long CurrentFrame { get { return m_frame; } set { m_frame = value; } }
         public ushort[][] NSamples { get { return m_nSamples; } set { m_nSamples = value; } }
 
@@ -110,6 +110,7 @@ namespace confocal_core
             m_params = Params.GetParams();
             m_scanInfo = new ScanInfo();
             m_scanData = new DataPool();
+            m_convertThread = null;
         }
 
         public void Config()
@@ -120,6 +121,8 @@ namespace confocal_core
 
         public void Start()
         {
+            m_convertThread = new Thread(ConvertSamples);
+            m_convertThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
             m_scanning = true;
         }
@@ -128,6 +131,9 @@ namespace confocal_core
         {
             NiCard.CreateInstance().SamplesReceived -= ReceiveSamples;
             m_scanning = false;
+            m_convertThread.Join();
+            m_convertThread.Abort();
+            m_convertThread = null;
         }
 
         public ScanInfo GetScanInfo()
@@ -140,12 +146,14 @@ namespace confocal_core
             Config m_config = confocal_core.Config.GetConfig();
             m_scanInfo.NSamples = samples;
 
-            //SampleData sampleData = new SampleData(m_scanInfo.NSamples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
-            //m_scanData.EnqueueSample(sampleData);
+            SampleData sampleData = new SampleData(m_scanInfo.NSamples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
+            m_scanData.EnqueueSample(sampleData);
+
+            m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
 
             if (m_config.Debugging)
             {
-                double timePerLine = m_scanInfo.TimeSpan / (m_config.GetScanYPoints() * m_scanInfo.CurrentFrame + m_scanInfo.CurrentLine);
+                double timePerLine = m_scanInfo.TimeSpan / (m_config.GetScanYPoints() * m_scanInfo.CurrentFrame + m_scanInfo.CurrentLine + 1);
                 Logger.Info(string.Format("scan info: frame[{0}], line[{1}], number of samples[{2}], time per line:[{3}].", m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine, m_scanInfo.NSamples[0].Length, timePerLine));
             }
 
@@ -154,7 +162,6 @@ namespace confocal_core
                 m_scanInfo.CurrentLine = 0;
                 m_scanInfo.CurrentFrame++;
 
-                m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
                 m_scanInfo.Fps = m_scanInfo.CurrentFrame / m_scanInfo.TimeSpan;
                 Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", m_scanInfo.CurrentFrame, m_scanInfo.TimeSpan, m_scanInfo.Fps));
             }
@@ -163,12 +170,17 @@ namespace confocal_core
         private void ConvertSamples()
         {
             int activatedChannelNum = m_config.GetActivatedChannelNum();
-            int sampleCountPerFrame = m_params.SampleCountPerFrame;
-            long currentFrame, currentLine;
-            int i;
-            ushort[,] data = new ushort[activatedChannelNum, sampleCountPerFrame];
-
-            //Marshal.Copy()
+            int sampleCountPerLine = m_params.SampleCountPerLine;
+            int validSampleCountPerFrame = m_params.ValidSampleCountPerFrame;
+            int validSampleCountPerLine = m_params.ValidSampleCountPerLine;
+            int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+            int i, offset;
+            
+            ushort[][] frame = new ushort[activatedChannelNum][];
+            for (i = 0; i < activatedChannelNum; i++)
+            {
+                frame[i] = new ushort[validSampleCountPerFrame];
+            }
 
             while (m_scanning)
             {
@@ -184,13 +196,37 @@ namespace confocal_core
                     continue;
                 }
 
-                currentFrame = sample.Frame;
+                // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
+                if (m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION && (sample.Line & 0x01) == 0x01)
+                {
+                    for (i = 0; i < activatedChannelNum; i++)
+                    {
+                        Array.Reverse(sample.NSamples[i]);
+                    }
+                }
+
+                offset = sample.Line * validSampleCountPerLine;
                 for (i = 0; i < activatedChannelNum; i++)
                 {
-                    
+                    Array.Copy(sample.NSamples[i], 0, frame[i], offset, validSampleCountPerLine);
                 }
-                                
+
+                // 完成一帧的转换
+                if (sample.Line == sacnRows - 1)
+                {
+                    // FrameData frameData = new FrameData(sample.Frame, frame);
+                    // m_scanData.EnqueueFrames(frameData);
+                    Logger.Info(string.Format("convert samples to frame: [{0}].", sample.Frame));
+
+                    frame = new ushort[activatedChannelNum][];
+                    for (i = 0; i < activatedChannelNum; i++)
+                    {
+                        frame[i] = new ushort[validSampleCountPerFrame];
+                    }
+                }
             }
+
+            Logger.Info(string.Format("scan task stop, finish convert samples."));
         }
 
     }

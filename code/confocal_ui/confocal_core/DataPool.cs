@@ -11,9 +11,9 @@ namespace confocal_core
     {
         public ushort[][] NSamples { get; set; }
         public long Frame { get; }
-        public long Line { get; }
+        public int Line { get; }
 
-        public SampleData(ushort[][] samples, long frame, long line)
+        public SampleData(ushort[][] samples, long frame, int line)
         {
             NSamples = samples;
             Frame = frame;
@@ -24,9 +24,9 @@ namespace confocal_core
     public struct FrameData
     {
         public long Frame { get; }
-        public ushort[] Data;
+        public ushort[][] Data { get; }
 
-        public FrameData(long frame, ushort[] data)
+        public FrameData(long frame, ushort[][] data)
         {
             Frame = frame;
             Data = data;
@@ -40,13 +40,13 @@ namespace confocal_core
         private static readonly int MAXIMUM_FRAME_QUEUE_SIZE_MBYTES = 512;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ConcurrentQueue<SampleData> m_sampleQueue;
-        private ConcurrentQueue<FrameData[]> m_frameQueue;
+        private ConcurrentQueue<FrameData> m_frameQueue;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public DataPool()
         {
             m_sampleQueue = new ConcurrentQueue<SampleData>();
-            m_frameQueue = new ConcurrentQueue<FrameData[]>();
+            m_frameQueue = new ConcurrentQueue<FrameData>();
         }
 
         public int SampleQueueSize()
@@ -59,7 +59,7 @@ namespace confocal_core
             m_sampleQueue.Enqueue(sampleData);
         }
 
-        public void EnqueueSample(ushort[][] samples, long frame, long line)
+        public void EnqueueSample(ushort[][] samples, long frame, int line)
         {
             SampleData sampleData = new SampleData(samples, frame, line);
             EnqueueSample(sampleData);
@@ -75,12 +75,12 @@ namespace confocal_core
             return m_frameQueue.Count;
         }
 
-        public void EnqueueFrames(FrameData[] frames)
+        public void EnqueueFrames(FrameData frames)
         {
             m_frameQueue.Enqueue(frames);
         }
 
-        public bool DequeueFrames(out FrameData[] frames)
+        public bool DequeueFrames(out FrameData frames)
         {
             return m_frameQueue.TryDequeue(out frames);
         }
