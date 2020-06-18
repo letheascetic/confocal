@@ -1,4 +1,5 @@
-﻿using confocal_ui;
+﻿using confocal_core;
+using confocal_ui;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,15 @@ namespace confocal_ui
         /************************************************************************************/
         private static readonly ILog Logger = log4net.LogManager.GetLogger("info");
         /************************************************************************************/
-        FormScan m_pFormScan = new FormScan();
-        FormROI m_pFormROI = new FormROI();
-        FormMeas m_pFormMeas = new FormMeas();
-        FormShowBox m_pFormShowBox = new FormShowBox();
-        List<FormImage> m_formImages = new List<FormImage>();
+        private FormScan m_pFormScan = new FormScan();
+        private FormROI m_pFormROI = new FormROI();
+        private FormMeas m_pFormMeas = new FormMeas();
+        private FormShowBox m_pFormShowBox = new FormShowBox();
+        private List<FormImage> m_formImages = new List<FormImage>();
+
+        private Config m_config;
+        private Params m_params;
+        private Scheduler m_scheduler;
         /************************************************************************************/
 
         public FormMain()
@@ -38,7 +43,9 @@ namespace confocal_ui
 
         private void Init()
         {
-
+            m_config = Config.GetConfig();
+            m_params = Params.GetParams();
+            m_scheduler = Scheduler.CreateInstance();
         }
 
         private void InitLoadControls()
@@ -48,14 +55,13 @@ namespace confocal_ui
             Logger.Info(string.Format("get software version: [{0}]", version));
 
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
-            //m_pFormROI.Show(this.dockPanel, DockState.DockRight);
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
 
-            m_formImages = new List<FormImage>();
-            m_formImages.Add(new FormImage());
-            m_formImages.Add(new FormImage());
-            m_formImages[0].Show(this.dockPanel, DockState.Document);
-            m_formImages[1].Show(this.dockPanel, DockState.Document);
+            //m_formImages = new List<FormImage>();
+            //m_formImages.Add(new FormImage());
+            //m_formImages.Add(new FormImage());
+            //m_formImages[0].Show(this.dockPanel, DockState.Document);
+            //m_formImages[1].Show(this.dockPanel, DockState.Document);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Left, 0.5);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Bottom, 0.5);
             //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);

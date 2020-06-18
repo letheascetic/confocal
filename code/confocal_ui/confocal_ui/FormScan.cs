@@ -116,30 +116,21 @@ namespace confocal_ui
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            byte[,] source = new byte[3, 5] { { 1,2,3,4,5},{ 6,7,8,9,10},{11,12,13,14,15 } };
-            byte[] dst = new byte[10];
-            int x = source.GetLowerBound(0);
-            int y = source.GetLowerBound(1);
-            int a = source.GetUpperBound(0);
-            int b = source.GetUpperBound(1);
-
-            //IntPtr ptr = Marshal.AllocHGlobal(10);
-            IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(source, 4);
-            Marshal.Copy(ptr, dst, 0, 4);
-
             UpdateVariables();
         }
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-            if (ScanTask.Scannning == false)
+            if (m_scheduler.TaskScanning() == false)
             {
                 UpdateVariables();
-                m_scheduler.StartScanTask();
+                m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+                m_scheduler.StartScanTask(scanTask);
             }
             else
             {
-                m_scheduler.StopScanTask();
+                ScanTask scanTask = m_scheduler.GetScanningTask();
+                m_scheduler.StopScanTask(scanTask);
             }
         }
     }

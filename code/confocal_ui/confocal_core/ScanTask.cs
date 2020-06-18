@@ -2,6 +2,8 @@
 using NationalInstruments;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -34,20 +36,13 @@ namespace confocal_core
 
         public ScanInfo()
         {
-            m_startTime = DateTime.Now;
-            m_timespan = 0;
-            m_fps = 0;
-            m_line = 0;
-            m_frame = 0;
-            m_nSamples = null;
-            m_405Index = LASER_SWITCH_OFF_DATA_INDEX;
-            m_488Index = LASER_SWITCH_OFF_DATA_INDEX;
-            m_561Index = LASER_SWITCH_OFF_DATA_INDEX;
-            m_640Index = LASER_SWITCH_OFF_DATA_INDEX;
+            Init();
         }
 
         public void Config()
         {
+            Init();
+
             Config config = confocal_core.Config.GetConfig();
             int alreadyUsedIndex = -1;
             if (config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON)
@@ -85,6 +80,20 @@ namespace confocal_core
             }
         }
 
+        private void Init()
+        {
+            m_startTime = DateTime.Now;
+            m_timespan = 0;
+            m_fps = 0;
+            m_line = 0;
+            m_frame = 0;
+            m_nSamples = null;
+            m_405Index = LASER_SWITCH_OFF_DATA_INDEX;
+            m_488Index = LASER_SWITCH_OFF_DATA_INDEX;
+            m_561Index = LASER_SWITCH_OFF_DATA_INDEX;
+            m_640Index = LASER_SWITCH_OFF_DATA_INDEX;
+        }
+
     }
 
     /// <summary>
@@ -96,21 +105,31 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         private static bool m_scanning = false;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private Config m_config;
+        private int m_taskId;                   // 扫描任务ID
+        private string m_taskName;              // 扫描任务名字
+        private Config m_config;                
         private Params m_params;
         private ScanInfo m_scanInfo;
-        private DataPool m_scanData;
-        private Thread m_convertThread;
+        private DataPool m_scanData;            // 扫描任务数据池
+        private Thread m_convertThread;         // 扫描任务数据转换子线程
+        private Thread m_displayImageThread;    // 扫描任务图像显示子线程
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public int TaskId { get { return m_taskId; } }
+        public string TaskName { get { return m_taskName; } }
+        public bool Scannning { get { return m_scanning; } }
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public static bool Scannning { get { return m_scanning; } }
+        #region public apis
 
-        public ScanTask()
+        public ScanTask(int taskId, string taskName)
         {
+            m_taskName = taskName;
             m_config = confocal_core.Config.GetConfig();
             m_params = Params.GetParams();
             m_scanInfo = new ScanInfo();
             m_scanData = new DataPool();
             m_convertThread = null;
+            m_displayImageThread = null;
         }
 
         public void Config()
@@ -121,8 +140,10 @@ namespace confocal_core
 
         public void Start()
         {
-            m_convertThread = new Thread(ConvertSamples);
+            m_convertThread = new Thread(ConvertSamplesHandler);
             m_convertThread.Start();
+            m_displayImageThread = new Thread(UpdateDisplayImageHandler);
+            m_displayImageThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
             m_scanning = true;
         }
@@ -134,6 +155,9 @@ namespace confocal_core
             m_convertThread.Join();
             m_convertThread.Abort();
             m_convertThread = null;
+            m_displayImageThread.Join();
+            m_displayImageThread.Abort();
+            m_displayImageThread = null;
         }
 
         public ScanInfo GetScanInfo()
@@ -141,6 +165,9 @@ namespace confocal_core
             return m_scanInfo;
         }
 
+        #endregion
+
+        #region private apis
         private void ReceiveSamples(object sender, ushort[][] samples)
         {
             Config m_config = confocal_core.Config.GetConfig();
@@ -167,19 +194,28 @@ namespace confocal_core
             }
         }
 
-        private void ConvertSamples()
+        /// <summary>
+        /// 将行数据转换成帧数据存储
+        /// 对于单向扫描，将行数据逐行存储，直到完成一帧数据的存储后，加入到帧数据存储队列
+        /// 对于双向扫描：
+        /// (a)对偶数行数据截取中间段数据存储到帧数据中
+        /// (b)奇数行数据先做反转操作，再根据数据错位值截取相应的中间段数据，并存储到帧数据中
+        /// (c)一帧数据存储完成后，加入到帧数据存储队列
+        /// </summary>
+        private void ConvertSamplesHandler()
         {
-            int activatedChannelNum = m_config.GetActivatedChannelNum();
+            //int activatedChannelNum = m_config.GetActivatedChannelNum();
+            int activatedChannelNum = m_config.GetChannelNum();
             int sampleCountPerLine = m_params.SampleCountPerLine;
-            int validSampleCountPerFrame = m_params.ValidSampleCountPerFrame;
-            int validSampleCountPerLine = m_params.ValidSampleCountPerLine;
+            int xSampleCountPerLine = m_config.GetScanXPoints();
+            int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
             int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
-            int i, offset;
-            
+            int i, offset, sourceIndex;
+
             ushort[][] frame = new ushort[activatedChannelNum][];
             for (i = 0; i < activatedChannelNum; i++)
             {
-                frame[i] = new ushort[validSampleCountPerFrame];
+                frame[i] = new ushort[imageSampleCountPerFrame];
             }
 
             while (m_scanning)
@@ -196,38 +232,86 @@ namespace confocal_core
                     continue;
                 }
 
+                offset = sample.Line * xSampleCountPerLine;
                 // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
-                if (m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION && (sample.Line & 0x01) == 0x01)
+                // 根据错位补偿参数，完成相应的截断
+                if (m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION)
+                {
+                    if ((sample.Line & 0x01) == 0x01)
+                    {
+                        sourceIndex = m_config.GetBScanPixelCompensation() / 2 + m_config.GetBScanPixelOffset();
+                        for (i = 0; i < activatedChannelNum; i++)
+                        {
+                            Array.Reverse(sample.NSamples[i]);
+                            Array.Copy(sample.NSamples[i], sourceIndex, frame[i], offset, xSampleCountPerLine);
+                        }
+                    }
+                    else
+                    {
+                        sourceIndex = m_config.GetBScanPixelCompensation() / 2;
+                        for (i = 0; i < activatedChannelNum; i++)
+                        {
+                            Array.Copy(sample.NSamples[i], sourceIndex, frame[i], offset, xSampleCountPerLine);
+                        }
+                    }
+                }
+                else
                 {
                     for (i = 0; i < activatedChannelNum; i++)
                     {
-                        Array.Reverse(sample.NSamples[i]);
+                        Array.Copy(sample.NSamples[i], 0, frame[i], offset, xSampleCountPerLine);
                     }
-                }
-
-                offset = sample.Line * validSampleCountPerLine;
-                for (i = 0; i < activatedChannelNum; i++)
-                {
-                    Array.Copy(sample.NSamples[i], 0, frame[i], offset, validSampleCountPerLine);
                 }
 
                 // 完成一帧的转换
                 if (sample.Line == sacnRows - 1)
                 {
-                    // FrameData frameData = new FrameData(sample.Frame, frame);
-                    // m_scanData.EnqueueFrames(frameData);
+                    FrameData frameData = new FrameData(sample.Frame, frame);
+                    m_scanData.EnqueueFrame(frameData);
                     Logger.Info(string.Format("convert samples to frame: [{0}].", sample.Frame));
 
                     frame = new ushort[activatedChannelNum][];
                     for (i = 0; i < activatedChannelNum; i++)
                     {
-                        frame[i] = new ushort[validSampleCountPerFrame];
+                        frame[i] = new ushort[imageSampleCountPerFrame];
                     }
                 }
             }
-
             Logger.Info(string.Format("scan task stop, finish convert samples."));
         }
+
+        private void UpdateDisplayImageHandler()
+        {
+            // int activatedChannelNum = m_config.GetActivatedChannelNum();
+            int activatedChannelNum = m_config.GetChannelNum();
+            int i;
+
+            while (m_scanning)
+            {
+                if (m_scanData.FrameQueueSize() == 0)
+                {
+                    continue;
+                }
+
+                FrameData frame = m_scanData.GetNewFrameData();
+                if (frame.Frame == m_scanData.ImageData.Frame)
+                {
+                    continue;
+                }
+
+                byte[][] displayData = new byte[activatedChannelNum][];
+                for (i = 0; i < activatedChannelNum; i++)
+                {
+                    CImage.Gray16ToBGR24(frame.Data[i], out displayData[i]);
+                }
+                DisplayData display = new DisplayData(frame.Frame, displayData);
+                m_scanData.ImageData = display;
+
+                Logger.Info(string.Format("get new display data: [{0}].", m_scanData.ImageData.Frame));
+            }
+        }
+
+        #endregion
 
     }
 }

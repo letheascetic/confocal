@@ -50,7 +50,10 @@ namespace confocal_core
         API_FAILED_NI_CONFIG_DO_TASK_EXCEPTION,
         API_FAILED_NI_CONFIG_AI_TASK_EXCEPTION,
         API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED,
-        API_FAILED_NI_START_TASK_EXCEPTION
+        API_FAILED_NI_START_TASK_EXCEPTION,
+        /* error for scan task */
+        API_FAILED_SCAN_TASK_INVALID = 0x00001000,
+        API_FAILED_SCAN_TASK_NOT_FOUND
     }
 
     public enum CHAN_ID : int
@@ -160,6 +163,7 @@ namespace confocal_core
         private double calibrationVoltage;      // 校准[标定]电压,V
         private double curveCoff;               // 曲线系数,%
         private int bScanPixelComp;             // Z形双向扫描中有效像素补偿
+        private int bScanPixelOffset;           // Z形双向扫描中像素错位
 
         public SCAN_MODE Mode
         { get { return mode; } set { mode = value; } }
@@ -185,6 +189,8 @@ namespace confocal_core
         { get { return curveCoff; } set { curveCoff = value; } }
         public int BScanPixelComp
         { get { return bScanPixelComp; } set { bScanPixelComp = value; } }
+        public int BScanPixelOffset
+        { get { return bScanPixelOffset; } set { bScanPixelOffset = value; } }
     }
 
     public delegate void ConfigEventHandler(Config config, Object paras);
@@ -461,6 +467,18 @@ namespace confocal_core
             return m_scan.BScanPixelComp;
         }
 
+        public API_RETURN_CODE SetBScanPixelOffset(int bScanPixelOffset)
+        {
+            Logger.Info(string.Format("set bidirection scan pixel offset: [{0}].", bScanPixelOffset));
+            m_scan.BScanPixelOffset = bScanPixelOffset;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public int GetBScanPixelOffset()
+        {
+            return m_scan.BScanPixelOffset;
+        }
+        
         #endregion
 
         #region private apis
@@ -519,7 +537,8 @@ namespace confocal_core
                 DwellTime = SCAN_PIXEL_TIME_DEFAULT,
                 CalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT,
                 CurveCoff = CURVE_COFF_DEFAULT,
-                BScanPixelComp = BIDIRECTION_SCAN_PIXEL_COMPENSATION
+                BScanPixelComp = BIDIRECTION_SCAN_PIXEL_COMPENSATION,
+                BScanPixelOffset = 0
             };
 
             Debugging = true;

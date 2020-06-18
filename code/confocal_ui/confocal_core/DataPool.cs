@@ -33,18 +33,35 @@ namespace confocal_core
         }
     }
 
+    public struct DisplayData
+    {
+        public long Frame { get; set; }
+        public byte[][] Data { get; set;}
+
+        public DisplayData(long frame, byte[][] data)
+        {
+            Frame = frame;
+            Data = data;
+        }
+    }
+    
     public class DataPool
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
-        private static readonly int MAXIMUM_FRAME_QUEUE_SIZE_MBYTES = 512;
+        private static readonly int MAXIMUM_FRAME_QUEUE_SIZE = 4;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ConcurrentQueue<SampleData> m_sampleQueue;
         private ConcurrentQueue<FrameData> m_frameQueue;
+        private DisplayData m_displayData;
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public DisplayData ImageData
+        { get { return m_displayData; } set { m_displayData = value; } }
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public DataPool()
         {
+            m_displayData = new DisplayData(-1, null);
             m_sampleQueue = new ConcurrentQueue<SampleData>();
             m_frameQueue = new ConcurrentQueue<FrameData>();
         }
@@ -75,15 +92,25 @@ namespace confocal_core
             return m_frameQueue.Count;
         }
 
-        public void EnqueueFrames(FrameData frames)
+        public void EnqueueFrame(FrameData frame)
         {
-            m_frameQueue.Enqueue(frames);
+            FrameData frameData;
+            while (m_frameQueue.Count >= MAXIMUM_FRAME_QUEUE_SIZE)
+            {
+                DequeueFrame(out frameData);
+            }
+            m_frameQueue.Enqueue(frame);
         }
 
-        public bool DequeueFrames(out FrameData frames)
+        public bool DequeueFrame(out FrameData frame)
         {
-            return m_frameQueue.TryDequeue(out frames);
+            return m_frameQueue.TryDequeue(out frame);
         }
 
+        public FrameData GetNewFrameData()
+        {
+            return m_frameQueue.Last();
+        }
+        
     }
 }

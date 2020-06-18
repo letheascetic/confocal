@@ -258,11 +258,11 @@ namespace confocal_core
         private API_RETURN_CODE ConfigAiTask()
         {
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
-            if (m_config.GetActivatedChannelNum() == 0)
-            {
-                Logger.Info(string.Format("no channel activated."));
-                return API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
-            }
+            //if (m_config.GetActivatedChannelNum() == 0)
+            //{
+            //    Logger.Info(string.Format("no channel activated."));
+            //    return API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
+            //}
 
             try
             {
@@ -277,12 +277,6 @@ namespace confocal_core
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
                     m_params.ValidSampleCountPerLine);
-
-                // for test
-                //double x = m_aiTask.Timing.AIConvertMaximumRate;
-                //double delay = m_aiTask.Timing.DelayFromSampleClock;
-                //DelayFromSampleClockUnits delayunits = m_aiTask.Timing.DelayFromSampleClockUnits;
-                //double y = m_aiTask.Timing.AIConvertRate;
 
                 // 设置Ai Start Trigger源为PFI4，PFI4与P0.0物理直连，接收Do的输出信号，作为触发
                 string source = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI4");
@@ -370,24 +364,25 @@ namespace confocal_core
         /// <returns></returns>
         private string GetAiPhysicalChannelName()
         {
-            List<string> activatedChannels = new List<string>();
-            if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON)
-            {
-                activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai0"));
-            }
-            if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON)
-            {
-                activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai1"));
-            }
-            if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON)
-            {
-                activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai2"));
-            }
-            if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.ON)
-            {
-                activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai3"));
-            }
-            string physicalChannelName = string.Join(",", activatedChannels);
+            //List<string> activatedChannels = new List<string>();
+            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON)
+            //{
+            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai0"));
+            //}
+            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON)
+            //{
+            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai1"));
+            //}
+            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON)
+            //{
+            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai2"));
+            //}
+            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.ON)
+            //{
+            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai3"));
+            //}
+            //string physicalChannelName = string.Join(",", activatedChannels);
+            string physicalChannelName = string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai0:3");
             Logger.Info(string.Format("ai physical channel name: [{0}].", physicalChannelName));
             return physicalChannelName;
         }
