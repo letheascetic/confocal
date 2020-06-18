@@ -46,6 +46,9 @@ namespace confocal_ui
             m_config = Config.GetConfig();
             m_params = Params.GetParams();
             m_scheduler = Scheduler.CreateInstance();
+
+            m_scheduler.ScanTaskCreated += new ScanTaskEventHandler(ScanTaskCreatedHandler);
+
         }
 
         private void InitLoadControls()
@@ -66,5 +69,29 @@ namespace confocal_ui
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Bottom, 0.5);
             //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);
         }
+
+        private void ScanTaskCreatedHandler(ScanTask scanTask, object paras)
+        {
+            if (FindFormImage(scanTask) == null)
+            {
+                Logger.Info(string.Format("new scan task[{0}|{1}], create form image.", scanTask.TaskId, scanTask.TaskName));
+                FormImage formImage = new FormImage(scanTask);
+                formImage.Show(this.dockPanel, DockState.Document);
+                m_formImages.Add(formImage);
+            }
+        }
+
+        private FormImage FindFormImage(ScanTask scanTask)
+        {
+            foreach (FormImage formImage in m_formImages)
+            {
+                if (formImage.FormId == scanTask.TaskId)
+                {
+                    return formImage;
+                }
+            }
+            return null;
+        }
+
     }
 }

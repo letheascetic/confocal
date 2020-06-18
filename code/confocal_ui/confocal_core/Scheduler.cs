@@ -159,6 +159,8 @@ namespace confocal_core
                 return code;
             }
 
+            m_scanTasks.Remove(scanTask);
+
             if (ScanTaskReleased != null)
             {
                 ScanTaskReleased.Invoke(scanTask, null);

@@ -277,7 +277,7 @@ namespace confocal_core
                     }
                 }
             }
-            Logger.Info(string.Format("scan task stop, finish convert samples."));
+            Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
         }
 
         private void UpdateDisplayImageHandler()
@@ -309,6 +309,8 @@ namespace confocal_core
 
                 Logger.Info(string.Format("get new display data: [{0}].", m_scanData.ImageData.Frame));
             }
+
+            Logger.Info(string.Format("scan task[{0}|{1}] stop, finish update display images.", m_taskId, m_taskName));
         }
 
         #endregion
