@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormImage));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lbPixelSize = new System.Windows.Forms.ToolStripStatusLabel();
@@ -37,33 +36,35 @@
             this.lbScanPixels = new System.Windows.Forms.ToolStripStatusLabel();
             this.sp1 = new System.Windows.Forms.ToolStripSeparator();
             this.lbBitDepth = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sp4 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbFps = new System.Windows.Forms.ToolStripStatusLabel();
             this.sp3 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbFrame = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tpgAll = new System.Windows.Forms.TabPage();
-            this.tpg405 = new System.Windows.Forms.TabPage();
-            this.tpg488 = new System.Windows.Forms.TabPage();
-            this.tpg561 = new System.Windows.Forms.TabPage();
-            this.tpg640 = new System.Windows.Forms.TabPage();
             this.pbxAll = new System.Windows.Forms.PictureBox();
+            this.tpg405 = new System.Windows.Forms.TabPage();
             this.pbx405 = new System.Windows.Forms.PictureBox();
+            this.tpg488 = new System.Windows.Forms.TabPage();
             this.pbx488 = new System.Windows.Forms.PictureBox();
+            this.tpg561 = new System.Windows.Forms.TabPage();
             this.pbx561 = new System.Windows.Forms.PictureBox();
+            this.tpg640 = new System.Windows.Forms.TabPage();
             this.pbx640 = new System.Windows.Forms.PictureBox();
-            this.sp4 = new System.Windows.Forms.ToolStripSeparator();
-            this.lbFrame = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lbFps = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sp5 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbTimeSpan = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tpgAll.SuspendLayout();
-            this.tpg405.SuspendLayout();
-            this.tpg488.SuspendLayout();
-            this.tpg561.SuspendLayout();
-            this.tpg640.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAll)).BeginInit();
+            this.tpg405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx405)).BeginInit();
+            this.tpg488.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx488)).BeginInit();
+            this.tpg561.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx561)).BeginInit();
+            this.tpg640.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx640)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,7 +89,9 @@
             this.sp4,
             this.lbFps,
             this.sp3,
-            this.lbFrame});
+            this.lbFrame,
+            this.sp5,
+            this.lbTimeSpan});
             this.statusStrip.Location = new System.Drawing.Point(0, 578);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(582, 25);
@@ -99,8 +102,8 @@
             // 
             this.lbPixelSize.BackColor = System.Drawing.Color.Transparent;
             this.lbPixelSize.Name = "lbPixelSize";
-            this.lbPixelSize.Size = new System.Drawing.Size(76, 20);
-            this.lbPixelSize.Text = "xx um/px";
+            this.lbPixelSize.Size = new System.Drawing.Size(79, 20);
+            this.lbPixelSize.Text = "{0} um/px";
             // 
             // sp2
             // 
@@ -126,10 +129,34 @@
             this.lbBitDepth.Size = new System.Drawing.Size(54, 20);
             this.lbBitDepth.Text = "16bits";
             // 
+            // sp4
+            // 
+            this.sp4.Name = "sp4";
+            this.sp4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // lbFps
+            // 
+            this.lbFps.BackColor = System.Drawing.Color.Transparent;
+            this.lbFps.Name = "lbFps";
+            this.lbFps.Size = new System.Drawing.Size(66, 20);
+            this.lbFps.Text = "1.28 fps";
+            // 
             // sp3
             // 
             this.sp3.Name = "sp3";
             this.sp3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // lbFrame
+            // 
+            this.lbFrame.BackColor = System.Drawing.Color.Transparent;
+            this.lbFrame.Name = "lbFrame";
+            this.lbFrame.Size = new System.Drawing.Size(96, 20);
+            this.lbFrame.Text = "NO. 1 frame";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // tabControl
             // 
@@ -159,6 +186,15 @@
             this.tpgAll.TabIndex = 0;
             this.tpgAll.Text = "全部";
             // 
+            // pbxAll
+            // 
+            this.pbxAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxAll.Location = new System.Drawing.Point(3, 3);
+            this.pbxAll.Name = "pbxAll";
+            this.pbxAll.Size = new System.Drawing.Size(568, 518);
+            this.pbxAll.TabIndex = 0;
+            this.pbxAll.TabStop = false;
+            // 
             // tpg405
             // 
             this.tpg405.Controls.Add(this.pbx405);
@@ -170,6 +206,15 @@
             this.tpg405.Text = "405nm";
             this.tpg405.UseVisualStyleBackColor = true;
             // 
+            // pbx405
+            // 
+            this.pbx405.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbx405.Location = new System.Drawing.Point(3, 3);
+            this.pbx405.Name = "pbx405";
+            this.pbx405.Size = new System.Drawing.Size(568, 518);
+            this.pbx405.TabIndex = 0;
+            this.pbx405.TabStop = false;
+            // 
             // tpg488
             // 
             this.tpg488.Controls.Add(this.pbx488);
@@ -179,6 +224,15 @@
             this.tpg488.TabIndex = 2;
             this.tpg488.Text = "488nm";
             this.tpg488.UseVisualStyleBackColor = true;
+            // 
+            // pbx488
+            // 
+            this.pbx488.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbx488.Location = new System.Drawing.Point(0, 0);
+            this.pbx488.Name = "pbx488";
+            this.pbx488.Size = new System.Drawing.Size(574, 524);
+            this.pbx488.TabIndex = 0;
+            this.pbx488.TabStop = false;
             // 
             // tpg561
             // 
@@ -190,6 +244,15 @@
             this.tpg561.Text = "561nm";
             this.tpg561.UseVisualStyleBackColor = true;
             // 
+            // pbx561
+            // 
+            this.pbx561.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbx561.Location = new System.Drawing.Point(0, 0);
+            this.pbx561.Name = "pbx561";
+            this.pbx561.Size = new System.Drawing.Size(574, 524);
+            this.pbx561.TabIndex = 0;
+            this.pbx561.TabStop = false;
+            // 
             // tpg640
             // 
             this.tpg640.Controls.Add(this.pbx640);
@@ -200,42 +263,6 @@
             this.tpg640.Text = "640nm";
             this.tpg640.UseVisualStyleBackColor = true;
             // 
-            // pbxAll
-            // 
-            this.pbxAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxAll.Location = new System.Drawing.Point(3, 3);
-            this.pbxAll.Name = "pbxAll";
-            this.pbxAll.Size = new System.Drawing.Size(568, 518);
-            this.pbxAll.TabIndex = 0;
-            this.pbxAll.TabStop = false;
-            // 
-            // pbx405
-            // 
-            this.pbx405.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbx405.Location = new System.Drawing.Point(3, 3);
-            this.pbx405.Name = "pbx405";
-            this.pbx405.Size = new System.Drawing.Size(568, 518);
-            this.pbx405.TabIndex = 0;
-            this.pbx405.TabStop = false;
-            // 
-            // pbx488
-            // 
-            this.pbx488.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbx488.Location = new System.Drawing.Point(0, 0);
-            this.pbx488.Name = "pbx488";
-            this.pbx488.Size = new System.Drawing.Size(574, 524);
-            this.pbx488.TabIndex = 0;
-            this.pbx488.TabStop = false;
-            // 
-            // pbx561
-            // 
-            this.pbx561.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbx561.Location = new System.Drawing.Point(0, 0);
-            this.pbx561.Name = "pbx561";
-            this.pbx561.Size = new System.Drawing.Size(574, 524);
-            this.pbx561.TabIndex = 0;
-            this.pbx561.TabStop = false;
-            // 
             // pbx640
             // 
             this.pbx640.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -245,37 +272,32 @@
             this.pbx640.TabIndex = 0;
             this.pbx640.TabStop = false;
             // 
-            // sp4
+            // sp5
             // 
-            this.sp4.Name = "sp4";
-            this.sp4.Size = new System.Drawing.Size(6, 25);
+            this.sp5.Name = "sp5";
+            this.sp5.Size = new System.Drawing.Size(6, 25);
             // 
-            // lbFrame
+            // lbTimeSpan
             // 
-            this.lbFrame.BackColor = System.Drawing.Color.Transparent;
-            this.lbFrame.Name = "lbFrame";
-            this.lbFrame.Size = new System.Drawing.Size(96, 20);
-            this.lbFrame.Text = "NO. 1 frame";
-            // 
-            // lbFps
-            // 
-            this.lbFps.BackColor = System.Drawing.Color.Transparent;
-            this.lbFps.Name = "lbFps";
-            this.lbFps.Size = new System.Drawing.Size(66, 20);
-            this.lbFps.Text = "1.28 fps";
+            this.lbTimeSpan.BackColor = System.Drawing.Color.Transparent;
+            this.lbTimeSpan.Name = "lbTimeSpan";
+            this.lbTimeSpan.Size = new System.Drawing.Size(89, 20);
+            this.lbTimeSpan.Text = "xx seconds";
             // 
             // FormImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(582, 603);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormImage";
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "扫描图像";
             this.Load += new System.EventHandler(this.FormImage_Load);
@@ -283,14 +305,14 @@
             this.statusStrip.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tpgAll.ResumeLayout(false);
-            this.tpg405.ResumeLayout(false);
-            this.tpg488.ResumeLayout(false);
-            this.tpg561.ResumeLayout(false);
-            this.tpg640.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxAll)).EndInit();
+            this.tpg405.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbx405)).EndInit();
+            this.tpg488.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbx488)).EndInit();
+            this.tpg561.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbx561)).EndInit();
+            this.tpg640.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbx640)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -321,5 +343,7 @@
         private System.Windows.Forms.ToolStripSeparator sp4;
         private System.Windows.Forms.ToolStripStatusLabel lbFrame;
         private System.Windows.Forms.ToolStripStatusLabel lbFps;
+        private System.Windows.Forms.ToolStripSeparator sp5;
+        private System.Windows.Forms.ToolStripStatusLabel lbTimeSpan;
     }
 }

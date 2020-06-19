@@ -53,7 +53,9 @@ namespace confocal_core
         API_FAILED_NI_START_TASK_EXCEPTION,
         /* error for scan task */
         API_FAILED_SCAN_TASK_INVALID = 0x00001000,
-        API_FAILED_SCAN_TASK_NOT_FOUND
+        API_FAILED_SCAN_TASK_NOT_FOUND,
+        API_FAILED_SCAN_TASK_START_FAILED,
+        API_FAILED_SCAN_TASK_STOP_FAILED
     }
 
     public enum CHAN_ID : int

@@ -70,16 +70,48 @@ namespace confocal_ui
             //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);
         }
 
-        private void ScanTaskCreatedHandler(ScanTask scanTask, object paras)
+        private API_RETURN_CODE ScanTaskCreatedHandler(ScanTask scanTask, object paras)
         {
-            if (FindFormImage(scanTask) == null)
+            FormImage formImage = FindFormImage(scanTask);
+            if (formImage == null)
             {
                 Logger.Info(string.Format("new scan task[{0}|{1}], create form image.", scanTask.TaskId, scanTask.TaskName));
-                FormImage formImage = new FormImage(scanTask);
+                formImage = new FormImage(scanTask);
                 formImage.Show(this.dockPanel, DockState.Document);
                 m_formImages.Add(formImage);
             }
+            else
+            {
+                Logger.Info(string.Format("scan task[{0}|{1} alreay created.", scanTask.TaskId, scanTask.TaskName));
+            }
+            formImage.ScanTaskCreated();
+            return API_RETURN_CODE.API_SUCCESS;
         }
+
+        private API_RETURN_CODE ScanTaskStartedHandler(ScanTask scanTask, object paras)
+        {
+            FormImage formImage = FindFormImage(scanTask);
+            if (formImage == null)
+            {
+                Logger.Info(string.Format("scan task matching form image not found."));
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
+            }
+            formImage.ScanTaskStrated();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private API_RETURN_CODE ScanTaskStoppedHandler(ScanTask scanTask, object paras)
+        {
+            FormImage formImage = FindFormImage(scanTask);
+            if (formImage == null)
+            {
+                Logger.Info(string.Format("scan task matching form image not found."));
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
+            }
+
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
 
         private FormImage FindFormImage(ScanTask scanTask)
         {

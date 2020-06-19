@@ -121,16 +121,26 @@ namespace confocal_ui
 
         private void btnScan_Click(object sender, EventArgs e)
         {
+            
             if (m_scheduler.TaskScanning() == false)
             {
                 UpdateVariables();
                 m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
-                m_scheduler.StartScanTask(scanTask);
+                API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+                if (code != API_RETURN_CODE.API_SUCCESS)
+                {
+                    MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+                }
             }
             else
             {
                 ScanTask scanTask = m_scheduler.GetScanningTask();
-                m_scheduler.StopScanTask(scanTask);
+                API_RETURN_CODE code = m_scheduler.StopScanTask(scanTask);
+                if (code != API_RETURN_CODE.API_SUCCESS)
+                {
+                    MessageBox.Show(string.Format("暂停扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+                }
             }
         }
     }

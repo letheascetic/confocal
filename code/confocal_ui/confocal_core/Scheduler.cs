@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace confocal_core
 {
-    public delegate void ScanTaskEventHandler(ScanTask scanTask, Object paras);
+    public delegate API_RETURN_CODE ScanTaskEventHandler(ScanTask scanTask, Object paras);
 
     /// <summary>
     /// 调度器，单例模式

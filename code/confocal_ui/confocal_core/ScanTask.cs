@@ -152,12 +152,18 @@ namespace confocal_core
         {
             NiCard.CreateInstance().SamplesReceived -= ReceiveSamples;
             m_scanning = false;
-            m_convertThread.Join();
-            m_convertThread.Abort();
-            m_convertThread = null;
-            m_displayImageThread.Join();
-            m_displayImageThread.Abort();
-            m_displayImageThread = null;
+            if (m_convertThread != null)
+            {
+                m_convertThread.Join();
+                m_convertThread.Abort();
+                m_convertThread = null;
+            }
+            if (m_displayImageThread != null)
+            {
+                m_displayImageThread.Join();
+                m_displayImageThread.Abort();
+                m_displayImageThread = null;
+            }
         }
 
         public ScanInfo GetScanInfo()
