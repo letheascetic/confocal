@@ -1,7 +1,10 @@
 ﻿using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace confocal_core
@@ -27,7 +30,7 @@ namespace confocal_core
             byte value;
 
             destnation = new byte[source.Length * 3];
-            
+
             for (i = 0; i < source.Length; i++)
             {
                 value = (byte)(source[i] >> 8);
@@ -60,5 +63,14 @@ namespace confocal_core
             }
         }
 
+        public static Bitmap CreateBitmap(byte[] data, int width, int height)
+        {
+            Bitmap Canvas = new Bitmap(width, height);
+            BitmapData CanvasData = Canvas.LockBits(new System.Drawing.Rectangle(0, 0, Canvas.Width, Canvas.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            IntPtr ptr = CanvasData.Scan0;
+            Marshal.Copy(data, 0, ptr, data.Length);
+            Canvas.UnlockBits(CanvasData);
+            return Canvas;
+        }
     }
 }

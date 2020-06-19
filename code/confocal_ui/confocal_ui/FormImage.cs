@@ -24,7 +24,6 @@ namespace confocal_ui
         ///////////////////////////////////////////////////////////////////////////////////////////
         public int FormId { get { return m_scanTask.TaskId; } }
         public string FormName { get { return m_scanTask.TaskName; } }
-
         ///////////////////////////////////////////////////////////////////////////////////////////
         public FormImage(ScanTask scanTask)
         {
@@ -34,12 +33,14 @@ namespace confocal_ui
 
         public void ScanTaskCreated()
         {
+            Logger.Info(string.Format("FormImage scan task[{0}|{1}] created.", m_scanTask.TaskId, m_scanTask.TaskName));
             UpdateControlers();
             this.Activate();
         }
 
         public void ScanTaskStrated()
         {
+            Logger.Info(string.Format("FormImage scan task[{0}|{1}] started.", m_scanTask.TaskId, m_scanTask.TaskName));
             string status = m_scanTask.Scannning ? "进行中" : "暂停";
             this.Text = string.Format(m_scanTask.TaskName, " ", status);
             timer.Start();
@@ -47,6 +48,7 @@ namespace confocal_ui
 
         public void ScanTaskStopped()
         {
+            Logger.Info(string.Format("FormImage scan task[{0}|{1}] stopped.", m_scanTask.TaskId, m_scanTask.TaskName));
             string status = m_scanTask.Scannning ? "进行中" : "暂停";
             this.Text = string.Format(m_scanTask.TaskName, " ", status);
             timer.Stop();
@@ -76,7 +78,13 @@ namespace confocal_ui
 
         private void timer_Tick(object sender, EventArgs e)
         {
-
+            byte[][] data = m_scanTask.GetScanData().ImageData.Data;
+            if (data != null)
+            {
+                Logger.Info(string.Format("convert frame[{0}] to image.", m_scanTask.GetScanData().ImageData.Frame));
+                Bitmap image = CImage.CreateBitmap(data[0], m_config.GetScanXPoints(), m_config.GetScanYPoints());
+                pbx405.Image = image;
+            }
         }
 
     }

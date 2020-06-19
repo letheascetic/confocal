@@ -41,6 +41,15 @@ namespace confocal_ui
             InitLoadControls();
         }
 
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ScanTask scanTask = m_scheduler.GetScanningTask();
+            if (scanTask != null && scanTask.Scannning)
+            {
+                m_scheduler.StopScanTask(scanTask);
+            }
+        }
+
         private void Init()
         {
             m_config = Config.GetConfig();
@@ -48,7 +57,9 @@ namespace confocal_ui
             m_scheduler = Scheduler.CreateInstance();
 
             m_scheduler.ScanTaskCreated += new ScanTaskEventHandler(ScanTaskCreatedHandler);
-
+            m_scheduler.ScanTaskStarted += new ScanTaskEventHandler(ScanTaskStartedHandler);
+            m_scheduler.ScanTaskStopped += new ScanTaskEventHandler(ScanTaskStoppedHandler);
+            m_scheduler.ScanTaskReleased += new ScanTaskEventHandler(ScanTaskReleasedHandler);
         }
 
         private void InitLoadControls()
@@ -108,10 +119,14 @@ namespace confocal_ui
                 Logger.Info(string.Format("scan task matching form image not found."));
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
             }
-
+            formImage.ScanTaskStopped();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        private API_RETURN_CODE ScanTaskReleasedHandler(ScanTask scanTask, object paras)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
 
         private FormImage FindFormImage(ScanTask scanTask)
         {

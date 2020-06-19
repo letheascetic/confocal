@@ -123,6 +123,7 @@ namespace confocal_core
 
         public ScanTask(int taskId, string taskName)
         {
+            m_taskId = taskId;
             m_taskName = taskName;
             m_config = confocal_core.Config.GetConfig();
             m_params = Params.GetParams();
@@ -169,6 +170,11 @@ namespace confocal_core
         public ScanInfo GetScanInfo()
         {
             return m_scanInfo;
+        }
+
+        public DataPool GetScanData()
+        {
+            return m_scanData;
         }
 
         #endregion
@@ -320,6 +326,5 @@ namespace confocal_core
         }
 
         #endregion
-
     }
 }
