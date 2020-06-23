@@ -71,11 +71,21 @@ namespace confocal_ui
             rbtnThree.Checked = m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? true : false;
             // 停留时间
             tbxDwellTime.Text = m_config.GetScanDwellTime().ToString();
-            // 激光[通道]开关状态
+            // 激光[通道]开关状态/功率/增益
             chbx405.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx488.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx561.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx640.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.ON ? true : false;
+
+            tb405Power.Value = LaserDevice.PowerToConfigValue(m_config.GetLaserPower(CHAN_ID.WAVELENGTH_405_NM));
+            tb488Power.Value = LaserDevice.PowerToConfigValue(m_config.GetLaserPower(CHAN_ID.WAVELENGTH_488_NM));
+            tb561Power.Value = LaserDevice.PowerToConfigValue(m_config.GetLaserPower(CHAN_ID.WAVELENGTH_561_NM));
+            tb640Power.Value = LaserDevice.PowerToConfigValue(m_config.GetLaserPower(CHAN_ID.WAVELENGTH_640_NM));
+
+            tbx405Power.Text = m_config.GetLaserPower(CHAN_ID.WAVELENGTH_405_NM).ToString("F2");
+            tbx488Power.Text = m_config.GetLaserPower(CHAN_ID.WAVELENGTH_488_NM).ToString("F2");
+            tbx561Power.Text = m_config.GetLaserPower(CHAN_ID.WAVELENGTH_561_NM).ToString("F2");
+            tbx640Power.Text = m_config.GetLaserPower(CHAN_ID.WAVELENGTH_640_NM).ToString("F2");
         }
 
         private void UpdateVariables()
@@ -121,13 +131,17 @@ namespace confocal_ui
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-            
+            if (!LaserDevice.IsConnected())
+            {
+                MessageBox.Show("激光器未连接，请先连接激光器.");
+                return;
+            }
+
             if (m_scheduler.TaskScanning() == false)
             {
                 UpdateVariables();
                 m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
                 API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
-
                 if (code != API_RETURN_CODE.API_SUCCESS)
                 {
                     MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
@@ -140,6 +154,130 @@ namespace confocal_ui
                 if (code != API_RETURN_CODE.API_SUCCESS)
                 {
                     MessageBox.Show(string.Format("暂停扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+                }
+            }
+        }
+
+        private void tb405Power_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_405_NM;
+            double power = LaserDevice.ConfigValueToPower(tb405Power.Value);
+            m_config.SetLaserPower(id, power);
+            if (LaserDevice.IsConnected())
+            {
+                LaserDevice.SetChannelPower(id, power);
+            }
+            tbx405Power.Text = power.ToString("F2");
+        }
+
+        private void tb488Power_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_488_NM;
+            double power = LaserDevice.ConfigValueToPower(tb488Power.Value);
+            m_config.SetLaserPower(id, power);
+            if (LaserDevice.IsConnected())
+            {
+                LaserDevice.SetChannelPower(id, power);
+            }
+            tbx488Power.Text = power.ToString("F2");
+        }
+
+        private void tb561Power_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_561_NM;
+            double power = LaserDevice.ConfigValueToPower(tb561Power.Value);
+            m_config.SetLaserPower(id, power);
+            if (LaserDevice.IsConnected())
+            {
+                LaserDevice.SetChannelPower(id, power);
+            }
+            tbx561Power.Text = power.ToString("F2");
+        }
+
+        private void tb640Power_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_640_NM;
+            double power = LaserDevice.ConfigValueToPower(tb640Power.Value);
+            m_config.SetLaserPower(id, power);
+            if (LaserDevice.IsConnected())
+            {
+                LaserDevice.SetChannelPower(id, power);
+            }
+            tbx640Power.Text = power.ToString("F2");
+        }
+
+        private void chbx405_CheckedChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_405_NM;
+            LASER_CHAN_SWITCH status = chbx405.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(id, status);
+            if (LaserDevice.IsConnected())
+            {
+                if (status == LASER_CHAN_SWITCH.ON)
+                {
+                    LaserDevice.OpenChannel(id);
+                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
+                }
+                else
+                {
+                    LaserDevice.CloseChannel(id);
+                }
+            }
+        }
+
+        private void chbx488_CheckedChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_488_NM;
+            LASER_CHAN_SWITCH status = chbx488.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(id, status);
+            if (LaserDevice.IsConnected())
+            {
+                if (status == LASER_CHAN_SWITCH.ON)
+                {
+                    LaserDevice.OpenChannel(id);
+                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
+                }
+                else
+                {
+                    LaserDevice.CloseChannel(id);
+                }
+            }
+        }
+
+        private void chbx561_CheckedChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_561_NM;
+            LASER_CHAN_SWITCH status = chbx561.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(id, status);
+            if (LaserDevice.IsConnected())
+            {
+                if (status == LASER_CHAN_SWITCH.ON)
+                {
+                    LaserDevice.OpenChannel(id);
+                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
+                }
+                else
+                {
+                    LaserDevice.CloseChannel(id);
+                }
+            }
+        }
+
+        private void chbx640_CheckedChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_640_NM;
+            LASER_CHAN_SWITCH status = chbx640.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            m_config.SetLaserSwitch(id, status);
+            if (LaserDevice.IsConnected())
+            {
+                if (status == LASER_CHAN_SWITCH.ON)
+                {
+                    LaserDevice.OpenChannel(id);
+                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
+                }
+                else
+                {
+                    LaserDevice.CloseChannel(id);
                 }
             }
         }

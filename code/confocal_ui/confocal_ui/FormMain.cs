@@ -35,21 +35,6 @@ namespace confocal_ui
             InitializeComponent();
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            Init();
-            InitLoadControls();
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ScanTask scanTask = m_scheduler.GetScanningTask();
-            if (scanTask != null && scanTask.Scannning)
-            {
-                m_scheduler.StopScanTask(scanTask);
-            }
-        }
-
         private void Init()
         {
             m_config = Config.GetConfig();
@@ -62,12 +47,18 @@ namespace confocal_ui
             m_scheduler.ScanTaskReleased += new ScanTaskEventHandler(ScanTaskReleasedHandler);
         }
 
-        private void InitLoadControls()
+        private void InitLoadControlers()
         {
+            // version
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.Text += version;
             Logger.Info(string.Format("get software version: [{0}]", version));
 
+            // menu 
+            string portName = m_config.GetLaserPortName();
+            cbxSelectLaser.SelectedIndex = portName != null ? cbxSelectLaser.FindString(portName) : 0;
+
+            // panel
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
 
@@ -79,6 +70,15 @@ namespace confocal_ui
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Left, 0.5);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Bottom, 0.5);
             //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);
+        }
+
+        private void UpdateControlers()
+        {
+            // menu 
+            cbxSelectLaser.Enabled = LaserDevice.IsConnected() ? false : true;
+            btnLaserConnect.Enabled = LaserDevice.IsConnected() ? false : true;
+            btnLaserRelease.Enabled = LaserDevice.IsConnected() ? true : false;
+            
         }
 
         private API_RETURN_CODE ScanTaskCreatedHandler(ScanTask scanTask, object paras)
@@ -139,6 +139,81 @@ namespace confocal_ui
             }
             return null;
         }
+
+        private API_RETURN_CODE LaserConfig()
+        {
+            string portName = cbxSelectLaser.SelectedItem.ToString();
+            API_RETURN_CODE code = LaserDevice.Connect(portName);
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                return code;
+            }
+
+            m_config.SetLaserPortName(portName);
+            for (int i = 0; i < m_config.GetChannelNum(); i++)
+            {
+                CHAN_ID id = (CHAN_ID)i;
+                if (m_config.GetLaserSwitch(id) != LASER_CHAN_SWITCH.ON)
+                {
+                    continue;
+                }
+                
+                if (LaserDevice.OpenChannel(id) != API_RETURN_CODE.API_SUCCESS)
+                {
+                    continue;
+                }
+                LaserDevice.SetChannelPower(id, (float)m_config.GetLaserPower(id));
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        #region controlers event
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            Init();
+            InitLoadControlers();
+            UpdateControlers();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ScanTask scanTask = m_scheduler.GetScanningTask();
+            if (scanTask != null && scanTask.Scannning)
+            {
+                m_scheduler.StopScanTask(scanTask);
+            }
+            if (LaserDevice.IsConnected())
+            {
+                LaserDevice.Release();
+            }
+        }
+
+        private void btnLaserConnect_Click(object sender, EventArgs e)
+        {
+            API_RETURN_CODE code = LaserConfig();
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("连接激光器失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
+            UpdateControlers();
+        }
+
+        private void btnLaserRelease_Click(object sender, EventArgs e)
+        {
+            API_RETURN_CODE code = LaserDevice.Release();
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("断开激光器连接失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
+            else
+            {
+                m_config.SetLaserPortName(null);
+            }
+            UpdateControlers();
+        }
+
+        #endregion
 
     }
 }

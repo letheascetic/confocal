@@ -48,36 +48,36 @@
             this.cbxChannels = new System.Windows.Forms.ComboBox();
             this.chbx405 = new System.Windows.Forms.CheckBox();
             this.gbxChan405 = new System.Windows.Forms.GroupBox();
-            this.tb405Cp = new System.Windows.Forms.TrackBar();
+            this.tb405Power = new System.Windows.Forms.TrackBar();
             this.tb405HV = new System.Windows.Forms.TrackBar();
-            this.tbx405Cp = new System.Windows.Forms.TextBox();
-            this.lb405Cp = new System.Windows.Forms.Label();
+            this.tbx405Power = new System.Windows.Forms.TextBox();
+            this.lb405Power = new System.Windows.Forms.Label();
             this.tbx405HV = new System.Windows.Forms.TextBox();
             this.lb405HV = new System.Windows.Forms.Label();
             this.lb405 = new System.Windows.Forms.Label();
             this.gbx488 = new System.Windows.Forms.GroupBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.tbx488Cp = new System.Windows.Forms.TextBox();
-            this.lb488Cp = new System.Windows.Forms.Label();
+            this.tb488Power = new System.Windows.Forms.TrackBar();
+            this.tb488HV = new System.Windows.Forms.TrackBar();
+            this.tbx488Power = new System.Windows.Forms.TextBox();
+            this.lb488Power = new System.Windows.Forms.Label();
             this.tbx488HV = new System.Windows.Forms.TextBox();
             this.lb488HV = new System.Windows.Forms.Label();
             this.lb488 = new System.Windows.Forms.Label();
             this.chbx488 = new System.Windows.Forms.CheckBox();
             this.gbx561 = new System.Windows.Forms.GroupBox();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.trackBar4 = new System.Windows.Forms.TrackBar();
-            this.tbx561Cp = new System.Windows.Forms.TextBox();
-            this.lb561Cp = new System.Windows.Forms.Label();
+            this.tb561Power = new System.Windows.Forms.TrackBar();
+            this.tb561HV = new System.Windows.Forms.TrackBar();
+            this.tbx561Power = new System.Windows.Forms.TextBox();
+            this.lb561Power = new System.Windows.Forms.Label();
             this.tbx561HV = new System.Windows.Forms.TextBox();
             this.lb561HV = new System.Windows.Forms.Label();
             this.lb561 = new System.Windows.Forms.Label();
             this.chbx561 = new System.Windows.Forms.CheckBox();
             this.gbx640 = new System.Windows.Forms.GroupBox();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
-            this.trackBar6 = new System.Windows.Forms.TrackBar();
-            this.tbx640Cp = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.tb640Power = new System.Windows.Forms.TrackBar();
+            this.tb640HV = new System.Windows.Forms.TrackBar();
+            this.tbx640Power = new System.Windows.Forms.TextBox();
+            this.lb640Power = new System.Windows.Forms.Label();
             this.tbx640HV = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lb640 = new System.Windows.Forms.Label();
@@ -92,17 +92,17 @@
             this.rbtnTwo = new System.Windows.Forms.RadioButton();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Cp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb405HV)).BeginInit();
             this.gbx488.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488HV)).BeginInit();
             this.gbx561.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561HV)).BeginInit();
             this.gbx640.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640HV)).BeginInit();
             this.gbxMode.SuspendLayout();
             this.gbxMirror.SuspendLayout();
             this.SuspendLayout();
@@ -215,13 +215,14 @@
             resources.ApplyResources(this.chbx405, "chbx405");
             this.chbx405.Name = "chbx405";
             this.chbx405.UseVisualStyleBackColor = true;
+            this.chbx405.CheckedChanged += new System.EventHandler(this.chbx405_CheckedChanged);
             // 
             // gbxChan405
             // 
-            this.gbxChan405.Controls.Add(this.tb405Cp);
+            this.gbxChan405.Controls.Add(this.tb405Power);
             this.gbxChan405.Controls.Add(this.tb405HV);
-            this.gbxChan405.Controls.Add(this.tbx405Cp);
-            this.gbxChan405.Controls.Add(this.lb405Cp);
+            this.gbxChan405.Controls.Add(this.tbx405Power);
+            this.gbxChan405.Controls.Add(this.lb405Power);
             this.gbxChan405.Controls.Add(this.tbx405HV);
             this.gbxChan405.Controls.Add(this.lb405HV);
             this.gbxChan405.Controls.Add(this.lb405);
@@ -230,36 +231,40 @@
             this.gbxChan405.Name = "gbxChan405";
             this.gbxChan405.TabStop = false;
             // 
-            // tb405Cp
+            // tb405Power
             // 
-            this.tb405Cp.LargeChange = 1;
-            resources.ApplyResources(this.tb405Cp, "tb405Cp");
-            this.tb405Cp.Minimum = 1;
-            this.tb405Cp.Name = "tb405Cp";
-            this.tb405Cp.TabStop = false;
-            this.tb405Cp.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb405Cp.Value = 1;
+            this.tb405Power.LargeChange = 100;
+            resources.ApplyResources(this.tb405Power, "tb405Power");
+            this.tb405Power.Maximum = 2499;
+            this.tb405Power.Minimum = 50;
+            this.tb405Power.Name = "tb405Power";
+            this.tb405Power.SmallChange = 50;
+            this.tb405Power.TabStop = false;
+            this.tb405Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb405Power.Value = 100;
+            this.tb405Power.ValueChanged += new System.EventHandler(this.tb405Power_ValueChanged);
             // 
             // tb405HV
             // 
             this.tb405HV.LargeChange = 1;
             resources.ApplyResources(this.tb405HV, "tb405HV");
+            this.tb405HV.Maximum = 20;
             this.tb405HV.Minimum = 1;
             this.tb405HV.Name = "tb405HV";
             this.tb405HV.TabStop = false;
             this.tb405HV.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tb405HV.Value = 1;
             // 
-            // tbx405Cp
+            // tbx405Power
             // 
-            this.tbx405Cp.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx405Cp, "tbx405Cp");
-            this.tbx405Cp.Name = "tbx405Cp";
+            this.tbx405Power.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx405Power, "tbx405Power");
+            this.tbx405Power.Name = "tbx405Power";
             // 
-            // lb405Cp
+            // lb405Power
             // 
-            resources.ApplyResources(this.lb405Cp, "lb405Cp");
-            this.lb405Cp.Name = "lb405Cp";
+            resources.ApplyResources(this.lb405Power, "lb405Power");
+            this.lb405Power.Name = "lb405Power";
             // 
             // tbx405HV
             // 
@@ -279,10 +284,10 @@
             // 
             // gbx488
             // 
-            this.gbx488.Controls.Add(this.trackBar1);
-            this.gbx488.Controls.Add(this.trackBar2);
-            this.gbx488.Controls.Add(this.tbx488Cp);
-            this.gbx488.Controls.Add(this.lb488Cp);
+            this.gbx488.Controls.Add(this.tb488Power);
+            this.gbx488.Controls.Add(this.tb488HV);
+            this.gbx488.Controls.Add(this.tbx488Power);
+            this.gbx488.Controls.Add(this.lb488Power);
             this.gbx488.Controls.Add(this.tbx488HV);
             this.gbx488.Controls.Add(this.lb488HV);
             this.gbx488.Controls.Add(this.lb488);
@@ -291,36 +296,39 @@
             this.gbx488.Name = "gbx488";
             this.gbx488.TabStop = false;
             // 
-            // trackBar1
+            // tb488Power
             // 
-            this.trackBar1.LargeChange = 1;
-            resources.ApplyResources(this.trackBar1, "trackBar1");
-            this.trackBar1.Minimum = 1;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.TabStop = false;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.Value = 1;
+            this.tb488Power.LargeChange = 100;
+            resources.ApplyResources(this.tb488Power, "tb488Power");
+            this.tb488Power.Maximum = 2499;
+            this.tb488Power.Minimum = 50;
+            this.tb488Power.Name = "tb488Power";
+            this.tb488Power.SmallChange = 50;
+            this.tb488Power.TabStop = false;
+            this.tb488Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb488Power.Value = 100;
+            this.tb488Power.ValueChanged += new System.EventHandler(this.tb488Power_ValueChanged);
             // 
-            // trackBar2
+            // tb488HV
             // 
-            this.trackBar2.LargeChange = 1;
-            resources.ApplyResources(this.trackBar2, "trackBar2");
-            this.trackBar2.Minimum = 1;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.TabStop = false;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar2.Value = 1;
+            this.tb488HV.LargeChange = 1;
+            resources.ApplyResources(this.tb488HV, "tb488HV");
+            this.tb488HV.Minimum = 1;
+            this.tb488HV.Name = "tb488HV";
+            this.tb488HV.TabStop = false;
+            this.tb488HV.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb488HV.Value = 1;
             // 
-            // tbx488Cp
+            // tbx488Power
             // 
-            this.tbx488Cp.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx488Cp, "tbx488Cp");
-            this.tbx488Cp.Name = "tbx488Cp";
+            this.tbx488Power.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx488Power, "tbx488Power");
+            this.tbx488Power.Name = "tbx488Power";
             // 
-            // lb488Cp
+            // lb488Power
             // 
-            resources.ApplyResources(this.lb488Cp, "lb488Cp");
-            this.lb488Cp.Name = "lb488Cp";
+            resources.ApplyResources(this.lb488Power, "lb488Power");
+            this.lb488Power.Name = "lb488Power";
             // 
             // tbx488HV
             // 
@@ -343,13 +351,14 @@
             resources.ApplyResources(this.chbx488, "chbx488");
             this.chbx488.Name = "chbx488";
             this.chbx488.UseVisualStyleBackColor = true;
+            this.chbx488.CheckedChanged += new System.EventHandler(this.chbx488_CheckedChanged);
             // 
             // gbx561
             // 
-            this.gbx561.Controls.Add(this.trackBar3);
-            this.gbx561.Controls.Add(this.trackBar4);
-            this.gbx561.Controls.Add(this.tbx561Cp);
-            this.gbx561.Controls.Add(this.lb561Cp);
+            this.gbx561.Controls.Add(this.tb561Power);
+            this.gbx561.Controls.Add(this.tb561HV);
+            this.gbx561.Controls.Add(this.tbx561Power);
+            this.gbx561.Controls.Add(this.lb561Power);
             this.gbx561.Controls.Add(this.tbx561HV);
             this.gbx561.Controls.Add(this.lb561HV);
             this.gbx561.Controls.Add(this.lb561);
@@ -358,36 +367,39 @@
             this.gbx561.Name = "gbx561";
             this.gbx561.TabStop = false;
             // 
-            // trackBar3
+            // tb561Power
             // 
-            this.trackBar3.LargeChange = 1;
-            resources.ApplyResources(this.trackBar3, "trackBar3");
-            this.trackBar3.Minimum = 1;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.TabStop = false;
-            this.trackBar3.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar3.Value = 1;
+            this.tb561Power.LargeChange = 100;
+            resources.ApplyResources(this.tb561Power, "tb561Power");
+            this.tb561Power.Maximum = 2499;
+            this.tb561Power.Minimum = 50;
+            this.tb561Power.Name = "tb561Power";
+            this.tb561Power.SmallChange = 50;
+            this.tb561Power.TabStop = false;
+            this.tb561Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb561Power.Value = 100;
+            this.tb561Power.ValueChanged += new System.EventHandler(this.tb561Power_ValueChanged);
             // 
-            // trackBar4
+            // tb561HV
             // 
-            this.trackBar4.LargeChange = 1;
-            resources.ApplyResources(this.trackBar4, "trackBar4");
-            this.trackBar4.Minimum = 1;
-            this.trackBar4.Name = "trackBar4";
-            this.trackBar4.TabStop = false;
-            this.trackBar4.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar4.Value = 1;
+            this.tb561HV.LargeChange = 1;
+            resources.ApplyResources(this.tb561HV, "tb561HV");
+            this.tb561HV.Minimum = 1;
+            this.tb561HV.Name = "tb561HV";
+            this.tb561HV.TabStop = false;
+            this.tb561HV.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb561HV.Value = 1;
             // 
-            // tbx561Cp
+            // tbx561Power
             // 
-            this.tbx561Cp.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx561Cp, "tbx561Cp");
-            this.tbx561Cp.Name = "tbx561Cp";
+            this.tbx561Power.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx561Power, "tbx561Power");
+            this.tbx561Power.Name = "tbx561Power";
             // 
-            // lb561Cp
+            // lb561Power
             // 
-            resources.ApplyResources(this.lb561Cp, "lb561Cp");
-            this.lb561Cp.Name = "lb561Cp";
+            resources.ApplyResources(this.lb561Power, "lb561Power");
+            this.lb561Power.Name = "lb561Power";
             // 
             // tbx561HV
             // 
@@ -410,13 +422,14 @@
             resources.ApplyResources(this.chbx561, "chbx561");
             this.chbx561.Name = "chbx561";
             this.chbx561.UseVisualStyleBackColor = true;
+            this.chbx561.CheckedChanged += new System.EventHandler(this.chbx561_CheckedChanged);
             // 
             // gbx640
             // 
-            this.gbx640.Controls.Add(this.trackBar5);
-            this.gbx640.Controls.Add(this.trackBar6);
-            this.gbx640.Controls.Add(this.tbx640Cp);
-            this.gbx640.Controls.Add(this.label3);
+            this.gbx640.Controls.Add(this.tb640Power);
+            this.gbx640.Controls.Add(this.tb640HV);
+            this.gbx640.Controls.Add(this.tbx640Power);
+            this.gbx640.Controls.Add(this.lb640Power);
             this.gbx640.Controls.Add(this.tbx640HV);
             this.gbx640.Controls.Add(this.label6);
             this.gbx640.Controls.Add(this.lb640);
@@ -425,36 +438,39 @@
             this.gbx640.Name = "gbx640";
             this.gbx640.TabStop = false;
             // 
-            // trackBar5
+            // tb640Power
             // 
-            this.trackBar5.LargeChange = 1;
-            resources.ApplyResources(this.trackBar5, "trackBar5");
-            this.trackBar5.Minimum = 1;
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.TabStop = false;
-            this.trackBar5.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar5.Value = 1;
+            this.tb640Power.LargeChange = 100;
+            resources.ApplyResources(this.tb640Power, "tb640Power");
+            this.tb640Power.Maximum = 2499;
+            this.tb640Power.Minimum = 50;
+            this.tb640Power.Name = "tb640Power";
+            this.tb640Power.SmallChange = 50;
+            this.tb640Power.TabStop = false;
+            this.tb640Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb640Power.Value = 100;
+            this.tb640Power.ValueChanged += new System.EventHandler(this.tb640Power_ValueChanged);
             // 
-            // trackBar6
+            // tb640HV
             // 
-            this.trackBar6.LargeChange = 1;
-            resources.ApplyResources(this.trackBar6, "trackBar6");
-            this.trackBar6.Minimum = 1;
-            this.trackBar6.Name = "trackBar6";
-            this.trackBar6.TabStop = false;
-            this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar6.Value = 1;
+            this.tb640HV.LargeChange = 1;
+            resources.ApplyResources(this.tb640HV, "tb640HV");
+            this.tb640HV.Minimum = 1;
+            this.tb640HV.Name = "tb640HV";
+            this.tb640HV.TabStop = false;
+            this.tb640HV.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb640HV.Value = 1;
             // 
-            // tbx640Cp
+            // tbx640Power
             // 
-            this.tbx640Cp.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx640Cp, "tbx640Cp");
-            this.tbx640Cp.Name = "tbx640Cp";
+            this.tbx640Power.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx640Power, "tbx640Power");
+            this.tbx640Power.Name = "tbx640Power";
             // 
-            // label3
+            // lb640Power
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.lb640Power, "lb640Power");
+            this.lb640Power.Name = "lb640Power";
             // 
             // tbx640HV
             // 
@@ -477,6 +493,7 @@
             resources.ApplyResources(this.chbx640, "chbx640");
             this.chbx640.Name = "chbx640";
             this.chbx640.UseVisualStyleBackColor = true;
+            this.chbx640.CheckedChanged += new System.EventHandler(this.chbx640_CheckedChanged);
             // 
             // gbxMode
             // 
@@ -573,20 +590,20 @@
             this.gbxParams.PerformLayout();
             this.gbxChan405.ResumeLayout(false);
             this.gbxChan405.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Cp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb405HV)).EndInit();
             this.gbx488.ResumeLayout(false);
             this.gbx488.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488HV)).EndInit();
             this.gbx561.ResumeLayout(false);
             this.gbx561.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561HV)).EndInit();
             this.gbx640.ResumeLayout(false);
             this.gbx640.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640HV)).EndInit();
             this.gbxMode.ResumeLayout(false);
             this.gbxMode.PerformLayout();
             this.gbxMirror.ResumeLayout(false);
@@ -619,34 +636,34 @@
         private System.Windows.Forms.GroupBox gbxChan405;
         private System.Windows.Forms.Label lb405;
         private System.Windows.Forms.Label lb405HV;
-        private System.Windows.Forms.Label lb405Cp;
+        private System.Windows.Forms.Label lb405Power;
         private System.Windows.Forms.TextBox tbx405HV;
-        private System.Windows.Forms.TextBox tbx405Cp;
-        private System.Windows.Forms.TrackBar tb405Cp;
+        private System.Windows.Forms.TextBox tbx405Power;
+        private System.Windows.Forms.TrackBar tb405Power;
         private System.Windows.Forms.TrackBar tb405HV;
         private System.Windows.Forms.GroupBox gbx488;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.TextBox tbx488Cp;
-        private System.Windows.Forms.Label lb488Cp;
+        private System.Windows.Forms.TrackBar tb488Power;
+        private System.Windows.Forms.TrackBar tb488HV;
+        private System.Windows.Forms.TextBox tbx488Power;
+        private System.Windows.Forms.Label lb488Power;
         private System.Windows.Forms.TextBox tbx488HV;
         private System.Windows.Forms.Label lb488HV;
         private System.Windows.Forms.Label lb488;
         private System.Windows.Forms.CheckBox chbx488;
         private System.Windows.Forms.GroupBox gbx561;
-        private System.Windows.Forms.TrackBar trackBar3;
-        private System.Windows.Forms.TrackBar trackBar4;
-        private System.Windows.Forms.TextBox tbx561Cp;
-        private System.Windows.Forms.Label lb561Cp;
+        private System.Windows.Forms.TrackBar tb561Power;
+        private System.Windows.Forms.TrackBar tb561HV;
+        private System.Windows.Forms.TextBox tbx561Power;
+        private System.Windows.Forms.Label lb561Power;
         private System.Windows.Forms.TextBox tbx561HV;
         private System.Windows.Forms.Label lb561HV;
         private System.Windows.Forms.Label lb561;
         private System.Windows.Forms.CheckBox chbx561;
         private System.Windows.Forms.GroupBox gbx640;
-        private System.Windows.Forms.TrackBar trackBar5;
-        private System.Windows.Forms.TrackBar trackBar6;
-        private System.Windows.Forms.TextBox tbx640Cp;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar tb640Power;
+        private System.Windows.Forms.TrackBar tb640HV;
+        private System.Windows.Forms.TextBox tbx640Power;
+        private System.Windows.Forms.Label lb640Power;
         private System.Windows.Forms.TextBox tbx640HV;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lb640;

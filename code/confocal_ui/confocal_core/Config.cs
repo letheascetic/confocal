@@ -209,7 +209,7 @@ namespace confocal_core
         private static readonly int CHAN_NUM = 4;
         //private static readonly int LASER_CHAN_NUM = CHAN_NUM;
         //private static readonly int PMT_CHAN_NUM = CHAN_NUM;
-        private static readonly double LASER_POWER_DEFAULT = 10.0;
+        private static readonly double LASER_POWER_DEFAULT = 2.0;
         private static readonly double PMT_GAIN_DEFAULT = 10.0;
         private static readonly double CRS_AMPLITUDE_DEFAULT = 3.3;
         private static readonly int SCAN_POINTS_DEFAULT = 512;
@@ -263,6 +263,18 @@ namespace confocal_core
                 }
             }
             return activatedChannelNum;
+        }
+
+        public API_RETURN_CODE SetLaserPortName(string portName)
+        {
+            Logger.Info(string.Format("set laser portname: [{0}].", portName));
+            m_laser.PortName = portName;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetLaserPortName()
+        {
+            return m_laser.PortName;
         }
 
         public API_RETURN_CODE SetLaserSwitch(CHAN_ID id, LASER_CHAN_SWITCH status)

@@ -39,8 +39,10 @@
             this.menuItemManual = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.lbSelectDevice = new System.Windows.Forms.ToolStripLabel();
-            this.cbxSelectDevice = new System.Windows.Forms.ToolStripComboBox();
+            this.lbSelectLaser = new System.Windows.Forms.ToolStripLabel();
+            this.cbxSelectLaser = new System.Windows.Forms.ToolStripComboBox();
+            this.btnLaserConnect = new System.Windows.Forms.ToolStripButton();
+            this.btnLaserRelease = new System.Windows.Forms.ToolStripButton();
             this.sp1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnOperateDevice = new System.Windows.Forms.ToolStripDropDownButton();
             this.itemAddDevice = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,36 +141,65 @@
             this.toolStrip.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lbSelectDevice,
-            this.cbxSelectDevice,
+            this.lbSelectLaser,
+            this.cbxSelectLaser,
+            this.btnLaserConnect,
+            this.btnLaserRelease,
             this.sp1,
             this.btnOperateDevice,
             this.sp2});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1582, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1582, 27);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
-            // lbSelectDevice
+            // lbSelectLaser
             // 
-            this.lbSelectDevice.Name = "lbSelectDevice";
-            this.lbSelectDevice.Size = new System.Drawing.Size(75, 22);
-            this.lbSelectDevice.Text = "选择设备:";
+            this.lbSelectLaser.Name = "lbSelectLaser";
+            this.lbSelectLaser.Size = new System.Drawing.Size(75, 24);
+            this.lbSelectLaser.Text = "激光端口:";
             // 
-            // cbxSelectDevice
+            // cbxSelectLaser
             // 
-            this.cbxSelectDevice.BackColor = System.Drawing.SystemColors.Control;
-            this.cbxSelectDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxSelectDevice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbxSelectDevice.Font = new System.Drawing.Font("微软雅黑", 6.6F);
-            this.cbxSelectDevice.Name = "cbxSelectDevice";
-            this.cbxSelectDevice.Size = new System.Drawing.Size(121, 25);
+            this.cbxSelectLaser.BackColor = System.Drawing.SystemColors.Control;
+            this.cbxSelectLaser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxSelectLaser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbxSelectLaser.Font = new System.Drawing.Font("微软雅黑", 6.6F);
+            this.cbxSelectLaser.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8"});
+            this.cbxSelectLaser.Name = "cbxSelectLaser";
+            this.cbxSelectLaser.Size = new System.Drawing.Size(121, 27);
+            // 
+            // btnLaserConnect
+            // 
+            this.btnLaserConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLaserConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnLaserConnect.Image")));
+            this.btnLaserConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLaserConnect.Name = "btnLaserConnect";
+            this.btnLaserConnect.Size = new System.Drawing.Size(24, 24);
+            this.btnLaserConnect.Click += new System.EventHandler(this.btnLaserConnect_Click);
+            // 
+            // btnLaserRelease
+            // 
+            this.btnLaserRelease.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLaserRelease.Image = ((System.Drawing.Image)(resources.GetObject("btnLaserRelease.Image")));
+            this.btnLaserRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLaserRelease.Name = "btnLaserRelease";
+            this.btnLaserRelease.Size = new System.Drawing.Size(24, 24);
+            this.btnLaserRelease.Click += new System.EventHandler(this.btnLaserRelease_Click);
             // 
             // sp1
             // 
             this.sp1.Name = "sp1";
-            this.sp1.Size = new System.Drawing.Size(6, 25);
+            this.sp1.Size = new System.Drawing.Size(6, 27);
             // 
             // btnOperateDevice
             // 
@@ -179,7 +210,7 @@
             this.itemDeleteDevice});
             this.btnOperateDevice.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnOperateDevice.Name = "btnOperateDevice";
-            this.btnOperateDevice.Size = new System.Drawing.Size(81, 22);
+            this.btnOperateDevice.Size = new System.Drawing.Size(81, 24);
             this.btnOperateDevice.Text = "操作设备";
             // 
             // itemAddDevice
@@ -212,7 +243,7 @@
             // sp2
             // 
             this.sp2.Name = "sp2";
-            this.sp2.Size = new System.Drawing.Size(6, 25);
+            this.sp2.Size = new System.Drawing.Size(6, 27);
             // 
             // statusStrip
             // 
@@ -231,9 +262,9 @@
             this.dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel.DockBackColor = System.Drawing.SystemColors.ActiveBorder;
             this.dockPanel.DockBottomPortion = 0.3D;
-            this.dockPanel.Location = new System.Drawing.Point(0, 49);
+            this.dockPanel.Location = new System.Drawing.Point(0, 51);
             this.dockPanel.Name = "dockPanel";
-            this.dockPanel.Size = new System.Drawing.Size(1582, 782);
+            this.dockPanel.Size = new System.Drawing.Size(1582, 780);
             this.dockPanel.TabIndex = 12;
             // 
             // FormMain
@@ -273,17 +304,19 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemManual;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripLabel lbSelectDevice;
-        private System.Windows.Forms.ToolStripComboBox cbxSelectDevice;
+        private System.Windows.Forms.ToolStripLabel lbSelectLaser;
+        private System.Windows.Forms.ToolStripComboBox cbxSelectLaser;
         private System.Windows.Forms.ToolStripSeparator sp1;
+        private System.Windows.Forms.ToolStripSeparator sp2;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel;
+        private System.Windows.Forms.ToolStripButton btnLaserConnect;
+        private System.Windows.Forms.ToolStripButton btnLaserRelease;
         private System.Windows.Forms.ToolStripDropDownButton btnOperateDevice;
         private System.Windows.Forms.ToolStripMenuItem itemAddDevice;
         private System.Windows.Forms.ToolStripMenuItem itemConfigDevice;
         private System.Windows.Forms.ToolStripMenuItem itemResetDevice;
         private System.Windows.Forms.ToolStripMenuItem itemDeleteDevice;
-        private System.Windows.Forms.ToolStripSeparator sp2;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel;
     }
 }
 
