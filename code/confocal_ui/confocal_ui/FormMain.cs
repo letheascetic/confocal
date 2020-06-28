@@ -167,6 +167,8 @@ namespace confocal_ui
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+
+
         #region controlers event
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -174,17 +176,31 @@ namespace confocal_ui
             Init();
             InitLoadControlers();
             UpdateControlers();
+            LaserConfig();
+
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // release scantask
             ScanTask scanTask = m_scheduler.GetScanningTask();
             if (scanTask != null && scanTask.Scannning)
             {
                 m_scheduler.StopScanTask(scanTask);
             }
+            
+            // close all activated laser channels
             if (LaserDevice.IsConnected())
             {
+                for (int i = 0; i < m_config.GetChannelNum(); i++)
+                {
+                    CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                    if (m_config.GetLaserSwitch(id) == LASER_CHAN_SWITCH.ON)
+                    {
+                        LaserDevice.CloseChannel(id);
+                        m_config.SetLaserSwitch(id, LASER_CHAN_SWITCH.OFF);
+                    }
+                }
                 LaserDevice.Release();
             }
         }

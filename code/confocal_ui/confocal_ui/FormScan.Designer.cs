@@ -49,37 +49,37 @@
             this.chbx405 = new System.Windows.Forms.CheckBox();
             this.gbxChan405 = new System.Windows.Forms.GroupBox();
             this.tb405Power = new System.Windows.Forms.TrackBar();
-            this.tb405HV = new System.Windows.Forms.TrackBar();
+            this.tb405Gain = new System.Windows.Forms.TrackBar();
             this.tbx405Power = new System.Windows.Forms.TextBox();
             this.lb405Power = new System.Windows.Forms.Label();
-            this.tbx405HV = new System.Windows.Forms.TextBox();
-            this.lb405HV = new System.Windows.Forms.Label();
+            this.tbx405Gain = new System.Windows.Forms.TextBox();
+            this.lb405Gain = new System.Windows.Forms.Label();
             this.lb405 = new System.Windows.Forms.Label();
             this.gbx488 = new System.Windows.Forms.GroupBox();
             this.tb488Power = new System.Windows.Forms.TrackBar();
-            this.tb488HV = new System.Windows.Forms.TrackBar();
+            this.tb488Gain = new System.Windows.Forms.TrackBar();
             this.tbx488Power = new System.Windows.Forms.TextBox();
             this.lb488Power = new System.Windows.Forms.Label();
-            this.tbx488HV = new System.Windows.Forms.TextBox();
-            this.lb488HV = new System.Windows.Forms.Label();
+            this.tbx488Gain = new System.Windows.Forms.TextBox();
+            this.lb488Gain = new System.Windows.Forms.Label();
             this.lb488 = new System.Windows.Forms.Label();
             this.chbx488 = new System.Windows.Forms.CheckBox();
             this.gbx561 = new System.Windows.Forms.GroupBox();
             this.tb561Power = new System.Windows.Forms.TrackBar();
-            this.tb561HV = new System.Windows.Forms.TrackBar();
+            this.tb561Gain = new System.Windows.Forms.TrackBar();
             this.tbx561Power = new System.Windows.Forms.TextBox();
             this.lb561Power = new System.Windows.Forms.Label();
-            this.tbx561HV = new System.Windows.Forms.TextBox();
-            this.lb561HV = new System.Windows.Forms.Label();
+            this.tbx561Gain = new System.Windows.Forms.TextBox();
+            this.lb561Gain = new System.Windows.Forms.Label();
             this.lb561 = new System.Windows.Forms.Label();
             this.chbx561 = new System.Windows.Forms.CheckBox();
             this.gbx640 = new System.Windows.Forms.GroupBox();
             this.tb640Power = new System.Windows.Forms.TrackBar();
-            this.tb640HV = new System.Windows.Forms.TrackBar();
+            this.tb640Gain = new System.Windows.Forms.TrackBar();
             this.tbx640Power = new System.Windows.Forms.TextBox();
             this.lb640Power = new System.Windows.Forms.Label();
-            this.tbx640HV = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.tbx640Gain = new System.Windows.Forms.TextBox();
+            this.lb640Gain = new System.Windows.Forms.Label();
             this.lb640 = new System.Windows.Forms.Label();
             this.chbx640 = new System.Windows.Forms.CheckBox();
             this.gbxMode = new System.Windows.Forms.GroupBox();
@@ -93,16 +93,16 @@
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405HV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Gain)).BeginInit();
             this.gbx488.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488HV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Gain)).BeginInit();
             this.gbx561.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561HV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Gain)).BeginInit();
             this.gbx640.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640HV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).BeginInit();
             this.gbxMode.SuspendLayout();
             this.gbxMirror.SuspendLayout();
             this.SuspendLayout();
@@ -220,11 +220,11 @@
             // gbxChan405
             // 
             this.gbxChan405.Controls.Add(this.tb405Power);
-            this.gbxChan405.Controls.Add(this.tb405HV);
+            this.gbxChan405.Controls.Add(this.tb405Gain);
             this.gbxChan405.Controls.Add(this.tbx405Power);
             this.gbxChan405.Controls.Add(this.lb405Power);
-            this.gbxChan405.Controls.Add(this.tbx405HV);
-            this.gbxChan405.Controls.Add(this.lb405HV);
+            this.gbxChan405.Controls.Add(this.tbx405Gain);
+            this.gbxChan405.Controls.Add(this.lb405Gain);
             this.gbxChan405.Controls.Add(this.lb405);
             this.gbxChan405.Controls.Add(this.chbx405);
             resources.ApplyResources(this.gbxChan405, "gbxChan405");
@@ -244,16 +244,18 @@
             this.tb405Power.Value = 100;
             this.tb405Power.ValueChanged += new System.EventHandler(this.tb405Power_ValueChanged);
             // 
-            // tb405HV
+            // tb405Gain
             // 
-            this.tb405HV.LargeChange = 1;
-            resources.ApplyResources(this.tb405HV, "tb405HV");
-            this.tb405HV.Maximum = 20;
-            this.tb405HV.Minimum = 1;
-            this.tb405HV.Name = "tb405HV";
-            this.tb405HV.TabStop = false;
-            this.tb405HV.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb405HV.Value = 1;
+            this.tb405Gain.LargeChange = 20;
+            resources.ApplyResources(this.tb405Gain, "tb405Gain");
+            this.tb405Gain.Maximum = 1000;
+            this.tb405Gain.Minimum = 1;
+            this.tb405Gain.Name = "tb405Gain";
+            this.tb405Gain.SmallChange = 10;
+            this.tb405Gain.TabStop = false;
+            this.tb405Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb405Gain.Value = 1;
+            this.tb405Gain.ValueChanged += new System.EventHandler(this.tb405Gain_ValueChanged);
             // 
             // tbx405Power
             // 
@@ -266,16 +268,16 @@
             resources.ApplyResources(this.lb405Power, "lb405Power");
             this.lb405Power.Name = "lb405Power";
             // 
-            // tbx405HV
+            // tbx405Gain
             // 
-            this.tbx405HV.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx405HV, "tbx405HV");
-            this.tbx405HV.Name = "tbx405HV";
+            this.tbx405Gain.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx405Gain, "tbx405Gain");
+            this.tbx405Gain.Name = "tbx405Gain";
             // 
-            // lb405HV
+            // lb405Gain
             // 
-            resources.ApplyResources(this.lb405HV, "lb405HV");
-            this.lb405HV.Name = "lb405HV";
+            resources.ApplyResources(this.lb405Gain, "lb405Gain");
+            this.lb405Gain.Name = "lb405Gain";
             // 
             // lb405
             // 
@@ -285,11 +287,11 @@
             // gbx488
             // 
             this.gbx488.Controls.Add(this.tb488Power);
-            this.gbx488.Controls.Add(this.tb488HV);
+            this.gbx488.Controls.Add(this.tb488Gain);
             this.gbx488.Controls.Add(this.tbx488Power);
             this.gbx488.Controls.Add(this.lb488Power);
-            this.gbx488.Controls.Add(this.tbx488HV);
-            this.gbx488.Controls.Add(this.lb488HV);
+            this.gbx488.Controls.Add(this.tbx488Gain);
+            this.gbx488.Controls.Add(this.lb488Gain);
             this.gbx488.Controls.Add(this.lb488);
             this.gbx488.Controls.Add(this.chbx488);
             resources.ApplyResources(this.gbx488, "gbx488");
@@ -309,15 +311,18 @@
             this.tb488Power.Value = 100;
             this.tb488Power.ValueChanged += new System.EventHandler(this.tb488Power_ValueChanged);
             // 
-            // tb488HV
+            // tb488Gain
             // 
-            this.tb488HV.LargeChange = 1;
-            resources.ApplyResources(this.tb488HV, "tb488HV");
-            this.tb488HV.Minimum = 1;
-            this.tb488HV.Name = "tb488HV";
-            this.tb488HV.TabStop = false;
-            this.tb488HV.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb488HV.Value = 1;
+            this.tb488Gain.LargeChange = 20;
+            resources.ApplyResources(this.tb488Gain, "tb488Gain");
+            this.tb488Gain.Maximum = 1000;
+            this.tb488Gain.Minimum = 1;
+            this.tb488Gain.Name = "tb488Gain";
+            this.tb488Gain.SmallChange = 10;
+            this.tb488Gain.TabStop = false;
+            this.tb488Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb488Gain.Value = 1;
+            this.tb488Gain.ValueChanged += new System.EventHandler(this.tb488Gain_ValueChanged);
             // 
             // tbx488Power
             // 
@@ -330,16 +335,16 @@
             resources.ApplyResources(this.lb488Power, "lb488Power");
             this.lb488Power.Name = "lb488Power";
             // 
-            // tbx488HV
+            // tbx488Gain
             // 
-            this.tbx488HV.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx488HV, "tbx488HV");
-            this.tbx488HV.Name = "tbx488HV";
+            this.tbx488Gain.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx488Gain, "tbx488Gain");
+            this.tbx488Gain.Name = "tbx488Gain";
             // 
-            // lb488HV
+            // lb488Gain
             // 
-            resources.ApplyResources(this.lb488HV, "lb488HV");
-            this.lb488HV.Name = "lb488HV";
+            resources.ApplyResources(this.lb488Gain, "lb488Gain");
+            this.lb488Gain.Name = "lb488Gain";
             // 
             // lb488
             // 
@@ -356,11 +361,11 @@
             // gbx561
             // 
             this.gbx561.Controls.Add(this.tb561Power);
-            this.gbx561.Controls.Add(this.tb561HV);
+            this.gbx561.Controls.Add(this.tb561Gain);
             this.gbx561.Controls.Add(this.tbx561Power);
             this.gbx561.Controls.Add(this.lb561Power);
-            this.gbx561.Controls.Add(this.tbx561HV);
-            this.gbx561.Controls.Add(this.lb561HV);
+            this.gbx561.Controls.Add(this.tbx561Gain);
+            this.gbx561.Controls.Add(this.lb561Gain);
             this.gbx561.Controls.Add(this.lb561);
             this.gbx561.Controls.Add(this.chbx561);
             resources.ApplyResources(this.gbx561, "gbx561");
@@ -380,15 +385,18 @@
             this.tb561Power.Value = 100;
             this.tb561Power.ValueChanged += new System.EventHandler(this.tb561Power_ValueChanged);
             // 
-            // tb561HV
+            // tb561Gain
             // 
-            this.tb561HV.LargeChange = 1;
-            resources.ApplyResources(this.tb561HV, "tb561HV");
-            this.tb561HV.Minimum = 1;
-            this.tb561HV.Name = "tb561HV";
-            this.tb561HV.TabStop = false;
-            this.tb561HV.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb561HV.Value = 1;
+            this.tb561Gain.LargeChange = 20;
+            resources.ApplyResources(this.tb561Gain, "tb561Gain");
+            this.tb561Gain.Maximum = 1000;
+            this.tb561Gain.Minimum = 1;
+            this.tb561Gain.Name = "tb561Gain";
+            this.tb561Gain.SmallChange = 10;
+            this.tb561Gain.TabStop = false;
+            this.tb561Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb561Gain.Value = 1;
+            this.tb561Gain.ValueChanged += new System.EventHandler(this.tb561Gain_ValueChanged);
             // 
             // tbx561Power
             // 
@@ -401,16 +409,16 @@
             resources.ApplyResources(this.lb561Power, "lb561Power");
             this.lb561Power.Name = "lb561Power";
             // 
-            // tbx561HV
+            // tbx561Gain
             // 
-            this.tbx561HV.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx561HV, "tbx561HV");
-            this.tbx561HV.Name = "tbx561HV";
+            this.tbx561Gain.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx561Gain, "tbx561Gain");
+            this.tbx561Gain.Name = "tbx561Gain";
             // 
-            // lb561HV
+            // lb561Gain
             // 
-            resources.ApplyResources(this.lb561HV, "lb561HV");
-            this.lb561HV.Name = "lb561HV";
+            resources.ApplyResources(this.lb561Gain, "lb561Gain");
+            this.lb561Gain.Name = "lb561Gain";
             // 
             // lb561
             // 
@@ -427,11 +435,11 @@
             // gbx640
             // 
             this.gbx640.Controls.Add(this.tb640Power);
-            this.gbx640.Controls.Add(this.tb640HV);
+            this.gbx640.Controls.Add(this.tb640Gain);
             this.gbx640.Controls.Add(this.tbx640Power);
             this.gbx640.Controls.Add(this.lb640Power);
-            this.gbx640.Controls.Add(this.tbx640HV);
-            this.gbx640.Controls.Add(this.label6);
+            this.gbx640.Controls.Add(this.tbx640Gain);
+            this.gbx640.Controls.Add(this.lb640Gain);
             this.gbx640.Controls.Add(this.lb640);
             this.gbx640.Controls.Add(this.chbx640);
             resources.ApplyResources(this.gbx640, "gbx640");
@@ -451,15 +459,18 @@
             this.tb640Power.Value = 100;
             this.tb640Power.ValueChanged += new System.EventHandler(this.tb640Power_ValueChanged);
             // 
-            // tb640HV
+            // tb640Gain
             // 
-            this.tb640HV.LargeChange = 1;
-            resources.ApplyResources(this.tb640HV, "tb640HV");
-            this.tb640HV.Minimum = 1;
-            this.tb640HV.Name = "tb640HV";
-            this.tb640HV.TabStop = false;
-            this.tb640HV.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb640HV.Value = 1;
+            this.tb640Gain.LargeChange = 20;
+            resources.ApplyResources(this.tb640Gain, "tb640Gain");
+            this.tb640Gain.Maximum = 1000;
+            this.tb640Gain.Minimum = 1;
+            this.tb640Gain.Name = "tb640Gain";
+            this.tb640Gain.SmallChange = 10;
+            this.tb640Gain.TabStop = false;
+            this.tb640Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb640Gain.Value = 1;
+            this.tb640Gain.ValueChanged += new System.EventHandler(this.tb640Gain_ValueChanged);
             // 
             // tbx640Power
             // 
@@ -472,16 +483,16 @@
             resources.ApplyResources(this.lb640Power, "lb640Power");
             this.lb640Power.Name = "lb640Power";
             // 
-            // tbx640HV
+            // tbx640Gain
             // 
-            this.tbx640HV.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx640HV, "tbx640HV");
-            this.tbx640HV.Name = "tbx640HV";
+            this.tbx640Gain.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx640Gain, "tbx640Gain");
+            this.tbx640Gain.Name = "tbx640Gain";
             // 
-            // label6
+            // lb640Gain
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.lb640Gain, "lb640Gain");
+            this.lb640Gain.Name = "lb640Gain";
             // 
             // lb640
             // 
@@ -591,19 +602,19 @@
             this.gbxChan405.ResumeLayout(false);
             this.gbxChan405.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405HV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Gain)).EndInit();
             this.gbx488.ResumeLayout(false);
             this.gbx488.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488HV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Gain)).EndInit();
             this.gbx561.ResumeLayout(false);
             this.gbx561.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561HV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Gain)).EndInit();
             this.gbx640.ResumeLayout(false);
             this.gbx640.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640HV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).EndInit();
             this.gbxMode.ResumeLayout(false);
             this.gbxMode.PerformLayout();
             this.gbxMirror.ResumeLayout(false);
@@ -635,37 +646,37 @@
         private System.Windows.Forms.CheckBox chbx405;
         private System.Windows.Forms.GroupBox gbxChan405;
         private System.Windows.Forms.Label lb405;
-        private System.Windows.Forms.Label lb405HV;
+        private System.Windows.Forms.Label lb405Gain;
         private System.Windows.Forms.Label lb405Power;
-        private System.Windows.Forms.TextBox tbx405HV;
+        private System.Windows.Forms.TextBox tbx405Gain;
         private System.Windows.Forms.TextBox tbx405Power;
         private System.Windows.Forms.TrackBar tb405Power;
-        private System.Windows.Forms.TrackBar tb405HV;
+        private System.Windows.Forms.TrackBar tb405Gain;
         private System.Windows.Forms.GroupBox gbx488;
         private System.Windows.Forms.TrackBar tb488Power;
-        private System.Windows.Forms.TrackBar tb488HV;
+        private System.Windows.Forms.TrackBar tb488Gain;
         private System.Windows.Forms.TextBox tbx488Power;
         private System.Windows.Forms.Label lb488Power;
-        private System.Windows.Forms.TextBox tbx488HV;
-        private System.Windows.Forms.Label lb488HV;
+        private System.Windows.Forms.TextBox tbx488Gain;
+        private System.Windows.Forms.Label lb488Gain;
         private System.Windows.Forms.Label lb488;
         private System.Windows.Forms.CheckBox chbx488;
         private System.Windows.Forms.GroupBox gbx561;
         private System.Windows.Forms.TrackBar tb561Power;
-        private System.Windows.Forms.TrackBar tb561HV;
+        private System.Windows.Forms.TrackBar tb561Gain;
         private System.Windows.Forms.TextBox tbx561Power;
         private System.Windows.Forms.Label lb561Power;
-        private System.Windows.Forms.TextBox tbx561HV;
-        private System.Windows.Forms.Label lb561HV;
+        private System.Windows.Forms.TextBox tbx561Gain;
+        private System.Windows.Forms.Label lb561Gain;
         private System.Windows.Forms.Label lb561;
         private System.Windows.Forms.CheckBox chbx561;
         private System.Windows.Forms.GroupBox gbx640;
         private System.Windows.Forms.TrackBar tb640Power;
-        private System.Windows.Forms.TrackBar tb640HV;
+        private System.Windows.Forms.TrackBar tb640Gain;
         private System.Windows.Forms.TextBox tbx640Power;
         private System.Windows.Forms.Label lb640Power;
-        private System.Windows.Forms.TextBox tbx640HV;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbx640Gain;
+        private System.Windows.Forms.Label lb640Gain;
         private System.Windows.Forms.Label lb640;
         private System.Windows.Forms.CheckBox chbx640;
         private System.Windows.Forms.GroupBox gbxMode;

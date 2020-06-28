@@ -86,6 +86,16 @@ namespace confocal_ui
             tbx488Power.Text = m_config.GetLaserPower(CHAN_ID.WAVELENGTH_488_NM).ToString("F2");
             tbx561Power.Text = m_config.GetLaserPower(CHAN_ID.WAVELENGTH_561_NM).ToString("F2");
             tbx640Power.Text = m_config.GetLaserPower(CHAN_ID.WAVELENGTH_640_NM).ToString("F2");
+
+            tb405Gain.Value = (int)m_config.GetPmtGain(CHAN_ID.WAVELENGTH_405_NM) * 10;
+            tb488Gain.Value = (int)m_config.GetPmtGain(CHAN_ID.WAVELENGTH_488_NM) * 10;
+            tb561Gain.Value = (int)m_config.GetPmtGain(CHAN_ID.WAVELENGTH_561_NM) * 10;
+            tb640Gain.Value = (int)m_config.GetPmtGain(CHAN_ID.WAVELENGTH_640_NM) * 10;
+
+            tbx405Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_405_NM).ToString("F1"), "");
+            tbx488Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_488_NM).ToString("F1"), "");
+            tbx561Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_561_NM).ToString("F1"), "");
+            tbx640Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_640_NM).ToString("F1"), "");
         }
 
         private void UpdateVariables()
@@ -280,6 +290,42 @@ namespace confocal_ui
                     LaserDevice.CloseChannel(id);
                 }
             }
+        }
+
+        private void tb405Gain_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_405_NM;
+            float configValue = tb405Gain.Value / 10.0f;
+            m_config.SetPmtGain(id, configValue);
+            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            tbx405Gain.Text = string.Concat(configValue.ToString("F1"), "");
+        }
+
+        private void tb488Gain_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_488_NM;
+            float configValue = tb488Gain.Value / 10.0f;
+            m_config.SetPmtGain(id, configValue);
+            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            tbx488Gain.Text = string.Concat(configValue.ToString("F1"), "");
+        }
+
+        private void tb561Gain_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_561_NM;
+            float configValue = tb561Gain.Value / 10.0f;
+            m_config.SetPmtGain(id, configValue);
+            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            tbx561Gain.Text = string.Concat(configValue.ToString("F1"), "");
+        }
+
+        private void tb640Gain_ValueChanged(object sender, EventArgs e)
+        {
+            CHAN_ID id = CHAN_ID.WAVELENGTH_640_NM;
+            float configValue = tb640Gain.Value / 10.0f;
+            m_config.SetPmtGain(id, configValue);
+            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            tbx640Gain.Text = string.Concat(configValue.ToString("F1"), "");
         }
     }
 }

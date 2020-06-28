@@ -23,11 +23,13 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private static Config m_config;
         private static bool m_connected;
         ///////////////////////////////////////////////////////////////////////////////////////////
         static LaserDevice()
         {
             m_connected = false;
+            m_config = Config.GetConfig();
         }
         
         public static bool IsConnected()

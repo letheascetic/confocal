@@ -55,7 +55,17 @@ namespace confocal_core
         API_FAILED_SCAN_TASK_INVALID = 0x00001000,
         API_FAILED_SCAN_TASK_NOT_FOUND,
         API_FAILED_SCAN_TASK_START_FAILED,
-        API_FAILED_SCAN_TASK_STOP_FAILED
+        API_FAILED_SCAN_TASK_STOP_FAILED,
+        /* error for usb dac */
+        API_FAILED_USB_DAC_OPEN_FAILED = 0x00002000,
+        API_FAILED_USB_DAC_RELEASE_FAILED,
+        API_FAILED_USB_DAC_SET_ALL_OUT_FAILED,
+        API_FAILED_USB_DAC_SET_CHANNEL_OUT_FAILED,
+        API_FAILED_USB_DAC_SET_ZERO_CALIBRATION_FAILED,
+        API_FAILED_USB_DAC_SET_GAIN_CALIBRATION_FAILED,
+        API_FAILED_USB_DAC_WRITE_CONFIG_FAILED,
+        API_FAILED_USB_DAC_READ_CONFIG_FAILED,
+        API_FAILED_USB_DAC_SET_REGISTER_FAILED
     }
 
     public enum CHAN_ID : int
@@ -210,7 +220,7 @@ namespace confocal_core
         //private static readonly int LASER_CHAN_NUM = CHAN_NUM;
         //private static readonly int PMT_CHAN_NUM = CHAN_NUM;
         private static readonly double LASER_POWER_DEFAULT = 2.0;
-        private static readonly double PMT_GAIN_DEFAULT = 10.0;
+        private static readonly double PMT_GAIN_DEFAULT = 50.0;
         private static readonly double CRS_AMPLITUDE_DEFAULT = 3.3;
         private static readonly int SCAN_POINTS_DEFAULT = 512;
         private static readonly double SCAN_PIXEL_TIME_DEFAULT = 2.0;       // 像素时间, us

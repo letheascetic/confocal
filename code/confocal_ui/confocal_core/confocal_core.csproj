@@ -63,6 +63,7 @@
     <Compile Include="ScanTask.cs" />
     <Compile Include="Scheduler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsbDac.cs" />
     <Compile Include="Waver.cs" />
   </ItemGroup>
   <ItemGroup>
