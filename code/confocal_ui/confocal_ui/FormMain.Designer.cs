@@ -177,6 +177,7 @@
             "COM8"});
             this.cbxSelectLaser.Name = "cbxSelectLaser";
             this.cbxSelectLaser.Size = new System.Drawing.Size(121, 27);
+            this.cbxSelectLaser.SelectedIndex = 2;
             // 
             // btnLaserConnect
             // 

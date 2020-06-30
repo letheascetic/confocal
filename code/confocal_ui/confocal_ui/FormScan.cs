@@ -297,7 +297,8 @@ namespace confocal_ui
             CHAN_ID id = CHAN_ID.WAVELENGTH_405_NM;
             float configValue = tb405Gain.Value / 10.0f;
             m_config.SetPmtGain(id, configValue);
-            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            UsbDac.SetDacOut((uint)id, UsbDac.ConfigValueToVout(configValue));
+            // UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
             tbx405Gain.Text = string.Concat(configValue.ToString("F1"), "");
         }
 
@@ -306,7 +307,8 @@ namespace confocal_ui
             CHAN_ID id = CHAN_ID.WAVELENGTH_488_NM;
             float configValue = tb488Gain.Value / 10.0f;
             m_config.SetPmtGain(id, configValue);
-            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            UsbDac.SetDacOut((uint)id, UsbDac.ConfigValueToVout(configValue));
+            // UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
             tbx488Gain.Text = string.Concat(configValue.ToString("F1"), "");
         }
 
@@ -315,7 +317,8 @@ namespace confocal_ui
             CHAN_ID id = CHAN_ID.WAVELENGTH_561_NM;
             float configValue = tb561Gain.Value / 10.0f;
             m_config.SetPmtGain(id, configValue);
-            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            UsbDac.SetDacOut((uint)id, UsbDac.ConfigValueToVout(configValue));
+            // UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
             tbx561Gain.Text = string.Concat(configValue.ToString("F1"), "");
         }
 
@@ -324,8 +327,15 @@ namespace confocal_ui
             CHAN_ID id = CHAN_ID.WAVELENGTH_640_NM;
             float configValue = tb640Gain.Value / 10.0f;
             m_config.SetPmtGain(id, configValue);
-            //UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
+            UsbDac.SetDacOut((uint)id, UsbDac.ConfigValueToVout(configValue));
+            // UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
             tbx640Gain.Text = string.Concat(configValue.ToString("F1"), "");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ushort gain = ushort.Parse(textBox1.Text);
+            UsbDac.SetGainCalibration(0, gain);
         }
     }
 }

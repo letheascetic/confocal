@@ -36,9 +36,9 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         // private static readonly int USB_DAC_CHANNEL_NUM_TOTAL = 16;
         private static readonly int USB_DAC_CHANNEL_NUM_USED = 4;
-        private static readonly uint USB_DAC_REGISTER_VALUE_DEFAULT = 0x8400;
+        private static readonly uint USB_DAC_REGISTER_VALUE_DEFAULT = 0x8000;
         private static readonly ushort USB_DAC_GAIN_VALUE_DEFAULT = 32768;
-        private static readonly float USB_DAC_VOUT_VALUE_DEFAULT = 5.0f;
+        private static readonly float USB_DAC_VOUT_VALUE_DEFAULT = 2.5f;
         private static readonly short USB_DAC_ZERO_VALUE_DEFAULT = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly int API_RETURN_SUCCESS = 0;
@@ -78,7 +78,7 @@ namespace confocal_core
             }
 
             // 设置寄存器初始值
-            // 量程: -15V/15V 启动零点和满量程校准
+            // 量程: -15V/15V 不启动零点和满量程校准
             API_RETURN_CODE code = SetDacRegister(0, m_register);
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
@@ -90,16 +90,16 @@ namespace confocal_core
                 return code;
             }
 
-            // 设置被使用通道的零点 & 增益
-            for (int i = 0; i < USB_DAC_CHANNEL_NUM_USED; i++)
-            {
-                code |= SetZeroCalibration((uint)i, m_zeroList[i]);
-                code |= SetGainCalibration((uint)i, m_gainList[i]);
-            }
-            if (code != API_RETURN_CODE.API_SUCCESS)
-            {
-                return code;
-            }
+            // 设置被使用通道的零点 & 增益[不开启，不需要设置]
+            //for (int i = 0; i < USB_DAC_CHANNEL_NUM_USED; i++)
+            //{
+            //    code |= SetZeroCalibration((uint)i, m_zeroList[i]);
+            //    code |= SetGainCalibration((uint)i, m_gainList[i]);
+            //}
+            //if (code != API_RETURN_CODE.API_SUCCESS)
+            //{
+            //    return code;
+            //}
 
             // 设置各通道电压输出值
             for (int i=0; i < USB_DAC_CHANNEL_NUM_USED; i++)
@@ -191,7 +191,7 @@ namespace confocal_core
             if (SetDac_RegisterV40(0, cs, register) == API_RETURN_SUCCESS)
             {
                 m_register = register;      // 写寄存器成功，才赋值存储
-                Logger.Info(string.Format("Usb dac[{0}] set register[{1}] failed: [{2}].", cs, register, API_RETURN_CODE.API_SUCCESS));
+                Logger.Info(string.Format("Usb dac[{0}] set register[{1}] success: [{2}].", cs, register, API_RETURN_CODE.API_SUCCESS));
                 return API_RETURN_CODE.API_SUCCESS;
             }
             Logger.Info(string.Format("Usb dac[{0}] set register[{1}] failed: [{2}].", cs, register, API_RETURN_CODE.API_FAILED_USB_DAC_SET_REGISTER_FAILED));
@@ -234,6 +234,20 @@ namespace confocal_core
             return API_RETURN_CODE.API_FAILED_USB_DAC_SET_CHANNEL_OUT_FAILED;
         }
 
+        public static API_RETURN_CODE SetDacOut(uint ch, float vout)
+        {
+            short value = 0;
+            VoutToWriteValue(ch, vout, ref value);
+            if (SetDac_OutV40(0, ch, value, 1) == API_RETURN_SUCCESS)
+            {
+                Logger.Info(string.Format("Usb dac set channel[{0}] out[{1}] success: [{2}].", ch, vout, API_RETURN_CODE.API_SUCCESS));
+                return API_RETURN_CODE.API_SUCCESS;
+            }
+
+            Logger.Info(string.Format("Usb dac set channel[{0}] out[{1}] failed: [{2}].", ch, vout, API_RETURN_CODE.API_FAILED_USB_DAC_SET_CHANNEL_OUT_FAILED));
+            return API_RETURN_CODE.API_FAILED_USB_DAC_SET_CHANNEL_OUT_FAILED;
+        }
+
         /// <summary>
         /// 设置指定通道的零点值
         /// </summary>
@@ -263,6 +277,7 @@ namespace confocal_core
         {
             if (SetDac_GainCalibrationV40(0, ch, gain, 1) == API_RETURN_SUCCESS)
             {
+                m_gainList[ch] = gain;
                 Logger.Info(string.Format("Usb dac[{0}] set gain calibration[{1}] success: [{2}].", ch, gain, API_RETURN_CODE.API_SUCCESS));
                 return API_RETURN_CODE.API_SUCCESS;
             }
@@ -283,16 +298,14 @@ namespace confocal_core
         public static void VoutToWriteValue(uint ch, float vout, ref short value)
         {
             uint gainFlag = (m_register >> 7) & 0x03;
-            // uint sceFlag = (m_register >> 10) & 0x01;    // 默认sceFlag = 0x01
             float voutScale = gainFlag == 0x00 ? 15.0f : 10.0f;
-            short dacData = (short)(vout / voutScale * 32768);
-            value = (short)((dacData - m_zeroList[ch]) * 65536.0f / (m_gainList[ch] + 32768));
+            value = (short)(vout / voutScale * 32768);
         }
 
         /// <summary>
         /// 将Config中配置的增益值（configValue）转换成实际写入USBDAC模块的增益值
         /// </summary>
-        /// <param name="configValue"></param>
+        /// <param name="configValue">0.1%-100.0%</param>
         /// <returns></returns>
         public static ushort ConfigValueToGain(float configValue)
         {
@@ -302,13 +315,22 @@ namespace confocal_core
         /// <summary>
         /// 将USBDAC中的增益值转换成Config中的配置值
         /// </summary>
-        /// <param name="gain"></param>
+        /// <param name="gain">1-65536</param>
         /// <returns></returns>
         public static float GainToConfigValue(ushort gain)
         {
             return 100.0f * gain / ushort.MaxValue;
         }
 
+        public static float ConfigValueToVout(float configValue)
+        {
+            return 5.0f * configValue / 100;
+        }
+
+        public static float VoutToConfigValue(float vout)
+        {
+            return 100.0f * vout / 5.0f;
+        }
     }
 }
 
