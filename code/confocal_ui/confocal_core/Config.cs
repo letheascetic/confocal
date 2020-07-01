@@ -1,6 +1,7 @@
 ﻿using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -100,6 +101,30 @@ namespace confocal_core
         THREEE
     };
 
+    public enum SCAN_ACQUISITION_MODE
+    {
+        STANDARD = 0,
+        SUM,
+        AVARAGE
+    };
+
+    public class PropChannel
+    {
+        private CHAN_ID id;
+        private Color colorReference;       // 各通道显示的颜色基准
+
+        public CHAN_ID Id { get { return id; } set { id = value; } }
+        public Color ColorReference { get { return colorReference; } set { colorReference = value; } }
+    }
+
+    public class Properties
+    {
+        private PropChannel[] channels;
+
+        public PropChannel[] Channels
+        { get { return channels; } set { channels = value; } }
+    }
+
     public class LaserChannel
     {
         private CHAN_ID id;
@@ -166,6 +191,7 @@ namespace confocal_core
         private SCAN_MODE mode;             // 扫描模式, Galv or Res
         private SCAN_STRATEGY strategy;     // 扫描策略
         private SCAN_MIRROR_NUM mirrorNum;  // 三振镜 or 两振镜
+        private SCAN_ACQUISITION_MODE auquisitionMode;  // 扫描采集模式[标准|平均|求和]
         private int flag;                   // 扫描功能标志位
         private double galvResponseTime;        // 振镜响应时间,us
         private double fieldSize;               // 视场大小,um
@@ -176,6 +202,7 @@ namespace confocal_core
         private double curveCoff;               // 曲线系数,%
         private int bScanPixelComp;             // Z形双向扫描中有效像素补偿
         private int bScanPixelOffset;           // Z形双向扫描中像素错位
+        private int acquisitionModeNum;         // 扫描采集模式为平均和求和时的平均数|求和数
 
         public SCAN_MODE Mode
         { get { return mode; } set { mode = value; } }
@@ -183,6 +210,8 @@ namespace confocal_core
         { get { return strategy; } set { strategy = value; } }
         public SCAN_MIRROR_NUM MirrorNum
         { get { return mirrorNum; } set { mirrorNum = value; } }
+        public SCAN_ACQUISITION_MODE AcquisitionMode
+        { get { return auquisitionMode; } set { auquisitionMode = value; } }
         public int Flag
         { get { return flag; } set { flag = value; } }
         public double GalvResponseTime
@@ -203,6 +232,8 @@ namespace confocal_core
         { get { return bScanPixelComp; } set { bScanPixelComp = value; } }
         public int BScanPixelOffset
         { get { return bScanPixelOffset; } set { bScanPixelOffset = value; } }
+        public int AcquisitionModeNum
+        { get { return acquisitionModeNum; } set { acquisitionModeNum = value; } }
     }
 
     public delegate void ConfigEventHandler(Config config, Object paras);
@@ -230,12 +261,14 @@ namespace confocal_core
         private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 4.09855e-5;  // 校准[标定]电压,V
         private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
         private static readonly int BIDIRECTION_SCAN_PIXEL_COMPENSATION = 64;    // Z形双向扫描中有效像素补偿
+        private static readonly int SCAN_ACQUISITION_MODE_NUM_DEFAULT = 4;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Laser m_laser;              // 激光参数
         private Pmt m_pmt;                  // PMT参数
         private Crs m_crs;                  // CRS
         private PinHole m_hole;             // 小孔
         private Scan m_scan;                // 扫描参数
+        private Properties m_properties;    // 属性参数
         ///////////////////////////////////////////////////////////////////////////////////////////
         public bool Debugging { get; set; } 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -502,7 +535,43 @@ namespace confocal_core
         {
             return m_scan.BScanPixelOffset;
         }
+
+        public API_RETURN_CODE SetScanAcquisitionMode(SCAN_ACQUISITION_MODE acquisitionMode)
+        {
+            Logger.Info(string.Format("set scan acquisition mode: [{0}].", acquisitionMode));
+            m_scan.AcquisitionMode = acquisitionMode;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public SCAN_ACQUISITION_MODE GetScanAcquisitionMode()
+        {
+            return m_scan.AcquisitionMode;
+        }
+
+        public API_RETURN_CODE SetScanAcquisitionModeNum(int acquisitionModeNum)
+        {
+            Logger.Info(string.Format("set scan acquisition mode num: [{0}].", acquisitionModeNum));
+            m_scan.AcquisitionModeNum = acquisitionModeNum;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public int GetScanAcquisitionModeNum()
+        {
+            return m_scan.AcquisitionModeNum;
+        }
         
+        public API_RETURN_CODE SetChannelColorReference(CHAN_ID id, Color colorReference)
+        {
+            Logger.Info(string.Format("set channel color reference: [id:{0}], [power:{1}].", id, colorReference));
+            GetPropChannel(id).ColorReference = colorReference;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public Color GetChannelColorReference(CHAN_ID id)
+        {
+            return GetPropChannel(id).ColorReference;
+        }
+
         #endregion
 
         #region private apis
@@ -562,8 +631,26 @@ namespace confocal_core
                 CalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT,
                 CurveCoff = CURVE_COFF_DEFAULT,
                 BScanPixelComp = BIDIRECTION_SCAN_PIXEL_COMPENSATION,
-                BScanPixelOffset = 0
+                BScanPixelOffset = 0,
+                AcquisitionMode = SCAN_ACQUISITION_MODE.STANDARD,
+                AcquisitionModeNum = SCAN_ACQUISITION_MODE_NUM_DEFAULT
             };
+
+            m_properties = new Properties
+            {
+                Channels = new PropChannel[CHAN_NUM]
+            };
+
+            Color[] clolrs = new Color[] { Color.Purple, Color.Cyan, Color.YellowGreen, Color.Red };
+
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                m_properties.Channels[i] = new PropChannel
+                {
+                    Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i),
+                    ColorReference = clolrs[i]
+                };
+            }
 
             Debugging = true;
         }
@@ -587,6 +674,18 @@ namespace confocal_core
                 if (m_pmt.Channels[i].Id == id)
                 {
                     return m_pmt.Channels[i];
+                }
+            }
+            return null;
+        }
+
+        private PropChannel GetPropChannel(CHAN_ID id)
+        {
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                if (m_properties.Channels[i].Id == id)
+                {
+                    return m_properties.Channels[i];
                 }
             }
             return null;

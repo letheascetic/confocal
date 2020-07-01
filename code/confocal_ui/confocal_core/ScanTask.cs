@@ -180,6 +180,7 @@ namespace confocal_core
         #endregion
 
         #region private apis
+
         private void ReceiveSamples(object sender, ushort[][] samples)
         {
             Config m_config = confocal_core.Config.GetConfig();
@@ -314,7 +315,9 @@ namespace confocal_core
                 byte[][] displayData = new byte[activatedChannelNum][];
                 for (i = 0; i < activatedChannelNum; i++)
                 {
-                    CImage.Gray16ToBGR24(frame.Data[i], out displayData[i]);
+                    Color colorReference = m_config.GetChannelColorReference((CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i));
+                    CImage.Gray16ToBGR24(colorReference, frame.Data[i], out displayData[i]);
+                    // CImage.Gray16ToBGR24(frame.Data[i], out displayData[i]);
                 }
                 DisplayData display = new DisplayData(frame.Frame, displayData);
                 m_scanData.ImageData = display;

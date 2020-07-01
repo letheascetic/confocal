@@ -141,15 +141,15 @@ namespace confocal_ui
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-            if (!LaserDevice.IsConnected())
-            {
-                MessageBox.Show("激光器未连接，请先连接激光器.");
-                return;
-            }
+            //if (!LaserDevice.IsConnected())
+            //{
+            //    MessageBox.Show("激光器未连接，请先连接激光器.");
+            //    return;
+            //}
 
             if (m_scheduler.TaskScanning() == false)
             {
-                UpdateVariables();
+                UpdateVariables();      // 将配置写入Config,计算Params
                 m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
                 API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
                 if (code != API_RETURN_CODE.API_SUCCESS)
@@ -332,10 +332,5 @@ namespace confocal_ui
             tbx640Gain.Text = string.Concat(configValue.ToString("F1"), "");
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ushort gain = ushort.Parse(textBox1.Text);
-            UsbDac.SetGainCalibration(0, gain);
-        }
     }
 }

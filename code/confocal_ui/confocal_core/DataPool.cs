@@ -49,7 +49,7 @@ namespace confocal_core
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
-        private static readonly int MAXIMUM_FRAME_QUEUE_SIZE = 4;
+        private static readonly int MAXIMUM_FRAME_QUEUE_SIZE = 2;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ConcurrentQueue<SampleData> m_sampleQueue;
         private ConcurrentQueue<FrameData> m_frameQueue;

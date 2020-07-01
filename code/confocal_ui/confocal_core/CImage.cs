@@ -14,7 +14,6 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-
         public static void Gray16ToGray8(ushort[] source, out byte[] destnation)
         {
             destnation = new byte[source.Length];
@@ -60,6 +59,28 @@ namespace confocal_core
                     destnation[j + 1] = (byte)(255 - ((source[i] - 192) << 2));
                     destnation[j] = 0;
                 }
+            }
+        }
+
+        public static void Gray16ToBGR24(Color color, ushort[] source, out byte[] destnation)
+        {
+            float rCoff = color.R / 255.0f;
+            float gCoff = color.G / 255.0f;
+            float bCoff = color.B / 255.0f;
+
+            destnation = new byte[source.Length * 3];
+
+            int i, j;
+            byte value;
+
+            for (i = 0; i < source.Length; i++)
+            {
+                j = i * 3;
+                value = (byte)(source[i] >> 8);
+
+                destnation[j + 2] = (byte)(rCoff * value);
+                destnation[j + 1] = (byte)(gCoff * value);
+                destnation[j] = (byte)(bCoff * value);
             }
         }
 

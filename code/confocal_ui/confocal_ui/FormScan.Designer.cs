@@ -90,8 +90,6 @@
             this.gbxMirror = new System.Windows.Forms.GroupBox();
             this.rbtnThree = new System.Windows.Forms.RadioButton();
             this.rbtnTwo = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
@@ -566,27 +564,12 @@
             this.rbtnTwo.TabStop = true;
             this.rbtnTwo.UseVisualStyleBackColor = true;
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // FormScan
             // 
             this.AutoHidePortion = 0.4D;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.gbxMirror);
             this.Controls.Add(this.cbxScanStrategy);
             this.Controls.Add(this.cbxScanPixels);
@@ -704,7 +687,5 @@
         private System.Windows.Forms.GroupBox gbxMirror;
         private System.Windows.Forms.RadioButton rbtnThree;
         private System.Windows.Forms.RadioButton rbtnTwo;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
     }
 }

@@ -49,18 +49,8 @@ namespace confocal_ui
 
         private void ConfigDevice()
         {
-            API_RETURN_CODE code = ConfigLaserDevice();
-            if (code != API_RETURN_CODE.API_SUCCESS)
-            {
-                MessageBox.Show(string.Format("连接激光器端口[{0}]失败，请检查接线是否正常，端口号是否正确。", cbxSelectLaser.SelectedItem.ToString()));
-            }
-
-            code = ConfigUsbDac();
-            if (code != API_RETURN_CODE.API_SUCCESS)
-            {
-                MessageBox.Show(string.Format("配置激光器增益失败，请联系厂家。"));
-            }
-
+            ConfigLaserDevice();
+            ConfigUsbDac();
         }
 
         private void InitLoadControlers()
@@ -108,6 +98,7 @@ namespace confocal_ui
             }
             else
             {
+
                 Logger.Info(string.Format("scan task[{0}|{1} alreay created.", scanTask.TaskId, scanTask.TaskName));
             }
             formImage.ScanTaskCreated();
@@ -189,18 +180,22 @@ namespace confocal_ui
             }
         }
 
-        private API_RETURN_CODE ConfigUsbDac()
+        private void ConfigUsbDac()
         {
-            return UsbDac.Connect();
+            API_RETURN_CODE code = UsbDac.Connect();
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("配置激光器增益失败，请联系厂家。"));
+            }
         }
 
-        private API_RETURN_CODE ConfigLaserDevice()
+        private void ConfigLaserDevice()
         {
             string portName = cbxSelectLaser.SelectedItem.ToString();
             API_RETURN_CODE code = LaserDevice.Connect(portName);
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
-                return code;
+                MessageBox.Show(string.Format("连接激光器端口[{0}]失败，请检查接线是否正常，端口号是否正确。", portName));
             }
 
             m_config.SetLaserPortName(portName);
@@ -220,7 +215,7 @@ namespace confocal_ui
                 
                 LaserDevice.SetChannelPower(id, (float)m_config.GetLaserPower(id));
             }
-            return API_RETURN_CODE.API_SUCCESS;
+
         }
 
         #region controlers event
@@ -247,11 +242,7 @@ namespace confocal_ui
 
         private void btnLaserConnect_Click(object sender, EventArgs e)
         {
-            API_RETURN_CODE code = ConfigLaserDevice();
-            if (code != API_RETURN_CODE.API_SUCCESS)
-            {
-                MessageBox.Show(string.Format("连接激光器失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
-            }
+            ConfigLaserDevice();
             UpdateControlers();
         }
 
