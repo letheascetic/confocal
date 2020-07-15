@@ -26,6 +26,11 @@ namespace confocal_ui
             InitializeComponent();
         }
 
+        public void ScanTaskStarted()
+        {
+            UpdateControlers();
+        }
+
         private void InitVariables()
         {
             m_config = Config.GetConfig();
@@ -108,9 +113,5 @@ namespace confocal_ui
             InitControlers();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            UpdateControlers();
-        }
     }
 }

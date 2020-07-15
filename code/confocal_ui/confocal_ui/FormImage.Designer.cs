@@ -271,7 +271,7 @@
             // 
             // pbxAll
             // 
-            this.pbxAll.BackgroundImage = global::confocal_ui.Properties.Resources.background;
+            this.pbxAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbxAll.BackgroundImage")));
             this.pbxAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxAll.Location = new System.Drawing.Point(3, 3);
             this.pbxAll.Name = "pbxAll";
@@ -281,6 +281,7 @@
             // 
             // pbx405
             // 
+            this.pbx405.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbx405.BackgroundImage")));
             this.pbx405.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx405.Location = new System.Drawing.Point(3, 3);
             this.pbx405.Name = "pbx405";
@@ -291,6 +292,7 @@
             // 
             // pbx488
             // 
+            this.pbx488.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbx488.BackgroundImage")));
             this.pbx488.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx488.Location = new System.Drawing.Point(0, 0);
             this.pbx488.Name = "pbx488";
@@ -301,6 +303,7 @@
             // 
             // pbx561
             // 
+            this.pbx561.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbx561.BackgroundImage")));
             this.pbx561.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx561.Location = new System.Drawing.Point(0, 0);
             this.pbx561.Name = "pbx561";
@@ -311,6 +314,7 @@
             // 
             // pbx640
             // 
+            this.pbx640.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbx640.BackgroundImage")));
             this.pbx640.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx640.Location = new System.Drawing.Point(0, 0);
             this.pbx640.Name = "pbx640";

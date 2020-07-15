@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormScan));
-            this.button2 = new System.Windows.Forms.Button();
             this.lbDwellTime = new System.Windows.Forms.Label();
-            this.tbxDwellTime = new System.Windows.Forms.TextBox();
             this.lbScanPixels = new System.Windows.Forms.Label();
             this.gbxParams = new System.Windows.Forms.GroupBox();
             this.lbFrameTime = new System.Windows.Forms.Label();
@@ -84,8 +82,10 @@
             this.lbAcquisitionMode = new System.Windows.Forms.Label();
             this.cbxAcquisitionMode = new System.Windows.Forms.ComboBox();
             this.cbxAcquisitionModeNum = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.btnScan = new System.Windows.Forms.Button();
+            this.nmDwellTime = new System.Windows.Forms.NumericUpDown();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
@@ -101,25 +101,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).BeginInit();
             this.gbxMode.SuspendLayout();
             this.gbxMirror.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDwellTime)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Image = global::confocal_ui.Properties.Resources.Scan;
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // lbDwellTime
             // 
             resources.ApplyResources(this.lbDwellTime, "lbDwellTime");
             this.lbDwellTime.Name = "lbDwellTime";
-            // 
-            // tbxDwellTime
-            // 
-            this.tbxDwellTime.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbxDwellTime, "tbxDwellTime");
-            this.tbxDwellTime.Name = "tbxDwellTime";
             // 
             // lbScanPixels
             // 
@@ -461,6 +449,7 @@
             this.rbtnGalv.Name = "rbtnGalv";
             this.rbtnGalv.TabStop = true;
             this.rbtnGalv.UseVisualStyleBackColor = true;
+            this.rbtnGalv.CheckedChanged += new System.EventHandler(this.rbtnGalv_CheckedChanged);
             // 
             // cbxScanPixels
             // 
@@ -468,6 +457,7 @@
             resources.ApplyResources(this.cbxScanPixels, "cbxScanPixels");
             this.cbxScanPixels.FormattingEnabled = true;
             this.cbxScanPixels.Name = "cbxScanPixels";
+            this.cbxScanPixels.SelectedIndexChanged += new System.EventHandler(this.cbxScanPixels_SelectedIndexChanged);
             // 
             // cbxScanStrategy
             // 
@@ -498,6 +488,7 @@
             this.rbtnTwo.Name = "rbtnTwo";
             this.rbtnTwo.TabStop = true;
             this.rbtnTwo.UseVisualStyleBackColor = true;
+            this.rbtnTwo.CheckedChanged += new System.EventHandler(this.rbtnTwo_CheckedChanged);
             // 
             // lbScanStrategy
             // 
@@ -515,6 +506,7 @@
             resources.ApplyResources(this.cbxAcquisitionMode, "cbxAcquisitionMode");
             this.cbxAcquisitionMode.FormattingEnabled = true;
             this.cbxAcquisitionMode.Name = "cbxAcquisitionMode";
+            this.cbxAcquisitionMode.SelectedIndexChanged += new System.EventHandler(this.cbxAcquisitionMode_SelectedIndexChanged);
             // 
             // cbxAcquisitionModeNum
             // 
@@ -522,6 +514,13 @@
             resources.ApplyResources(this.cbxAcquisitionModeNum, "cbxAcquisitionModeNum");
             this.cbxAcquisitionModeNum.FormattingEnabled = true;
             this.cbxAcquisitionModeNum.Name = "cbxAcquisitionModeNum";
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Image = global::confocal_ui.Properties.Resources.Scan;
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // btnCapture
             // 
@@ -538,12 +537,41 @@
             this.btnScan.UseVisualStyleBackColor = false;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
+            // nmDwellTime
+            // 
+            this.nmDwellTime.DecimalPlaces = 1;
+            this.nmDwellTime.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            resources.ApplyResources(this.nmDwellTime, "nmDwellTime");
+            this.nmDwellTime.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            65536});
+            this.nmDwellTime.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nmDwellTime.Name = "nmDwellTime";
+            this.nmDwellTime.ReadOnly = true;
+            this.nmDwellTime.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nmDwellTime.ValueChanged += new System.EventHandler(this.nmDwellTime_ValueChanged);
+            // 
             // FormScan
             // 
             this.AutoHidePortion = 0.4D;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.nmDwellTime);
             this.Controls.Add(this.cbxAcquisitionModeNum);
             this.Controls.Add(this.cbxAcquisitionMode);
             this.Controls.Add(this.lbAcquisitionMode);
@@ -558,7 +586,6 @@
             this.Controls.Add(this.gbxChan405);
             this.Controls.Add(this.gbxParams);
             this.Controls.Add(this.lbScanPixels);
-            this.Controls.Add(this.tbxDwellTime);
             this.Controls.Add(this.lbDwellTime);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnCapture);
@@ -589,6 +616,7 @@
             this.gbxMode.PerformLayout();
             this.gbxMirror.ResumeLayout(false);
             this.gbxMirror.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDwellTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -600,7 +628,6 @@
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lbDwellTime;
-        private System.Windows.Forms.TextBox tbxDwellTime;
         private System.Windows.Forms.Label lbScanPixels;
         private System.Windows.Forms.GroupBox gbxParams;
         private System.Windows.Forms.Label lbFps;
@@ -653,5 +680,6 @@
         private System.Windows.Forms.Label lbAcquisitionMode;
         private System.Windows.Forms.ComboBox cbxAcquisitionMode;
         private System.Windows.Forms.ComboBox cbxAcquisitionModeNum;
+        private System.Windows.Forms.NumericUpDown nmDwellTime;
     }
 }

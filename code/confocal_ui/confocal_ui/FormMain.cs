@@ -116,6 +116,7 @@ namespace confocal_ui
             }
             formImage.ScanTaskStrated();
             m_pFormScan.ScanTaskStarted();
+            m_pFormShowBox.ScanTaskStarted();
             return API_RETURN_CODE.API_SUCCESS;
         }
 

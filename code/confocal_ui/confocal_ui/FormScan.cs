@@ -98,7 +98,7 @@ namespace confocal_ui
             // 振镜系统
             rbtnThree.Checked = m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? true : false;
             // 停留时间
-            tbxDwellTime.Text = m_config.GetScanDwellTime().ToString();
+            nmDwellTime.Value = Decimal.Parse(m_config.GetScanDwellTime().ToString());
             // 激光[通道]开关状态/功率/增益
             chbx405.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx488.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON ? true : false;
@@ -144,7 +144,7 @@ namespace confocal_ui
             int acquisitionModeNum = (int)cbxAcquisitionModeNum.SelectedItem;
             m_config.SetScanAcquisitionModeNum(acquisitionModeNum);
             // Dwell Time
-            m_config.SetScanDwellTime(double.Parse(tbxDwellTime.Text));
+            m_config.SetScanDwellTime(double.Parse(nmDwellTime.Value.ToString()));
             // 扫描像素
             int scanPixels = ((KeyValuePair<int, string>)cbxScanPixels.SelectedItem).Key;
             m_config.SetScanXPoints(scanPixels);
@@ -191,9 +191,11 @@ namespace confocal_ui
 
             if (m_scheduler.TaskScanning() == false)
             {
-                UpdateVariables();                                                  // 将配置写入Config,计算Params
+                this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
                 API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+
                 if (code != API_RETURN_CODE.API_SUCCESS)
                 {
                     MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
@@ -201,8 +203,11 @@ namespace confocal_ui
             }
             else
             {
+                this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ScanTask scanTask = m_scheduler.GetScanningTask();
                 API_RETURN_CODE code = m_scheduler.StopScanTask(scanTask);
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+
                 if (code != API_RETURN_CODE.API_SUCCESS)
                 {
                     MessageBox.Show(string.Format("暂停扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
@@ -390,12 +395,16 @@ namespace confocal_ui
                 return;
             }
 
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
             // if task is not running, just update config
             if (m_scheduler.TaskScanning() == false)
             {
                 m_config.SetScanStartegy(strategy);
                 m_params.Calculate();
                 UpdateControlers();
+
+                this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
             }
 
@@ -406,16 +415,177 @@ namespace confocal_ui
             // create & start task
             m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
             API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+            UpdateControlers();
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
                 MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
             }
-            UpdateControlers();
         }
 
+        private void cbxAcquisitionMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SCAN_ACQUISITION_MODE acquisitionMode = ((KeyValuePair<SCAN_ACQUISITION_MODE, string>)cbxAcquisitionMode.SelectedItem).Key;
+            if (m_config.GetScanAcquisitionMode() == acquisitionMode)
+            {
+                return;
+            }
+
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+            // if task is not running, just update config
+            if (m_scheduler.TaskScanning() == false)
+            {
+                m_config.SetScanAcquisitionMode(acquisitionMode);
+                m_params.Calculate();
+                UpdateControlers();
+
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+                return;
+            }
+
+            // if task is already running, stop first
+            m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
+            // update config
+            m_config.SetScanAcquisitionMode(acquisitionMode);
+            // create & start task
+            m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+            API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+            UpdateControlers();
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
+        }
+
+        private void rbtnGalv_CheckedChanged(object sender, EventArgs e)
+        {
+            
 
 
+        }
 
+        private void rbtnTwo_CheckedChanged(object sender, EventArgs e)
+        {
+            SCAN_MIRROR_NUM mirrorNum = rbtnTwo.Checked ? SCAN_MIRROR_NUM.TWO : SCAN_MIRROR_NUM.THREEE;
+            if (m_config.GetScanMirrorNum() == mirrorNum)
+            {
+                return;
+            }
 
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+            // if task is not running, just update config
+            if (m_scheduler.TaskScanning() == false)
+            {
+                m_config.SetScanMirrorNum(mirrorNum);
+                m_params.Calculate();
+
+                UpdateControlers();
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+                return;
+            }
+
+            // if task is already running, stop first
+            m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
+            // update config
+            m_config.SetScanMirrorNum(mirrorNum);
+            // create & start task
+            m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+            API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+            UpdateControlers();
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
+        }
+
+        private void cbxScanPixels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int scanPixels = ((KeyValuePair<int, string>)cbxScanPixels.SelectedItem).Key;
+            if (m_config.GetScanXPoints() == scanPixels && m_config.GetScanYPoints() == scanPixels)
+            {
+                return;
+            }
+
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+            // if task is not running, just update config
+            if (m_scheduler.TaskScanning() == false)
+            {
+                m_config.SetScanXPoints(scanPixels);
+                m_config.SetScanYPoints(scanPixels);
+                m_params.Calculate();
+                UpdateControlers();
+
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+                return;
+            }
+
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+
+            // if task is already running, stop first
+            m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
+            // update config
+            m_config.SetScanXPoints(scanPixels);
+            m_config.SetScanYPoints(scanPixels);
+            // create & start task
+            m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+            API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+            UpdateControlers();
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
+        }
+
+        private void nmDwellTime_ValueChanged(object sender, EventArgs e)
+        {
+            double dwellTime = double.Parse(nmDwellTime.Value.ToString());
+            if (m_config.GetScanDwellTime() == dwellTime)
+            {
+                return;
+            }
+
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+            // if task is not running, just update config
+            if (m_scheduler.TaskScanning() == false)
+            {
+                m_config.SetScanDwellTime(dwellTime);
+                m_params.Calculate();
+                UpdateControlers();
+
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+                return;
+            }
+
+            // if task is already running, stop first
+            m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
+            // update config
+            m_config.SetScanDwellTime(dwellTime);
+            // create & start task
+            m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+            API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+            UpdateControlers();
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
+        }
     }
 }
