@@ -63,6 +63,12 @@ namespace confocal_ui
             timer.Stop();
         }
 
+        public void ActivatedChannelChanged()
+        {
+            Logger.Info(string.Format("FormImage scan task[{0}|{1}] activated channel channged.", m_scanTask.TaskId, m_scanTask.TaskName));
+            UpdateTabPages();
+        }
+
         private void InitVariables()
         {
             m_config = Config.GetConfig();
@@ -92,17 +98,12 @@ namespace confocal_ui
             this.lbScanPixels.Text = string.Format("{0} x {1} pixels", m_config.GetScanXPoints(), m_config.GetScanYPoints());
             this.lbBitDepth.Text = "16 bits";
             this.lbFps.Text = string.Format("{0} fps", m_params.Fps.ToString("F2"));
-            this.lbFrame.Text = string.Format("NO. {0} frame", m_scanTask.GetScanInfo().CurrentFrame);
-            this.lbTimeSpan.Text = string.Format("{0} seconds", m_scanTask.GetScanInfo().TimeSpan.ToString("F1"));
-
+            
             this.m_currentFrame = -1;
             this.m_firstDisplay = true;
 
-            this.tpgAll.Parent = m_config.GetActivatedChannelNum() <= 1 ? null : this.tabControl;
-            this.tpg405.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
-            this.tpg488.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
-            this.tpg561.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
-            this.tpg640.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
+            UpdateRTControlers();
+            UpdateTabPages();
 
             byte[] data = new byte[m_config.GetScanXPoints() * m_config.GetScanYPoints()];
             Bitmap bmp = CImage.CreateBitmap(data, m_config.GetScanXPoints(), m_config.GetScanYPoints());
@@ -110,6 +111,27 @@ namespace confocal_ui
             this.pbx488.Image = bmp;
             this.pbx561.Image = bmp;
             this.pbx640.Image = bmp;
+        }
+
+        private void UpdateRTControlers()
+        {
+            this.lbFrame.Text = string.Format("NO. {0} frame", m_scanTask.GetScanInfo().CurrentFrame);
+            this.lbTimeSpan.Text = string.Format("{0} seconds", m_scanTask.GetScanInfo().TimeSpan.ToString("F1"));
+        }
+
+        private void UpdateTabPages()
+        {
+            this.tpgAll.Parent = null;
+            this.tpg405.Parent = null;
+            this.tpg488.Parent = null;
+            this.tpg561.Parent = null;
+            this.tpg640.Parent = null;
+
+            this.tpgAll.Parent = m_config.GetActivatedChannelNum() <= 1 ? null : this.tabControl;
+            this.tpg405.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
+            this.tpg488.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
+            this.tpg561.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
+            this.tpg640.Parent = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.OFF ? null : this.tabControl;
         }
 
         private PictureBox GetMappingPictureBox(TabPage tabPage)
@@ -177,11 +199,57 @@ namespace confocal_ui
         private void timer_Tick(object sender, EventArgs e)
         {
             DisplayImage();
+            UpdateRTControlers();
         }
 
         private void tabControl_Selected(object sender, TabControlEventArgs e)
         {
             DisplayImage();
+        }
+
+        private void btnDisplayCenter_Click(object sender, EventArgs e)
+        {
+            PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
+            if (pbx != null)
+            {
+                pbx.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
+        }
+
+        private void btnDisplaytNormal_Click(object sender, EventArgs e)
+        {
+            PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
+            if (pbx != null)
+            {
+                pbx.SizeMode = PictureBoxSizeMode.Normal;
+            }
+        }
+
+        private void btnDisplayAutosize_Click(object sender, EventArgs e)
+        {
+            PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
+            if (pbx != null)
+            {
+                pbx.SizeMode = PictureBoxSizeMode.AutoSize;
+            }
+        }
+
+        private void btnDisplayStretch_Click(object sender, EventArgs e)
+        {
+            PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
+            if (pbx != null)
+            {
+                pbx.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+
+        private void btnDisplayZoom_Click(object sender, EventArgs e)
+        {
+            PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
+            if (pbx != null)
+            {
+                pbx.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
     }
 }

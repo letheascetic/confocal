@@ -23,7 +23,7 @@ namespace confocal_ui
         private FormROI m_pFormROI = new FormROI();
         private FormMeas m_pFormMeas = new FormMeas();
         private FormShowBox m_pFormShowBox = new FormShowBox();
-        private List<FormImage> m_formImages = new List<FormImage>();
+        private List<FormImage> m_pFormImages = new List<FormImage>();
 
         private Config m_config;
         private Params m_params;
@@ -45,6 +45,7 @@ namespace confocal_ui
             m_scheduler.ScanTaskStarted += new ScanTaskEventHandler(ScanTaskStartedHandler);
             m_scheduler.ScanTaskStopped += new ScanTaskEventHandler(ScanTaskStoppedHandler);
             m_scheduler.ScanTaskReleased += new ScanTaskEventHandler(ScanTaskReleasedHandler);
+            m_scheduler.ActivatedChannelChanged += new ScanTaskEventHandler(ActivatedChannelChangedHandler);
         }
 
         private void ConfigDevice()
@@ -94,7 +95,7 @@ namespace confocal_ui
                 Logger.Info(string.Format("new scan task[{0}|{1}], create form image.", scanTask.TaskId, scanTask.TaskName));
                 formImage = new FormImage(scanTask);
                 formImage.Show(this.dockPanel, DockState.Document);
-                m_formImages.Add(formImage);
+                m_pFormImages.Add(formImage);
             }
             else
             {
@@ -114,6 +115,7 @@ namespace confocal_ui
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
             }
             formImage.ScanTaskStrated();
+            m_pFormScan.ScanTaskStarted();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -126,6 +128,7 @@ namespace confocal_ui
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
             }
             formImage.ScanTaskStopped();
+            m_pFormScan.ScanTaskStopped();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -134,9 +137,21 @@ namespace confocal_ui
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        private API_RETURN_CODE ActivatedChannelChangedHandler(ScanTask scanTask, object paras)
+        {
+            FormImage formImage = FindFormImage(scanTask);
+            if (formImage == null)
+            {
+                Logger.Info(string.Format("scan task matching form image not found."));
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
+            }
+            formImage.ActivatedChannelChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         private FormImage FindFormImage(ScanTask scanTask)
         {
-            foreach (FormImage formImage in m_formImages)
+            foreach (FormImage formImage in m_pFormImages)
             {
                 if (formImage.FormId == scanTask.TaskId)
                 {

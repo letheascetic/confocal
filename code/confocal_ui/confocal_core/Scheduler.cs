@@ -27,6 +27,7 @@ namespace confocal_core
         public event ScanTaskEventHandler ScanTaskStarted;
         public event ScanTaskEventHandler ScanTaskStopped;
         public event ScanTaskEventHandler ScanTaskReleased;
+        public event ScanTaskEventHandler ActivatedChannelChanged;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Params m_params;
         private Config m_config;
@@ -165,6 +166,27 @@ namespace confocal_core
             {
                 ScanTaskReleased.Invoke(scanTask, null);
             }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ChangeActivatedChannels(ScanTask scanTask)
+        {
+            if (scanTask == null || !scanTask.Scannning)
+            {
+                return API_RETURN_CODE.API_SUCCESS;
+            }
+
+            if (FindScanTask(scanTask.TaskId) == null)
+            {
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_NOT_FOUND;
+            }
+
+            if (ActivatedChannelChanged != null)
+            {
+                ActivatedChannelChanged.Invoke(scanTask, null);
+            }
+
+            Logger.Info(string.Format("change activated channels[{0}|{1}].", scanTask.TaskId, scanTask.TaskName));
             return API_RETURN_CODE.API_SUCCESS;
         }
 

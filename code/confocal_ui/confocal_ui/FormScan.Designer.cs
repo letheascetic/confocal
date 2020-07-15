@@ -29,23 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormScan));
-            this.btnScan = new System.Windows.Forms.Button();
-            this.btnCapture = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnConfig = new System.Windows.Forms.Button();
-            this.btnAG = new System.Windows.Forms.Button();
-            this.cbxSkip = new System.Windows.Forms.ComboBox();
-            this.lbControl = new System.Windows.Forms.Label();
             this.lbDwellTime = new System.Windows.Forms.Label();
             this.tbxDwellTime = new System.Windows.Forms.TextBox();
             this.lbScanPixels = new System.Windows.Forms.Label();
-            this.btnScanFlagNormal = new System.Windows.Forms.Button();
-            this.btnScanFlagMulti = new System.Windows.Forms.Button();
-            this.btnScanFlagSum = new System.Windows.Forms.Button();
             this.gbxParams = new System.Windows.Forms.GroupBox();
             this.lbFrameTime = new System.Windows.Forms.Label();
             this.lbFps = new System.Windows.Forms.Label();
-            this.cbxChannels = new System.Windows.Forms.ComboBox();
             this.chbx405 = new System.Windows.Forms.CheckBox();
             this.gbxChan405 = new System.Windows.Forms.GroupBox();
             this.tb405Power = new System.Windows.Forms.TrackBar();
@@ -90,6 +80,12 @@
             this.gbxMirror = new System.Windows.Forms.GroupBox();
             this.rbtnThree = new System.Windows.Forms.RadioButton();
             this.rbtnTwo = new System.Windows.Forms.RadioButton();
+            this.lbScanStrategy = new System.Windows.Forms.Label();
+            this.lbAcquisitionMode = new System.Windows.Forms.Label();
+            this.cbxAcquisitionMode = new System.Windows.Forms.ComboBox();
+            this.cbxAcquisitionModeNum = new System.Windows.Forms.ComboBox();
+            this.btnCapture = new System.Windows.Forms.Button();
+            this.btnScan = new System.Windows.Forms.Button();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
@@ -107,49 +103,12 @@
             this.gbxMirror.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnScan
-            // 
-            resources.ApplyResources(this.btnScan, "btnScan");
-            this.btnScan.Name = "btnScan";
-            this.btnScan.UseVisualStyleBackColor = true;
-            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
-            // 
-            // btnCapture
-            // 
-            resources.ApplyResources(this.btnCapture, "btnCapture");
-            this.btnCapture.Name = "btnCapture";
-            this.btnCapture.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             resources.ApplyResources(this.button2, "button2");
+            this.button2.Image = global::confocal_ui.Properties.Resources.Scan;
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btnConfig
-            // 
-            resources.ApplyResources(this.btnConfig, "btnConfig");
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.UseVisualStyleBackColor = true;
-            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
-            // 
-            // btnAG
-            // 
-            resources.ApplyResources(this.btnAG, "btnAG");
-            this.btnAG.Name = "btnAG";
-            this.btnAG.UseVisualStyleBackColor = true;
-            // 
-            // cbxSkip
-            // 
-            this.cbxSkip.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.cbxSkip, "cbxSkip");
-            this.cbxSkip.FormattingEnabled = true;
-            this.cbxSkip.Name = "cbxSkip";
-            // 
-            // lbControl
-            // 
-            resources.ApplyResources(this.lbControl, "lbControl");
-            this.lbControl.Name = "lbControl";
             // 
             // lbDwellTime
             // 
@@ -166,24 +125,6 @@
             // 
             resources.ApplyResources(this.lbScanPixels, "lbScanPixels");
             this.lbScanPixels.Name = "lbScanPixels";
-            // 
-            // btnScanFlagNormal
-            // 
-            resources.ApplyResources(this.btnScanFlagNormal, "btnScanFlagNormal");
-            this.btnScanFlagNormal.Name = "btnScanFlagNormal";
-            this.btnScanFlagNormal.UseVisualStyleBackColor = true;
-            // 
-            // btnScanFlagMulti
-            // 
-            resources.ApplyResources(this.btnScanFlagMulti, "btnScanFlagMulti");
-            this.btnScanFlagMulti.Name = "btnScanFlagMulti";
-            this.btnScanFlagMulti.UseVisualStyleBackColor = true;
-            // 
-            // btnScanFlagSum
-            // 
-            resources.ApplyResources(this.btnScanFlagSum, "btnScanFlagSum");
-            this.btnScanFlagSum.Name = "btnScanFlagSum";
-            this.btnScanFlagSum.UseVisualStyleBackColor = true;
             // 
             // gbxParams
             // 
@@ -202,13 +143,6 @@
             // 
             resources.ApplyResources(this.lbFps, "lbFps");
             this.lbFps.Name = "lbFps";
-            // 
-            // cbxChannels
-            // 
-            this.cbxChannels.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.cbxChannels, "cbxChannels");
-            this.cbxChannels.FormattingEnabled = true;
-            this.cbxChannels.Name = "cbxChannels";
             // 
             // chbx405
             // 
@@ -233,8 +167,8 @@
             // 
             // tb405Power
             // 
-            this.tb405Power.LargeChange = 100;
             resources.ApplyResources(this.tb405Power, "tb405Power");
+            this.tb405Power.LargeChange = 100;
             this.tb405Power.Maximum = 2499;
             this.tb405Power.Minimum = 50;
             this.tb405Power.Name = "tb405Power";
@@ -246,8 +180,8 @@
             // 
             // tb405Gain
             // 
-            this.tb405Gain.LargeChange = 20;
             resources.ApplyResources(this.tb405Gain, "tb405Gain");
+            this.tb405Gain.LargeChange = 20;
             this.tb405Gain.Maximum = 1000;
             this.tb405Gain.Minimum = 1;
             this.tb405Gain.Name = "tb405Gain";
@@ -300,8 +234,8 @@
             // 
             // tb488Power
             // 
-            this.tb488Power.LargeChange = 100;
             resources.ApplyResources(this.tb488Power, "tb488Power");
+            this.tb488Power.LargeChange = 100;
             this.tb488Power.Maximum = 2499;
             this.tb488Power.Minimum = 50;
             this.tb488Power.Name = "tb488Power";
@@ -313,8 +247,8 @@
             // 
             // tb488Gain
             // 
-            this.tb488Gain.LargeChange = 20;
             resources.ApplyResources(this.tb488Gain, "tb488Gain");
+            this.tb488Gain.LargeChange = 20;
             this.tb488Gain.Maximum = 1000;
             this.tb488Gain.Minimum = 1;
             this.tb488Gain.Name = "tb488Gain";
@@ -374,8 +308,8 @@
             // 
             // tb561Power
             // 
-            this.tb561Power.LargeChange = 100;
             resources.ApplyResources(this.tb561Power, "tb561Power");
+            this.tb561Power.LargeChange = 100;
             this.tb561Power.Maximum = 2499;
             this.tb561Power.Minimum = 50;
             this.tb561Power.Name = "tb561Power";
@@ -387,8 +321,8 @@
             // 
             // tb561Gain
             // 
-            this.tb561Gain.LargeChange = 20;
             resources.ApplyResources(this.tb561Gain, "tb561Gain");
+            this.tb561Gain.LargeChange = 20;
             this.tb561Gain.Maximum = 1000;
             this.tb561Gain.Minimum = 1;
             this.tb561Gain.Name = "tb561Gain";
@@ -448,8 +382,8 @@
             // 
             // tb640Power
             // 
-            this.tb640Power.LargeChange = 100;
             resources.ApplyResources(this.tb640Power, "tb640Power");
+            this.tb640Power.LargeChange = 100;
             this.tb640Power.Maximum = 2499;
             this.tb640Power.Minimum = 50;
             this.tb640Power.Name = "tb640Power";
@@ -461,8 +395,8 @@
             // 
             // tb640Gain
             // 
-            this.tb640Gain.LargeChange = 20;
             resources.ApplyResources(this.tb640Gain, "tb640Gain");
+            this.tb640Gain.LargeChange = 20;
             this.tb640Gain.Maximum = 1000;
             this.tb640Gain.Minimum = 1;
             this.tb640Gain.Name = "tb640Gain";
@@ -541,6 +475,7 @@
             resources.ApplyResources(this.cbxScanStrategy, "cbxScanStrategy");
             this.cbxScanStrategy.FormattingEnabled = true;
             this.cbxScanStrategy.Name = "cbxScanStrategy";
+            this.cbxScanStrategy.SelectedIndexChanged += new System.EventHandler(this.cbxScanStrategy_SelectedIndexChanged);
             // 
             // gbxMirror
             // 
@@ -564,12 +499,55 @@
             this.rbtnTwo.TabStop = true;
             this.rbtnTwo.UseVisualStyleBackColor = true;
             // 
+            // lbScanStrategy
+            // 
+            resources.ApplyResources(this.lbScanStrategy, "lbScanStrategy");
+            this.lbScanStrategy.Name = "lbScanStrategy";
+            // 
+            // lbAcquisitionMode
+            // 
+            resources.ApplyResources(this.lbAcquisitionMode, "lbAcquisitionMode");
+            this.lbAcquisitionMode.Name = "lbAcquisitionMode";
+            // 
+            // cbxAcquisitionMode
+            // 
+            this.cbxAcquisitionMode.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.cbxAcquisitionMode, "cbxAcquisitionMode");
+            this.cbxAcquisitionMode.FormattingEnabled = true;
+            this.cbxAcquisitionMode.Name = "cbxAcquisitionMode";
+            // 
+            // cbxAcquisitionModeNum
+            // 
+            this.cbxAcquisitionModeNum.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.cbxAcquisitionModeNum, "cbxAcquisitionModeNum");
+            this.cbxAcquisitionModeNum.FormattingEnabled = true;
+            this.cbxAcquisitionModeNum.Name = "cbxAcquisitionModeNum";
+            // 
+            // btnCapture
+            // 
+            resources.ApplyResources(this.btnCapture, "btnCapture");
+            this.btnCapture.Image = global::confocal_ui.Properties.Resources.Scan;
+            this.btnCapture.Name = "btnCapture";
+            this.btnCapture.UseVisualStyleBackColor = true;
+            // 
+            // btnScan
+            // 
+            resources.ApplyResources(this.btnScan, "btnScan");
+            this.btnScan.Image = global::confocal_ui.Properties.Resources.Scan;
+            this.btnScan.Name = "btnScan";
+            this.btnScan.UseVisualStyleBackColor = false;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            // 
             // FormScan
             // 
             this.AutoHidePortion = 0.4D;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.cbxAcquisitionModeNum);
+            this.Controls.Add(this.cbxAcquisitionMode);
+            this.Controls.Add(this.lbAcquisitionMode);
+            this.Controls.Add(this.lbScanStrategy);
             this.Controls.Add(this.gbxMirror);
             this.Controls.Add(this.cbxScanStrategy);
             this.Controls.Add(this.cbxScanPixels);
@@ -578,18 +556,10 @@
             this.Controls.Add(this.gbx561);
             this.Controls.Add(this.gbx488);
             this.Controls.Add(this.gbxChan405);
-            this.Controls.Add(this.cbxChannels);
             this.Controls.Add(this.gbxParams);
-            this.Controls.Add(this.btnScanFlagSum);
-            this.Controls.Add(this.btnScanFlagMulti);
-            this.Controls.Add(this.btnScanFlagNormal);
             this.Controls.Add(this.lbScanPixels);
             this.Controls.Add(this.tbxDwellTime);
             this.Controls.Add(this.lbDwellTime);
-            this.Controls.Add(this.lbControl);
-            this.Controls.Add(this.cbxSkip);
-            this.Controls.Add(this.btnAG);
-            this.Controls.Add(this.btnConfig);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnCapture);
             this.Controls.Add(this.btnScan);
@@ -629,20 +599,12 @@
         private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnConfig;
-        private System.Windows.Forms.Button btnAG;
-        private System.Windows.Forms.ComboBox cbxSkip;
-        private System.Windows.Forms.Label lbControl;
         private System.Windows.Forms.Label lbDwellTime;
         private System.Windows.Forms.TextBox tbxDwellTime;
         private System.Windows.Forms.Label lbScanPixels;
-        private System.Windows.Forms.Button btnScanFlagNormal;
-        private System.Windows.Forms.Button btnScanFlagMulti;
-        private System.Windows.Forms.Button btnScanFlagSum;
         private System.Windows.Forms.GroupBox gbxParams;
         private System.Windows.Forms.Label lbFps;
         private System.Windows.Forms.Label lbFrameTime;
-        private System.Windows.Forms.ComboBox cbxChannels;
         private System.Windows.Forms.CheckBox chbx405;
         private System.Windows.Forms.GroupBox gbxChan405;
         private System.Windows.Forms.Label lb405;
@@ -687,5 +649,9 @@
         private System.Windows.Forms.GroupBox gbxMirror;
         private System.Windows.Forms.RadioButton rbtnThree;
         private System.Windows.Forms.RadioButton rbtnTwo;
+        private System.Windows.Forms.Label lbScanStrategy;
+        private System.Windows.Forms.Label lbAcquisitionMode;
+        private System.Windows.Forms.ComboBox cbxAcquisitionMode;
+        private System.Windows.Forms.ComboBox cbxAcquisitionModeNum;
     }
 }

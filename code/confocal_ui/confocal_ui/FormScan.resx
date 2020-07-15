@@ -117,88 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="button2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        /9j/4AAQSkZJRgABAQEAYABgAAD/4QBaRXhpZgAATU0AKgAAAAgABQMBAAUAAAABAAAASgMDAAEAAAAB
-        AAAAAFEQAAEAAAABAQAAAFERAAQAAAABAAAOxFESAAQAAAABAAAOxAAAAAAAAYagAACxj//bAEMAAgEB
-        AgEBAgICAgICAgIDBQMDAwMDBgQEAwUHBgcHBwYHBwgJCwkICAoIBwcKDQoKCwwMDAwHCQ4PDQwOCwwM
-        DP/bAEMBAgICAwMDBgMDBgwIBwgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM
-        DAwMDAwMDAwMDP/AABEIABcAFwMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJ
-        Cgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKC
-        CQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImK
-        kpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T1
-        9vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncA
-        AQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RF
-        RkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1
-        tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APur9sb/
-        AIKQeP8A9lX9s3xFplhcWmq+HLVLUjSryMeWoaFWYo64ZSSSevWvZf2aP+CwXwo+PV1baVquof8ACE+I
-        5gALTVXCwTMeMRz/AHT9Gwa/P3/gsrq40/8Abs8Vx7gM2tk3/kutfLfgf4a678X/ABVBpmjaXfatf3bB
-        Iba1hMsr+nAHA96/ccFwRlmPyejia37uXJFuS06byT0fm9H5n4xjOMsywObVsPS/eR52lF69dk1qvLde
-        R/ShbXUV7bpNDJHNFIoZHRgyuD0II6iivi7/AIJa/sW/Fz9nGyivvGvjO9tdEkgYReEzN9rWMsOGd2yI
-        yvXbGe2Ce1FfjmZYWlhsRKjRqqrFfaV0n9/6Nrs2frWX4mriKEatam6cn9l2uvu/Wz7pHOftR/8ABInV
-        v2uP25Na8ba1rdro3gy5tbONPs/729uTHGFdQpG1Of4jn6V9Yfs7/sm+Av2WvDa6d4O0G109ioWe8ceZ
-        d3R9XlPJ+gwPaiiujGZ3jcTh6eFq1H7OCSUdlptddX5u/kYYTJsHhq88TSgvaTbblu9e3ZeS+Z6PRRRX
-        knqH/9k=
-</value>
-  </data>
-  <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="btnScan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 60</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="btnScan.Text" xml:space="preserve">
-    <value>  扫描</value>
-  </data>
-  <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
-    <value>btnScan</value>
-  </data>
-  <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnScan.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="btnCapture.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="btnCapture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 12</value>
-  </data>
-  <data name="btnCapture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 60</value>
-  </data>
-  <data name="btnCapture.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="btnCapture.Text" xml:space="preserve">
-    <value>  捕捉</value>
-  </data>
-  <data name="&gt;&gt;btnCapture.Name" xml:space="preserve">
-    <value>btnCapture</value>
-  </data>
-  <data name="&gt;&gt;btnCapture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCapture.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnCapture.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
   <data name="button2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>184, 12</value>
@@ -206,6 +134,7 @@
   <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 60</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="button2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -222,116 +151,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="btnConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 88</value>
-  </data>
-  <data name="btnConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 35</value>
-  </data>
-  <data name="btnConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="btnConfig.Text" xml:space="preserve">
-    <value>配置</value>
-  </data>
-  <data name="&gt;&gt;btnConfig.Name" xml:space="preserve">
-    <value>btnConfig</value>
-  </data>
-  <data name="&gt;&gt;btnConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnConfig.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnConfig.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="btnAG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 88</value>
-  </data>
-  <data name="btnAG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 35</value>
-  </data>
-  <data name="btnAG.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btnAG.Text" xml:space="preserve">
-    <value>自动增益</value>
-  </data>
-  <data name="&gt;&gt;btnAG.Name" xml:space="preserve">
-    <value>btnAG</value>
-  </data>
-  <data name="&gt;&gt;btnAG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAG.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnAG.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cbxSkip.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="cbxSkip.ItemHeight" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="cbxSkip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 181</value>
-  </data>
-  <data name="cbxSkip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="cbxSkip.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="cbxSkip.Text" xml:space="preserve">
-    <value>Skip 4x</value>
-  </data>
-  <data name="&gt;&gt;cbxSkip.Name" xml:space="preserve">
-    <value>cbxSkip</value>
-  </data>
-  <data name="&gt;&gt;cbxSkip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbxSkip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cbxSkip.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="lbControl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 173</value>
-  </data>
-  <data name="lbControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 15</value>
-  </data>
-  <data name="lbControl.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="lbControl.Text" xml:space="preserve">
-    <value>控制：</value>
-  </data>
-  <data name="&gt;&gt;lbControl.Name" xml:space="preserve">
-    <value>lbControl</value>
-  </data>
-  <data name="&gt;&gt;lbControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbControl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lbControl.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="lbDwellTime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lbDwellTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lbDwellTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 209</value>
@@ -381,6 +207,9 @@
   <data name="lbScanPixels.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lbScanPixels.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lbScanPixels.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 245</value>
   </data>
@@ -405,93 +234,6 @@
   <data name="&gt;&gt;lbScanPixels.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="btnScanFlagNormal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 284</value>
-  </data>
-  <data name="btnScanFlagNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 35</value>
-  </data>
-  <data name="btnScanFlagNormal.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="btnScanFlagNormal.Text" xml:space="preserve">
-    <value>正常</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagNormal.Name" xml:space="preserve">
-    <value>btnScanFlagNormal</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagNormal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagNormal.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagNormal.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="btnScanFlagMulti.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 284</value>
-  </data>
-  <data name="btnScanFlagMulti.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 35</value>
-  </data>
-  <data name="btnScanFlagMulti.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="btnScanFlagMulti.Text" xml:space="preserve">
-    <value>乘法</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagMulti.Name" xml:space="preserve">
-    <value>btnScanFlagMulti</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagMulti.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagMulti.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagMulti.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="btnScanFlagSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 284</value>
-  </data>
-  <data name="btnScanFlagSum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 35</value>
-  </data>
-  <data name="btnScanFlagSum.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="btnScanFlagSum.Text" xml:space="preserve">
-    <value>加法</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagSum.Name" xml:space="preserve">
-    <value>btnScanFlagSum</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagSum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagSum.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnScanFlagSum.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="lbFrameTime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbFrameTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 21</value>
-  </data>
-  <data name="lbFrameTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 15</value>
-  </data>
-  <data name="lbFrameTime.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="lbFrameTime.Text" xml:space="preserve">
-    <value>Frame Time：</value>
-  </data>
   <data name="&gt;&gt;lbFrameTime.Name" xml:space="preserve">
     <value>lbFrameTime</value>
   </data>
@@ -503,21 +245,6 @@
   </data>
   <data name="&gt;&gt;lbFrameTime.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="lbFps.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbFps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 21</value>
-  </data>
-  <data name="lbFps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 15</value>
-  </data>
-  <data name="lbFps.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="lbFps.Text" xml:space="preserve">
-    <value>Fps：</value>
   </data>
   <data name="&gt;&gt;lbFps.Name" xml:space="preserve">
     <value>lbFps</value>
@@ -550,40 +277,73 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;gbxParams.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
-  <data name="cbxChannels.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="lbFrameTime.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="cbxChannels.ItemHeight" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="lbFrameTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="cbxChannels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 291</value>
+  <data name="lbFrameTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 21</value>
   </data>
-  <data name="cbxChannels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+  <data name="lbFrameTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 15</value>
   </data>
-  <data name="cbxChannels.TabIndex" type="System.Int32, mscorlib">
+  <data name="lbFrameTime.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="lbFrameTime.Text" xml:space="preserve">
+    <value>Frame Time：</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.Name" xml:space="preserve">
+    <value>lbFrameTime</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.Parent" xml:space="preserve">
+    <value>gbxParams</value>
+  </data>
+  <data name="&gt;&gt;lbFrameTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lbFps.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbFps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbFps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="lbFps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 15</value>
+  </data>
+  <data name="lbFps.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="cbxChannels.Text" xml:space="preserve">
-    <value>通道选择</value>
+  <data name="lbFps.Text" xml:space="preserve">
+    <value>Fps：</value>
   </data>
-  <data name="&gt;&gt;cbxChannels.Name" xml:space="preserve">
-    <value>cbxChannels</value>
+  <data name="&gt;&gt;lbFps.Name" xml:space="preserve">
+    <value>lbFps</value>
   </data>
-  <data name="&gt;&gt;cbxChannels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lbFps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbxChannels.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;lbFps.Parent" xml:space="preserve">
+    <value>gbxParams</value>
   </data>
-  <data name="&gt;&gt;cbxChannels.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;lbFps.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="chbx405.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chbx405.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chbx405.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 24</value>
@@ -608,6 +368,114 @@
   </data>
   <data name="&gt;&gt;chbx405.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="&gt;&gt;tb405Power.Name" xml:space="preserve">
+    <value>tb405Power</value>
+  </data>
+  <data name="&gt;&gt;tb405Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb405Power.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tb405Power.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tb405Gain.Name" xml:space="preserve">
+    <value>tb405Gain</value>
+  </data>
+  <data name="&gt;&gt;tb405Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb405Gain.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tb405Gain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx405Power.Name" xml:space="preserve">
+    <value>tbx405Power</value>
+  </data>
+  <data name="&gt;&gt;tbx405Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx405Power.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tbx405Power.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lb405Power.Name" xml:space="preserve">
+    <value>lb405Power</value>
+  </data>
+  <data name="&gt;&gt;lb405Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb405Power.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;lb405Power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx405Gain.Name" xml:space="preserve">
+    <value>tbx405Gain</value>
+  </data>
+  <data name="&gt;&gt;tbx405Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx405Gain.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;tbx405Gain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb405Gain.Name" xml:space="preserve">
+    <value>lb405Gain</value>
+  </data>
+  <data name="&gt;&gt;lb405Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb405Gain.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;lb405Gain.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb405.Name" xml:space="preserve">
+    <value>lb405</value>
+  </data>
+  <data name="&gt;&gt;lb405.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb405.Parent" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;lb405.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="gbxChan405.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 389</value>
+  </data>
+  <data name="gbxChan405.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 120</value>
+  </data>
+  <data name="gbxChan405.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Name" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="tb405Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb405Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 86</value>
@@ -638,6 +506,9 @@
   </data>
   <data name="&gt;&gt;tb405Power.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tb405Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb405Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 55</value>
@@ -693,6 +564,9 @@
   <data name="lb405Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb405Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb405Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 89</value>
   </data>
@@ -741,6 +615,9 @@
   <data name="lb405Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb405Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb405Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 58</value>
   </data>
@@ -768,6 +645,9 @@
   <data name="lb405.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb405.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb405.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 25</value>
   </data>
@@ -792,26 +672,125 @@
   <data name="&gt;&gt;lb405.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="gbxChan405.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 389</value>
+  <data name="&gt;&gt;tb488Power.Name" xml:space="preserve">
+    <value>tb488Power</value>
   </data>
-  <data name="gbxChan405.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;tb488Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Name" xml:space="preserve">
+    <value>tb488Gain</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.Name" xml:space="preserve">
+    <value>tbx488Power</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.Name" xml:space="preserve">
+    <value>lb488Power</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.Name" xml:space="preserve">
+    <value>tbx488Gain</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.Name" xml:space="preserve">
+    <value>lb488Gain</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb488.Name" xml:space="preserve">
+    <value>lb488</value>
+  </data>
+  <data name="&gt;&gt;lb488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Name" xml:space="preserve">
+    <value>chbx488</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 515</value>
+  </data>
+  <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
   </data>
-  <data name="gbxChan405.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="gbx488.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.Name" xml:space="preserve">
-    <value>gbxChan405</value>
+  <data name="&gt;&gt;gbx488.Name" xml:space="preserve">
+    <value>gbx488</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbx488.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbx488.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbxChan405.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;gbx488.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="tb488Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb488Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 86</value>
@@ -842,6 +821,9 @@
   </data>
   <data name="&gt;&gt;tb488Power.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tb488Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb488Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 55</value>
@@ -897,6 +879,9 @@
   <data name="lb488Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb488Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb488Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 89</value>
   </data>
@@ -945,6 +930,9 @@
   <data name="lb488Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb488Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb488Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 58</value>
   </data>
@@ -971,6 +959,9 @@
   </data>
   <data name="lb488.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lb488.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lb488.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 25</value>
@@ -999,6 +990,9 @@
   <data name="chbx488.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chbx488.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chbx488.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 24</value>
   </data>
@@ -1023,26 +1017,125 @@
   <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 515</value>
+  <data name="&gt;&gt;tb561Power.Name" xml:space="preserve">
+    <value>tb561Power</value>
   </data>
-  <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;tb561Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb561Power.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tb561Power.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.Name" xml:space="preserve">
+    <value>tb561Gain</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx561Power.Name" xml:space="preserve">
+    <value>tbx561Power</value>
+  </data>
+  <data name="&gt;&gt;tbx561Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx561Power.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tbx561Power.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lb561Power.Name" xml:space="preserve">
+    <value>lb561Power</value>
+  </data>
+  <data name="&gt;&gt;lb561Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb561Power.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;lb561Power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx561Gain.Name" xml:space="preserve">
+    <value>tbx561Gain</value>
+  </data>
+  <data name="&gt;&gt;tbx561Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx561Gain.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tbx561Gain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb561Gain.Name" xml:space="preserve">
+    <value>lb561Gain</value>
+  </data>
+  <data name="&gt;&gt;lb561Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb561Gain.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;lb561Gain.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb561.Name" xml:space="preserve">
+    <value>lb561</value>
+  </data>
+  <data name="&gt;&gt;lb561.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb561.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;lb561.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chbx561.Name" xml:space="preserve">
+    <value>chbx561</value>
+  </data>
+  <data name="&gt;&gt;chbx561.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx561.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;chbx561.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gbx561.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 641</value>
+  </data>
+  <data name="gbx561.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
   </data>
-  <data name="gbx488.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="gbx561.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
-  <data name="&gt;&gt;gbx488.Name" xml:space="preserve">
-    <value>gbx488</value>
+  <data name="&gt;&gt;gbx561.Name" xml:space="preserve">
+    <value>gbx561</value>
   </data>
-  <data name="&gt;&gt;gbx488.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbx561.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbx488.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbx561.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbx488.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;gbx561.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tb561Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb561Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 86</value>
@@ -1073,6 +1166,9 @@
   </data>
   <data name="&gt;&gt;tb561Power.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tb561Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb561Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 55</value>
@@ -1128,6 +1224,9 @@
   <data name="lb561Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb561Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb561Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 89</value>
   </data>
@@ -1176,6 +1275,9 @@
   <data name="lb561Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb561Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb561Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 58</value>
   </data>
@@ -1202,6 +1304,9 @@
   </data>
   <data name="lb561.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lb561.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lb561.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 25</value>
@@ -1230,6 +1335,9 @@
   <data name="chbx561.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chbx561.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chbx561.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 24</value>
   </data>
@@ -1254,26 +1362,125 @@
   <data name="&gt;&gt;chbx561.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="gbx561.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 641</value>
+  <data name="&gt;&gt;tb640Power.Name" xml:space="preserve">
+    <value>tb640Power</value>
   </data>
-  <data name="gbx561.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;tb640Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb640Power.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tb640Power.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.Name" xml:space="preserve">
+    <value>tb640Gain</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.Name" xml:space="preserve">
+    <value>tbx640Power</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.Name" xml:space="preserve">
+    <value>lb640Power</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.Name" xml:space="preserve">
+    <value>tbx640Gain</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.Name" xml:space="preserve">
+    <value>lb640Gain</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb640.Name" xml:space="preserve">
+    <value>lb640</value>
+  </data>
+  <data name="&gt;&gt;lb640.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Name" xml:space="preserve">
+    <value>chbx640</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;chbx640.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gbx640.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 767</value>
+  </data>
+  <data name="gbx640.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
   </data>
-  <data name="gbx561.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="gbx640.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="&gt;&gt;gbx561.Name" xml:space="preserve">
-    <value>gbx561</value>
+  <data name="&gt;&gt;gbx640.Name" xml:space="preserve">
+    <value>gbx640</value>
   </data>
-  <data name="&gt;&gt;gbx561.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbx640.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbx561.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbx640.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbx561.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;gbx640.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="tb640Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb640Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 86</value>
@@ -1304,6 +1511,9 @@
   </data>
   <data name="&gt;&gt;tb640Power.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tb640Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tb640Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 55</value>
@@ -1359,6 +1569,9 @@
   <data name="lb640Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb640Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb640Power.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 89</value>
   </data>
@@ -1407,6 +1620,9 @@
   <data name="lb640Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb640Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lb640Gain.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 58</value>
   </data>
@@ -1433,6 +1649,9 @@
   </data>
   <data name="lb640.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lb640.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lb640.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 25</value>
@@ -1461,6 +1680,9 @@
   <data name="chbx640.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chbx640.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chbx640.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 24</value>
   </data>
@@ -1485,26 +1707,50 @@
   <data name="&gt;&gt;chbx640.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="gbx640.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 767</value>
+  <data name="&gt;&gt;rbtnRes.Name" xml:space="preserve">
+    <value>rbtnRes</value>
   </data>
-  <data name="gbx640.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 120</value>
+  <data name="&gt;&gt;rbtnRes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="gbx640.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="&gt;&gt;rbtnRes.Parent" xml:space="preserve">
+    <value>gbxMode</value>
   </data>
-  <data name="&gt;&gt;gbx640.Name" xml:space="preserve">
-    <value>gbx640</value>
+  <data name="&gt;&gt;rbtnRes.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;gbx640.Type" xml:space="preserve">
+  <data name="&gt;&gt;rbtnGalv.Name" xml:space="preserve">
+    <value>rbtnGalv</value>
+  </data>
+  <data name="&gt;&gt;rbtnGalv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnGalv.Parent" xml:space="preserve">
+    <value>gbxMode</value>
+  </data>
+  <data name="&gt;&gt;rbtnGalv.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbxMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 4</value>
+  </data>
+  <data name="gbxMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 68</value>
+  </data>
+  <data name="gbxMode.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;gbxMode.Name" xml:space="preserve">
+    <value>gbxMode</value>
+  </data>
+  <data name="&gt;&gt;gbxMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbx640.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbxMode.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbx640.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;gbxMode.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="rbtnRes.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1539,6 +1785,9 @@
   <data name="rbtnGalv.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rbtnGalv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rbtnGalv.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 17</value>
   </data>
@@ -1562,27 +1811,6 @@
   </data>
   <data name="&gt;&gt;rbtnGalv.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="gbxMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 4</value>
-  </data>
-  <data name="gbxMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 68</value>
-  </data>
-  <data name="gbxMode.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.Name" xml:space="preserve">
-    <value>gbxMode</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxMode.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="cbxScanPixels.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1609,7 +1837,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxScanPixels.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="cbxScanStrategy.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1618,10 +1846,10 @@
     <value>15</value>
   </data>
   <data name="cbxScanStrategy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 152</value>
+    <value>100, 92</value>
   </data>
   <data name="cbxScanStrategy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+    <value>78, 23</value>
   </data>
   <data name="cbxScanStrategy.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -1636,7 +1864,52 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxScanStrategy.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Name" xml:space="preserve">
+    <value>rbtnThree</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.Parent" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;rbtnThree.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Name" xml:space="preserve">
+    <value>rbtnTwo</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.Parent" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;rbtnTwo.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="gbxMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 86</value>
+  </data>
+  <data name="gbxMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 68</value>
+  </data>
+  <data name="gbxMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.Name" xml:space="preserve">
+    <value>gbxMirror</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxMirror.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="rbtnThree.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1698,26 +1971,185 @@
   <data name="&gt;&gt;rbtnTwo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="gbxMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 78</value>
+  <data name="lbScanStrategy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="gbxMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 68</value>
+  <data name="lbScanStrategy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="gbxMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+  <data name="lbScanStrategy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 95</value>
   </data>
-  <data name="&gt;&gt;gbxMirror.Name" xml:space="preserve">
-    <value>gbxMirror</value>
+  <data name="lbScanStrategy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 15</value>
   </data>
-  <data name="&gt;&gt;gbxMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbScanStrategy.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
   </data>
-  <data name="&gt;&gt;gbxMirror.Parent" xml:space="preserve">
+  <data name="lbScanStrategy.Text" xml:space="preserve">
+    <value>扫描策略：</value>
+  </data>
+  <data name="&gt;&gt;lbScanStrategy.Name" xml:space="preserve">
+    <value>lbScanStrategy</value>
+  </data>
+  <data name="&gt;&gt;lbScanStrategy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbScanStrategy.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gbxMirror.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lbScanStrategy.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lbAcquisitionMode.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbAcquisitionMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbAcquisitionMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 134</value>
+  </data>
+  <data name="lbAcquisitionMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 15</value>
+  </data>
+  <data name="lbAcquisitionMode.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lbAcquisitionMode.Text" xml:space="preserve">
+    <value>采集模式：</value>
+  </data>
+  <data name="&gt;&gt;lbAcquisitionMode.Name" xml:space="preserve">
+    <value>lbAcquisitionMode</value>
+  </data>
+  <data name="&gt;&gt;lbAcquisitionMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbAcquisitionMode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbAcquisitionMode.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbxAcquisitionMode.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="cbxAcquisitionMode.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cbxAcquisitionMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 131</value>
+  </data>
+  <data name="cbxAcquisitionMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 23</value>
+  </data>
+  <data name="cbxAcquisitionMode.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionMode.Name" xml:space="preserve">
+    <value>cbxAcquisitionMode</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionMode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionMode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbxAcquisitionModeNum.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="cbxAcquisitionModeNum.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cbxAcquisitionModeNum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 131</value>
+  </data>
+  <data name="cbxAcquisitionModeNum.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 23</value>
+  </data>
+  <data name="cbxAcquisitionModeNum.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionModeNum.Name" xml:space="preserve">
+    <value>cbxAcquisitionModeNum</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionModeNum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionModeNum.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbxAcquisitionModeNum.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="btnCapture.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="btnCapture.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnCapture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnCapture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 12</value>
+  </data>
+  <data name="btnCapture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 60</value>
+  </data>
+  <data name="btnCapture.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnCapture.Text" xml:space="preserve">
+    <value>  捕捉</value>
+  </data>
+  <data name="&gt;&gt;btnCapture.Name" xml:space="preserve">
+    <value>btnCapture</value>
+  </data>
+  <data name="&gt;&gt;btnCapture.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCapture.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCapture.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="btnScan.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnScan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 60</value>
+  </data>
+  <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btnScan.Text" xml:space="preserve">
+    <value>  扫描</value>
+  </data>
+  <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
+    <value>btnScan</value>
+  </data>
+  <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnScan.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

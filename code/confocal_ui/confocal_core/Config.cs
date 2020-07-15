@@ -189,7 +189,7 @@ namespace confocal_core
     public class Scan
     {
         private SCAN_MODE mode;             // 扫描模式, Galv or Res
-        private SCAN_STRATEGY strategy;     // 扫描策略
+        private SCAN_STRATEGY strategy;     // 扫描策略, Z形单向/Z形双向
         private SCAN_MIRROR_NUM mirrorNum;  // 三振镜 or 两振镜
         private SCAN_ACQUISITION_MODE auquisitionMode;  // 扫描采集模式[标准|平均|求和]
         private int flag;                   // 扫描功能标志位

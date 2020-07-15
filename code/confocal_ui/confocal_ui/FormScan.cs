@@ -21,6 +21,7 @@ namespace confocal_ui
         private Dictionary<int, string> scanPixelsDict;
         private Dictionary<SCAN_MIRROR_NUM, string> mirrorNumDict;
         private Dictionary<SCAN_STRATEGY, string> scanStrategyDict;
+        private Dictionary<SCAN_ACQUISITION_MODE, string> scanAcquisitionModeDict;
         private Config m_config;
         private Params m_params;
         private Scheduler m_scheduler;
@@ -29,6 +30,20 @@ namespace confocal_ui
         public FormScan()
         {
             InitializeComponent();
+        }
+
+        public void ScanTaskStarted()
+        {
+            Logger.Info(string.Format("FormScan scan task started."));
+            btnScan.Image = m_scheduler.TaskScanning() ? global::confocal_ui.Properties.Resources.Stop : global::confocal_ui.Properties.Resources.Scan;
+            btnScan.BackColor = m_scheduler.TaskScanning() ? System.Drawing.SystemColors.GradientActiveCaption : System.Drawing.SystemColors.Control;
+        }
+
+        public void ScanTaskStopped()
+        {
+            Logger.Info(string.Format("FormScan scan task stopped."));
+            btnScan.Image = m_scheduler.TaskScanning() ? global::confocal_ui.Properties.Resources.Stop : global::confocal_ui.Properties.Resources.Scan;
+            btnScan.BackColor = m_scheduler.TaskScanning() ? System.Drawing.SystemColors.GradientActiveCaption : System.Drawing.SystemColors.Control;
         }
 
         private void InitVariables()
@@ -48,6 +63,11 @@ namespace confocal_ui
             scanStrategyDict.Add(SCAN_STRATEGY.Z_UNIDIRECTION, "单向");
             scanStrategyDict.Add(SCAN_STRATEGY.Z_BIDIRECTION, "双向");
 
+            scanAcquisitionModeDict = new Dictionary<SCAN_ACQUISITION_MODE, string>();
+            scanAcquisitionModeDict.Add(SCAN_ACQUISITION_MODE.STANDARD, "标准");
+            scanAcquisitionModeDict.Add(SCAN_ACQUISITION_MODE.AVARAGE, "平均");
+            scanAcquisitionModeDict.Add(SCAN_ACQUISITION_MODE.SUM, "积分");
+
             m_config = Config.GetConfig();
             m_params = Params.GetParams();
             m_scheduler = Scheduler.CreateInstance();
@@ -62,6 +82,14 @@ namespace confocal_ui
             cbxScanStrategy.DisplayMember = "Value";
             cbxScanStrategy.ValueMember = "Key";
             cbxScanStrategy.SelectedIndex = cbxScanStrategy.FindString(scanStrategyDict[m_config.GetScanStrategy()]);
+            // 扫描采集模式
+            cbxAcquisitionMode.DataSource = scanAcquisitionModeDict.ToList<KeyValuePair<SCAN_ACQUISITION_MODE, string>>();
+            cbxAcquisitionMode.DisplayMember = "Value";
+            cbxAcquisitionMode.ValueMember = "Key";
+            cbxAcquisitionMode.SelectedIndex = cbxAcquisitionMode.FindString(scanAcquisitionModeDict[m_config.GetScanAcquisitionMode()]);
+            // 扫描采集模式数量
+            cbxAcquisitionModeNum.DataSource = new int[] { 2, 4, 8, 16 };
+            cbxAcquisitionModeNum.SelectedIndex = cbxAcquisitionModeNum.FindString(m_config.GetScanAcquisitionModeNum().ToString());
             // 扫描像素
             cbxScanPixels.DataSource = scanPixelsDict.ToList<KeyValuePair<int, string>>();
             cbxScanPixels.DisplayMember = "Value";
@@ -109,6 +137,12 @@ namespace confocal_ui
             // 振镜系统
             SCAN_MIRROR_NUM mirrorNum = rbtnThree.Checked ? SCAN_MIRROR_NUM.THREEE : SCAN_MIRROR_NUM.TWO;
             m_config.SetScanMirrorNum(mirrorNum);
+            // 采集模式 & 采集数量
+            SCAN_ACQUISITION_MODE acquisitionMode = ((KeyValuePair<SCAN_ACQUISITION_MODE, string>)cbxAcquisitionMode.SelectedItem).Key;
+            m_config.SetScanAcquisitionMode(acquisitionMode);
+            // 采集模式数量
+            int acquisitionModeNum = (int)cbxAcquisitionModeNum.SelectedItem;
+            m_config.SetScanAcquisitionModeNum(acquisitionModeNum);
             // Dwell Time
             m_config.SetScanDwellTime(double.Parse(tbxDwellTime.Text));
             // 扫描像素
@@ -128,16 +162,24 @@ namespace confocal_ui
             m_params.Calculate();
         }
 
+        private void UpdateControlers()
+        {
+            cbxAcquisitionModeNum.Visible = m_config.GetScanAcquisitionMode() == SCAN_ACQUISITION_MODE.STANDARD ? false : true;
+            lbFps.Text = string.Format("Fps: {0}", m_params.Fps.ToString("F2"));
+            lbFrameTime.Text = string.Format("Frame Time: {0}s", (1 / m_params.Fps).ToString("F2"));
+        }
+
         private void FormScan_Load(object sender, EventArgs e)
         {
             InitVariables();
             InitControlers();
+            UpdateControlers();
         }
 
-        private void btnConfig_Click(object sender, EventArgs e)
-        {
-            UpdateVariables();
-        }
+        //private void btnConfig_Click(object sender, EventArgs e)
+        //{
+        //    UpdateVariables();
+        //}
 
         private void btnScan_Click(object sender, EventArgs e)
         {
@@ -149,7 +191,7 @@ namespace confocal_ui
 
             if (m_scheduler.TaskScanning() == false)
             {
-                UpdateVariables();      // 将配置写入Config,计算Params
+                UpdateVariables();                                                  // 将配置写入Config,计算Params
                 m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
                 API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
                 if (code != API_RETURN_CODE.API_SUCCESS)
@@ -233,6 +275,8 @@ namespace confocal_ui
                     LaserDevice.CloseChannel(id);
                 }
             }
+            ScanTask scanTask = m_scheduler.GetScanningTask();
+            m_scheduler.ChangeActivatedChannels(scanTask);
         }
 
         private void chbx488_CheckedChanged(object sender, EventArgs e)
@@ -252,6 +296,8 @@ namespace confocal_ui
                     LaserDevice.CloseChannel(id);
                 }
             }
+            ScanTask scanTask = m_scheduler.GetScanningTask();
+            m_scheduler.ChangeActivatedChannels(scanTask);
         }
 
         private void chbx561_CheckedChanged(object sender, EventArgs e)
@@ -271,6 +317,8 @@ namespace confocal_ui
                     LaserDevice.CloseChannel(id);
                 }
             }
+            ScanTask scanTask = m_scheduler.GetScanningTask();
+            m_scheduler.ChangeActivatedChannels(scanTask);
         }
 
         private void chbx640_CheckedChanged(object sender, EventArgs e)
@@ -290,6 +338,8 @@ namespace confocal_ui
                     LaserDevice.CloseChannel(id);
                 }
             }
+            ScanTask scanTask = m_scheduler.GetScanningTask();
+            m_scheduler.ChangeActivatedChannels(scanTask);
         }
 
         private void tb405Gain_ValueChanged(object sender, EventArgs e)
@@ -331,6 +381,41 @@ namespace confocal_ui
             // UsbDac.SetGainCalibration((uint)id, UsbDac.ConfigValueToGain(configValue));
             tbx640Gain.Text = string.Concat(configValue.ToString("F1"), "");
         }
+
+        private void cbxScanStrategy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SCAN_STRATEGY strategy = ((KeyValuePair<SCAN_STRATEGY, string>)cbxScanStrategy.SelectedItem).Key;
+            if (m_config.GetScanStrategy() == strategy)
+            {
+                return;
+            }
+
+            // if task is not running, just update config
+            if (m_scheduler.TaskScanning() == false)
+            {
+                m_config.SetScanStartegy(strategy);
+                m_params.Calculate();
+                UpdateControlers();
+                return;
+            }
+
+            // if task is already running, stop first
+            m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
+            // update config
+            m_config.SetScanStartegy(strategy);
+            // create & start task
+            m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+            API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
+            UpdateControlers();
+        }
+
+
+
+
 
     }
 }
