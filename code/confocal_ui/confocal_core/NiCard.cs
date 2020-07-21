@@ -278,12 +278,16 @@ namespace confocal_core
                     SampleQuantityMode.FiniteSamples,
                     m_params.ValidSampleCountPerLine);
 
+                double aiConvertRate = m_aiTask.Timing.AIConvertRate;
+                m_aiTask.Timing.AIConvertRate = m_params.AoSampleRate * 5;
+                aiConvertRate = m_aiTask.Timing.AIConvertRate;
+
                 // 设置Ai Start Trigger源为PFI4，PFI4与P0.0物理直连，接收Do的输出信号，作为触发
                 string source = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI4");
                 m_aiTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
                 m_aiTask.Triggers.StartTrigger.Retriggerable = true;        // 设置为允许重触发
 
-                // 路由Do Sample Clcok到PFI1
+                // 路由AI Sample Clcok到PFI2， AI Convert Clock到PFI3
                 if (m_config.Debugging)
                 {
                     Logger.Info(string.Format("route ai sample clock to FFI2, ai convert clock to PFI3."));
