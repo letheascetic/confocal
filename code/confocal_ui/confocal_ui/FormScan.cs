@@ -98,7 +98,8 @@ namespace confocal_ui
             // 振镜系统
             rbtnThree.Checked = m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? true : false;
             // 停留时间
-            nmDwellTime.Value = Decimal.Parse(m_config.GetScanDwellTime().ToString());
+            cbxDwellTime.DataSource = new string[] { "2.0", "4.0", "6.0", "8.0", "10.0" };
+            cbxDwellTime.SelectedIndex = cbxDwellTime.FindString(m_config.GetScanDwellTime().ToString());
             // 激光[通道]开关状态/功率/增益
             chbx405.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx488.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON ? true : false;
@@ -144,7 +145,7 @@ namespace confocal_ui
             int acquisitionModeNum = (int)cbxAcquisitionModeNum.SelectedItem;
             m_config.SetScanAcquisitionModeNum(acquisitionModeNum);
             // Dwell Time
-            m_config.SetScanDwellTime(double.Parse(nmDwellTime.Value.ToString()));
+            m_config.SetScanDwellTime(double.Parse(cbxDwellTime.SelectedItem.ToString()));
             // 扫描像素
             int scanPixels = ((KeyValuePair<int, string>)cbxScanPixels.SelectedItem).Key;
             m_config.SetScanXPoints(scanPixels);
@@ -175,11 +176,6 @@ namespace confocal_ui
             InitControlers();
             UpdateControlers();
         }
-
-        //private void btnConfig_Click(object sender, EventArgs e)
-        //{
-        //    UpdateVariables();
-        //}
 
         private void btnScan_Click(object sender, EventArgs e)
         {
@@ -401,7 +397,7 @@ namespace confocal_ui
             if (m_scheduler.TaskScanning() == false)
             {
                 m_config.SetScanStartegy(strategy);
-                m_params.Calculate();
+                m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
                 UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -439,7 +435,7 @@ namespace confocal_ui
             if (m_scheduler.TaskScanning() == false)
             {
                 m_config.SetScanAcquisitionMode(acquisitionMode);
-                m_params.Calculate();
+                m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
                 UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -466,8 +462,6 @@ namespace confocal_ui
         private void rbtnGalv_CheckedChanged(object sender, EventArgs e)
         {
             
-
-
         }
 
         private void rbtnTwo_CheckedChanged(object sender, EventArgs e)
@@ -484,7 +478,7 @@ namespace confocal_ui
             if (m_scheduler.TaskScanning() == false)
             {
                 m_config.SetScanMirrorNum(mirrorNum);
-                m_params.Calculate();
+                m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
 
                 UpdateControlers();
                 this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -523,14 +517,12 @@ namespace confocal_ui
             {
                 m_config.SetScanXPoints(scanPixels);
                 m_config.SetScanYPoints(scanPixels);
-                m_params.Calculate();
+                m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
                 UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
             }
-
-            this.Cursor = System.Windows.Forms.Cursors.Default;
 
             // if task is already running, stop first
             m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
@@ -550,9 +542,9 @@ namespace confocal_ui
             }
         }
 
-        private void nmDwellTime_ValueChanged(object sender, EventArgs e)
+        private void cbxDwellTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            double dwellTime = double.Parse(nmDwellTime.Value.ToString());
+            double dwellTime = double.Parse(cbxDwellTime.SelectedItem.ToString());
             if (m_config.GetScanDwellTime() == dwellTime)
             {
                 return;
@@ -564,7 +556,7 @@ namespace confocal_ui
             if (m_scheduler.TaskScanning() == false)
             {
                 m_config.SetScanDwellTime(dwellTime);
-                m_params.Calculate();
+                m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
                 UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;

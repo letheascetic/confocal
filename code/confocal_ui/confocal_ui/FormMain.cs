@@ -46,6 +46,7 @@ namespace confocal_ui
             m_scheduler.ScanTaskStopped += new ScanTaskEventHandler(ScanTaskStoppedHandler);
             m_scheduler.ScanTaskReleased += new ScanTaskEventHandler(ScanTaskReleasedHandler);
             m_scheduler.ActivatedChannelChanged += new ScanTaskEventHandler(ActivatedChannelChangedHandler);
+            m_scheduler.ScanTaskConfigured += new ScanTaskEventHandler(ConfigScanTaskHandler);
         }
 
         private void ConfigDevice()
@@ -66,8 +67,8 @@ namespace confocal_ui
             cbxSelectLaser.SelectedIndex = portName != null ? cbxSelectLaser.FindString(portName) : 0;
 
             // panel
-            m_pFormScan.Show(this.dockPanel, DockState.DockRight);
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
+            m_pFormScan.Show(this.dockPanel, DockState.DockRight);
 
             //m_formImages = new List<FormImage>();
             //m_formImages.Add(new FormImage());
@@ -147,6 +148,12 @@ namespace confocal_ui
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
             }
             formImage.ActivatedChannelChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private API_RETURN_CODE ConfigScanTaskHandler(ScanTask scanTask, object paras)
+        {
+            m_pFormShowBox.ScanTaskConfigured();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -239,8 +246,8 @@ namespace confocal_ui
         private void FormMain_Load(object sender, EventArgs e)
         {
             InitVariables();
-            ConfigDevice();
             InitLoadControlers();
+            ConfigDevice();
             UpdateControlers();
         }
 
@@ -289,7 +296,20 @@ namespace confocal_ui
             UpdateControlers();
         }
 
+
+
         #endregion
 
+        private void tsmiScan_Click(object sender, EventArgs e)
+        {
+            m_pFormScan.Show();
+            this.Activate();
+        }
+
+        private void tsmiShow_Click(object sender, EventArgs e)
+        {
+            m_pFormShowBox.Show();
+            this.Activate();
+        }
     }
 }

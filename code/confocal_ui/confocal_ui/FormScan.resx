@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lbDwellTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 209</value>
+    <value>12, 176</value>
   </data>
   <data name="lbDwellTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 15</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbScanPixels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 245</value>
+    <value>12, 215</value>
   </data>
   <data name="lbScanPixels.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 15</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbFrameTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 21</value>
+    <value>163, 21</value>
   </data>
   <data name="lbFrameTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 15</value>
@@ -241,10 +241,10 @@
     <value>1</value>
   </data>
   <data name="gbxParams.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 325</value>
+    <value>12, 250</value>
   </data>
   <data name="gbxParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 46</value>
+    <value>363, 46</value>
   </data>
   <data name="gbxParams.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -490,7 +490,7 @@
     <value>6</value>
   </data>
   <data name="gbxChan405.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 389</value>
+    <value>12, 302</value>
   </data>
   <data name="gbxChan405.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
@@ -739,7 +739,7 @@
     <value>7</value>
   </data>
   <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 515</value>
+    <value>12, 428</value>
   </data>
   <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
@@ -988,7 +988,7 @@
     <value>7</value>
   </data>
   <data name="gbx561.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 641</value>
+    <value>12, 554</value>
   </data>
   <data name="gbx561.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
@@ -1237,7 +1237,7 @@
     <value>7</value>
   </data>
   <data name="gbx640.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 767</value>
+    <value>12, 680</value>
   </data>
   <data name="gbx640.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 120</value>
@@ -1345,7 +1345,7 @@
     <value>15</value>
   </data>
   <data name="cbxScanPixels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 242</value>
+    <value>146, 212</value>
   </data>
   <data name="cbxScanPixels.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
@@ -1686,28 +1686,31 @@
   <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="nmDwellTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 207</value>
+  <data name="cbxDwellTime.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="nmDwellTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 25</value>
+  <data name="cbxDwellTime.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="nmDwellTime.TabIndex" type="System.Int32, mscorlib">
+  <data name="cbxDwellTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 173</value>
+  </data>
+  <data name="cbxDwellTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="cbxDwellTime.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
-  <data name="nmDwellTime.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
+  <data name="&gt;&gt;cbxDwellTime.Name" xml:space="preserve">
+    <value>cbxDwellTime</value>
   </data>
-  <data name="&gt;&gt;nmDwellTime.Name" xml:space="preserve">
-    <value>nmDwellTime</value>
+  <data name="&gt;&gt;cbxDwellTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nmDwellTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nmDwellTime.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cbxDwellTime.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;nmDwellTime.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cbxDwellTime.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1723,7 +1726,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>382, 903</value>
+    <value>382, 813</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

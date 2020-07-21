@@ -31,6 +31,11 @@ namespace confocal_ui
             UpdateControlers();
         }
 
+        public void ScanTaskConfigured()
+        {
+            UpdateControlers();
+        }
+
         private void InitVariables()
         {
             m_config = Config.GetConfig();
@@ -71,6 +76,7 @@ namespace confocal_ui
 
             Params m_params = Params.GetParams();
             SCAN_STRATEGY strategy = Config.GetConfig().GetScanStrategy();
+            SCAN_MIRROR_NUM mirror = Config.GetConfig().GetScanMirrorNum();
 
             int pointCount = m_params.SampleCountPerLine * 3;
             double aoSampleTime = 1.0 / m_params.AoSampleRate;
@@ -105,6 +111,8 @@ namespace confocal_ui
                 chart.Series[3].Points.AddXY(xValue, m_params.DigitalTriggerSamplesPerLine[index]);
             }
 
+            chart.Series[2].IsVisibleInLegend = Config.GetConfig().GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? true : false;
+
         }
 
         private void FormShowBox_Load(object sender, EventArgs e)
@@ -112,6 +120,5 @@ namespace confocal_ui
             InitVariables();
             InitControlers();
         }
-
     }
 }

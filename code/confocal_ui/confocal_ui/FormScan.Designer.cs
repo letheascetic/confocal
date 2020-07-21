@@ -85,7 +85,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.btnScan = new System.Windows.Forms.Button();
-            this.nmDwellTime = new System.Windows.Forms.NumericUpDown();
+            this.cbxDwellTime = new System.Windows.Forms.ComboBox();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
@@ -101,7 +101,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).BeginInit();
             this.gbxMode.SuspendLayout();
             this.gbxMirror.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDwellTime)).BeginInit();
             this.SuspendLayout();
             // 
             // lbDwellTime
@@ -537,33 +536,13 @@
             this.btnScan.UseVisualStyleBackColor = false;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
-            // nmDwellTime
+            // cbxDwellTime
             // 
-            this.nmDwellTime.DecimalPlaces = 1;
-            this.nmDwellTime.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            resources.ApplyResources(this.nmDwellTime, "nmDwellTime");
-            this.nmDwellTime.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            65536});
-            this.nmDwellTime.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.nmDwellTime.Name = "nmDwellTime";
-            this.nmDwellTime.ReadOnly = true;
-            this.nmDwellTime.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.nmDwellTime.ValueChanged += new System.EventHandler(this.nmDwellTime_ValueChanged);
+            this.cbxDwellTime.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.cbxDwellTime, "cbxDwellTime");
+            this.cbxDwellTime.FormattingEnabled = true;
+            this.cbxDwellTime.Name = "cbxDwellTime";
+            this.cbxDwellTime.SelectedIndexChanged += new System.EventHandler(this.cbxDwellTime_SelectedIndexChanged);
             // 
             // FormScan
             // 
@@ -571,7 +550,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.nmDwellTime);
+            this.Controls.Add(this.cbxDwellTime);
             this.Controls.Add(this.cbxAcquisitionModeNum);
             this.Controls.Add(this.cbxAcquisitionMode);
             this.Controls.Add(this.lbAcquisitionMode);
@@ -616,7 +595,6 @@
             this.gbxMode.PerformLayout();
             this.gbxMirror.ResumeLayout(false);
             this.gbxMirror.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDwellTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -680,6 +658,6 @@
         private System.Windows.Forms.Label lbAcquisitionMode;
         private System.Windows.Forms.ComboBox cbxAcquisitionMode;
         private System.Windows.Forms.ComboBox cbxAcquisitionModeNum;
-        private System.Windows.Forms.NumericUpDown nmDwellTime;
+        private System.Windows.Forms.ComboBox cbxDwellTime;
     }
 }
