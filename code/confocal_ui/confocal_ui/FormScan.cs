@@ -560,7 +560,40 @@ namespace confocal_ui
 
         private void cbxDwellTime_SelectedIndexChanged(object sender, EventArgs e)
         {
+            double dwellTime = double.Parse(cbxDwellTime.SelectedItem.ToString());
+            if (m_config.GetScanDwellTime() == dwellTime)
+            {
+                return;
+            }
 
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+            // if task is not running, just update config
+            if (m_scheduler.TaskScanning() == false)
+            {
+                m_config.SetScanDwellTime(dwellTime);
+                m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
+                UpdateControlers();
+
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+                return;
+            }
+
+            // if task is already running, stop first
+            m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
+            // update config
+            m_config.SetScanDwellTime(dwellTime);
+            // create & start task
+            m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+            API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+            UpdateControlers();
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+            }
         }
     }
 }
