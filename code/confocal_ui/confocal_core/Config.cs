@@ -254,7 +254,7 @@ namespace confocal_core
         private static readonly double PMT_GAIN_DEFAULT = 50.0;
         private static readonly double CRS_AMPLITUDE_DEFAULT = 3.3;
         private static readonly int SCAN_POINTS_DEFAULT = 512;
-        private static readonly double SCAN_PIXEL_TIME_DEFAULT = 2.0;       // 像素时间, us
+        private static readonly double SCAN_PIXEL_TIME_DEFAULT = 4.0;       // 像素时间, us
         private static readonly double PIN_HOLE_SIZE_DEFAULT = 50;          // 小孔尺寸
         private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;  // 振镜响应时间, us
         private static readonly double FIELD_SIZE_DEFAULT = 200.0;          // 视场大小, um
@@ -621,7 +621,7 @@ namespace confocal_core
             {
                 Mode = SCAN_MODE.GALVANOMETER,
                 Strategy = SCAN_STRATEGY.Z_UNIDIRECTION,
-                MirrorNum = SCAN_MIRROR_NUM.THREEE,
+                MirrorNum = SCAN_MIRROR_NUM.TWO,
                 XPoints = SCAN_POINTS_DEFAULT,
                 YPoints = SCAN_POINTS_DEFAULT,
                 Flag = 0,

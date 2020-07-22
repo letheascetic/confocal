@@ -77,29 +77,44 @@ namespace confocal_ui
         {
             // 扫描模式
             rbtnGalv.Checked = m_config.GetScanMode() == SCAN_MODE.GALVANOMETER ? true : false;
+            rbtnRes.Checked = m_config.GetScanMode() == SCAN_MODE.GALVANOMETER ? false : true;
+            rbtnGalv.CheckedChanged += rbtnGalv_CheckedChanged;
+            
             // 扫描策略
             cbxScanStrategy.DataSource = scanStrategyDict.ToList<KeyValuePair<SCAN_STRATEGY, string>>();
             cbxScanStrategy.DisplayMember = "Value";
             cbxScanStrategy.ValueMember = "Key";
             cbxScanStrategy.SelectedIndex = cbxScanStrategy.FindString(scanStrategyDict[m_config.GetScanStrategy()]);
+            cbxScanStrategy.SelectedIndexChanged += cbxScanStrategy_SelectedIndexChanged;
+
             // 扫描采集模式
             cbxAcquisitionMode.DataSource = scanAcquisitionModeDict.ToList<KeyValuePair<SCAN_ACQUISITION_MODE, string>>();
             cbxAcquisitionMode.DisplayMember = "Value";
             cbxAcquisitionMode.ValueMember = "Key";
             cbxAcquisitionMode.SelectedIndex = cbxAcquisitionMode.FindString(scanAcquisitionModeDict[m_config.GetScanAcquisitionMode()]);
+            cbxAcquisitionMode.SelectedIndexChanged += cbxAcquisitionMode_SelectedIndexChanged;
+
             // 扫描采集模式数量
             cbxAcquisitionModeNum.DataSource = new int[] { 2, 4, 8, 16 };
             cbxAcquisitionModeNum.SelectedIndex = cbxAcquisitionModeNum.FindString(m_config.GetScanAcquisitionModeNum().ToString());
+            
             // 扫描像素
             cbxScanPixels.DataSource = scanPixelsDict.ToList<KeyValuePair<int, string>>();
             cbxScanPixels.DisplayMember = "Value";
             cbxScanPixels.ValueMember = "Key";
             cbxScanPixels.SelectedIndex = cbxScanPixels.FindString(scanPixelsDict[m_config.GetScanXPoints()]);
+            cbxScanPixels.SelectedIndexChanged += cbxScanPixels_SelectedIndexChanged;
+
             // 振镜系统
             rbtnThree.Checked = m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? true : false;
+            rbtnTwo.Checked = m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? false : true;
+            rbtnTwo.CheckedChanged += rbtnTwo_CheckedChanged;
+
             // 停留时间
             cbxDwellTime.DataSource = new string[] { "2.0", "4.0", "6.0", "8.0", "10.0" };
-            cbxDwellTime.SelectedIndex = cbxDwellTime.FindString(m_config.GetScanDwellTime().ToString());
+            cbxDwellTime.SelectedIndex = cbxDwellTime.FindString(m_config.GetScanDwellTime().ToString("F1"));
+            cbxDwellTime.SelectedIndexChanged += cbxDwellTime_SelectedIndexChanged;
+
             // 激光[通道]开关状态/功率/增益
             chbx405.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON ? true : false;
             chbx488.Checked = m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON ? true : false;
@@ -125,6 +140,7 @@ namespace confocal_ui
             tbx488Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_488_NM).ToString("F1"), "");
             tbx561Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_561_NM).ToString("F1"), "");
             tbx640Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_640_NM).ToString("F1"), "");
+
         }
 
         private void UpdateVariables()
@@ -544,40 +560,7 @@ namespace confocal_ui
 
         private void cbxDwellTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            double dwellTime = double.Parse(cbxDwellTime.SelectedItem.ToString());
-            if (m_config.GetScanDwellTime() == dwellTime)
-            {
-                return;
-            }
 
-            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-
-            // if task is not running, just update config
-            if (m_scheduler.TaskScanning() == false)
-            {
-                m_config.SetScanDwellTime(dwellTime);
-                m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
-                UpdateControlers();
-
-                this.Cursor = System.Windows.Forms.Cursors.Default;
-                return;
-            }
-
-            // if task is already running, stop first
-            m_scheduler.StopScanTask(m_scheduler.GetScanningTask());
-            // update config
-            m_config.SetScanDwellTime(dwellTime);
-            // create & start task
-            m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
-            API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
-
-            UpdateControlers();
-            this.Cursor = System.Windows.Forms.Cursors.Default;
-
-            if (code != API_RETURN_CODE.API_SUCCESS)
-            {
-                MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
-            }
         }
     }
 }

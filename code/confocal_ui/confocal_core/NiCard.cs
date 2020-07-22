@@ -278,9 +278,9 @@ namespace confocal_core
                     SampleQuantityMode.FiniteSamples,
                     m_params.ValidSampleCountPerLine);
 
-                double aiConvertRate = m_aiTask.Timing.AIConvertRate;
-                m_aiTask.Timing.AIConvertRate = m_params.AoSampleRate * 5;
-                aiConvertRate = m_aiTask.Timing.AIConvertRate;
+                //double aiConvertRate = m_aiTask.Timing.AIConvertRate;
+                //m_aiTask.Timing.AIConvertRate = m_params.AoSampleRate * 5;
+                //aiConvertRate = m_aiTask.Timing.AIConvertRate;
 
                 // 设置Ai Start Trigger源为PFI4，PFI4与P0.0物理直连，接收Do的输出信号，作为触发
                 string source = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI4");

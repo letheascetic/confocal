@@ -259,7 +259,7 @@ namespace confocal_ui
             // close all activated laser channels
             ReleaseLaserDevice();
 
-            // close  usb dac device
+            // close usb dac device
             ReleaseUsbDac();
         }
 
@@ -295,8 +295,6 @@ namespace confocal_ui
             }
             UpdateControlers();
         }
-
-
 
         #endregion
 

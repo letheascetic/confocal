@@ -448,7 +448,6 @@
             this.rbtnGalv.Name = "rbtnGalv";
             this.rbtnGalv.TabStop = true;
             this.rbtnGalv.UseVisualStyleBackColor = true;
-            this.rbtnGalv.CheckedChanged += new System.EventHandler(this.rbtnGalv_CheckedChanged);
             // 
             // cbxScanPixels
             // 
@@ -456,7 +455,6 @@
             resources.ApplyResources(this.cbxScanPixels, "cbxScanPixels");
             this.cbxScanPixels.FormattingEnabled = true;
             this.cbxScanPixels.Name = "cbxScanPixels";
-            this.cbxScanPixels.SelectedIndexChanged += new System.EventHandler(this.cbxScanPixels_SelectedIndexChanged);
             // 
             // cbxScanStrategy
             // 
@@ -464,7 +462,6 @@
             resources.ApplyResources(this.cbxScanStrategy, "cbxScanStrategy");
             this.cbxScanStrategy.FormattingEnabled = true;
             this.cbxScanStrategy.Name = "cbxScanStrategy";
-            this.cbxScanStrategy.SelectedIndexChanged += new System.EventHandler(this.cbxScanStrategy_SelectedIndexChanged);
             // 
             // gbxMirror
             // 
@@ -487,7 +484,6 @@
             this.rbtnTwo.Name = "rbtnTwo";
             this.rbtnTwo.TabStop = true;
             this.rbtnTwo.UseVisualStyleBackColor = true;
-            this.rbtnTwo.CheckedChanged += new System.EventHandler(this.rbtnTwo_CheckedChanged);
             // 
             // lbScanStrategy
             // 
@@ -505,7 +501,6 @@
             resources.ApplyResources(this.cbxAcquisitionMode, "cbxAcquisitionMode");
             this.cbxAcquisitionMode.FormattingEnabled = true;
             this.cbxAcquisitionMode.Name = "cbxAcquisitionMode";
-            this.cbxAcquisitionMode.SelectedIndexChanged += new System.EventHandler(this.cbxAcquisitionMode_SelectedIndexChanged);
             // 
             // cbxAcquisitionModeNum
             // 
@@ -542,7 +537,6 @@
             resources.ApplyResources(this.cbxDwellTime, "cbxDwellTime");
             this.cbxDwellTime.FormattingEnabled = true;
             this.cbxDwellTime.Name = "cbxDwellTime";
-            this.cbxDwellTime.SelectedIndexChanged += new System.EventHandler(this.cbxDwellTime_SelectedIndexChanged);
             // 
             // FormScan
             // 
