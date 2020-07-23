@@ -9,7 +9,7 @@ using System.Text;
 
 namespace confocal_core
 {
-    public delegate void SamplesReceivedEventHandler(object sender, ushort[][] samples);
+    public delegate void SamplesReceivedEventHandler(object sender, short[][] samples);
 
     /// <summary>
     /// NI板卡接口层
@@ -278,10 +278,6 @@ namespace confocal_core
                     SampleQuantityMode.FiniteSamples,
                     m_params.ValidSampleCountPerLine);
 
-                //double aiConvertRate = m_aiTask.Timing.AIConvertRate;
-                //m_aiTask.Timing.AIConvertRate = m_params.AoSampleRate * 5;
-                //aiConvertRate = m_aiTask.Timing.AIConvertRate;
-
                 // 设置Ai Start Trigger源为PFI4，PFI4与P0.0物理直连，接收Do的输出信号，作为触发
                 string source = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI4");
                 m_aiTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
@@ -343,10 +339,10 @@ namespace confocal_core
             try
             {
                 // 读取16位原始数据，每一行读取一次
-                ushort[,] originSamples = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
-                AnalogWaveform<ushort>[] waves = AnalogWaveform<ushort>.FromArray2D(originSamples);
+                short[,] originSamples = m_aiUnscaledReader.ReadInt16(m_params.ValidSampleCountPerLine);
+                AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
 
-                ushort[][] samples = new ushort[waves.Length][];
+                short[][] samples = new short[waves.Length][];
                 for (int i = 0; i < waves.Length; i++)
                 {
                     samples[i] = waves[i].GetRawData();

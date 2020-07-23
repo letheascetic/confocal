@@ -35,7 +35,7 @@ namespace confocal_core
             }
         }
 
-        public static void Gray16ToBGR24(ushort[] source, out byte[] destnation)
+        public static void Gray16ToBGR24(short[] source, out byte[] destnation)
         {
             int i, j;
             byte value;
@@ -74,11 +74,11 @@ namespace confocal_core
             }
         }
 
-        public static void Gray16ToBGR24(Color color, ushort[] source, out byte[] destnation)
+        public static void Gray16ToBGR24(Color color, short[] source, out byte[] destnation)
         {
-            float rCoff = color.R / 255.0f;
-            float gCoff = color.G / 255.0f;
-            float bCoff = color.B / 255.0f;
+            float rCoff = color.R / 256.0f;
+            float gCoff = color.G / 256.0f;
+            float bCoff = color.B / 256.0f;
 
             destnation = new byte[source.Length * 3];
 
@@ -88,6 +88,7 @@ namespace confocal_core
             for (i = 0; i < source.Length; i++)
             {
                 j = i * 3;
+
                 value = (byte)(source[i] >> 8);
 
                 destnation[j + 2] = (byte)(rCoff * value);

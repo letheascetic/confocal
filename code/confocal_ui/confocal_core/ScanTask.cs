@@ -21,7 +21,7 @@ namespace confocal_core
         private double m_fps;                   // 扫描帧率
         private int m_line;                     // 扫描当前所在行
         private long m_frame;                   // 扫描当前所在帧
-        private ushort[][] m_nSamples;          // 当前获取到的有效样本
+        private short[][] m_nSamples;          // 当前获取到的有效样本
         private int m_405Index;                 // 405nm激光对应的采集通道
         private int m_488Index;                 // 488nm激光对应的采集通道
         private int m_561Index;                 // 561nm激光对应的采集通道
@@ -32,7 +32,7 @@ namespace confocal_core
         public double Fps { get { return m_fps; } set { m_fps = value; } }
         public int CurrentLine { get { return m_line; } set { m_line = value; } }
         public long CurrentFrame { get { return m_frame; } set { m_frame = value; } }
-        public ushort[][] NSamples { get { return m_nSamples; } set { m_nSamples = value; } }
+        public short[][] NSamples { get { return m_nSamples; } set { m_nSamples = value; } }
 
         public ScanInfo()
         {
@@ -141,12 +141,12 @@ namespace confocal_core
 
         public void Start()
         {
+            m_scanning = true;
             m_convertThread = new Thread(ConvertSamplesHandler);
             m_convertThread.Start();
             m_displayImageThread = new Thread(UpdateDisplayImageHandler);
             m_displayImageThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
-            m_scanning = true;
         }
 
         public void Stop()
@@ -181,29 +181,9 @@ namespace confocal_core
 
         #region private apis
 
-        private void ReceiveSamples(object sender, ushort[][] samples)
+        private void ReceiveSamples(object sender, short[][] samples)
         {
             Config m_config = confocal_core.Config.GetConfig();
-
-            //int activatedChannelNum = samples.GetLength(0);
-            //int samplesPerLine = m_params.ValidSampleCountPerLine;
-            //ushort threshold = 32768;
-
-            //for (int i = 0; i < activatedChannelNum; i++)
-            //{
-            //    ushort[] channelSamples = samples[i];
-            //    for (int j = 0; i < samplesPerLine; j++)
-            //    {
-            //        //if (channelSamples[j] < threshold)
-            //        //{
-            //        //    channelSamples[j] = (ushort)(threshold - channelSamples[j]);
-            //        //}
-            //        //else
-            //        //{
-            //        //    channelSamples[j] = (ushort)(channelSamples[j] - threshold);
-            //        //}
-            //    }
-            //}
 
             m_scanInfo.NSamples = samples;
 
@@ -244,12 +224,12 @@ namespace confocal_core
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
             int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
-            int i, j, offset, sourceIndex;
+            int i, offset, sourceIndex;
 
-            ushort[][] frame = new ushort[activatedChannelNum][];
+            short[][] frame = new short[activatedChannelNum][];
             for (i = 0; i < activatedChannelNum; i++)
             {
-                frame[i] = new ushort[imageSampleCountPerFrame];
+                frame[i] = new short[imageSampleCountPerFrame];
             }
 
             while (m_scanning)
@@ -266,24 +246,18 @@ namespace confocal_core
                     continue;
                 }
 
-                //ushort threshold = ushort.MaxValue;
-                //for (i = 0; i < activatedChannelNum; i++)
+                sample.Convert();
+
+                //double average = 0;
+                //for (i = 0; i < sample.NSamples.GetLength(0); i++)
                 //{
-                //    ushort[] channelSample = sample.NSamples[i];
-                //    int len = channelSample.Length;
-                //    for (j = 0; j < len; j++)
+                //    average = 0;
+                //    for (int j = 0; j < sample.NSamples[i].Length; j++)
                 //    {
-                //        //channelSample[j] = (ushort)(threshold - channelSample[i]);
-                //        //if (channelSample[j] < threshold)
-                //        //{
-                //        //    channelSample[j] = 0;
-                //        //    channelSample[j] = (ushort)(threshold - channelSample[j]);
-                //        //}
-                //        //else
-                //        //{
-                //        //    channelSample[j] = (ushort)(channelSample[j] - threshold);
-                //        //}
+                //        average += sample.NSamples[i][j];
                 //    }
+                //    average = average / sample.NSamples[0].Length;
+                //    Logger.Info(string.Format("sample average value: [{0}][{1}].", i, average));
                 //}
 
                 offset = sample.Line * xSampleCountPerLine;
@@ -324,10 +298,10 @@ namespace confocal_core
                     m_scanData.EnqueueFrame(frameData);
                     Logger.Info(string.Format("convert samples to frame: [{0}].", sample.Frame));
 
-                    frame = new ushort[activatedChannelNum][];
+                    frame = new short[activatedChannelNum][];
                     for (i = 0; i < activatedChannelNum; i++)
                     {
-                        frame[i] = new ushort[imageSampleCountPerFrame];
+                        frame[i] = new short[imageSampleCountPerFrame];
                     }
                 }
             }

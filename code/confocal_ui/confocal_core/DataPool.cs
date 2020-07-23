@@ -12,24 +12,43 @@ namespace confocal_core
     /// </summary>
     public struct SampleData
     {
-        public ushort[][] NSamples { get; set; }
+        public short[][] NSamples { get; set; }
         public long Frame { get; }
         public int Line { get; }
 
-        public SampleData(ushort[][] samples, long frame, int line)
+        public SampleData(short[][] samples, long frame, int line)
         {
             NSamples = samples;
             Frame = frame;
             Line = line;
         }
+
+        public void Convert()
+        {
+            for (int i = 0; i < NSamples.GetLength(0); i++)
+            {
+                short[] channelSample = NSamples[i];
+                int len = channelSample.Length;
+                for (int j = 0; j < len; j++)
+                {
+                    if (channelSample[j] < 0)
+                    {
+                        channelSample[j] = (short)-channelSample[j];
+                    }
+                }
+            }
+        }
     }
 
+    /// <summary>
+    /// 帧数据
+    /// </summary>
     public struct FrameData
     {
         public long Frame { get; }
-        public ushort[][] Data { get; }
+        public short[][] Data { get; }
 
-        public FrameData(long frame, ushort[][] data)
+        public FrameData(long frame, short[][] data)
         {
             Frame = frame;
             Data = data;
@@ -79,7 +98,7 @@ namespace confocal_core
             m_sampleQueue.Enqueue(sampleData);
         }
 
-        public void EnqueueSample(ushort[][] samples, long frame, int line)
+        public void EnqueueSample(short[][] samples, long frame, int line)
         {
             SampleData sampleData = new SampleData(samples, frame, line);
             EnqueueSample(sampleData);
