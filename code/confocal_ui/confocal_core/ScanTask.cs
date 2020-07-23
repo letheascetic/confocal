@@ -184,6 +184,27 @@ namespace confocal_core
         private void ReceiveSamples(object sender, ushort[][] samples)
         {
             Config m_config = confocal_core.Config.GetConfig();
+
+            //int activatedChannelNum = samples.GetLength(0);
+            //int samplesPerLine = m_params.ValidSampleCountPerLine;
+            //ushort threshold = 32768;
+
+            //for (int i = 0; i < activatedChannelNum; i++)
+            //{
+            //    ushort[] channelSamples = samples[i];
+            //    for (int j = 0; i < samplesPerLine; j++)
+            //    {
+            //        //if (channelSamples[j] < threshold)
+            //        //{
+            //        //    channelSamples[j] = (ushort)(threshold - channelSamples[j]);
+            //        //}
+            //        //else
+            //        //{
+            //        //    channelSamples[j] = (ushort)(channelSamples[j] - threshold);
+            //        //}
+            //    }
+            //}
+
             m_scanInfo.NSamples = samples;
 
             SampleData sampleData = new SampleData(m_scanInfo.NSamples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
@@ -223,7 +244,7 @@ namespace confocal_core
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
             int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
-            int i, offset, sourceIndex;
+            int i, j, offset, sourceIndex;
 
             ushort[][] frame = new ushort[activatedChannelNum][];
             for (i = 0; i < activatedChannelNum; i++)
@@ -244,6 +265,26 @@ namespace confocal_core
                     Logger.Info(string.Format("dequeue sample data failed."));
                     continue;
                 }
+
+                //ushort threshold = ushort.MaxValue;
+                //for (i = 0; i < activatedChannelNum; i++)
+                //{
+                //    ushort[] channelSample = sample.NSamples[i];
+                //    int len = channelSample.Length;
+                //    for (j = 0; j < len; j++)
+                //    {
+                //        //channelSample[j] = (ushort)(threshold - channelSample[i]);
+                //        //if (channelSample[j] < threshold)
+                //        //{
+                //        //    channelSample[j] = 0;
+                //        //    channelSample[j] = (ushort)(threshold - channelSample[j]);
+                //        //}
+                //        //else
+                //        //{
+                //        //    channelSample[j] = (ushort)(channelSample[j] - threshold);
+                //        //}
+                //    }
+                //}
 
                 offset = sample.Line * xSampleCountPerLine;
                 // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
@@ -317,6 +358,7 @@ namespace confocal_core
                 {
                     Color colorReference = m_config.GetChannelColorReference((CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i));
                     CImage.Gray16ToBGR24(colorReference, frame.Data[i], out displayData[i]);
+                    // CImage.Gray16ToGray24(frame.Data[i], out displayData[i]);
                     // CImage.Gray16ToBGR24(frame.Data[i], out displayData[i]);
                 }
                 DisplayData display = new DisplayData(frame.Frame, displayData);

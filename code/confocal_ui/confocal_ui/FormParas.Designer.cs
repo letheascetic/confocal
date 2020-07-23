@@ -1,6 +1,6 @@
 ﻿namespace confocal_ui
 {
-    partial class FormShowBox
+    partial class FormParas
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShowBox));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormParas));
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -266,7 +266,7 @@
             resources.ApplyResources(this.lbAORate, "lbAORate");
             this.lbAORate.Name = "lbAORate";
             // 
-            // FormShowBox
+            // FormParas
             // 
             this.AutoHidePortion = 0.4D;
             resources.ApplyResources(this, "$this");
@@ -274,9 +274,13 @@
             this.Controls.Add(this.gbxResults);
             this.Controls.Add(this.gbxGalv);
             this.Controls.Add(this.chart);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.HideOnClose = true;
-            this.Name = "FormShowBox";
+            this.Name = "FormParas";
             this.Load += new System.EventHandler(this.FormShowBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.gbxGalv.ResumeLayout(false);

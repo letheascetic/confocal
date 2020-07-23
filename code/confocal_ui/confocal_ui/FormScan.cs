@@ -87,6 +87,12 @@ namespace confocal_ui
             cbxScanStrategy.SelectedIndex = cbxScanStrategy.FindString(scanStrategyDict[m_config.GetScanStrategy()]);
             cbxScanStrategy.SelectedIndexChanged += cbxScanStrategy_SelectedIndexChanged;
 
+            // 双向扫描补偿
+            nudBSOffset.Maximum = m_config.GetBScanPixelCompensation() / 2;
+            nudBSOffset.Minimum = -m_config.GetBScanPixelCompensation() / 2;
+            nudBSOffset.Value = m_config.GetBScanPixelOffset();
+            nudBSOffset.Visible = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? true : false; 
+
             // 扫描采集模式
             cbxAcquisitionMode.DataSource = scanAcquisitionModeDict.ToList<KeyValuePair<SCAN_ACQUISITION_MODE, string>>();
             cbxAcquisitionMode.DisplayMember = "Value";
@@ -140,7 +146,6 @@ namespace confocal_ui
             tbx488Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_488_NM).ToString("F1"), "");
             tbx561Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_561_NM).ToString("F1"), "");
             tbx640Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_640_NM).ToString("F1"), "");
-
         }
 
         private void UpdateVariables()
@@ -181,6 +186,7 @@ namespace confocal_ui
 
         private void UpdateControlers()
         {
+            nudBSOffset.Visible = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? true : false;
             cbxAcquisitionModeNum.Visible = m_config.GetScanAcquisitionMode() == SCAN_ACQUISITION_MODE.STANDARD ? false : true;
             lbFps.Text = string.Format("Fps: {0}", m_params.Fps.ToString("F2"));
             lbFrameTime.Text = string.Format("Frame Time: {0}s", (1 / m_params.Fps).ToString("F2"));
@@ -594,6 +600,12 @@ namespace confocal_ui
             {
                 MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
             }
+        }
+
+        private void nudBSOffset_ValueChanged(object sender, EventArgs e)
+        {
+            int bsOffset = (int)nudBSOffset.Value;
+            m_config.SetBScanPixelOffset(bsOffset);
         }
     }
 }

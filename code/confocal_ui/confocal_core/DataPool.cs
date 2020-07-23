@@ -7,6 +7,9 @@ using System.Text;
 
 namespace confocal_core
 {
+    /// <summary>
+    /// 原始的行数据
+    /// </summary>
     public struct SampleData
     {
         public ushort[][] NSamples { get; set; }

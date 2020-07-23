@@ -22,7 +22,7 @@ namespace confocal_ui
         private FormScan m_pFormScan = new FormScan();
         private FormROI m_pFormROI = new FormROI();
         private FormMeas m_pFormMeas = new FormMeas();
-        private FormShowBox m_pFormShowBox = new FormShowBox();
+        private FormParas m_pFormShowBox = new FormParas();
         private List<FormImage> m_pFormImages = new List<FormImage>();
 
         private Config m_config;

@@ -12,7 +12,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace confocal_ui
 {
-    public partial class FormShowBox : DockContent
+    public partial class FormParas : DockContent
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
@@ -21,7 +21,7 @@ namespace confocal_ui
         private Config m_config;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public FormShowBox()
+        public FormParas()
         {
             InitializeComponent();
         }

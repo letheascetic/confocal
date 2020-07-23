@@ -23,6 +23,18 @@ namespace confocal_core
             }
         }
 
+        public static void Gray16ToGray24(ushort[] source, out byte[] destnation)
+        {
+            destnation = new byte[source.Length * 3];
+            for (int i = 0, j = 0; i < source.Length; i++)
+            {
+                j = i * 3;
+                destnation[j] = (byte)(source[i] >> 8);
+                destnation[j + 1] = destnation[j];
+                destnation[j + 2] = destnation[j];
+            }
+        }
+
         public static void Gray16ToBGR24(ushort[] source, out byte[] destnation)
         {
             int i, j;

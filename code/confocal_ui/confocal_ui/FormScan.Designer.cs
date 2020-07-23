@@ -86,6 +86,7 @@
             this.btnCapture = new System.Windows.Forms.Button();
             this.btnScan = new System.Windows.Forms.Button();
             this.cbxDwellTime = new System.Windows.Forms.ComboBox();
+            this.nudBSOffset = new System.Windows.Forms.NumericUpDown();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
@@ -101,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).BeginInit();
             this.gbxMode.SuspendLayout();
             this.gbxMirror.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBSOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // lbDwellTime
@@ -538,12 +540,29 @@
             this.cbxDwellTime.FormattingEnabled = true;
             this.cbxDwellTime.Name = "cbxDwellTime";
             // 
+            // nudBSOffset
+            // 
+            resources.ApplyResources(this.nudBSOffset, "nudBSOffset");
+            this.nudBSOffset.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.nudBSOffset.Minimum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            -2147483648});
+            this.nudBSOffset.Name = "nudBSOffset";
+            this.nudBSOffset.ValueChanged += new System.EventHandler(this.nudBSOffset_ValueChanged);
+            // 
             // FormScan
             // 
             this.AutoHidePortion = 0.4D;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.nudBSOffset);
             this.Controls.Add(this.cbxDwellTime);
             this.Controls.Add(this.cbxAcquisitionModeNum);
             this.Controls.Add(this.cbxAcquisitionMode);
@@ -589,6 +608,7 @@
             this.gbxMode.PerformLayout();
             this.gbxMirror.ResumeLayout(false);
             this.gbxMirror.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBSOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -653,5 +673,6 @@
         private System.Windows.Forms.ComboBox cbxAcquisitionMode;
         private System.Windows.Forms.ComboBox cbxAcquisitionModeNum;
         private System.Windows.Forms.ComboBox cbxDwellTime;
+        private System.Windows.Forms.NumericUpDown nudBSOffset;
     }
 }

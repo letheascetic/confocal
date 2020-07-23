@@ -342,6 +342,7 @@ namespace confocal_core
         {
             try
             {
+                // 读取16位原始数据，每一行读取一次
                 ushort[,] originSamples = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
                 AnalogWaveform<ushort>[] waves = AnalogWaveform<ushort>.FromArray2D(originSamples);
 
