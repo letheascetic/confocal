@@ -21,7 +21,7 @@ namespace confocal_core
         private double m_fps;                   // 扫描帧率
         private int m_line;                     // 扫描当前所在行
         private long m_frame;                   // 扫描当前所在帧
-        private short[][] m_nSamples;          // 当前获取到的有效样本
+        private short[][] m_nSamples;           // 当前获取到的有效样本
         private int m_405Index;                 // 405nm激光对应的采集通道
         private int m_488Index;                 // 488nm激光对应的采集通道
         private int m_561Index;                 // 561nm激光对应的采集通道
@@ -137,6 +137,7 @@ namespace confocal_core
         {
             NiCard.CreateInstance().SamplesReceived += new SamplesReceivedEventHandler(ReceiveSamples);
             m_scanInfo.Config();
+            m_scanData.Config();
         }
 
         public void Start()
@@ -224,6 +225,8 @@ namespace confocal_core
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
             int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+            SCAN_STRATEGY scanStrategy = m_config.GetScanStrategy();
+
             int i, offset, sourceIndex;
 
             short[][] frame = new short[activatedChannelNum][];
@@ -263,7 +266,7 @@ namespace confocal_core
                 offset = sample.Line * xSampleCountPerLine;
                 // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
                 // 根据错位补偿参数，完成相应的截断
-                if (m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION)
+                if (scanStrategy == SCAN_STRATEGY.Z_BIDIRECTION)
                 {
                     if ((sample.Line & 0x01) == 0x01)
                     {

@@ -88,6 +88,11 @@ namespace confocal_core
             m_frameQueue = new ConcurrentQueue<FrameData>();
         }
 
+        public void Config()
+        {
+            Release();
+        }
+
         public int SampleQueueSize()
         {
             return m_sampleQueue.Count;
@@ -133,6 +138,18 @@ namespace confocal_core
         {
             return m_frameQueue.Last();
         }
-        
+
+        public void Release()
+        {
+            m_displayData = new DisplayData(-1, null);
+            while (!m_sampleQueue.IsEmpty)
+            {
+                DequeueSample(out SampleData sampleData);
+            }
+            while (!m_frameQueue.IsEmpty)
+            {
+                DequeueFrame(out FrameData frame);
+            }
+        }
     }
 }

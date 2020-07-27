@@ -47,7 +47,6 @@
             this.toolStripRight = new System.Windows.Forms.ToolStrip();
             this.btnDisplayCenter = new System.Windows.Forms.ToolStripButton();
             this.btnDisplaytNormal = new System.Windows.Forms.ToolStripButton();
-            this.btnDisplayAutosize = new System.Windows.Forms.ToolStripButton();
             this.btnDisplayStretch = new System.Windows.Forms.ToolStripButton();
             this.btnDisplayZoom = new System.Windows.Forms.ToolStripButton();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -66,6 +65,9 @@
             this.tpg640 = new System.Windows.Forms.TabPage();
             this.pbx640 = new System.Windows.Forms.PictureBox();
             this.toolStrip640 = new System.Windows.Forms.ToolStrip();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTop.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripRight.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -84,9 +86,12 @@
             // toolStripTop
             // 
             this.toolStripTop.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStripTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSave,
+            this.toolStripSeparator1});
             this.toolStripTop.Location = new System.Drawing.Point(0, 0);
             this.toolStripTop.Name = "toolStripTop";
-            this.toolStripTop.Size = new System.Drawing.Size(689, 25);
+            this.toolStripTop.Size = new System.Drawing.Size(689, 27);
             this.toolStripTop.TabIndex = 1;
             this.toolStripTop.Text = "toolStrip";
             // 
@@ -190,12 +195,11 @@
             this.toolStripRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnDisplayCenter,
             this.btnDisplaytNormal,
-            this.btnDisplayAutosize,
             this.btnDisplayStretch,
             this.btnDisplayZoom});
-            this.toolStripRight.Location = new System.Drawing.Point(664, 25);
+            this.toolStripRight.Location = new System.Drawing.Point(664, 27);
             this.toolStripRight.Name = "toolStripRight";
-            this.toolStripRight.Size = new System.Drawing.Size(25, 553);
+            this.toolStripRight.Size = new System.Drawing.Size(25, 551);
             this.toolStripRight.TabIndex = 5;
             this.toolStripRight.Text = "toolStrip";
             // 
@@ -219,16 +223,6 @@
             this.btnDisplaytNormal.Size = new System.Drawing.Size(22, 24);
             this.btnDisplaytNormal.Text = "Normal";
             this.btnDisplaytNormal.Click += new System.EventHandler(this.btnDisplaytNormal_Click);
-            // 
-            // btnDisplayAutosize
-            // 
-            this.btnDisplayAutosize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDisplayAutosize.Image = ((System.Drawing.Image)(resources.GetObject("btnDisplayAutosize.Image")));
-            this.btnDisplayAutosize.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDisplayAutosize.Name = "btnDisplayAutosize";
-            this.btnDisplayAutosize.Size = new System.Drawing.Size(22, 24);
-            this.btnDisplayAutosize.Text = "AutoSize";
-            this.btnDisplayAutosize.Click += new System.EventHandler(this.btnDisplayAutosize_Click);
             // 
             // btnDisplayStretch
             // 
@@ -260,12 +254,12 @@
             this.tabControl.Controls.Add(this.tpg640);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.HotTrack = true;
-            this.tabControl.Location = new System.Drawing.Point(0, 25);
+            this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl.SelectedIndex = 0;
             this.tabControl.ShowToolTips = true;
-            this.tabControl.Size = new System.Drawing.Size(664, 553);
+            this.tabControl.Size = new System.Drawing.Size(664, 551);
             this.tabControl.TabIndex = 6;
             // 
             // tpgAll
@@ -403,7 +397,7 @@
             this.tpg640.Controls.Add(this.toolStrip640);
             this.tpg640.Location = new System.Drawing.Point(4, 4);
             this.tpg640.Name = "tpg640";
-            this.tpg640.Size = new System.Drawing.Size(656, 524);
+            this.tpg640.Size = new System.Drawing.Size(656, 522);
             this.tpg640.TabIndex = 4;
             this.tpg640.Tag = "3";
             this.tpg640.Text = "640nm";
@@ -415,7 +409,7 @@
             this.pbx640.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx640.Location = new System.Drawing.Point(0, 25);
             this.pbx640.Name = "pbx640";
-            this.pbx640.Size = new System.Drawing.Size(656, 499);
+            this.pbx640.Size = new System.Drawing.Size(656, 497);
             this.pbx640.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbx640.TabIndex = 2;
             this.pbx640.TabStop = false;
@@ -428,6 +422,20 @@
             this.toolStrip640.Size = new System.Drawing.Size(656, 25);
             this.toolStrip640.TabIndex = 1;
             this.toolStrip640.Text = "toolStrip1";
+            // 
+            // btnSave
+            // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(24, 24);
+            this.btnSave.Text = "保存";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // FormImage
             // 
@@ -447,6 +455,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "扫描图像";
             this.Load += new System.EventHandler(this.FormImage_Load);
+            this.toolStripTop.ResumeLayout(false);
+            this.toolStripTop.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.toolStripRight.ResumeLayout(false);
@@ -496,7 +506,6 @@
         private System.Windows.Forms.TabPage tpg640;
         private System.Windows.Forms.ToolStripButton btnDisplaytNormal;
         private System.Windows.Forms.ToolStripButton btnDisplayCenter;
-        private System.Windows.Forms.ToolStripButton btnDisplayAutosize;
         private System.Windows.Forms.ToolStripButton btnDisplayStretch;
         private System.Windows.Forms.ToolStripButton btnDisplayZoom;
         private System.Windows.Forms.ToolStrip toolStrip640;
@@ -509,5 +518,7 @@
         private System.Windows.Forms.PictureBox pbx405;
         private System.Windows.Forms.ToolStrip toolStripAll;
         private System.Windows.Forms.PictureBox pbxAll;
+        private System.Windows.Forms.ToolStripButton btnSave;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
