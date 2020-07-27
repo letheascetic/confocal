@@ -260,7 +260,7 @@ namespace confocal_core
         private static readonly double FIELD_SIZE_DEFAULT = 500.0;          // 视场大小, um
         private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 4.09855e-5;  // 校准[标定]电压,V
         private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
-        private static readonly int BIDIRECTION_SCAN_PIXEL_COMPENSATION = 64;    // Z形双向扫描中有效像素补偿
+        private static readonly int BIDIRECTION_SCAN_PIXEL_COMPENSATION = 128;    // Z形双向扫描中有效像素补偿
         private static readonly int SCAN_ACQUISITION_MODE_NUM_DEFAULT = 4;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Laser m_laser;              // 激光参数

@@ -102,6 +102,12 @@
     <Compile Include="FormParas.Designer.cs">
       <DependentUpon>FormParas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSysCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSysCfg.Designer.cs">
+      <DependentUpon>FormSysCfg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormImage.resx">
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormParas.resx">
       <DependentUpon>FormParas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSysCfg.resx">
+      <DependentUpon>FormSysCfg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -42,7 +42,7 @@
             this.tbxCalibrationV = new System.Windows.Forms.TextBox();
             this.lbCalibrationV = new System.Windows.Forms.Label();
             this.tbxResponseTime = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbResponseTime = new System.Windows.Forms.Label();
             this.tbxFieldSize = new System.Windows.Forms.TextBox();
             this.lbFieldSize = new System.Windows.Forms.Label();
             this.gbxResults = new System.Windows.Forms.GroupBox();
@@ -104,7 +104,7 @@
             this.gbxGalv.Controls.Add(this.tbxCalibrationV);
             this.gbxGalv.Controls.Add(this.lbCalibrationV);
             this.gbxGalv.Controls.Add(this.tbxResponseTime);
-            this.gbxGalv.Controls.Add(this.label1);
+            this.gbxGalv.Controls.Add(this.lbResponseTime);
             this.gbxGalv.Controls.Add(this.tbxFieldSize);
             this.gbxGalv.Controls.Add(this.lbFieldSize);
             this.gbxGalv.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -139,11 +139,11 @@
             resources.ApplyResources(this.tbxResponseTime, "tbxResponseTime");
             this.tbxResponseTime.Name = "tbxResponseTime";
             // 
-            // label1
+            // lbResponseTime
             // 
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            this.lbResponseTime.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbResponseTime, "lbResponseTime");
+            this.lbResponseTime.Name = "lbResponseTime";
             // 
             // tbxFieldSize
             // 
@@ -300,7 +300,7 @@
         private System.Windows.Forms.TextBox tbxCalibrationV;
         private System.Windows.Forms.Label lbCalibrationV;
         private System.Windows.Forms.TextBox tbxResponseTime;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbResponseTime;
         private System.Windows.Forms.TextBox tbxFieldSize;
         private System.Windows.Forms.Label lbFieldSize;
         private System.Windows.Forms.GroupBox gbxResults;

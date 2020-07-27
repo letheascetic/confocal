@@ -35,6 +35,7 @@
             this.menuItemView = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScan = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSysCfg = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSkin = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSkinDefault = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,13 +79,13 @@
             // menuItemFile
             // 
             this.menuItemFile.Name = "menuItemFile";
-            this.menuItemFile.Size = new System.Drawing.Size(49, 20);
+            this.menuItemFile.Size = new System.Drawing.Size(49, 24);
             this.menuItemFile.Text = "文件";
             // 
             // menuItemOption
             // 
             this.menuItemOption.Name = "menuItemOption";
-            this.menuItemOption.Size = new System.Drawing.Size(49, 20);
+            this.menuItemOption.Size = new System.Drawing.Size(49, 24);
             this.menuItemOption.Text = "操作";
             // 
             // menuItemView
@@ -93,25 +94,33 @@
             this.menuItemView.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuItemView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScan,
-            this.tsmiShow});
+            this.tsmiShow,
+            this.tsmiSysCfg});
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(49, 20);
+            this.menuItemView.Size = new System.Drawing.Size(49, 24);
             this.menuItemView.Tag = "0";
             this.menuItemView.Text = "窗口";
             // 
             // tsmiScan
             // 
             this.tsmiScan.Name = "tsmiScan";
-            this.tsmiScan.Size = new System.Drawing.Size(140, 26);
+            this.tsmiScan.Size = new System.Drawing.Size(216, 26);
             this.tsmiScan.Text = "扫描控制";
             this.tsmiScan.Click += new System.EventHandler(this.tsmiScan_Click);
             // 
             // tsmiShow
             // 
             this.tsmiShow.Name = "tsmiShow";
-            this.tsmiShow.Size = new System.Drawing.Size(140, 26);
+            this.tsmiShow.Size = new System.Drawing.Size(216, 26);
             this.tsmiShow.Text = "参数显示";
             this.tsmiShow.Click += new System.EventHandler(this.tsmiShow_Click);
+            // 
+            // tsmiSysCfg
+            // 
+            this.tsmiSysCfg.Name = "tsmiSysCfg";
+            this.tsmiSysCfg.Size = new System.Drawing.Size(216, 26);
+            this.tsmiSysCfg.Text = "系统配置";
+            this.tsmiSysCfg.Click += new System.EventHandler(this.tsmiSysCfg_Click);
             // 
             // menuItemSkin
             // 
@@ -120,7 +129,7 @@
             this.menuItemSkin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSkinDefault});
             this.menuItemSkin.Name = "menuItemSkin";
-            this.menuItemSkin.Size = new System.Drawing.Size(49, 20);
+            this.menuItemSkin.Size = new System.Drawing.Size(49, 24);
             this.menuItemSkin.Tag = "0";
             this.menuItemSkin.Text = "皮肤";
             // 
@@ -138,7 +147,7 @@
             this.menuItemManual,
             this.menuItemAbout});
             this.menuItemHelp.Name = "menuItemHelp";
-            this.menuItemHelp.Size = new System.Drawing.Size(49, 20);
+            this.menuItemHelp.Size = new System.Drawing.Size(49, 24);
             this.menuItemHelp.Text = "帮助";
             // 
             // menuItemManual
@@ -338,6 +347,7 @@
         private System.Windows.Forms.ToolStripMenuItem itemDeleteDevice;
         private System.Windows.Forms.ToolStripMenuItem tsmiScan;
         private System.Windows.Forms.ToolStripMenuItem tsmiShow;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSysCfg;
     }
 }
 

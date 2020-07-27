@@ -154,6 +154,7 @@ namespace confocal_ui
         private API_RETURN_CODE ConfigScanTaskHandler(ScanTask scanTask, object paras)
         {
             m_pFormShowBox.ScanTaskConfigured();
+            m_pFormScan.ScanTaskConfigured();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -308,6 +309,23 @@ namespace confocal_ui
         {
             m_pFormShowBox.Show();
             this.Activate();
+        }
+
+        private void tsmiSysCfg_Click(object sender, EventArgs e)
+        {
+            if (m_scheduler.TaskScanning())
+            {
+                MessageBox.Show("正在扫描中，请先停止扫描再配置系统参数。");
+                return;
+            }
+
+            FormSysCfg formSysCfg = new FormSysCfg();
+            if (formSysCfg.ShowDialog() == DialogResult.OK)
+            {
+                ScanTask scanTask = m_scheduler.GetScanningTask();
+                m_scheduler.ConfigScanTask(scanTask);
+                formSysCfg.Close();
+            }
         }
     }
 }

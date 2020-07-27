@@ -37,6 +37,8 @@ namespace confocal_ui
             Logger.Info(string.Format("FormScan scan task started."));
             btnScan.Image = m_scheduler.TaskScanning() ? global::confocal_ui.Properties.Resources.Stop : global::confocal_ui.Properties.Resources.Scan;
             btnScan.BackColor = m_scheduler.TaskScanning() ? System.Drawing.SystemColors.GradientActiveCaption : System.Drawing.SystemColors.Control;
+
+            UpdateControlers();
         }
 
         public void ScanTaskStopped()
@@ -44,6 +46,11 @@ namespace confocal_ui
             Logger.Info(string.Format("FormScan scan task stopped."));
             btnScan.Image = m_scheduler.TaskScanning() ? global::confocal_ui.Properties.Resources.Stop : global::confocal_ui.Properties.Resources.Scan;
             btnScan.BackColor = m_scheduler.TaskScanning() ? System.Drawing.SystemColors.GradientActiveCaption : System.Drawing.SystemColors.Control;
+        }
+
+        public void ScanTaskConfigured()
+        {
+            UpdateControlers();
         }
 
         private void InitVariables()
@@ -420,7 +427,7 @@ namespace confocal_ui
             {
                 m_config.SetScanStartegy(strategy);
                 m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
-                UpdateControlers();
+                // UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
@@ -434,7 +441,7 @@ namespace confocal_ui
             m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
             API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
 
-            UpdateControlers();
+            // UpdateControlers();
             this.Cursor = System.Windows.Forms.Cursors.Default;
 
             if (code != API_RETURN_CODE.API_SUCCESS)
@@ -458,7 +465,7 @@ namespace confocal_ui
             {
                 m_config.SetScanAcquisitionMode(acquisitionMode);
                 m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
-                UpdateControlers();
+                // UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
@@ -472,7 +479,7 @@ namespace confocal_ui
             m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
             API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
 
-            UpdateControlers();
+            // UpdateControlers();
             this.Cursor = System.Windows.Forms.Cursors.Default;
 
             if (code != API_RETURN_CODE.API_SUCCESS)
@@ -502,7 +509,7 @@ namespace confocal_ui
                 m_config.SetScanMirrorNum(mirrorNum);
                 m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
 
-                UpdateControlers();
+                // UpdateControlers();
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
             }
@@ -515,7 +522,7 @@ namespace confocal_ui
             m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
             API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
 
-            UpdateControlers();
+            // UpdateControlers();
             this.Cursor = System.Windows.Forms.Cursors.Default;
 
             if (code != API_RETURN_CODE.API_SUCCESS)
@@ -540,7 +547,7 @@ namespace confocal_ui
                 m_config.SetScanXPoints(scanPixels);
                 m_config.SetScanYPoints(scanPixels);
                 m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
-                UpdateControlers();
+                // UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
@@ -555,7 +562,7 @@ namespace confocal_ui
             m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
             API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
 
-            UpdateControlers();
+            // UpdateControlers();
             this.Cursor = System.Windows.Forms.Cursors.Default;
 
             if (code != API_RETURN_CODE.API_SUCCESS)
@@ -579,7 +586,7 @@ namespace confocal_ui
             {
                 m_config.SetScanDwellTime(dwellTime);
                 m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
-                UpdateControlers();
+                // UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
@@ -593,7 +600,7 @@ namespace confocal_ui
             m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
             API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
 
-            UpdateControlers();
+            // UpdateControlers();
             this.Cursor = System.Windows.Forms.Cursors.Default;
 
             if (code != API_RETURN_CODE.API_SUCCESS)
