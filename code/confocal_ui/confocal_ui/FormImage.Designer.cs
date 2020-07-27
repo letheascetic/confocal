@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormImage));
             this.toolStripTop = new System.Windows.Forms.ToolStrip();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lbPixelSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.sp2 = new System.Windows.Forms.ToolStripSeparator();
@@ -65,8 +67,6 @@
             this.tpg640 = new System.Windows.Forms.TabPage();
             this.pbx640 = new System.Windows.Forms.PictureBox();
             this.toolStrip640 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTop.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripRight.SuspendLayout();
@@ -94,6 +94,21 @@
             this.toolStripTop.Size = new System.Drawing.Size(689, 27);
             this.toolStripTop.TabIndex = 1;
             this.toolStripTop.Text = "toolStrip";
+            // 
+            // btnSave
+            // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(24, 24);
+            this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // statusStrip
             // 
@@ -270,7 +285,7 @@
             this.tpgAll.Location = new System.Drawing.Point(4, 4);
             this.tpgAll.Name = "tpgAll";
             this.tpgAll.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgAll.Size = new System.Drawing.Size(656, 524);
+            this.tpgAll.Size = new System.Drawing.Size(656, 522);
             this.tpgAll.TabIndex = 0;
             this.tpgAll.Tag = "-1";
             this.tpgAll.Text = "全部";
@@ -281,7 +296,7 @@
             this.pbxAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxAll.Location = new System.Drawing.Point(3, 28);
             this.pbxAll.Name = "pbxAll";
-            this.pbxAll.Size = new System.Drawing.Size(650, 493);
+            this.pbxAll.Size = new System.Drawing.Size(650, 491);
             this.pbxAll.TabIndex = 1;
             this.pbxAll.TabStop = false;
             // 
@@ -301,7 +316,7 @@
             this.tpg405.Location = new System.Drawing.Point(4, 4);
             this.tpg405.Name = "tpg405";
             this.tpg405.Padding = new System.Windows.Forms.Padding(3);
-            this.tpg405.Size = new System.Drawing.Size(656, 524);
+            this.tpg405.Size = new System.Drawing.Size(656, 522);
             this.tpg405.TabIndex = 1;
             this.tpg405.Tag = "0";
             this.tpg405.Text = "405nm";
@@ -313,7 +328,7 @@
             this.pbx405.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx405.Location = new System.Drawing.Point(3, 28);
             this.pbx405.Name = "pbx405";
-            this.pbx405.Size = new System.Drawing.Size(650, 493);
+            this.pbx405.Size = new System.Drawing.Size(650, 491);
             this.pbx405.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbx405.TabIndex = 1;
             this.pbx405.TabStop = false;
@@ -333,7 +348,7 @@
             this.tpg488.Controls.Add(this.toolStrip488);
             this.tpg488.Location = new System.Drawing.Point(4, 4);
             this.tpg488.Name = "tpg488";
-            this.tpg488.Size = new System.Drawing.Size(656, 524);
+            this.tpg488.Size = new System.Drawing.Size(656, 522);
             this.tpg488.TabIndex = 2;
             this.tpg488.Tag = "1";
             this.tpg488.Text = "488nm";
@@ -345,7 +360,7 @@
             this.pbx488.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx488.Location = new System.Drawing.Point(0, 25);
             this.pbx488.Name = "pbx488";
-            this.pbx488.Size = new System.Drawing.Size(656, 499);
+            this.pbx488.Size = new System.Drawing.Size(656, 497);
             this.pbx488.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbx488.TabIndex = 1;
             this.pbx488.TabStop = false;
@@ -365,7 +380,7 @@
             this.tpg561.Controls.Add(this.toolStrip561);
             this.tpg561.Location = new System.Drawing.Point(4, 4);
             this.tpg561.Name = "tpg561";
-            this.tpg561.Size = new System.Drawing.Size(656, 524);
+            this.tpg561.Size = new System.Drawing.Size(656, 522);
             this.tpg561.TabIndex = 3;
             this.tpg561.Tag = "2";
             this.tpg561.Text = "561nm";
@@ -377,7 +392,7 @@
             this.pbx561.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbx561.Location = new System.Drawing.Point(0, 25);
             this.pbx561.Name = "pbx561";
-            this.pbx561.Size = new System.Drawing.Size(656, 499);
+            this.pbx561.Size = new System.Drawing.Size(656, 497);
             this.pbx561.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbx561.TabIndex = 1;
             this.pbx561.TabStop = false;
@@ -422,20 +437,6 @@
             this.toolStrip640.Size = new System.Drawing.Size(656, 25);
             this.toolStrip640.TabIndex = 1;
             this.toolStrip640.Text = "toolStrip1";
-            // 
-            // btnSave
-            // 
-            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(24, 24);
-            this.btnSave.Text = "保存";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // FormImage
             // 

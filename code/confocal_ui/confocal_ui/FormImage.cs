@@ -225,15 +225,6 @@ namespace confocal_ui
             }
         }
 
-        private void btnDisplayAutosize_Click(object sender, EventArgs e)
-        {
-            PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
-            if (pbx != null)
-            {
-                pbx.SizeMode = PictureBoxSizeMode.AutoSize;
-            }
-        }
-
         private void btnDisplayStretch_Click(object sender, EventArgs e)
         {
             PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
@@ -249,6 +240,30 @@ namespace confocal_ui
             if (pbx != null)
             {
                 pbx.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
+            if (pbx != null)
+            {
+                Bitmap bmp = (Bitmap)pbx.Image.Clone();
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Jpeg Files (*.)|*.Png";
+                dialog.FilterIndex = 1;
+                dialog.RestoreDirectory = true;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (!dialog.FileName.EndsWith(".Png"))
+                    {
+                        MessageBox.Show("文件名格式有误!");
+                        return;
+                    }
+                    string filename = dialog.FileName;
+                    bmp.Save(filename, ImageFormat.Png);
+                }
             }
         }
     }
