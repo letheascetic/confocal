@@ -129,7 +129,7 @@ namespace confocal_ui
             rbtnTwo.CheckedChanged += rbtnTwo_CheckedChanged;
 
             // 停留时间
-            cbxDwellTime.DataSource = new string[] { "2.0", "4.0", "6.0", "8.0", "10.0" };
+            cbxDwellTime.DataSource = new string[] { "2.0", "4.0", "6.0", "8.0", "10.0", "12.0", "14.0", "16.0", "18.0", "20.0" };
             cbxDwellTime.SelectedIndex = cbxDwellTime.FindString(m_config.GetScanDwellTime().ToString("F1"));
             cbxDwellTime.SelectedIndexChanged += cbxDwellTime_SelectedIndexChanged;
 
@@ -624,6 +624,13 @@ namespace confocal_ui
         {
             int bsOffset = (int)nudScanPixelCali.Value;
             m_config.SetScanPixelCalibration(bsOffset);
+        }
+
+        private void nudBN561_ValueChanged(object sender, EventArgs e)
+        {
+            int value = (int)nudBN561.Value;
+            short noiseLevel = (short)(short.MaxValue * value / 100);
+            m_config.SetChannelBackgroundNoiseLevel(CHAN_ID.WAVELENGTH_561_NM, noiseLevel);
         }
     }
 }

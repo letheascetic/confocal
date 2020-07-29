@@ -112,9 +112,11 @@ namespace confocal_core
     {
         private CHAN_ID id;
         private Color colorReference;       // 各通道显示的颜色基准
+        private short backgroundNoiseLevel;   // 背景噪声水平
 
         public CHAN_ID Id { get { return id; } set { id = value; } }
         public Color ColorReference { get { return colorReference; } set { colorReference = value; } }
+        public short BackgroundNoiseLevel { get { return backgroundNoiseLevel; } set { backgroundNoiseLevel = value; } }
     }
 
     public class Properties
@@ -260,8 +262,8 @@ namespace confocal_core
         private static readonly double SCAN_PIXEL_TIME_DEFAULT = 4.0;       // 像素时间, us
         private static readonly double PIN_HOLE_SIZE_DEFAULT = 50;          // 小孔尺寸
         private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;  // 振镜响应时间, us
-        private static readonly double FIELD_SIZE_DEFAULT = 500.0;          // 视场大小, um
-        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 4.09855e-5 * 2;  // 校准[标定]电压,V
+        private static readonly double FIELD_SIZE_DEFAULT = 200.0;          // 视场大小, um
+        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 4.09855e-5;  // 校准[标定]电压,V
         private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
         private static readonly int SCAN_PIXEL_COMPENSATION = 128;          // Z形扫描中有效像素补偿
         private static readonly int SCAN_ACQUISITION_MODE_NUM_DEFAULT = 4;
@@ -577,7 +579,7 @@ namespace confocal_core
         
         public API_RETURN_CODE SetChannelColorReference(CHAN_ID id, Color colorReference)
         {
-            Logger.Info(string.Format("set channel color reference: [id:{0}], [power:{1}].", id, colorReference));
+            Logger.Info(string.Format("set channel color reference: [id:{0}], [color:{1}].", id, colorReference));
             GetPropChannel(id).ColorReference = colorReference;
             return API_RETURN_CODE.API_SUCCESS;
         }
@@ -585,6 +587,18 @@ namespace confocal_core
         public Color GetChannelColorReference(CHAN_ID id)
         {
             return GetPropChannel(id).ColorReference;
+        }
+
+        public API_RETURN_CODE SetChannelBackgroundNoiseLevel(CHAN_ID id, short noiseLevel)
+        {
+            Logger.Info(string.Format("set channel background noise level: [id:{0}], [level:{1}].", id, noiseLevel));
+            GetPropChannel(id).BackgroundNoiseLevel = noiseLevel;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public short GetChannelBackgroundNoiseLevel(CHAN_ID id)
+        {
+            return GetPropChannel(id).BackgroundNoiseLevel;
         }
 
         #endregion
@@ -664,7 +678,8 @@ namespace confocal_core
                 m_properties.Channels[i] = new PropChannel
                 {
                     Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i),
-                    ColorReference = clolrs[i]
+                    ColorReference = clolrs[i],
+                    BackgroundNoiseLevel = 0
                 };
             }
 

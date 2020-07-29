@@ -87,6 +87,10 @@
             this.cbxDwellTime = new System.Windows.Forms.ComboBox();
             this.nudScanPixelOffset = new System.Windows.Forms.NumericUpDown();
             this.nudScanPixelCali = new System.Windows.Forms.NumericUpDown();
+            this.nudBN405 = new System.Windows.Forms.NumericUpDown();
+            this.nudBN488 = new System.Windows.Forms.NumericUpDown();
+            this.nudBN561 = new System.Windows.Forms.NumericUpDown();
+            this.nudBN640 = new System.Windows.Forms.NumericUpDown();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
@@ -104,6 +108,10 @@
             this.gbxMirror.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelCali)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN405)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN488)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN561)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN640)).BeginInit();
             this.SuspendLayout();
             // 
             // lbDwellTime
@@ -143,6 +151,7 @@
             // 
             // gbxChan405
             // 
+            this.gbxChan405.Controls.Add(this.nudBN405);
             this.gbxChan405.Controls.Add(this.tb405Power);
             this.gbxChan405.Controls.Add(this.tb405Gain);
             this.gbxChan405.Controls.Add(this.tbx405Power);
@@ -210,6 +219,7 @@
             // 
             // gbx488
             // 
+            this.gbx488.Controls.Add(this.nudBN488);
             this.gbx488.Controls.Add(this.tb488Power);
             this.gbx488.Controls.Add(this.tb488Gain);
             this.gbx488.Controls.Add(this.tbx488Power);
@@ -284,6 +294,7 @@
             // 
             // gbx561
             // 
+            this.gbx561.Controls.Add(this.nudBN561);
             this.gbx561.Controls.Add(this.tb561Power);
             this.gbx561.Controls.Add(this.tb561Gain);
             this.gbx561.Controls.Add(this.tbx561Power);
@@ -358,6 +369,7 @@
             // 
             // gbx640
             // 
+            this.gbx640.Controls.Add(this.nudBN640);
             this.gbx640.Controls.Add(this.tb640Power);
             this.gbx640.Controls.Add(this.tb640Gain);
             this.gbx640.Controls.Add(this.tbx640Power);
@@ -566,6 +578,27 @@
             this.nudScanPixelCali.Name = "nudScanPixelCali";
             this.nudScanPixelCali.ValueChanged += new System.EventHandler(this.nudScanPixelCali_ValueChanged);
             // 
+            // nudBN405
+            // 
+            resources.ApplyResources(this.nudBN405, "nudBN405");
+            this.nudBN405.Name = "nudBN405";
+            // 
+            // nudBN488
+            // 
+            resources.ApplyResources(this.nudBN488, "nudBN488");
+            this.nudBN488.Name = "nudBN488";
+            // 
+            // nudBN561
+            // 
+            resources.ApplyResources(this.nudBN561, "nudBN561");
+            this.nudBN561.Name = "nudBN561";
+            this.nudBN561.ValueChanged += new System.EventHandler(this.nudBN561_ValueChanged);
+            // 
+            // nudBN640
+            // 
+            resources.ApplyResources(this.nudBN640, "nudBN640");
+            this.nudBN640.Name = "nudBN640";
+            // 
             // FormScan
             // 
             this.AutoHidePortion = 0.4D;
@@ -620,6 +653,10 @@
             this.gbxMirror.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelCali)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN405)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN488)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN561)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBN640)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -685,5 +722,9 @@
         private System.Windows.Forms.ComboBox cbxDwellTime;
         private System.Windows.Forms.NumericUpDown nudScanPixelOffset;
         private System.Windows.Forms.NumericUpDown nudScanPixelCali;
+        private System.Windows.Forms.NumericUpDown nudBN405;
+        private System.Windows.Forms.NumericUpDown nudBN488;
+        private System.Windows.Forms.NumericUpDown nudBN561;
+        private System.Windows.Forms.NumericUpDown nudBN640;
     }
 }

@@ -249,8 +249,6 @@ namespace confocal_core
                     continue;
                 }
 
-                sample.Convert();
-
                 //double average = 0;
                 //for (i = 0; i < sample.NSamples.GetLength(0); i++)
                 //{
@@ -262,6 +260,8 @@ namespace confocal_core
                 //    average = average / sample.NSamples[0].Length;
                 //    Logger.Info(string.Format("sample average value: [{0}][{1}].", i, average));
                 //}
+
+                sample.Convert();
 
                 offset = sample.Line * xSampleCountPerLine;
                 // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
@@ -303,6 +303,17 @@ namespace confocal_core
                     m_scanData.EnqueueFrame(frameData);
                     Logger.Info(string.Format("convert samples to frame: [{0}].", sample.Frame));
 
+                    //for (i = 0; i < activatedChannelNum; i++)
+                    //{
+                    //    average = 0;
+                    //    for (int j = 0; j < imageSampleCountPerFrame; j++)
+                    //    {
+                    //        average += frame[i][j];
+                    //    }
+                    //    average = average / imageSampleCountPerFrame;
+                    //    Logger.Info(string.Format("frame average value: [{0}][{1}].", i, average));
+                    //}
+
                     frame = new short[activatedChannelNum][];
                     for (i = 0; i < activatedChannelNum; i++)
                     {
@@ -335,7 +346,9 @@ namespace confocal_core
                 byte[][] displayData = new byte[activatedChannelNum][];
                 for (i = 0; i < activatedChannelNum; i++)
                 {
-                    Color colorReference = m_config.GetChannelColorReference((CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i));
+                    CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                    Color colorReference = m_config.GetChannelColorReference(id);
+                    // short noiseLevel = m_config.GetChannelBackgroundNoiseLevel(id);
                     CImage.Gray16ToBGR24(colorReference, frame.Data[i], out displayData[i]);
                     // CImage.Gray16ToGray24(frame.Data[i], out displayData[i]);
                     // CImage.Gray16ToBGR24(frame.Data[i], out displayData[i]);

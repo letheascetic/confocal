@@ -246,7 +246,7 @@ namespace confocal_core
             catch (Exception e)
             {
                 Logger.Error(string.Format("config do task exception: [{0}].", e));
-                code = API_RETURN_CODE.API_FAILED_NI_CONFIG_AO_TASK_EXCEPTION;
+                code = API_RETURN_CODE.API_FAILED_NI_CONFIG_DO_TASK_EXCEPTION;
             }
             return code;
         }

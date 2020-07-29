@@ -142,7 +142,7 @@ namespace confocal_core
             double voltagePerPixel = m_config.GetScanCalibrationVoltage() / 5.0 * 1000 * pixelSize;
 
             int realScanXPixels = m_config.GetScanXPoints() + m_config.GetScanPixelCompensation();
-            int realScanYPixels = m_config.GetScanYPoints() / 2;
+            int realScanYPixels = m_config.GetScanYPoints();
 
             double w = m_config.GetScanDwellTime() * realScanXPixels / 1000;
             double h = voltagePerPixel * realScanXPixels;
