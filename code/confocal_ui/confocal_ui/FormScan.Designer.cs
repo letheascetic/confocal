@@ -82,11 +82,11 @@
             this.lbAcquisitionMode = new System.Windows.Forms.Label();
             this.cbxAcquisitionMode = new System.Windows.Forms.ComboBox();
             this.cbxAcquisitionModeNum = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.btnScan = new System.Windows.Forms.Button();
             this.cbxDwellTime = new System.Windows.Forms.ComboBox();
-            this.nudBSOffset = new System.Windows.Forms.NumericUpDown();
+            this.nudScanPixelOffset = new System.Windows.Forms.NumericUpDown();
+            this.nudScanPixelCali = new System.Windows.Forms.NumericUpDown();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
@@ -102,7 +102,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).BeginInit();
             this.gbxMode.SuspendLayout();
             this.gbxMirror.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBSOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelCali)).BeginInit();
             this.SuspendLayout();
             // 
             // lbDwellTime
@@ -511,13 +512,6 @@
             this.cbxAcquisitionModeNum.FormattingEnabled = true;
             this.cbxAcquisitionModeNum.Name = "cbxAcquisitionModeNum";
             // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Image = global::confocal_ui.Properties.Resources.Scan;
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // btnCapture
             // 
             resources.ApplyResources(this.btnCapture, "btnCapture");
@@ -540,21 +534,37 @@
             this.cbxDwellTime.FormattingEnabled = true;
             this.cbxDwellTime.Name = "cbxDwellTime";
             // 
-            // nudBSOffset
+            // nudScanPixelOffset
             // 
-            resources.ApplyResources(this.nudBSOffset, "nudBSOffset");
-            this.nudBSOffset.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.nudScanPixelOffset, "nudScanPixelOffset");
+            this.nudScanPixelOffset.Maximum = new decimal(new int[] {
             32,
             0,
             0,
             0});
-            this.nudBSOffset.Minimum = new decimal(new int[] {
+            this.nudScanPixelOffset.Minimum = new decimal(new int[] {
             32,
             0,
             0,
             -2147483648});
-            this.nudBSOffset.Name = "nudBSOffset";
-            this.nudBSOffset.ValueChanged += new System.EventHandler(this.nudBSOffset_ValueChanged);
+            this.nudScanPixelOffset.Name = "nudScanPixelOffset";
+            this.nudScanPixelOffset.ValueChanged += new System.EventHandler(this.nudBSOffset_ValueChanged);
+            // 
+            // nudScanPixelCali
+            // 
+            resources.ApplyResources(this.nudScanPixelCali, "nudScanPixelCali");
+            this.nudScanPixelCali.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.nudScanPixelCali.Minimum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            -2147483648});
+            this.nudScanPixelCali.Name = "nudScanPixelCali";
+            this.nudScanPixelCali.ValueChanged += new System.EventHandler(this.nudScanPixelCali_ValueChanged);
             // 
             // FormScan
             // 
@@ -562,7 +572,8 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.nudBSOffset);
+            this.Controls.Add(this.nudScanPixelCali);
+            this.Controls.Add(this.nudScanPixelOffset);
             this.Controls.Add(this.cbxDwellTime);
             this.Controls.Add(this.cbxAcquisitionModeNum);
             this.Controls.Add(this.cbxAcquisitionMode);
@@ -579,7 +590,6 @@
             this.Controls.Add(this.gbxParams);
             this.Controls.Add(this.lbScanPixels);
             this.Controls.Add(this.lbDwellTime);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnCapture);
             this.Controls.Add(this.btnScan);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -608,7 +618,8 @@
             this.gbxMode.PerformLayout();
             this.gbxMirror.ResumeLayout(false);
             this.gbxMirror.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBSOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelCali)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -618,7 +629,6 @@
 
         private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.Button btnCapture;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lbDwellTime;
         private System.Windows.Forms.Label lbScanPixels;
         private System.Windows.Forms.GroupBox gbxParams;
@@ -673,6 +683,7 @@
         private System.Windows.Forms.ComboBox cbxAcquisitionMode;
         private System.Windows.Forms.ComboBox cbxAcquisitionModeNum;
         private System.Windows.Forms.ComboBox cbxDwellTime;
-        private System.Windows.Forms.NumericUpDown nudBSOffset;
+        private System.Windows.Forms.NumericUpDown nudScanPixelOffset;
+        private System.Windows.Forms.NumericUpDown nudScanPixelCali;
     }
 }

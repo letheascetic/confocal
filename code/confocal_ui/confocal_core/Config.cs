@@ -200,8 +200,9 @@ namespace confocal_core
         private int yPoints;                    // y扫描像素
         private double calibrationVoltage;      // 校准[标定]电压,V
         private double curveCoff;               // 曲线系数,%
-        private int bScanPixelComp;             // Z形双向扫描中有效像素补偿
-        private int bScanPixelOffset;           // Z形双向扫描中像素错位
+        private int scanPixelComp;              // Z形扫描中补偿的有效像素
+        private int scanPixelOffset;            // Z形扫描中有效像素起始位
+        private int scanPixelCalibration;       // Z形双向扫描中奇数偶数行错位校准
         private int acquisitionModeNum;         // 扫描采集模式为平均和求和时的平均数|求和数
 
         public SCAN_MODE Mode
@@ -228,10 +229,12 @@ namespace confocal_core
         { get { return calibrationVoltage; }set { calibrationVoltage = value; } }
         public double CurveCoff
         { get { return curveCoff; } set { curveCoff = value; } }
-        public int BScanPixelComp
-        { get { return bScanPixelComp; } set { bScanPixelComp = value; } }
-        public int BScanPixelOffset
-        { get { return bScanPixelOffset; } set { bScanPixelOffset = value; } }
+        public int ScanPixelComp
+        { get { return scanPixelComp; } set { scanPixelComp = value; } }
+        public int ScanPixelOffset
+        { get { return scanPixelOffset; } set { scanPixelOffset = value; } }
+        public int ScanPixelCalibration
+        { get { return scanPixelCalibration; }set { scanPixelCalibration = value; } }
         public int AcquisitionModeNum
         { get { return acquisitionModeNum; } set { acquisitionModeNum = value; } }
     }
@@ -260,7 +263,7 @@ namespace confocal_core
         private static readonly double FIELD_SIZE_DEFAULT = 500.0;          // 视场大小, um
         private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 4.09855e-5 * 2;  // 校准[标定]电压,V
         private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
-        private static readonly int BIDIRECTION_SCAN_PIXEL_COMPENSATION = 128;    // Z形双向扫描中有效像素补偿
+        private static readonly int SCAN_PIXEL_COMPENSATION = 128;          // Z形扫描中有效像素补偿
         private static readonly int SCAN_ACQUISITION_MODE_NUM_DEFAULT = 4;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Laser m_laser;              // 激光参数
@@ -512,28 +515,40 @@ namespace confocal_core
             return m_scan.CurveCoff;
         }
 
-        public API_RETURN_CODE SetBScanPixelCompensation(int bScanPixelComp)
+        public API_RETURN_CODE SetScanPixelCompensation(int scanPixelComp)
         {
-            Logger.Info(string.Format("set bidirection scan pixel compensation: [{0}].", bScanPixelComp));
-            m_scan.BScanPixelComp = bScanPixelComp;
+            Logger.Info(string.Format("set scan pixel compensation: [{0}].", scanPixelComp));
+            m_scan.ScanPixelComp = scanPixelComp;
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        public int GetBScanPixelCompensation()
+        public int GetScanPixelCompensation()
         {
-            return m_scan.BScanPixelComp;
+            return m_scan.ScanPixelComp;
         }
 
-        public API_RETURN_CODE SetBScanPixelOffset(int bScanPixelOffset)
+        public API_RETURN_CODE SetScanPixelOffset(int scanPixelOffset)
         {
-            Logger.Info(string.Format("set bidirection scan pixel offset: [{0}].", bScanPixelOffset));
-            m_scan.BScanPixelOffset = bScanPixelOffset;
+            Logger.Info(string.Format("set scan pixel offset: [{0}].", scanPixelOffset));
+            m_scan.ScanPixelOffset = scanPixelOffset;
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        public int GetBScanPixelOffset()
+        public int GetScanPixelOffset()
         {
-            return m_scan.BScanPixelOffset;
+            return m_scan.ScanPixelOffset;
+        }
+
+        public API_RETURN_CODE SetScanPixelCalibration(int scanPixelCalibration)
+        {
+            Logger.Info(string.Format("set scan pixel caliration: [{0}].", scanPixelCalibration));
+            m_scan.ScanPixelCalibration = scanPixelCalibration;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public int GetScanPixelCalibration()
+        {
+            return m_scan.ScanPixelCalibration;
         }
 
         public API_RETURN_CODE SetScanAcquisitionMode(SCAN_ACQUISITION_MODE acquisitionMode)
@@ -630,8 +645,9 @@ namespace confocal_core
                 DwellTime = SCAN_PIXEL_TIME_DEFAULT,
                 CalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT,
                 CurveCoff = CURVE_COFF_DEFAULT,
-                BScanPixelComp = BIDIRECTION_SCAN_PIXEL_COMPENSATION,
-                BScanPixelOffset = 0,
+                ScanPixelComp = SCAN_PIXEL_COMPENSATION,
+                ScanPixelOffset = 0,
+                ScanPixelCalibration = 0,
                 AcquisitionMode = SCAN_ACQUISITION_MODE.STANDARD,
                 AcquisitionModeNum = SCAN_ACQUISITION_MODE_NUM_DEFAULT
             };

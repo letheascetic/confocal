@@ -270,7 +270,8 @@ namespace confocal_core
                 {
                     if ((sample.Line & 0x01) == 0x01)
                     {
-                        sourceIndex = m_config.GetBScanPixelCompensation() / 2 + m_config.GetBScanPixelOffset();
+                        // sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
+                        sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelCalibration(); 
                         for (i = 0; i < activatedChannelNum; i++)
                         {
                             Array.Reverse(sample.NSamples[i]);
@@ -279,7 +280,7 @@ namespace confocal_core
                     }
                     else
                     {
-                        sourceIndex = m_config.GetBScanPixelCompensation() / 2;
+                        sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
                         for (i = 0; i < activatedChannelNum; i++)
                         {
                             Array.Copy(sample.NSamples[i], sourceIndex, frame[i], offset, xSampleCountPerLine);
@@ -288,9 +289,10 @@ namespace confocal_core
                 }
                 else
                 {
+                    sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
                     for (i = 0; i < activatedChannelNum; i++)
                     {
-                        Array.Copy(sample.NSamples[i], 0, frame[i], offset, xSampleCountPerLine);
+                        Array.Copy(sample.NSamples[i], sourceIndex, frame[i], offset, xSampleCountPerLine);
                     }
                 }
 

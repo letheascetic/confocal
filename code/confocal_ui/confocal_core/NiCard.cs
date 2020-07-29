@@ -268,7 +268,7 @@ namespace confocal_core
             {
                 m_aiTask = new Task();
 
-                m_aiTask.AIChannels.CreateVoltageChannel(GetAiPhysicalChannelName(), "", AITerminalConfiguration.Differential, -10.0, 10.0, AIVoltageUnits.Volts);
+                m_aiTask.AIChannels.CreateVoltageChannel(GetAiPhysicalChannelName(), "", AITerminalConfiguration.Differential, -5.0, 5.0, AIVoltageUnits.Volts);
                 m_aiTask.Control(TaskAction.Verify);
 
                 m_aiTask.Timing.SampleClockRate = m_params.AoSampleRate;

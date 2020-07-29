@@ -50,7 +50,7 @@ namespace confocal_core
         /// </summary>
         public int PostSampleCountPerLine { get; set; }
         /// <summary>
-        /// 单行输出样本数量
+        /// 单行输出样本数量，包括前置样本、有效样本、后置样本
         /// </summary>
         public int SampleCountPerLine { get; set; }
         /// <summary>
@@ -141,22 +141,25 @@ namespace confocal_core
             double pixelSize = m_config.GetScanFieldSize() / m_config.GetScanXPoints();
             double voltagePerPixel = m_config.GetScanCalibrationVoltage() / 5.0 * 1000 * pixelSize;
 
-            double w = m_config.GetScanDwellTime() * m_config.GetScanXPoints() / 1000;
-            double h = voltagePerPixel * m_config.GetScanXPoints();
+            int realScanXPixels = m_config.GetScanXPoints() + m_config.GetScanPixelCompensation();
+            int realScanYPixels = m_config.GetScanYPoints() / 2;
+
+            double w = m_config.GetScanDwellTime() * realScanXPixels / 1000;
+            double h = voltagePerPixel * realScanXPixels;
             double h2 = voltagePerPixel * m_config.GetScanYPoints();
             double cosx = w / Math.Sqrt(w * w + h * h);
             double sinx = Math.Sqrt(1 - cosx * cosx);
             double r = m_config.GetScanCurveCoff() / 100 * h / (1 - cosx);
 
             // 从prev_x0到prev_xn总共的samples数量
-            int previousTotalSampleCount = (int)(2 * r * sinx / w * m_config.GetScanXPoints());
+            int previousTotalSampleCount = (int)(2 * r * sinx / w * realScanXPixels);
             // 计算每行前置输出样本数量
             int previousSampleCountPerLine = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
 
             // 计算每行有效输出样本数量
-            int validSampleCountPerLine = m_config.GetScanXPoints();
+            int validSampleCountPerLine = realScanXPixels;
 
-            int postFirstTotalSampleCount = (int)(2 * r * sinx / w * m_config.GetScanXPoints());
+            int postFirstTotalSampleCount = (int)(2 * r * sinx / w * realScanXPixels);
             // 计算每行后置输出样本数量
             int postFirstSampleCount = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
             int postSecondSampleCount = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime() / 2);
@@ -171,7 +174,7 @@ namespace confocal_core
             int sampleCountPerLine = previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine;
 
             // 计算帧率
-            double fps = aoSampleRate / (sampleCountPerLine * m_config.GetScanYPoints());
+            double fps = aoSampleRate / (sampleCountPerLine * realScanYPixels);
 
             double xn;
             // 计算逐行前置输出样本
@@ -218,12 +221,12 @@ namespace confocal_core
             Array.Copy(validSamplesPerLine, 0, xSamplesPerLine, previousSampleCountPerLine, validSampleCountPerLine);
             Array.Copy(postSamplesPerLine, 0, xSamplesPerLine, previousSampleCountPerLine + validSampleCountPerLine, postSampleCountPerLine);
 
-            int sampleCountPerFrame = sampleCountPerLine * m_config.GetScanYPoints();
+            int sampleCountPerFrame = sampleCountPerLine * realScanYPixels;
 
-            double[] y1SamplesPerRow = new double[m_config.GetScanYPoints()];
-            double[] y2SamplesPerRow = new double[m_config.GetScanYPoints()];
+            double[] y1SamplesPerRow = new double[realScanYPixels];
+            double[] y2SamplesPerRow = new double[realScanYPixels];
             double yn;
-            for (int i = 0; i < m_config.GetScanYPoints(); i++)
+            for (int i = 0; i < realScanYPixels; i++)
             {
                 yn = voltagePerPixel * i - h2 / 2;
                 y1SamplesPerRow[i] = yn;
@@ -241,15 +244,15 @@ namespace confocal_core
                 }
             }
 
-            m_params.Fps = fps;
-            m_params.AoSampleRate = aoSampleRate;
-            m_params.PixelSize = pixelSize;
+            m_params.Fps = fps;                         // 帧率
+            m_params.AoSampleRate = aoSampleRate;       // 模拟输出率
+            m_params.PixelSize = pixelSize;             // 像素尺寸
             m_params.VoltagePerPixel = voltagePerPixel;
             m_params.PreviousSampleCountPerLine = previousSampleCountPerLine;
             m_params.ValidSampleCountPerLine = validSampleCountPerLine;
             m_params.PostSampleCountPerLine = postSampleCountPerLine;
             m_params.SampleCountPerLine = sampleCountPerLine;
-            m_params.ScanRows = m_config.GetScanYPoints();
+            m_params.ScanRows = realScanYPixels;
 
             m_params.ValidSampleScanTimePerLine = w;
             m_params.ValidSampleVoltagePerLine = h;
@@ -271,7 +274,7 @@ namespace confocal_core
             double pixelSize = m_config.GetScanFieldSize() / m_config.GetScanXPoints();
             double voltagePerPixel = m_config.GetScanCalibrationVoltage() / 5.0 * 1000 * pixelSize;
 
-            int realScanXPixels = m_config.GetScanXPoints() + m_config.GetBScanPixelCompensation();
+            int realScanXPixels = m_config.GetScanXPoints() + m_config.GetScanPixelCompensation();
             int realScanYPixels = m_config.GetScanYPoints() / 2;
 
             double w = m_config.GetScanDwellTime() * realScanXPixels / 1000;    // ms
