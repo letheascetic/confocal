@@ -478,6 +478,11 @@ namespace confocal_core
 
                     index = index * 3;
                     CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
+
+                    Bitmap Canvas = m_scanData.ScanImage.DisplayImage;
+                    BitmapData CanvasData = Canvas.LockBits(new System.Drawing.Rectangle(0, convertData.Line, xSampleCountPerLine, 1), ImageLockMode.WriteOnly, Canvas.PixelFormat);
+                    Marshal.Copy(bgrData, index, CanvasData.Scan0, xSampleCountPerLine);
+                    Canvas.UnlockBits(CanvasData);
                 }
                 
             }
