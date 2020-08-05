@@ -1,5 +1,6 @@
 ﻿using log4net;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -14,6 +15,25 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        
+        public static byte[,] CreateColorMapping(Color color)
+        {
+            float rCoff = color.R / 256.0f;
+            float gCoff = color.G / 256.0f;
+            float bCoff = color.B / 256.0f;
+
+            byte[,] colorMapping = new byte[byte.MaxValue, 3];
+            byte value;
+            for (int i = 0; i < byte.MaxValue; i++)
+            {
+                value = (byte)i;
+                colorMapping[i, 2] = (byte)(rCoff * value);
+                colorMapping[i, 1] = (byte)(gCoff * value);
+                colorMapping[i, 0] = (byte)(bCoff * value);
+            }
+            return colorMapping;
+        }
+
         public static void Gray16ToGray8(ushort[] source, out byte[] destnation)
         {
             destnation = new byte[source.Length];
@@ -94,6 +114,20 @@ namespace confocal_core
                 destnation[j + 2] = (byte)(rCoff * value);
                 destnation[j + 1] = (byte)(gCoff * value);
                 destnation[j] = (byte)(bCoff * value);
+            }
+        }
+
+        public static void Gray16ToBGR24(short[] source, ref byte[] destnation, int destIndex, byte[,] mapping)
+        {
+            byte value;
+            int i, j;
+            for (i = 0; i < source.Length; i++)
+            {
+                value = (byte)(source[i] >> 8);
+                j = i * 3 + destIndex;
+                destnation[j] = mapping[value, 0];
+                destnation[j + 1] = mapping[value, 1];
+                destnation[j + 2] = mapping[value, 2];
             }
         }
 

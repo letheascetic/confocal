@@ -165,17 +165,17 @@ namespace confocal_ui
             {
                 Logger.Info(string.Format("convert frame[{0}] to image.", m_currentFrame));
                 PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
-                DisplayData displayData = m_scanTask.GetScanData().ImageData;
-                pbx.Image = CImage.CreateBitmap(displayData.Data[index], m_config.GetScanXPoints(), m_config.GetScanYPoints());
+                ImageData imageData = m_scanTask.GetScanData().ScanImage;
+                pbx.Image = CImage.CreateBitmap(imageData.BGRData[index], m_config.GetScanXPoints(), m_config.GetScanYPoints());
             }
         }
 
         private void DisplayImage()
         {
-            DisplayData displayData = m_scanTask.GetScanData().ImageData;
-            if (m_currentFrame != displayData.Frame)
+            ImageData imageData = m_scanTask.GetScanData().ScanImage;
+            if (m_currentFrame != imageData.Frame)
             {
-                m_currentFrame = displayData.Frame;
+                m_currentFrame = imageData.Frame;
                 if (m_firstDisplay)
                 {
                     m_firstDisplay = false;

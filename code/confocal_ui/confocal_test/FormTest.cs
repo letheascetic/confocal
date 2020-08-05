@@ -70,7 +70,13 @@ namespace confocal_test
             }
         }
 
+        private void btnArrayTest_Click(object sender, EventArgs e)
+        {
+            int[] source = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            int[] seg = source.TakeWhile(i => i > 3).ToArray();
 
-
+            seg[0] = 90;
+            seg[1] = 91;
+        }
     }
 }
