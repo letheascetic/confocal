@@ -104,21 +104,21 @@
             // tsmiScan
             // 
             this.tsmiScan.Name = "tsmiScan";
-            this.tsmiScan.Size = new System.Drawing.Size(216, 26);
+            this.tsmiScan.Size = new System.Drawing.Size(140, 26);
             this.tsmiScan.Text = "扫描控制";
             this.tsmiScan.Click += new System.EventHandler(this.tsmiScan_Click);
             // 
             // tsmiShow
             // 
             this.tsmiShow.Name = "tsmiShow";
-            this.tsmiShow.Size = new System.Drawing.Size(216, 26);
+            this.tsmiShow.Size = new System.Drawing.Size(140, 26);
             this.tsmiShow.Text = "参数显示";
             this.tsmiShow.Click += new System.EventHandler(this.tsmiShow_Click);
             // 
             // tsmiSysCfg
             // 
             this.tsmiSysCfg.Name = "tsmiSysCfg";
-            this.tsmiSysCfg.Size = new System.Drawing.Size(216, 26);
+            this.tsmiSysCfg.Size = new System.Drawing.Size(140, 26);
             this.tsmiSysCfg.Text = "系统配置";
             this.tsmiSysCfg.Click += new System.EventHandler(this.tsmiSysCfg_Click);
             // 

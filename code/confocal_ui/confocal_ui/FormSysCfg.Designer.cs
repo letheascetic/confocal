@@ -40,9 +40,19 @@
             this.lbFieldSize = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.gbxNI = new System.Windows.Forms.GroupBox();
+            this.lbDevice = new System.Windows.Forms.Label();
+            this.lbXMirror = new System.Windows.Forms.Label();
+            this.lbYMirror = new System.Windows.Forms.Label();
+            this.lbY2Mirror = new System.Windows.Forms.Label();
+            this.cbxDevice = new System.Windows.Forms.ComboBox();
+            this.cbxXMirror = new System.Windows.Forms.ComboBox();
+            this.cbxYMirror = new System.Windows.Forms.ComboBox();
+            this.cbxY2Mirror = new System.Windows.Forms.ComboBox();
             this.gbxGalv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFieldSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResponseTime)).BeginInit();
+            this.gbxNI.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxGalv
@@ -56,7 +66,7 @@
             this.gbxGalv.Controls.Add(this.lbResponseTime);
             this.gbxGalv.Controls.Add(this.lbFieldSize);
             this.gbxGalv.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.gbxGalv.Location = new System.Drawing.Point(12, 12);
+            this.gbxGalv.Location = new System.Drawing.Point(12, 165);
             this.gbxGalv.Name = "gbxGalv";
             this.gbxGalv.Size = new System.Drawing.Size(374, 163);
             this.gbxGalv.TabIndex = 5;
@@ -175,7 +185,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(215, 181);
+            this.btnOk.Location = new System.Drawing.Point(215, 334);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 38);
             this.btnOk.TabIndex = 6;
@@ -185,7 +195,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(311, 181);
+            this.btnCancel.Location = new System.Drawing.Point(311, 334);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 38);
             this.btnCancel.TabIndex = 7;
@@ -193,11 +203,97 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // gbxNI
+            // 
+            this.gbxNI.Controls.Add(this.cbxY2Mirror);
+            this.gbxNI.Controls.Add(this.cbxYMirror);
+            this.gbxNI.Controls.Add(this.lbY2Mirror);
+            this.gbxNI.Controls.Add(this.cbxXMirror);
+            this.gbxNI.Controls.Add(this.cbxDevice);
+            this.gbxNI.Controls.Add(this.lbDevice);
+            this.gbxNI.Controls.Add(this.lbYMirror);
+            this.gbxNI.Controls.Add(this.lbXMirror);
+            this.gbxNI.Location = new System.Drawing.Point(12, 12);
+            this.gbxNI.Name = "gbxNI";
+            this.gbxNI.Size = new System.Drawing.Size(374, 147);
+            this.gbxNI.TabIndex = 8;
+            this.gbxNI.TabStop = false;
+            this.gbxNI.Text = "DAQ设备";
+            // 
+            // lbDevice
+            // 
+            this.lbDevice.AutoSize = true;
+            this.lbDevice.Location = new System.Drawing.Point(26, 36);
+            this.lbDevice.Name = "lbDevice";
+            this.lbDevice.Size = new System.Drawing.Size(52, 15);
+            this.lbDevice.TabIndex = 1;
+            this.lbDevice.Text = "设备名";
+            // 
+            // lbXMirror
+            // 
+            this.lbXMirror.AutoSize = true;
+            this.lbXMirror.Location = new System.Drawing.Point(26, 72);
+            this.lbXMirror.Name = "lbXMirror";
+            this.lbXMirror.Size = new System.Drawing.Size(45, 15);
+            this.lbXMirror.TabIndex = 2;
+            this.lbXMirror.Text = "X振镜";
+            // 
+            // lbYMirror
+            // 
+            this.lbYMirror.AutoSize = true;
+            this.lbYMirror.Location = new System.Drawing.Point(26, 105);
+            this.lbYMirror.Name = "lbYMirror";
+            this.lbYMirror.Size = new System.Drawing.Size(45, 15);
+            this.lbYMirror.TabIndex = 3;
+            this.lbYMirror.Text = "Y振镜";
+            // 
+            // lbY2Mirror
+            // 
+            this.lbY2Mirror.AutoSize = true;
+            this.lbY2Mirror.Location = new System.Drawing.Point(187, 108);
+            this.lbY2Mirror.Name = "lbY2Mirror";
+            this.lbY2Mirror.Size = new System.Drawing.Size(60, 15);
+            this.lbY2Mirror.TabIndex = 4;
+            this.lbY2Mirror.Text = "Y补偿镜";
+            // 
+            // cbxDevice
+            // 
+            this.cbxDevice.FormattingEnabled = true;
+            this.cbxDevice.Location = new System.Drawing.Point(84, 33);
+            this.cbxDevice.Name = "cbxDevice";
+            this.cbxDevice.Size = new System.Drawing.Size(87, 23);
+            this.cbxDevice.TabIndex = 9;
+            // 
+            // cbxXMirror
+            // 
+            this.cbxXMirror.FormattingEnabled = true;
+            this.cbxXMirror.Location = new System.Drawing.Point(84, 69);
+            this.cbxXMirror.Name = "cbxXMirror";
+            this.cbxXMirror.Size = new System.Drawing.Size(87, 23);
+            this.cbxXMirror.TabIndex = 10;
+            // 
+            // cbxYMirror
+            // 
+            this.cbxYMirror.FormattingEnabled = true;
+            this.cbxYMirror.Location = new System.Drawing.Point(84, 105);
+            this.cbxYMirror.Name = "cbxYMirror";
+            this.cbxYMirror.Size = new System.Drawing.Size(87, 23);
+            this.cbxYMirror.TabIndex = 11;
+            // 
+            // cbxY2Mirror
+            // 
+            this.cbxY2Mirror.FormattingEnabled = true;
+            this.cbxY2Mirror.Location = new System.Drawing.Point(253, 105);
+            this.cbxY2Mirror.Name = "cbxY2Mirror";
+            this.cbxY2Mirror.Size = new System.Drawing.Size(87, 23);
+            this.cbxY2Mirror.TabIndex = 12;
+            // 
             // FormSysCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 231);
+            this.ClientSize = new System.Drawing.Size(396, 380);
+            this.Controls.Add(this.gbxNI);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.gbxGalv);
@@ -213,6 +309,8 @@
             this.gbxGalv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFieldSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResponseTime)).EndInit();
+            this.gbxNI.ResumeLayout(false);
+            this.gbxNI.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -230,5 +328,14 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.NumericUpDown nudResponseTime;
         private System.Windows.Forms.NumericUpDown nudFieldSize;
+        private System.Windows.Forms.GroupBox gbxNI;
+        private System.Windows.Forms.Label lbDevice;
+        private System.Windows.Forms.Label lbXMirror;
+        private System.Windows.Forms.Label lbYMirror;
+        private System.Windows.Forms.Label lbY2Mirror;
+        private System.Windows.Forms.ComboBox cbxDevice;
+        private System.Windows.Forms.ComboBox cbxXMirror;
+        private System.Windows.Forms.ComboBox cbxYMirror;
+        private System.Windows.Forms.ComboBox cbxY2Mirror;
     }
 }
