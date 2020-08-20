@@ -389,6 +389,10 @@ namespace confocal_core
 
                 ConvertData convertData = new ConvertData(data, sample.Frame, sample.Line);
                 m_scanData.EnqueueConvertData(convertData);
+                if (convertData.Line + 1 == sacnRows)
+                {
+                    // Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
+                }
 
                 data = new short[activatedChannelNum][];
                 for (i = 0; i < activatedChannelNum; i++)
@@ -441,7 +445,7 @@ namespace confocal_core
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int xSampleCountPerLine = m_config.GetScanXPoints();
-            // int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+            int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
 
             int i, index;
             List<byte[,]> colorMappingArr = new List<byte[,]>();
@@ -468,6 +472,8 @@ namespace confocal_core
                     continue;
                 }
 
+                m_scanData.SetImageFrame(convertData.Frame);
+                // m_scanData.GetScanImage().SetCurrentLine(convertData.Line);
                 for (i = 0; i < activatedChannelNum; i++)
                 {
                     byte[] bgrData = m_scanData.ScanImage.BGRData[i];
@@ -479,10 +485,16 @@ namespace confocal_core
                     index = index * 3;
                     CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
 
-                    Bitmap Canvas = m_scanData.ScanImage.DisplayImage;
-                    BitmapData CanvasData = Canvas.LockBits(new System.Drawing.Rectangle(0, convertData.Line, xSampleCountPerLine, 1), ImageLockMode.WriteOnly, Canvas.PixelFormat);
-                    Marshal.Copy(bgrData, index, CanvasData.Scan0, xSampleCountPerLine);
-                    Canvas.UnlockBits(CanvasData);
+                    //Bitmap Canvas = m_scanData.ScanImage.DisplayImage;
+                    //BitmapData CanvasData = Canvas.LockBits(new System.Drawing.Rectangle(0, convertData.Line, xSampleCountPerLine, 1), ImageLockMode.WriteOnly, Canvas.PixelFormat);
+                    //Marshal.Copy(bgrData, index, CanvasData.Scan0, xSampleCountPerLine);
+                    //Canvas.UnlockBits(CanvasData);
+                }
+
+                if (convertData.Line + 1 == sacnRows)
+                {
+                    
+                    Logger.Info(string.Format("update image info: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
                 }
                 
             }

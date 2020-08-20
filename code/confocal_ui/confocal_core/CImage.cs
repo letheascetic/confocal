@@ -22,9 +22,9 @@ namespace confocal_core
             float gCoff = color.G / 256.0f;
             float bCoff = color.B / 256.0f;
 
-            byte[,] colorMapping = new byte[byte.MaxValue, 3];
+            byte[,] colorMapping = new byte[256, 3];
             byte value;
-            for (int i = 0; i < byte.MaxValue; i++)
+            for (int i = 0; i <= byte.MaxValue; i++)
             {
                 value = (byte)i;
                 colorMapping[i, 2] = (byte)(rCoff * value);

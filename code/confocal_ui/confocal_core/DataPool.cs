@@ -66,14 +66,17 @@ namespace confocal_core
 
     public struct ImageData
     {
+        private long m_frame;
+        private int m_line;
+
         /// <summary>
         /// 当前帧
         /// </summary>
-        public long Frame { get; set; }
+        public long Frame { get { return m_frame; } set { m_frame = value; } }
         /// <summary>
         /// 当前行
         /// </summary>
-        public int Line { get; set; }
+        public int Line { get { return m_line; } set { m_line = value; } }
         /// <summary>
         /// 数据
         /// </summary>
@@ -86,8 +89,8 @@ namespace confocal_core
         public ImageData(int activatedChannelNum, int scanXPoints, int scanYPoints)
         {
             int samplesPerFrame = scanXPoints * scanYPoints;
-            Frame = -1;
-            Line = -1;
+            m_frame = -1;
+            m_line = -1;
             Data = new short[activatedChannelNum][];
             BGRData = new byte[activatedChannelNum][];
             for (int i = 0; i < activatedChannelNum; i++)
@@ -97,6 +100,17 @@ namespace confocal_core
             }
             DisplayImage = new Bitmap(scanXPoints, scanYPoints);
         }
+
+        public void SetCurrentFrame(long frame)
+        {
+            Frame = frame;
+        }
+
+        public void SetCurrentLine(int line)
+        {
+            Line = line;
+        }
+
     }
 
     /// <summary>
@@ -159,6 +173,16 @@ namespace confocal_core
             confocal_core.Config config = confocal_core.Config.GetConfig();
             m_imageData = new ImageData(config.GetChannelNum(), config.GetScanXPoints(), config.GetScanYPoints());
             
+        }
+
+        public long GetImageFrame()
+        {
+            return m_imageData.Frame;
+        }
+
+        public void SetImageFrame(long frame)
+        {
+            m_imageData.Frame = frame;
         }
 
         public int SampleQueueSize()
