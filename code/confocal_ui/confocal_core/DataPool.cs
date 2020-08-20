@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 
@@ -81,7 +82,7 @@ namespace confocal_core
 
         public byte[][] BGRData { get; set; }
 
-        public Bitmap DisplayImage { get; set; }
+        public Bitmap[] DisplayImage { get; set; }
 
         public ImageData(int activatedChannelNum, int scanXPoints, int scanYPoints)
         {
@@ -90,12 +91,13 @@ namespace confocal_core
             m_line = -1;
             Data = new short[activatedChannelNum][];
             BGRData = new byte[activatedChannelNum][];
+            DisplayImage = new Bitmap[activatedChannelNum];
             for (int i = 0; i < activatedChannelNum; i++)
             {
                 Data[i] = new short[samplesPerFrame];
                 BGRData[i] = new byte[samplesPerFrame * 3];
+                DisplayImage[i] = new Bitmap(scanXPoints, scanYPoints, PixelFormat.Format24bppRgb);
             }
-            DisplayImage = new Bitmap(scanXPoints, scanYPoints);
         }
 
     }
@@ -150,6 +152,16 @@ namespace confocal_core
         public void SetImageFrame(long frame)
         {
             m_imageData.Frame = frame;
+        }
+
+        public int GetImageLine()
+        {
+            return m_imageData.Line;
+        }
+
+        public void SetImageLine(int line)
+        {
+            m_imageData.Line = line;
         }
 
         public int SampleQueueSize()

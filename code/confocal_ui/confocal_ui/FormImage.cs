@@ -21,8 +21,6 @@ namespace confocal_ui
         private ScanTask m_scanTask;
         private Params m_params;
         private Config m_config;
-        private bool m_firstDisplay;
-        private long m_currentFrame;
         private KeyValuePair<TabPage, PictureBox>[] m_pagePicPairs;
         private KeyValuePair<TabPage, int>[] m_pageIndexPairs;
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -73,8 +71,6 @@ namespace confocal_ui
         {
             m_config = Config.GetConfig();
             m_params = Params.GetParams();
-            m_currentFrame = -1;
-            m_firstDisplay = true;
             m_pagePicPairs = new KeyValuePair<TabPage, PictureBox>[] {
                 new KeyValuePair<TabPage, PictureBox>(tpgAll, pbxAll),
                 new KeyValuePair<TabPage, PictureBox>(tpg405, pbx405),
@@ -91,6 +87,29 @@ namespace confocal_ui
             }; 
         }
 
+        private void InitControlers()
+        {
+            pbxAllu.Parent = pbxAll;
+            pbxAllu.Location = pbxAll.Location;
+            pbxAllu.Size = pbxAll.Size;
+
+            pbx405u.Parent = pbx405;
+            pbx405u.Location = pbx405.Location;
+            pbx405u.Size = pbx405.Size;
+
+            pbx488u.Parent = pbx488;
+            pbx488u.Location = pbx488.Location;
+            pbx488u.Size = pbx488.Size;
+
+            pbx561u.Parent = pbx561;
+            pbx561u.Location = pbx561.Location;
+            pbx561u.Size = pbx561.Size;
+
+            pbx640u.Parent = pbx640;
+            pbx640u.Location = pbx640.Location;
+            pbx640u.Size = pbx640.Size;
+        }
+
         private void UpdateControlers()
         {
             this.Text = m_scanTask.TaskName;
@@ -99,9 +118,6 @@ namespace confocal_ui
             this.lbBitDepth.Text = "16 bits";
             this.lbFps.Text = string.Format("{0} fps", m_params.Fps.ToString("F2"));
             
-            this.m_currentFrame = -1;
-            this.m_firstDisplay = true;
-
             UpdateRTControlers();
             UpdateTabPages();
 
@@ -163,37 +179,25 @@ namespace confocal_ui
             int index = GetMappingIndex(tabControl.SelectedTab);
             if (index >= 0)
             {
-                Logger.Info(string.Format("convert frame[{0}] to image.", m_currentFrame));
+                // Logger.Info(string.Format("convert frame[{0}] to image.", m_currentFrame));
                 PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
-                ImageData imageData = m_scanTask.GetScanData().ScanImage;
-                pbx.Image = CImage.CreateBitmap(imageData.BGRData[index], m_config.GetScanXPoints(), m_config.GetScanYPoints());
+                pbx.Image = m_scanTask.GetScanData().ScanImage.DisplayImage[index];
             }
         }
 
         private void DisplayImage()
         {
             ImageData imageData = m_scanTask.GetScanData().ScanImage;
-            if (m_currentFrame != imageData.Frame)
+            foreach (TabPage tabPage in tabControl.TabPages)
             {
-                m_currentFrame = imageData.Frame;
-                if (m_firstDisplay)
-                {
-                    m_firstDisplay = false;
-                    foreach (TabPage tabPage in tabControl.TabPages)
-                    {
-                        DisplayImage(tabPage);
-                    }
-                }
-                else
-                {
-                    DisplayImage(tabControl.SelectedTab);
-                }
+                DisplayImage(tabPage);
             }
         }
 
         private void FormImage_Load(object sender, EventArgs e)
         {
             InitVariables();
+            InitControlers();
         }
 
         private void timer_Tick(object sender, EventArgs e)

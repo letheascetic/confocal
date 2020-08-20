@@ -112,7 +112,8 @@ namespace confocal_core
         private ScanInfo m_scanInfo;
         private DataPool m_scanData;            // 扫描任务数据池
         private Thread m_convertThread;         // 扫描任务数据转换子线程
-        private Thread m_displayImageThread;    // 扫描任务图像显示子线程
+        private Thread m_imageDataThread;       // 扫描任务图像数据生成子线程
+        private Thread m_imageDisplayThread;    // 扫描任务图像[Bitmap]生成子线程
         ///////////////////////////////////////////////////////////////////////////////////////////
         public int TaskId { get { return m_taskId; } }
         public string TaskName { get { return m_taskName; } }
@@ -130,7 +131,8 @@ namespace confocal_core
             m_scanInfo = new ScanInfo();
             m_scanData = new DataPool();
             m_convertThread = null;
-            m_displayImageThread = null;
+            m_imageDataThread = null;
+            m_imageDisplayThread = null;
         }
 
         public void Config()
@@ -145,8 +147,10 @@ namespace confocal_core
             m_scanning = true;
             m_convertThread = new Thread(ConvertSamplesHandler);
             m_convertThread.Start();
-            m_displayImageThread = new Thread(UpdateDisplayImageHandler);
-            m_displayImageThread.Start();
+            m_imageDataThread = new Thread(UpdateImageDataHandler);
+            m_imageDataThread.Start();
+            m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
+            m_imageDisplayThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
         }
 
@@ -160,11 +164,17 @@ namespace confocal_core
                 m_convertThread.Abort();
                 m_convertThread = null;
             }
-            if (m_displayImageThread != null)
+            if (m_imageDataThread != null)
             {
-                m_displayImageThread.Join();
-                m_displayImageThread.Abort();
-                m_displayImageThread = null;
+                m_imageDataThread.Join();
+                m_imageDataThread.Abort();
+                m_imageDataThread = null;
+            }
+            if(m_imageDisplayThread != null)
+            {
+                m_imageDisplayThread.Join();
+                m_imageDisplayThread.Abort();
+                m_imageDisplayThread = null;
             }
         }
 
@@ -229,7 +239,7 @@ namespace confocal_core
             int sampleCountPerLine = m_params.SampleCountPerLine;
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
-            int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+            int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
             SCAN_STRATEGY scanStrategy = m_config.GetScanStrategy();
 
             int i, sourceIndex;
@@ -290,7 +300,9 @@ namespace confocal_core
 
                 ConvertData convertData = new ConvertData(data, sample.Frame, sample.Line);
                 m_scanData.EnqueueConvertData(convertData);
-                if (convertData.Line + 1 == sacnRows)
+
+                // Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
+                if (convertData.Line + 1 == scanRows)
                 {
                     Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
                 }
@@ -303,14 +315,20 @@ namespace confocal_core
             }
             Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
         }
-        
-        private void UpdateDisplayImageHandler()
+
+        /// <summary>
+        /// 从ConvertData队列中取出行数据，做伪彩色处理，生成图像的原始数据和BGR数据
+        /// </summary>
+        private void UpdateImageDataHandler()
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int xSampleCountPerLine = m_config.GetScanXPoints();
-            int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+            int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
 
             int i, index;
+
+            Bitmap[] CanvasArr = m_scanData.ScanImage.DisplayImage;
+            Rectangle lockBitsZoom = new Rectangle(0, 0, CanvasArr[0].Width, CanvasArr[0].Height);
 
             while (m_scanning)
             {
@@ -325,7 +343,6 @@ namespace confocal_core
                     continue;
                 }
 
-                m_scanData.SetImageFrame(convertData.Frame);
                 for (i = 0; i < activatedChannelNum; i++)
                 {
                     byte[] bgrData = m_scanData.ScanImage.BGRData[i];
@@ -336,19 +353,56 @@ namespace confocal_core
 
                     index = index * 3;
                     CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
-
-                    //Bitmap Canvas = m_scanData.ScanImage.DisplayImage;
-                    //BitmapData CanvasData = Canvas.LockBits(new System.Drawing.Rectangle(0, convertData.Line, xSampleCountPerLine, 1), ImageLockMode.WriteOnly, Canvas.PixelFormat);
-                    //Marshal.Copy(bgrData, index, CanvasData.Scan0, xSampleCountPerLine);
-                    //Canvas.UnlockBits(CanvasData);
                 }
 
-                if (convertData.Line + 1 == sacnRows)
+                m_scanData.SetImageFrame(convertData.Frame);
+                m_scanData.SetImageLine(convertData.Line);
+
+                // Logger.Info(string.Format("update image data: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
+
+                if (convertData.Line + 1 == scanRows)
                 {
-                    
-                    Logger.Info(string.Format("update image info: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
+                    Logger.Info(string.Format("update image data: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
                 }
-                
+            }
+            Logger.Info(string.Format("scan task[{0}|{1}] stop, finish update image data.", m_taskId, m_taskName));
+        }
+
+        /// <summary>
+        /// 更新bitmap
+        /// </summary>
+        private void UpdateDisplayImageHandler()
+        {
+            int activatedChannelNum = m_config.GetChannelNum();
+            int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+
+            int i, line = -1;
+
+            Bitmap[] CanvasArr = m_scanData.ScanImage.DisplayImage;
+            Rectangle lockBitsZoom = new Rectangle(0, 0, CanvasArr[0].Width, CanvasArr[0].Height);
+
+            while (m_scanning)
+            {
+                if (line != m_scanData.ScanImage.Line)
+                {
+                    line = m_scanData.ScanImage.Line;
+
+                    for (i = 0; i < activatedChannelNum; i++)
+                    {
+                        byte[] bgrData = m_scanData.ScanImage.BGRData[i];
+                        byte[,] mapping = m_params.ColorMappingArr[i];
+
+                        Bitmap Canvas = CanvasArr[i];
+                        BitmapData CanvasData = Canvas.LockBits(lockBitsZoom, ImageLockMode.WriteOnly, Canvas.PixelFormat);
+                        Marshal.Copy(bgrData, 0, CanvasData.Scan0, bgrData.Length);
+                        Canvas.UnlockBits(CanvasData);
+                    }
+
+                    if (line + 1 == scanRows)
+                    {
+                        Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
+                    }
+                }
             }
 
             Logger.Info(string.Format("scan task[{0}|{1}] stop, finish update display images.", m_taskId, m_taskName));

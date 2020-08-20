@@ -138,8 +138,5 @@ namespace confocal_core
             Canvas.UnlockBits(CanvasData);
             return Canvas;
         }
-
-
-
     }
 }
