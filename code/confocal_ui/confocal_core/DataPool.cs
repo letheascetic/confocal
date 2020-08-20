@@ -59,9 +59,6 @@ namespace confocal_core
             Frame = frame;
             Line = line;
         }
-
-        public void Convert()
-        { }
     }
 
     public struct ImageData
@@ -101,16 +98,6 @@ namespace confocal_core
             DisplayImage = new Bitmap(scanXPoints, scanYPoints);
         }
 
-        public void SetCurrentFrame(long frame)
-        {
-            Frame = frame;
-        }
-
-        public void SetCurrentLine(int line)
-        {
-            Line = line;
-        }
-
     }
 
     /// <summary>
@@ -127,44 +114,25 @@ namespace confocal_core
             Data = data;
         }
     }
-
-    //public struct DisplayData
-    //{
-    //    public long Frame { get; set; }
-    //    public byte[][] Data { get; set;}
-
-    //    public DisplayData(long frame, byte[][] data)
-    //    {
-    //        Frame = frame;
-    //        Data = data;
-    //    }
-    //}
     
     public class DataPool
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
-        // private static readonly int MAXIMUM_FRAME_QUEUE_SIZE = 2;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ConcurrentQueue<SampleData> m_sampleQueue;      // 原始行数据队列
         private ConcurrentQueue<ConvertData> m_convertQueue;    // 截断、反转、去底噪后的行数据队列
         private ImageData m_imageData;                          // 帧数据
-        // private ConcurrentQueue<FrameData> m_frameQueue;
-        // private DisplayData m_displayData;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        //public DisplayData ImageData
-        //{ get { return m_displayData; } set { m_displayData = value; } }
         public ImageData ScanImage
         { get { return m_imageData; } set { m_imageData = value; } }
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public DataPool()
         {
-            // m_displayData = new DisplayData(-1, null);
             m_sampleQueue = new ConcurrentQueue<SampleData>();
             m_convertQueue = new ConcurrentQueue<ConvertData>();
             m_imageData = new ImageData();
-            // m_frameQueue = new ConcurrentQueue<FrameData>();
         } 
 
         public void Config()
@@ -172,7 +140,6 @@ namespace confocal_core
             Release();
             confocal_core.Config config = confocal_core.Config.GetConfig();
             m_imageData = new ImageData(config.GetChannelNum(), config.GetScanXPoints(), config.GetScanYPoints());
-            
         }
 
         public long GetImageFrame()
@@ -206,31 +173,6 @@ namespace confocal_core
             return m_sampleQueue.TryDequeue(out sampleData);
         }
 
-        //public int FrameQueueSize()
-        //{
-        //    return m_frameQueue.Count;
-        //}
-
-        //public void EnqueueFrame(FrameData frame)
-        //{
-        //    FrameData frameData;
-        //    while (m_frameQueue.Count >= MAXIMUM_FRAME_QUEUE_SIZE)
-        //    {
-        //        DequeueFrame(out frameData);
-        //    }
-        //    m_frameQueue.Enqueue(frame);
-        //}
-
-        //public bool DequeueFrame(out FrameData frame)
-        //{
-        //    return m_frameQueue.TryDequeue(out frame);
-        //}
-
-        //public FrameData GetNewFrameData()
-        //{
-        //    return m_frameQueue.Last();
-        //}
-
         public int ConvertQueueSize()
         {
             return m_convertQueue.Count;
@@ -248,7 +190,6 @@ namespace confocal_core
 
         public void Release()
         {
-            // m_displayData = new DisplayData(-1, null);
             while (!m_sampleQueue.IsEmpty)
             {
                 DequeueSample(out SampleData sampleData);
@@ -257,10 +198,6 @@ namespace confocal_core
             {
                 DequeueConvertData(out ConvertData convertData);
             }
-            //while (!m_frameQueue.IsEmpty)
-            //{
-            //    DequeueFrame(out FrameData frame);
-            //}
         }
     }
 }

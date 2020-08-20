@@ -16,13 +16,12 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         
-        public static byte[,] CreateColorMapping(Color color)
+        public static void CreateColorMapping(Color color, ref byte[,] colorMapping)
         {
             float rCoff = color.R / 256.0f;
             float gCoff = color.G / 256.0f;
             float bCoff = color.B / 256.0f;
 
-            byte[,] colorMapping = new byte[256, 3];
             byte value;
             for (int i = 0; i <= byte.MaxValue; i++)
             {
@@ -31,7 +30,6 @@ namespace confocal_core
                 colorMapping[i, 1] = (byte)(gCoff * value);
                 colorMapping[i, 0] = (byte)(bCoff * value);
             }
-            return colorMapping;
         }
 
         public static void Gray16ToGray8(ushort[] source, out byte[] destnation)

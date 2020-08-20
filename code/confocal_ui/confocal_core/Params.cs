@@ -1,6 +1,7 @@
 ﻿using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -20,6 +21,7 @@ namespace confocal_core
         public static readonly double MAXIMUM_VOLTAGE_DIFF_PER_PIXEL = 0.2; // 像素间的最大电压差
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
+        private byte[][,] m_colorMappingArr;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// 扫描帧率
@@ -95,6 +97,11 @@ namespace confocal_core
         /// 每行DO输出数据（用于每次在AO输出有效样本的开始时刻，产生数字触发脉冲，触发AI采集数据）
         /// </summary>
         public byte[] DigitalTriggerSamplesPerLine { get; set; }
+        /// <summary>
+        /// 伪彩色转换映射数组
+        /// </summary>
+        public byte[][,] ColorMappingArr
+        { get { return m_colorMappingArr; } set { m_colorMappingArr = value; } }
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         #region apis
@@ -131,8 +138,20 @@ namespace confocal_core
                     CalculateSScan();
                     break;
             }
+            GenerateColorMapping();
         }
 
+        public void GenerateColorMapping()
+        {
+            int channelNum = m_config.GetChannelNum();
+            for (int i = 0; i < channelNum; i++)
+            {
+                CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                Color colorReference = m_config.GetChannelColorReference(id);
+                CImage.CreateColorMapping(colorReference, ref m_colorMappingArr[i]);
+            }
+        }
+        
         private void CalculateSScan()
         {
             double maximumVolatgeStep = MAXIMUM_VOLTAGE_DIFF_PER_PIXEL;
@@ -400,6 +419,12 @@ namespace confocal_core
         private Params()
         {
             m_config = Config.GetConfig();
+            int channelNum = m_config.GetChannelNum();
+            m_colorMappingArr = new byte[channelNum][,];
+            for (int i = 0; i < channelNum; i++)
+            {
+                m_colorMappingArr[i] = new byte[256, 3];
+            }
         }
 
         #endregion

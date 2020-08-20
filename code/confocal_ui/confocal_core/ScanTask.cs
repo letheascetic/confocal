@@ -143,9 +143,9 @@ namespace confocal_core
         public void Start()
         {
             m_scanning = true;
-            m_convertThread = new Thread(ConvertSamplesHandler2);
+            m_convertThread = new Thread(ConvertSamplesHandler);
             m_convertThread.Start();
-            m_displayImageThread = new Thread(UpdateDisplayImageHandler2);
+            m_displayImageThread = new Thread(UpdateDisplayImageHandler);
             m_displayImageThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
         }
@@ -182,6 +182,12 @@ namespace confocal_core
 
         #region private apis
 
+        /// <summary>
+        /// 接收NICard AI中获取到的行数据，生成SampleData，加入队列中
+        /// 计算并更新Frame Line Fps TimeSpan
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="samples"></param>
         private void ReceiveSamples(object sender, short[][] samples)
         {
             Config m_config = confocal_core.Config.GetConfig();
@@ -217,114 +223,7 @@ namespace confocal_core
         /// (b)奇数行数据先做反转操作，再根据数据错位值截取相应的中间段数据，并存储到帧数据中
         /// (c)一帧数据存储完成后，加入到帧数据存储队列
         /// </summary>
-        //private void ConvertSamplesHandler()
-        //{
-        //    //int activatedChannelNum = m_config.GetActivatedChannelNum();
-        //    int activatedChannelNum = m_config.GetChannelNum();
-        //    int sampleCountPerLine = m_params.SampleCountPerLine;
-        //    int xSampleCountPerLine = m_config.GetScanXPoints();
-        //    int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
-        //    int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
-        //    SCAN_STRATEGY scanStrategy = m_config.GetScanStrategy();
-
-        //    int i, offset, sourceIndex;
-
-        //    short[][] frame = new short[activatedChannelNum][];
-        //    for (i = 0; i < activatedChannelNum; i++)
-        //    {
-        //        frame[i] = new short[imageSampleCountPerFrame];
-        //    }
-
-        //    while (m_scanning)
-        //    {
-        //        if (m_scanData.SampleQueueSize() == 0)
-        //        {
-        //            continue;
-        //        }
-
-        //        SampleData sample;
-        //        if (!m_scanData.DequeueSample(out sample))
-        //        {
-        //            Logger.Info(string.Format("dequeue sample data failed."));
-        //            continue;
-        //        }
-
-        //        //double average = 0;
-        //        //for (i = 0; i < sample.NSamples.GetLength(0); i++)
-        //        //{
-        //        //    average = 0;
-        //        //    for (int j = 0; j < sample.NSamples[i].Length; j++)
-        //        //    {
-        //        //        average += sample.NSamples[i][j];
-        //        //    }
-        //        //    average = average / sample.NSamples[0].Length;
-        //        //    Logger.Info(string.Format("sample average value: [{0}][{1}].", i, average));
-        //        //}
-
-        //        sample.Convert();
-
-        //        offset = sample.Line * xSampleCountPerLine;
-        //        // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
-        //        // 根据错位补偿参数，完成相应的截断
-        //        if (scanStrategy == SCAN_STRATEGY.Z_BIDIRECTION)
-        //        {
-        //            if ((sample.Line & 0x01) == 0x01)
-        //            {
-        //                // sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
-        //                sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelCalibration(); 
-        //                for (i = 0; i < activatedChannelNum; i++)
-        //                {
-        //                    Array.Reverse(sample.NSamples[i]);
-        //                    Array.Copy(sample.NSamples[i], sourceIndex, frame[i], offset, xSampleCountPerLine);
-        //                }
-        //            }
-        //            else
-        //            {
-        //                sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
-        //                for (i = 0; i < activatedChannelNum; i++)
-        //                {
-        //                    Array.Copy(sample.NSamples[i], sourceIndex, frame[i], offset, xSampleCountPerLine);
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
-        //            for (i = 0; i < activatedChannelNum; i++)
-        //            {
-        //                Array.Copy(sample.NSamples[i], sourceIndex, frame[i], offset, xSampleCountPerLine);
-        //            }
-        //        }
-
-        //        // 完成一帧的转换
-        //        if (sample.Line == sacnRows - 1)
-        //        {
-        //            FrameData frameData = new FrameData(sample.Frame, frame);
-        //            m_scanData.EnqueueFrame(frameData);
-        //            Logger.Info(string.Format("convert samples to frame: [{0}].", sample.Frame));
-
-        //            //for (i = 0; i < activatedChannelNum; i++)
-        //            //{
-        //            //    average = 0;
-        //            //    for (int j = 0; j < imageSampleCountPerFrame; j++)
-        //            //    {
-        //            //        average += frame[i][j];
-        //            //    }
-        //            //    average = average / imageSampleCountPerFrame;
-        //            //    Logger.Info(string.Format("frame average value: [{0}][{1}].", i, average));
-        //            //}
-
-        //            frame = new short[activatedChannelNum][];
-        //            for (i = 0; i < activatedChannelNum; i++)
-        //            {
-        //                frame[i] = new short[imageSampleCountPerFrame];
-        //            }
-        //        }
-        //    }
-        //    Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
-        //}
-
-        private void ConvertSamplesHandler2()
+        private void ConvertSamplesHandler()
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int sampleCountPerLine = m_params.SampleCountPerLine;
@@ -354,13 +253,15 @@ namespace confocal_core
                     continue;
                 }
 
+                // 采集数据转换
+                // 去背景噪声
                 sample.Convert();
 
                 // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
                 // 根据错位补偿参数，完成相应的截断
                 if (scanStrategy == SCAN_STRATEGY.Z_BIDIRECTION)
                 {
-                    if ((sample.Line & 0x01) == 0x01)
+                    if ((sample.Line & 0x01) == 0x01)   // 奇数行，需要反转
                     {
                         sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelCalibration();
                         for (i = 0; i < activatedChannelNum; i++)
@@ -391,7 +292,7 @@ namespace confocal_core
                 m_scanData.EnqueueConvertData(convertData);
                 if (convertData.Line + 1 == sacnRows)
                 {
-                    // Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
+                    Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
                 }
 
                 data = new short[activatedChannelNum][];
@@ -403,61 +304,13 @@ namespace confocal_core
             Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
         }
         
-        //private void UpdateDisplayImageHandler()
-        //{
-        //    // int activatedChannelNum = m_config.GetActivatedChannelNum();
-        //    int activatedChannelNum = m_config.GetChannelNum();
-        //    int i;
-
-        //    while (m_scanning)
-        //    {
-        //        if (m_scanData.FrameQueueSize() == 0)
-        //        {
-        //            continue;
-        //        }
-
-        //        FrameData frame = m_scanData.GetNewFrameData();
-        //        if (frame.Frame == m_scanData.ImageData.Frame)
-        //        {
-        //            continue;
-        //        }
-
-        //        byte[][] displayData = new byte[activatedChannelNum][];
-        //        for (i = 0; i < activatedChannelNum; i++)
-        //        {
-        //            CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
-        //            Color colorReference = m_config.GetChannelColorReference(id);
-        //            // short noiseLevel = m_config.GetChannelBackgroundNoiseLevel(id);
-        //            CImage.Gray16ToBGR24(colorReference, frame.Data[i], out displayData[i]);
-        //            // CImage.Gray16ToGray24(frame.Data[i], out displayData[i]);
-        //            // CImage.Gray16ToBGR24(frame.Data[i], out displayData[i]);
-        //        }
-        //        DisplayData display = new DisplayData(frame.Frame, displayData);
-        //        m_scanData.ImageData = display;
-
-        //        Logger.Info(string.Format("get new display data: [{0}].", m_scanData.ImageData.Frame));
-        //    }
-
-        //    Logger.Info(string.Format("scan task[{0}|{1}] stop, finish update display images.", m_taskId, m_taskName));
-        //}
-
-        private void UpdateDisplayImageHandler2()
+        private void UpdateDisplayImageHandler()
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int sacnRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
 
             int i, index;
-            List<byte[,]> colorMappingArr = new List<byte[,]>();
-
-            // 生成伪彩色转换的映射序列
-            for (i = 0; i < activatedChannelNum; i++)
-            {
-                CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
-                Color colorReference = m_config.GetChannelColorReference(id);
-                byte[,] mapping = CImage.CreateColorMapping(colorReference);
-                colorMappingArr.Add(mapping);
-            }
 
             while (m_scanning)
             {
@@ -473,11 +326,10 @@ namespace confocal_core
                 }
 
                 m_scanData.SetImageFrame(convertData.Frame);
-                // m_scanData.GetScanImage().SetCurrentLine(convertData.Line);
                 for (i = 0; i < activatedChannelNum; i++)
                 {
                     byte[] bgrData = m_scanData.ScanImage.BGRData[i];
-                    byte[,] mapping = colorMappingArr.ElementAt(i);
+                    byte[,] mapping = m_params.ColorMappingArr[i];
 
                     index = xSampleCountPerLine * convertData.Line;
                     Array.Copy(convertData.NSamples[i], 0, m_scanData.ScanImage.Data[i], index, xSampleCountPerLine);
