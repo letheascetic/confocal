@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTest));
             this.cbxLaser = new System.Windows.Forms.ComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -71,6 +72,8 @@
             this.lb405 = new System.Windows.Forms.Label();
             this.chbx405 = new System.Windows.Forms.CheckBox();
             this.btnArrayTest = new System.Windows.Forms.Button();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.gbx640.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -83,6 +86,7 @@
             this.gbxChan405.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Cp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb405HV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxLaser
@@ -589,7 +593,7 @@
             // 
             // btnArrayTest
             // 
-            this.btnArrayTest.Location = new System.Drawing.Point(276, 275);
+            this.btnArrayTest.Location = new System.Drawing.Point(12, 259);
             this.btnArrayTest.Name = "btnArrayTest";
             this.btnArrayTest.Size = new System.Drawing.Size(108, 61);
             this.btnArrayTest.TabIndex = 32;
@@ -597,11 +601,25 @@
             this.btnArrayTest.UseVisualStyleBackColor = true;
             this.btnArrayTest.Click += new System.EventHandler(this.btnArrayTest_Click);
             // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(178, 269);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox.TabIndex = 33;
+            this.pictureBox.TabStop = false;
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 442);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.btnArrayTest);
             this.Controls.Add(this.gbx640);
             this.Controls.Add(this.gbx561);
@@ -632,6 +650,7 @@
             this.gbxChan405.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tb405Cp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb405HV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -681,6 +700,8 @@
         private System.Windows.Forms.Label lb405;
         private System.Windows.Forms.CheckBox chbx405;
         private System.Windows.Forms.Button btnArrayTest;
+        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

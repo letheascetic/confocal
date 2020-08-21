@@ -327,9 +327,6 @@ namespace confocal_core
 
             int i, index;
 
-            Bitmap[] CanvasArr = m_scanData.ScanImage.DisplayImage;
-            Rectangle lockBitsZoom = new Rectangle(0, 0, CanvasArr[0].Width, CanvasArr[0].Height);
-
             while (m_scanning)
             {
                 if (m_scanData.ConvertQueueSize() == 0)
@@ -375,28 +372,28 @@ namespace confocal_core
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+            
+            Rectangle lockBitsZoom = new Rectangle(0, 0, m_config.GetScanXPoints(), m_config.GetScanYPoints());
+            
+            double timePerFrame = 1.0f / m_params.Fps;
+            double updateNum = timePerFrame / 0.2;
+            int updateLines = (int)Math.Ceiling(scanRows / updateNum);
 
             int i, line = -1;
 
-            Bitmap[] CanvasArr = m_scanData.ScanImage.DisplayImage;
-            Rectangle lockBitsZoom = new Rectangle(0, 0, CanvasArr[0].Width, CanvasArr[0].Height);
-
             while (m_scanning)
             {
-                if (line != m_scanData.ScanImage.Line)
+                if (line > m_scanData.ScanImage.Line || (m_scanData.ScanImage.Line - line) >= updateLines)
                 {
                     line = m_scanData.ScanImage.Line;
 
                     for (i = 0; i < activatedChannelNum; i++)
                     {
-                        byte[] bgrData = m_scanData.ScanImage.BGRData[i];
                         byte[,] mapping = m_params.ColorMappingArr[i];
-
-                        Bitmap Canvas = CanvasArr[i];
-                        BitmapData CanvasData = Canvas.LockBits(lockBitsZoom, ImageLockMode.WriteOnly, Canvas.PixelFormat);
-                        Marshal.Copy(bgrData, 0, CanvasData.Scan0, bgrData.Length);
-                        Canvas.UnlockBits(CanvasData);
+                        m_scanData.ScanImage.UpdateDisplayImage(i, mapping, lockBitsZoom);
                     }
+
+                    Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
 
                     if (line + 1 == scanRows)
                     {

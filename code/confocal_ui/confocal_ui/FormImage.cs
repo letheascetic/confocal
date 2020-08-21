@@ -21,6 +21,7 @@ namespace confocal_ui
         private ScanTask m_scanTask;
         private Params m_params;
         private Config m_config;
+        private Bitmap[] m_bitmapArr;
         private KeyValuePair<TabPage, PictureBox>[] m_pagePicPairs;
         private KeyValuePair<TabPage, int>[] m_pageIndexPairs;
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +42,7 @@ namespace confocal_ui
         public void ScanTaskCreated()
         {
             Logger.Info(string.Format("FormImage scan task[{0}|{1}] created.", m_scanTask.TaskId, m_scanTask.TaskName));
+            UpdateVariables();
             UpdateControlers();
             this.Activate();
         }
@@ -84,7 +86,15 @@ namespace confocal_ui
                 new KeyValuePair<TabPage, int>(tpg488, (int)CHAN_ID.WAVELENGTH_488_NM),
                 new KeyValuePair<TabPage, int>(tpg561, (int)CHAN_ID.WAVELENGTH_561_NM),
                 new KeyValuePair<TabPage, int>(tpg640, (int)CHAN_ID.WAVELENGTH_640_NM)
-            }; 
+            };
+
+            int channelNum = m_config.GetChannelNum();
+            m_bitmapArr = new Bitmap[channelNum];
+            
+            for (int i = 0; i < channelNum; i++)
+            {
+                m_bitmapArr[i] = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
+            }
         }
 
         private void InitControlers()
@@ -110,6 +120,14 @@ namespace confocal_ui
             pbx640u.Size = pbx640.Size;
         }
 
+        private void UpdateVariables()
+        {
+            for (int i = 0; i < m_config.GetChannelNum(); i++)
+            {
+                m_bitmapArr[i] = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
+            }
+        }
+
         private void UpdateControlers()
         {
             this.Text = m_scanTask.TaskName;
@@ -120,13 +138,6 @@ namespace confocal_ui
             
             UpdateRTControlers();
             UpdateTabPages();
-
-            byte[] data = new byte[m_config.GetScanXPoints() * m_config.GetScanYPoints()];
-            Bitmap bmp = CImage.CreateBitmap(data, m_config.GetScanXPoints(), m_config.GetScanYPoints());
-            this.pbx405.Image = bmp;
-            this.pbx488.Image = bmp;
-            this.pbx561.Image = bmp;
-            this.pbx640.Image = bmp;
         }
 
         private void UpdateRTControlers()
@@ -179,9 +190,8 @@ namespace confocal_ui
             int index = GetMappingIndex(tabControl.SelectedTab);
             if (index >= 0)
             {
-                // Logger.Info(string.Format("convert frame[{0}] to image.", m_currentFrame));
                 PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
-                pbx.Image = m_scanTask.GetScanData().ScanImage.DisplayImage[index];
+                pbx.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(index, ref m_bitmapArr[index]);
             }
         }
 

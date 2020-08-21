@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace confocal_core
@@ -62,11 +63,18 @@ namespace confocal_core
         }
     }
 
-    public struct ImageData
+    public class ImageData
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private readonly object m_locker = new object();        // 锁
         private long m_frame;
         private int m_line;
-
+        private short[][] m_data;
+        private byte[][] m_bgrData;
+        private Bitmap[] m_displayImages;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// 当前帧
         /// </summary>
@@ -76,13 +84,13 @@ namespace confocal_core
         /// </summary>
         public int Line { get { return m_line; } set { m_line = value; } }
         /// <summary>
-        /// 数据
+        /// 原始图像数据
         /// </summary>
-        public short[][] Data { get; set; }
-
-        public byte[][] BGRData { get; set; }
-
-        public Bitmap[] DisplayImage { get; set; }
+        public short[][] Data { get { return m_data; } set { m_data = value; } }
+        /// <summary>
+        /// 伪彩色图像数据
+        /// </summary>
+        public byte[][] BGRData { get { return m_bgrData; } set { m_bgrData = value; } }
 
         public ImageData(int activatedChannelNum, int scanXPoints, int scanYPoints)
         {
@@ -91,32 +99,38 @@ namespace confocal_core
             m_line = -1;
             Data = new short[activatedChannelNum][];
             BGRData = new byte[activatedChannelNum][];
-            DisplayImage = new Bitmap[activatedChannelNum];
+            m_displayImages = new Bitmap[activatedChannelNum];
             for (int i = 0; i < activatedChannelNum; i++)
             {
                 Data[i] = new short[samplesPerFrame];
                 BGRData[i] = new byte[samplesPerFrame * 3];
-                DisplayImage[i] = new Bitmap(scanXPoints, scanYPoints, PixelFormat.Format24bppRgb);
+                m_displayImages[i] = new Bitmap(scanXPoints, scanYPoints, PixelFormat.Format24bppRgb);
             }
         }
 
-    }
-
-    /// <summary>
-    /// 帧数据
-    /// </summary>
-    public struct FrameData
-    {
-        public long Frame { get; }
-        public short[][] Data { get; }
-
-        public FrameData(long frame, short[][] data)
+        public Bitmap GetDisplayImage(int index, ref Bitmap destnation)
         {
-            Frame = frame;
-            Data = data;
+            lock (m_locker)
+            {
+                destnation = (Bitmap)m_displayImages[index].Clone();
+                return destnation;
+            }
         }
+
+        public void UpdateDisplayImage(int index, byte[,] mapping, Rectangle lockBitsZoom)
+        {
+            lock (m_locker)
+            {
+                byte[] bgrData = m_bgrData[index];
+                Bitmap canvas = m_displayImages[index];
+                BitmapData canvasData = canvas.LockBits(lockBitsZoom, ImageLockMode.WriteOnly, canvas.PixelFormat);
+                Marshal.Copy(bgrData, 0, canvasData.Scan0, bgrData.Length);
+                canvas.UnlockBits(canvasData);
+            }
+        }
+        
     }
-    
+
     public class DataPool
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -134,8 +148,9 @@ namespace confocal_core
         {
             m_sampleQueue = new ConcurrentQueue<SampleData>();
             m_convertQueue = new ConcurrentQueue<ConvertData>();
-            m_imageData = new ImageData();
-        } 
+            confocal_core.Config config = confocal_core.Config.GetConfig();
+            m_imageData = new ImageData(config.GetChannelNum(), config.GetScanXPoints(), config.GetScanYPoints());
+        }
 
         public void Config()
         {
