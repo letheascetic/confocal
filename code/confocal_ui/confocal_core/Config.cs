@@ -1,4 +1,5 @@
 ﻿using log4net;
+using NationalInstruments.DAQmx;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -50,6 +51,7 @@ namespace confocal_core
         API_FAILED_NI_CONFIG_AO_TASK_EXCEPTION = 0x00000800,
         API_FAILED_NI_CONFIG_DO_TASK_EXCEPTION,
         API_FAILED_NI_CONFIG_AI_TASK_EXCEPTION,
+        API_FAILED_NI_CONFIG_CI_TASK_EXCEPTION,
         API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED,
         API_FAILED_NI_START_TASK_EXCEPTION,
         /* error for scan task */
@@ -723,6 +725,135 @@ namespace confocal_core
         }
 
         #endregion
+
+    }
+
+    public enum ACQ_DEVICE
+    {
+        PMT = 0x00,
+        APD = 0x01
+    }
+
+    public enum ACQ_BOARD
+    {
+        NICARD = 0x00,
+        ATS9440 = 0x01
+    }
+
+    public class SysConfig
+    {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        private volatile static SysConfig pConfig = null;
+        private static readonly object locker = new object();
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private ACQ_BOARD m_acqBoard;
+        private ACQ_DEVICE m_acqDevice;
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private Device m_board;
+        private string m_boardName;
+        private string m_xGalvoAoChannel;
+        private string m_yGalvoAoChannel;
+        private string m_y2GalvoAoChannel;
+
+        private string[] m_pmtAiChannels;
+        private string[] m_apdCiChannels;
+
+        public static string[] GetDeviceNames()
+        {
+            return DaqSystem.Local.Devices;
+        }
+
+        public static string GetDeviceType(string device)
+        {
+            return DaqSystem.Local.LoadDevice(device).ProductType;
+        }
+
+        public static string[] GetAoChannels()
+        {
+            return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.AO, PhysicalChannelAccess.External);
+        }
+
+        public static string[] GetAiChannels()
+        {
+            return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.AI, PhysicalChannelAccess.External);
+        }
+
+        public static string[] GetDoPorts()
+        {
+            return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.DOPort, PhysicalChannelAccess.External);
+        }
+
+        public static string[] GetCiChannels()
+        {
+            return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.CI, PhysicalChannelAccess.External);
+        }
+
+        public static SysConfig GetSysConfig()
+        {
+            if (pConfig == null)
+            {
+                lock (locker)
+                {
+                    if (pConfig == null)
+                    {
+                        pConfig = new SysConfig();
+                    }
+                }
+            }
+            return pConfig;
+        }
+
+        public ACQ_DEVICE GetAcqDevice()
+        {
+            return m_acqDevice;
+        }
+
+        public API_RETURN_CODE SetAcqDevice(ACQ_DEVICE acqDevice)
+        {
+            Logger.Info(string.Format("set acq device: [{0}].", acqDevice));
+            m_acqDevice = acqDevice;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public ACQ_BOARD GetAcqBoard()
+        {
+            return m_acqBoard;
+        }
+
+        public API_RETURN_CODE SetAcqBoard(ACQ_BOARD acqBoard)
+        {
+            Logger.Info(string.Format("set acq board: [{0}].", acqBoard));
+            m_acqBoard = acqBoard;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private SysConfig()
+        {
+            m_acqBoard = ACQ_BOARD.NICARD;
+            m_acqDevice = ACQ_DEVICE.PMT;
+
+            LoadDevice();
+
+        }
+
+        private void LoadDevice()
+        {
+            string[] deviceNames = DaqSystem.Local.Devices;
+            if (deviceNames.Length > 0)
+            {
+                m_boardName = deviceNames[0];
+                m_board = DaqSystem.Local.LoadDevice(m_boardName);
+
+
+
+            }
+            else
+            {
+                m_boardName = null;
+                m_board = null;
+            }
+        }
 
     }
 }

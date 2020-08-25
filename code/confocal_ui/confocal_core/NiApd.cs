@@ -3,29 +3,21 @@ using NationalInstruments;
 using NationalInstruments.DAQmx;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace confocal_core
 {
-    public delegate void SamplesReceivedEventHandler(object sender, short[][] samples);
-
-    /// <summary>
-    /// NI板卡接口层
-    /// </summary>
-    public class NiCard
+    public class NiApd
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
-        private volatile static NiCard m_card = null;
+        private volatile static NiApd m_card = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly string NI_CARD_NAME_DEFAULT = "Dev1";
         private static readonly string TWO_MIRROR_AO_CHANNELS = "ao0:1";
         private static readonly string THREE_MIRROR_AO_CHANNELS = "ao0:2";
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        public SamplesReceivedEventHandler SamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
         private Params m_params;
@@ -33,12 +25,10 @@ namespace confocal_core
 
         private Task m_aoTask;
         private Task m_doTask;
-        private Task m_aiTask;
-        private AnalogUnscaledReader m_aiUnscaledReader;
+        private Task m_ciTask;
+        private CounterMultiChannelReader m_ciReader;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        public static NiCard CreateInstance()
+        public static NiApd CreateInstance()
         {
             if (m_card == null)
             {
@@ -46,7 +36,7 @@ namespace confocal_core
                 {
                     if (m_card == null)
                     {
-                        m_card = new NiCard();
+                        m_card = new NiApd();
                     }
                 }
             }
@@ -75,7 +65,7 @@ namespace confocal_core
                 return code;
             }
 
-            code = ConfigAiTask();
+            code = ConfigCiTask();
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
                 Stop();
@@ -125,23 +115,23 @@ namespace confocal_core
                 m_doTask = null;
             }
 
-            if (m_aiTask != null)
+            if (m_ciTask != null)
             {
                 try
                 {
-                    m_aiTask.Stop();
-                    m_aiTask.Dispose();
+                    m_ciTask.Stop();
+                    m_ciTask.Dispose();
                 }
                 catch (DaqException e)
                 {
-                    Logger.Error("stop ai task exception: [{0}].", e);
+                    Logger.Error("stop ci task exception: [{0}].", e);
                 }
-                m_aiTask = null;
-                m_aiUnscaledReader = null;
+                m_ciTask = null;
+                m_ciReader = null;
             }
         }
 
-        private NiCard()
+        private NiApd()
         {
             m_config = Config.GetConfig();
             m_params = Params.GetParams();
@@ -149,8 +139,8 @@ namespace confocal_core
 
             m_aoTask = null;
             m_doTask = null;
-            m_aiTask = null;
-            m_aiUnscaledReader = null;
+            m_ciTask = null;
+            m_ciReader = null;
         }
 
         /// <summary>
@@ -180,7 +170,7 @@ namespace confocal_core
                     Logger.Info(string.Format("route ao sample clock to PFI0."));
                     m_aoTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/", NI_CARD_NAME_DEFAULT, "/", "PFI0");
                 }
-                
+
                 // 写入波形
                 AnalogMultiChannelWriter writer = new AnalogMultiChannelWriter(m_aoTask.Stream);
                 AnalogWaveform<double>[] waves;
@@ -252,57 +242,38 @@ namespace confocal_core
         }
 
         /// <summary>
-        /// 配置Ai采集任务
+        /// 配置CI采集任务
         /// </summary>
         /// <returns></returns>
-        private API_RETURN_CODE ConfigAiTask()
+        private API_RETURN_CODE ConfigCiTask()
         {
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
-            //if (m_config.GetActivatedChannelNum() == 0)
-            //{
-            //    Logger.Info(string.Format("no channel activated."));
-            //    return API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
-            //}
 
             try
             {
-                m_aiTask = new Task();
+                m_ciTask = new Task();
 
-                m_aiTask.AIChannels.CreateVoltageChannel(GetAiPhysicalChannelName(), "", AITerminalConfiguration.Differential, -5.0, 5.0, AIVoltageUnits.Volts);
-                m_aiTask.Control(TaskAction.Verify);
+                m_ciTask.CIChannels.CreateCountEdgesChannel("/Dev1/ctr0", "", CICountEdgesActiveEdge.Rising, 0, CICountEdgesCountDirection.Up);
+                m_ciTask.Control(TaskAction.Verify);
 
-                m_aiTask.Timing.SampleClockRate = m_params.AoSampleRate;
-                m_aiTask.Timing.ConfigureSampleClock("",
-                    m_aiTask.Timing.SampleClockRate,
+                m_ciTask.Timing.SampleClockRate = m_params.AoSampleRate;
+                m_ciTask.Timing.ConfigureSampleClock("/Dev1/ao/SampleClock",
+                    m_ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
-                    SampleQuantityMode.FiniteSamples,
+                    SampleQuantityMode.ContinuousSamples,
                     m_params.SampleCountPerFrame);
 
-                // 设置Ai Start Trigger源为PFI4，PFI4与P0.0物理直连，接收Do的输出信号，作为触发
-                string source = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI4");
-                m_aiTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
-                m_aiTask.Triggers.StartTrigger.Retriggerable = true;        // 设置为允许重触发
+                m_ciTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
+                m_ciTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(EveryNSamplesRead);
 
-                // 路由AI Sample Clcok到PFI2， AI Convert Clock到PFI3
-                if (m_config.Debugging)
-                {
-                    Logger.Info(string.Format("route ai sample clock to FFI2, ai convert clock to PFI3."));
-                    m_aiTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI2"); ;
-                    m_aiTask.ExportSignals.AIConvertClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI3"); ;
-                }
-
-                m_aiTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
-                m_aiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(EveryNSamplesRead);
-
-                m_aiUnscaledReader = new AnalogUnscaledReader(m_aiTask.Stream);
-                m_aiUnscaledReader.SynchronizeCallbacks = false;
+                m_ciReader = new CounterMultiChannelReader(m_ciTask.Stream);
+                m_ciReader.SynchronizeCallbacks = false;
             }
             catch (Exception e)
             {
-                Logger.Error(string.Format("config ai task exception: [{0}].", e));
-                code = API_RETURN_CODE.API_FAILED_NI_CONFIG_AI_TASK_EXCEPTION;
+                Logger.Error(string.Format("config ci task exception: [{0}].", e));
+                code = API_RETURN_CODE.API_FAILED_NI_CONFIG_CI_TASK_EXCEPTION;
             }
-
             return code;
         }
 
@@ -315,7 +286,7 @@ namespace confocal_core
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
             try
             {
-                m_aiTask.Start();
+                m_ciTask.Start();
                 m_doTask.Start();
                 m_aoTask.Start();
             }
@@ -337,54 +308,13 @@ namespace confocal_core
         {
             try
             {
-                // 读取16位原始数据，每一行读取一次
-                short[,] originSamples = m_aiUnscaledReader.ReadInt16(m_params.ValidSampleCountPerLine);
-                AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
-
-                short[][] samples = new short[waves.Length][];
-                for (int i = 0; i < waves.Length; i++)
-                {
-                    samples[i] = waves[i].GetRawData();
-                }
-
-                if (SamplesReceived != null)
-                {
-                    SamplesReceived.Invoke(this, samples);
-                }
+                int[,] originSamples = m_ciReader.ReadMultiSampleInt32(m_params.ValidSampleCountPerLine);
+                Logger.Info(string.Format("every n samples read: [{0}].", originSamples.Length));
             }
             catch (Exception err)
             {
                 Logger.Error(string.Format("every n samples read exception: [{0}].", err));
             }
-        }
-
-        /// <summary>
-        /// 生成AI物理通道名
-        /// </summary>
-        /// <returns></returns>
-        private string GetAiPhysicalChannelName()
-        {
-            //List<string> activatedChannels = new List<string>();
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai0"));
-            //}
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai1"));
-            //}
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai2"));
-            //}
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai3"));
-            //}
-            //string physicalChannelName = string.Join(",", activatedChannels);
-            string physicalChannelName = string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai0:3");
-            Logger.Info(string.Format("ai physical channel name: [{0}].", physicalChannelName));
-            return physicalChannelName;
         }
 
         private string GetAoPhysicalChannelName()
@@ -407,5 +337,6 @@ namespace confocal_core
         {
             return string.Concat("/" + NI_CARD_NAME_DEFAULT + "/port0/line0");
         }
+
     }
 }

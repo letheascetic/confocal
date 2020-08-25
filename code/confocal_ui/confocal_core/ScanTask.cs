@@ -395,10 +395,10 @@ namespace confocal_core
 
                     Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
 
-                    if (line + 1 == scanRows)
-                    {
-                        Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
-                    }
+                    //if (line + 1 == scanRows)
+                    //{
+                    //    Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
+                    //}
                 }
             }
 
