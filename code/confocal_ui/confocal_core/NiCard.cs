@@ -396,5 +396,6 @@ namespace confocal_core
         {
             return m_sysConfig.GetAcqTriggerDoLine();
         }
+
     }
 }

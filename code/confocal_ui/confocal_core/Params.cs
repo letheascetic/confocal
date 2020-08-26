@@ -21,6 +21,7 @@ namespace confocal_core
         public static readonly double MAXIMUM_VOLTAGE_DIFF_PER_PIXEL = 0.2; // 像素间的最大电压差
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
+        private SysConfig m_sysConfig;
         private byte[][,] m_colorMappingArr;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -254,10 +255,13 @@ namespace confocal_core
 
             // 生成单行数字触发波形
             byte[] digitalTriggerSamplesPerLine = new byte[sampleCountPerLine];
+            int segEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
+                previousSampleCountPerLine + Params.DIGITAL_TRIGGER_PULSE_WIDTH : previousSampleCountPerLine + validSampleCountPerLine;
+
             for (int i = 0; i < sampleCountPerLine; i++)
             {
                 digitalTriggerSamplesPerLine[i] = 0x00;
-                if (i >= previousSampleCountPerLine && i < previousSampleCountPerLine + Params.DIGITAL_TRIGGER_PULSE_WIDTH)
+                if (i >= previousSampleCountPerLine && i < segEnd)
                 {
                     digitalTriggerSamplesPerLine[i] = 0x01;
                 }
@@ -381,14 +385,21 @@ namespace confocal_core
             byte[] digitalTriggerSamplesPerLine = new byte[sampleCountPerLine];
             int firstValidSamplesIndex = previousSampleCountPerLine;
             int secondValidSamplesIndex = previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine;
+
+            int segOneEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
+                firstValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : firstValidSamplesIndex + validSampleCountPerLine;
+
+            int segTwoEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
+                secondValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : secondValidSamplesIndex + validSampleCountPerLine;
+
             for (int i = 0; i < sampleCountPerLine; i++)
             {
                 digitalTriggerSamplesPerLine[i] = 0x00;
-                if (i >= firstValidSamplesIndex && i < firstValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH)
+                if (i >= firstValidSamplesIndex && i < segOneEnd)
                 {
                     digitalTriggerSamplesPerLine[i] = 0x01;
                 }
-                else if (i >= secondValidSamplesIndex && i < secondValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH)
+                else if (i >= secondValidSamplesIndex && i < segTwoEnd)
                 {
                     digitalTriggerSamplesPerLine[i] = 0x01;
                 }
@@ -418,6 +429,7 @@ namespace confocal_core
 
         private Params()
         {
+            m_sysConfig = SysConfig.GetSysConfig();
             m_config = Config.GetConfig();
             int channelNum = m_config.GetChannelNum();
             m_colorMappingArr = new byte[channelNum][,];
