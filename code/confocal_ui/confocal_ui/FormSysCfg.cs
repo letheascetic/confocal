@@ -63,6 +63,10 @@ namespace confocal_ui
             cbxAcqTrigger.Items.AddRange(doLines);
             cbxAcqTrigger.SelectedIndex = cbxAcqTrigger.FindString(m_sysConfig.GetAcqTriggerDoLine());
 
+            string[] startSyncSignals = SysConfig.GetStartSyncSignals();
+            cbxStartSync.Items.AddRange(startSyncSignals);
+            cbxStartSync.SelectedIndex = cbxStartSync.FindString(m_sysConfig.GetStartSyncSignal());
+
             string[] ciChannels = SysConfig.GetCiChannels();
             cbxApd405Ci.Items.AddRange(ciChannels);
             cbxApd488Ci.Items.AddRange(ciChannels);
@@ -134,6 +138,7 @@ namespace confocal_ui
             m_sysConfig.SetAcqDevice(acqDevice);
 
             m_sysConfig.SetAcqTriggerDoLine(cbxAcqTrigger.SelectedItem.ToString());
+            m_sysConfig.SetStartSyncSignal(cbxStartSync.SelectedItem.ToString());
 
             m_sysConfig.SetPmtAiChannel(CHAN_ID.WAVELENGTH_405_NM, cbxPmt405Ai.SelectedItem.ToString());
             m_sysConfig.SetPmtAiChannel(CHAN_ID.WAVELENGTH_488_NM, cbxPmt488Ai.SelectedItem.ToString());
@@ -165,6 +170,7 @@ namespace confocal_ui
             cbxY2Galvo.Items.Clear();
 
             cbxAcqTrigger.Items.Clear();
+            cbxStartSync.Items.Clear();
 
             cbxPmt405Ai.Items.Clear();
             cbxPmt488Ai.Items.Clear();

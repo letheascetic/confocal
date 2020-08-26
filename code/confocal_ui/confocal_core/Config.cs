@@ -754,7 +754,8 @@ namespace confocal_core
         private string m_yGalvoAoChannel;   // Y振镜控制电压 - AO输出
         private string m_y2GalvoAoChannel;  // Y补偿镜控制电压 - AO输出
 
-        private string m_acqTriggerDoLine;  // 采集触发输出信号[行触发]，APD和PMT模式共用 - DO输出
+        private string m_acqTriggerDoLine;      // 采集触发输出信号[行触发]，APD和PMT模式共用 - DO输出
+        private string m_acqStartSyncSignal;    // 采集启动同步信号[Start Trigger]，使AO、DO同时工作
 
         private string[] m_pmtAiChannels;   // PMT输出电压信号 - AI输入
         private string m_pmtTriggerInPfi;   // PMT采集触发输入信号 - PFI
@@ -801,6 +802,21 @@ namespace confocal_core
             foreach(string terminal in terminals)
             {
                 if (terminal.Contains("/PFI"))
+                {
+                    pfis.Add(terminal);
+                }
+            }
+            return pfis.ToArray();
+        }
+
+        public static string[] GetStartSyncSignals()
+        {
+            string[] terminals = DaqSystem.Local.GetTerminals(TerminalTypes.Basic);
+            List<string> pfis = new List<string>();
+
+            foreach (string terminal in terminals)
+            {
+                if (terminal.Contains("/StartTrigger"))
                 {
                     pfis.Add(terminal);
                 }
@@ -946,6 +962,17 @@ namespace confocal_core
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        public string GetStartSyncSignal()
+        {
+            return m_acqStartSyncSignal;
+        }
+
+        public API_RETURN_CODE SetStartSyncSignal(string startSyncSignal)
+        {
+            m_acqStartSyncSignal = startSyncSignal;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         private SysConfig()
         {
             m_acqBoard = ACQ_BOARD.NICARD;
@@ -960,6 +987,7 @@ namespace confocal_core
             m_y2GalvoAoChannel = string.Concat(deviceName, "/ao2");
 
             m_acqTriggerDoLine = string.Concat(deviceName, "/port0/line0");
+            m_acqStartSyncSignal = string.Concat("/", deviceName, "/ao/StartTrigger");
 
             string[] aiChannels = GetAiChannels();
             m_pmtAiChannels = new string[] {

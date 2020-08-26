@@ -41,6 +41,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.gbxScan = new System.Windows.Forms.GroupBox();
+            this.lbInfo = new System.Windows.Forms.Label();
             this.cbxY2Galvo = new System.Windows.Forms.ComboBox();
             this.cbxYGalvo = new System.Windows.Forms.ComboBox();
             this.cbxXGalvo = new System.Windows.Forms.ComboBox();
@@ -86,8 +87,9 @@
             this.cbxPmt405Ai = new System.Windows.Forms.ComboBox();
             this.lbAi = new System.Windows.Forms.Label();
             this.lbPmt405 = new System.Windows.Forms.Label();
-            this.lbInfo = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.cbxStartSync = new System.Windows.Forms.ComboBox();
+            this.lbStartSync = new System.Windows.Forms.Label();
             this.gbxGalv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFieldSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResponseTime)).BeginInit();
@@ -239,7 +241,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(252, 470);
+            this.btnOk.Location = new System.Drawing.Point(252, 496);
             this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(56, 30);
@@ -250,7 +252,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(317, 470);
+            this.btnCancel.Location = new System.Drawing.Point(317, 496);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 30);
@@ -276,6 +278,16 @@
             this.gbxScan.TabIndex = 8;
             this.gbxScan.TabStop = false;
             this.gbxScan.Text = "扫描控制";
+            // 
+            // lbInfo
+            // 
+            this.lbInfo.AutoSize = true;
+            this.lbInfo.ForeColor = System.Drawing.Color.Red;
+            this.lbInfo.Location = new System.Drawing.Point(247, 11);
+            this.lbInfo.Name = "lbInfo";
+            this.lbInfo.Size = new System.Drawing.Size(113, 12);
+            this.lbInfo.TabIndex = 20;
+            this.lbInfo.Text = "No NI Board Found.";
             // 
             // cbxY2Galvo
             // 
@@ -333,13 +345,15 @@
             // 
             // gbxAcqMode
             // 
+            this.gbxAcqMode.Controls.Add(this.cbxStartSync);
             this.gbxAcqMode.Controls.Add(this.cbxAcqTrigger);
             this.gbxAcqMode.Controls.Add(this.lbAcqTrigger);
+            this.gbxAcqMode.Controls.Add(this.lbStartSync);
             this.gbxAcqMode.Controls.Add(this.rbtnApd);
             this.gbxAcqMode.Controls.Add(this.rbtnPmt);
             this.gbxAcqMode.Location = new System.Drawing.Point(9, 243);
             this.gbxAcqMode.Name = "gbxAcqMode";
-            this.gbxAcqMode.Size = new System.Drawing.Size(364, 47);
+            this.gbxAcqMode.Size = new System.Drawing.Size(364, 73);
             this.gbxAcqMode.TabIndex = 9;
             this.gbxAcqMode.TabStop = false;
             this.gbxAcqMode.Text = "采集方式";
@@ -347,7 +361,7 @@
             // cbxAcqTrigger
             // 
             this.cbxAcqTrigger.FormattingEnabled = true;
-            this.cbxAcqTrigger.Location = new System.Drawing.Point(224, 19);
+            this.cbxAcqTrigger.Location = new System.Drawing.Point(224, 45);
             this.cbxAcqTrigger.Name = "cbxAcqTrigger";
             this.cbxAcqTrigger.Size = new System.Drawing.Size(123, 20);
             this.cbxAcqTrigger.TabIndex = 20;
@@ -355,7 +369,7 @@
             // lbAcqTrigger
             // 
             this.lbAcqTrigger.AutoSize = true;
-            this.lbAcqTrigger.Location = new System.Drawing.Point(159, 22);
+            this.lbAcqTrigger.Location = new System.Drawing.Point(159, 48);
             this.lbAcqTrigger.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbAcqTrigger.Name = "lbAcqTrigger";
             this.lbAcqTrigger.Size = new System.Drawing.Size(53, 12);
@@ -388,7 +402,7 @@
             // 
             this.panAcq.BackColor = System.Drawing.Color.Transparent;
             this.panAcq.Controls.Add(this.tbcAcq);
-            this.panAcq.Location = new System.Drawing.Point(9, 296);
+            this.panAcq.Location = new System.Drawing.Point(9, 322);
             this.panAcq.Name = "panAcq";
             this.panAcq.Size = new System.Drawing.Size(364, 170);
             this.panAcq.TabIndex = 10;
@@ -720,19 +734,9 @@
             this.lbPmt405.TabIndex = 46;
             this.lbPmt405.Text = "405nm";
             // 
-            // lbInfo
-            // 
-            this.lbInfo.AutoSize = true;
-            this.lbInfo.ForeColor = System.Drawing.Color.Red;
-            this.lbInfo.Location = new System.Drawing.Point(247, 11);
-            this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Size = new System.Drawing.Size(113, 12);
-            this.lbInfo.TabIndex = 20;
-            this.lbInfo.Text = "No NI Board Found.";
-            // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(9, 470);
+            this.btnSearch.Location = new System.Drawing.Point(9, 496);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(56, 30);
             this.btnSearch.TabIndex = 11;
@@ -740,11 +744,29 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // cbxStartSync
+            // 
+            this.cbxStartSync.FormattingEnabled = true;
+            this.cbxStartSync.Location = new System.Drawing.Point(224, 19);
+            this.cbxStartSync.Name = "cbxStartSync";
+            this.cbxStartSync.Size = new System.Drawing.Size(123, 20);
+            this.cbxStartSync.TabIndex = 21;
+            // 
+            // lbStartSync
+            // 
+            this.lbStartSync.AutoSize = true;
+            this.lbStartSync.Location = new System.Drawing.Point(159, 22);
+            this.lbStartSync.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbStartSync.Name = "lbStartSync";
+            this.lbStartSync.Size = new System.Drawing.Size(53, 12);
+            this.lbStartSync.TabIndex = 22;
+            this.lbStartSync.Text = "启动同步";
+            // 
             // FormSysCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 511);
+            this.ClientSize = new System.Drawing.Size(384, 531);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.panAcq);
             this.Controls.Add(this.gbxAcqMode);
@@ -840,5 +862,7 @@
         private System.Windows.Forms.Label lbApdTriggerIn;
         private System.Windows.Forms.Label lbInfo;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ComboBox cbxStartSync;
+        private System.Windows.Forms.Label lbStartSync;
     }
 }

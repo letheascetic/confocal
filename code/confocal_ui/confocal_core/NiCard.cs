@@ -27,6 +27,7 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         public SamplesReceivedEventHandler SamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private SysConfig m_sysConfig;
         private Config m_config;
         private Params m_params;
         private Waver m_waver;
@@ -34,9 +35,11 @@ namespace confocal_core
         private Task m_aoTask;
         private Task m_doTask;
         private Task m_aiTask;
+        private Task[] m_ciTasks;
         private AnalogUnscaledReader m_aiUnscaledReader;
+        private CounterMultiChannelReader[] m_ciMultiChannelReaderTasks;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         public static NiCard CreateInstance()
         {
@@ -143,6 +146,7 @@ namespace confocal_core
 
         private NiCard()
         {
+            m_sysConfig = SysConfig.GetSysConfig();
             m_config = Config.GetConfig();
             m_params = Params.GetParams();
             m_waver = Waver.GetWaver();
@@ -150,7 +154,9 @@ namespace confocal_core
             m_aoTask = null;
             m_doTask = null;
             m_aiTask = null;
+            m_ciTasks = null;
             m_aiUnscaledReader = null;
+            m_ciMultiChannelReaderTasks = null;
         }
 
         /// <summary>
@@ -175,11 +181,11 @@ namespace confocal_core
                     m_params.SampleCountPerFrame);
 
                 // 路由Ao Sample Clcok到PFI0
-                if (m_config.Debugging)
-                {
-                    Logger.Info(string.Format("route ao sample clock to PFI0."));
-                    m_aoTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/", NI_CARD_NAME_DEFAULT, "/", "PFI0");
-                }
+                //if (m_config.Debugging)
+                //{
+                //    Logger.Info(string.Format("route ao sample clock to PFI0."));
+                //    m_aoTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/", NI_CARD_NAME_DEFAULT, "/", "PFI0");
+                //}
                 
                 // 写入波形
                 AnalogMultiChannelWriter writer = new AnalogMultiChannelWriter(m_aoTask.Stream);
@@ -364,40 +370,26 @@ namespace confocal_core
         /// <returns></returns>
         private string GetAiPhysicalChannelName()
         {
-            //List<string> activatedChannels = new List<string>();
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai0"));
-            //}
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai1"));
-            //}
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai2"));
-            //}
-            //if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.ON)
-            //{
-            //    activatedChannels.Add(string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai3"));
-            //}
-            //string physicalChannelName = string.Join(",", activatedChannels);
-            string physicalChannelName = string.Concat("/", NI_CARD_NAME_DEFAULT, "/ai0:3");
+            string physicalChannelName = string.Join(",", m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_405_NM),
+                m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_488_NM),
+                m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_561_NM),
+                m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_640_NM));
+
             Logger.Info(string.Format("ai physical channel name: [{0}].", physicalChannelName));
             return physicalChannelName;
         }
 
         private string GetAoPhysicalChannelName()
         {
-            string physicalChannelName = string.Concat("/", NI_CARD_NAME_DEFAULT);
+            string physicalChannelName = string.Empty;
             if (m_config.GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE)
             {
-
-                physicalChannelName = string.Concat(physicalChannelName, "/", THREE_MIRROR_AO_CHANNELS);
+                physicalChannelName = string.Concat(m_sysConfig.GetXGalvoAoChannel(), ",",
+                    m_sysConfig.GetYGalvoAoChannel(), ",", m_sysConfig.GetY2GalvoAoChannel());
             }
             else
             {
-                physicalChannelName = string.Concat(physicalChannelName, "/", TWO_MIRROR_AO_CHANNELS);
+                physicalChannelName = string.Concat(m_sysConfig.GetXGalvoAoChannel(), ",", m_sysConfig.GetYGalvoAoChannel());
             }
             Logger.Info(string.Format("ao physical channel name: [{0}].", physicalChannelName));
             return physicalChannelName;
@@ -405,7 +397,8 @@ namespace confocal_core
 
         private string GetDoPhysicalChannelName()
         {
-            return string.Concat("/" + NI_CARD_NAME_DEFAULT + "/port0/line0");
+            return m_sysConfig.GetAcqTriggerDoLine();
         }
+
     }
 }
