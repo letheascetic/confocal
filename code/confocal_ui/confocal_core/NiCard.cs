@@ -186,7 +186,10 @@ namespace confocal_core
                 //    Logger.Info(string.Format("route ao sample clock to PFI0."));
                 //    m_aoTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/", NI_CARD_NAME_DEFAULT, "/", "PFI0");
                 //}
-                
+
+                //string source = m_sysConfig.GetStartSyncSignal();
+                //m_aoTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
+
                 // 写入波形
                 AnalogMultiChannelWriter writer = new AnalogMultiChannelWriter(m_aoTask.Stream);
                 AnalogWaveform<double>[] waves;
@@ -232,16 +235,16 @@ namespace confocal_core
                     SampleQuantityMode.ContinuousSamples,
                     m_params.SampleCountPerFrame);
 
-                // 设置Do Start Trigger源为Ao Start Trigger，实现启动同步
-                string source = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/ao/StartTrigger");
+                // 设置Do Start Trigger源为Ao Start Trigger[默认]，实现启动同步
+                string source = m_sysConfig.GetStartSyncSignal();
                 m_doTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
 
                 // 路由Do Sample Clcok到PFI1
-                if (m_config.Debugging)
-                {
-                    Logger.Info(string.Format("route do sample clock to PFI1."));
-                    m_doTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI1");
-                }
+                //if (m_config.Debugging)
+                //{
+                //    Logger.Info(string.Format("route do sample clock to PFI1."));
+                //    m_doTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI1");
+                //}
 
                 m_doTask.Stream.WriteRegenerationMode = WriteRegenerationMode.AllowRegeneration;
 
@@ -264,17 +267,12 @@ namespace confocal_core
         private API_RETURN_CODE ConfigAiTask()
         {
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
-            //if (m_config.GetActivatedChannelNum() == 0)
-            //{
-            //    Logger.Info(string.Format("no channel activated."));
-            //    return API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
-            //}
 
             try
             {
                 m_aiTask = new Task();
 
-                m_aiTask.AIChannels.CreateVoltageChannel(GetAiPhysicalChannelName(), "", AITerminalConfiguration.Differential, -5.0, 5.0, AIVoltageUnits.Volts);
+                m_aiTask.AIChannels.CreateVoltageChannel(GetAiPhysicalChannelName(), "", AITerminalConfiguration.Differential, -10.0, 10.0, AIVoltageUnits.Volts);
                 m_aiTask.Control(TaskAction.Verify);
 
                 m_aiTask.Timing.SampleClockRate = m_params.AoSampleRate;
@@ -282,20 +280,20 @@ namespace confocal_core
                     m_aiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    m_params.SampleCountPerFrame);
+                    m_params.ValidSampleCountPerLine);
 
-                // 设置Ai Start Trigger源为PFI4，PFI4与P0.0物理直连，接收Do的输出信号，作为触发
-                string source = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI4");
+                // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
+                string source = m_sysConfig.GetPmtTriggerInPfi();
                 m_aiTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
                 m_aiTask.Triggers.StartTrigger.Retriggerable = true;        // 设置为允许重触发
 
                 // 路由AI Sample Clcok到PFI2， AI Convert Clock到PFI3
-                if (m_config.Debugging)
-                {
-                    Logger.Info(string.Format("route ai sample clock to FFI2, ai convert clock to PFI3."));
-                    m_aiTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI2"); ;
-                    m_aiTask.ExportSignals.AIConvertClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI3"); ;
-                }
+                //if (m_config.Debugging)
+                //{
+                //    Logger.Info(string.Format("route ai sample clock to FFI2, ai convert clock to PFI3."));
+                //    m_aiTask.ExportSignals.SampleClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI2"); ;
+                //    m_aiTask.ExportSignals.AIConvertClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI3"); ;
+                //}
 
                 m_aiTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
                 m_aiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(EveryNSamplesRead);
@@ -374,7 +372,6 @@ namespace confocal_core
                 m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_488_NM),
                 m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_561_NM),
                 m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_640_NM));
-
             Logger.Info(string.Format("ai physical channel name: [{0}].", physicalChannelName));
             return physicalChannelName;
         }
@@ -399,6 +396,5 @@ namespace confocal_core
         {
             return m_sysConfig.GetAcqTriggerDoLine();
         }
-
     }
 }

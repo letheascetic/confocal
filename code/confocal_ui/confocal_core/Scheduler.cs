@@ -104,8 +104,8 @@ namespace confocal_core
             m_waver.Generate();                         // 计算AO输出波形和触发信号
             scanTask.Config();                          // 配置扫描任务
 
-            // API_RETURN_CODE code = m_card.Start();      // 启动板卡
-            API_RETURN_CODE code = m_niApd.Start();
+            API_RETURN_CODE code = m_card.Start();      // 启动板卡
+            // API_RETURN_CODE code = m_niApd.Start();
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
                 Logger.Info(string.Format("start scan task[{0}|{1}] failed: [{2}].", scanTask.TaskId, scanTask.TaskName, code));
@@ -137,8 +137,8 @@ namespace confocal_core
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_NOT_FOUND;
             }
 
-            // m_card.Stop();
-            m_niApd.Stop();
+            m_card.Stop();
+            // m_niApd.Stop();
             scanTask.Stop();
             m_scanningTask = null;
 
