@@ -750,15 +750,19 @@ namespace confocal_core
         private ACQ_BOARD m_acqBoard;
         private ACQ_DEVICE m_acqDevice;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private Device m_board;
-        private string m_boardName;
-        private string m_xGalvoAoChannel;
-        private string m_yGalvoAoChannel;
-        private string m_y2GalvoAoChannel;
+        private string m_xGalvoAoChannel;   // X振镜控制电压 - AO输出
+        private string m_yGalvoAoChannel;   // Y振镜控制电压 - AO输出
+        private string m_y2GalvoAoChannel;  // Y补偿镜控制电压 - AO输出
 
-        private string[] m_pmtAiChannels;
-        private string[] m_apdCiChannels;
+        private string m_acqTriggerDoLine;  // 采集触发输出信号[行触发]，APD和PMT模式共用 - DO输出
 
+        private string[] m_pmtAiChannels;   // PMT输出电压信号 - AI输入
+        private string m_pmtTriggerInPfi;   // PMT采集触发输入信号 - PFI
+
+        private string[] m_apdCiChannels;   // APD脉冲信号 - CI计数[CI计数器是虚拟的，需要指定具体的PFI端口]
+        private string[] m_apdCiSrcPfis;    // APD脉冲计数器[CI]使用的PFI端口
+        private string[] m_apdCiGatePfis;   // APD门信号[Pause Trigger]使用的PFI端口，用于使能/禁能计数器计数
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public static string[] GetDeviceNames()
         {
             return DaqSystem.Local.Devices;
@@ -779,14 +783,29 @@ namespace confocal_core
             return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.AI, PhysicalChannelAccess.External);
         }
 
-        public static string[] GetDoPorts()
+        public static string[] GetDoLines()
         {
-            return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.DOPort, PhysicalChannelAccess.External);
+            return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.DOLine, PhysicalChannelAccess.External);
         }
 
         public static string[] GetCiChannels()
         {
             return DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.CI, PhysicalChannelAccess.External);
+        }
+
+        public static string[] GetPFIs()
+        {
+            string[] terminals = DaqSystem.Local.GetTerminals(TerminalTypes.Basic);
+            List<string> pfis = new List<string>();
+
+            foreach(string terminal in terminals)
+            {
+                if (terminal.Contains("/PFI"))
+                {
+                    pfis.Add(terminal);
+                }
+            }
+            return pfis.ToArray();
         }
 
         public static SysConfig GetSysConfig()
@@ -828,31 +847,151 @@ namespace confocal_core
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        public string GetXGalvoAoChannel()
+        {
+            return m_xGalvoAoChannel;
+        }
+
+        public API_RETURN_CODE SetXGalvoAoChannel(string aoChannel)
+        {
+            m_xGalvoAoChannel = aoChannel;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetYGalvoAoChannel()
+        {
+            return m_yGalvoAoChannel;
+        }
+
+        public API_RETURN_CODE SetYGalvoAoChannel(string aoChannel)
+        {
+            m_yGalvoAoChannel = aoChannel;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetY2GalvoAoChannel()
+        {
+            return m_y2GalvoAoChannel;
+        }
+
+        public API_RETURN_CODE SetY2GalvoAoChannel(string aoChannel)
+        {
+            m_y2GalvoAoChannel = aoChannel;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetAcqTriggerDoLine()
+        {
+            return m_acqTriggerDoLine;
+        }
+
+        public API_RETURN_CODE SetAcqTriggerDoLine(string doLine)
+        {
+            m_acqTriggerDoLine = doLine;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetPmtAiChannel(CHAN_ID id)
+        {
+            return m_pmtAiChannels[(int)id];
+        }
+
+        public API_RETURN_CODE SetPmtAiChannel(CHAN_ID id, string aiChannel)
+        {
+            m_pmtAiChannels[(int)id] = aiChannel;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetPmtTriggerInPfi()
+        {
+            return m_pmtTriggerInPfi;
+        }
+
+        public API_RETURN_CODE SetPmtTriggerInPfi(string pfi)
+        {
+            m_pmtTriggerInPfi = pfi;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetApdCiChannel(CHAN_ID id)
+        {
+            return m_apdCiChannels[(int)id];
+        }
+
+        public API_RETURN_CODE SetApdCiChannel(CHAN_ID id, string ciChannel)
+        {
+            m_apdCiChannels[(int)id] = ciChannel;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetApdCiSrcPfi(CHAN_ID id)
+        {
+            return m_apdCiSrcPfis[(int)id];
+        }
+
+        public API_RETURN_CODE SetApdCiSrcPfi(CHAN_ID id, string pfi)
+        {
+            m_apdCiSrcPfis[(int)id] = pfi;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public string GetApdCiGatePfi(CHAN_ID id)
+        {
+            return m_apdCiGatePfis[(int)id];
+        }
+
+        public API_RETURN_CODE SetApdCiGatePfi(CHAN_ID id, string pfi)
+        {
+            m_apdCiGatePfis[(int)id] = pfi;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         private SysConfig()
         {
             m_acqBoard = ACQ_BOARD.NICARD;
             m_acqDevice = ACQ_DEVICE.PMT;
 
-            LoadDevice();
+            string[] devices = GetDeviceNames();
+            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
 
-        }
+            string[] aoChannels = GetAoChannels();
+            m_xGalvoAoChannel = string.Concat(deviceName, "/ao0");
+            m_yGalvoAoChannel = string.Concat(deviceName, "/ao1");
+            m_y2GalvoAoChannel = string.Concat(deviceName, "/ao2");
 
-        private void LoadDevice()
-        {
-            string[] deviceNames = DaqSystem.Local.Devices;
-            if (deviceNames.Length > 0)
-            {
-                m_boardName = deviceNames[0];
-                m_board = DaqSystem.Local.LoadDevice(m_boardName);
+            m_acqTriggerDoLine = string.Concat(deviceName, "/port0/line0");
 
+            string[] aiChannels = GetAiChannels();
+            m_pmtAiChannels = new string[] {
+                string.Concat(deviceName, "/ai0"),
+                string.Concat(deviceName, "/ai1"),
+                string.Concat(deviceName, "/ai2"),
+                string.Concat(deviceName, "/ai3"),
+            };
 
+            m_pmtTriggerInPfi = string.Concat("/", deviceName, "/PFI10");
 
-            }
-            else
-            {
-                m_boardName = null;
-                m_board = null;
-            }
+            string[] ciChannels = GetCiChannels();
+            m_apdCiChannels = new string[] {
+                string.Concat(deviceName, "/ctr0"),
+                string.Concat(deviceName, "/ctr1"),
+                string.Concat(deviceName, "/ctr2"),
+                string.Concat(deviceName, "/ctr3"),
+            };
+
+            m_apdCiSrcPfis = new string[] {
+                string.Concat("/", deviceName, "/PFI8"),
+                string.Concat("/", deviceName, "/PFI3"),
+                string.Concat("/", deviceName, "/PFI0"),
+                string.Concat("/", deviceName, "/PFI5"),
+            };
+
+            m_apdCiGatePfis = new string[] {
+                string.Concat("/", deviceName, "/PFI9"),
+                string.Concat("/", deviceName, "/PFI4"),
+                string.Concat("/", deviceName, "/PFI1"),
+                string.Concat("/", deviceName, "/PFI6"),
+            };
         }
 
     }

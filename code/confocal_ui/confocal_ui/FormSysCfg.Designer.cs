@@ -48,12 +48,18 @@
             this.lbYMirror = new System.Windows.Forms.Label();
             this.lbXMirror = new System.Windows.Forms.Label();
             this.gbxAcqMode = new System.Windows.Forms.GroupBox();
+            this.cbxAcqTrigger = new System.Windows.Forms.ComboBox();
+            this.lbAcqTrigger = new System.Windows.Forms.Label();
             this.rbtnApd = new System.Windows.Forms.RadioButton();
             this.rbtnPmt = new System.Windows.Forms.RadioButton();
             this.panAcq = new System.Windows.Forms.Panel();
             this.tbcAcq = new System.Windows.Forms.TabControl();
             this.tpgApd = new System.Windows.Forms.TabPage();
-            this.tpgPmt = new System.Windows.Forms.TabPage();
+            this.lbApdTriggerIn = new System.Windows.Forms.Label();
+            this.cbxApd640CiGate = new System.Windows.Forms.ComboBox();
+            this.cbxApd561CiGate = new System.Windows.Forms.ComboBox();
+            this.cbxApd488CiGate = new System.Windows.Forms.ComboBox();
+            this.cbxApd405CiGate = new System.Windows.Forms.ComboBox();
             this.cbxApd640CiSrc = new System.Windows.Forms.ComboBox();
             this.cbxApd640Ci = new System.Windows.Forms.ComboBox();
             this.lbApd640 = new System.Windows.Forms.Label();
@@ -68,6 +74,9 @@
             this.cbxApd405Ci = new System.Windows.Forms.ComboBox();
             this.lbCounter = new System.Windows.Forms.Label();
             this.lbApd405 = new System.Windows.Forms.Label();
+            this.tpgPmt = new System.Windows.Forms.TabPage();
+            this.cbxPmtTriggerIn = new System.Windows.Forms.ComboBox();
+            this.lbPmtTriggerIn = new System.Windows.Forms.Label();
             this.cbxPmt640Ai = new System.Windows.Forms.ComboBox();
             this.lbPmt640 = new System.Windows.Forms.Label();
             this.cbxPmt561Ai = new System.Windows.Forms.ComboBox();
@@ -77,6 +86,8 @@
             this.cbxPmt405Ai = new System.Windows.Forms.ComboBox();
             this.lbAi = new System.Windows.Forms.Label();
             this.lbPmt405 = new System.Windows.Forms.Label();
+            this.lbInfo = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.gbxGalv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFieldSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResponseTime)).BeginInit();
@@ -250,6 +261,7 @@
             // 
             // gbxScan
             // 
+            this.gbxScan.Controls.Add(this.lbInfo);
             this.gbxScan.Controls.Add(this.cbxY2Galvo);
             this.gbxScan.Controls.Add(this.cbxYGalvo);
             this.gbxScan.Controls.Add(this.cbxXGalvo);
@@ -321,6 +333,8 @@
             // 
             // gbxAcqMode
             // 
+            this.gbxAcqMode.Controls.Add(this.cbxAcqTrigger);
+            this.gbxAcqMode.Controls.Add(this.lbAcqTrigger);
             this.gbxAcqMode.Controls.Add(this.rbtnApd);
             this.gbxAcqMode.Controls.Add(this.rbtnPmt);
             this.gbxAcqMode.Location = new System.Drawing.Point(9, 243);
@@ -329,6 +343,24 @@
             this.gbxAcqMode.TabIndex = 9;
             this.gbxAcqMode.TabStop = false;
             this.gbxAcqMode.Text = "采集方式";
+            // 
+            // cbxAcqTrigger
+            // 
+            this.cbxAcqTrigger.FormattingEnabled = true;
+            this.cbxAcqTrigger.Location = new System.Drawing.Point(224, 19);
+            this.cbxAcqTrigger.Name = "cbxAcqTrigger";
+            this.cbxAcqTrigger.Size = new System.Drawing.Size(123, 20);
+            this.cbxAcqTrigger.TabIndex = 20;
+            // 
+            // lbAcqTrigger
+            // 
+            this.lbAcqTrigger.AutoSize = true;
+            this.lbAcqTrigger.Location = new System.Drawing.Point(159, 22);
+            this.lbAcqTrigger.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbAcqTrigger.Name = "lbAcqTrigger";
+            this.lbAcqTrigger.Size = new System.Drawing.Size(53, 12);
+            this.lbAcqTrigger.TabIndex = 20;
+            this.lbAcqTrigger.Text = "触发信号";
             // 
             // rbtnApd
             // 
@@ -375,6 +407,11 @@
             // tpgApd
             // 
             this.tpgApd.BackColor = System.Drawing.Color.Gainsboro;
+            this.tpgApd.Controls.Add(this.lbApdTriggerIn);
+            this.tpgApd.Controls.Add(this.cbxApd640CiGate);
+            this.tpgApd.Controls.Add(this.cbxApd561CiGate);
+            this.tpgApd.Controls.Add(this.cbxApd488CiGate);
+            this.tpgApd.Controls.Add(this.cbxApd405CiGate);
             this.tpgApd.Controls.Add(this.cbxApd640CiSrc);
             this.tpgApd.Controls.Add(this.cbxApd640Ci);
             this.tpgApd.Controls.Add(this.lbApd640);
@@ -396,9 +433,177 @@
             this.tpgApd.TabIndex = 0;
             this.tpgApd.Text = "APD";
             // 
+            // lbApdTriggerIn
+            // 
+            this.lbApdTriggerIn.AutoSize = true;
+            this.lbApdTriggerIn.Location = new System.Drawing.Point(258, 9);
+            this.lbApdTriggerIn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApdTriggerIn.Name = "lbApdTriggerIn";
+            this.lbApdTriggerIn.Size = new System.Drawing.Size(53, 12);
+            this.lbApdTriggerIn.TabIndex = 64;
+            this.lbApdTriggerIn.Text = "触发接收";
+            // 
+            // cbxApd640CiGate
+            // 
+            this.cbxApd640CiGate.FormattingEnabled = true;
+            this.cbxApd640CiGate.Location = new System.Drawing.Point(244, 109);
+            this.cbxApd640CiGate.Name = "cbxApd640CiGate";
+            this.cbxApd640CiGate.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd640CiGate.TabIndex = 63;
+            // 
+            // cbxApd561CiGate
+            // 
+            this.cbxApd561CiGate.FormattingEnabled = true;
+            this.cbxApd561CiGate.Location = new System.Drawing.Point(244, 83);
+            this.cbxApd561CiGate.Name = "cbxApd561CiGate";
+            this.cbxApd561CiGate.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd561CiGate.TabIndex = 62;
+            // 
+            // cbxApd488CiGate
+            // 
+            this.cbxApd488CiGate.FormattingEnabled = true;
+            this.cbxApd488CiGate.Location = new System.Drawing.Point(244, 57);
+            this.cbxApd488CiGate.Name = "cbxApd488CiGate";
+            this.cbxApd488CiGate.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd488CiGate.TabIndex = 61;
+            // 
+            // cbxApd405CiGate
+            // 
+            this.cbxApd405CiGate.FormattingEnabled = true;
+            this.cbxApd405CiGate.Location = new System.Drawing.Point(244, 31);
+            this.cbxApd405CiGate.Name = "cbxApd405CiGate";
+            this.cbxApd405CiGate.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd405CiGate.TabIndex = 60;
+            // 
+            // cbxApd640CiSrc
+            // 
+            this.cbxApd640CiSrc.FormattingEnabled = true;
+            this.cbxApd640CiSrc.Location = new System.Drawing.Point(148, 109);
+            this.cbxApd640CiSrc.Name = "cbxApd640CiSrc";
+            this.cbxApd640CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd640CiSrc.TabIndex = 59;
+            // 
+            // cbxApd640Ci
+            // 
+            this.cbxApd640Ci.FormattingEnabled = true;
+            this.cbxApd640Ci.Location = new System.Drawing.Point(61, 109);
+            this.cbxApd640Ci.Name = "cbxApd640Ci";
+            this.cbxApd640Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd640Ci.TabIndex = 58;
+            // 
+            // lbApd640
+            // 
+            this.lbApd640.AutoSize = true;
+            this.lbApd640.Location = new System.Drawing.Point(16, 112);
+            this.lbApd640.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd640.Name = "lbApd640";
+            this.lbApd640.Size = new System.Drawing.Size(35, 12);
+            this.lbApd640.TabIndex = 57;
+            this.lbApd640.Text = "640nm";
+            // 
+            // cbxApd561CiSrc
+            // 
+            this.cbxApd561CiSrc.FormattingEnabled = true;
+            this.cbxApd561CiSrc.Location = new System.Drawing.Point(148, 83);
+            this.cbxApd561CiSrc.Name = "cbxApd561CiSrc";
+            this.cbxApd561CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd561CiSrc.TabIndex = 56;
+            // 
+            // cbxApd561Ci
+            // 
+            this.cbxApd561Ci.FormattingEnabled = true;
+            this.cbxApd561Ci.Location = new System.Drawing.Point(61, 83);
+            this.cbxApd561Ci.Name = "cbxApd561Ci";
+            this.cbxApd561Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd561Ci.TabIndex = 55;
+            // 
+            // lbApd561
+            // 
+            this.lbApd561.AutoSize = true;
+            this.lbApd561.Location = new System.Drawing.Point(16, 86);
+            this.lbApd561.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd561.Name = "lbApd561";
+            this.lbApd561.Size = new System.Drawing.Size(35, 12);
+            this.lbApd561.TabIndex = 54;
+            this.lbApd561.Text = "561nm";
+            // 
+            // cbxApd488CiSrc
+            // 
+            this.cbxApd488CiSrc.FormattingEnabled = true;
+            this.cbxApd488CiSrc.Location = new System.Drawing.Point(148, 57);
+            this.cbxApd488CiSrc.Name = "cbxApd488CiSrc";
+            this.cbxApd488CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd488CiSrc.TabIndex = 53;
+            // 
+            // cbxApd488Ci
+            // 
+            this.cbxApd488Ci.FormattingEnabled = true;
+            this.cbxApd488Ci.Location = new System.Drawing.Point(61, 57);
+            this.cbxApd488Ci.Name = "cbxApd488Ci";
+            this.cbxApd488Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd488Ci.TabIndex = 52;
+            // 
+            // lbApd488
+            // 
+            this.lbApd488.AutoSize = true;
+            this.lbApd488.Location = new System.Drawing.Point(16, 60);
+            this.lbApd488.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd488.Name = "lbApd488";
+            this.lbApd488.Size = new System.Drawing.Size(35, 12);
+            this.lbApd488.TabIndex = 51;
+            this.lbApd488.Text = "488nm";
+            // 
+            // lbCounterSrc
+            // 
+            this.lbCounterSrc.AutoSize = true;
+            this.lbCounterSrc.Location = new System.Drawing.Point(160, 9);
+            this.lbCounterSrc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCounterSrc.Name = "lbCounterSrc";
+            this.lbCounterSrc.Size = new System.Drawing.Size(59, 12);
+            this.lbCounterSrc.TabIndex = 50;
+            this.lbCounterSrc.Text = "APD接线端";
+            // 
+            // cbxApd405CiSrc
+            // 
+            this.cbxApd405CiSrc.FormattingEnabled = true;
+            this.cbxApd405CiSrc.Location = new System.Drawing.Point(148, 31);
+            this.cbxApd405CiSrc.Name = "cbxApd405CiSrc";
+            this.cbxApd405CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd405CiSrc.TabIndex = 49;
+            // 
+            // cbxApd405Ci
+            // 
+            this.cbxApd405Ci.FormattingEnabled = true;
+            this.cbxApd405Ci.Location = new System.Drawing.Point(61, 31);
+            this.cbxApd405Ci.Name = "cbxApd405Ci";
+            this.cbxApd405Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd405Ci.TabIndex = 48;
+            // 
+            // lbCounter
+            // 
+            this.lbCounter.AutoSize = true;
+            this.lbCounter.Location = new System.Drawing.Point(62, 9);
+            this.lbCounter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCounter.Name = "lbCounter";
+            this.lbCounter.Size = new System.Drawing.Size(65, 12);
+            this.lbCounter.TabIndex = 47;
+            this.lbCounter.Text = "计数器通道";
+            // 
+            // lbApd405
+            // 
+            this.lbApd405.AutoSize = true;
+            this.lbApd405.Location = new System.Drawing.Point(16, 34);
+            this.lbApd405.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd405.Name = "lbApd405";
+            this.lbApd405.Size = new System.Drawing.Size(35, 12);
+            this.lbApd405.TabIndex = 46;
+            this.lbApd405.Text = "405nm";
+            // 
             // tpgPmt
             // 
             this.tpgPmt.BackColor = System.Drawing.Color.Gainsboro;
+            this.tpgPmt.Controls.Add(this.cbxPmtTriggerIn);
+            this.tpgPmt.Controls.Add(this.lbPmtTriggerIn);
             this.tpgPmt.Controls.Add(this.cbxPmt640Ai);
             this.tpgPmt.Controls.Add(this.lbPmt640);
             this.tpgPmt.Controls.Add(this.cbxPmt561Ai);
@@ -415,129 +620,23 @@
             this.tpgPmt.TabIndex = 1;
             this.tpgPmt.Text = "PMT";
             // 
-            // cbxApd640CiSrc
+            // cbxPmtTriggerIn
             // 
-            this.cbxApd640CiSrc.FormattingEnabled = true;
-            this.cbxApd640CiSrc.Location = new System.Drawing.Point(215, 112);
-            this.cbxApd640CiSrc.Name = "cbxApd640CiSrc";
-            this.cbxApd640CiSrc.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd640CiSrc.TabIndex = 59;
+            this.cbxPmtTriggerIn.FormattingEnabled = true;
+            this.cbxPmtTriggerIn.Location = new System.Drawing.Point(220, 34);
+            this.cbxPmtTriggerIn.Name = "cbxPmtTriggerIn";
+            this.cbxPmtTriggerIn.Size = new System.Drawing.Size(114, 20);
+            this.cbxPmtTriggerIn.TabIndex = 60;
             // 
-            // cbxApd640Ci
+            // lbPmtTriggerIn
             // 
-            this.cbxApd640Ci.FormattingEnabled = true;
-            this.cbxApd640Ci.Location = new System.Drawing.Point(73, 112);
-            this.cbxApd640Ci.Name = "cbxApd640Ci";
-            this.cbxApd640Ci.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd640Ci.TabIndex = 58;
-            // 
-            // lbApd640
-            // 
-            this.lbApd640.AutoSize = true;
-            this.lbApd640.Location = new System.Drawing.Point(28, 115);
-            this.lbApd640.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbApd640.Name = "lbApd640";
-            this.lbApd640.Size = new System.Drawing.Size(35, 12);
-            this.lbApd640.TabIndex = 57;
-            this.lbApd640.Text = "640nm";
-            // 
-            // cbxApd561CiSrc
-            // 
-            this.cbxApd561CiSrc.FormattingEnabled = true;
-            this.cbxApd561CiSrc.Location = new System.Drawing.Point(215, 86);
-            this.cbxApd561CiSrc.Name = "cbxApd561CiSrc";
-            this.cbxApd561CiSrc.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd561CiSrc.TabIndex = 56;
-            // 
-            // cbxApd561Ci
-            // 
-            this.cbxApd561Ci.FormattingEnabled = true;
-            this.cbxApd561Ci.Location = new System.Drawing.Point(73, 86);
-            this.cbxApd561Ci.Name = "cbxApd561Ci";
-            this.cbxApd561Ci.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd561Ci.TabIndex = 55;
-            // 
-            // lbApd561
-            // 
-            this.lbApd561.AutoSize = true;
-            this.lbApd561.Location = new System.Drawing.Point(28, 89);
-            this.lbApd561.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbApd561.Name = "lbApd561";
-            this.lbApd561.Size = new System.Drawing.Size(35, 12);
-            this.lbApd561.TabIndex = 54;
-            this.lbApd561.Text = "561nm";
-            // 
-            // cbxApd488CiSrc
-            // 
-            this.cbxApd488CiSrc.FormattingEnabled = true;
-            this.cbxApd488CiSrc.Location = new System.Drawing.Point(215, 60);
-            this.cbxApd488CiSrc.Name = "cbxApd488CiSrc";
-            this.cbxApd488CiSrc.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd488CiSrc.TabIndex = 53;
-            // 
-            // cbxApd488Ci
-            // 
-            this.cbxApd488Ci.FormattingEnabled = true;
-            this.cbxApd488Ci.Location = new System.Drawing.Point(73, 60);
-            this.cbxApd488Ci.Name = "cbxApd488Ci";
-            this.cbxApd488Ci.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd488Ci.TabIndex = 52;
-            // 
-            // lbApd488
-            // 
-            this.lbApd488.AutoSize = true;
-            this.lbApd488.Location = new System.Drawing.Point(28, 63);
-            this.lbApd488.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbApd488.Name = "lbApd488";
-            this.lbApd488.Size = new System.Drawing.Size(35, 12);
-            this.lbApd488.TabIndex = 51;
-            this.lbApd488.Text = "488nm";
-            // 
-            // lbCounterSrc
-            // 
-            this.lbCounterSrc.AutoSize = true;
-            this.lbCounterSrc.Location = new System.Drawing.Point(234, 12);
-            this.lbCounterSrc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbCounterSrc.Name = "lbCounterSrc";
-            this.lbCounterSrc.Size = new System.Drawing.Size(59, 12);
-            this.lbCounterSrc.TabIndex = 50;
-            this.lbCounterSrc.Text = "APD接线端";
-            // 
-            // cbxApd405CiSrc
-            // 
-            this.cbxApd405CiSrc.FormattingEnabled = true;
-            this.cbxApd405CiSrc.Location = new System.Drawing.Point(215, 34);
-            this.cbxApd405CiSrc.Name = "cbxApd405CiSrc";
-            this.cbxApd405CiSrc.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd405CiSrc.TabIndex = 49;
-            // 
-            // cbxApd405Ci
-            // 
-            this.cbxApd405Ci.FormattingEnabled = true;
-            this.cbxApd405Ci.Location = new System.Drawing.Point(73, 34);
-            this.cbxApd405Ci.Name = "cbxApd405Ci";
-            this.cbxApd405Ci.Size = new System.Drawing.Size(114, 20);
-            this.cbxApd405Ci.TabIndex = 48;
-            // 
-            // lbCounter
-            // 
-            this.lbCounter.AutoSize = true;
-            this.lbCounter.Location = new System.Drawing.Point(96, 12);
-            this.lbCounter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbCounter.Name = "lbCounter";
-            this.lbCounter.Size = new System.Drawing.Size(65, 12);
-            this.lbCounter.TabIndex = 47;
-            this.lbCounter.Text = "计数器通道";
-            // 
-            // lbApd405
-            // 
-            this.lbApd405.AutoSize = true;
-            this.lbApd405.Location = new System.Drawing.Point(28, 37);
-            this.lbApd405.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbApd405.Name = "lbApd405";
-            this.lbApd405.Size = new System.Drawing.Size(35, 12);
-            this.lbApd405.TabIndex = 46;
-            this.lbApd405.Text = "405nm";
+            this.lbPmtTriggerIn.AutoSize = true;
+            this.lbPmtTriggerIn.Location = new System.Drawing.Point(233, 12);
+            this.lbPmtTriggerIn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPmtTriggerIn.Name = "lbPmtTriggerIn";
+            this.lbPmtTriggerIn.Size = new System.Drawing.Size(101, 12);
+            this.lbPmtTriggerIn.TabIndex = 59;
+            this.lbPmtTriggerIn.Text = "触发接收（共用）";
             // 
             // cbxPmt640Ai
             // 
@@ -621,11 +720,32 @@
             this.lbPmt405.TabIndex = 46;
             this.lbPmt405.Text = "405nm";
             // 
+            // lbInfo
+            // 
+            this.lbInfo.AutoSize = true;
+            this.lbInfo.ForeColor = System.Drawing.Color.Red;
+            this.lbInfo.Location = new System.Drawing.Point(247, 11);
+            this.lbInfo.Name = "lbInfo";
+            this.lbInfo.Size = new System.Drawing.Size(113, 12);
+            this.lbInfo.TabIndex = 20;
+            this.lbInfo.Text = "No NI Board Found.";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(9, 470);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(56, 30);
+            this.btnSearch.TabIndex = 11;
+            this.btnSearch.Text = "搜索";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // FormSysCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 511);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.panAcq);
             this.Controls.Add(this.gbxAcqMode);
             this.Controls.Add(this.gbxScan);
@@ -709,5 +829,16 @@
         private System.Windows.Forms.ComboBox cbxPmt405Ai;
         private System.Windows.Forms.Label lbAi;
         private System.Windows.Forms.Label lbPmt405;
+        private System.Windows.Forms.Label lbAcqTrigger;
+        private System.Windows.Forms.ComboBox cbxAcqTrigger;
+        private System.Windows.Forms.Label lbPmtTriggerIn;
+        private System.Windows.Forms.ComboBox cbxPmtTriggerIn;
+        private System.Windows.Forms.ComboBox cbxApd640CiGate;
+        private System.Windows.Forms.ComboBox cbxApd561CiGate;
+        private System.Windows.Forms.ComboBox cbxApd488CiGate;
+        private System.Windows.Forms.ComboBox cbxApd405CiGate;
+        private System.Windows.Forms.Label lbApdTriggerIn;
+        private System.Windows.Forms.Label lbInfo;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
