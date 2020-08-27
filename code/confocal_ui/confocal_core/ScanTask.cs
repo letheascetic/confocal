@@ -107,6 +107,7 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private int m_taskId;                   // 扫描任务ID
         private string m_taskName;              // 扫描任务名字
+        private SysConfig m_sysConfig;
         private Config m_config;                
         private Params m_params;
         private ScanInfo m_scanInfo;
@@ -126,6 +127,7 @@ namespace confocal_core
         {
             m_taskId = taskId;
             m_taskName = taskName;
+            m_sysConfig = confocal_core.SysConfig.GetSysConfig();
             m_config = confocal_core.Config.GetConfig();
             m_params = Params.GetParams();
             m_scanInfo = new ScanInfo();
@@ -137,7 +139,14 @@ namespace confocal_core
 
         public void Config()
         {
-            NiCard.CreateInstance().SamplesReceived += new SamplesReceivedEventHandler(ReceiveSamples);
+            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
+            {
+                NiCard.CreateInstance().SamplesReceived += new SamplesReceivedEventHandler(ReceiveSamples);
+            }
+            else
+            {
+                NiCard.CreateInstance().CiSamplesReceived += new CiSamplesReceivedEventHandler(CiReceiveSamples);
+            }
             m_scanInfo.Config();
             m_scanData.Config();
         }
@@ -156,7 +165,14 @@ namespace confocal_core
 
         public void Stop()
         {
-            NiCard.CreateInstance().SamplesReceived -= ReceiveSamples;
+            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
+            {
+                NiCard.CreateInstance().SamplesReceived -= ReceiveSamples;
+            }
+            else
+            {
+                NiCard.CreateInstance().CiSamplesReceived -= CiReceiveSamples;
+            }
             m_scanning = false;
             if (m_convertThread != null)
             {
@@ -222,6 +238,25 @@ namespace confocal_core
 
                 m_scanInfo.Fps = m_scanInfo.CurrentFrame / m_scanInfo.TimeSpan;
                 Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", m_scanInfo.CurrentFrame, m_scanInfo.TimeSpan, m_scanInfo.Fps));
+            }
+        }
+
+        private void CiReceiveSamples(object sender, int channelIndex, int[] samples)
+        {
+            Config m_config = confocal_core.Config.GetConfig();
+
+            m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
+
+            if (channelIndex == 0)
+            {
+                if (++m_scanInfo.CurrentLine % m_config.GetScanYPoints() == 0)
+                {
+                    m_scanInfo.CurrentLine = 0;
+                    m_scanInfo.CurrentFrame++;
+
+                    m_scanInfo.Fps = m_scanInfo.CurrentFrame / m_scanInfo.TimeSpan;
+                    Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", m_scanInfo.CurrentFrame, m_scanInfo.TimeSpan, m_scanInfo.Fps));
+                }
             }
         }
 

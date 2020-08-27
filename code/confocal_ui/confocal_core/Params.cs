@@ -17,7 +17,7 @@ namespace confocal_core
         private volatile static Params m_params = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public static readonly int DIGITAL_TRIGGER_PULSE_WIDTH = 10;        // 数字行触发脉冲宽度，10个DO Sample Clock 
+        public static readonly int DIGITAL_TRIGGER_PULSE_WIDTH = 20;        // 数字行触发脉冲宽度，20个DO Sample Clock 
         public static readonly double MAXIMUM_VOLTAGE_DIFF_PER_PIXEL = 0.2; // 像素间的最大电压差
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
@@ -32,6 +32,14 @@ namespace confocal_core
         /// AO输出速率，单位：xx Sample/s
         /// </summary>
         public double AoSampleRate { get; set; }
+        /// <summary>
+        /// DO输出速率，单位：xx Sample/s
+        /// </summary>
+        public double DoSampleRate { get; set; }
+        /// <summary>
+        /// AI采样速率，单位：xx Sample/s
+        /// </summary>
+        public double AiSampleRate { get; set; }
         /// <summary>
         /// 像素尺寸，单位：um
         /// </summary>
@@ -254,14 +262,23 @@ namespace confocal_core
             }
 
             // 生成单行数字触发波形
-            byte[] digitalTriggerSamplesPerLine = new byte[sampleCountPerLine];
-            int segEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
-                previousSampleCountPerLine + Params.DIGITAL_TRIGGER_PULSE_WIDTH : previousSampleCountPerLine + validSampleCountPerLine;
+            int digitalTriggerSampleCountPerLine = sampleCountPerLine * 2;
+            byte[] digitalTriggerSamplesPerLine = Enumerable.Repeat<byte>(0, digitalTriggerSampleCountPerLine).ToArray();
 
-            for (int i = 0; i < sampleCountPerLine; i++)
+            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
             {
-                digitalTriggerSamplesPerLine[i] = 0x00;
-                if (i >= previousSampleCountPerLine && i < segEnd)
+                int segStart = previousSampleCountPerLine * 2;
+                int segEnd = segStart + Params.DIGITAL_TRIGGER_PULSE_WIDTH;
+                for (int i = segStart; i < segEnd; i++)
+                {
+                    digitalTriggerSamplesPerLine[i] = 0x01;
+                }
+            }
+            else
+            {
+                int segStart = previousSampleCountPerLine * 2;
+                int segEnd = (previousSampleCountPerLine + validSampleCountPerLine) * 2;
+                for (int i = segStart; i < segEnd; i = i + 2)
                 {
                     digitalTriggerSamplesPerLine[i] = 0x01;
                 }
@@ -269,6 +286,8 @@ namespace confocal_core
 
             m_params.Fps = fps;                         // 帧率
             m_params.AoSampleRate = aoSampleRate;       // 模拟输出率
+            m_params.AiSampleRate = aoSampleRate;
+            m_params.DoSampleRate = aoSampleRate * 2;
             m_params.PixelSize = pixelSize;             // 像素尺寸
             m_params.VoltagePerPixel = voltagePerPixel;
             m_params.PreviousSampleCountPerLine = previousSampleCountPerLine;
@@ -382,24 +401,41 @@ namespace confocal_core
             }
 
             // 生成单行数字触发波形
-            byte[] digitalTriggerSamplesPerLine = new byte[sampleCountPerLine];
-            int firstValidSamplesIndex = previousSampleCountPerLine;
-            int secondValidSamplesIndex = previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine;
+            int digitalTriggerSampleCountPerLine = sampleCountPerLine * 2;
+            byte[] digitalTriggerSamplesPerLine = Enumerable.Repeat<byte>(0, digitalTriggerSampleCountPerLine).ToArray();
 
-            int segOneEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
-                firstValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : firstValidSamplesIndex + validSampleCountPerLine;
+            //int segOneEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
+            //    firstValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : firstValidSamplesIndex + validSampleCountPerLine;
 
-            int segTwoEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
-                secondValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : secondValidSamplesIndex + validSampleCountPerLine;
+            //int segTwoEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
+            //    secondValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : secondValidSamplesIndex + validSampleCountPerLine;
 
-            for (int i = 0; i < sampleCountPerLine; i++)
+            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
             {
-                digitalTriggerSamplesPerLine[i] = 0x00;
-                if (i >= firstValidSamplesIndex && i < segOneEnd)
+                int segOneStart = previousSampleCountPerLine * 2;
+                int segOneEnd = segOneStart + Params.DIGITAL_TRIGGER_PULSE_WIDTH;
+                int segTwoStart = (previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine) * 2;
+                int segTwoEnd = segTwoStart + Params.DIGITAL_TRIGGER_PULSE_WIDTH;
+                for (int i = segOneStart; i < segOneEnd; i++)
                 {
                     digitalTriggerSamplesPerLine[i] = 0x01;
                 }
-                else if (i >= secondValidSamplesIndex && i < segTwoEnd)
+                for (int i = segTwoStart; i < segTwoEnd; i++)
+                {
+                    digitalTriggerSamplesPerLine[i] = 0x01;
+                }
+            }
+            else
+            {
+                int segOneStart = previousSampleCountPerLine * 2;
+                int segOneEnd = segOneStart + validSampleCountPerLine * 2;
+                int segTwoStart = (previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine) * 2;
+                int segTwoEnd = segTwoStart + validSampleCountPerLine * 2;
+                for (int i = segOneStart; i < segOneEnd; i = i + 2)
+                {
+                    digitalTriggerSamplesPerLine[i] = 0x01;
+                }
+                for (int i = segTwoStart; i < segTwoEnd; i = i + 2)
                 {
                     digitalTriggerSamplesPerLine[i] = 0x01;
                 }
@@ -407,6 +443,8 @@ namespace confocal_core
 
             m_params.Fps = fps;
             m_params.AoSampleRate = aoSampleRate;
+            m_params.AiSampleRate = aoSampleRate;
+            m_params.DoSampleRate = aoSampleRate * 2;
             m_params.PixelSize = pixelSize;
             m_params.VoltagePerPixel = voltagePerPixel;
             m_params.PreviousSampleCountPerLine = previousSampleCountPerLine;

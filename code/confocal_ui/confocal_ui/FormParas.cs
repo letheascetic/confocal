@@ -78,7 +78,7 @@ namespace confocal_ui
             SCAN_STRATEGY strategy = Config.GetConfig().GetScanStrategy();
             SCAN_MIRROR_NUM mirror = Config.GetConfig().GetScanMirrorNum();
 
-            int pointCount = m_params.SampleCountPerLine * 3;
+            int pointCount = m_params.SampleCountPerLine * 2;
             double aoSampleTime = 1.0 / m_params.AoSampleRate;
             double xValue;
             int index, line;
@@ -108,7 +108,8 @@ namespace confocal_ui
                         chart.Series[2].Points.AddXY(xValue, m_params.Y2SamplesPerRow[line] + m_params.VoltagePerPixel * 2);
                     }
                 }
-                chart.Series[3].Points.AddXY(xValue, m_params.DigitalTriggerSamplesPerLine[index]);
+                chart.Series[3].Points.AddXY(xValue, m_params.DigitalTriggerSamplesPerLine[index*2]);
+                chart.Series[3].Points.AddXY(xValue + aoSampleTime, m_params.DigitalTriggerSamplesPerLine[index*2+1]);
             }
 
             chart.Series[2].IsVisibleInLegend = Config.GetConfig().GetScanMirrorNum() == SCAN_MIRROR_NUM.THREEE ? true : false;

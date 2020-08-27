@@ -10,7 +10,7 @@ using System.Text;
 namespace confocal_core
 {
     public delegate void SamplesReceivedEventHandler(object sender, short[][] samples);
-
+    public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, int[] samples);
     /// <summary>
     /// NI板卡接口层
     /// </summary>
@@ -21,11 +21,8 @@ namespace confocal_core
         private volatile static NiCard m_card = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly string NI_CARD_NAME_DEFAULT = "Dev1";
-        private static readonly string TWO_MIRROR_AO_CHANNELS = "ao0:1";
-        private static readonly string THREE_MIRROR_AO_CHANNELS = "ao0:2";
-        ///////////////////////////////////////////////////////////////////////////////////////////
         public SamplesReceivedEventHandler SamplesReceived;
+        public CiSamplesReceivedEventHandler CiSamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private SysConfig m_sysConfig;
         private Config m_config;
@@ -37,7 +34,7 @@ namespace confocal_core
         private Task m_aiTask;
         private Task[] m_ciTasks;
         private AnalogUnscaledReader m_aiUnscaledReader;
-        private CounterMultiChannelReader[] m_ciMultiChannelReaderTasks;
+        private CounterSingleChannelReader[] m_ciChannelReaders;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +75,14 @@ namespace confocal_core
                 return code;
             }
 
-            code = ConfigAiTask();
+            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
+            {
+                code = ConfigAiTask();
+            }
+            else
+            {
+                code = ConfigCiTasks();
+            }
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
                 Stop();
@@ -109,7 +113,7 @@ namespace confocal_core
                 }
                 catch (DaqException e)
                 {
-                    Logger.Error("stop ao task exception: [{0}].", e);
+                    Logger.Error(string.Format("stop ao task exception: [{0}].", e));
                 }
                 m_aoTask = null;
             }
@@ -123,7 +127,7 @@ namespace confocal_core
                 }
                 catch (DaqException e)
                 {
-                    Logger.Error("stop do task exception: [{0}].", e);
+                    Logger.Error(string.Format("stop do task exception: [{0}].", e));
                 }
                 m_doTask = null;
             }
@@ -137,11 +141,40 @@ namespace confocal_core
                 }
                 catch (DaqException e)
                 {
-                    Logger.Error("stop ai task exception: [{0}].", e);
+                    Logger.Error(string.Format("stop ai task exception: [{0}].", e));
                 }
                 m_aiTask = null;
                 m_aiUnscaledReader = null;
             }
+
+            if (m_ciTasks != null)
+            {
+                for (int i = 0; i < m_ciTasks.Length; i++)
+                {
+                    try
+                    {
+                        if (m_ciTasks[i] != null)
+                        {
+                            m_ciTasks[i].Stop();
+                            m_ciTasks[i].Dispose();
+                            m_ciTasks[i] = null;
+                        }
+                    }
+                    catch (DaqException e)
+                    {
+                        Logger.Error(string.Format("stop ci task[{0}] exception: [{1}].", i, e));
+                    }
+                }
+
+                for (int i = 0; i < m_ciChannelReaders.Length; i++)
+                {
+                    m_ciChannelReaders[i] = null;
+                }
+
+                m_ciTasks = null;
+                m_ciChannelReaders = null;
+            }
+
         }
 
         private NiCard()
@@ -156,7 +189,7 @@ namespace confocal_core
             m_aiTask = null;
             m_ciTasks = null;
             m_aiUnscaledReader = null;
-            m_ciMultiChannelReaderTasks = null;
+            m_ciChannelReaders = null;
         }
 
         /// <summary>
@@ -228,7 +261,7 @@ namespace confocal_core
                 m_doTask.DOChannels.CreateChannel(GetDoPhysicalChannelName(), "", ChannelLineGrouping.OneChannelForEachLine);
                 m_doTask.Control(TaskAction.Verify);
 
-                m_doTask.Timing.SampleClockRate = m_params.AoSampleRate;
+                m_doTask.Timing.SampleClockRate = m_params.DoSampleRate;
                 m_doTask.Timing.ConfigureSampleClock("",
                     m_doTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
@@ -275,12 +308,12 @@ namespace confocal_core
                 m_aiTask.AIChannels.CreateVoltageChannel(GetAiPhysicalChannelName(), "", AITerminalConfiguration.Differential, -10.0, 10.0, AIVoltageUnits.Volts);
                 m_aiTask.Control(TaskAction.Verify);
 
-                m_aiTask.Timing.SampleClockRate = m_params.AoSampleRate;
+                m_aiTask.Timing.SampleClockRate = m_params.AiSampleRate;
                 m_aiTask.Timing.ConfigureSampleClock("",
                     m_aiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    m_params.ValidSampleCountPerLine);
+                    m_params.SampleCountPerLine);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = m_sysConfig.GetPmtTriggerInPfi();
@@ -311,6 +344,76 @@ namespace confocal_core
         }
 
         /// <summary>
+        /// 配置CI采集任务
+        /// </summary>
+        /// <returns></returns>
+        private API_RETURN_CODE ConfigCiTasks()
+        {
+            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+
+            int channelNum = m_config.GetChannelNum();
+            m_ciTasks = new Task[channelNum];
+            m_ciChannelReaders = new CounterSingleChannelReader[channelNum];
+            for (int i = 0; i < channelNum; i++)
+            {
+                CHAN_ID id = (CHAN_ID)i;
+                code = ConfigCiTask(m_sysConfig.GetApdCiChannel(id),
+                    m_sysConfig.GetApdCiSrcPfi(id),
+                    m_sysConfig.GetApdCiGatePfi(id),
+                    ref m_ciTasks[i], ref m_ciChannelReaders[i]);
+                if (code != API_RETURN_CODE.API_SUCCESS)
+                {
+                    return code;
+                }
+            }
+            return code;
+        }
+
+        private API_RETURN_CODE ConfigCiTask(string ciChannel, string ciSrc, string ciGate, ref Task ciTask, ref CounterSingleChannelReader ciMultiChannelReader)
+        {
+            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+
+            try
+            {
+                ciTask = new Task();
+
+                ciTask.CIChannels.CreateCountEdgesChannel(ciChannel, "", CICountEdgesActiveEdge.Rising, 0, CICountEdgesCountDirection.Up);
+                ciTask.Control(TaskAction.Verify);
+
+                ciTask.Timing.SampleClockRate = m_params.AoSampleRate;
+                ciTask.Timing.ConfigureSampleClock(ciGate,
+                    ciTask.Timing.SampleClockRate,
+                    SampleClockActiveEdge.Rising,
+                    SampleQuantityMode.ContinuousSamples,
+                    m_params.ValidSampleCountPerFrame);
+
+                // 指定CI Channel使用的物理输入终端[APD的脉冲接收端]
+                ciTask.CIChannels[0].CountEdgesTerminal = ciSrc;
+
+                // 设置Ci Pause Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
+                // 低电平使能Pause Trigger,高电平禁能
+                // ciTask.Triggers.PauseTrigger.ConfigureDigitalLevelTrigger(ciGate, DigitalLevelPauseTriggerCondition.Low);
+
+                // 设置Arm Start Trigger，使CI与AO、DO同时启动工作
+                string source = m_sysConfig.GetStartSyncSignal();
+                ciTask.Triggers.ArmStartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeArmStartTriggerEdge.Rising);
+
+                ciTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
+                ciTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(CiEveryNSamplesRead);
+
+                ciMultiChannelReader = new CounterSingleChannelReader(ciTask.Stream);
+                ciMultiChannelReader.SynchronizeCallbacks = false;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(string.Format("config ci task[{0}] exception: [{1}].", ciChannel, e));
+                code = API_RETURN_CODE.API_FAILED_NI_CONFIG_CI_TASK_EXCEPTION;
+            }
+
+            return code;
+        }
+
+        /// <summary>
         /// 启动所有任务
         /// </summary>
         /// <returns></returns>
@@ -319,7 +422,21 @@ namespace confocal_core
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
             try
             {
-                m_aiTask.Start();
+                if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
+                {
+                    m_aiTask.Start();
+                }
+                else
+                {
+                    for (int i = 0; i < m_ciTasks.Length; i++)
+                    {
+                        if (m_ciTasks[i] != null)
+                        {
+                            m_ciTasks[i].Start();
+                        }
+                    }
+                }
+                
                 m_doTask.Start();
                 m_aoTask.Start();
             }
@@ -354,6 +471,30 @@ namespace confocal_core
                 if (SamplesReceived != null)
                 {
                     SamplesReceived.Invoke(this, samples);
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(string.Format("every n samples read exception: [{0}].", err));
+            }
+        }
+
+        private void CiEveryNSamplesRead(object sender, EveryNSamplesReadEventArgs e)
+        {
+            try
+            {
+                int index = FindCiMultiChannelReaderIndex(sender);
+                if (index < 0)
+                {
+                    Logger.Warn(string.Format("no matching ci task found: [{0}].", sender));
+                    return;
+                }
+
+                int[] originSamples = m_ciChannelReaders[index].ReadMultiSampleInt32(m_params.ValidSampleCountPerLine);
+
+                if (CiSamplesReceived != null)
+                {
+                    CiSamplesReceived.Invoke(this, index, originSamples);
                 }
             }
             catch (Exception err)
@@ -397,5 +538,22 @@ namespace confocal_core
             return m_sysConfig.GetAcqTriggerDoLine();
         }
 
+        private string GetCiSampleClockSourceName()
+        {
+            string aoDeviceName = m_sysConfig.GetXGalvoAoChannel().Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0];
+            return string.Concat("/", aoDeviceName, "/ao/SampleClock");
+        }
+
+        private int FindCiMultiChannelReaderIndex(object sender)
+        {
+            for (int i = 0; i < m_ciTasks.Length; i++)
+            {
+                if (m_ciTasks[i].Equals(sender))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }
