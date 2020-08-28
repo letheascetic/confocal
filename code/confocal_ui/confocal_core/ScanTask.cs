@@ -221,7 +221,7 @@ namespace confocal_core
             m_scanInfo.NSamples = samples;
 
             PmtSampleData sampleData = new PmtSampleData(m_scanInfo.NSamples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
-            m_scanData.EnqueueSample(sampleData);
+            m_scanData.EnqueuePmtSample(sampleData);
 
             m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
 
@@ -287,12 +287,12 @@ namespace confocal_core
 
             while (m_scanning)
             {
-                if (m_scanData.SampleQueueSize() == 0)
+                if (m_scanData.PmtSampleQueueSize() == 0)
                 {
                     continue;
                 }
 
-                if (!m_scanData.DequeueSample(out PmtSampleData sample))
+                if (!m_scanData.DequeuePmtSample(out PmtSampleData sample))
                 {
                     Logger.Info(string.Format("dequeue sample data failed."));
                     continue;
@@ -333,8 +333,8 @@ namespace confocal_core
                     }
                 }
 
-                PmtConvertData convertData = new PmtConvertData(data, sample.Frame, sample.Line);
-                m_scanData.EnqueueConvertData(convertData);
+                PmtSampleData convertData = new PmtSampleData(data, sample.Frame, sample.Line);
+                m_scanData.EnqueuePmtConvertData(convertData);
 
                 // Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
                 if (convertData.Line + 1 == scanRows)
@@ -364,12 +364,12 @@ namespace confocal_core
 
             while (m_scanning)
             {
-                if (m_scanData.ConvertQueueSize() == 0)
+                if (m_scanData.PmtConvertQueueSize() == 0)
                 {
                     continue;
                 }
 
-                if (!m_scanData.DequeueConvertData(out PmtConvertData convertData))
+                if (!m_scanData.DequeuePmtConvertData(out PmtSampleData convertData))
                 {
                     Logger.Info(string.Format("dequeue convert data failed."));
                     continue;

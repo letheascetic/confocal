@@ -49,22 +49,27 @@ namespace confocal_core
         }
     }
 
-    public struct PmtConvertData
+    public struct ApdSampleData
     {
-        public short[][] NSamples { get; set; }
+        public int[] NSamples { get; set; }
         public long Frame { get; }
         public int Line { get; }
+        public int ChannelIndex { get; set; }
 
-        public PmtConvertData(short[][] samples, long frame, int line)
+        public ApdSampleData(int[] samples, long frame, int line, int channelIndex)
         {
             NSamples = samples;
             Frame = frame;
             Line = line;
+            ChannelIndex = channelIndex;
+        }
+
+        public void Convert()
+        {
+
         }
     }
-
-
-
+    
     public class ImageData
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -138,9 +143,11 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private ConcurrentQueue<PmtSampleData> m_sampleQueue;      // 原始行数据队列
-        private ConcurrentQueue<PmtConvertData> m_convertQueue;    // 截断、反转、去底噪后的行数据队列
-        private ImageData m_imageData;                          // 帧数据
+        private ConcurrentQueue<PmtSampleData> m_pmtSampleQueue;       // 原始行数据队列
+        private ConcurrentQueue<PmtSampleData> m_pmtConvertQueue;      // 截断、反转、去底噪后的行数据队列
+        private ConcurrentQueue<ApdSampleData> m_apdSampleQueue;
+        private ConcurrentQueue<ApdSampleData> m_apdConvertQueue;
+        private ImageData m_imageData;                              // 帧数据
         ///////////////////////////////////////////////////////////////////////////////////////////
         public ImageData ScanImage
         { get { return m_imageData; } set { m_imageData = value; } }
@@ -148,8 +155,10 @@ namespace confocal_core
 
         public DataPool()
         {
-            m_sampleQueue = new ConcurrentQueue<PmtSampleData>();
-            m_convertQueue = new ConcurrentQueue<PmtConvertData>();
+            m_pmtSampleQueue = new ConcurrentQueue<PmtSampleData>();
+            m_pmtConvertQueue = new ConcurrentQueue<PmtSampleData>();
+            m_apdSampleQueue = new ConcurrentQueue<ApdSampleData>();
+            m_apdConvertQueue = new ConcurrentQueue<ApdSampleData>();
             confocal_core.Config config = confocal_core.Config.GetConfig();
             m_imageData = new ImageData(config.GetChannelNum(), config.GetScanXPoints(), config.GetScanYPoints());
         }
@@ -181,51 +190,95 @@ namespace confocal_core
             m_imageData.Line = line;
         }
 
-        public int SampleQueueSize()
+        public int PmtSampleQueueSize()
         {
-            return m_sampleQueue.Count;
+            return m_pmtSampleQueue.Count;
         }
 
-        public void EnqueueSample(PmtSampleData sampleData)
+        public void EnqueuePmtSample(PmtSampleData sampleData)
         {
-            m_sampleQueue.Enqueue(sampleData);
+            m_pmtSampleQueue.Enqueue(sampleData);
         }
 
-        public void EnqueueSample(short[][] samples, long frame, int line)
+        public void EnqueuePmtSample(short[][] samples, long frame, int line)
         {
             PmtSampleData sampleData = new PmtSampleData(samples, frame, line);
-            EnqueueSample(sampleData);
+            EnqueuePmtSample(sampleData);
         }
 
-        public bool DequeueSample(out PmtSampleData sampleData)
+        public bool DequeuePmtSample(out PmtSampleData sampleData)
         {
-            return m_sampleQueue.TryDequeue(out sampleData);
+            return m_pmtSampleQueue.TryDequeue(out sampleData);
         }
 
-        public int ConvertQueueSize()
+        public int PmtConvertQueueSize()
         {
-            return m_convertQueue.Count;
+            return m_pmtConvertQueue.Count;
         }
 
-        public void EnqueueConvertData(PmtConvertData convertData)
+        public void EnqueuePmtConvertData(PmtSampleData convertData)
         {
-            m_convertQueue.Enqueue(convertData);
+            m_pmtConvertQueue.Enqueue(convertData);
         }
 
-        public bool DequeueConvertData(out PmtConvertData convertData)
+        public bool DequeuePmtConvertData(out PmtSampleData convertData)
         {
-            return m_convertQueue.TryDequeue(out convertData);
+            return m_pmtConvertQueue.TryDequeue(out convertData);
+        }
+
+        public int ApdSampleQueueSize()
+        {
+            return m_apdSampleQueue.Count;
+        }
+
+        public void EnqueueApdSample(ApdSampleData sampleData)
+        {
+            m_apdSampleQueue.Enqueue(sampleData);
+        }
+
+        public void EnqueueApdSample(short[][] samples, long frame, int line)
+        {
+            PmtSampleData sampleData = new PmtSampleData(samples, frame, line);
+            EnqueuePmtSample(sampleData);
+        }
+
+        public bool DequeueApdSample(out ApdSampleData sampleData)
+        {
+            return m_apdSampleQueue.TryDequeue(out sampleData);
+        }
+
+        public int ApdConvertQueueSize()
+        {
+            return m_apdConvertQueue.Count;
+        }
+
+        public void EnqueueApdConvertData(ApdSampleData convertData)
+        {
+            m_apdConvertQueue.Enqueue(convertData);
+        }
+
+        public bool DequeueApdConvertData(out ApdSampleData convertData)
+        {
+            return m_apdConvertQueue.TryDequeue(out convertData);
         }
 
         public void Release()
         {
-            while (!m_sampleQueue.IsEmpty)
+            while (!m_pmtSampleQueue.IsEmpty)
             {
-                DequeueSample(out PmtSampleData sampleData);
+                DequeuePmtSample(out PmtSampleData sampleData);
             }
-            while (!m_convertQueue.IsEmpty)
+            while (!m_pmtConvertQueue.IsEmpty)
             {
-                DequeueConvertData(out PmtConvertData convertData);
+                DequeuePmtConvertData(out PmtSampleData convertData);
+            }
+            while (!m_apdSampleQueue.IsEmpty)
+            {
+                DequeueApdSample(out ApdSampleData sampleData);
+            }
+            while (!m_apdConvertQueue.IsEmpty)
+            {
+                DequeueApdConvertData(out ApdSampleData convertData);
             }
         }
     }
