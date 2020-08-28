@@ -13,13 +13,13 @@ namespace confocal_core
     /// <summary>
     /// 原始的行数据
     /// </summary>
-    public struct SampleData
+    public struct PmtSampleData
     {
         public short[][] NSamples { get; set; }
         public long Frame { get; }
         public int Line { get; }
 
-        public SampleData(short[][] samples, long frame, int line)
+        public PmtSampleData(short[][] samples, long frame, int line)
         {
             NSamples = samples;
             Frame = frame;
@@ -49,19 +49,21 @@ namespace confocal_core
         }
     }
 
-    public struct ConvertData
+    public struct PmtConvertData
     {
         public short[][] NSamples { get; set; }
         public long Frame { get; }
         public int Line { get; }
 
-        public ConvertData(short[][] samples, long frame, int line)
+        public PmtConvertData(short[][] samples, long frame, int line)
         {
             NSamples = samples;
             Frame = frame;
             Line = line;
         }
     }
+
+
 
     public class ImageData
     {
@@ -136,8 +138,8 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private ConcurrentQueue<SampleData> m_sampleQueue;      // 原始行数据队列
-        private ConcurrentQueue<ConvertData> m_convertQueue;    // 截断、反转、去底噪后的行数据队列
+        private ConcurrentQueue<PmtSampleData> m_sampleQueue;      // 原始行数据队列
+        private ConcurrentQueue<PmtConvertData> m_convertQueue;    // 截断、反转、去底噪后的行数据队列
         private ImageData m_imageData;                          // 帧数据
         ///////////////////////////////////////////////////////////////////////////////////////////
         public ImageData ScanImage
@@ -146,8 +148,8 @@ namespace confocal_core
 
         public DataPool()
         {
-            m_sampleQueue = new ConcurrentQueue<SampleData>();
-            m_convertQueue = new ConcurrentQueue<ConvertData>();
+            m_sampleQueue = new ConcurrentQueue<PmtSampleData>();
+            m_convertQueue = new ConcurrentQueue<PmtConvertData>();
             confocal_core.Config config = confocal_core.Config.GetConfig();
             m_imageData = new ImageData(config.GetChannelNum(), config.GetScanXPoints(), config.GetScanYPoints());
         }
@@ -184,18 +186,18 @@ namespace confocal_core
             return m_sampleQueue.Count;
         }
 
-        public void EnqueueSample(SampleData sampleData)
+        public void EnqueueSample(PmtSampleData sampleData)
         {
             m_sampleQueue.Enqueue(sampleData);
         }
 
         public void EnqueueSample(short[][] samples, long frame, int line)
         {
-            SampleData sampleData = new SampleData(samples, frame, line);
+            PmtSampleData sampleData = new PmtSampleData(samples, frame, line);
             EnqueueSample(sampleData);
         }
 
-        public bool DequeueSample(out SampleData sampleData)
+        public bool DequeueSample(out PmtSampleData sampleData)
         {
             return m_sampleQueue.TryDequeue(out sampleData);
         }
@@ -205,12 +207,12 @@ namespace confocal_core
             return m_convertQueue.Count;
         }
 
-        public void EnqueueConvertData(ConvertData convertData)
+        public void EnqueueConvertData(PmtConvertData convertData)
         {
             m_convertQueue.Enqueue(convertData);
         }
 
-        public bool DequeueConvertData(out ConvertData convertData)
+        public bool DequeueConvertData(out PmtConvertData convertData)
         {
             return m_convertQueue.TryDequeue(out convertData);
         }
@@ -219,11 +221,11 @@ namespace confocal_core
         {
             while (!m_sampleQueue.IsEmpty)
             {
-                DequeueSample(out SampleData sampleData);
+                DequeueSample(out PmtSampleData sampleData);
             }
             while (!m_convertQueue.IsEmpty)
             {
-                DequeueConvertData(out ConvertData convertData);
+                DequeueConvertData(out PmtConvertData convertData);
             }
         }
     }

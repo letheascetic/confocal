@@ -313,7 +313,7 @@ namespace confocal_core
                     m_aiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    m_params.SampleCountPerLine);
+                    m_params.ValidSampleCountPerLine);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = m_sysConfig.GetPmtTriggerInPfi();

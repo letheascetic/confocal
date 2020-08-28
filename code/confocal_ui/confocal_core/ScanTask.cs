@@ -220,7 +220,7 @@ namespace confocal_core
 
             m_scanInfo.NSamples = samples;
 
-            SampleData sampleData = new SampleData(m_scanInfo.NSamples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
+            PmtSampleData sampleData = new PmtSampleData(m_scanInfo.NSamples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
             m_scanData.EnqueueSample(sampleData);
 
             m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
@@ -292,7 +292,7 @@ namespace confocal_core
                     continue;
                 }
 
-                if (!m_scanData.DequeueSample(out SampleData sample))
+                if (!m_scanData.DequeueSample(out PmtSampleData sample))
                 {
                     Logger.Info(string.Format("dequeue sample data failed."));
                     continue;
@@ -333,7 +333,7 @@ namespace confocal_core
                     }
                 }
 
-                ConvertData convertData = new ConvertData(data, sample.Frame, sample.Line);
+                PmtConvertData convertData = new PmtConvertData(data, sample.Frame, sample.Line);
                 m_scanData.EnqueueConvertData(convertData);
 
                 // Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
@@ -369,7 +369,7 @@ namespace confocal_core
                     continue;
                 }
 
-                if (!m_scanData.DequeueConvertData(out ConvertData convertData))
+                if (!m_scanData.DequeueConvertData(out PmtConvertData convertData))
                 {
                     Logger.Info(string.Format("dequeue convert data failed."));
                     continue;
