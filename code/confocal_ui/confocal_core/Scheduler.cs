@@ -34,7 +34,6 @@ namespace confocal_core
         private Config m_config;
         private Waver m_waver;
         private NiCard m_card;
-        private NiApd m_niApd;
         private List<ScanTask> m_scanTasks;     // 扫描任务集
         private ScanTask m_scanningTask;        // 当前在扫描的任务
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +104,6 @@ namespace confocal_core
             scanTask.Config();                          // 配置扫描任务
 
             API_RETURN_CODE code = m_card.Start();      // 启动板卡
-            // API_RETURN_CODE code = m_niApd.Start();
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
                 Logger.Info(string.Format("start scan task[{0}|{1}] failed: [{2}].", scanTask.TaskId, scanTask.TaskName, code));
@@ -138,7 +136,6 @@ namespace confocal_core
             }
 
             m_card.Stop();
-            // m_niApd.Stop();
             scanTask.Stop();
             m_scanningTask = null;
 
@@ -217,7 +214,6 @@ namespace confocal_core
             m_config = Config.GetConfig();
             m_waver = Waver.GetWaver();
             m_card = NiCard.CreateInstance();
-            m_niApd = NiApd.CreateInstance();
             m_scanTasks = new List<ScanTask>();
             m_scanningTask = null;
             m_params.Calculate();

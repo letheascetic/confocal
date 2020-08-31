@@ -58,7 +58,6 @@
     <Compile Include="Config.cs" />
     <Compile Include="DataPool.cs" />
     <Compile Include="LaserDevice.cs" />
-    <Compile Include="NiApd.cs" />
     <Compile Include="NiCard.cs" />
     <Compile Include="Params.cs" />
     <Compile Include="ScanTask.cs" />

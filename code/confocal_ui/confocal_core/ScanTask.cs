@@ -15,68 +15,81 @@ namespace confocal_core
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         public static readonly int LASER_SWITCH_OFF_DATA_INDEX = -1;
+        private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private Config m_config;
         private DateTime m_startTime;           // 扫描开始时间
         private double m_timespan;              // 扫描经过时间
-        private double m_fps;                   // 扫描帧率
-        private int m_line;                     // 扫描当前所在行
-        private long m_frame;                   // 扫描当前所在帧
-        private short[][] m_nSamples;           // 当前获取到的有效样本
-        private int m_405Index;                 // 405nm激光对应的采集通道
-        private int m_488Index;                 // 488nm激光对应的采集通道
-        private int m_561Index;                 // 561nm激光对应的采集通道
-        private int m_640Index;                 // 640nm激光对应的采集通道
+        private double[] m_fps;                 // 扫描帧率
+        private int[] m_lines;                   // 扫描当前所在行
+        private long[] m_frames;                 // 扫描当前所在帧
 
         public DateTime StartTime { get { return m_startTime; } set { m_startTime = value; } }
         public Double TimeSpan { get { return m_timespan; } set { m_timespan = value; } }
-        public double Fps { get { return m_fps; } set { m_fps = value; } }
-        public int CurrentLine { get { return m_line; } set { m_line = value; } }
-        public long CurrentFrame { get { return m_frame; } set { m_frame = value; } }
-        public short[][] NSamples { get { return m_nSamples; } set { m_nSamples = value; } }
+        public double Fps { get { return m_fps[0]; } set { m_fps[0] = value; } }
+        public int CurrentLine { get { return m_lines[0]; } set { m_lines[0] = value; } }
+        public long CurrentFrame { get { return m_frames[0]; } set { m_frames[0] = value; } }
 
         public ScanInfo()
         {
+            m_config = confocal_core.Config.GetConfig();
             Init();
         }
 
         public void Config()
         {
-            Init();
+            m_startTime = DateTime.Now;
+            m_timespan = 0;
 
-            Config config = confocal_core.Config.GetConfig();
-            int alreadyUsedIndex = -1;
-            if (config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON)
+            int channelNum = m_config.GetChannelNum();
+            for (int i = 0; i < channelNum; i++)
             {
-                m_405Index = ++alreadyUsedIndex;
-            }
-            if (config.GetLaserSwitch(CHAN_ID.WAVELENGTH_488_NM) == LASER_CHAN_SWITCH.ON)
-            {
-                m_488Index = ++alreadyUsedIndex;
-            }
-            if (config.GetLaserSwitch(CHAN_ID.WAVELENGTH_561_NM) == LASER_CHAN_SWITCH.ON)
-            {
-                m_561Index = ++alreadyUsedIndex;
-            }
-            if (config.GetLaserSwitch(CHAN_ID.WAVELENGTH_640_NM) == LASER_CHAN_SWITCH.ON)
-            {
-                m_640Index = ++alreadyUsedIndex;
+                m_fps[i] = 0.0;
+                m_lines[i] = 0;
+                m_frames[i] = 0;
             }
         }
 
-        public int GetDataIndex(CHAN_ID id)
+        public double GetFps(int index)
         {
-            switch (id)
+            return m_fps[index];
+        }
+
+        public long GetFrame(int index)
+        {
+            return m_frames[index];
+        }
+
+        public int GetLine(int index)
+        {
+            return m_lines[index];
+        }
+
+        public void UpdateScanInfo()
+        {
+            TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
+            if (++CurrentLine % m_config.GetScanYPoints() == 0)
             {
-                case CHAN_ID.WAVELENGTH_405_NM:
-                    return m_405Index;
-                case CHAN_ID.WAVELENGTH_488_NM:
-                    return m_488Index;
-                case CHAN_ID.WAVELENGTH_561_NM:
-                    return m_561Index;
-                case CHAN_ID.WAVELENGTH_640_NM:
-                    return m_640Index;
-                default:
-                    return LASER_SWITCH_OFF_DATA_INDEX;
+                CurrentLine = 0;
+                CurrentFrame++;
+                Fps = CurrentFrame / TimeSpan;
+                Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", CurrentFrame, TimeSpan, Fps));
+            }
+        }
+
+        public void UpdateScanInfo(int channelIndex)
+        {
+            if (channelIndex == 0)
+            {
+                TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
+            }
+            
+            if (++m_lines[channelIndex] % m_config.GetScanYPoints() == 0)
+            {
+                m_lines[channelIndex] = 0;
+                m_frames[channelIndex]++;
+                m_fps[channelIndex] = m_frames[channelIndex] / (DateTime.Now - StartTime).TotalSeconds;
+                Logger.Info(string.Format("scan info: channel[{0}], frame[{1}], fps[{2}].", channelIndex, m_frames[channelIndex], m_fps[channelIndex]));
             }
         }
 
@@ -84,16 +97,11 @@ namespace confocal_core
         {
             m_startTime = DateTime.Now;
             m_timespan = 0;
-            m_fps = 0;
-            m_line = 0;
-            m_frame = 0;
-            m_nSamples = null;
-            m_405Index = LASER_SWITCH_OFF_DATA_INDEX;
-            m_488Index = LASER_SWITCH_OFF_DATA_INDEX;
-            m_561Index = LASER_SWITCH_OFF_DATA_INDEX;
-            m_640Index = LASER_SWITCH_OFF_DATA_INDEX;
+            int channelNum = m_config.GetChannelNum();
+            m_fps = new double[channelNum];
+            m_lines = new int[channelNum];
+            m_frames = new long[channelNum];
         }
-
     }
 
     /// <summary>
@@ -141,11 +149,11 @@ namespace confocal_core
         {
             if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
             {
-                NiCard.CreateInstance().SamplesReceived += new SamplesReceivedEventHandler(ReceiveSamples);
+                NiCard.CreateInstance().AiSamplesReceived += new AiSamplesReceivedEventHandler(PmtReceiveSamples);
             }
             else
             {
-                NiCard.CreateInstance().CiSamplesReceived += new CiSamplesReceivedEventHandler(CiReceiveSamples);
+                NiCard.CreateInstance().CiSamplesReceived += new CiSamplesReceivedEventHandler(ApdReceiveSamples);
             }
             m_scanInfo.Config();
             m_scanData.Config();
@@ -154,9 +162,9 @@ namespace confocal_core
         public void Start()
         {
             m_scanning = true;
-            m_convertThread = new Thread(ConvertSamplesHandler);
+            m_convertThread = new Thread(ConvertPmtSamplesHandler);
             m_convertThread.Start();
-            m_imageDataThread = new Thread(UpdateImageDataHandler);
+            m_imageDataThread = new Thread(UpdatePmtImageDataHandler);
             m_imageDataThread.Start();
             m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
             m_imageDisplayThread.Start();
@@ -167,11 +175,11 @@ namespace confocal_core
         {
             if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
             {
-                NiCard.CreateInstance().SamplesReceived -= ReceiveSamples;
+                NiCard.CreateInstance().AiSamplesReceived -= PmtReceiveSamples;
             }
             else
             {
-                NiCard.CreateInstance().CiSamplesReceived -= CiReceiveSamples;
+                NiCard.CreateInstance().CiSamplesReceived -= ApdReceiveSamples;
             }
             m_scanning = false;
             if (m_convertThread != null)
@@ -214,50 +222,35 @@ namespace confocal_core
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="samples"></param>
-        private void ReceiveSamples(object sender, short[][] samples)
+        private void PmtReceiveSamples(object sender, short[][] samples)
         {
-            Config m_config = confocal_core.Config.GetConfig();
-
-            m_scanInfo.NSamples = samples;
-
-            PmtSampleData sampleData = new PmtSampleData(m_scanInfo.NSamples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
+            PmtSampleData sampleData = new PmtSampleData(samples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
             m_scanData.EnqueuePmtSample(sampleData);
-
-            m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
 
             //if (m_config.Debugging)
             //{
+            //    double timeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
             //    double timePerLine = m_scanInfo.TimeSpan / (m_config.GetScanYPoints() * m_scanInfo.CurrentFrame + m_scanInfo.CurrentLine + 1);
-            //    Logger.Info(string.Format("scan info: frame[{0}], line[{1}], number of samples[{2}], time per line:[{3}].", m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine, m_scanInfo.NSamples[0].Length, timePerLine));
+            //    Logger.Info(string.Format("scan info: frame[{0}], line[{1}], number of samples[{2}], time per line:[{3}].", m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine, samples[0].Length, timePerLine));
             //}
 
-            if (++m_scanInfo.CurrentLine % m_config.GetScanYPoints() == 0)
-            {
-                m_scanInfo.CurrentLine = 0;
-                m_scanInfo.CurrentFrame++;
-
-                m_scanInfo.Fps = m_scanInfo.CurrentFrame / m_scanInfo.TimeSpan;
-                Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", m_scanInfo.CurrentFrame, m_scanInfo.TimeSpan, m_scanInfo.Fps));
-            }
+            m_scanInfo.UpdateScanInfo();
         }
 
-        private void CiReceiveSamples(object sender, int channelIndex, int[] samples)
+        private void ApdReceiveSamples(object sender, int channelIndex, int[] samples)
         {
-            Config m_config = confocal_core.Config.GetConfig();
+            ApdSampleData sample = new ApdSampleData(samples, m_scanInfo.GetFrame(channelIndex), m_scanInfo.GetLine(channelIndex), channelIndex);
+            // m_scanData.EnqueueApdSample(sample);
 
-            m_scanInfo.TimeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
+            //if (m_config.Debugging)
+            //{
+            //    double timeSpan = (DateTime.Now - m_scanInfo.StartTime).TotalSeconds;
+            //    double timePerLine = m_scanInfo.TimeSpan / (m_config.GetScanYPoints() * m_scanInfo.GetFrame(channelIndex) + m_scanInfo.GetLine(channelIndex) + 1);
+            //    Logger.Info(string.Format("scan info: channel[{0}], frame[{1}], line[{2}], number of samples[{3}], time per line:[{4}].", 
+            //        channelIndex, m_scanInfo.GetFrame(channelIndex), m_scanInfo.GetLine(channelIndex), samples.Length, timePerLine));
+            //}
 
-            if (channelIndex == 0)
-            {
-                if (++m_scanInfo.CurrentLine % m_config.GetScanYPoints() == 0)
-                {
-                    m_scanInfo.CurrentLine = 0;
-                    m_scanInfo.CurrentFrame++;
-
-                    m_scanInfo.Fps = m_scanInfo.CurrentFrame / m_scanInfo.TimeSpan;
-                    Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", m_scanInfo.CurrentFrame, m_scanInfo.TimeSpan, m_scanInfo.Fps));
-                }
-            }
+            m_scanInfo.UpdateScanInfo(channelIndex);
         }
 
         /// <summary>
@@ -268,7 +261,7 @@ namespace confocal_core
         /// (b)奇数行数据先做反转操作，再根据数据错位值截取相应的中间段数据，并存储到帧数据中
         /// (c)一帧数据存储完成后，加入到帧数据存储队列
         /// </summary>
-        private void ConvertSamplesHandler()
+        private void ConvertPmtSamplesHandler()
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int sampleCountPerLine = m_params.SampleCountPerLine;
@@ -354,7 +347,7 @@ namespace confocal_core
         /// <summary>
         /// 从ConvertData队列中取出行数据，做伪彩色处理，生成图像的原始数据和BGR数据
         /// </summary>
-        private void UpdateImageDataHandler()
+        private void UpdatePmtImageDataHandler()
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int xSampleCountPerLine = m_config.GetScanXPoints();

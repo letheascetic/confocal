@@ -9,7 +9,7 @@ using System.Text;
 
 namespace confocal_core
 {
-    public delegate void SamplesReceivedEventHandler(object sender, short[][] samples);
+    public delegate void AiSamplesReceivedEventHandler(object sender, short[][] samples);
     public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, int[] samples);
     /// <summary>
     /// NI板卡接口层
@@ -21,7 +21,7 @@ namespace confocal_core
         private volatile static NiCard m_card = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public SamplesReceivedEventHandler SamplesReceived;
+        public AiSamplesReceivedEventHandler AiSamplesReceived;
         public CiSamplesReceivedEventHandler CiSamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private SysConfig m_sysConfig;
@@ -329,7 +329,7 @@ namespace confocal_core
                 //}
 
                 m_aiTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
-                m_aiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(EveryNSamplesRead);
+                m_aiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(AiEveryNSamplesRead);
 
                 m_aiUnscaledReader = new AnalogUnscaledReader(m_aiTask.Stream);
                 m_aiUnscaledReader.SynchronizeCallbacks = false;
@@ -454,7 +454,7 @@ namespace confocal_core
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void EveryNSamplesRead(object sender, EveryNSamplesReadEventArgs e)
+        private void AiEveryNSamplesRead(object sender, EveryNSamplesReadEventArgs e)
         {
             try
             {
@@ -468,9 +468,9 @@ namespace confocal_core
                     samples[i] = waves[i].GetRawData();
                 }
 
-                if (SamplesReceived != null)
+                if (AiSamplesReceived != null)
                 {
-                    SamplesReceived.Invoke(this, samples);
+                    AiSamplesReceived.Invoke(this, samples);
                 }
             }
             catch (Exception err)
