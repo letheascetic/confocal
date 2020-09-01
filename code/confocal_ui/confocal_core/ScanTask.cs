@@ -120,7 +120,7 @@ namespace confocal_core
         private Params m_params;
         private ScanInfo m_scanInfo;
         private DataPool m_scanData;            // 扫描任务数据池
-        private Thread m_convertThread;         // 扫描任务数据转换子线程
+        private Thread[] m_convertThreads;      // 扫描任务数据转换子线程
         private Thread m_imageDataThread;       // 扫描任务图像数据生成子线程
         private Thread m_imageDisplayThread;    // 扫描任务图像[Bitmap]生成子线程
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -140,7 +140,7 @@ namespace confocal_core
             m_params = Params.GetParams();
             m_scanInfo = new ScanInfo();
             m_scanData = new DataPool();
-            m_convertThread = null;
+            m_convertThreads = null;
             m_imageDataThread = null;
             m_imageDisplayThread = null;
         }
@@ -162,8 +162,15 @@ namespace confocal_core
         public void Start()
         {
             m_scanning = true;
-            m_convertThread = new Thread(ConvertPmtSamplesHandler);
-            m_convertThread.Start();
+
+            int threadNum = 1;
+            m_convertThreads = new Thread[threadNum];
+            for (int i = 0; i < threadNum; i++)
+            {
+                m_convertThreads[i] = new Thread(ConvertSamplesHandler);
+                m_convertThreads[i].Start();
+            }
+
             m_imageDataThread = new Thread(UpdatePmtImageDataHandler);
             m_imageDataThread.Start();
             m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
@@ -182,11 +189,17 @@ namespace confocal_core
                 NiCard.CreateInstance().CiSamplesReceived -= ApdReceiveSamples;
             }
             m_scanning = false;
-            if (m_convertThread != null)
+            if (m_convertThreads != null)
             {
-                m_convertThread.Join();
-                m_convertThread.Abort();
-                m_convertThread = null;
+                for (int i = 0; i < m_convertThreads.Length; i++)
+                {
+                    if (m_convertThreads[i] != null)
+                    {
+                        m_convertThreads[i].Join();
+                        m_convertThreads[i].Abort();
+                        m_convertThreads[i] = null;
+                    }
+                }
             }
             if (m_imageDataThread != null)
             {
@@ -253,6 +266,18 @@ namespace confocal_core
             m_scanInfo.UpdateScanInfo(channelIndex);
         }
 
+        private void ConvertSamplesHandler()
+        {
+            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.APD)
+            {
+                ConvertApdSamplesHandler();
+            }
+            else
+            {
+                ConvertPmtSamplesHandler();
+            }
+        }
+
         /// <summary>
         /// 将行数据转换成帧数据存储
         /// 对于单向扫描，将行数据逐行存储，直到完成一帧数据的存储后，加入到帧数据存储队列
@@ -287,7 +312,7 @@ namespace confocal_core
 
                 if (!m_scanData.DequeuePmtSample(out PmtSampleData sample))
                 {
-                    Logger.Info(string.Format("dequeue sample data failed."));
+                    // Logger.Info(string.Format("dequeue sample data failed."));
                     continue;
                 }
 
@@ -344,6 +369,72 @@ namespace confocal_core
             Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
         }
 
+        private void ConvertApdSamplesHandler()
+        {
+            int activatedChannelNum = m_config.GetChannelNum();
+            int sampleCountPerLine = m_params.SampleCountPerLine;
+            int xSampleCountPerLine = m_config.GetScanXPoints();
+            int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
+            int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
+            SCAN_STRATEGY scanStrategy = m_config.GetScanStrategy();
+
+            int sourceIndex;
+
+            int[] data = new int[xSampleCountPerLine];
+
+            while (m_scanning)
+            {
+                if (m_scanData.ApdSampleQueueSize() == 0)
+                {
+                    continue;
+                }
+
+                if (!m_scanData.DequeueApdSample(out ApdSampleData sample))
+                {
+                    // Logger.Info(string.Format("dequeue sample data failed."));
+                    continue;
+                }
+
+                // 采集数据转换
+                // 去背景噪声
+                sample.Convert();
+
+                // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
+                // 根据错位补偿参数，完成相应的截断
+                if (scanStrategy == SCAN_STRATEGY.Z_BIDIRECTION)
+                {
+                    if ((sample.Line & 0x01) == 0x01)   // 奇数行，需要反转
+                    {
+                        sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelCalibration();
+                        Array.Reverse(sample.NSamples);
+                        Array.Copy(sample.NSamples, sourceIndex, data, 0, xSampleCountPerLine);
+                    }
+                    else
+                    {
+                        sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
+                        Array.Copy(sample.NSamples, sourceIndex, data, 0, xSampleCountPerLine);
+                    }
+                }
+                else
+                {
+                    sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
+                    Array.Copy(sample.NSamples, sourceIndex, data, 0, xSampleCountPerLine);
+                }
+
+                ApdSampleData convertData = new ApdSampleData(data, sample.Frame, sample.Line, sample.ChannelIndex);
+                m_scanData.EnqueueApdConvertData(convertData);
+
+                if (convertData.Line + 1 == scanRows)
+                {
+                    Logger.Info(string.Format("channel[{0}] convert info: frame[{1}], line[{2}].", convertData.ChannelIndex, convertData.Frame, convertData.Line));
+                }
+
+                data = new int[xSampleCountPerLine];
+                Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
+            }
+
+        }
+
         /// <summary>
         /// 从ConvertData队列中取出行数据，做伪彩色处理，生成图像的原始数据和BGR数据
         /// </summary>
@@ -380,8 +471,11 @@ namespace confocal_core
                     CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
                 }
 
-                m_scanData.SetImageFrame(convertData.Frame);
-                m_scanData.SetImageLine(convertData.Line);
+                if (m_scanData.GetImageLine() < convertData.Line || m_scanData.GetImageFrame() < convertData.Frame)
+                {
+                    m_scanData.SetImageFrame(convertData.Frame);
+                    m_scanData.SetImageLine(convertData.Line);
+                }
 
                 // Logger.Info(string.Format("update image data: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
 

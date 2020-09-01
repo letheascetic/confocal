@@ -66,7 +66,15 @@ namespace confocal_core
 
         public void Convert()
         {
-
+            for (int i = 1; i < NSamples.Length; i++)
+            {
+                NSamples[i] = NSamples[i + 1] - NSamples[i];
+                if (NSamples[i] < 0)
+                {
+                    NSamples[i] = NSamples[i] + int.MaxValue;
+                }
+            }
+            NSamples[0] = NSamples[1];
         }
     }
     
