@@ -101,5 +101,13 @@ namespace confocal_test
             //pictureBox.Update();
             pictureBox.Image = canvas;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            short[] x = new short[] { short.MaxValue, short.MinValue, 3, 4, 5, 6, 7, 8, 9, 10 };
+            int[] y = new int[10];
+            Array.Copy(x, y, 10);
+            y[0] = 5;
+        }
     }
 }

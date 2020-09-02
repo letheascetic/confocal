@@ -68,7 +68,7 @@ namespace confocal_core
         {
             for (int i = 1; i < NSamples.Length; i++)
             {
-                NSamples[i] = NSamples[i + 1] - NSamples[i];
+                NSamples[i] = NSamples[i] - NSamples[i - 1];
                 if (NSamples[i] < 0)
                 {
                     NSamples[i] = NSamples[i] + int.MaxValue;
@@ -86,7 +86,7 @@ namespace confocal_core
         private readonly object m_locker = new object();        // 锁
         private long m_frame;
         private int m_line;
-        private short[][] m_data;
+        private int[][] m_data;
         private byte[][] m_bgrData;
         private Bitmap[] m_displayImages;
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -101,7 +101,7 @@ namespace confocal_core
         /// <summary>
         /// 原始图像数据
         /// </summary>
-        public short[][] Data { get { return m_data; } set { m_data = value; } }
+        public int[][] Data { get { return m_data; } set { m_data = value; } }
         /// <summary>
         /// 伪彩色图像数据
         /// </summary>
@@ -112,12 +112,12 @@ namespace confocal_core
             int samplesPerFrame = scanXPoints * scanYPoints;
             m_frame = -1;
             m_line = -1;
-            Data = new short[activatedChannelNum][];
+            Data = new int[activatedChannelNum][];
             BGRData = new byte[activatedChannelNum][];
             m_displayImages = new Bitmap[activatedChannelNum];
             for (int i = 0; i < activatedChannelNum; i++)
             {
-                Data[i] = new short[samplesPerFrame];
+                Data[i] = new int[samplesPerFrame];
                 BGRData[i] = new byte[samplesPerFrame * 3];
                 m_displayImages[i] = new Bitmap(scanXPoints, scanYPoints, PixelFormat.Format24bppRgb);
             }
