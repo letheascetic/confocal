@@ -56,6 +56,8 @@ namespace confocal_ui
         private void InitVariables()
         {
             scanPixelsDict = new Dictionary<int, string>();
+            scanPixelsDict.Add(64, "64x64");
+            scanPixelsDict.Add(128, "128x128");
             scanPixelsDict.Add(256, "256x256");
             scanPixelsDict.Add(512, "512x512");
             scanPixelsDict.Add(1024, "1024x1024");
@@ -382,49 +384,6 @@ namespace confocal_ui
                 LaserDevice.SetChannelPower(id, power);
             }
             tbx640Power.Text = power.ToString("F2");
-        }
-
-        private void chbx405_CheckedChanged(object sender, EventArgs e)
-        {
-            CHAN_ID id = CHAN_ID.WAVELENGTH_405_NM;
-            LASER_CHAN_SWITCH status = chbx405.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
-            if (m_config.GetLaserSwitch(id) == status)
-            {
-                return;
-            }
-
-            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-
-            m_config.SetLaserSwitch(id, status);
-            if (LaserDevice.IsConnected())
-            {
-                if (status == LASER_CHAN_SWITCH.ON)
-                {
-                    LaserDevice.OpenChannel(id);
-                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
-                }
-                else
-                {
-                    LaserDevice.CloseChannel(id);
-                }
-            }
-            ScanTask scanTask = m_scheduler.GetScanningTask();
-            m_scheduler.ChangeActivatedChannels(scanTask);
-        }
-
-        private void chbx488_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chbx561_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chbx640_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void tb405Gain_ValueChanged(object sender, EventArgs e)

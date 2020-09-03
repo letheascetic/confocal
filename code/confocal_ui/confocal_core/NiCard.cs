@@ -357,13 +357,18 @@ namespace confocal_core
             for (int i = 0; i < channelNum; i++)
             {
                 CHAN_ID id = (CHAN_ID)i;
-                code = ConfigCiTask(m_sysConfig.GetApdCiChannel(id),
-                    m_sysConfig.GetApdCiSrcPfi(id),
-                    m_sysConfig.GetApdCiGatePfi(id),
-                    ref m_ciTasks[i], ref m_ciChannelReaders[i]);
-                if (code != API_RETURN_CODE.API_SUCCESS)
+                if (m_config.GetLaserSwitch(id) == LASER_CHAN_SWITCH.ON)
                 {
-                    return code;
+                    code = ConfigCiTask(m_sysConfig.GetApdCiChannel(id), m_sysConfig.GetApdCiSrcPfi(id), m_sysConfig.GetApdCiGatePfi(id), ref m_ciTasks[i], ref m_ciChannelReaders[i]);
+                    if (code != API_RETURN_CODE.API_SUCCESS)
+                    {
+                        return code;
+                    }
+                }
+                else
+                {
+                    m_ciTasks[i] = null;
+                    m_ciChannelReaders[i] = null;
                 }
             }
             return code;
@@ -556,7 +561,7 @@ namespace confocal_core
         {
             for (int i = 0; i < m_ciTasks.Length; i++)
             {
-                if (m_ciTasks[i].Equals(sender))
+                if (m_ciTasks[i] != null && m_ciTasks[i].Equals(sender))
                 {
                     return i;
                 }

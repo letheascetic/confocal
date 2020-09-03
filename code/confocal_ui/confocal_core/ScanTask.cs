@@ -18,21 +18,22 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
+        private SysConfig m_sysConfig;              
         private DateTime m_startTime;           // 扫描开始时间
         private double m_timespan;              // 扫描经过时间
         private double[] m_fps;                 // 扫描帧率
         private int[] m_lines;                  // 扫描当前所在行
         private long[] m_frames;                // 扫描当前所在帧
-        
+        private int m_currentIndex;             
+
         public DateTime StartTime { get { return m_startTime; } set { m_startTime = value; } }
         public Double TimeSpan { get { return m_timespan; } set { m_timespan = value; } }
-        public double Fps { get { return m_fps[0]; } set { m_fps[0] = value; } }
-        public int CurrentLine { get { return m_lines[0]; } set { m_lines[0] = value; } }
-        public long CurrentFrame { get { return m_frames[0]; } set { m_frames[0] = value; } }
+        public double Fps { get { return m_fps[m_currentIndex]; } set { m_fps[m_currentIndex] = value; } }
+        public int CurrentLine { get { return m_lines[m_currentIndex]; } set { m_lines[m_currentIndex] = value; } }
+        public long CurrentFrame { get { return m_frames[m_currentIndex]; } set { m_frames[m_currentIndex] = value; } }
 
         public ScanInfo()
         {
-            m_config = confocal_core.Config.GetConfig();
             Init();
         }
 
@@ -47,7 +48,21 @@ namespace confocal_core
                 m_fps[i] = 0.0;
                 m_lines[i] = 0;
                 m_frames[i] = 0;
-                
+            }
+
+            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.APD)
+            {
+                for (int i = 0; i < channelNum; i++)
+                {
+                    if (m_config.GetLaserSwitch((CHAN_ID)i) == LASER_CHAN_SWITCH.ON)
+                    {
+                        m_currentIndex = i;
+                    }
+                }
+            }
+            else
+            {
+                m_currentIndex = 0;
             }
         }
 
@@ -80,7 +95,7 @@ namespace confocal_core
 
         public void UpdateScanInfo(int channelIndex)
         {
-            if (channelIndex == 0)
+            if (channelIndex == m_currentIndex)
             {
                 TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
             }
@@ -96,12 +111,15 @@ namespace confocal_core
 
         private void Init()
         {
+            m_config = confocal_core.Config.GetConfig();
+            m_sysConfig = confocal_core.SysConfig.GetSysConfig();
             m_startTime = DateTime.Now;
             m_timespan = 0;
             int channelNum = m_config.GetChannelNum();
             m_fps = new double[channelNum];
             m_lines = new int[channelNum];
             m_frames = new long[channelNum];
+            m_currentIndex = 0;
         }
     }
 
@@ -386,8 +404,6 @@ namespace confocal_core
 
         private void ConvertApdSamplesHandler()
         {
-            int activatedChannelNum = m_config.GetChannelNum();
-            int sampleCountPerLine = m_params.SampleCountPerLine;
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
@@ -524,7 +540,6 @@ namespace confocal_core
 
         private void UpdateApdImageDataHandler()
         {
-            int activatedChannelNum = m_config.GetChannelNum();
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
 
