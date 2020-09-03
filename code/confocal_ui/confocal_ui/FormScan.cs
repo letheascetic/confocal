@@ -204,6 +204,91 @@ namespace confocal_ui
             lbFrameTime.Text = string.Format("Frame Time: {0}s", (1 / m_params.Fps).ToString("F2"));
         }
 
+        private void UpdateLaserSwitch(CheckBox chbx, CHAN_ID id)
+        {
+            LASER_CHAN_SWITCH status = chbx.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+            // if task is not running, just update config
+            if (m_scheduler.TaskScanning() == false)
+            {
+                chbx.Checked = !chbx.Checked;
+                status = chbx.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+                m_config.SetLaserSwitch(id, status);
+
+                if (LaserDevice.IsConnected())
+                {
+                    if (status == LASER_CHAN_SWITCH.ON)
+                    {
+                        LaserDevice.OpenChannel(id);
+                        LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
+                    }
+                    else
+                    {
+                        LaserDevice.CloseChannel(id);
+                    }
+                }
+
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+                return;
+            }
+
+            // task is already running
+            if (status == LASER_CHAN_SWITCH.OFF)        // 激光当前是OFF状态
+            {
+                m_scheduler.StopScanTask(m_scheduler.GetScanningTask());    // 先停止扫描
+
+                chbx.Checked = true;                                        // 再更新配置，并打开激光，设置激光功率
+                m_config.SetLaserSwitch(id, LASER_CHAN_SWITCH.ON);
+                if (LaserDevice.IsConnected())
+                {
+                    LaserDevice.OpenChannel(id);
+                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
+                }
+
+                m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);   // 创建Task，并启动
+                API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+
+                if (code != API_RETURN_CODE.API_SUCCESS)
+                {
+                    MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+                }
+            }
+            else
+            {
+                // 激光当前是ON状态
+                if (m_config.GetActivatedChannelNum() == 1)     // 该路激光是扫描状态下唯一开启的激光
+                {
+                    this.Cursor = System.Windows.Forms.Cursors.Default;
+                    return;                                     // 作为扫描状态下唯一开启的激光，不允许关闭，直接返回
+                }
+                else
+                {
+                    m_scheduler.StopScanTask(m_scheduler.GetScanningTask());    // 先停止扫描
+
+                    chbx.Checked = false;                                       // 再更新配置，并关闭激光
+                    m_config.SetLaserSwitch(id, LASER_CHAN_SWITCH.OFF);
+                    if (LaserDevice.IsConnected())
+                    {
+                        LaserDevice.CloseChannel(id);
+                    }
+
+                    m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);   // 创建Task，并启动
+                    API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
+
+                    this.Cursor = System.Windows.Forms.Cursors.Default;
+
+                    if (code != API_RETURN_CODE.API_SUCCESS)
+                    {
+                        MessageBox.Show(string.Format("启动扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+                    }
+                }
+            }
+        }
+
         private void FormScan_Load(object sender, EventArgs e)
         {
             InitVariables();
@@ -221,6 +306,12 @@ namespace confocal_ui
 
             if (m_scheduler.TaskScanning() == false)
             {
+                if (m_config.GetActivatedChannelNum() == 0)
+                {
+                    MessageBox.Show("激光未打开，请至少打开一路激光通道.");
+                    return;
+                }
+
                 this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
                 API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
@@ -240,7 +331,7 @@ namespace confocal_ui
 
                 if (code != API_RETURN_CODE.API_SUCCESS)
                 {
-                    MessageBox.Show(string.Format("暂停扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
+                    MessageBox.Show(string.Format("停止扫描任务失败，失败码: [0x{0}][{1}].", ((int)code).ToString("X"), code));
                 }
             }
         }
@@ -297,6 +388,13 @@ namespace confocal_ui
         {
             CHAN_ID id = CHAN_ID.WAVELENGTH_405_NM;
             LASER_CHAN_SWITCH status = chbx405.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
+            if (m_config.GetLaserSwitch(id) == status)
+            {
+                return;
+            }
+
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
             m_config.SetLaserSwitch(id, status);
             if (LaserDevice.IsConnected())
             {
@@ -316,65 +414,17 @@ namespace confocal_ui
 
         private void chbx488_CheckedChanged(object sender, EventArgs e)
         {
-            CHAN_ID id = CHAN_ID.WAVELENGTH_488_NM;
-            LASER_CHAN_SWITCH status = chbx488.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
-            m_config.SetLaserSwitch(id, status);
-            if (LaserDevice.IsConnected())
-            {
-                if (status == LASER_CHAN_SWITCH.ON)
-                {
-                    LaserDevice.OpenChannel(id);
-                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
-                }
-                else
-                {
-                    LaserDevice.CloseChannel(id);
-                }
-            }
-            ScanTask scanTask = m_scheduler.GetScanningTask();
-            m_scheduler.ChangeActivatedChannels(scanTask);
+
         }
 
         private void chbx561_CheckedChanged(object sender, EventArgs e)
         {
-            CHAN_ID id = CHAN_ID.WAVELENGTH_561_NM;
-            LASER_CHAN_SWITCH status = chbx561.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
-            m_config.SetLaserSwitch(id, status);
-            if (LaserDevice.IsConnected())
-            {
-                if (status == LASER_CHAN_SWITCH.ON)
-                {
-                    LaserDevice.OpenChannel(id);
-                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
-                }
-                else
-                {
-                    LaserDevice.CloseChannel(id);
-                }
-            }
-            ScanTask scanTask = m_scheduler.GetScanningTask();
-            m_scheduler.ChangeActivatedChannels(scanTask);
+
         }
 
         private void chbx640_CheckedChanged(object sender, EventArgs e)
         {
-            CHAN_ID id = CHAN_ID.WAVELENGTH_640_NM;
-            LASER_CHAN_SWITCH status = chbx640.Checked ? LASER_CHAN_SWITCH.ON : LASER_CHAN_SWITCH.OFF;
-            m_config.SetLaserSwitch(id, status);
-            if (LaserDevice.IsConnected())
-            {
-                if (status == LASER_CHAN_SWITCH.ON)
-                {
-                    LaserDevice.OpenChannel(id);
-                    LaserDevice.SetChannelPower(id, m_config.GetLaserPower(id));
-                }
-                else
-                {
-                    LaserDevice.CloseChannel(id);
-                }
-            }
-            ScanTask scanTask = m_scheduler.GetScanningTask();
-            m_scheduler.ChangeActivatedChannels(scanTask);
+
         }
 
         private void tb405Gain_ValueChanged(object sender, EventArgs e)
@@ -432,7 +482,6 @@ namespace confocal_ui
             {
                 m_config.SetScanStartegy(strategy);
                 m_scheduler.ConfigScanTask(m_scheduler.GetScanningTask());
-                // UpdateControlers();
 
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 return;
@@ -446,7 +495,6 @@ namespace confocal_ui
             m_scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
             API_RETURN_CODE code = m_scheduler.StartScanTask(scanTask);
 
-            // UpdateControlers();
             this.Cursor = System.Windows.Forms.Cursors.Default;
 
             if (code != API_RETURN_CODE.API_SUCCESS)
@@ -631,6 +679,26 @@ namespace confocal_ui
             int value = (int)nudBN561.Value;
             short noiseLevel = (short)(short.MaxValue * value / 100);
             m_config.SetChannelBackgroundNoiseLevel(CHAN_ID.WAVELENGTH_561_NM, noiseLevel);
+        }
+
+        private void chbx405_Click(object sender, EventArgs e)
+        {
+            UpdateLaserSwitch(chbx405, CHAN_ID.WAVELENGTH_405_NM);
+        }
+
+        private void chbx488_Click(object sender, EventArgs e)
+        {
+            UpdateLaserSwitch(chbx488, CHAN_ID.WAVELENGTH_488_NM);
+        }
+
+        private void chbx561_Click(object sender, EventArgs e)
+        {
+            UpdateLaserSwitch(chbx561, CHAN_ID.WAVELENGTH_561_NM);
+        }
+
+        private void chbx640_Click(object sender, EventArgs e)
+        {
+            UpdateLaserSwitch(chbx640, CHAN_ID.WAVELENGTH_640_NM);
         }
     }
 }
