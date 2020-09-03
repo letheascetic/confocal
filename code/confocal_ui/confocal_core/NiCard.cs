@@ -459,13 +459,14 @@ namespace confocal_core
             try
             {
                 // 读取16位原始数据，每一行读取一次
+                int channelNum = m_config.GetChannelNum();
                 short[,] originSamples = m_aiUnscaledReader.ReadInt16(m_params.ValidSampleCountPerLine);
                 AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
 
-                short[][] samples = new short[waves.Length][];
-                for (int i = 0; i < waves.Length; i++)
+                short[][] samples = new short[channelNum][];
+                for (int i = 0; i < channelNum; i++)
                 {
-                    samples[i] = waves[i].GetRawData();
+                    samples[i] = m_params.GetLaserAiChannelIndex(i) >= 0 ? waves[m_params.GetLaserAiChannelIndex(i)].GetRawData() : null;
                 }
 
                 if (AiSamplesReceived != null)
@@ -509,10 +510,17 @@ namespace confocal_core
         /// <returns></returns>
         private string GetAiPhysicalChannelName()
         {
-            string physicalChannelName = string.Join(",", m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_405_NM),
-                m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_488_NM),
-                m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_561_NM),
-                m_sysConfig.GetPmtAiChannel(CHAN_ID.WAVELENGTH_640_NM));
+            List<string> activatedChannelNames = new List<string>();
+            int channelNum = m_config.GetChannelNum();
+            for (int i = 0; i < channelNum; i++)
+            {
+                CHAN_ID id = (CHAN_ID)i;
+                if (m_config.GetLaserSwitch(id) == LASER_CHAN_SWITCH.ON)
+                {
+                    activatedChannelNames.Add(m_sysConfig.GetPmtAiChannel(id));
+                }
+            }
+            string physicalChannelName = string.Join(",", activatedChannelNames.ToArray());
             Logger.Info(string.Format("ai physical channel name: [{0}].", physicalChannelName));
             return physicalChannelName;
         }

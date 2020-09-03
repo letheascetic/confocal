@@ -23,6 +23,7 @@ namespace confocal_core
         private Config m_config;
         private SysConfig m_sysConfig;
         private byte[][,] m_colorMappingArr;
+        private int[] m_aiChannelIndex;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// 扫描帧率
@@ -147,7 +148,6 @@ namespace confocal_core
                     CalculateSScan();
                     break;
             }
-            GenerateColorMapping();
         }
 
         public void GenerateColorMapping()
@@ -159,6 +159,21 @@ namespace confocal_core
                 Color colorReference = m_config.GetChannelColorReference(id);
                 CImage.CreateColorMapping(colorReference, ref m_colorMappingArr[i]);
             }
+        }
+
+        public void GenerateAiChannelIndex()
+        {
+            int index = -1;
+            int channelNum = m_config.GetChannelNum();
+            for (int i = 0; i < channelNum; i++)
+            {
+                m_aiChannelIndex[i] = m_config.GetLaserSwitch((CHAN_ID)i) == LASER_CHAN_SWITCH.ON ? ++index : -1;
+            }
+        }
+
+        public int GetLaserAiChannelIndex(int channelId)
+        {
+            return m_aiChannelIndex[channelId];
         }
         
         private void CalculateSScan()
@@ -471,9 +486,11 @@ namespace confocal_core
             m_config = Config.GetConfig();
             int channelNum = m_config.GetChannelNum();
             m_colorMappingArr = new byte[channelNum][,];
+            m_aiChannelIndex = new int[channelNum];
             for (int i = 0; i < channelNum; i++)
             {
                 m_colorMappingArr[i] = new byte[256, 3];
+                m_aiChannelIndex[i] = -1;
             }
         }
 

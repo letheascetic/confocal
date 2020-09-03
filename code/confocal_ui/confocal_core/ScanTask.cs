@@ -23,7 +23,7 @@ namespace confocal_core
         private double[] m_fps;                 // 扫描帧率
         private int[] m_lines;                  // 扫描当前所在行
         private long[] m_frames;                // 扫描当前所在帧
-
+        
         public DateTime StartTime { get { return m_startTime; } set { m_startTime = value; } }
         public Double TimeSpan { get { return m_timespan; } set { m_timespan = value; } }
         public double Fps { get { return m_fps[0]; } set { m_fps[0] = value; } }
@@ -47,6 +47,7 @@ namespace confocal_core
                 m_fps[i] = 0.0;
                 m_lines[i] = 0;
                 m_frames[i] = 0;
+                
             }
         }
 
@@ -296,11 +297,16 @@ namespace confocal_core
             SCAN_STRATEGY scanStrategy = m_config.GetScanStrategy();
 
             int i, sourceIndex;
+            bool[] channelSwitch = new bool[activatedChannelNum];
+            for (i = 0; i < activatedChannelNum; i++)
+            {
+                channelSwitch[i] = m_config.GetLaserSwitch((CHAN_ID)i) == LASER_CHAN_SWITCH.ON ? true : false;
+            }
 
             short[][] data = new short[activatedChannelNum][];
             for (i = 0; i < activatedChannelNum; i++)
             {
-                data[i] = new short[xSampleCountPerLine];
+                data[i] = channelSwitch[i] ? new short[xSampleCountPerLine] : null;
             }
 
             while (m_scanning)
@@ -329,8 +335,11 @@ namespace confocal_core
                         sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelCalibration();
                         for (i = 0; i < activatedChannelNum; i++)
                         {
-                            Array.Reverse(sample.NSamples[i]);
-                            Array.Copy(sample.NSamples[i], sourceIndex, data[i], 0, xSampleCountPerLine);
+                            if (sample.NSamples[i] != null)
+                            {
+                                Array.Reverse(sample.NSamples[i]);
+                                Array.Copy(sample.NSamples[i], sourceIndex, data[i], 0, xSampleCountPerLine);
+                            }
                         }
                     }
                     else
@@ -338,7 +347,10 @@ namespace confocal_core
                         sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
                         for (i = 0; i < activatedChannelNum; i++)
                         {
-                            Array.Copy(sample.NSamples[i], sourceIndex, data[i], 0, xSampleCountPerLine);
+                            if (sample.NSamples[i] != null)
+                            {
+                                Array.Copy(sample.NSamples[i], sourceIndex, data[i], 0, xSampleCountPerLine);
+                            }
                         }
                     }
                 }
@@ -347,7 +359,10 @@ namespace confocal_core
                     sourceIndex = m_config.GetScanPixelCompensation() / 2 + m_config.GetScanPixelOffset();
                     for (i = 0; i < activatedChannelNum; i++)
                     {
-                        Array.Copy(sample.NSamples[i], sourceIndex, data[i], 0, xSampleCountPerLine);
+                        if (sample.NSamples[i] != null)
+                        {
+                            Array.Copy(sample.NSamples[i], sourceIndex, data[i], 0, xSampleCountPerLine);
+                        }
                     }
                 }
 
@@ -363,7 +378,7 @@ namespace confocal_core
                 data = new short[activatedChannelNum][];
                 for (i = 0; i < activatedChannelNum; i++)
                 {
-                    data[i] = new short[xSampleCountPerLine];
+                    data[i] = channelSwitch[i] ? new short[xSampleCountPerLine] : null;
                 }
             }
             Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
@@ -457,6 +472,11 @@ namespace confocal_core
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
 
             int i, index;
+            bool[] channelSwitch = new bool[activatedChannelNum];
+            for (i = 0; i < activatedChannelNum; i++)
+            {
+                channelSwitch[i] = m_config.GetLaserSwitch((CHAN_ID)i) == LASER_CHAN_SWITCH.ON ? true : false;
+            }
 
             while (m_scanning)
             {
@@ -473,14 +493,17 @@ namespace confocal_core
 
                 for (i = 0; i < activatedChannelNum; i++)
                 {
-                    byte[] bgrData = m_scanData.ScanImage.BGRData[i];
-                    byte[,] mapping = m_params.ColorMappingArr[i];
+                    if (channelSwitch[i])
+                    {
+                        byte[] bgrData = m_scanData.ScanImage.BGRData[i];
+                        byte[,] mapping = m_params.ColorMappingArr[i];
 
-                    index = xSampleCountPerLine * convertData.Line;
-                    Array.Copy(convertData.NSamples[i], 0, m_scanData.ScanImage.Data[i], index, xSampleCountPerLine);
+                        index = xSampleCountPerLine * convertData.Line;
+                        Array.Copy(convertData.NSamples[i], 0, m_scanData.ScanImage.Data[i], index, xSampleCountPerLine);
 
-                    index = index * 3;
-                    CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
+                        index = index * 3;
+                        CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
+                    }
                 }
 
                 if (m_scanData.GetImageLine() < convertData.Line || m_scanData.GetImageFrame() < convertData.Frame)
@@ -559,6 +582,11 @@ namespace confocal_core
             int updateLines = (int)Math.Ceiling(scanRows / updateNum);
 
             int i, line = -1;
+            bool[] channelSwitch = new bool[activatedChannelNum];
+            for (i = 0; i < activatedChannelNum; i++)
+            {
+                channelSwitch[i] = m_config.GetLaserSwitch((CHAN_ID)i) == LASER_CHAN_SWITCH.ON ? true : false;
+            }
 
             while (m_scanning)
             {
@@ -568,8 +596,11 @@ namespace confocal_core
 
                     for (i = 0; i < activatedChannelNum; i++)
                     {
-                        byte[,] mapping = m_params.ColorMappingArr[i];
-                        m_scanData.ScanImage.UpdateDisplayImage(i, mapping, lockBitsZoom);
+                        if (channelSwitch[i])
+                        {
+                            byte[,] mapping = m_params.ColorMappingArr[i];
+                            m_scanData.ScanImage.UpdateDisplayImage(i, mapping, lockBitsZoom);
+                        }
                     }
 
                     Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));

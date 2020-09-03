@@ -100,6 +100,8 @@ namespace confocal_core
             }
 
             m_params.Calculate();                       // 计算参数
+            m_params.GenerateColorMapping();            // 
+            m_params.GenerateAiChannelIndex();          // 计算使用PMT的情况下各个AI通道采集数据对应的Index
             m_waver.Generate();                         // 计算AO输出波形和触发信号
             scanTask.Config();                          // 配置扫描任务
 

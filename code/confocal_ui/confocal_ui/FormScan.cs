@@ -129,7 +129,7 @@ namespace confocal_ui
             rbtnTwo.CheckedChanged += rbtnTwo_CheckedChanged;
 
             // 停留时间
-            cbxDwellTime.DataSource = new string[] { "2.0", "4.0", "6.0", "8.0", "10.0", "12.0", "14.0", "16.0", "18.0", "20.0" };
+            cbxDwellTime.DataSource = new string[] { "0.5", "1.0", "2.0", "4.0", "6.0", "8.0", "10.0", "12.0", "14.0", "16.0", "18.0", "20.0" };
             cbxDwellTime.SelectedIndex = cbxDwellTime.FindString(m_config.GetScanDwellTime().ToString("F1"));
             cbxDwellTime.SelectedIndexChanged += cbxDwellTime_SelectedIndexChanged;
 

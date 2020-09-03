@@ -30,19 +30,22 @@ namespace confocal_core
         {
             for (int i = 0; i < NSamples.GetLength(0); i++)
             {
-                CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
-                short noiseLevel = Config.GetConfig().GetChannelBackgroundNoiseLevel(id);
                 short[] channelSample = NSamples[i];
-                int len = channelSample.Length;
-                for (int j = 0; j < len; j++)
+                if (channelSample != null)
                 {
-                    if (channelSample[j] < 0)
+                    CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                    short noiseLevel = Config.GetConfig().GetChannelBackgroundNoiseLevel(id);
+                    int len = channelSample.Length;
+                    for (int j = 0; j < len; j++)
                     {
-                        channelSample[j] = (short)-channelSample[j];
-                    }
-                    if (channelSample[j] <= noiseLevel)
-                    {
-                        channelSample[j] = 0;
+                        if (channelSample[j] < 0)
+                        {
+                            channelSample[j] = (short)-channelSample[j];
+                        }
+                        if (channelSample[j] <= noiseLevel)
+                        {
+                            channelSample[j] = 0;
+                        }
                     }
                 }
             }
