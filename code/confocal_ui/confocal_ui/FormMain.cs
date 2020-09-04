@@ -69,12 +69,6 @@ namespace confocal_ui
             // panel
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
-
-            //m_formImages = new List<FormImage>();
-            //m_formImages.Add(new FormImage());
-            //m_formImages.Add(new FormImage());
-            //m_formImages[0].Show(this.dockPanel, DockState.Document);
-            //m_formImages[1].Show(this.dockPanel, DockState.Document);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Left, 0.5);
             //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Bottom, 0.5);
             //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);

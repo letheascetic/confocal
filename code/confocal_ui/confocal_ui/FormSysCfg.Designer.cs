@@ -49,18 +49,17 @@
             this.lbYMirror = new System.Windows.Forms.Label();
             this.lbXMirror = new System.Windows.Forms.Label();
             this.gbxAcqMode = new System.Windows.Forms.GroupBox();
+            this.cbxStartSync = new System.Windows.Forms.ComboBox();
             this.cbxAcqTrigger = new System.Windows.Forms.ComboBox();
             this.lbAcqTrigger = new System.Windows.Forms.Label();
+            this.lbStartSync = new System.Windows.Forms.Label();
             this.rbtnApd = new System.Windows.Forms.RadioButton();
             this.rbtnPmt = new System.Windows.Forms.RadioButton();
             this.panAcq = new System.Windows.Forms.Panel();
             this.tbcAcq = new System.Windows.Forms.TabControl();
             this.tpgApd = new System.Windows.Forms.TabPage();
             this.lbApdTriggerIn = new System.Windows.Forms.Label();
-            this.cbxApd640CiGate = new System.Windows.Forms.ComboBox();
-            this.cbxApd561CiGate = new System.Windows.Forms.ComboBox();
-            this.cbxApd488CiGate = new System.Windows.Forms.ComboBox();
-            this.cbxApd405CiGate = new System.Windows.Forms.ComboBox();
+            this.cbxApdTriggerIn = new System.Windows.Forms.ComboBox();
             this.cbxApd640CiSrc = new System.Windows.Forms.ComboBox();
             this.cbxApd640Ci = new System.Windows.Forms.ComboBox();
             this.lbApd640 = new System.Windows.Forms.Label();
@@ -88,8 +87,6 @@
             this.lbAi = new System.Windows.Forms.Label();
             this.lbPmt405 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.cbxStartSync = new System.Windows.Forms.ComboBox();
-            this.lbStartSync = new System.Windows.Forms.Label();
             this.gbxGalv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFieldSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResponseTime)).BeginInit();
@@ -112,11 +109,11 @@
             this.gbxGalv.Controls.Add(this.lbResponseTime);
             this.gbxGalv.Controls.Add(this.lbFieldSize);
             this.gbxGalv.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.gbxGalv.Location = new System.Drawing.Point(9, 108);
-            this.gbxGalv.Margin = new System.Windows.Forms.Padding(2);
+            this.gbxGalv.Location = new System.Drawing.Point(12, 135);
+            this.gbxGalv.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbxGalv.Name = "gbxGalv";
-            this.gbxGalv.Padding = new System.Windows.Forms.Padding(2);
-            this.gbxGalv.Size = new System.Drawing.Size(364, 130);
+            this.gbxGalv.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbxGalv.Size = new System.Drawing.Size(485, 162);
             this.gbxGalv.TabIndex = 5;
             this.gbxGalv.TabStop = false;
             this.gbxGalv.Text = "扫描参数";
@@ -128,8 +125,8 @@
             0,
             0,
             0});
-            this.nudFieldSize.Location = new System.Drawing.Point(152, 45);
-            this.nudFieldSize.Margin = new System.Windows.Forms.Padding(2);
+            this.nudFieldSize.Location = new System.Drawing.Point(203, 56);
+            this.nudFieldSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudFieldSize.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -141,7 +138,7 @@
             0,
             0});
             this.nudFieldSize.Name = "nudFieldSize";
-            this.nudFieldSize.Size = new System.Drawing.Size(70, 21);
+            this.nudFieldSize.Size = new System.Drawing.Size(93, 25);
             this.nudFieldSize.TabIndex = 14;
             this.nudFieldSize.Value = new decimal(new int[] {
             200,
@@ -156,8 +153,8 @@
             0,
             0,
             0});
-            this.nudResponseTime.Location = new System.Drawing.Point(152, 17);
-            this.nudResponseTime.Margin = new System.Windows.Forms.Padding(2);
+            this.nudResponseTime.Location = new System.Drawing.Point(203, 21);
+            this.nudResponseTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudResponseTime.Maximum = new decimal(new int[] {
             500,
             0,
@@ -169,7 +166,7 @@
             0,
             0});
             this.nudResponseTime.Name = "nudResponseTime";
-            this.nudResponseTime.Size = new System.Drawing.Size(70, 21);
+            this.nudResponseTime.Size = new System.Drawing.Size(93, 25);
             this.nudResponseTime.TabIndex = 13;
             this.nudResponseTime.Value = new decimal(new int[] {
             200,
@@ -179,10 +176,10 @@
             // 
             // tbxCurveCoff
             // 
-            this.tbxCurveCoff.Location = new System.Drawing.Point(152, 102);
-            this.tbxCurveCoff.Margin = new System.Windows.Forms.Padding(2);
+            this.tbxCurveCoff.Location = new System.Drawing.Point(203, 128);
+            this.tbxCurveCoff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxCurveCoff.Name = "tbxCurveCoff";
-            this.tbxCurveCoff.Size = new System.Drawing.Size(71, 21);
+            this.tbxCurveCoff.Size = new System.Drawing.Size(93, 25);
             this.tbxCurveCoff.TabIndex = 12;
             this.tbxCurveCoff.Text = "10";
             // 
@@ -190,19 +187,18 @@
             // 
             this.lbCurveCoff.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lbCurveCoff.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lbCurveCoff.Location = new System.Drawing.Point(20, 105);
-            this.lbCurveCoff.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCurveCoff.Location = new System.Drawing.Point(27, 131);
             this.lbCurveCoff.Name = "lbCurveCoff";
-            this.lbCurveCoff.Size = new System.Drawing.Size(120, 18);
+            this.lbCurveCoff.Size = new System.Drawing.Size(160, 22);
             this.lbCurveCoff.TabIndex = 11;
             this.lbCurveCoff.Text = "曲线系数（%）：";
             // 
             // tbxCalibrationV
             // 
-            this.tbxCalibrationV.Location = new System.Drawing.Point(152, 75);
-            this.tbxCalibrationV.Margin = new System.Windows.Forms.Padding(2);
+            this.tbxCalibrationV.Location = new System.Drawing.Point(203, 94);
+            this.tbxCalibrationV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxCalibrationV.Name = "tbxCalibrationV";
-            this.tbxCalibrationV.Size = new System.Drawing.Size(71, 21);
+            this.tbxCalibrationV.Size = new System.Drawing.Size(93, 25);
             this.tbxCalibrationV.TabIndex = 10;
             this.tbxCalibrationV.Text = "4.09855e-5";
             // 
@@ -210,10 +206,9 @@
             // 
             this.lbCalibrationV.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lbCalibrationV.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lbCalibrationV.Location = new System.Drawing.Point(20, 78);
-            this.lbCalibrationV.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCalibrationV.Location = new System.Drawing.Point(27, 98);
             this.lbCalibrationV.Name = "lbCalibrationV";
-            this.lbCalibrationV.Size = new System.Drawing.Size(120, 18);
+            this.lbCalibrationV.Size = new System.Drawing.Size(160, 22);
             this.lbCalibrationV.TabIndex = 9;
             this.lbCalibrationV.Text = "标定电压 (V)：";
             // 
@@ -221,10 +216,9 @@
             // 
             this.lbResponseTime.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lbResponseTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lbResponseTime.Location = new System.Drawing.Point(20, 19);
-            this.lbResponseTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbResponseTime.Location = new System.Drawing.Point(27, 24);
             this.lbResponseTime.Name = "lbResponseTime";
-            this.lbResponseTime.Size = new System.Drawing.Size(120, 18);
+            this.lbResponseTime.Size = new System.Drawing.Size(160, 22);
             this.lbResponseTime.TabIndex = 0;
             this.lbResponseTime.Text = "振镜响应时间（us）：";
             // 
@@ -232,19 +226,18 @@
             // 
             this.lbFieldSize.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lbFieldSize.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lbFieldSize.Location = new System.Drawing.Point(20, 46);
-            this.lbFieldSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbFieldSize.Location = new System.Drawing.Point(27, 58);
             this.lbFieldSize.Name = "lbFieldSize";
-            this.lbFieldSize.Size = new System.Drawing.Size(120, 18);
+            this.lbFieldSize.Size = new System.Drawing.Size(160, 22);
             this.lbFieldSize.TabIndex = 2;
             this.lbFieldSize.Text = "视场大小 (um)：";
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(252, 496);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(2);
+            this.btnOk.Location = new System.Drawing.Point(336, 620);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(56, 30);
+            this.btnOk.Size = new System.Drawing.Size(75, 38);
             this.btnOk.TabIndex = 6;
             this.btnOk.Text = "确定";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -252,10 +245,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(317, 496);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancel.Location = new System.Drawing.Point(423, 620);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(56, 30);
+            this.btnCancel.Size = new System.Drawing.Size(75, 38);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -270,11 +263,11 @@
             this.gbxScan.Controls.Add(this.lbY2Mirror);
             this.gbxScan.Controls.Add(this.lbYMirror);
             this.gbxScan.Controls.Add(this.lbXMirror);
-            this.gbxScan.Location = new System.Drawing.Point(9, 10);
-            this.gbxScan.Margin = new System.Windows.Forms.Padding(2);
+            this.gbxScan.Location = new System.Drawing.Point(12, 12);
+            this.gbxScan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbxScan.Name = "gbxScan";
-            this.gbxScan.Padding = new System.Windows.Forms.Padding(2);
-            this.gbxScan.Size = new System.Drawing.Size(364, 94);
+            this.gbxScan.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbxScan.Size = new System.Drawing.Size(485, 118);
             this.gbxScan.TabIndex = 8;
             this.gbxScan.TabStop = false;
             this.gbxScan.Text = "扫描控制";
@@ -283,63 +276,64 @@
             // 
             this.lbInfo.AutoSize = true;
             this.lbInfo.ForeColor = System.Drawing.Color.Red;
-            this.lbInfo.Location = new System.Drawing.Point(247, 11);
+            this.lbInfo.Location = new System.Drawing.Point(329, 14);
+            this.lbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Size = new System.Drawing.Size(113, 12);
+            this.lbInfo.Size = new System.Drawing.Size(151, 15);
             this.lbInfo.TabIndex = 20;
             this.lbInfo.Text = "No NI Board Found.";
             // 
             // cbxY2Galvo
             // 
             this.cbxY2Galvo.FormattingEnabled = true;
-            this.cbxY2Galvo.Location = new System.Drawing.Point(248, 59);
+            this.cbxY2Galvo.Location = new System.Drawing.Point(331, 74);
+            this.cbxY2Galvo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxY2Galvo.Name = "cbxY2Galvo";
-            this.cbxY2Galvo.Size = new System.Drawing.Size(90, 20);
+            this.cbxY2Galvo.Size = new System.Drawing.Size(119, 23);
             this.cbxY2Galvo.TabIndex = 19;
             // 
             // cbxYGalvo
             // 
             this.cbxYGalvo.FormattingEnabled = true;
-            this.cbxYGalvo.Location = new System.Drawing.Point(65, 59);
+            this.cbxYGalvo.Location = new System.Drawing.Point(87, 74);
+            this.cbxYGalvo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxYGalvo.Name = "cbxYGalvo";
-            this.cbxYGalvo.Size = new System.Drawing.Size(90, 20);
+            this.cbxYGalvo.Size = new System.Drawing.Size(119, 23);
             this.cbxYGalvo.TabIndex = 18;
             // 
             // cbxXGalvo
             // 
             this.cbxXGalvo.FormattingEnabled = true;
-            this.cbxXGalvo.Location = new System.Drawing.Point(65, 25);
+            this.cbxXGalvo.Location = new System.Drawing.Point(87, 31);
+            this.cbxXGalvo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxXGalvo.Name = "cbxXGalvo";
-            this.cbxXGalvo.Size = new System.Drawing.Size(90, 20);
+            this.cbxXGalvo.Size = new System.Drawing.Size(119, 23);
             this.cbxXGalvo.TabIndex = 17;
             // 
             // lbY2Mirror
             // 
             this.lbY2Mirror.AutoSize = true;
-            this.lbY2Mirror.Location = new System.Drawing.Point(192, 62);
-            this.lbY2Mirror.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbY2Mirror.Location = new System.Drawing.Point(256, 78);
             this.lbY2Mirror.Name = "lbY2Mirror";
-            this.lbY2Mirror.Size = new System.Drawing.Size(47, 12);
+            this.lbY2Mirror.Size = new System.Drawing.Size(60, 15);
             this.lbY2Mirror.TabIndex = 4;
             this.lbY2Mirror.Text = "Y补偿镜";
             // 
             // lbYMirror
             // 
             this.lbYMirror.AutoSize = true;
-            this.lbYMirror.Location = new System.Drawing.Point(20, 62);
-            this.lbYMirror.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbYMirror.Location = new System.Drawing.Point(27, 78);
             this.lbYMirror.Name = "lbYMirror";
-            this.lbYMirror.Size = new System.Drawing.Size(35, 12);
+            this.lbYMirror.Size = new System.Drawing.Size(45, 15);
             this.lbYMirror.TabIndex = 3;
             this.lbYMirror.Text = "Y振镜";
             // 
             // lbXMirror
             // 
             this.lbXMirror.AutoSize = true;
-            this.lbXMirror.Location = new System.Drawing.Point(20, 28);
-            this.lbXMirror.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbXMirror.Location = new System.Drawing.Point(27, 35);
             this.lbXMirror.Name = "lbXMirror";
-            this.lbXMirror.Size = new System.Drawing.Size(35, 12);
+            this.lbXMirror.Size = new System.Drawing.Size(45, 15);
             this.lbXMirror.TabIndex = 2;
             this.lbXMirror.Text = "X振镜";
             // 
@@ -351,37 +345,58 @@
             this.gbxAcqMode.Controls.Add(this.lbStartSync);
             this.gbxAcqMode.Controls.Add(this.rbtnApd);
             this.gbxAcqMode.Controls.Add(this.rbtnPmt);
-            this.gbxAcqMode.Location = new System.Drawing.Point(9, 243);
+            this.gbxAcqMode.Location = new System.Drawing.Point(12, 304);
+            this.gbxAcqMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbxAcqMode.Name = "gbxAcqMode";
-            this.gbxAcqMode.Size = new System.Drawing.Size(364, 73);
+            this.gbxAcqMode.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxAcqMode.Size = new System.Drawing.Size(485, 91);
             this.gbxAcqMode.TabIndex = 9;
             this.gbxAcqMode.TabStop = false;
             this.gbxAcqMode.Text = "采集方式";
             // 
+            // cbxStartSync
+            // 
+            this.cbxStartSync.FormattingEnabled = true;
+            this.cbxStartSync.Location = new System.Drawing.Point(299, 24);
+            this.cbxStartSync.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxStartSync.Name = "cbxStartSync";
+            this.cbxStartSync.Size = new System.Drawing.Size(163, 23);
+            this.cbxStartSync.TabIndex = 21;
+            // 
             // cbxAcqTrigger
             // 
             this.cbxAcqTrigger.FormattingEnabled = true;
-            this.cbxAcqTrigger.Location = new System.Drawing.Point(224, 45);
+            this.cbxAcqTrigger.Location = new System.Drawing.Point(299, 56);
+            this.cbxAcqTrigger.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxAcqTrigger.Name = "cbxAcqTrigger";
-            this.cbxAcqTrigger.Size = new System.Drawing.Size(123, 20);
+            this.cbxAcqTrigger.Size = new System.Drawing.Size(163, 23);
             this.cbxAcqTrigger.TabIndex = 20;
             // 
             // lbAcqTrigger
             // 
             this.lbAcqTrigger.AutoSize = true;
-            this.lbAcqTrigger.Location = new System.Drawing.Point(159, 48);
-            this.lbAcqTrigger.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbAcqTrigger.Location = new System.Drawing.Point(212, 60);
             this.lbAcqTrigger.Name = "lbAcqTrigger";
-            this.lbAcqTrigger.Size = new System.Drawing.Size(53, 12);
+            this.lbAcqTrigger.Size = new System.Drawing.Size(67, 15);
             this.lbAcqTrigger.TabIndex = 20;
             this.lbAcqTrigger.Text = "触发信号";
+            // 
+            // lbStartSync
+            // 
+            this.lbStartSync.AutoSize = true;
+            this.lbStartSync.Location = new System.Drawing.Point(212, 28);
+            this.lbStartSync.Name = "lbStartSync";
+            this.lbStartSync.Size = new System.Drawing.Size(67, 15);
+            this.lbStartSync.TabIndex = 22;
+            this.lbStartSync.Text = "启动同步";
             // 
             // rbtnApd
             // 
             this.rbtnApd.AutoSize = true;
-            this.rbtnApd.Location = new System.Drawing.Point(90, 20);
+            this.rbtnApd.Location = new System.Drawing.Point(120, 25);
+            this.rbtnApd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbtnApd.Name = "rbtnApd";
-            this.rbtnApd.Size = new System.Drawing.Size(41, 16);
+            this.rbtnApd.Size = new System.Drawing.Size(52, 19);
             this.rbtnApd.TabIndex = 1;
             this.rbtnApd.Text = "APD";
             this.rbtnApd.UseVisualStyleBackColor = true;
@@ -390,9 +405,10 @@
             // 
             this.rbtnPmt.AutoSize = true;
             this.rbtnPmt.Checked = true;
-            this.rbtnPmt.Location = new System.Drawing.Point(22, 20);
+            this.rbtnPmt.Location = new System.Drawing.Point(29, 25);
+            this.rbtnPmt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbtnPmt.Name = "rbtnPmt";
-            this.rbtnPmt.Size = new System.Drawing.Size(41, 16);
+            this.rbtnPmt.Size = new System.Drawing.Size(52, 19);
             this.rbtnPmt.TabIndex = 0;
             this.rbtnPmt.TabStop = true;
             this.rbtnPmt.Text = "PMT";
@@ -402,9 +418,10 @@
             // 
             this.panAcq.BackColor = System.Drawing.Color.Transparent;
             this.panAcq.Controls.Add(this.tbcAcq);
-            this.panAcq.Location = new System.Drawing.Point(9, 322);
+            this.panAcq.Location = new System.Drawing.Point(12, 402);
+            this.panAcq.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panAcq.Name = "panAcq";
-            this.panAcq.Size = new System.Drawing.Size(364, 170);
+            this.panAcq.Size = new System.Drawing.Size(485, 212);
             this.panAcq.TabIndex = 10;
             // 
             // tbcAcq
@@ -413,19 +430,17 @@
             this.tbcAcq.Controls.Add(this.tpgPmt);
             this.tbcAcq.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcAcq.Location = new System.Drawing.Point(0, 0);
+            this.tbcAcq.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbcAcq.Name = "tbcAcq";
             this.tbcAcq.SelectedIndex = 0;
-            this.tbcAcq.Size = new System.Drawing.Size(364, 170);
+            this.tbcAcq.Size = new System.Drawing.Size(485, 212);
             this.tbcAcq.TabIndex = 0;
             // 
             // tpgApd
             // 
             this.tpgApd.BackColor = System.Drawing.Color.Gainsboro;
             this.tpgApd.Controls.Add(this.lbApdTriggerIn);
-            this.tpgApd.Controls.Add(this.cbxApd640CiGate);
-            this.tpgApd.Controls.Add(this.cbxApd561CiGate);
-            this.tpgApd.Controls.Add(this.cbxApd488CiGate);
-            this.tpgApd.Controls.Add(this.cbxApd405CiGate);
+            this.tpgApd.Controls.Add(this.cbxApdTriggerIn);
             this.tpgApd.Controls.Add(this.cbxApd640CiSrc);
             this.tpgApd.Controls.Add(this.cbxApd640Ci);
             this.tpgApd.Controls.Add(this.lbApd640);
@@ -440,176 +455,155 @@
             this.tpgApd.Controls.Add(this.cbxApd405Ci);
             this.tpgApd.Controls.Add(this.lbCounter);
             this.tpgApd.Controls.Add(this.lbApd405);
-            this.tpgApd.Location = new System.Drawing.Point(4, 22);
+            this.tpgApd.Location = new System.Drawing.Point(4, 25);
+            this.tpgApd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpgApd.Name = "tpgApd";
-            this.tpgApd.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgApd.Size = new System.Drawing.Size(356, 144);
+            this.tpgApd.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpgApd.Size = new System.Drawing.Size(477, 183);
             this.tpgApd.TabIndex = 0;
             this.tpgApd.Text = "APD";
             // 
             // lbApdTriggerIn
             // 
             this.lbApdTriggerIn.AutoSize = true;
-            this.lbApdTriggerIn.Location = new System.Drawing.Point(258, 9);
-            this.lbApdTriggerIn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApdTriggerIn.Location = new System.Drawing.Point(331, 11);
             this.lbApdTriggerIn.Name = "lbApdTriggerIn";
-            this.lbApdTriggerIn.Size = new System.Drawing.Size(53, 12);
+            this.lbApdTriggerIn.Size = new System.Drawing.Size(127, 15);
             this.lbApdTriggerIn.TabIndex = 64;
-            this.lbApdTriggerIn.Text = "触发接收";
+            this.lbApdTriggerIn.Text = "触发接收（共用）";
             // 
-            // cbxApd640CiGate
+            // cbxApdTriggerIn
             // 
-            this.cbxApd640CiGate.FormattingEnabled = true;
-            this.cbxApd640CiGate.Location = new System.Drawing.Point(244, 109);
-            this.cbxApd640CiGate.Name = "cbxApd640CiGate";
-            this.cbxApd640CiGate.Size = new System.Drawing.Size(90, 20);
-            this.cbxApd640CiGate.TabIndex = 63;
-            // 
-            // cbxApd561CiGate
-            // 
-            this.cbxApd561CiGate.FormattingEnabled = true;
-            this.cbxApd561CiGate.Location = new System.Drawing.Point(244, 83);
-            this.cbxApd561CiGate.Name = "cbxApd561CiGate";
-            this.cbxApd561CiGate.Size = new System.Drawing.Size(90, 20);
-            this.cbxApd561CiGate.TabIndex = 62;
-            // 
-            // cbxApd488CiGate
-            // 
-            this.cbxApd488CiGate.FormattingEnabled = true;
-            this.cbxApd488CiGate.Location = new System.Drawing.Point(244, 57);
-            this.cbxApd488CiGate.Name = "cbxApd488CiGate";
-            this.cbxApd488CiGate.Size = new System.Drawing.Size(90, 20);
-            this.cbxApd488CiGate.TabIndex = 61;
-            // 
-            // cbxApd405CiGate
-            // 
-            this.cbxApd405CiGate.FormattingEnabled = true;
-            this.cbxApd405CiGate.Location = new System.Drawing.Point(244, 31);
-            this.cbxApd405CiGate.Name = "cbxApd405CiGate";
-            this.cbxApd405CiGate.Size = new System.Drawing.Size(90, 20);
-            this.cbxApd405CiGate.TabIndex = 60;
+            this.cbxApdTriggerIn.FormattingEnabled = true;
+            this.cbxApdTriggerIn.Location = new System.Drawing.Point(325, 39);
+            this.cbxApdTriggerIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApdTriggerIn.Name = "cbxApdTriggerIn";
+            this.cbxApdTriggerIn.Size = new System.Drawing.Size(133, 23);
+            this.cbxApdTriggerIn.TabIndex = 60;
             // 
             // cbxApd640CiSrc
             // 
             this.cbxApd640CiSrc.FormattingEnabled = true;
-            this.cbxApd640CiSrc.Location = new System.Drawing.Point(148, 109);
+            this.cbxApd640CiSrc.Location = new System.Drawing.Point(197, 136);
+            this.cbxApd640CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd640CiSrc.Name = "cbxApd640CiSrc";
-            this.cbxApd640CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd640CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd640CiSrc.TabIndex = 59;
             // 
             // cbxApd640Ci
             // 
             this.cbxApd640Ci.FormattingEnabled = true;
-            this.cbxApd640Ci.Location = new System.Drawing.Point(61, 109);
+            this.cbxApd640Ci.Location = new System.Drawing.Point(81, 136);
+            this.cbxApd640Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd640Ci.Name = "cbxApd640Ci";
-            this.cbxApd640Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd640Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd640Ci.TabIndex = 58;
             // 
             // lbApd640
             // 
             this.lbApd640.AutoSize = true;
-            this.lbApd640.Location = new System.Drawing.Point(16, 112);
-            this.lbApd640.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd640.Location = new System.Drawing.Point(21, 140);
             this.lbApd640.Name = "lbApd640";
-            this.lbApd640.Size = new System.Drawing.Size(35, 12);
+            this.lbApd640.Size = new System.Drawing.Size(47, 15);
             this.lbApd640.TabIndex = 57;
             this.lbApd640.Text = "640nm";
             // 
             // cbxApd561CiSrc
             // 
             this.cbxApd561CiSrc.FormattingEnabled = true;
-            this.cbxApd561CiSrc.Location = new System.Drawing.Point(148, 83);
+            this.cbxApd561CiSrc.Location = new System.Drawing.Point(197, 104);
+            this.cbxApd561CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd561CiSrc.Name = "cbxApd561CiSrc";
-            this.cbxApd561CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd561CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd561CiSrc.TabIndex = 56;
             // 
             // cbxApd561Ci
             // 
             this.cbxApd561Ci.FormattingEnabled = true;
-            this.cbxApd561Ci.Location = new System.Drawing.Point(61, 83);
+            this.cbxApd561Ci.Location = new System.Drawing.Point(81, 104);
+            this.cbxApd561Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd561Ci.Name = "cbxApd561Ci";
-            this.cbxApd561Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd561Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd561Ci.TabIndex = 55;
             // 
             // lbApd561
             // 
             this.lbApd561.AutoSize = true;
-            this.lbApd561.Location = new System.Drawing.Point(16, 86);
-            this.lbApd561.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd561.Location = new System.Drawing.Point(21, 108);
             this.lbApd561.Name = "lbApd561";
-            this.lbApd561.Size = new System.Drawing.Size(35, 12);
+            this.lbApd561.Size = new System.Drawing.Size(47, 15);
             this.lbApd561.TabIndex = 54;
             this.lbApd561.Text = "561nm";
             // 
             // cbxApd488CiSrc
             // 
             this.cbxApd488CiSrc.FormattingEnabled = true;
-            this.cbxApd488CiSrc.Location = new System.Drawing.Point(148, 57);
+            this.cbxApd488CiSrc.Location = new System.Drawing.Point(197, 71);
+            this.cbxApd488CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd488CiSrc.Name = "cbxApd488CiSrc";
-            this.cbxApd488CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd488CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd488CiSrc.TabIndex = 53;
             // 
             // cbxApd488Ci
             // 
             this.cbxApd488Ci.FormattingEnabled = true;
-            this.cbxApd488Ci.Location = new System.Drawing.Point(61, 57);
+            this.cbxApd488Ci.Location = new System.Drawing.Point(81, 71);
+            this.cbxApd488Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd488Ci.Name = "cbxApd488Ci";
-            this.cbxApd488Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd488Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd488Ci.TabIndex = 52;
             // 
             // lbApd488
             // 
             this.lbApd488.AutoSize = true;
-            this.lbApd488.Location = new System.Drawing.Point(16, 60);
-            this.lbApd488.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd488.Location = new System.Drawing.Point(21, 75);
             this.lbApd488.Name = "lbApd488";
-            this.lbApd488.Size = new System.Drawing.Size(35, 12);
+            this.lbApd488.Size = new System.Drawing.Size(47, 15);
             this.lbApd488.TabIndex = 51;
             this.lbApd488.Text = "488nm";
             // 
             // lbCounterSrc
             // 
             this.lbCounterSrc.AutoSize = true;
-            this.lbCounterSrc.Location = new System.Drawing.Point(160, 9);
-            this.lbCounterSrc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCounterSrc.Location = new System.Drawing.Point(213, 11);
             this.lbCounterSrc.Name = "lbCounterSrc";
-            this.lbCounterSrc.Size = new System.Drawing.Size(59, 12);
+            this.lbCounterSrc.Size = new System.Drawing.Size(76, 15);
             this.lbCounterSrc.TabIndex = 50;
             this.lbCounterSrc.Text = "APD接线端";
             // 
             // cbxApd405CiSrc
             // 
             this.cbxApd405CiSrc.FormattingEnabled = true;
-            this.cbxApd405CiSrc.Location = new System.Drawing.Point(148, 31);
+            this.cbxApd405CiSrc.Location = new System.Drawing.Point(197, 39);
+            this.cbxApd405CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd405CiSrc.Name = "cbxApd405CiSrc";
-            this.cbxApd405CiSrc.Size = new System.Drawing.Size(90, 20);
+            this.cbxApd405CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd405CiSrc.TabIndex = 49;
             // 
             // cbxApd405Ci
             // 
             this.cbxApd405Ci.FormattingEnabled = true;
-            this.cbxApd405Ci.Location = new System.Drawing.Point(61, 31);
+            this.cbxApd405Ci.Location = new System.Drawing.Point(81, 39);
+            this.cbxApd405Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxApd405Ci.Name = "cbxApd405Ci";
-            this.cbxApd405Ci.Size = new System.Drawing.Size(81, 20);
+            this.cbxApd405Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd405Ci.TabIndex = 48;
             // 
             // lbCounter
             // 
             this.lbCounter.AutoSize = true;
-            this.lbCounter.Location = new System.Drawing.Point(62, 9);
-            this.lbCounter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCounter.Location = new System.Drawing.Point(83, 11);
             this.lbCounter.Name = "lbCounter";
-            this.lbCounter.Size = new System.Drawing.Size(65, 12);
+            this.lbCounter.Size = new System.Drawing.Size(82, 15);
             this.lbCounter.TabIndex = 47;
             this.lbCounter.Text = "计数器通道";
             // 
             // lbApd405
             // 
             this.lbApd405.AutoSize = true;
-            this.lbApd405.Location = new System.Drawing.Point(16, 34);
-            this.lbApd405.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbApd405.Location = new System.Drawing.Point(21, 42);
             this.lbApd405.Name = "lbApd405";
-            this.lbApd405.Size = new System.Drawing.Size(35, 12);
+            this.lbApd405.Size = new System.Drawing.Size(47, 15);
             this.lbApd405.TabIndex = 46;
             this.lbApd405.Text = "405nm";
             // 
@@ -627,146 +621,129 @@
             this.tpgPmt.Controls.Add(this.cbxPmt405Ai);
             this.tpgPmt.Controls.Add(this.lbAi);
             this.tpgPmt.Controls.Add(this.lbPmt405);
-            this.tpgPmt.Location = new System.Drawing.Point(4, 22);
+            this.tpgPmt.Location = new System.Drawing.Point(4, 25);
+            this.tpgPmt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpgPmt.Name = "tpgPmt";
-            this.tpgPmt.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgPmt.Size = new System.Drawing.Size(356, 144);
+            this.tpgPmt.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpgPmt.Size = new System.Drawing.Size(477, 183);
             this.tpgPmt.TabIndex = 1;
             this.tpgPmt.Text = "PMT";
             // 
             // cbxPmtTriggerIn
             // 
             this.cbxPmtTriggerIn.FormattingEnabled = true;
-            this.cbxPmtTriggerIn.Location = new System.Drawing.Point(220, 34);
+            this.cbxPmtTriggerIn.Location = new System.Drawing.Point(293, 42);
+            this.cbxPmtTriggerIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxPmtTriggerIn.Name = "cbxPmtTriggerIn";
-            this.cbxPmtTriggerIn.Size = new System.Drawing.Size(114, 20);
+            this.cbxPmtTriggerIn.Size = new System.Drawing.Size(151, 23);
             this.cbxPmtTriggerIn.TabIndex = 60;
             // 
             // lbPmtTriggerIn
             // 
             this.lbPmtTriggerIn.AutoSize = true;
-            this.lbPmtTriggerIn.Location = new System.Drawing.Point(233, 12);
-            this.lbPmtTriggerIn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPmtTriggerIn.Location = new System.Drawing.Point(311, 15);
             this.lbPmtTriggerIn.Name = "lbPmtTriggerIn";
-            this.lbPmtTriggerIn.Size = new System.Drawing.Size(101, 12);
+            this.lbPmtTriggerIn.Size = new System.Drawing.Size(127, 15);
             this.lbPmtTriggerIn.TabIndex = 59;
             this.lbPmtTriggerIn.Text = "触发接收（共用）";
             // 
             // cbxPmt640Ai
             // 
             this.cbxPmt640Ai.FormattingEnabled = true;
-            this.cbxPmt640Ai.Location = new System.Drawing.Point(73, 112);
+            this.cbxPmt640Ai.Location = new System.Drawing.Point(97, 140);
+            this.cbxPmt640Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxPmt640Ai.Name = "cbxPmt640Ai";
-            this.cbxPmt640Ai.Size = new System.Drawing.Size(114, 20);
+            this.cbxPmt640Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt640Ai.TabIndex = 58;
             // 
             // lbPmt640
             // 
             this.lbPmt640.AutoSize = true;
-            this.lbPmt640.Location = new System.Drawing.Point(28, 115);
-            this.lbPmt640.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPmt640.Location = new System.Drawing.Point(37, 144);
             this.lbPmt640.Name = "lbPmt640";
-            this.lbPmt640.Size = new System.Drawing.Size(35, 12);
+            this.lbPmt640.Size = new System.Drawing.Size(47, 15);
             this.lbPmt640.TabIndex = 57;
             this.lbPmt640.Text = "640nm";
             // 
             // cbxPmt561Ai
             // 
             this.cbxPmt561Ai.FormattingEnabled = true;
-            this.cbxPmt561Ai.Location = new System.Drawing.Point(73, 86);
+            this.cbxPmt561Ai.Location = new System.Drawing.Point(97, 108);
+            this.cbxPmt561Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxPmt561Ai.Name = "cbxPmt561Ai";
-            this.cbxPmt561Ai.Size = new System.Drawing.Size(114, 20);
+            this.cbxPmt561Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt561Ai.TabIndex = 55;
             // 
             // lbPmt561
             // 
             this.lbPmt561.AutoSize = true;
-            this.lbPmt561.Location = new System.Drawing.Point(28, 89);
-            this.lbPmt561.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPmt561.Location = new System.Drawing.Point(37, 111);
             this.lbPmt561.Name = "lbPmt561";
-            this.lbPmt561.Size = new System.Drawing.Size(35, 12);
+            this.lbPmt561.Size = new System.Drawing.Size(47, 15);
             this.lbPmt561.TabIndex = 54;
             this.lbPmt561.Text = "561nm";
             // 
             // cbxPmt488Ai
             // 
             this.cbxPmt488Ai.FormattingEnabled = true;
-            this.cbxPmt488Ai.Location = new System.Drawing.Point(73, 60);
+            this.cbxPmt488Ai.Location = new System.Drawing.Point(97, 75);
+            this.cbxPmt488Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxPmt488Ai.Name = "cbxPmt488Ai";
-            this.cbxPmt488Ai.Size = new System.Drawing.Size(114, 20);
+            this.cbxPmt488Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt488Ai.TabIndex = 52;
             // 
             // lbPmt488
             // 
             this.lbPmt488.AutoSize = true;
-            this.lbPmt488.Location = new System.Drawing.Point(28, 63);
-            this.lbPmt488.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPmt488.Location = new System.Drawing.Point(37, 79);
             this.lbPmt488.Name = "lbPmt488";
-            this.lbPmt488.Size = new System.Drawing.Size(35, 12);
+            this.lbPmt488.Size = new System.Drawing.Size(47, 15);
             this.lbPmt488.TabIndex = 51;
             this.lbPmt488.Text = "488nm";
             // 
             // cbxPmt405Ai
             // 
             this.cbxPmt405Ai.FormattingEnabled = true;
-            this.cbxPmt405Ai.Location = new System.Drawing.Point(73, 34);
+            this.cbxPmt405Ai.Location = new System.Drawing.Point(97, 42);
+            this.cbxPmt405Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxPmt405Ai.Name = "cbxPmt405Ai";
-            this.cbxPmt405Ai.Size = new System.Drawing.Size(114, 20);
+            this.cbxPmt405Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt405Ai.TabIndex = 48;
             // 
             // lbAi
             // 
             this.lbAi.AutoSize = true;
-            this.lbAi.Location = new System.Drawing.Point(96, 12);
-            this.lbAi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbAi.Location = new System.Drawing.Point(128, 15);
             this.lbAi.Name = "lbAi";
-            this.lbAi.Size = new System.Drawing.Size(59, 12);
+            this.lbAi.Size = new System.Drawing.Size(76, 15);
             this.lbAi.TabIndex = 47;
             this.lbAi.Text = "PMT接线端";
             // 
             // lbPmt405
             // 
             this.lbPmt405.AutoSize = true;
-            this.lbPmt405.Location = new System.Drawing.Point(28, 37);
-            this.lbPmt405.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPmt405.Location = new System.Drawing.Point(37, 46);
             this.lbPmt405.Name = "lbPmt405";
-            this.lbPmt405.Size = new System.Drawing.Size(35, 12);
+            this.lbPmt405.Size = new System.Drawing.Size(47, 15);
             this.lbPmt405.TabIndex = 46;
             this.lbPmt405.Text = "405nm";
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(9, 496);
+            this.btnSearch.Location = new System.Drawing.Point(12, 620);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(56, 30);
+            this.btnSearch.Size = new System.Drawing.Size(75, 38);
             this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "搜索";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // cbxStartSync
-            // 
-            this.cbxStartSync.FormattingEnabled = true;
-            this.cbxStartSync.Location = new System.Drawing.Point(224, 19);
-            this.cbxStartSync.Name = "cbxStartSync";
-            this.cbxStartSync.Size = new System.Drawing.Size(123, 20);
-            this.cbxStartSync.TabIndex = 21;
-            // 
-            // lbStartSync
-            // 
-            this.lbStartSync.AutoSize = true;
-            this.lbStartSync.Location = new System.Drawing.Point(159, 22);
-            this.lbStartSync.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbStartSync.Name = "lbStartSync";
-            this.lbStartSync.Size = new System.Drawing.Size(53, 12);
-            this.lbStartSync.TabIndex = 22;
-            this.lbStartSync.Text = "启动同步";
-            // 
             // FormSysCfg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 531);
+            this.ClientSize = new System.Drawing.Size(512, 664);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.panAcq);
             this.Controls.Add(this.gbxAcqMode);
@@ -776,7 +753,7 @@
             this.Controls.Add(this.gbxGalv);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSysCfg";
@@ -855,10 +832,7 @@
         private System.Windows.Forms.ComboBox cbxAcqTrigger;
         private System.Windows.Forms.Label lbPmtTriggerIn;
         private System.Windows.Forms.ComboBox cbxPmtTriggerIn;
-        private System.Windows.Forms.ComboBox cbxApd640CiGate;
-        private System.Windows.Forms.ComboBox cbxApd561CiGate;
-        private System.Windows.Forms.ComboBox cbxApd488CiGate;
-        private System.Windows.Forms.ComboBox cbxApd405CiGate;
+        private System.Windows.Forms.ComboBox cbxApdTriggerIn;
         private System.Windows.Forms.Label lbApdTriggerIn;
         private System.Windows.Forms.Label lbInfo;
         private System.Windows.Forms.Button btnSearch;

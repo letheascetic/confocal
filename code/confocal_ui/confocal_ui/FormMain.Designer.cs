@@ -79,13 +79,13 @@
             // menuItemFile
             // 
             this.menuItemFile.Name = "menuItemFile";
-            this.menuItemFile.Size = new System.Drawing.Size(49, 24);
+            this.menuItemFile.Size = new System.Drawing.Size(49, 20);
             this.menuItemFile.Text = "文件";
             // 
             // menuItemOption
             // 
             this.menuItemOption.Name = "menuItemOption";
-            this.menuItemOption.Size = new System.Drawing.Size(49, 24);
+            this.menuItemOption.Size = new System.Drawing.Size(49, 20);
             this.menuItemOption.Text = "操作";
             // 
             // menuItemView
@@ -97,7 +97,7 @@
             this.tsmiShow,
             this.tsmiSysCfg});
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(49, 24);
+            this.menuItemView.Size = new System.Drawing.Size(49, 20);
             this.menuItemView.Tag = "0";
             this.menuItemView.Text = "窗口";
             // 
@@ -129,7 +129,7 @@
             this.menuItemSkin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSkinDefault});
             this.menuItemSkin.Name = "menuItemSkin";
-            this.menuItemSkin.Size = new System.Drawing.Size(49, 24);
+            this.menuItemSkin.Size = new System.Drawing.Size(49, 20);
             this.menuItemSkin.Tag = "0";
             this.menuItemSkin.Text = "皮肤";
             // 
@@ -147,7 +147,7 @@
             this.menuItemManual,
             this.menuItemAbout});
             this.menuItemHelp.Name = "menuItemHelp";
-            this.menuItemHelp.Size = new System.Drawing.Size(49, 24);
+            this.menuItemHelp.Size = new System.Drawing.Size(49, 20);
             this.menuItemHelp.Text = "帮助";
             // 
             // menuItemManual
@@ -289,7 +289,10 @@
             this.dockPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel.DockBackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dockPanel.DockBottomPortion = 0.3D;
+            this.dockPanel.DockBottomPortion = 0.16D;
+            this.dockPanel.DockLeftPortion = 0.16D;
+            this.dockPanel.DockRightPortion = 0.16D;
+            this.dockPanel.DockTopPortion = 0.16D;
             this.dockPanel.Location = new System.Drawing.Point(0, 51);
             this.dockPanel.Name = "dockPanel";
             this.dockPanel.Size = new System.Drawing.Size(1582, 780);
@@ -309,6 +312,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Confocal Imaging v";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);

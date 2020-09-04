@@ -359,7 +359,7 @@ namespace confocal_core
                 CHAN_ID id = (CHAN_ID)i;
                 if (m_config.GetLaserSwitch(id) == LASER_CHAN_SWITCH.ON)
                 {
-                    code = ConfigCiTask(m_sysConfig.GetApdCiChannel(id), m_sysConfig.GetApdCiSrcPfi(id), m_sysConfig.GetApdCiGatePfi(id), ref m_ciTasks[i], ref m_ciChannelReaders[i]);
+                    code = ConfigCiTask(m_sysConfig.GetApdCiChannel(id), m_sysConfig.GetApdCiSrcPfi(id), m_sysConfig.GetApdTriggerInPfi(), ref m_ciTasks[i], ref m_ciChannelReaders[i]);
                     if (code != API_RETURN_CODE.API_SUCCESS)
                     {
                         return code;
@@ -374,7 +374,7 @@ namespace confocal_core
             return code;
         }
 
-        private API_RETURN_CODE ConfigCiTask(string ciChannel, string ciSrc, string ciGate, ref Task ciTask, ref CounterSingleChannelReader ciMultiChannelReader)
+        private API_RETURN_CODE ConfigCiTask(string ciChannel, string ciSrc, string ciClock, ref Task ciTask, ref CounterSingleChannelReader ciMultiChannelReader)
         {
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
 
@@ -386,7 +386,7 @@ namespace confocal_core
                 ciTask.Control(TaskAction.Verify);
 
                 ciTask.Timing.SampleClockRate = m_params.AoSampleRate;
-                ciTask.Timing.ConfigureSampleClock(ciGate,
+                ciTask.Timing.ConfigureSampleClock(ciClock,
                     ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,

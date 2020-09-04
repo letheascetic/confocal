@@ -605,7 +605,7 @@
             // 
             // FormScan
             // 
-            this.AutoHidePortion = 0.4D;
+            this.AutoHidePortion = 0.2D;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -629,6 +629,8 @@
             this.Controls.Add(this.lbDwellTime);
             this.Controls.Add(this.btnCapture);
             this.Controls.Add(this.btnScan);
+            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HideOnClose = true;
             this.Name = "FormScan";

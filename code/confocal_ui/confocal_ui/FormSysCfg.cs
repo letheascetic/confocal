@@ -89,15 +89,9 @@ namespace confocal_ui
             cbxApd561CiSrc.SelectedIndex = cbxApd561CiSrc.FindString(m_sysConfig.GetApdCiSrcPfi(CHAN_ID.WAVELENGTH_561_NM));
             cbxApd640CiSrc.SelectedIndex = cbxApd640CiSrc.FindString(m_sysConfig.GetApdCiSrcPfi(CHAN_ID.WAVELENGTH_640_NM));
 
-            cbxApd405CiGate.Items.AddRange(pfis);
-            cbxApd488CiGate.Items.AddRange(pfis);
-            cbxApd561CiGate.Items.AddRange(pfis);
-            cbxApd640CiGate.Items.AddRange(pfis);
+            cbxApdTriggerIn.Items.AddRange(pfis);
 
-            cbxApd405CiGate.SelectedIndex = cbxApd405CiGate.FindString(m_sysConfig.GetApdCiGatePfi(CHAN_ID.WAVELENGTH_405_NM));
-            cbxApd488CiGate.SelectedIndex = cbxApd488CiGate.FindString(m_sysConfig.GetApdCiGatePfi(CHAN_ID.WAVELENGTH_488_NM));
-            cbxApd561CiGate.SelectedIndex = cbxApd561CiGate.FindString(m_sysConfig.GetApdCiGatePfi(CHAN_ID.WAVELENGTH_561_NM));
-            cbxApd640CiGate.SelectedIndex = cbxApd640CiGate.FindString(m_sysConfig.GetApdCiGatePfi(CHAN_ID.WAVELENGTH_640_NM));
+            cbxApdTriggerIn.SelectedIndex = cbxApdTriggerIn.FindString(m_sysConfig.GetApdTriggerInPfi());
 
             string[] aiChannels = SysConfig.GetAiChannels();
             cbxPmt405Ai.Items.AddRange(aiChannels);
@@ -157,10 +151,7 @@ namespace confocal_ui
             m_sysConfig.SetApdCiSrcPfi(CHAN_ID.WAVELENGTH_561_NM, cbxApd561CiSrc.SelectedItem.ToString());
             m_sysConfig.SetApdCiSrcPfi(CHAN_ID.WAVELENGTH_640_NM, cbxApd640CiSrc.SelectedItem.ToString());
 
-            m_sysConfig.SetApdCiGatePfi(CHAN_ID.WAVELENGTH_405_NM, cbxApd405CiGate.SelectedItem.ToString());
-            m_sysConfig.SetApdCiGatePfi(CHAN_ID.WAVELENGTH_488_NM, cbxApd488CiGate.SelectedItem.ToString());
-            m_sysConfig.SetApdCiGatePfi(CHAN_ID.WAVELENGTH_561_NM, cbxApd561CiGate.SelectedItem.ToString());
-            m_sysConfig.SetApdCiGatePfi(CHAN_ID.WAVELENGTH_640_NM, cbxApd640CiGate.SelectedItem.ToString());
+            m_sysConfig.SetApdTriggerInPfi(cbxApdTriggerIn.SelectedItem.ToString());
         }
 
         private void ReleaseControlers()
@@ -188,10 +179,7 @@ namespace confocal_ui
             cbxApd561CiSrc.Items.Clear();
             cbxApd640CiSrc.Items.Clear();
 
-            cbxApd405CiGate.Items.Clear();
-            cbxApd488CiGate.Items.Clear();
-            cbxApd561CiGate.Items.Clear();
-            cbxApd640CiGate.Items.Clear();
+            cbxApdTriggerIn.Items.Clear();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

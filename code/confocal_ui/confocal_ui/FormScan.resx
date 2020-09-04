@@ -675,6 +675,141 @@
   <data name="&gt;&gt;lb405.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="&gt;&gt;nudBN488.Name" xml:space="preserve">
+    <value>nudBN488</value>
+  </data>
+  <data name="&gt;&gt;nudBN488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudBN488.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;nudBN488.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.Name" xml:space="preserve">
+    <value>tb488Power</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Name" xml:space="preserve">
+    <value>tb488Gain</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.Name" xml:space="preserve">
+    <value>tbx488Power</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tbx488Power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.Name" xml:space="preserve">
+    <value>lb488Power</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488Power.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.Name" xml:space="preserve">
+    <value>tbx488Gain</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tbx488Gain.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.Name" xml:space="preserve">
+    <value>lb488Gain</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488Gain.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lb488.Name" xml:space="preserve">
+    <value>lb488</value>
+  </data>
+  <data name="&gt;&gt;lb488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Name" xml:space="preserve">
+    <value>chbx488</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx488.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 428</value>
+  </data>
+  <data name="gbx488.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="gbx488.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 120</value>
+  </data>
+  <data name="gbx488.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;gbx488.Name" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;gbx488.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbx488.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbx488.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
   <data name="nudBN488.Location" type="System.Drawing.Point, System.Drawing">
     <value>288, 24</value>
   </data>
@@ -935,33 +1070,6 @@
   </data>
   <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 428</value>
-  </data>
-  <data name="gbx488.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="gbx488.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
-    <value>357, 120</value>
-  </data>
-  <data name="gbx488.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="&gt;&gt;gbx488.Name" xml:space="preserve">
-    <value>gbx488</value>
-  </data>
-  <data name="&gt;&gt;gbx488.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbx488.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbx488.ZOrder" xml:space="preserve">
-    <value>13</value>
   </data>
   <data name="&gt;&gt;nudBN561.Name" xml:space="preserve">
     <value>nudBN561</value>
@@ -2328,8 +2436,8 @@
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>381, 812</value>

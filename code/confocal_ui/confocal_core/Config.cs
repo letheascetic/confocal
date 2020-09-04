@@ -762,7 +762,7 @@ namespace confocal_core
 
         private string[] m_apdCiChannels;   // APD脉冲信号 - CI计数[CI计数器是虚拟的，需要指定具体的PFI端口]
         private string[] m_apdCiSrcPfis;    // APD脉冲计数器[CI]使用的PFI端口
-        private string[] m_apdCiGatePfis;   // APD门信号[Pause Trigger]使用的PFI端口，用于使能/禁能计数器计数
+        private string m_apdTriggerInPfi;   // APD时钟信号（作为触发信号）使用的PFI端口，一个时钟完成一次计数
         ///////////////////////////////////////////////////////////////////////////////////////////
         public static string[] GetDeviceNames()
         {
@@ -951,14 +951,14 @@ namespace confocal_core
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        public string GetApdCiGatePfi(CHAN_ID id)
+        public string GetApdTriggerInPfi()
         {
-            return m_apdCiGatePfis[(int)id];
+            return m_apdTriggerInPfi;
         }
 
-        public API_RETURN_CODE SetApdCiGatePfi(CHAN_ID id, string pfi)
+        public API_RETURN_CODE SetApdTriggerInPfi(string pfi)
         {
-            m_apdCiGatePfis[(int)id] = pfi;
+            m_apdTriggerInPfi = pfi;
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -1014,12 +1014,7 @@ namespace confocal_core
                 string.Concat("/", deviceName, "/PFI5"),
             };
 
-            m_apdCiGatePfis = new string[] {
-                string.Concat("/", deviceName, "/PFI9"),
-                string.Concat("/", deviceName, "/PFI4"),
-                string.Concat("/", deviceName, "/PFI1"),
-                string.Concat("/", deviceName, "/PFI6"),
-            };
+            m_apdTriggerInPfi = string.Concat("/", deviceName, "/PFI9");
         }
 
     }
