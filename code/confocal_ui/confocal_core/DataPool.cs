@@ -96,6 +96,7 @@ namespace confocal_core
         private readonly object m_locker = new object();        // 锁
         private long m_frame;
         private int m_line;
+        private double[][] m_linePixelValue;
         private int[][] m_data;
         private byte[][] m_bgrData;
         private Bitmap[] m_displayImages;
@@ -117,19 +118,26 @@ namespace confocal_core
         /// </summary>
         public byte[][] BGRData { get { return m_bgrData; } set { m_bgrData = value; } }
 
-        public ImageData(int activatedChannelNum, int scanXPoints, int scanYPoints)
+        /// <summary>
+        /// 每个通道每行的平均像素
+        /// </summary>
+        public double[][] PixelValuePerLine { get { return m_linePixelValue; } set { m_linePixelValue = value; } }
+
+        public ImageData(int channelNum, int scanXPoints, int scanYPoints)
         {
             int samplesPerFrame = scanXPoints * scanYPoints;
             m_frame = -1;
             m_line = -1;
-            Data = new int[activatedChannelNum][];
-            BGRData = new byte[activatedChannelNum][];
-            m_displayImages = new Bitmap[activatedChannelNum];
-            for (int i = 0; i < activatedChannelNum; i++)
+            Data = new int[channelNum][];
+            BGRData = new byte[channelNum][];
+            m_displayImages = new Bitmap[channelNum];
+            m_linePixelValue = new double[channelNum][];
+            for (int i = 0; i < channelNum; i++)
             {
                 Data[i] = new int[samplesPerFrame];
                 BGRData[i] = new byte[samplesPerFrame * 3];
                 m_displayImages[i] = new Bitmap(scanXPoints, scanYPoints, PixelFormat.Format24bppRgb);
+                m_linePixelValue[i] = Enumerable.Repeat<double>(0, scanYPoints).ToArray();
             }
         }
 
