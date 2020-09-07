@@ -428,7 +428,7 @@ namespace confocal_core
 
                 // 采集数据转换
                 // 去背景噪声
-                // sample.Convert();
+                sample.Convert();
 
                 // 如果是双向扫描，且当前是奇数行，则该行的数据需要反转
                 // 根据错位补偿参数，完成相应的截断
@@ -566,7 +566,8 @@ namespace confocal_core
                 Array.Copy(convertData.NSamples, 0, m_scanData.ScanImage.Data[convertData.ChannelIndex], index, xSampleCountPerLine);
 
                 index = index * 3;
-                CImage.Gray16ToBGR24(convertData.NSamples, ref bgrData, index, mapping);
+                // CImage.IntToBGR24(convertData.NSamples, ref bgrData, index, mapping);
+                CImage.IntToGray(convertData.NSamples, ref bgrData, index);
 
                 if (m_scanData.GetImageLine() < convertData.Line || m_scanData.GetImageFrame() < convertData.Frame)
                 {

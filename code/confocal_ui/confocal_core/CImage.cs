@@ -129,17 +129,31 @@ namespace confocal_core
             }
         }
 
-        public static void Gray16ToBGR24(int[] source, ref byte[] destnation, int destIndex, byte[,] mapping)
+        public static void IntToBGR24(int[] source, ref byte[] destnation, int destIndex, byte[,] mapping)
         {
             byte value;
             int i, j;
             for (i = 0; i < source.Length; i++)
             {
-                value = (byte)(source[i] >> 8);
+                value = (byte)(source[i]);
                 j = i * 3 + destIndex;
                 destnation[j] = mapping[value, 0];
                 destnation[j + 1] = mapping[value, 1];
                 destnation[j + 2] = mapping[value, 2];
+            }
+        }
+
+        public static void IntToGray(int[] source, ref byte[] destnation, int destIndex)
+        {
+            byte value;
+            int i, j;
+            for (i = 0; i < source.Length; i++)
+            {
+                value = (byte)(source[i]);
+                j = i * 3 + destIndex;
+                destnation[j] = value;
+                destnation[j + 1] = value;
+                destnation[j + 2] = value;
             }
         }
 

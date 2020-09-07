@@ -15,6 +15,9 @@ namespace confocal_core
     /// </summary>
     public struct PmtSampleData
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public short[][] NSamples { get; set; }
         public long Frame { get; }
         public int Line { get; }
@@ -54,6 +57,9 @@ namespace confocal_core
 
     public struct ApdSampleData
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public int[] NSamples { get; set; }
         public long Frame { get; }
         public int Line { get; }
@@ -69,7 +75,7 @@ namespace confocal_core
 
         public void Convert()
         {
-            for (int i = 1; i < NSamples.Length; i++)
+            for (int i = NSamples.Length - 1; i > 0; i--)
             {
                 NSamples[i] = NSamples[i] - NSamples[i - 1];
                 if (NSamples[i] < 0)
@@ -78,6 +84,7 @@ namespace confocal_core
                 }
             }
             NSamples[0] = NSamples[1];
+            Logger.Info(string.Format("max count: [{0}].", NSamples.Max()));
         }
     }
     
