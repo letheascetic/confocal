@@ -42,25 +42,30 @@
             this.lbFrame = new System.Windows.Forms.ToolStripStatusLabel();
             this.sp5 = new System.Windows.Forms.ToolStripSeparator();
             this.lbTimeSpan = new System.Windows.Forms.ToolStripStatusLabel();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.sp6 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbCurrent = new System.Windows.Forms.ToolStripStatusLabel();
+            this.m_timer = new System.Windows.Forms.Timer(this.components);
             this.toolStripTop = new System.Windows.Forms.ToolStrip();
             this.cbxSelect = new System.Windows.Forms.ToolStripComboBox();
             this.ts1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cbxColor = new System.Windows.Forms.ToolStripComboBox();
+            this.btnColor = new System.Windows.Forms.ToolStripButton();
+            this.ts3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.ts2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripRight = new System.Windows.Forms.ToolStrip();
             this.btnDisplayCenter = new System.Windows.Forms.ToolStripButton();
             this.btnDisplayZoom = new System.Windows.Forms.ToolStripButton();
+            this.pnlImage = new System.Windows.Forms.Panel();
+            this.pbxAOI = new System.Windows.Forms.PictureBox();
             this.pbxImage = new System.Windows.Forms.PictureBox();
-            this.pbxDesc = new System.Windows.Forms.PictureBox();
-            this.ts3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cbxColor = new System.Windows.Forms.ToolStripComboBox();
-            this.btnColor = new System.Windows.Forms.ToolStripButton();
+            this.m_cursorTimer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip.SuspendLayout();
             this.toolStripTop.SuspendLayout();
             this.toolStripRight.SuspendLayout();
+            this.pnlImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxAOI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxDesc)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -77,11 +82,13 @@
             this.sp3,
             this.lbFrame,
             this.sp5,
-            this.lbTimeSpan});
-            this.statusStrip.Location = new System.Drawing.Point(0, 459);
+            this.lbTimeSpan,
+            this.sp6,
+            this.lbCurrent});
+            this.statusStrip.Location = new System.Drawing.Point(0, 535);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip.Size = new System.Drawing.Size(517, 23);
+            this.statusStrip.Size = new System.Drawing.Size(588, 23);
             this.statusStrip.TabIndex = 3;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -152,10 +159,21 @@
             this.lbTimeSpan.Size = new System.Drawing.Size(72, 18);
             this.lbTimeSpan.Text = "xx seconds";
             // 
-            // timer
+            // sp6
             // 
-            this.timer.Interval = 200;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.sp6.Name = "sp6";
+            this.sp6.Size = new System.Drawing.Size(6, 23);
+            // 
+            // lbCurrent
+            // 
+            this.lbCurrent.Name = "lbCurrent";
+            this.lbCurrent.Size = new System.Drawing.Size(101, 18);
+            this.lbCurrent.Text = "[255, (512, 512)]";
+            // 
+            // m_timer
+            // 
+            this.m_timer.Interval = 200;
+            this.m_timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // toolStripTop
             // 
@@ -170,7 +188,7 @@
             this.ts2});
             this.toolStripTop.Location = new System.Drawing.Point(0, 0);
             this.toolStripTop.Name = "toolStripTop";
-            this.toolStripTop.Size = new System.Drawing.Size(517, 27);
+            this.toolStripTop.Size = new System.Drawing.Size(588, 27);
             this.toolStripTop.TabIndex = 4;
             this.toolStripTop.Text = "toolStrip";
             // 
@@ -188,81 +206,6 @@
             // 
             this.ts1.Name = "ts1";
             this.ts1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // btnSave
-            // 
-            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(24, 24);
-            this.btnSave.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // ts2
-            // 
-            this.ts2.Name = "ts2";
-            this.ts2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripRight
-            // 
-            this.toolStripRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.toolStripRight.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnDisplayCenter,
-            this.btnDisplayZoom});
-            this.toolStripRight.Location = new System.Drawing.Point(492, 27);
-            this.toolStripRight.Name = "toolStripRight";
-            this.toolStripRight.Size = new System.Drawing.Size(25, 432);
-            this.toolStripRight.TabIndex = 6;
-            this.toolStripRight.Text = "toolStrip";
-            // 
-            // btnDisplayCenter
-            // 
-            this.btnDisplayCenter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDisplayCenter.Image = ((System.Drawing.Image)(resources.GetObject("btnDisplayCenter.Image")));
-            this.btnDisplayCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDisplayCenter.Name = "btnDisplayCenter";
-            this.btnDisplayCenter.Size = new System.Drawing.Size(22, 24);
-            this.btnDisplayCenter.Text = "CenterIamge";
-            this.btnDisplayCenter.ToolTipText = "CenterIamge";
-            this.btnDisplayCenter.Click += new System.EventHandler(this.btnDisplayCenter_Click);
-            // 
-            // btnDisplayZoom
-            // 
-            this.btnDisplayZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDisplayZoom.Image = ((System.Drawing.Image)(resources.GetObject("btnDisplayZoom.Image")));
-            this.btnDisplayZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDisplayZoom.Name = "btnDisplayZoom";
-            this.btnDisplayZoom.Size = new System.Drawing.Size(22, 24);
-            this.btnDisplayZoom.Text = "Zoom";
-            this.btnDisplayZoom.Click += new System.EventHandler(this.btnDisplayZoom_Click);
-            // 
-            // pbxImage
-            // 
-            this.pbxImage.BackgroundImage = global::confocal_ui.Properties.Resources.bg;
-            this.pbxImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbxImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxImage.Location = new System.Drawing.Point(0, 27);
-            this.pbxImage.Name = "pbxImage";
-            this.pbxImage.Size = new System.Drawing.Size(492, 432);
-            this.pbxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxImage.TabIndex = 7;
-            this.pbxImage.TabStop = false;
-            // 
-            // pbxDesc
-            // 
-            this.pbxDesc.BackColor = System.Drawing.Color.Transparent;
-            this.pbxDesc.Location = new System.Drawing.Point(28, 54);
-            this.pbxDesc.Name = "pbxDesc";
-            this.pbxDesc.Size = new System.Drawing.Size(100, 76);
-            this.pbxDesc.TabIndex = 8;
-            this.pbxDesc.TabStop = false;
-            // 
-            // ts3
-            // 
-            this.ts3.Name = "ts3";
-            this.ts3.Size = new System.Drawing.Size(6, 27);
             // 
             // cbxColor
             // 
@@ -286,14 +229,108 @@
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(23, 24);
             // 
+            // ts3
+            // 
+            this.ts3.Name = "ts3";
+            this.ts3.Size = new System.Drawing.Size(6, 27);
+            // 
+            // btnSave
+            // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(24, 24);
+            this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // ts2
+            // 
+            this.ts2.Name = "ts2";
+            this.ts2.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripRight
+            // 
+            this.toolStripRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.toolStripRight.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStripRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnDisplayCenter,
+            this.btnDisplayZoom});
+            this.toolStripRight.Location = new System.Drawing.Point(563, 27);
+            this.toolStripRight.Name = "toolStripRight";
+            this.toolStripRight.Size = new System.Drawing.Size(25, 508);
+            this.toolStripRight.TabIndex = 6;
+            this.toolStripRight.Text = "toolStrip";
+            // 
+            // btnDisplayCenter
+            // 
+            this.btnDisplayCenter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDisplayCenter.Image = ((System.Drawing.Image)(resources.GetObject("btnDisplayCenter.Image")));
+            this.btnDisplayCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDisplayCenter.Name = "btnDisplayCenter";
+            this.btnDisplayCenter.Size = new System.Drawing.Size(29, 24);
+            this.btnDisplayCenter.Text = "CenterIamge";
+            this.btnDisplayCenter.ToolTipText = "CenterIamge";
+            this.btnDisplayCenter.Click += new System.EventHandler(this.btnDisplayCenter_Click);
+            // 
+            // btnDisplayZoom
+            // 
+            this.btnDisplayZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDisplayZoom.Image = ((System.Drawing.Image)(resources.GetObject("btnDisplayZoom.Image")));
+            this.btnDisplayZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDisplayZoom.Name = "btnDisplayZoom";
+            this.btnDisplayZoom.Size = new System.Drawing.Size(29, 24);
+            this.btnDisplayZoom.Text = "Zoom";
+            this.btnDisplayZoom.Click += new System.EventHandler(this.btnDisplayZoom_Click);
+            // 
+            // pnlImage
+            // 
+            this.pnlImage.AutoScroll = true;
+            this.pnlImage.AutoSize = true;
+            this.pnlImage.BackgroundImage = global::confocal_ui.Properties.Resources.bg;
+            this.pnlImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlImage.Controls.Add(this.pbxAOI);
+            this.pnlImage.Controls.Add(this.pbxImage);
+            this.pnlImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlImage.Location = new System.Drawing.Point(0, 27);
+            this.pnlImage.Name = "pnlImage";
+            this.pnlImage.Size = new System.Drawing.Size(563, 508);
+            this.pnlImage.TabIndex = 7;
+            // 
+            // pbxAOI
+            // 
+            this.pbxAOI.BackColor = System.Drawing.Color.Transparent;
+            this.pbxAOI.Location = new System.Drawing.Point(177, 141);
+            this.pbxAOI.Name = "pbxAOI";
+            this.pbxAOI.Size = new System.Drawing.Size(100, 76);
+            this.pbxAOI.TabIndex = 10;
+            this.pbxAOI.TabStop = false;
+            // 
+            // pbxImage
+            // 
+            this.pbxImage.BackColor = System.Drawing.Color.Transparent;
+            this.pbxImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbxImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxImage.Location = new System.Drawing.Point(0, 0);
+            this.pbxImage.Name = "pbxImage";
+            this.pbxImage.Size = new System.Drawing.Size(563, 508);
+            this.pbxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxImage.TabIndex = 9;
+            this.pbxImage.TabStop = false;
+            // 
+            // m_cursorTimer
+            // 
+            this.m_cursorTimer.Interval = 500;
+            this.m_cursorTimer.Tick += new System.EventHandler(this.m_cursorTimer_Tick);
+            // 
             // FormDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(517, 482);
-            this.Controls.Add(this.pbxDesc);
-            this.Controls.Add(this.pbxImage);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(588, 558);
+            this.Controls.Add(this.pnlImage);
             this.Controls.Add(this.toolStripRight);
             this.Controls.Add(this.toolStripTop);
             this.Controls.Add(this.statusStrip);
@@ -308,8 +345,9 @@
             this.toolStripTop.PerformLayout();
             this.toolStripRight.ResumeLayout(false);
             this.toolStripRight.PerformLayout();
+            this.pnlImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxAOI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxDesc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,7 +367,7 @@
         private System.Windows.Forms.ToolStripStatusLabel lbFrame;
         private System.Windows.Forms.ToolStripSeparator sp5;
         private System.Windows.Forms.ToolStripStatusLabel lbTimeSpan;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer m_timer;
         private System.Windows.Forms.ToolStrip toolStripTop;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripSeparator ts2;
@@ -337,11 +375,15 @@
         private System.Windows.Forms.ToolStripButton btnDisplayCenter;
         private System.Windows.Forms.ToolStripButton btnDisplayZoom;
         private System.Windows.Forms.ToolStripComboBox cbxSelect;
-        private System.Windows.Forms.PictureBox pbxImage;
-        private System.Windows.Forms.PictureBox pbxDesc;
         private System.Windows.Forms.ToolStripSeparator ts1;
         private System.Windows.Forms.ToolStripSeparator ts3;
         private System.Windows.Forms.ToolStripComboBox cbxColor;
         private System.Windows.Forms.ToolStripButton btnColor;
+        private System.Windows.Forms.ToolStripSeparator sp6;
+        private System.Windows.Forms.ToolStripStatusLabel lbCurrent;
+        private System.Windows.Forms.Panel pnlImage;
+        private System.Windows.Forms.PictureBox pbxAOI;
+        private System.Windows.Forms.PictureBox pbxImage;
+        private System.Windows.Forms.Timer m_cursorTimer;
     }
 }

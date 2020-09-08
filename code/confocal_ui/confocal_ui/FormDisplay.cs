@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -23,7 +24,13 @@ namespace confocal_ui
         private Config m_config;
         private Bitmap[] m_bitmapArr;
         private Dictionary<string, CHAN_ID> m_activatedChannelDict;
-        private int m_selectedChannelIndex;
+        private int m_selectedChannelIndex;         // 当前显示图像对应激光通道的索引
+        private int m_xScanPoints;                  // X扫描像素点
+        private int m_yScanPoints;                  // Y扫描像素点
+        private Point m_mousePosition;              // 鼠标在图像区域的位置[当前显示图像中的位置]
+        private Point m_imagePosition;              // 鼠标在图像区域的位置[扫描像素图像中的位置]
+        private Rectangle m_imageRectangle;         // Image在PictureBox中的位置
+        private SizeF m_imageScaleRatio;            // 显示图像与扫描图像的缩放比例
         ///////////////////////////////////////////////////////////////////////////////////////////
         public int FormId { get { return m_scanTask.TaskId; } }
         public string FormName { get { return m_scanTask.TaskName; } }
@@ -52,7 +59,7 @@ namespace confocal_ui
             Logger.Info(string.Format("FormImage scan task[{0}|{1}] started.", m_scanTask.TaskId, m_scanTask.TaskName));
             string status = m_scanTask.Scannning ? "扫描中" : "暂停";
             this.Text = string.Format(m_scanTask.TaskName, " ", status);
-            timer.Start();
+            m_timer.Start();
         }
 
         public void ScanTaskStopped()
@@ -60,7 +67,7 @@ namespace confocal_ui
             Logger.Info(string.Format("FormImage scan task[{0}|{1}] stopped.", m_scanTask.TaskId, m_scanTask.TaskName));
             string status = m_scanTask.Scannning ? "扫描中" : "暂停";
             this.Text = string.Format(m_scanTask.TaskName, " ", status);
-            timer.Stop();
+            m_timer.Stop();
         }
 
         public void ActivatedChannelChanged()
@@ -83,14 +90,17 @@ namespace confocal_ui
 
             m_activatedChannelDict = new Dictionary<string, CHAN_ID>();
             m_selectedChannelIndex = -1;
+
+            m_cursorTimer.Start();
         }
 
         private void InitControlers()
         {
-            pbxDesc.Parent = pbxImage;
-            pbxDesc.Size = pbxImage.Size;
-            pbxDesc.Location = pbxImage.Location;
-            pbxDesc.Dock = DockStyle.Fill;
+            pbxAOI.Parent = pbxImage;
+            pbxAOI.Size = pbxImage.Size;
+            pbxAOI.Location = pbxImage.Location;
+            pbxAOI.Dock = DockStyle.Fill;
+            pbxImage.Image = m_bitmapArr[0];
         }
 
         private void UpdateVariables()
@@ -117,6 +127,13 @@ namespace confocal_ui
             {
                 m_activatedChannelDict.Add("640nm", CHAN_ID.WAVELENGTH_640_NM);
             }
+
+            m_xScanPoints = m_config.GetScanXPoints();
+            m_yScanPoints = m_config.GetScanYPoints();
+
+            PropertyInfo info = pbxImage.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
+            m_imageRectangle = (Rectangle)info.GetValue(pbxImage, null);
+            m_imageScaleRatio = new SizeF((float)m_imageRectangle.Width / m_xScanPoints, (float)m_imageRectangle.Height / m_yScanPoints);
         }
 
         private void UpdateControlers()
@@ -142,6 +159,35 @@ namespace confocal_ui
             this.lbTimeSpan.Text = string.Format("{0} seconds", m_scanTask.GetScanInfo().TimeSpan.ToString("F1"));
         }
 
+        private void UpdateCurrentPosition()
+        {
+            this.m_mousePosition = pbxAOI.PointToClient(MousePosition);
+            if (!pbxAOI.Bounds.Contains(m_mousePosition))
+            {
+                return;
+            }
+
+            if (pbxImage.SizeMode == PictureBoxSizeMode.AutoSize)
+            {
+                this.m_imagePosition = this.m_mousePosition;
+                int pixelIndex = m_xScanPoints * m_imagePosition.Y + m_imagePosition.X;
+                int pixelValue = m_scanTask.GetScanData().ScanImage.Data[m_selectedChannelIndex][pixelIndex];
+                this.lbCurrent.Text = string.Format("[{0}, ({1}, {2})]", pixelValue, this.m_imagePosition.X, this.m_imagePosition.Y);
+            }
+            else
+            {
+                if (m_imageRectangle.Contains(m_mousePosition))
+                {
+                    Point posInImage = new Point(m_mousePosition.X - m_imageRectangle.Left, m_mousePosition.Y - m_imageRectangle.Y);
+                    m_imagePosition.X = (int)(posInImage.X / m_imageScaleRatio.Width);
+                    m_imagePosition.Y = (int)(posInImage.Y / m_imageScaleRatio.Height);
+                    int pixelIndex = m_xScanPoints * m_imagePosition.Y + m_imagePosition.X;
+                    int pixelValue = m_scanTask.GetScanData().ScanImage.Data[m_selectedChannelIndex][pixelIndex];
+                    this.lbCurrent.Text = string.Format("[{0}, ({1}, {2})]", pixelValue, this.m_imagePosition.X, this.m_imagePosition.Y);
+                }
+            }
+        }
+
         private void FormDisplay_Load(object sender, EventArgs e)
         {
             InitVariables();
@@ -150,12 +196,20 @@ namespace confocal_ui
 
         private void btnDisplayCenter_Click(object sender, EventArgs e)
         {
-            pbxImage.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbxImage.Dock = DockStyle.None;
+            pbxImage.SizeMode = PictureBoxSizeMode.AutoSize;
+            PropertyInfo info = pbxImage.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
+            m_imageRectangle = (Rectangle)info.GetValue(pbxImage, null);
+            m_imageScaleRatio = new SizeF((float)m_imageRectangle.Width / m_xScanPoints, (float)m_imageRectangle.Height / m_yScanPoints);
         }
 
         private void btnDisplayZoom_Click(object sender, EventArgs e)
         {
+            pbxImage.Dock = DockStyle.Fill;
             pbxImage.SizeMode = PictureBoxSizeMode.Zoom;
+            PropertyInfo info = pbxImage.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
+            m_imageRectangle = (Rectangle)info.GetValue(pbxImage, null);
+            m_imageScaleRatio = new SizeF((float)m_imageRectangle.Width / m_xScanPoints, (float)m_imageRectangle.Height / m_yScanPoints);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -200,5 +254,11 @@ namespace confocal_ui
             m_selectedChannelIndex = (int)id;
             pbxImage.Image = m_bitmapArr[m_selectedChannelIndex];
         }
+
+        private void m_cursorTimer_Tick(object sender, EventArgs e)
+        {
+            UpdateCurrentPosition();
+        }
+
     }
 }
