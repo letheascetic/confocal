@@ -23,7 +23,7 @@ namespace confocal_ui
         private FormROI m_pFormROI = new FormROI();
         private FormMeas m_pFormMeas = new FormMeas();
         private FormParas m_pFormShowBox = new FormParas();
-        private List<FormImage> m_pFormImages = new List<FormImage>();
+        private List<FormDisplay> m_pFormImages = new List<FormDisplay>();
 
         private Config m_config;
         private Params m_params;
@@ -68,10 +68,9 @@ namespace confocal_ui
 
             // panel
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
+            m_pFormMeas.Show(this.dockPanel, DockState.DockLeft);
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
-            //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Left, 0.5);
-            //m_pFormROI.Show(m_pFormSC.Pane, DockAlignment.Bottom, 0.5);
-            //m_pFormMeas.Show(this.dockPanel, DockState.DockRight);
+            m_pFormROI.Show(m_pFormScan.Pane, DockAlignment.Bottom, 0.25);
         }
 
         private void UpdateControlers()
@@ -84,11 +83,11 @@ namespace confocal_ui
 
         private API_RETURN_CODE ScanTaskCreatedHandler(ScanTask scanTask, object paras)
         {
-            FormImage formImage = FindFormImage(scanTask);
+            FormDisplay formImage = FindFormImage(scanTask);
             if (formImage == null)
             {
                 Logger.Info(string.Format("new scan task[{0}|{1}], create form image.", scanTask.TaskId, scanTask.TaskName));
-                formImage = new FormImage(scanTask);
+                formImage = new FormDisplay(scanTask);
                 formImage.Show(this.dockPanel, DockState.Document);
                 m_pFormImages.Add(formImage);
             }
@@ -103,7 +102,7 @@ namespace confocal_ui
 
         private API_RETURN_CODE ScanTaskStartedHandler(ScanTask scanTask, object paras)
         {
-            FormImage formImage = FindFormImage(scanTask);
+            FormDisplay formImage = FindFormImage(scanTask);
             if (formImage == null)
             {
                 Logger.Info(string.Format("scan task matching form image not found."));
@@ -117,7 +116,7 @@ namespace confocal_ui
 
         private API_RETURN_CODE ScanTaskStoppedHandler(ScanTask scanTask, object paras)
         {
-            FormImage formImage = FindFormImage(scanTask);
+            FormDisplay formImage = FindFormImage(scanTask);
             if (formImage == null)
             {
                 Logger.Info(string.Format("scan task matching form image not found."));
@@ -135,7 +134,7 @@ namespace confocal_ui
 
         private API_RETURN_CODE ActivatedChannelChangedHandler(ScanTask scanTask, object paras)
         {
-            FormImage formImage = FindFormImage(scanTask);
+            FormDisplay formImage = FindFormImage(scanTask);
             if (formImage == null)
             {
                 Logger.Info(string.Format("scan task matching form image not found."));
@@ -152,9 +151,9 @@ namespace confocal_ui
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        private FormImage FindFormImage(ScanTask scanTask)
+        private FormDisplay FindFormImage(ScanTask scanTask)
         {
-            foreach (FormImage formImage in m_pFormImages)
+            foreach (FormDisplay formImage in m_pFormImages)
             {
                 if (formImage.FormId == scanTask.TaskId)
                 {

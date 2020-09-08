@@ -66,6 +66,12 @@
     <Compile Include="FormColor.Designer.cs">
       <DependentUpon>FormColor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDisplay.Designer.cs">
+      <DependentUpon>FormDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormImage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormDisplay.resx">
+      <DependentUpon>FormDisplay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormImage.resx">
       <DependentUpon>FormImage.cs</DependentUpon>
     </EmbeddedResource>
