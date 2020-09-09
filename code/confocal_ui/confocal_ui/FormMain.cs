@@ -20,7 +20,7 @@ namespace confocal_ui
         private static readonly ILog Logger = log4net.LogManager.GetLogger("info");
         /************************************************************************************/
         private FormScan m_pFormScan = new FormScan();
-        private FormROI m_pFormROI = new FormROI();
+        private FormZone m_pFormROI = new FormZone();
         private FormMeas m_pFormMeas = new FormMeas();
         private FormParas m_pFormShowBox = new FormParas();
         private List<FormDisplay> m_pFormImages = new List<FormDisplay>();

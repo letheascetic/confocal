@@ -566,8 +566,8 @@ namespace confocal_core
                 Array.Copy(convertData.NSamples, 0, m_scanData.ScanImage.Data[convertData.ChannelIndex], index, xSampleCountPerLine);
 
                 index = index * 3;
-                // CImage.IntToBGR24(convertData.NSamples, ref bgrData, index, mapping);
-                CImage.IntToGray(convertData.NSamples, ref bgrData, index);
+                CImage.IntToBGR24(convertData.NSamples, ref bgrData, index, mapping);
+                //CImage.IntToGray(convertData.NSamples, ref bgrData, index);
 
                 if (m_scanData.GetImageLine() < convertData.Line || m_scanData.GetImageFrame() < convertData.Frame)
                 {

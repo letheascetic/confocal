@@ -91,11 +91,11 @@
     <Compile Include="FormMeas.Designer.cs">
       <DependentUpon>FormMeas.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormROI.cs">
+    <Compile Include="FormZone.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormROI.Designer.cs">
-      <DependentUpon>FormROI.cs</DependentUpon>
+    <Compile Include="FormZone.Designer.cs">
+      <DependentUpon>FormZone.cs</DependentUpon>
     </Compile>
     <Compile Include="FormScan.cs">
       <SubType>Form</SubType>
@@ -129,8 +129,8 @@
     <EmbeddedResource Include="FormMeas.resx">
       <DependentUpon>FormMeas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormROI.resx">
-      <DependentUpon>FormROI.cs</DependentUpon>
+    <EmbeddedResource Include="FormZone.resx">
+      <DependentUpon>FormZone.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormScan.resx">
       <DependentUpon>FormScan.cs</DependentUpon>
