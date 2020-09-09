@@ -57,10 +57,10 @@
             this.btnDisplayCenter = new System.Windows.Forms.ToolStripButton();
             this.btnDisplayZoom = new System.Windows.Forms.ToolStripButton();
             this.pnlImage = new System.Windows.Forms.Panel();
-            this.pbxAOI = new System.Windows.Forms.PictureBox();
+            this.pbxZone = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsSelectZone = new System.Windows.Forms.ToolStripMenuItem();
             this.tsResetZone = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSelectZone = new System.Windows.Forms.ToolStripMenuItem();
             this.tsStartAOI = new System.Windows.Forms.ToolStripMenuItem();
             this.pbxImage = new System.Windows.Forms.PictureBox();
             this.m_cursorTimer = new System.Windows.Forms.Timer(this.components);
@@ -68,7 +68,7 @@
             this.toolStripTop.SuspendLayout();
             this.toolStripRight.SuspendLayout();
             this.pnlImage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxAOI)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).BeginInit();
             this.SuspendLayout();
@@ -294,7 +294,7 @@
             this.pnlImage.AutoSize = true;
             this.pnlImage.BackgroundImage = global::confocal_ui.Properties.Resources.bg;
             this.pnlImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlImage.Controls.Add(this.pbxAOI);
+            this.pnlImage.Controls.Add(this.pbxZone);
             this.pnlImage.Controls.Add(this.pbxImage);
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlImage.Location = new System.Drawing.Point(0, 28);
@@ -303,16 +303,16 @@
             this.pnlImage.Size = new System.Drawing.Size(759, 645);
             this.pnlImage.TabIndex = 7;
             // 
-            // pbxAOI
+            // pbxZone
             // 
-            this.pbxAOI.BackColor = System.Drawing.Color.Transparent;
-            this.pbxAOI.ContextMenuStrip = this.contextMenuStrip;
-            this.pbxAOI.Location = new System.Drawing.Point(236, 176);
-            this.pbxAOI.Margin = new System.Windows.Forms.Padding(4);
-            this.pbxAOI.Name = "pbxAOI";
-            this.pbxAOI.Size = new System.Drawing.Size(133, 95);
-            this.pbxAOI.TabIndex = 10;
-            this.pbxAOI.TabStop = false;
+            this.pbxZone.BackColor = System.Drawing.Color.Transparent;
+            this.pbxZone.ContextMenuStrip = this.contextMenuStrip;
+            this.pbxZone.Location = new System.Drawing.Point(236, 176);
+            this.pbxZone.Margin = new System.Windows.Forms.Padding(4);
+            this.pbxZone.Name = "pbxZone";
+            this.pbxZone.Size = new System.Drawing.Size(133, 95);
+            this.pbxZone.TabIndex = 10;
+            this.pbxZone.TabStop = false;
             // 
             // contextMenuStrip
             // 
@@ -323,24 +323,24 @@
             this.tsStartAOI});
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(186, 104);
-            // 
-            // tsSelectZone
-            // 
-            this.tsSelectZone.Name = "tsSelectZone";
-            this.tsSelectZone.Size = new System.Drawing.Size(185, 24);
-            this.tsSelectZone.Text = "选择指定扫描区域";
+            this.contextMenuStrip.Size = new System.Drawing.Size(174, 76);
             // 
             // tsResetZone
             // 
             this.tsResetZone.Name = "tsResetZone";
-            this.tsResetZone.Size = new System.Drawing.Size(185, 24);
+            this.tsResetZone.Size = new System.Drawing.Size(173, 24);
             this.tsResetZone.Text = "重置到视图全区域";
+            // 
+            // tsSelectZone
+            // 
+            this.tsSelectZone.Name = "tsSelectZone";
+            this.tsSelectZone.Size = new System.Drawing.Size(173, 24);
+            this.tsSelectZone.Text = "选择指定扫描区域";
             // 
             // tsStartAOI
             // 
             this.tsStartAOI.Name = "tsStartAOI";
-            this.tsStartAOI.Size = new System.Drawing.Size(185, 24);
+            this.tsStartAOI.Size = new System.Drawing.Size(173, 24);
             this.tsStartAOI.Text = "扫描感兴趣区域";
             // 
             // pbxImage
@@ -385,7 +385,7 @@
             this.toolStripRight.ResumeLayout(false);
             this.toolStripRight.PerformLayout();
             this.pnlImage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxAOI)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).EndInit();
             this.ResumeLayout(false);
@@ -422,7 +422,7 @@
         private System.Windows.Forms.ToolStripSeparator sp6;
         private System.Windows.Forms.ToolStripStatusLabel lbCurrent;
         private System.Windows.Forms.Panel pnlImage;
-        private System.Windows.Forms.PictureBox pbxAOI;
+        private System.Windows.Forms.PictureBox pbxZone;
         private System.Windows.Forms.PictureBox pbxImage;
         private System.Windows.Forms.Timer m_cursorTimer;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;

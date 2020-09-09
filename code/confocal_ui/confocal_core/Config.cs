@@ -224,6 +224,8 @@ namespace confocal_core
         { get { return galvResponseTime; } set { galvResponseTime = value; } }
         public double FieldSize
         { get { return fieldSize; } set { fieldSize = value; } }
+        public RectangleF FieldRange
+        { get { return fieldRange; } set { fieldRange = value; } }
         public double DwellTime
         { get { return dwellTime; } set { dwellTime = value; } }
         public int XPoints
@@ -461,6 +463,17 @@ namespace confocal_core
             return m_scan.FieldSize;
         }
 
+        public RectangleF GetScanFieldRange()
+        {
+            return m_scan.FieldRange;
+        }
+
+        public API_RETURN_CODE SetScanFieldRange(RectangleF fieldRange)
+        {
+            m_scan.FieldRange = fieldRange;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         public API_RETURN_CODE SetScanDwellTime(double dwellTime)
         {
             Logger.Info(string.Format("set scan dwell time: [{0}].", dwellTime));
@@ -660,6 +673,9 @@ namespace confocal_core
                 Flag = 0,
                 GalvResponseTime = GALV_RESPONSE_TIME_DEFAULT,
                 FieldSize = FIELD_SIZE_DEFAULT,
+                FieldRange = new RectangleF(
+                    -(float)FIELD_SIZE_DEFAULT / 2, -(float)FIELD_SIZE_DEFAULT / 2, 
+                    (float)FIELD_SIZE_DEFAULT, (float)FIELD_SIZE_DEFAULT),
                 DwellTime = SCAN_PIXEL_TIME_DEFAULT,
                 CalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT,
                 CurveCoff = CURVE_COFF_DEFAULT,

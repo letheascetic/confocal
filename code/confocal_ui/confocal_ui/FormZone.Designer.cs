@@ -33,17 +33,27 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lbPixelSize = new System.Windows.Forms.ToolStripStatusLabel();
-            this.sp2 = new System.Windows.Forms.ToolStripSeparator();
+            this.sp = new System.Windows.Forms.ToolStripSeparator();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.cbxScanPixels = new System.Windows.Forms.ComboBox();
             this.lbScanPixels = new System.Windows.Forms.Label();
             this.pnlImage = new System.Windows.Forms.Panel();
             this.pbxImage = new System.Windows.Forms.PictureBox();
             this.m_cursorTimer = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsResetZone = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSelectZone = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsStartAOI = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbxZone = new System.Windows.Forms.PictureBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.lbFieldRange = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sp2 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip.SuspendLayout();
             this.pnlBottom.SuspendLayout();
             this.pnlImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -60,6 +70,8 @@
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbPixelSize,
+            this.sp,
+            this.lbFieldRange,
             this.sp2});
             this.statusStrip.Location = new System.Drawing.Point(0, 472);
             this.statusStrip.Name = "statusStrip";
@@ -74,10 +86,10 @@
             this.lbPixelSize.Size = new System.Drawing.Size(79, 20);
             this.lbPixelSize.Text = "{0} um/px";
             // 
-            // sp2
+            // sp
             // 
-            this.sp2.Name = "sp2";
-            this.sp2.Size = new System.Drawing.Size(6, 25);
+            this.sp.Name = "sp";
+            this.sp.Size = new System.Drawing.Size(6, 25);
             // 
             // pnlBottom
             // 
@@ -118,6 +130,9 @@
             // 
             this.pnlImage.AutoScroll = true;
             this.pnlImage.AutoSize = true;
+            this.pnlImage.BackgroundImage = global::confocal_ui.Properties.Resources.bg;
+            this.pnlImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlImage.Controls.Add(this.pbxZone);
             this.pnlImage.Controls.Add(this.pbxImage);
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlImage.Location = new System.Drawing.Point(0, 25);
@@ -127,7 +142,7 @@
             // 
             // pbxImage
             // 
-            this.pbxImage.BackgroundImage = global::confocal_ui.Properties.Resources.bg;
+            this.pbxImage.BackColor = System.Drawing.Color.Transparent;
             this.pbxImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbxImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbxImage.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -141,6 +156,63 @@
             // m_cursorTimer
             // 
             this.m_cursorTimer.Interval = 1000;
+            this.m_cursorTimer.Tick += new System.EventHandler(this.m_cursorTimer_Tick);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsResetZone,
+            this.tsSelectZone,
+            this.tsStartAOI});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.ShowImageMargin = false;
+            this.contextMenuStrip.Size = new System.Drawing.Size(174, 76);
+            // 
+            // tsResetZone
+            // 
+            this.tsResetZone.Name = "tsResetZone";
+            this.tsResetZone.Size = new System.Drawing.Size(173, 24);
+            this.tsResetZone.Text = "重置到视图全区域";
+            // 
+            // tsSelectZone
+            // 
+            this.tsSelectZone.Name = "tsSelectZone";
+            this.tsSelectZone.Size = new System.Drawing.Size(173, 24);
+            this.tsSelectZone.Text = "选择指定扫描区域";
+            // 
+            // tsStartAOI
+            // 
+            this.tsStartAOI.Name = "tsStartAOI";
+            this.tsStartAOI.Size = new System.Drawing.Size(173, 24);
+            this.tsStartAOI.Text = "扫描感兴趣区域";
+            // 
+            // pbxZone
+            // 
+            this.pbxZone.BackColor = System.Drawing.Color.Transparent;
+            this.pbxZone.ContextMenuStrip = this.contextMenuStrip;
+            this.pbxZone.Location = new System.Drawing.Point(189, 157);
+            this.pbxZone.Margin = new System.Windows.Forms.Padding(4);
+            this.pbxZone.Name = "pbxZone";
+            this.pbxZone.Size = new System.Drawing.Size(133, 95);
+            this.pbxZone.TabIndex = 11;
+            this.pbxZone.TabStop = false;
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // lbFieldRange
+            // 
+            this.lbFieldRange.Name = "lbFieldRange";
+            this.lbFieldRange.Size = new System.Drawing.Size(268, 20);
+            this.lbFieldRange.Text = "Field: [{0}um, {1}um] [{2}um x {3}um]";
+            // 
+            // sp2
+            // 
+            this.sp2.Name = "sp2";
+            this.sp2.Size = new System.Drawing.Size(6, 25);
             // 
             // FormZone
             // 
@@ -168,6 +240,8 @@
             this.pnlBottom.PerformLayout();
             this.pnlImage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,7 +256,15 @@
         private System.Windows.Forms.Panel pnlImage;
         private System.Windows.Forms.PictureBox pbxImage;
         private System.Windows.Forms.ToolStripStatusLabel lbPixelSize;
-        private System.Windows.Forms.ToolStripSeparator sp2;
+        private System.Windows.Forms.ToolStripSeparator sp;
         private System.Windows.Forms.Timer m_cursorTimer;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem tsResetZone;
+        private System.Windows.Forms.ToolStripMenuItem tsSelectZone;
+        private System.Windows.Forms.ToolStripMenuItem tsStartAOI;
+        private System.Windows.Forms.PictureBox pbxZone;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ToolStripStatusLabel lbFieldRange;
+        private System.Windows.Forms.ToolStripSeparator sp2;
     }
 }

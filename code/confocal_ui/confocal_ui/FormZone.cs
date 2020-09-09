@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -22,6 +23,8 @@ namespace confocal_ui
         private Config m_config;
         private Scheduler m_scheduler;
         private Dictionary<int, string> scanPixelsDict;
+        private Bitmap m_bitmap;
+        private int m_selectedChannelIndex;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public FormZone()
@@ -31,6 +34,12 @@ namespace confocal_ui
 
         private void InitVariables()
         {
+            m_config = Config.GetConfig();
+            m_params = Params.GetParams();
+            m_scheduler = Scheduler.CreateInstance();
+
+            m_bitmap = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
+
             scanPixelsDict = new Dictionary<int, string>();
             scanPixelsDict.Add(64, "64x64");
             scanPixelsDict.Add(128, "128x128");
@@ -39,10 +48,6 @@ namespace confocal_ui
             scanPixelsDict.Add(1024, "1024x1024");
             scanPixelsDict.Add(2048, "2048x2048");
             scanPixelsDict.Add(4096, "4096x4096");
-
-            m_config = Config.GetConfig();
-            m_params = Params.GetParams();
-            m_scheduler = Scheduler.CreateInstance();
         }
 
         private void InitControlers()
@@ -52,6 +57,13 @@ namespace confocal_ui
             cbxScanPixels.ValueMember = "Key";
             cbxScanPixels.SelectedIndex = cbxScanPixels.FindString(scanPixelsDict[m_config.GetScanXPoints()]);
             // cbxScanPixels.SelectedIndexChanged += cbxScanPixels_SelectedIndexChanged;
+
+            pbxImage.Image = m_bitmap;
+
+            pbxZone.Parent = pbxImage;
+            pbxZone.Size = pbxImage.Size;
+            pbxZone.Location = pbxImage.Location;
+            pbxZone.Dock = DockStyle.Fill;
         }
 
         private void FormZone_Load(object sender, EventArgs e)
@@ -60,6 +72,14 @@ namespace confocal_ui
             InitControlers();
         }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            pbxImage.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(m_selectedChannelIndex, ref m_bitmap);
+        }
 
+        private void m_cursorTimer_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
