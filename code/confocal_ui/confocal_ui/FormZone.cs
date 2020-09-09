@@ -57,7 +57,7 @@ namespace confocal_ui
         private void FormZone_Load(object sender, EventArgs e)
         {
             InitVariables();
-
+            InitControlers();
         }
 
 

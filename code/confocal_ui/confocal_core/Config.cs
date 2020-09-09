@@ -199,6 +199,7 @@ namespace confocal_core
         private int flag;                   // 扫描功能标志位
         private double galvResponseTime;        // 振镜响应时间,us
         private double fieldSize;               // 视场大小,um
+        private RectangleF fieldRange;          // 扫描视场范围
         private double dwellTime;               // 停留时间
         private int xPoints;                    // x扫描像素
         private int yPoints;                    // y扫描像素
