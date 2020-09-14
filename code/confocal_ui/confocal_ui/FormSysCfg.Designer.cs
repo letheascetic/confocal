@@ -133,7 +133,7 @@
             0,
             0});
             this.nudFieldSize.Minimum = new decimal(new int[] {
-            50,
+            10,
             0,
             0,
             0});
@@ -287,7 +287,7 @@
             // 
             this.cbxY2Galvo.FormattingEnabled = true;
             this.cbxY2Galvo.Location = new System.Drawing.Point(331, 74);
-            this.cbxY2Galvo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxY2Galvo.Margin = new System.Windows.Forms.Padding(4);
             this.cbxY2Galvo.Name = "cbxY2Galvo";
             this.cbxY2Galvo.Size = new System.Drawing.Size(119, 23);
             this.cbxY2Galvo.TabIndex = 19;
@@ -296,7 +296,7 @@
             // 
             this.cbxYGalvo.FormattingEnabled = true;
             this.cbxYGalvo.Location = new System.Drawing.Point(87, 74);
-            this.cbxYGalvo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxYGalvo.Margin = new System.Windows.Forms.Padding(4);
             this.cbxYGalvo.Name = "cbxYGalvo";
             this.cbxYGalvo.Size = new System.Drawing.Size(119, 23);
             this.cbxYGalvo.TabIndex = 18;
@@ -305,7 +305,7 @@
             // 
             this.cbxXGalvo.FormattingEnabled = true;
             this.cbxXGalvo.Location = new System.Drawing.Point(87, 31);
-            this.cbxXGalvo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxXGalvo.Margin = new System.Windows.Forms.Padding(4);
             this.cbxXGalvo.Name = "cbxXGalvo";
             this.cbxXGalvo.Size = new System.Drawing.Size(119, 23);
             this.cbxXGalvo.TabIndex = 17;
@@ -346,9 +346,9 @@
             this.gbxAcqMode.Controls.Add(this.rbtnApd);
             this.gbxAcqMode.Controls.Add(this.rbtnPmt);
             this.gbxAcqMode.Location = new System.Drawing.Point(12, 304);
-            this.gbxAcqMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxAcqMode.Margin = new System.Windows.Forms.Padding(4);
             this.gbxAcqMode.Name = "gbxAcqMode";
-            this.gbxAcqMode.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxAcqMode.Padding = new System.Windows.Forms.Padding(4);
             this.gbxAcqMode.Size = new System.Drawing.Size(485, 91);
             this.gbxAcqMode.TabIndex = 9;
             this.gbxAcqMode.TabStop = false;
@@ -358,7 +358,7 @@
             // 
             this.cbxStartSync.FormattingEnabled = true;
             this.cbxStartSync.Location = new System.Drawing.Point(299, 24);
-            this.cbxStartSync.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxStartSync.Margin = new System.Windows.Forms.Padding(4);
             this.cbxStartSync.Name = "cbxStartSync";
             this.cbxStartSync.Size = new System.Drawing.Size(163, 23);
             this.cbxStartSync.TabIndex = 21;
@@ -367,7 +367,7 @@
             // 
             this.cbxAcqTrigger.FormattingEnabled = true;
             this.cbxAcqTrigger.Location = new System.Drawing.Point(299, 56);
-            this.cbxAcqTrigger.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxAcqTrigger.Margin = new System.Windows.Forms.Padding(4);
             this.cbxAcqTrigger.Name = "cbxAcqTrigger";
             this.cbxAcqTrigger.Size = new System.Drawing.Size(163, 23);
             this.cbxAcqTrigger.TabIndex = 20;
@@ -394,7 +394,7 @@
             // 
             this.rbtnApd.AutoSize = true;
             this.rbtnApd.Location = new System.Drawing.Point(120, 25);
-            this.rbtnApd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbtnApd.Margin = new System.Windows.Forms.Padding(4);
             this.rbtnApd.Name = "rbtnApd";
             this.rbtnApd.Size = new System.Drawing.Size(52, 19);
             this.rbtnApd.TabIndex = 1;
@@ -406,7 +406,7 @@
             this.rbtnPmt.AutoSize = true;
             this.rbtnPmt.Checked = true;
             this.rbtnPmt.Location = new System.Drawing.Point(29, 25);
-            this.rbtnPmt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbtnPmt.Margin = new System.Windows.Forms.Padding(4);
             this.rbtnPmt.Name = "rbtnPmt";
             this.rbtnPmt.Size = new System.Drawing.Size(52, 19);
             this.rbtnPmt.TabIndex = 0;
@@ -419,7 +419,7 @@
             this.panAcq.BackColor = System.Drawing.Color.Transparent;
             this.panAcq.Controls.Add(this.tbcAcq);
             this.panAcq.Location = new System.Drawing.Point(12, 402);
-            this.panAcq.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panAcq.Margin = new System.Windows.Forms.Padding(4);
             this.panAcq.Name = "panAcq";
             this.panAcq.Size = new System.Drawing.Size(485, 212);
             this.panAcq.TabIndex = 10;
@@ -430,7 +430,7 @@
             this.tbcAcq.Controls.Add(this.tpgPmt);
             this.tbcAcq.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcAcq.Location = new System.Drawing.Point(0, 0);
-            this.tbcAcq.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbcAcq.Margin = new System.Windows.Forms.Padding(4);
             this.tbcAcq.Name = "tbcAcq";
             this.tbcAcq.SelectedIndex = 0;
             this.tbcAcq.Size = new System.Drawing.Size(485, 212);
@@ -456,9 +456,9 @@
             this.tpgApd.Controls.Add(this.lbCounter);
             this.tpgApd.Controls.Add(this.lbApd405);
             this.tpgApd.Location = new System.Drawing.Point(4, 25);
-            this.tpgApd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpgApd.Margin = new System.Windows.Forms.Padding(4);
             this.tpgApd.Name = "tpgApd";
-            this.tpgApd.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpgApd.Padding = new System.Windows.Forms.Padding(4);
             this.tpgApd.Size = new System.Drawing.Size(477, 183);
             this.tpgApd.TabIndex = 0;
             this.tpgApd.Text = "APD";
@@ -476,7 +476,7 @@
             // 
             this.cbxApdTriggerIn.FormattingEnabled = true;
             this.cbxApdTriggerIn.Location = new System.Drawing.Point(325, 39);
-            this.cbxApdTriggerIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApdTriggerIn.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApdTriggerIn.Name = "cbxApdTriggerIn";
             this.cbxApdTriggerIn.Size = new System.Drawing.Size(133, 23);
             this.cbxApdTriggerIn.TabIndex = 60;
@@ -485,7 +485,7 @@
             // 
             this.cbxApd640CiSrc.FormattingEnabled = true;
             this.cbxApd640CiSrc.Location = new System.Drawing.Point(197, 136);
-            this.cbxApd640CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd640CiSrc.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd640CiSrc.Name = "cbxApd640CiSrc";
             this.cbxApd640CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd640CiSrc.TabIndex = 59;
@@ -494,7 +494,7 @@
             // 
             this.cbxApd640Ci.FormattingEnabled = true;
             this.cbxApd640Ci.Location = new System.Drawing.Point(81, 136);
-            this.cbxApd640Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd640Ci.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd640Ci.Name = "cbxApd640Ci";
             this.cbxApd640Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd640Ci.TabIndex = 58;
@@ -512,7 +512,7 @@
             // 
             this.cbxApd561CiSrc.FormattingEnabled = true;
             this.cbxApd561CiSrc.Location = new System.Drawing.Point(197, 104);
-            this.cbxApd561CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd561CiSrc.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd561CiSrc.Name = "cbxApd561CiSrc";
             this.cbxApd561CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd561CiSrc.TabIndex = 56;
@@ -521,7 +521,7 @@
             // 
             this.cbxApd561Ci.FormattingEnabled = true;
             this.cbxApd561Ci.Location = new System.Drawing.Point(81, 104);
-            this.cbxApd561Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd561Ci.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd561Ci.Name = "cbxApd561Ci";
             this.cbxApd561Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd561Ci.TabIndex = 55;
@@ -539,7 +539,7 @@
             // 
             this.cbxApd488CiSrc.FormattingEnabled = true;
             this.cbxApd488CiSrc.Location = new System.Drawing.Point(197, 71);
-            this.cbxApd488CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd488CiSrc.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd488CiSrc.Name = "cbxApd488CiSrc";
             this.cbxApd488CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd488CiSrc.TabIndex = 53;
@@ -548,7 +548,7 @@
             // 
             this.cbxApd488Ci.FormattingEnabled = true;
             this.cbxApd488Ci.Location = new System.Drawing.Point(81, 71);
-            this.cbxApd488Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd488Ci.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd488Ci.Name = "cbxApd488Ci";
             this.cbxApd488Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd488Ci.TabIndex = 52;
@@ -575,7 +575,7 @@
             // 
             this.cbxApd405CiSrc.FormattingEnabled = true;
             this.cbxApd405CiSrc.Location = new System.Drawing.Point(197, 39);
-            this.cbxApd405CiSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd405CiSrc.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd405CiSrc.Name = "cbxApd405CiSrc";
             this.cbxApd405CiSrc.Size = new System.Drawing.Size(119, 23);
             this.cbxApd405CiSrc.TabIndex = 49;
@@ -584,7 +584,7 @@
             // 
             this.cbxApd405Ci.FormattingEnabled = true;
             this.cbxApd405Ci.Location = new System.Drawing.Point(81, 39);
-            this.cbxApd405Ci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxApd405Ci.Margin = new System.Windows.Forms.Padding(4);
             this.cbxApd405Ci.Name = "cbxApd405Ci";
             this.cbxApd405Ci.Size = new System.Drawing.Size(107, 23);
             this.cbxApd405Ci.TabIndex = 48;
@@ -622,9 +622,9 @@
             this.tpgPmt.Controls.Add(this.lbAi);
             this.tpgPmt.Controls.Add(this.lbPmt405);
             this.tpgPmt.Location = new System.Drawing.Point(4, 25);
-            this.tpgPmt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpgPmt.Margin = new System.Windows.Forms.Padding(4);
             this.tpgPmt.Name = "tpgPmt";
-            this.tpgPmt.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpgPmt.Padding = new System.Windows.Forms.Padding(4);
             this.tpgPmt.Size = new System.Drawing.Size(477, 183);
             this.tpgPmt.TabIndex = 1;
             this.tpgPmt.Text = "PMT";
@@ -633,7 +633,7 @@
             // 
             this.cbxPmtTriggerIn.FormattingEnabled = true;
             this.cbxPmtTriggerIn.Location = new System.Drawing.Point(293, 42);
-            this.cbxPmtTriggerIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPmtTriggerIn.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPmtTriggerIn.Name = "cbxPmtTriggerIn";
             this.cbxPmtTriggerIn.Size = new System.Drawing.Size(151, 23);
             this.cbxPmtTriggerIn.TabIndex = 60;
@@ -651,7 +651,7 @@
             // 
             this.cbxPmt640Ai.FormattingEnabled = true;
             this.cbxPmt640Ai.Location = new System.Drawing.Point(97, 140);
-            this.cbxPmt640Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPmt640Ai.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPmt640Ai.Name = "cbxPmt640Ai";
             this.cbxPmt640Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt640Ai.TabIndex = 58;
@@ -669,7 +669,7 @@
             // 
             this.cbxPmt561Ai.FormattingEnabled = true;
             this.cbxPmt561Ai.Location = new System.Drawing.Point(97, 108);
-            this.cbxPmt561Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPmt561Ai.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPmt561Ai.Name = "cbxPmt561Ai";
             this.cbxPmt561Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt561Ai.TabIndex = 55;
@@ -687,7 +687,7 @@
             // 
             this.cbxPmt488Ai.FormattingEnabled = true;
             this.cbxPmt488Ai.Location = new System.Drawing.Point(97, 75);
-            this.cbxPmt488Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPmt488Ai.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPmt488Ai.Name = "cbxPmt488Ai";
             this.cbxPmt488Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt488Ai.TabIndex = 52;
@@ -705,7 +705,7 @@
             // 
             this.cbxPmt405Ai.FormattingEnabled = true;
             this.cbxPmt405Ai.Location = new System.Drawing.Point(97, 42);
-            this.cbxPmt405Ai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPmt405Ai.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPmt405Ai.Name = "cbxPmt405Ai";
             this.cbxPmt405Ai.Size = new System.Drawing.Size(151, 23);
             this.cbxPmt405Ai.TabIndex = 48;
@@ -731,7 +731,7 @@
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(12, 620);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 38);
             this.btnSearch.TabIndex = 11;
