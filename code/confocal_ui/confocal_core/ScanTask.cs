@@ -308,7 +308,6 @@ namespace confocal_core
         private void ConvertPmtSamplesHandler()
         {
             int activatedChannelNum = m_config.GetChannelNum();
-            int sampleCountPerLine = m_params.SampleCountPerLine;
             int xSampleCountPerLine = m_config.GetScanXPoints();
             int imageSampleCountPerFrame = m_config.GetScanXPoints() * m_config.GetScanYPoints();
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;

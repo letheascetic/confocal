@@ -129,14 +129,14 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tbxFPS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 202</value>
+    <value>203, 252</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbxFPS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxFPS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxFPS.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -160,13 +160,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbFPS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 205</value>
-  </data>
-  <data name="lbFPS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 256</value>
   </data>
   <data name="lbFPS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 18</value>
+    <value>125, 22</value>
   </data>
   <data name="lbFPS.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -187,13 +184,13 @@
     <value>1</value>
   </data>
   <data name="tbxTotalSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 176</value>
+    <value>203, 220</value>
   </data>
   <data name="tbxTotalSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxTotalSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxTotalSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -217,13 +214,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbTotalSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 178</value>
-  </data>
-  <data name="lbTotalSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 222</value>
   </data>
   <data name="lbTotalSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbTotalSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -244,13 +238,13 @@
     <value>3</value>
   </data>
   <data name="tbxPostSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 149</value>
+    <value>203, 186</value>
   </data>
   <data name="tbxPostSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxPostSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxPostSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -274,13 +268,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbPostSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 151</value>
-  </data>
-  <data name="lbPostSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 189</value>
   </data>
   <data name="lbPostSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbPostSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -301,13 +292,13 @@
     <value>5</value>
   </data>
   <data name="tbxVaildSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 122</value>
+    <value>203, 152</value>
   </data>
   <data name="tbxVaildSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxVaildSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxVaildSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -331,13 +322,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbVaildSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 125</value>
-  </data>
-  <data name="lbVaildSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 156</value>
   </data>
   <data name="lbVaildSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbVaildSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -358,13 +346,13 @@
     <value>7</value>
   </data>
   <data name="tbxPrevSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 98</value>
+    <value>203, 122</value>
   </data>
   <data name="tbxPrevSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxPrevSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxPrevSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -388,13 +376,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbPrevSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 100</value>
-  </data>
-  <data name="lbPrevSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 125</value>
   </data>
   <data name="lbPrevSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbPrevSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -415,13 +400,13 @@
     <value>9</value>
   </data>
   <data name="tbxVoltagePerPixel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 70</value>
+    <value>203, 88</value>
   </data>
   <data name="tbxVoltagePerPixel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxVoltagePerPixel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxVoltagePerPixel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -445,13 +430,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbVoltagePerPixel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 70</value>
-  </data>
-  <data name="lbVoltagePerPixel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 88</value>
   </data>
   <data name="lbVoltagePerPixel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbVoltagePerPixel.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -472,13 +454,13 @@
     <value>11</value>
   </data>
   <data name="tbxPixelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 42</value>
+    <value>203, 52</value>
   </data>
   <data name="tbxPixelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxPixelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxPixelSize.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -502,13 +484,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbPixelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 44</value>
-  </data>
-  <data name="lbPixelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 55</value>
   </data>
   <data name="lbPixelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbPixelSize.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -529,13 +508,13 @@
     <value>13</value>
   </data>
   <data name="tbxAORate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 17</value>
+    <value>203, 21</value>
   </data>
   <data name="tbxAORate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxAORate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>80, 25</value>
   </data>
   <data name="tbxAORate.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -559,13 +538,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbAORate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 19</value>
-  </data>
-  <data name="lbAORate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 24</value>
   </data>
   <data name="lbAORate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 18</value>
+    <value>171, 22</value>
   </data>
   <data name="lbAORate.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -586,16 +562,16 @@
     <value>15</value>
   </data>
   <data name="gbxResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 332</value>
+    <value>4, 415</value>
   </data>
   <data name="gbxResults.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxResults.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 241</value>
+    <value>373, 311</value>
   </data>
   <data name="gbxResults.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -619,13 +595,13 @@
     <value>True</value>
   </data>
   <data name="tbxCurveCoff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 102</value>
+    <value>203, 128</value>
   </data>
   <data name="tbxCurveCoff.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxCurveCoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 21</value>
+    <value>93, 25</value>
   </data>
   <data name="tbxCurveCoff.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -649,13 +625,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbCurveCoff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 105</value>
-  </data>
-  <data name="lbCurveCoff.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 131</value>
   </data>
   <data name="lbCurveCoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbCurveCoff.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -676,13 +649,13 @@
     <value>1</value>
   </data>
   <data name="tbxCalibrationV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 75</value>
+    <value>203, 94</value>
   </data>
   <data name="tbxCalibrationV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxCalibrationV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 21</value>
+    <value>93, 25</value>
   </data>
   <data name="tbxCalibrationV.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -706,13 +679,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbCalibrationV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 78</value>
-  </data>
-  <data name="lbCalibrationV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 98</value>
   </data>
   <data name="lbCalibrationV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbCalibrationV.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -733,13 +703,13 @@
     <value>3</value>
   </data>
   <data name="tbxResponseTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 19</value>
+    <value>203, 24</value>
   </data>
   <data name="tbxResponseTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxResponseTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 21</value>
+    <value>93, 25</value>
   </data>
   <data name="tbxResponseTime.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -763,13 +733,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbResponseTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 19</value>
-  </data>
-  <data name="lbResponseTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 24</value>
   </data>
   <data name="lbResponseTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbResponseTime.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -790,13 +757,13 @@
     <value>5</value>
   </data>
   <data name="tbxFieldSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 44</value>
+    <value>203, 55</value>
   </data>
   <data name="tbxFieldSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbxFieldSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 21</value>
+    <value>93, 25</value>
   </data>
   <data name="tbxFieldSize.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -820,13 +787,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbFieldSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 46</value>
-  </data>
-  <data name="lbFieldSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>27, 58</value>
   </data>
   <data name="lbFieldSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 18</value>
+    <value>160, 22</value>
   </data>
   <data name="lbFieldSize.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -847,16 +811,16 @@
     <value>7</value>
   </data>
   <data name="gbxGalv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 197</value>
+    <value>4, 246</value>
   </data>
   <data name="gbxGalv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxGalv.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxGalv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 130</value>
+    <value>373, 186</value>
   </data>
   <data name="gbxGalv.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -877,13 +841,13 @@
     <value>1</value>
   </data>
   <data name="chart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 6</value>
+    <value>4, 8</value>
   </data>
   <data name="chart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="chart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 186</value>
+    <value>373, 232</value>
   </data>
   <data name="chart.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -909,8 +873,11 @@
   <data name="panel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="panel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 579</value>
+    <value>385, 724</value>
   </data>
   <data name="panel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -931,7 +898,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+    <value>8, 15</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -940,7 +907,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>289, 579</value>
+    <value>385, 724</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1230,7 +1197,7 @@
 </value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

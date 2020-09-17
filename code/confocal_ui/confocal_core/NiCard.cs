@@ -211,7 +211,7 @@ namespace confocal_core
                     m_aoTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    m_params.SampleCountPerFrame);
+                    m_params.AoSampleCountPerFrame);
 
                 // 路由Ao Sample Clcok到PFI0
                 //if (m_config.Debugging)
@@ -266,7 +266,7 @@ namespace confocal_core
                     m_doTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    m_params.SampleCountPerFrame);
+                    m_params.AoSampleCountPerFrame);
 
                 // 设置Do Start Trigger源为Ao Start Trigger[默认]，实现启动同步
                 string source = m_sysConfig.GetStartSyncSignal();
@@ -313,7 +313,7 @@ namespace confocal_core
                     m_aiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    m_params.ValidSampleCountPerLine);
+                    m_params.ValidScanPixelsPerLine);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = m_sysConfig.GetPmtTriggerInPfi();
@@ -328,7 +328,7 @@ namespace confocal_core
                 //    m_aiTask.ExportSignals.AIConvertClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI3"); ;
                 //}
 
-                m_aiTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
+                m_aiTask.EveryNSamplesReadEventInterval = m_params.ValidScanPixelsPerLine;
                 m_aiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(AiEveryNSamplesRead);
 
                 m_aiUnscaledReader = new AnalogUnscaledReader(m_aiTask.Stream);
@@ -385,12 +385,12 @@ namespace confocal_core
                 ciTask.CIChannels.CreateCountEdgesChannel(ciChannel, "", CICountEdgesActiveEdge.Rising, 0, CICountEdgesCountDirection.Up);
                 ciTask.Control(TaskAction.Verify);
 
-                ciTask.Timing.SampleClockRate = m_params.AoSampleRate;
+                ciTask.Timing.SampleClockRate = m_params.CtrSampleRate;
                 ciTask.Timing.ConfigureSampleClock(ciClock,
                     ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    m_params.ValidSampleCountPerFrame);
+                    m_params.ValidScanPixelsPerFrame);
 
                 // 指定CI Channel使用的物理输入终端[APD的脉冲接收端]
                 ciTask.CIChannels[0].CountEdgesTerminal = ciSrc;
@@ -403,7 +403,7 @@ namespace confocal_core
                 string source = m_sysConfig.GetStartSyncSignal();
                 ciTask.Triggers.ArmStartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeArmStartTriggerEdge.Rising);
 
-                ciTask.EveryNSamplesReadEventInterval = m_params.ValidSampleCountPerLine;
+                ciTask.EveryNSamplesReadEventInterval = m_params.ValidScanPixelsPerLine;
                 ciTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(CiEveryNSamplesRead);
 
                 ciMultiChannelReader = new CounterSingleChannelReader(ciTask.Stream);
@@ -465,8 +465,7 @@ namespace confocal_core
             {
                 // 读取16位原始数据，每一行读取一次
                 int channelNum = m_config.GetChannelNum();
-                // ushort[,] x = m_aiUnscaledReader.ReadUInt16(m_params.ValidSampleCountPerLine);
-                short[,] originSamples = m_aiUnscaledReader.ReadInt16(m_params.ValidSampleCountPerLine);
+                short[,] originSamples = m_aiUnscaledReader.ReadInt16(m_params.ValidScanPixelsPerLine);
                 AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
 
                 short[][] samples = new short[channelNum][];
@@ -497,7 +496,7 @@ namespace confocal_core
                     return;
                 }
 
-                int[] originSamples = m_ciChannelReaders[index].ReadMultiSampleInt32(m_params.ValidSampleCountPerLine);
+                int[] originSamples = m_ciChannelReaders[index].ReadMultiSampleInt32(m_params.ValidScanPixelsPerLine);
 
                 if (CiSamplesReceived != null)
                 {
