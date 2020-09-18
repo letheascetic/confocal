@@ -313,7 +313,7 @@ namespace confocal_core
                     m_aiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    m_params.ValidScanPixelsPerLine);
+                    m_params.ScanPixelsPerAcquisition * 2);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = m_sysConfig.GetPmtTriggerInPfi();
@@ -328,7 +328,7 @@ namespace confocal_core
                 //    m_aiTask.ExportSignals.AIConvertClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI3"); ;
                 //}
 
-                m_aiTask.EveryNSamplesReadEventInterval = m_params.ValidScanPixelsPerLine;
+                m_aiTask.EveryNSamplesReadEventInterval = m_params.ScanPixelsPerAcquisition;
                 m_aiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(AiEveryNSamplesRead);
 
                 m_aiUnscaledReader = new AnalogUnscaledReader(m_aiTask.Stream);
@@ -390,7 +390,7 @@ namespace confocal_core
                     ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    m_params.ValidScanPixelsPerFrame);
+                    m_params.ScanPixelsPerAcquisition * 4);
 
                 // 指定CI Channel使用的物理输入终端[APD的脉冲接收端]
                 ciTask.CIChannels[0].CountEdgesTerminal = ciSrc;
@@ -403,7 +403,7 @@ namespace confocal_core
                 string source = m_sysConfig.GetStartSyncSignal();
                 ciTask.Triggers.ArmStartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeArmStartTriggerEdge.Rising);
 
-                ciTask.EveryNSamplesReadEventInterval = m_params.ValidScanPixelsPerLine;
+                ciTask.EveryNSamplesReadEventInterval = m_params.ScanPixelsPerAcquisition;
                 ciTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(CiEveryNSamplesRead);
 
                 ciMultiChannelReader = new CounterSingleChannelReader(ciTask.Stream);
@@ -463,9 +463,9 @@ namespace confocal_core
         {
             try
             {
-                // 读取16位原始数据，每一行读取一次
+                // 读取16位原始数据，每次读取单次采集的像素数
                 int channelNum = m_config.GetChannelNum();
-                short[,] originSamples = m_aiUnscaledReader.ReadInt16(m_params.ValidScanPixelsPerLine);
+                short[,] originSamples = m_aiUnscaledReader.ReadInt16(m_params.ScanPixelsPerAcquisition);
                 AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
 
                 short[][] samples = new short[channelNum][];
@@ -496,7 +496,7 @@ namespace confocal_core
                     return;
                 }
 
-                int[] originSamples = m_ciChannelReaders[index].ReadMultiSampleInt32(m_params.ValidScanPixelsPerLine);
+                int[] originSamples = m_ciChannelReaders[index].ReadMultiSampleInt32(m_params.ScanPixelsPerAcquisition);
 
                 if (CiSamplesReceived != null)
                 {

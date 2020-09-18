@@ -18,6 +18,7 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
+        private Params m_params;
         private SysConfig m_sysConfig;              
         private DateTime m_startTime;           // 扫描开始时间
         private double m_timespan;              // 扫描经过时间
@@ -84,10 +85,12 @@ namespace confocal_core
         public void UpdateScanInfo()
         {
             TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
-            if (++CurrentLine % m_config.GetScanYPoints() == 0)
+            CurrentLine += m_params.ScanRowsPerAcquisition;
+
+            if (CurrentLine >= m_config.GetScanYPoints())
             {
-                CurrentLine = 0;
-                CurrentFrame++;
+                CurrentFrame += (CurrentLine / m_config.GetScanYPoints());
+                CurrentLine = CurrentLine % m_config.GetScanYPoints();
                 Fps = CurrentFrame / TimeSpan;
                 Logger.Info(string.Format("scan info: frame[{0}], timespan[{1}], fps[{2}].", CurrentFrame, TimeSpan, Fps));
             }
@@ -99,11 +102,13 @@ namespace confocal_core
             {
                 TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
             }
-            
-            if (++m_lines[channelIndex] % m_config.GetScanYPoints() == 0)
+
+            m_lines[channelIndex] += m_params.ScanRowsPerAcquisition;
+
+            if (m_lines[channelIndex] >= m_config.GetScanYPoints())
             {
-                m_lines[channelIndex] = 0;
-                m_frames[channelIndex]++;
+                m_frames[channelIndex] += (m_lines[channelIndex] / m_config.GetScanYPoints());
+                m_lines[channelIndex] = m_lines[channelIndex] % m_config.GetScanYPoints();
                 m_fps[channelIndex] = m_frames[channelIndex] / (DateTime.Now - StartTime).TotalSeconds;
                 Logger.Info(string.Format("scan info: channel[{0}], frame[{1}], fps[{2}].", channelIndex, m_frames[channelIndex], m_fps[channelIndex]));
             }
@@ -112,6 +117,7 @@ namespace confocal_core
         private void Init()
         {
             m_config = confocal_core.Config.GetConfig();
+            m_params = confocal_core.Params.GetParams();
             m_sysConfig = confocal_core.SysConfig.GetSysConfig();
             m_startTime = DateTime.Now;
             m_timespan = 0;
@@ -256,8 +262,8 @@ namespace confocal_core
         /// <param name="samples"></param>
         private void PmtReceiveSamples(object sender, short[][] samples)
         {
-            PmtSampleData sampleData = new PmtSampleData(samples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
-            m_scanData.EnqueuePmtSample(sampleData);
+            // PmtSampleData sampleData = new PmtSampleData(samples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
+            // m_scanData.EnqueuePmtSample(sampleData);
 
             //if (m_config.Debugging)
             //{
@@ -271,8 +277,8 @@ namespace confocal_core
 
         private void ApdReceiveSamples(object sender, int channelIndex, int[] samples)
         {
-            ApdSampleData sample = new ApdSampleData(samples, m_scanInfo.GetFrame(channelIndex), m_scanInfo.GetLine(channelIndex), channelIndex);
-            m_scanData.EnqueueApdSample(sample);
+            // ApdSampleData sample = new ApdSampleData(samples, m_scanInfo.GetFrame(channelIndex), m_scanInfo.GetLine(channelIndex), channelIndex);
+            // m_scanData.EnqueueApdSample(sample);
 
             //if (m_config.Debugging)
             //{
