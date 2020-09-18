@@ -102,12 +102,9 @@ namespace confocal_core
         /// </summary>
         public int AoValidSampleCountPerFrame { get; set; }
         /// <summary>
-        /// 单行有效样本的扫描时间，单位：ms
+        /// 单行扫描时间，单位：ms
         /// </summary>
-        public double ValidSampleScanTimePerLine { get; set; }
-
-        // public double ScanTimePerLine
-
+        public double ScanTimePerLine { get; set; }
         /// <summary>
         /// 扫描单行的有效样本，X振镜的电压变化幅值，单位：V
         /// </summary>
@@ -333,7 +330,7 @@ namespace confocal_core
             m_params.ScanRows = realScanYPixels;
             m_params.ValidScanPixelsPerFrame = realScanXPixels * realScanYPixels;
 
-            m_params.ValidSampleScanTimePerLine = w;
+            m_params.ScanTimePerLine = sampleCountPerLine * aoSamplePeriod / 1000;
             m_params.AoValidSampleVoltagePerLine = h;
             m_params.AoVoltagePerRow = h2;
 
@@ -497,7 +494,7 @@ namespace confocal_core
             m_params.ScanRows = realScanYPixels;
             m_params.ValidScanPixelsPerFrame = realScanXPixels * realScanYPixels * 2;
 
-            m_params.ValidSampleScanTimePerLine = w;
+            m_params.ScanTimePerLine = sampleCountPerLine * aoSamplePeriod / 1000;
             m_params.AoValidSampleVoltagePerLine = h;
             m_params.AoVoltagePerRow = h2;
 
@@ -507,7 +504,6 @@ namespace confocal_core
             m_params.AoY1SamplesPerRow = y1SamplesPerRow;
             m_params.AoY2SamplesPerRow = y2SamplesPerRow;
         }
-
 
         private void GenerateDoubleTriggerWave()
         {
@@ -554,310 +550,6 @@ namespace confocal_core
                     m_params.DigitalTriggerSamplesPerLine[i] = 0x01;
                 }
             }
-        }
-
-        private void CalculateSScan()
-        {
-            double maximumVolatgeStep = MAXIMUM_VOLTAGE_DIFF_PER_PIXEL;
-
-            double aoSampleRate = 1e6 / m_config.GetScanDwellTime();
-            double pixelSize = m_config.GetScanFieldSize() / m_config.GetScanXPoints();
-            double voltagePerPixel = m_config.GetScanCalibrationVoltage() / 5.0 * 1000 * pixelSize;
-
-            int realScanXPixels = m_config.GetScanXPoints() + m_config.GetScanPixelCompensation();
-            int realScanYPixels = m_config.GetScanYPoints();
-
-            double w = m_config.GetScanDwellTime() * realScanXPixels / 1000;
-            double h = voltagePerPixel * realScanXPixels;
-            double h2 = voltagePerPixel * m_config.GetScanYPoints();
-            double cosx = w / Math.Sqrt(w * w + h * h);
-            double sinx = Math.Sqrt(1 - cosx * cosx);
-            double r = m_config.GetScanCurveCoff() / 100 * h / (1 - cosx);
-
-            // 从prev_x0到prev_xn总共的samples数量
-            int previousTotalSampleCount = (int)(2 * r * sinx / w * realScanXPixels);
-            // 计算每行前置输出样本数量
-            int previousSampleCountPerLine = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
-
-            // 计算每行有效输出样本数量
-            int validSampleCountPerLine = realScanXPixels;
-
-            int postFirstTotalSampleCount = (int)(2 * r * sinx / w * realScanXPixels);
-            // 计算每行后置输出样本数量
-            int postFirstSampleCount = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
-            int postSecondSampleCount = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime() / 2);
-            int postSecondMinimumSampleCount = (int)(h / maximumVolatgeStep);
-            if (postSecondSampleCount < postSecondMinimumSampleCount)
-            {
-                postSecondSampleCount = postSecondMinimumSampleCount;
-            }
-            int postSampleCountPerLine = postFirstSampleCount + postSecondSampleCount;
-
-            // 每行输出样本数量
-            int sampleCountPerLine = previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine;
-
-            // 计算帧率
-            double fps = aoSampleRate / (sampleCountPerLine * realScanYPixels);
-
-            double xn;
-            // 计算逐行前置输出样本
-            double[] previousSamplesPerLine = new double[previousSampleCountPerLine];
-            double prev_xc = -(w / 2 + r * sinx);       // 前置扫描曲线圆心的x坐标值
-            double prev_yc = -(h / 2 - r * cosx);       // 前置扫描曲线圆心的y坐标值
-            double prev_x0 = -(w / 2 + 2 * r * sinx);
-            double prev_y0 = -h / 2;
-
-            for (int i = 0; i < (previousSampleCountPerLine + 1) / 2; i++)
-            {
-                xn = prev_x0 + 2 * r * sinx / previousTotalSampleCount * i;
-                previousSamplesPerLine[i] = -Math.Sqrt(r * r - (xn - prev_xc) * (xn - prev_xc)) + prev_yc;
-                previousSamplesPerLine[previousSampleCountPerLine - 1 - i] = previousSamplesPerLine[i];
-            }
-
-            // 计算逐行有效输出样本
-            double[] validSamplesPerLine = new double[validSampleCountPerLine];
-            for (int i = 0; i < validSampleCountPerLine; i++)
-            {
-                validSamplesPerLine[i] = (i - (validSampleCountPerLine / 2)) * voltagePerPixel;
-            }
-
-            // 计算逐行后置输出样本
-            double[] postSamplesPerLine = new double[postSampleCountPerLine];
-            double post_xc = w / 2 + r * sinx;
-            double post_yc = h / 2 - r * cosx;
-
-            for (int i = 0; i < (postFirstSampleCount + 1) / 2; i++)
-            {
-                xn = w / 2 + 2 * r * sinx / postFirstTotalSampleCount * i;
-                postSamplesPerLine[i] = Math.Sqrt(r * r - (xn - post_xc) * (xn - post_xc)) + post_yc;
-                postSamplesPerLine[postFirstSampleCount - 1 - i] = postSamplesPerLine[i];
-            }
-
-            for (int i = 0; i < postSecondSampleCount; i++)
-            {
-                postSamplesPerLine[i + postFirstSampleCount] = h / 2 - h / postSecondSampleCount * i;
-            }
-
-            // 生成单行X振镜的电压变化曲线
-            double[] xSamplesPerLine = new double[sampleCountPerLine];
-            Array.Copy(previousSamplesPerLine, xSamplesPerLine, previousSampleCountPerLine);
-            Array.Copy(validSamplesPerLine, 0, xSamplesPerLine, previousSampleCountPerLine, validSampleCountPerLine);
-            Array.Copy(postSamplesPerLine, 0, xSamplesPerLine, previousSampleCountPerLine + validSampleCountPerLine, postSampleCountPerLine);
-
-            int sampleCountPerFrame = sampleCountPerLine * realScanYPixels;
-
-            double[] y1SamplesPerRow = new double[realScanYPixels];
-            double[] y2SamplesPerRow = new double[realScanYPixels];
-            double yn;
-            for (int i = 0; i < realScanYPixels; i++)
-            {
-                yn = voltagePerPixel * i - h2 / 2;
-                y1SamplesPerRow[i] = yn;
-                y2SamplesPerRow[i] = yn * 2;
-            }
-
-            // 生成单行数字触发波形
-            int digitalTriggerSampleCountPerLine = sampleCountPerLine * 2;
-            byte[] digitalTriggerSamplesPerLine = Enumerable.Repeat<byte>(0, digitalTriggerSampleCountPerLine).ToArray();
-
-            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
-            {
-                int segStart = previousSampleCountPerLine * 2;
-                int segEnd = segStart + Params.DIGITAL_TRIGGER_PULSE_WIDTH;
-                for (int i = segStart; i < segEnd; i++)
-                {
-                    digitalTriggerSamplesPerLine[i] = 0x01;
-                }
-            }
-            else
-            {
-                int segStart = previousSampleCountPerLine * 2;
-                int segEnd = (previousSampleCountPerLine + validSampleCountPerLine) * 2;
-                for (int i = segStart; i < segEnd; i = i + 2)
-                {
-                    digitalTriggerSamplesPerLine[i] = 0x01;
-                }
-            }
-
-            m_params.Fps = fps;                         // 帧率
-            m_params.AoSampleRate = aoSampleRate;       // 模拟输出率
-            m_params.AiSampleRate = aoSampleRate;
-            m_params.DoSampleRate = aoSampleRate * 2;
-            m_params.PixelSize = pixelSize;             // 像素尺寸
-            m_params.AoVoltagePerPixel = voltagePerPixel;
-            m_params.AoPreviousSampleCountPerLine = previousSampleCountPerLine;
-            m_params.AoValidSampleCountPerLine = validSampleCountPerLine;
-            m_params.AoPostSampleCountPerLine = postSampleCountPerLine;
-            m_params.AoSampleCountPerLine = sampleCountPerLine;
-            m_params.ScanRows = realScanYPixels;
-
-            m_params.ValidSampleScanTimePerLine = w;
-            m_params.AoValidSampleVoltagePerLine = h;
-            m_params.AoVoltagePerRow = h2;
-
-            m_params.AoSampleCountPerFrame = sampleCountPerFrame;
-            m_params.AoValidSampleCountPerFrame = m_params.AoValidSampleCountPerLine * m_params.ScanRows;
-            m_params.AoXSamplesPerLine = xSamplesPerLine;
-            m_params.AoY1SamplesPerRow = y1SamplesPerRow;
-            m_params.AoY2SamplesPerRow = y2SamplesPerRow;
-            m_params.DigitalTriggerSamplesPerLine = digitalTriggerSamplesPerLine;
-        }
-
-        private void CalculateBScan()
-        {
-            double maximumVolatgeStep = MAXIMUM_VOLTAGE_DIFF_PER_PIXEL;
-
-            double aoSampleRate = 1e6 / m_config.GetScanDwellTime();
-            double pixelSize = m_config.GetScanFieldSize() / m_config.GetScanXPoints();
-            double voltagePerPixel = m_config.GetScanCalibrationVoltage() / 5.0 * 1000 * pixelSize;
-
-            int realScanXPixels = m_config.GetScanXPoints() + m_config.GetScanPixelCompensation();
-            int realScanYPixels = m_config.GetScanYPoints() / 2;
-
-            double w = m_config.GetScanDwellTime() * realScanXPixels / 1000;    // ms
-            double h = voltagePerPixel * realScanXPixels;                       
-            double h2 = voltagePerPixel * m_config.GetScanYPoints();
-            double cosx = w / Math.Sqrt(w * w + h * h);
-            double sinx = Math.Sqrt(1 - cosx * cosx);
-            double r = m_config.GetScanCurveCoff() / 100 * h / (1 - cosx);
-
-            // 从prev_x0到prev_xn总共的samples数量
-            int previousTotalSampleCount = (int)(2 * r * sinx / w * realScanXPixels);
-            // 计算每行前置输出样本数量
-            int previousSampleCountPerLine = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
-
-            // 计算每行有效输出样本数量
-            int validSampleCountPerLine = realScanXPixels;
-
-            int postTotalSampleCount = (int)(2 * r * sinx / w * realScanXPixels);
-            // 计算每行后置输出样本数量
-            int postSampleCountPerLine = (int)Math.Ceiling(m_config.GetGalvResponseTime() / m_config.GetScanDwellTime());
-
-            // 每行输出样本数量
-            int sampleCountPerLine = previousSampleCountPerLine + validSampleCountPerLine * 2 + postSampleCountPerLine;
-
-            // 计算帧率
-            double fps = aoSampleRate / (sampleCountPerLine * realScanYPixels);
-
-            double xn;
-            // 计算逐行前置输出样本
-            double[] previousSamplesPerLine = new double[previousSampleCountPerLine];
-            double prev_xc = -(w / 2 + r * sinx);       // 前置扫描曲线圆心的x坐标值
-            double prev_yc = -(h / 2 - r * cosx);       // 前置扫描曲线圆心的y坐标值
-            double prev_x0 = -(w / 2 + 2 * r * sinx);
-            double prev_y0 = -h / 2;
-
-            for (int i = 0; i < (previousSampleCountPerLine + 1) / 2; i++)
-            {
-                xn = prev_x0 + 2 * r * sinx / previousTotalSampleCount * i;
-                previousSamplesPerLine[i] = -Math.Sqrt(r * r - (xn - prev_xc) * (xn - prev_xc)) + prev_yc;
-                previousSamplesPerLine[previousSampleCountPerLine - 1 - i] = previousSamplesPerLine[i];
-            }
-
-            // 计算逐行有效输出样本
-            double[] validFirstSamplesPerLine = new double[validSampleCountPerLine];
-            double[] validSecondSamplesPerLine = new double[validSampleCountPerLine];
-            for (int i = 0; i < validSampleCountPerLine; i++)
-            {
-                validFirstSamplesPerLine[i] = (i - (validSampleCountPerLine / 2)) * voltagePerPixel;
-            }
-            Array.Copy(validFirstSamplesPerLine, validSecondSamplesPerLine, validSampleCountPerLine);
-            Array.Reverse(validSecondSamplesPerLine);
-
-            // 计算逐行后置输出样本
-            double[] postSamplesPerLine = new double[postSampleCountPerLine];
-            double post_xc = w / 2 + r * sinx;
-            double post_yc = h / 2 - r * cosx;
-
-            for (int i = 0; i < (postSampleCountPerLine + 1) / 2; i++)
-            {
-                xn = w / 2 + 2 * r * sinx / postTotalSampleCount * i;
-                postSamplesPerLine[i] = Math.Sqrt(r * r - (xn - post_xc) * (xn - post_xc)) + post_yc;
-                postSamplesPerLine[postSampleCountPerLine - 1 - i] = postSamplesPerLine[i];
-            }
-
-            // 生成单行X振镜的电压变化曲线
-            double[] xSamplesPerLine = new double[sampleCountPerLine];
-            Array.Copy(previousSamplesPerLine, xSamplesPerLine, previousSampleCountPerLine);
-            Array.Copy(validFirstSamplesPerLine, 0, xSamplesPerLine, previousSampleCountPerLine, validSampleCountPerLine);
-            Array.Copy(postSamplesPerLine, 0, xSamplesPerLine, previousSampleCountPerLine + validSampleCountPerLine, postSampleCountPerLine);
-            Array.Copy(validSecondSamplesPerLine, 0, xSamplesPerLine, previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine, validSampleCountPerLine);
-
-            int sampleCountPerFrame = sampleCountPerLine * realScanYPixels;
-
-            double[] y1SamplesPerRow = new double[realScanYPixels];
-            double[] y2SamplesPerRow = new double[realScanYPixels];
-            double yn;
-            for (int i = 0; i < realScanYPixels; i++)
-            {
-                yn = voltagePerPixel * i * 2 - h2 / 2;
-                y1SamplesPerRow[i] = yn;
-                y2SamplesPerRow[i] = yn * 2;
-            }
-
-            // 生成单行数字触发波形
-            int digitalTriggerSampleCountPerLine = sampleCountPerLine * 2;
-            byte[] digitalTriggerSamplesPerLine = Enumerable.Repeat<byte>(0, digitalTriggerSampleCountPerLine).ToArray();
-
-            //int segOneEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
-            //    firstValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : firstValidSamplesIndex + validSampleCountPerLine;
-
-            //int segTwoEnd = m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT ?
-            //    secondValidSamplesIndex + Params.DIGITAL_TRIGGER_PULSE_WIDTH : secondValidSamplesIndex + validSampleCountPerLine;
-
-            if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
-            {
-                int segOneStart = previousSampleCountPerLine * 2;
-                int segOneEnd = segOneStart + Params.DIGITAL_TRIGGER_PULSE_WIDTH;
-                int segTwoStart = (previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine) * 2;
-                int segTwoEnd = segTwoStart + Params.DIGITAL_TRIGGER_PULSE_WIDTH;
-                for (int i = segOneStart; i < segOneEnd; i++)
-                {
-                    digitalTriggerSamplesPerLine[i] = 0x01;
-                }
-                for (int i = segTwoStart; i < segTwoEnd; i++)
-                {
-                    digitalTriggerSamplesPerLine[i] = 0x01;
-                }
-            }
-            else
-            {
-                int segOneStart = previousSampleCountPerLine * 2;
-                int segOneEnd = segOneStart + validSampleCountPerLine * 2;
-                int segTwoStart = (previousSampleCountPerLine + validSampleCountPerLine + postSampleCountPerLine) * 2;
-                int segTwoEnd = segTwoStart + validSampleCountPerLine * 2;
-                for (int i = segOneStart; i < segOneEnd; i = i + 2)
-                {
-                    digitalTriggerSamplesPerLine[i] = 0x01;
-                }
-                for (int i = segTwoStart; i < segTwoEnd; i = i + 2)
-                {
-                    digitalTriggerSamplesPerLine[i] = 0x01;
-                }
-            }
-
-            m_params.Fps = fps;
-            m_params.AoSampleRate = aoSampleRate;
-            m_params.AiSampleRate = aoSampleRate;
-            m_params.DoSampleRate = aoSampleRate * 2;
-            m_params.PixelSize = pixelSize;
-            m_params.AoVoltagePerPixel = voltagePerPixel;
-            m_params.AoPreviousSampleCountPerLine = previousSampleCountPerLine;
-            m_params.AoValidSampleCountPerLine = validSampleCountPerLine;
-            m_params.AoPostSampleCountPerLine = postSampleCountPerLine;
-            m_params.AoSampleCountPerLine = sampleCountPerLine;
-            m_params.ScanRows = realScanYPixels;
-
-            m_params.ValidSampleScanTimePerLine = w;
-            m_params.AoValidSampleVoltagePerLine = h;
-            m_params.AoVoltagePerRow = h2;
-
-            m_params.AoSampleCountPerFrame = sampleCountPerFrame;
-            m_params.AoValidSampleCountPerFrame = m_params.AoValidSampleCountPerLine * m_params.ScanRows * 2;
-            m_params.AoXSamplesPerLine = xSamplesPerLine;
-            m_params.AoY1SamplesPerRow = y1SamplesPerRow;
-            m_params.AoY2SamplesPerRow = y2SamplesPerRow;
-            m_params.DigitalTriggerSamplesPerLine = digitalTriggerSamplesPerLine;
         }
 
         private Params()

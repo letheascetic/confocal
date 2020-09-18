@@ -62,7 +62,7 @@ namespace confocal_ui
                 m_params.AoPreviousSampleCountPerLine, m_params.AoValidSampleCountPerLine, m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? 2:1,
                 m_params.AoPostSampleCountPerLine, m_params.AoSampleCountPerLine);
             tbxSpCtPerFm.Text = m_params.AoSampleCountPerFrame.ToString();
-            tbxScanTimePerLine.Text = (m_params.AoSampleCountPerLine * 1e3 / m_params.AoSampleRate).ToString();
+            tbxScanTimePerLine.Text = m_params.ScanTimePerLine.ToString();
             tbxScanTimePerFm.Text = (1e3 / m_params.Fps).ToString();
             tbxFPS.Text = m_params.Fps.ToString();
             tbxPixelRate.Text = (m_params.PixelSampleRate / 1e6).ToString();
