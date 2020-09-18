@@ -37,16 +37,20 @@
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel = new System.Windows.Forms.Panel();
             this.gbxResults = new System.Windows.Forms.GroupBox();
+            this.tbxScanTimePerFm = new System.Windows.Forms.TextBox();
+            this.lbScanTimePerFm = new System.Windows.Forms.Label();
+            this.tbxValidSpCtPerLn = new System.Windows.Forms.TextBox();
+            this.lbValidSpCtPerLine = new System.Windows.Forms.Label();
+            this.tbxPixelRate = new System.Windows.Forms.TextBox();
+            this.lbPixelRate = new System.Windows.Forms.Label();
+            this.tbxScanTimePerLine = new System.Windows.Forms.TextBox();
+            this.lbScanTimePerLine = new System.Windows.Forms.Label();
             this.tbxFPS = new System.Windows.Forms.TextBox();
             this.lbFPS = new System.Windows.Forms.Label();
-            this.tbxTotalSpCtPerLn = new System.Windows.Forms.TextBox();
-            this.lbTotalSpCtPerLn = new System.Windows.Forms.Label();
-            this.tbxPostSpCtPerLn = new System.Windows.Forms.TextBox();
-            this.lbPostSpCtPerLn = new System.Windows.Forms.Label();
-            this.tbxVaildSpCtPerLn = new System.Windows.Forms.TextBox();
-            this.lbVaildSpCtPerLn = new System.Windows.Forms.Label();
-            this.tbxPrevSpCtPerLn = new System.Windows.Forms.TextBox();
-            this.lbPrevSpCtPerLn = new System.Windows.Forms.Label();
+            this.tbxSpCtPerFm = new System.Windows.Forms.TextBox();
+            this.lbAoSpCtPerFm = new System.Windows.Forms.Label();
+            this.tbxAoSpCtPerLn = new System.Windows.Forms.TextBox();
+            this.lbAoSpCtPerLn = new System.Windows.Forms.Label();
             this.tbxVoltagePerPixel = new System.Windows.Forms.TextBox();
             this.lbVoltagePerPixel = new System.Windows.Forms.Label();
             this.tbxPixelSize = new System.Windows.Forms.TextBox();
@@ -80,16 +84,20 @@
             // gbxResults
             // 
             resources.ApplyResources(this.gbxResults, "gbxResults");
+            this.gbxResults.Controls.Add(this.tbxScanTimePerFm);
+            this.gbxResults.Controls.Add(this.lbScanTimePerFm);
+            this.gbxResults.Controls.Add(this.tbxValidSpCtPerLn);
+            this.gbxResults.Controls.Add(this.lbValidSpCtPerLine);
+            this.gbxResults.Controls.Add(this.tbxPixelRate);
+            this.gbxResults.Controls.Add(this.lbPixelRate);
+            this.gbxResults.Controls.Add(this.tbxScanTimePerLine);
+            this.gbxResults.Controls.Add(this.lbScanTimePerLine);
             this.gbxResults.Controls.Add(this.tbxFPS);
             this.gbxResults.Controls.Add(this.lbFPS);
-            this.gbxResults.Controls.Add(this.tbxTotalSpCtPerLn);
-            this.gbxResults.Controls.Add(this.lbTotalSpCtPerLn);
-            this.gbxResults.Controls.Add(this.tbxPostSpCtPerLn);
-            this.gbxResults.Controls.Add(this.lbPostSpCtPerLn);
-            this.gbxResults.Controls.Add(this.tbxVaildSpCtPerLn);
-            this.gbxResults.Controls.Add(this.lbVaildSpCtPerLn);
-            this.gbxResults.Controls.Add(this.tbxPrevSpCtPerLn);
-            this.gbxResults.Controls.Add(this.lbPrevSpCtPerLn);
+            this.gbxResults.Controls.Add(this.tbxSpCtPerFm);
+            this.gbxResults.Controls.Add(this.lbAoSpCtPerFm);
+            this.gbxResults.Controls.Add(this.tbxAoSpCtPerLn);
+            this.gbxResults.Controls.Add(this.lbAoSpCtPerLn);
             this.gbxResults.Controls.Add(this.tbxVoltagePerPixel);
             this.gbxResults.Controls.Add(this.lbVoltagePerPixel);
             this.gbxResults.Controls.Add(this.tbxPixelSize);
@@ -98,6 +106,48 @@
             this.gbxResults.Controls.Add(this.lbAORate);
             this.gbxResults.Name = "gbxResults";
             this.gbxResults.TabStop = false;
+            // 
+            // tbxScanTimePerFm
+            // 
+            resources.ApplyResources(this.tbxScanTimePerFm, "tbxScanTimePerFm");
+            this.tbxScanTimePerFm.Name = "tbxScanTimePerFm";
+            // 
+            // lbScanTimePerFm
+            // 
+            resources.ApplyResources(this.lbScanTimePerFm, "lbScanTimePerFm");
+            this.lbScanTimePerFm.Name = "lbScanTimePerFm";
+            // 
+            // tbxValidSpCtPerLn
+            // 
+            resources.ApplyResources(this.tbxValidSpCtPerLn, "tbxValidSpCtPerLn");
+            this.tbxValidSpCtPerLn.Name = "tbxValidSpCtPerLn";
+            // 
+            // lbValidSpCtPerLine
+            // 
+            this.lbValidSpCtPerLine.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbValidSpCtPerLine, "lbValidSpCtPerLine");
+            this.lbValidSpCtPerLine.Name = "lbValidSpCtPerLine";
+            // 
+            // tbxPixelRate
+            // 
+            resources.ApplyResources(this.tbxPixelRate, "tbxPixelRate");
+            this.tbxPixelRate.Name = "tbxPixelRate";
+            // 
+            // lbPixelRate
+            // 
+            this.lbPixelRate.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbPixelRate, "lbPixelRate");
+            this.lbPixelRate.Name = "lbPixelRate";
+            // 
+            // tbxScanTimePerLine
+            // 
+            resources.ApplyResources(this.tbxScanTimePerLine, "tbxScanTimePerLine");
+            this.tbxScanTimePerLine.Name = "tbxScanTimePerLine";
+            // 
+            // lbScanTimePerLine
+            // 
+            resources.ApplyResources(this.lbScanTimePerLine, "lbScanTimePerLine");
+            this.lbScanTimePerLine.Name = "lbScanTimePerLine";
             // 
             // tbxFPS
             // 
@@ -110,49 +160,27 @@
             resources.ApplyResources(this.lbFPS, "lbFPS");
             this.lbFPS.Name = "lbFPS";
             // 
-            // tbxTotalSpCtPerLn
+            // tbxSpCtPerFm
             // 
-            resources.ApplyResources(this.tbxTotalSpCtPerLn, "tbxTotalSpCtPerLn");
-            this.tbxTotalSpCtPerLn.Name = "tbxTotalSpCtPerLn";
+            resources.ApplyResources(this.tbxSpCtPerFm, "tbxSpCtPerFm");
+            this.tbxSpCtPerFm.Name = "tbxSpCtPerFm";
             // 
-            // lbTotalSpCtPerLn
+            // lbAoSpCtPerFm
             // 
-            this.lbTotalSpCtPerLn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.lbTotalSpCtPerLn, "lbTotalSpCtPerLn");
-            this.lbTotalSpCtPerLn.Name = "lbTotalSpCtPerLn";
+            this.lbAoSpCtPerFm.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbAoSpCtPerFm, "lbAoSpCtPerFm");
+            this.lbAoSpCtPerFm.Name = "lbAoSpCtPerFm";
             // 
-            // tbxPostSpCtPerLn
+            // tbxAoSpCtPerLn
             // 
-            resources.ApplyResources(this.tbxPostSpCtPerLn, "tbxPostSpCtPerLn");
-            this.tbxPostSpCtPerLn.Name = "tbxPostSpCtPerLn";
+            resources.ApplyResources(this.tbxAoSpCtPerLn, "tbxAoSpCtPerLn");
+            this.tbxAoSpCtPerLn.Name = "tbxAoSpCtPerLn";
             // 
-            // lbPostSpCtPerLn
+            // lbAoSpCtPerLn
             // 
-            this.lbPostSpCtPerLn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.lbPostSpCtPerLn, "lbPostSpCtPerLn");
-            this.lbPostSpCtPerLn.Name = "lbPostSpCtPerLn";
-            // 
-            // tbxVaildSpCtPerLn
-            // 
-            resources.ApplyResources(this.tbxVaildSpCtPerLn, "tbxVaildSpCtPerLn");
-            this.tbxVaildSpCtPerLn.Name = "tbxVaildSpCtPerLn";
-            // 
-            // lbVaildSpCtPerLn
-            // 
-            this.lbVaildSpCtPerLn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.lbVaildSpCtPerLn, "lbVaildSpCtPerLn");
-            this.lbVaildSpCtPerLn.Name = "lbVaildSpCtPerLn";
-            // 
-            // tbxPrevSpCtPerLn
-            // 
-            resources.ApplyResources(this.tbxPrevSpCtPerLn, "tbxPrevSpCtPerLn");
-            this.tbxPrevSpCtPerLn.Name = "tbxPrevSpCtPerLn";
-            // 
-            // lbPrevSpCtPerLn
-            // 
-            this.lbPrevSpCtPerLn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.lbPrevSpCtPerLn, "lbPrevSpCtPerLn");
-            this.lbPrevSpCtPerLn.Name = "lbPrevSpCtPerLn";
+            this.lbAoSpCtPerLn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbAoSpCtPerLn, "lbAoSpCtPerLn");
+            this.lbAoSpCtPerLn.Name = "lbAoSpCtPerLn";
             // 
             // tbxVoltagePerPixel
             // 
@@ -248,14 +276,12 @@
             // 
             // chart
             // 
-            chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
             chartArea1.Name = "ChartArea1";
             this.chart.ChartAreas.Add(chartArea1);
+            resources.ApplyResources(this.chart, "chart");
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             this.chart.Legends.Add(legend1);
-            resources.ApplyResources(this.chart, "chart");
             this.chart.Name = "chart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -305,23 +331,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel;
-        private System.Windows.Forms.GroupBox gbxResults;
-        private System.Windows.Forms.TextBox tbxFPS;
-        private System.Windows.Forms.Label lbFPS;
-        private System.Windows.Forms.TextBox tbxTotalSpCtPerLn;
-        private System.Windows.Forms.Label lbTotalSpCtPerLn;
-        private System.Windows.Forms.TextBox tbxPostSpCtPerLn;
-        private System.Windows.Forms.Label lbPostSpCtPerLn;
-        private System.Windows.Forms.TextBox tbxVaildSpCtPerLn;
-        private System.Windows.Forms.Label lbVaildSpCtPerLn;
-        private System.Windows.Forms.TextBox tbxPrevSpCtPerLn;
-        private System.Windows.Forms.Label lbPrevSpCtPerLn;
-        private System.Windows.Forms.TextBox tbxVoltagePerPixel;
-        private System.Windows.Forms.Label lbVoltagePerPixel;
-        private System.Windows.Forms.TextBox tbxPixelSize;
-        private System.Windows.Forms.Label lbPixelSize;
-        private System.Windows.Forms.TextBox tbxAORate;
-        private System.Windows.Forms.Label lbAORate;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private System.Windows.Forms.GroupBox gbxGalv;
         private System.Windows.Forms.TextBox tbxCurveCoff;
@@ -332,5 +341,26 @@
         private System.Windows.Forms.Label lbResponseTime;
         private System.Windows.Forms.TextBox tbxFieldSize;
         private System.Windows.Forms.Label lbFieldSize;
+        private System.Windows.Forms.GroupBox gbxResults;
+        private System.Windows.Forms.TextBox tbxFPS;
+        private System.Windows.Forms.Label lbFPS;
+        private System.Windows.Forms.TextBox tbxSpCtPerFm;
+        private System.Windows.Forms.Label lbAoSpCtPerFm;
+        private System.Windows.Forms.TextBox tbxAoSpCtPerLn;
+        private System.Windows.Forms.Label lbAoSpCtPerLn;
+        private System.Windows.Forms.TextBox tbxVoltagePerPixel;
+        private System.Windows.Forms.Label lbVoltagePerPixel;
+        private System.Windows.Forms.TextBox tbxPixelSize;
+        private System.Windows.Forms.Label lbPixelSize;
+        private System.Windows.Forms.TextBox tbxAORate;
+        private System.Windows.Forms.Label lbAORate;
+        private System.Windows.Forms.Label lbScanTimePerLine;
+        private System.Windows.Forms.TextBox tbxScanTimePerLine;
+        private System.Windows.Forms.Label lbPixelRate;
+        private System.Windows.Forms.TextBox tbxPixelRate;
+        private System.Windows.Forms.TextBox tbxValidSpCtPerLn;
+        private System.Windows.Forms.Label lbValidSpCtPerLine;
+        private System.Windows.Forms.TextBox tbxScanTimePerFm;
+        private System.Windows.Forms.Label lbScanTimePerFm;
     }
 }

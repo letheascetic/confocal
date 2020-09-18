@@ -55,14 +55,18 @@ namespace confocal_ui
             tbxCurveCoff.Text = m_config.GetScanCurveCoff().ToString();
 
             Params m_params = Params.GetParams();
-            tbxAORate.Text = m_params.AoSampleRate.ToString();
+            tbxAORate.Text = (m_params.AoSampleRate / 1e6).ToString();
             tbxPixelSize.Text = m_params.PixelSize.ToString();
             tbxVoltagePerPixel.Text = m_params.AoVoltagePerPixel.ToString();
-            tbxPrevSpCtPerLn.Text = m_params.AoPreviousSampleCountPerLine.ToString();
-            tbxVaildSpCtPerLn.Text = m_params.AoValidSampleCountPerLine.ToString();
-            tbxPostSpCtPerLn.Text = m_params.AoPostSampleCountPerLine.ToString();
-            tbxTotalSpCtPerLn.Text = m_params.AoSampleCountPerLine.ToString();
+            tbxAoSpCtPerLn.Text = string.Format("{0}+{1}*{2}+{3}={4}", 
+                m_params.AoPreviousSampleCountPerLine, m_params.AoValidSampleCountPerLine, m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? 2:1,
+                m_params.AoPostSampleCountPerLine, m_params.AoSampleCountPerLine);
+            tbxSpCtPerFm.Text = m_params.AoSampleCountPerFrame.ToString();
+            tbxScanTimePerLine.Text = (m_params.AoSampleCountPerLine * 1e3 / m_params.AoSampleRate).ToString();
+            tbxScanTimePerFm.Text = (1e3 / m_params.Fps).ToString();
             tbxFPS.Text = m_params.Fps.ToString();
+            tbxPixelRate.Text = (m_params.PixelSampleRate / 1e6).ToString();
+            tbxValidSpCtPerLn.Text = m_params.ValidScanPixelsPerLine.ToString();
 
             UpdateChart();
         }
