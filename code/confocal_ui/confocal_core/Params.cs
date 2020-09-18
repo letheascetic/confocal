@@ -17,9 +17,10 @@ namespace confocal_core
         private volatile static Params m_params = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public static readonly int DIGITAL_TRIGGER_PULSE_WIDTH = 20;        // 数字行触发脉冲宽度，20个DO Sample Clock 
-        public static readonly double MAXIMUM_VOLTAGE_DIFF_PER_PIXEL = 0.1; // 像素间的最大电压差
-        public static readonly double DEFAULT_AO_SAMPLE_RATE = 250000;      // 默认AO输出速率
+        private static readonly int DIGITAL_TRIGGER_PULSE_WIDTH = 20;        // 数字行触发脉冲宽度，20个DO Sample Clock 
+        private static readonly double MAXIMUM_VOLTAGE_DIFF_PER_PIXEL = 0.1; // 像素间的最大电压差
+        private static readonly double DEFAULT_AO_SAMPLE_RATE = 250000;      // 默认AO输出速率
+        private static readonly double DEFAULT_ACQUISITION_INTERVAL = 50;    // 默认采集时间间隔，单位：ms
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
         private SysConfig m_sysConfig;
@@ -104,6 +105,9 @@ namespace confocal_core
         /// 单行有效样本的扫描时间，单位：ms
         /// </summary>
         public double ValidSampleScanTimePerLine { get; set; }
+
+        // public double ScanTimePerLine
+
         /// <summary>
         /// 扫描单行的有效样本，X振镜的电压变化幅值，单位：V
         /// </summary>
