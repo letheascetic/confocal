@@ -20,7 +20,7 @@ namespace confocal_core
         private static readonly int DIGITAL_TRIGGER_PULSE_WIDTH = 20;        // 数字行触发脉冲宽度，20个DO Sample Clock 
         private static readonly double MAXIMUM_VOLTAGE_DIFF_PER_PIXEL = 0.1; // 像素间的最大电压差
         private static readonly double DEFAULT_AO_SAMPLE_RATE = 250000;      // 默认AO输出速率
-        private static readonly double DEFAULT_ACQUISITION_INTERVAL = 50;    // 默认采集时间间隔，单位：ms
+        private static readonly double DEFAULT_ACQUISITION_INTERVAL = 20.0;  // 默认采集时间间隔，单位：ms，WINDOWS时间片轮询时间为20ms左右
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
         private SysConfig m_sysConfig;
@@ -93,6 +93,18 @@ namespace confocal_core
         /// (2) 对于Z行双向扫描，等于config.ScanYPoints / 2
         /// </summary>
         public int ScanRows { get; set; }
+        /// <summary>
+        /// 每次采集扫描的行数
+        /// </summary>
+        public int ScanRowsPerAcquisition{ get; set; }
+        /// <summary>
+        /// 每次采集的像素数
+        /// </summary>
+        public int ScanPixelsPerAcquisition { get; set; }
+        /// <summary>
+        /// 每次采集的时间间隔，单位：ms
+        /// </summary>
+        public double IntervalPerAcquisition { get; set; }
         /// <summary>
         /// 单帧输出样本数量
         /// </summary>
@@ -339,6 +351,10 @@ namespace confocal_core
             m_params.AoXSamplesPerLine = xSamplesPerLine;
             m_params.AoY1SamplesPerRow = y1SamplesPerRow;
             m_params.AoY2SamplesPerRow = y2SamplesPerRow;
+
+            m_params.ScanRowsPerAcquisition = (int)Math.Ceiling(DEFAULT_ACQUISITION_INTERVAL / m_params.ScanTimePerLine);
+            m_params.ScanPixelsPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ValidScanPixelsPerLine;
+            m_params.IntervalPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ScanTimePerLine;
         }
 
         private void GenerateSingleTriggerWave()
@@ -503,6 +519,10 @@ namespace confocal_core
             m_params.AoXSamplesPerLine = xSamplesPerLine;
             m_params.AoY1SamplesPerRow = y1SamplesPerRow;
             m_params.AoY2SamplesPerRow = y2SamplesPerRow;
+
+            m_params.ScanRowsPerAcquisition = (int)Math.Ceiling(DEFAULT_ACQUISITION_INTERVAL / m_params.ScanTimePerLine) * 2;
+            m_params.ScanPixelsPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ValidScanPixelsPerLine;
+            m_params.IntervalPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ScanTimePerLine / 2;
         }
 
         private void GenerateDoubleTriggerWave()

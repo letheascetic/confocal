@@ -67,6 +67,12 @@
             this.tbxFieldSize = new System.Windows.Forms.TextBox();
             this.lbFieldSize = new System.Windows.Forms.Label();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.lbScanRowsPerAcq = new System.Windows.Forms.Label();
+            this.lbScanPixelsPerAcq = new System.Windows.Forms.Label();
+            this.tbxScanRowsPerAcq = new System.Windows.Forms.TextBox();
+            this.tbxScanPixelsPerAcq = new System.Windows.Forms.TextBox();
+            this.lbIntervalPerAcq = new System.Windows.Forms.Label();
+            this.tbxIntervalPerAcq = new System.Windows.Forms.TextBox();
             this.panel.SuspendLayout();
             this.gbxResults.SuspendLayout();
             this.gbxGalv.SuspendLayout();
@@ -84,6 +90,12 @@
             // gbxResults
             // 
             resources.ApplyResources(this.gbxResults, "gbxResults");
+            this.gbxResults.Controls.Add(this.tbxIntervalPerAcq);
+            this.gbxResults.Controls.Add(this.lbIntervalPerAcq);
+            this.gbxResults.Controls.Add(this.tbxScanPixelsPerAcq);
+            this.gbxResults.Controls.Add(this.tbxScanRowsPerAcq);
+            this.gbxResults.Controls.Add(this.lbScanPixelsPerAcq);
+            this.gbxResults.Controls.Add(this.lbScanRowsPerAcq);
             this.gbxResults.Controls.Add(this.tbxScanTimePerFm);
             this.gbxResults.Controls.Add(this.lbScanTimePerFm);
             this.gbxResults.Controls.Add(this.tbxValidSpCtPerLn);
@@ -304,6 +316,39 @@
             this.chart.Series.Add(series3);
             this.chart.Series.Add(series4);
             // 
+            // lbScanRowsPerAcq
+            // 
+            this.lbScanRowsPerAcq.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbScanRowsPerAcq, "lbScanRowsPerAcq");
+            this.lbScanRowsPerAcq.Name = "lbScanRowsPerAcq";
+            // 
+            // lbScanPixelsPerAcq
+            // 
+            this.lbScanPixelsPerAcq.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbScanPixelsPerAcq, "lbScanPixelsPerAcq");
+            this.lbScanPixelsPerAcq.Name = "lbScanPixelsPerAcq";
+            // 
+            // tbxScanRowsPerAcq
+            // 
+            resources.ApplyResources(this.tbxScanRowsPerAcq, "tbxScanRowsPerAcq");
+            this.tbxScanRowsPerAcq.Name = "tbxScanRowsPerAcq";
+            // 
+            // tbxScanPixelsPerAcq
+            // 
+            resources.ApplyResources(this.tbxScanPixelsPerAcq, "tbxScanPixelsPerAcq");
+            this.tbxScanPixelsPerAcq.Name = "tbxScanPixelsPerAcq";
+            // 
+            // lbIntervalPerAcq
+            // 
+            this.lbIntervalPerAcq.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lbIntervalPerAcq, "lbIntervalPerAcq");
+            this.lbIntervalPerAcq.Name = "lbIntervalPerAcq";
+            // 
+            // tbxIntervalPerAcq
+            // 
+            resources.ApplyResources(this.tbxIntervalPerAcq, "tbxIntervalPerAcq");
+            this.tbxIntervalPerAcq.Name = "tbxIntervalPerAcq";
+            // 
             // FormParas
             // 
             this.AutoHidePortion = 0.4D;
@@ -362,5 +407,11 @@
         private System.Windows.Forms.Label lbValidSpCtPerLine;
         private System.Windows.Forms.TextBox tbxScanTimePerFm;
         private System.Windows.Forms.Label lbScanTimePerFm;
+        private System.Windows.Forms.Label lbScanRowsPerAcq;
+        private System.Windows.Forms.Label lbScanPixelsPerAcq;
+        private System.Windows.Forms.TextBox tbxScanRowsPerAcq;
+        private System.Windows.Forms.TextBox tbxIntervalPerAcq;
+        private System.Windows.Forms.Label lbIntervalPerAcq;
+        private System.Windows.Forms.TextBox tbxScanPixelsPerAcq;
     }
 }

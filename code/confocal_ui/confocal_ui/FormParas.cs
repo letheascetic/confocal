@@ -68,6 +68,10 @@ namespace confocal_ui
             tbxPixelRate.Text = (m_params.PixelSampleRate / 1e6).ToString();
             tbxValidSpCtPerLn.Text = m_params.ValidScanPixelsPerLine.ToString();
 
+            tbxScanRowsPerAcq.Text = m_params.ScanRowsPerAcquisition.ToString();
+            tbxScanPixelsPerAcq.Text = m_params.ScanPixelsPerAcquisition.ToString();
+            tbxIntervalPerAcq.Text = m_params.IntervalPerAcquisition.ToString();
+
             UpdateChart();
         }
 

@@ -128,15 +128,186 @@
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tbxScanTimePerFm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 220</value>
+  <data name="tbxIntervalPerAcq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 345</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbxIntervalPerAcq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tbxIntervalPerAcq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="tbxIntervalPerAcq.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="tbxIntervalPerAcq.Text" xml:space="preserve">
+    <value>200</value>
+  </data>
+  <data name="&gt;&gt;tbxIntervalPerAcq.Name" xml:space="preserve">
+    <value>tbxIntervalPerAcq</value>
+  </data>
+  <data name="&gt;&gt;tbxIntervalPerAcq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbxIntervalPerAcq.Parent" xml:space="preserve">
+    <value>gbxResults</value>
+  </data>
+  <data name="&gt;&gt;tbxIntervalPerAcq.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lbIntervalPerAcq.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbIntervalPerAcq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 345</value>
+  </data>
+  <data name="lbIntervalPerAcq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lbIntervalPerAcq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 18</value>
+  </data>
+  <data name="lbIntervalPerAcq.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="lbIntervalPerAcq.Text" xml:space="preserve">
+    <value>单次采集间隔（ms）：</value>
+  </data>
+  <data name="&gt;&gt;lbIntervalPerAcq.Name" xml:space="preserve">
+    <value>lbIntervalPerAcq</value>
+  </data>
+  <data name="&gt;&gt;lbIntervalPerAcq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbIntervalPerAcq.Parent" xml:space="preserve">
+    <value>gbxResults</value>
+  </data>
+  <data name="&gt;&gt;lbIntervalPerAcq.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbxScanPixelsPerAcq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 318</value>
+  </data>
+  <data name="tbxScanPixelsPerAcq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tbxScanPixelsPerAcq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="tbxScanPixelsPerAcq.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="tbxScanPixelsPerAcq.Text" xml:space="preserve">
+    <value>200</value>
+  </data>
+  <data name="&gt;&gt;tbxScanPixelsPerAcq.Name" xml:space="preserve">
+    <value>tbxScanPixelsPerAcq</value>
+  </data>
+  <data name="&gt;&gt;tbxScanPixelsPerAcq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbxScanPixelsPerAcq.Parent" xml:space="preserve">
+    <value>gbxResults</value>
+  </data>
+  <data name="&gt;&gt;tbxScanPixelsPerAcq.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbxScanRowsPerAcq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 290</value>
+  </data>
+  <data name="tbxScanRowsPerAcq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tbxScanRowsPerAcq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="tbxScanRowsPerAcq.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="tbxScanRowsPerAcq.Text" xml:space="preserve">
+    <value>200</value>
+  </data>
+  <data name="&gt;&gt;tbxScanRowsPerAcq.Name" xml:space="preserve">
+    <value>tbxScanRowsPerAcq</value>
+  </data>
+  <data name="&gt;&gt;tbxScanRowsPerAcq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbxScanRowsPerAcq.Parent" xml:space="preserve">
+    <value>gbxResults</value>
+  </data>
+  <data name="&gt;&gt;tbxScanRowsPerAcq.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lbScanPixelsPerAcq.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbScanPixelsPerAcq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 318</value>
+  </data>
+  <data name="lbScanPixelsPerAcq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lbScanPixelsPerAcq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 18</value>
+  </data>
+  <data name="lbScanPixelsPerAcq.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="lbScanPixelsPerAcq.Text" xml:space="preserve">
+    <value>单次采集像素数：</value>
+  </data>
+  <data name="&gt;&gt;lbScanPixelsPerAcq.Name" xml:space="preserve">
+    <value>lbScanPixelsPerAcq</value>
+  </data>
+  <data name="&gt;&gt;lbScanPixelsPerAcq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbScanPixelsPerAcq.Parent" xml:space="preserve">
+    <value>gbxResults</value>
+  </data>
+  <data name="&gt;&gt;lbScanPixelsPerAcq.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lbScanRowsPerAcq.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbScanRowsPerAcq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 293</value>
+  </data>
+  <data name="lbScanRowsPerAcq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lbScanRowsPerAcq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 18</value>
+  </data>
+  <data name="lbScanRowsPerAcq.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="lbScanRowsPerAcq.Text" xml:space="preserve">
+    <value>单次采集行数：</value>
+  </data>
+  <data name="&gt;&gt;lbScanRowsPerAcq.Name" xml:space="preserve">
+    <value>lbScanRowsPerAcq</value>
+  </data>
+  <data name="&gt;&gt;lbScanRowsPerAcq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbScanRowsPerAcq.Parent" xml:space="preserve">
+    <value>gbxResults</value>
+  </data>
+  <data name="&gt;&gt;lbScanRowsPerAcq.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tbxScanTimePerFm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 176</value>
+  </data>
   <data name="tbxScanTimePerFm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxScanTimePerFm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxScanTimePerFm.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -154,7 +325,7 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxScanTimePerFm.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="lbScanTimePerFm.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -163,10 +334,13 @@
     <value>NoControl</value>
   </data>
   <data name="lbScanTimePerFm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 223</value>
+    <value>16, 178</value>
+  </data>
+  <data name="lbScanTimePerFm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbScanTimePerFm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 15</value>
+    <value>125, 12</value>
   </data>
   <data name="lbScanTimePerFm.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -184,16 +358,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbScanTimePerFm.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="tbxValidSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 329</value>
+    <value>150, 263</value>
   </data>
   <data name="tbxValidSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxValidSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 25</value>
+    <value>63, 21</value>
   </data>
   <data name="tbxValidSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -211,22 +385,25 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxValidSpCtPerLn.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>8</value>
   </data>
   <data name="lbValidSpCtPerLine.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbValidSpCtPerLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 332</value>
+    <value>16, 266</value>
+  </data>
+  <data name="lbValidSpCtPerLine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbValidSpCtPerLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbValidSpCtPerLine.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
   <data name="lbValidSpCtPerLine.Text" xml:space="preserve">
-    <value>采样样本数：</value>
+    <value>每行采样样本数：</value>
   </data>
   <data name="&gt;&gt;lbValidSpCtPerLine.Name" xml:space="preserve">
     <value>lbValidSpCtPerLine</value>
@@ -238,16 +415,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbValidSpCtPerLine.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>9</value>
   </data>
   <data name="tbxPixelRate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 294</value>
+    <value>152, 235</value>
   </data>
   <data name="tbxPixelRate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxPixelRate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxPixelRate.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -265,16 +442,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxPixelRate.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>10</value>
   </data>
   <data name="lbPixelRate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbPixelRate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 297</value>
+    <value>18, 238</value>
+  </data>
+  <data name="lbPixelRate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbPixelRate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>128, 18</value>
   </data>
   <data name="lbPixelRate.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -292,16 +472,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbPixelRate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>11</value>
   </data>
   <data name="tbxScanTimePerLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 187</value>
+    <value>152, 150</value>
   </data>
   <data name="tbxScanTimePerLine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxScanTimePerLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxScanTimePerLine.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -319,7 +499,7 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxScanTimePerLine.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>12</value>
   </data>
   <data name="lbScanTimePerLine.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -328,10 +508,13 @@
     <value>NoControl</value>
   </data>
   <data name="lbScanTimePerLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 190</value>
+    <value>18, 152</value>
+  </data>
+  <data name="lbScanTimePerLine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbScanTimePerLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 15</value>
+    <value>125, 12</value>
   </data>
   <data name="lbScanTimePerLine.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -349,16 +532,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbScanTimePerLine.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>13</value>
   </data>
   <data name="tbxFPS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 255</value>
+    <value>152, 204</value>
   </data>
   <data name="tbxFPS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxFPS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxFPS.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -376,16 +559,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxFPS.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>14</value>
   </data>
   <data name="lbFPS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbFPS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 258</value>
+    <value>20, 206</value>
+  </data>
+  <data name="lbFPS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbFPS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>94, 18</value>
   </data>
   <data name="lbFPS.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -403,16 +589,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbFPS.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>15</value>
   </data>
   <data name="tbxSpCtPerFm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 155</value>
+    <value>152, 124</value>
   </data>
   <data name="tbxSpCtPerFm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxSpCtPerFm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxSpCtPerFm.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -430,16 +616,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxSpCtPerFm.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>16</value>
   </data>
   <data name="lbAoSpCtPerFm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbAoSpCtPerFm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 158</value>
+    <value>20, 126</value>
+  </data>
+  <data name="lbAoSpCtPerFm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbAoSpCtPerFm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbAoSpCtPerFm.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -457,16 +646,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbAoSpCtPerFm.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>17</value>
   </data>
   <data name="tbxAoSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 122</value>
+    <value>152, 98</value>
   </data>
   <data name="tbxAoSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxAoSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 25</value>
+    <value>127, 21</value>
   </data>
   <data name="tbxAoSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -484,16 +673,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxAoSpCtPerLn.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>18</value>
   </data>
   <data name="lbAoSpCtPerLn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbAoSpCtPerLn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 125</value>
+    <value>20, 100</value>
+  </data>
+  <data name="lbAoSpCtPerLn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbAoSpCtPerLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbAoSpCtPerLn.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -511,16 +703,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbAoSpCtPerLn.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>19</value>
   </data>
   <data name="tbxVoltagePerPixel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 88</value>
+    <value>152, 70</value>
   </data>
   <data name="tbxVoltagePerPixel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxVoltagePerPixel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxVoltagePerPixel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -538,16 +730,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxVoltagePerPixel.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>20</value>
   </data>
   <data name="lbVoltagePerPixel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbVoltagePerPixel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 88</value>
+    <value>20, 70</value>
+  </data>
+  <data name="lbVoltagePerPixel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbVoltagePerPixel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbVoltagePerPixel.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -565,16 +760,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbVoltagePerPixel.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>21</value>
   </data>
   <data name="tbxPixelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 52</value>
+    <value>152, 42</value>
   </data>
   <data name="tbxPixelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxPixelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxPixelSize.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -592,16 +787,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxPixelSize.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>22</value>
   </data>
   <data name="lbPixelSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbPixelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 55</value>
+    <value>20, 44</value>
+  </data>
+  <data name="lbPixelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbPixelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbPixelSize.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -619,16 +817,16 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbPixelSize.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>23</value>
   </data>
   <data name="tbxAORate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 21</value>
+    <value>152, 17</value>
   </data>
   <data name="tbxAORate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxAORate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 25</value>
+    <value>61, 21</value>
   </data>
   <data name="tbxAORate.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -646,16 +844,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;tbxAORate.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>24</value>
   </data>
   <data name="lbAORate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbAORate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 24</value>
+    <value>20, 19</value>
+  </data>
+  <data name="lbAORate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbAORate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>128, 18</value>
   </data>
   <data name="lbAORate.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -673,19 +874,19 @@
     <value>gbxResults</value>
   </data>
   <data name="&gt;&gt;lbAORate.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>25</value>
   </data>
   <data name="gbxResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 421</value>
+    <value>0, 337</value>
   </data>
   <data name="gbxResults.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="gbxResults.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="gbxResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 383</value>
+    <value>296, 388</value>
   </data>
   <data name="gbxResults.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -709,13 +910,13 @@
     <value>True</value>
   </data>
   <data name="tbxCurveCoff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 128</value>
+    <value>152, 102</value>
   </data>
   <data name="tbxCurveCoff.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxCurveCoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 25</value>
+    <value>71, 21</value>
   </data>
   <data name="tbxCurveCoff.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -739,10 +940,13 @@
     <value>NoControl</value>
   </data>
   <data name="lbCurveCoff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 131</value>
+    <value>20, 105</value>
+  </data>
+  <data name="lbCurveCoff.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbCurveCoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbCurveCoff.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -763,13 +967,13 @@
     <value>1</value>
   </data>
   <data name="tbxCalibrationV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 94</value>
+    <value>152, 75</value>
   </data>
   <data name="tbxCalibrationV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxCalibrationV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 25</value>
+    <value>71, 21</value>
   </data>
   <data name="tbxCalibrationV.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -793,10 +997,13 @@
     <value>NoControl</value>
   </data>
   <data name="lbCalibrationV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 98</value>
+    <value>20, 78</value>
+  </data>
+  <data name="lbCalibrationV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbCalibrationV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbCalibrationV.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -817,13 +1024,13 @@
     <value>3</value>
   </data>
   <data name="tbxResponseTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 24</value>
+    <value>152, 19</value>
   </data>
   <data name="tbxResponseTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxResponseTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 25</value>
+    <value>71, 21</value>
   </data>
   <data name="tbxResponseTime.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -847,10 +1054,13 @@
     <value>NoControl</value>
   </data>
   <data name="lbResponseTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 24</value>
+    <value>20, 19</value>
+  </data>
+  <data name="lbResponseTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbResponseTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbResponseTime.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -871,13 +1081,13 @@
     <value>5</value>
   </data>
   <data name="tbxFieldSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 55</value>
+    <value>152, 44</value>
   </data>
   <data name="tbxFieldSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="tbxFieldSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 25</value>
+    <value>71, 21</value>
   </data>
   <data name="tbxFieldSize.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -901,10 +1111,13 @@
     <value>NoControl</value>
   </data>
   <data name="lbFieldSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 58</value>
+    <value>20, 46</value>
+  </data>
+  <data name="lbFieldSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lbFieldSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>120, 18</value>
   </data>
   <data name="lbFieldSize.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -925,16 +1138,16 @@
     <value>7</value>
   </data>
   <data name="gbxGalv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 238</value>
+    <value>2, 190</value>
   </data>
   <data name="gbxGalv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="gbxGalv.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="gbxGalv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 179</value>
+    <value>294, 143</value>
   </data>
   <data name="gbxGalv.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -960,11 +1173,8 @@
   <data name="chart.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="chart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="chart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 232</value>
+    <value>301, 186</value>
   </data>
   <data name="chart.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -990,11 +1200,8 @@
   <data name="panel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 815</value>
+    <value>301, 728</value>
   </data>
   <data name="panel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1015,13 +1222,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 15</value>
+    <value>6, 12</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>401, 815</value>
+    <value>301, 728</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1311,7 +1518,7 @@
 </value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
