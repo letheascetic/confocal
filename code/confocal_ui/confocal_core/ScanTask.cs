@@ -189,17 +189,17 @@ namespace confocal_core
             m_scanning = true;
 
             int threadNum = 1;
-            //m_convertThreads = new Thread[threadNum];
-            //for (int i = 0; i < threadNum; i++)
-            //{
-            //    m_convertThreads[i] = new Thread(ConvertSamplesHandler);
-            //    m_convertThreads[i].Start();
-            //}
+            m_convertThreads = new Thread[threadNum];
+            for (int i = 0; i < threadNum; i++)
+            {
+                m_convertThreads[i] = new Thread(ConvertSamplesHandler);
+                m_convertThreads[i].Start();
+            }
 
             //m_imageDataThread = new Thread(UpdateImageDataHandler);
             //m_imageDataThread.Start();
-            //m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
-            //m_imageDisplayThread.Start();
+            m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
+            m_imageDisplayThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
         }
 
@@ -262,8 +262,8 @@ namespace confocal_core
         /// <param name="samples"></param>
         private void PmtReceiveSamples(object sender, short[][] samples)
         {
-            // PmtSampleData sampleData = new PmtSampleData(samples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
-            // m_scanData.EnqueuePmtSample(sampleData);
+            PmtSampleData sampleData = new PmtSampleData(samples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
+            m_scanData.EnqueuePmtSample(sampleData);
 
             //if (m_config.Debugging)
             //{
@@ -334,14 +334,8 @@ namespace confocal_core
 
             while (m_scanning)
             {
-                if (m_scanData.PmtSampleQueueSize() == 0)
-                {
-                    continue;
-                }
-
                 if (!m_scanData.DequeuePmtSample(out PmtSampleData sample))
                 {
-                    // Logger.Info(string.Format("dequeue sample data failed."));
                     continue;
                 }
 
@@ -420,11 +414,6 @@ namespace confocal_core
 
             while (m_scanning)
             {
-                if (m_scanData.ApdSampleQueueSize() == 0)
-                {
-                    continue;
-                }
-
                 if (!m_scanData.DequeueApdSample(out ApdSampleData sample))
                 {
                     // Logger.Info(string.Format("dequeue sample data failed."));
@@ -523,7 +512,8 @@ namespace confocal_core
                         Array.Copy(convertData.NSamples[i], 0, m_scanData.ScanImage.Data[i], index, xSampleCountPerLine);
 
                         index = index * 3;
-                        CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
+                        // CImage.Gray16ToBGR24(convertData.NSamples[i], ref bgrData, index, mapping);
+                        // CImage.IntToGray(convertData.NSamples, ref bgrData, index);
                     }
                 }
 
@@ -572,7 +562,6 @@ namespace confocal_core
 
                 index = index * 3;
                 CImage.IntToBGR24(convertData.NSamples, ref bgrData, index, mapping);
-                //CImage.IntToGray(convertData.NSamples, ref bgrData, index);
 
                 if (m_scanData.GetImageLine() < convertData.Line || m_scanData.GetImageFrame() < convertData.Frame)
                 {

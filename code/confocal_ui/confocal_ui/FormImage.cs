@@ -212,7 +212,7 @@ namespace confocal_ui
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            DisplayImage();
+            //DisplayImage();
             UpdateRTControlers();
         }
 

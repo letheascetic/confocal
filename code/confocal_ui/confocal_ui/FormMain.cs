@@ -33,6 +33,9 @@ namespace confocal_ui
         public FormMain()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景. 
+            SetStyle(ControlStyles.DoubleBuffer, true);         // 双缓冲  
         }
 
         private void InitVariables()

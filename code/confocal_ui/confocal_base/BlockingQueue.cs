@@ -17,7 +17,7 @@ namespace confocal_base
 
         public bool Dequeue(out T t)
         {
-            m_semaphore.WaitOne();
+            m_semaphore.WaitOne(100);
             return base.TryDequeue(out t);
         }
 

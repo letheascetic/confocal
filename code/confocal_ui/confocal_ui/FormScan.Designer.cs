@@ -631,6 +631,7 @@
             this.Controls.Add(this.btnScan);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) 
             | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HideOnClose = true;
             this.Name = "FormScan";
