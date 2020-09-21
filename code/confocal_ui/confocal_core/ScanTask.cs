@@ -189,17 +189,17 @@ namespace confocal_core
             m_scanning = true;
 
             int threadNum = 1;
-            m_convertThreads = new Thread[threadNum];
-            for (int i = 0; i < threadNum; i++)
-            {
-                m_convertThreads[i] = new Thread(ConvertSamplesHandler);
-                m_convertThreads[i].Start();
-            }
+            //m_convertThreads = new Thread[threadNum];
+            //for (int i = 0; i < threadNum; i++)
+            //{
+            //    m_convertThreads[i] = new Thread(ConvertSamplesHandler);
+            //    m_convertThreads[i].Start();
+            //}
 
-            m_imageDataThread = new Thread(UpdateImageDataHandler);
-            m_imageDataThread.Start();
-            m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
-            m_imageDisplayThread.Start();
+            //m_imageDataThread = new Thread(UpdateImageDataHandler);
+            //m_imageDataThread.Start();
+            //m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
+            //m_imageDisplayThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
         }
 
@@ -277,8 +277,8 @@ namespace confocal_core
 
         private void ApdReceiveSamples(object sender, int channelIndex, int[] samples)
         {
-            // ApdSampleData sample = new ApdSampleData(samples, m_scanInfo.GetFrame(channelIndex), m_scanInfo.GetLine(channelIndex), channelIndex);
-            // m_scanData.EnqueueApdSample(sample);
+            ApdSampleData sample = new ApdSampleData(samples, m_scanInfo.GetFrame(channelIndex), m_scanInfo.GetLine(channelIndex), channelIndex);
+            m_scanData.EnqueueApdSample(sample);
 
             //if (m_config.Debugging)
             //{

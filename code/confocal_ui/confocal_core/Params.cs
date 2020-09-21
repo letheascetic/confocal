@@ -352,7 +352,8 @@ namespace confocal_core
             m_params.AoY1SamplesPerRow = y1SamplesPerRow;
             m_params.AoY2SamplesPerRow = y2SamplesPerRow;
 
-            m_params.ScanRowsPerAcquisition = (int)Math.Ceiling(DEFAULT_ACQUISITION_INTERVAL / m_params.ScanTimePerLine);
+            m_params.ScanRowsPerAcquisition = 1;
+            // m_params.ScanRowsPerAcquisition = (int)Math.Ceiling(DEFAULT_ACQUISITION_INTERVAL / m_params.ScanTimePerLine);
             m_params.ScanPixelsPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ValidScanPixelsPerLine;
             m_params.IntervalPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ScanTimePerLine;
         }
@@ -520,7 +521,8 @@ namespace confocal_core
             m_params.AoY1SamplesPerRow = y1SamplesPerRow;
             m_params.AoY2SamplesPerRow = y2SamplesPerRow;
 
-            m_params.ScanRowsPerAcquisition = (int)Math.Ceiling(DEFAULT_ACQUISITION_INTERVAL / m_params.ScanTimePerLine) * 2;
+            m_params.ScanRowsPerAcquisition = 1;
+            // m_params.ScanRowsPerAcquisition = (int)Math.Ceiling(DEFAULT_ACQUISITION_INTERVAL / m_params.ScanTimePerLine) * 2;
             m_params.ScanPixelsPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ValidScanPixelsPerLine;
             m_params.IntervalPerAcquisition = m_params.ScanRowsPerAcquisition * m_params.ScanTimePerLine / 2;
         }

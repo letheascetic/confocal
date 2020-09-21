@@ -313,12 +313,14 @@ namespace confocal_core
                     m_aiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    m_params.ScanPixelsPerAcquisition * 2);
+                    m_params.ScanPixelsPerAcquisition);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = m_sysConfig.GetPmtTriggerInPfi();
                 m_aiTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
                 m_aiTask.Triggers.StartTrigger.Retriggerable = true;        // 设置为允许重触发
+
+                // m_aiTask.AIChannels.All.DataTransferMechanism = AIDataTransferMechanism.Dma;
 
                 // 路由AI Sample Clcok到PFI2， AI Convert Clock到PFI3
                 //if (m_config.Debugging)
@@ -390,7 +392,11 @@ namespace confocal_core
                     ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    m_params.ScanPixelsPerAcquisition * 4);
+                    m_params.ValidScanPixelsPerFrame);
+
+                ciTask.Stream.ConfigureInputBuffer(m_params.ValidScanPixelsPerFrame);
+
+                // CIDataTransferMechanism x = ciTask.CIChannels.All.DataTransferMechanism;
 
                 // 指定CI Channel使用的物理输入终端[APD的脉冲接收端]
                 ciTask.CIChannels[0].CountEdgesTerminal = ciSrc;
