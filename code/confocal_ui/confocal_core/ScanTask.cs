@@ -196,8 +196,8 @@ namespace confocal_core
                 m_convertThreads[i].Start();
             }
 
-            //m_imageDataThread = new Thread(UpdateImageDataHandler);
-            //m_imageDataThread.Start();
+            m_imageDataThread = new Thread(UpdateImageDataHandler);
+            m_imageDataThread.Start();
             m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
             m_imageDisplayThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
