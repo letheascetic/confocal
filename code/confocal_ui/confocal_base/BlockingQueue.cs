@@ -15,17 +15,15 @@ namespace confocal_base
             m_semaphore = new Semaphore(0, Int32.MaxValue);
         }
 
-        public T Dequeue()
+        public bool Dequeue(out T t)
         {
-            T t = default(T);
             m_semaphore.WaitOne();
-            base.TryDequeue(out T);
-            return t;
+            return base.TryDequeue(out t);
         }
 
-        public new T TryDequeue(out T t)
+        public new bool TryDequeue(out T t)
         {
-            throw new Exception("Unsupport Method Exception");
+            return Dequeue(out t);
         }
 
         public new void Enqueue(T t)

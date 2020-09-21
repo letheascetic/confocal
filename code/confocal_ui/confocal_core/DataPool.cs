@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using confocal_base;
+using log4net;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -169,10 +170,10 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private ConcurrentQueue<PmtSampleData> m_pmtSampleQueue;       // 原始行数据队列
-        private ConcurrentQueue<PmtSampleData> m_pmtConvertQueue;      // 截断、反转、去底噪后的行数据队列
-        private ConcurrentQueue<ApdSampleData> m_apdSampleQueue;
-        private ConcurrentQueue<ApdSampleData> m_apdConvertQueue;
+        private BlockingQueue<PmtSampleData> m_pmtSampleQueue;       // 原始行数据队列
+        private BlockingQueue<PmtSampleData> m_pmtConvertQueue;      // 截断、反转、去底噪后的行数据队列
+        private BlockingQueue<ApdSampleData> m_apdSampleQueue;
+        private BlockingQueue<ApdSampleData> m_apdConvertQueue;
         private ImageData m_imageData;                              // 帧数据
         ///////////////////////////////////////////////////////////////////////////////////////////
         public ImageData ScanImage
@@ -181,10 +182,10 @@ namespace confocal_core
 
         public DataPool()
         {
-            m_pmtSampleQueue = new ConcurrentQueue<PmtSampleData>();
-            m_pmtConvertQueue = new ConcurrentQueue<PmtSampleData>();
-            m_apdSampleQueue = new ConcurrentQueue<ApdSampleData>();
-            m_apdConvertQueue = new ConcurrentQueue<ApdSampleData>();
+            m_pmtSampleQueue = new BlockingQueue<PmtSampleData>();
+            m_pmtConvertQueue = new BlockingQueue<PmtSampleData>();
+            m_apdSampleQueue = new BlockingQueue<ApdSampleData>();
+            m_apdConvertQueue = new BlockingQueue<ApdSampleData>();
             confocal_core.Config config = confocal_core.Config.GetConfig();
             m_imageData = new ImageData(config.GetChannelNum(), config.GetScanXPoints(), config.GetScanYPoints());
         }
@@ -234,7 +235,7 @@ namespace confocal_core
 
         public bool DequeuePmtSample(out PmtSampleData sampleData)
         {
-            return m_pmtSampleQueue.TryDequeue(out sampleData);
+            return m_pmtSampleQueue.Dequeue(out sampleData);
         }
 
         public int PmtConvertQueueSize()
@@ -249,7 +250,7 @@ namespace confocal_core
 
         public bool DequeuePmtConvertData(out PmtSampleData convertData)
         {
-            return m_pmtConvertQueue.TryDequeue(out convertData);
+            return m_pmtConvertQueue.Dequeue(out convertData);
         }
 
         public int ApdSampleQueueSize()
@@ -270,7 +271,7 @@ namespace confocal_core
 
         public bool DequeueApdSample(out ApdSampleData sampleData)
         {
-            return m_apdSampleQueue.TryDequeue(out sampleData);
+            return m_apdSampleQueue.Dequeue(out sampleData);
         }
 
         public int ApdConvertQueueSize()
@@ -285,7 +286,7 @@ namespace confocal_core
 
         public bool DequeueApdConvertData(out ApdSampleData convertData)
         {
-            return m_apdConvertQueue.TryDequeue(out convertData);
+            return m_apdConvertQueue.Dequeue(out convertData);
         }
 
         public void Release()
