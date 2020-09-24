@@ -416,7 +416,6 @@ namespace confocal_core
             {
                 if (!m_scanData.DequeueApdSample(out ApdSampleData sample))
                 {
-                    // Logger.Info(string.Format("dequeue sample data failed."));
                     continue;
                 }
 

@@ -85,7 +85,6 @@ namespace confocal_core
                 }
             }
             NSamples[0] = NSamples[1];
-            // Logger.Info(string.Format("max count: [{0}].", NSamples.Max()));
         }
     }
     
