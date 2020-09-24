@@ -99,10 +99,6 @@ namespace confocal_ui
 
         private void InitControlers()
         {
-            pbxZone.Parent = pbxImage;
-            pbxZone.Size = pbxImage.Size;
-            pbxZone.Location = pbxImage.Location;
-            pbxZone.Dock = DockStyle.Fill;
             pbxImage.Image = m_bitmapArr[0];
         }
 
@@ -164,8 +160,8 @@ namespace confocal_ui
 
         private void UpdateCurrentPosition()
         {
-            this.m_mousePosition = pbxZone.PointToClient(MousePosition);
-            if (!pbxZone.Bounds.Contains(m_mousePosition))
+            this.m_mousePosition = pbxImage.PointToClient(MousePosition);
+            if (!pbxImage.Bounds.Contains(m_mousePosition))
             {
                 return;
             }
