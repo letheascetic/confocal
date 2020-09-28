@@ -1,4 +1,7 @@
 ﻿using confocal_base;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.OCR;
 using log4net;
 using System;
 using System.Collections.Concurrent;
@@ -38,7 +41,7 @@ namespace confocal_core
                 if (channelSample != null)
                 {
                     CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
-                    short noiseLevel = Config.GetConfig().GetChannelBackgroundNoiseLevel(id);
+                    // short noiseLevel = Config.GetConfig().GetChannelBackgroundNoiseLevel(id);
                     int len = channelSample.Length;
                     for (int j = 0; j < len; j++)
                     {
@@ -46,10 +49,10 @@ namespace confocal_core
                         {
                             channelSample[j] = (short)-channelSample[j];
                         }
-                        if (channelSample[j] <= noiseLevel)
-                        {
-                            channelSample[j] = 0;
-                        }
+                        //if (channelSample[j] <= noiseLevel)
+                        //{
+                        //    channelSample[j] = 0;
+                        //}
                     }
                 }
             }
@@ -96,10 +99,11 @@ namespace confocal_core
         private readonly object m_locker = new object();        // 锁
         private long m_frame;
         private int m_line;
-        private double[][] m_linePixelValue;
-        private int[][] m_data;
-        private byte[][] m_bgrData;
-        private Bitmap[] m_displayImages;
+
+        private Mat[] m_originMat;
+        private Mat[] m_grayMat;
+        private Mat[] m_bgrMat;
+        
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// 当前帧
@@ -109,35 +113,24 @@ namespace confocal_core
         /// 当前行
         /// </summary>
         public int Line { get { return m_line; } set { m_line = value; } }
-        /// <summary>
-        /// 原始图像数据
-        /// </summary>
-        public int[][] Data { get { return m_data; } set { m_data = value; } }
-        /// <summary>
-        /// 伪彩色图像数据
-        /// </summary>
-        public byte[][] BGRData { get { return m_bgrData; } set { m_bgrData = value; } }
 
-        /// <summary>
-        /// 每个通道每行的平均像素
-        /// </summary>
-        public double[][] PixelValuePerLine { get { return m_linePixelValue; } set { m_linePixelValue = value; } }
+        public Mat[] GrayMat { get { return m_grayMat; } set { m_grayMat = value; } }
+
+        public Mat[] OriginMat { get { return m_originMat; } set { m_originMat = value; } }
+
+        public Mat[] BGRMat { get { return m_bgrMat; } set { m_bgrMat = value; } }
 
         public ImageData(int channelNum, int scanXPoints, int scanYPoints)
         {
             int samplesPerFrame = scanXPoints * scanYPoints;
             m_frame = -1;
             m_line = -1;
-            Data = new int[channelNum][];
-            BGRData = new byte[channelNum][];
-            m_displayImages = new Bitmap[channelNum];
-            m_linePixelValue = new double[channelNum][];
+
             for (int i = 0; i < channelNum; i++)
             {
-                Data[i] = new int[samplesPerFrame];
-                BGRData[i] = new byte[samplesPerFrame * 3];
-                m_displayImages[i] = new Bitmap(scanXPoints, scanYPoints, PixelFormat.Format24bppRgb);
-                m_linePixelValue[i] = Enumerable.Repeat<double>(0, scanYPoints).ToArray();
+                OriginMat[i] = new Mat(scanXPoints, scanYPoints, DepthType.Cv16S, 1);
+                GrayMat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 1);
+                BGRMat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 3);
             }
         }
 
@@ -170,9 +163,9 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         private BlockingQueue<PmtSampleData> m_pmtSampleQueue;       // 原始行数据队列
-        private BlockingQueue<PmtSampleData> m_pmtConvertQueue;      // 截断、反转、去底噪后的行数据队列
+        // private BlockingQueue<PmtSampleData> m_pmtConvertQueue;      // 截断、反转、去底噪后的行数据队列
         private BlockingQueue<ApdSampleData> m_apdSampleQueue;
-        private BlockingQueue<ApdSampleData> m_apdConvertQueue;
+        // private BlockingQueue<ApdSampleData> m_apdConvertQueue;
         private ImageData m_imageData;                              // 帧数据
         ///////////////////////////////////////////////////////////////////////////////////////////
         public ImageData ScanImage
@@ -182,9 +175,9 @@ namespace confocal_core
         public DataPool()
         {
             m_pmtSampleQueue = new BlockingQueue<PmtSampleData>();
-            m_pmtConvertQueue = new BlockingQueue<PmtSampleData>();
+            // m_pmtConvertQueue = new BlockingQueue<PmtSampleData>();
             m_apdSampleQueue = new BlockingQueue<ApdSampleData>();
-            m_apdConvertQueue = new BlockingQueue<ApdSampleData>();
+            // m_apdConvertQueue = new BlockingQueue<ApdSampleData>();
             confocal_core.Config config = confocal_core.Config.GetConfig();
             m_imageData = new ImageData(config.GetChannelNum(), config.GetScanXPoints(), config.GetScanYPoints());
         }
@@ -237,20 +230,20 @@ namespace confocal_core
             return m_pmtSampleQueue.Dequeue(out sampleData);
         }
 
-        public int PmtConvertQueueSize()
-        {
-            return m_pmtConvertQueue.Count;
-        }
+        //public int PmtConvertQueueSize()
+        //{
+        //    return m_pmtConvertQueue.Count;
+        //}
 
-        public void EnqueuePmtConvertData(PmtSampleData convertData)
-        {
-            m_pmtConvertQueue.Enqueue(convertData);
-        }
+        //public void EnqueuePmtConvertData(PmtSampleData convertData)
+        //{
+        //    m_pmtConvertQueue.Enqueue(convertData);
+        //}
 
-        public bool DequeuePmtConvertData(out PmtSampleData convertData)
-        {
-            return m_pmtConvertQueue.Dequeue(out convertData);
-        }
+        //public bool DequeuePmtConvertData(out PmtSampleData convertData)
+        //{
+        //    return m_pmtConvertQueue.Dequeue(out convertData);
+        //}
 
         public int ApdSampleQueueSize()
         {
@@ -273,20 +266,20 @@ namespace confocal_core
             return m_apdSampleQueue.Dequeue(out sampleData);
         }
 
-        public int ApdConvertQueueSize()
-        {
-            return m_apdConvertQueue.Count;
-        }
+        //public int ApdConvertQueueSize()
+        //{
+        //    return m_apdConvertQueue.Count;
+        //}
 
-        public void EnqueueApdConvertData(ApdSampleData convertData)
-        {
-            m_apdConvertQueue.Enqueue(convertData);
-        }
+        //public void EnqueueApdConvertData(ApdSampleData convertData)
+        //{
+        //    m_apdConvertQueue.Enqueue(convertData);
+        //}
 
-        public bool DequeueApdConvertData(out ApdSampleData convertData)
-        {
-            return m_apdConvertQueue.Dequeue(out convertData);
-        }
+        //public bool DequeueApdConvertData(out ApdSampleData convertData)
+        //{
+        //    return m_apdConvertQueue.Dequeue(out convertData);
+        //}
 
         public void Release()
         {
@@ -294,18 +287,18 @@ namespace confocal_core
             {
                 DequeuePmtSample(out PmtSampleData sampleData);
             }
-            while (!m_pmtConvertQueue.IsEmpty)
-            {
-                DequeuePmtConvertData(out PmtSampleData convertData);
-            }
+            //while (!m_pmtConvertQueue.IsEmpty)
+            //{
+            //    DequeuePmtConvertData(out PmtSampleData convertData);
+            //}
             while (!m_apdSampleQueue.IsEmpty)
             {
                 DequeueApdSample(out ApdSampleData sampleData);
             }
-            while (!m_apdConvertQueue.IsEmpty)
-            {
-                DequeueApdConvertData(out ApdSampleData convertData);
-            }
+            //while (!m_apdConvertQueue.IsEmpty)
+            //{
+            //    DequeueApdConvertData(out ApdSampleData convertData);
+            //}
         }
     }
 }
