@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>..\dll\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.World">
+      <HintPath>..\dll\Emgu.CV.World.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -61,6 +67,9 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\dll\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormColor.cs">
@@ -166,6 +175,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\confocal_base\confocal_base.csproj">
+      <Project>{215205F8-5F8A-4717-8D92-D71176A4E3AB}</Project>
+      <Name>confocal_base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\confocal_core\confocal_core.csproj">
       <Project>{03f7aaea-27e2-4046-afa6-9da6dbbf98c7}</Project>
       <Name>confocal_core</Name>

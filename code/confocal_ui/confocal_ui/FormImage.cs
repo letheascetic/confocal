@@ -191,7 +191,7 @@ namespace confocal_ui
             if (index >= 0)
             {
                 PictureBox pbx = GetMappingPictureBox(tabControl.SelectedTab);
-                pbx.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(index, ref m_bitmapArr[index]);
+                // pbx.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(index, ref m_bitmapArr[index]);
             }
         }
 

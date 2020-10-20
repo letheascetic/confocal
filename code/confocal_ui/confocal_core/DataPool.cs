@@ -40,7 +40,7 @@ namespace confocal_core
                 short[] channelSample = NSamples[i];
                 if (channelSample != null)
                 {
-                    CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                    // CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
                     // short noiseLevel = Config.GetConfig().GetChannelBackgroundNoiseLevel(id);
                     int len = channelSample.Length;
                     for (int j = 0; j < len; j++)
@@ -100,9 +100,9 @@ namespace confocal_core
         private long m_frame;
         private int m_line;
 
-        private Mat[] m_originMat;
-        private Mat[] m_grayMat;
-        private Mat[] m_bgrMat;
+        private Mat[] m_originMat;      // 原始图像数据
+        private Mat[] m_grayMat;        // 灰度图像数据
+        private Mat[] m_bgrMat;         // 伪彩色图像数据
         
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -113,11 +113,17 @@ namespace confocal_core
         /// 当前行
         /// </summary>
         public int Line { get { return m_line; } set { m_line = value; } }
-
+        /// <summary>
+        /// 灰度图像
+        /// </summary>
         public Mat[] GrayMat { get { return m_grayMat; } set { m_grayMat = value; } }
-
+        /// <summary>
+        /// 原始图像
+        /// </summary>
         public Mat[] OriginMat { get { return m_originMat; } set { m_originMat = value; } }
-
+        /// <summary>
+        /// 伪彩色图像
+        /// </summary>
         public Mat[] BGRMat { get { return m_bgrMat; } set { m_bgrMat = value; } }
 
         public ImageData(int channelNum, int scanXPoints, int scanYPoints)
@@ -125,6 +131,10 @@ namespace confocal_core
             int samplesPerFrame = scanXPoints * scanYPoints;
             m_frame = -1;
             m_line = -1;
+
+            m_originMat = new Mat[channelNum];
+            m_grayMat = new Mat[channelNum];
+            m_bgrMat = new Mat[channelNum];
 
             for (int i = 0; i < channelNum; i++)
             {
@@ -134,26 +144,35 @@ namespace confocal_core
             }
         }
 
-        public Bitmap GetDisplayImage(int index, ref Bitmap destnation)
+        //public Bitmap GetDisplayImage(int index, ref Bitmap destnation)
+        //{
+        //    lock (m_locker)
+        //    {
+        //        destnation = (Bitmap)m_displayImages[index].Clone();
+        //        return destnation;
+        //    }
+        //}
+
+        public void UpdateDisplayImage(int index)
         {
             lock (m_locker)
             {
-                destnation = (Bitmap)m_displayImages[index].Clone();
-                return destnation;
+                OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1, 0);
+                CvInvoke.ApplyColorMap(GrayMat[index], BGRMat[index], Emgu.CV.CvEnum.ColorMapType.Autumn);
             }
         }
 
-        public void UpdateDisplayImage(int index, byte[,] mapping, Rectangle lockBitsZoom)
-        {
-            lock (m_locker)
-            {
-                byte[] bgrData = m_bgrData[index];
-                Bitmap canvas = m_displayImages[index];
-                BitmapData canvasData = canvas.LockBits(lockBitsZoom, ImageLockMode.WriteOnly, canvas.PixelFormat);
-                Marshal.Copy(bgrData, 0, canvasData.Scan0, bgrData.Length);
-                canvas.UnlockBits(canvasData);
-            }
-        }
+        //public void UpdateDisplayImage(int index, byte[,] mapping, Rectangle lockBitsZoom)
+        //{
+        //    lock (m_locker)
+        //    {
+        //        byte[] bgrData = m_bgrData[index];
+        //        Bitmap canvas = m_displayImages[index];
+        //        BitmapData canvasData = canvas.LockBits(lockBitsZoom, ImageLockMode.WriteOnly, canvas.PixelFormat);
+        //        Marshal.Copy(bgrData, 0, canvasData.Scan0, bgrData.Length);
+        //        canvas.UnlockBits(canvasData);
+        //    }
+        //}
         
     }
 
@@ -162,7 +181,7 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private BlockingQueue<PmtSampleData> m_pmtSampleQueue;       // 原始行数据队列
+        private BlockingQueue<PmtSampleData> m_pmtSampleQueue;          // 原始行数据队列
         // private BlockingQueue<PmtSampleData> m_pmtConvertQueue;      // 截断、反转、去底噪后的行数据队列
         private BlockingQueue<ApdSampleData> m_apdSampleQueue;
         // private BlockingQueue<ApdSampleData> m_apdConvertQueue;

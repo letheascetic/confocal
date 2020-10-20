@@ -74,7 +74,7 @@ namespace confocal_ui
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            pbxImage.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(m_selectedChannelIndex, ref m_bitmap);
+            // pbxImage.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(m_selectedChannelIndex, ref m_bitmap);
         }
 
         private void m_cursorTimer_Tick(object sender, EventArgs e)

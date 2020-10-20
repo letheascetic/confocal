@@ -455,7 +455,6 @@ namespace confocal_core
                 }
                 m_scanData.ScanImage.OriginMat[sample.ChannelIndex].Row(sample.Line).SetTo<short>(data);
 
-
                 if (m_scanData.GetImageLine() < sample.Line || m_scanData.GetImageFrame() < sample.Frame)
                 {
                     m_scanData.SetImageFrame(sample.Frame);
@@ -583,7 +582,7 @@ namespace confocal_core
             int activatedChannelNum = m_config.GetChannelNum();
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
             
-            Rectangle lockBitsZoom = new Rectangle(0, 0, m_config.GetScanXPoints(), m_config.GetScanYPoints());
+            // Rectangle lockBitsZoom = new Rectangle(0, 0, m_config.GetScanXPoints(), m_config.GetScanYPoints());
             
             double timePerFrame = 1.0f / m_params.Fps;
             double updateNum = timePerFrame / 0.2;
@@ -606,8 +605,9 @@ namespace confocal_core
                     {
                         if (channelSwitch[i])
                         {
-                            byte[,] mapping = m_params.ColorMappingArr[i];
-                            m_scanData.ScanImage.UpdateDisplayImage(i, mapping, lockBitsZoom);
+                            // byte[,] mapping = m_params.ColorMappingArr[i];
+                            //m_scanData.ScanImage.UpdateDisplayImage(i, mapping, lockBitsZoom);
+                            m_scanData.ScanImage.UpdateDisplayImage(i);
                         }
                     }
 

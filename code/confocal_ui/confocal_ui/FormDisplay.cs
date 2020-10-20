@@ -1,4 +1,5 @@
-﻿using confocal_core;
+﻿using confocal_base;
+using confocal_core;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -99,7 +100,7 @@ namespace confocal_ui
 
         private void InitControlers()
         {
-            pbxImage.Image = m_bitmapArr[0];
+            // imageBox.Image = m_bitmapArr[0];
         }
 
         private void UpdateVariables()
@@ -130,8 +131,9 @@ namespace confocal_ui
             m_xScanPoints = m_config.GetScanXPoints();
             m_yScanPoints = m_config.GetScanYPoints();
 
-            PropertyInfo info = pbxImage.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
-            m_imageRectangle = (Rectangle)info.GetValue(pbxImage, null);
+            //PropertyInfo info = imageBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
+            //m_imageRectangle = (Rectangle)info.GetValue(imageBox, null);
+            m_imageRectangle = imageBox.DisplayRectangle;
             m_imageScaleRatio = new SizeF((float)m_imageRectangle.Width / m_xScanPoints, (float)m_imageRectangle.Height / m_yScanPoints);
         }
 
@@ -160,17 +162,19 @@ namespace confocal_ui
 
         private void UpdateCurrentPosition()
         {
-            this.m_mousePosition = pbxImage.PointToClient(MousePosition);
-            if (!pbxImage.Bounds.Contains(m_mousePosition))
+            this.m_mousePosition = imageBox.PointToClient(MousePosition);
+            if (!imageBox.Bounds.Contains(m_mousePosition))
             {
                 return;
             }
 
-            if (pbxImage.SizeMode == PictureBoxSizeMode.AutoSize)
+            if (imageBox.SizeMode == PictureBoxSizeMode.AutoSize)
             {
                 this.m_imagePosition = this.m_mousePosition;
-                int pixelIndex = m_xScanPoints * m_imagePosition.Y + m_imagePosition.X;
-                int pixelValue = m_scanTask.GetScanData().ScanImage.Data[m_selectedChannelIndex][pixelIndex];
+                // int pixelIndex = m_xScanPoints * m_imagePosition.Y + m_imagePosition.X;
+                // m_scanTask.GetScanData().ScanImage.GrayMat[m_selectedChannelIndex].get
+                // int pixelValue = m_scanTask.GetScanData().ScanImage.Data[m_selectedChannelIndex][pixelIndex];
+                dynamic pixelValue = MatExtension.GetValue(m_scanTask.GetScanData().ScanImage.GrayMat[m_selectedChannelIndex], m_imagePosition.Y, m_imagePosition.X);
                 this.lbCurrent.Text = string.Format("[{0}, ({1}, {2})]", pixelValue, this.m_imagePosition.X, this.m_imagePosition.Y);
             }
             else
@@ -180,8 +184,9 @@ namespace confocal_ui
                     Point posInImage = new Point(m_mousePosition.X - m_imageRectangle.Left, m_mousePosition.Y - m_imageRectangle.Y);
                     m_imagePosition.X = (int)(posInImage.X / m_imageScaleRatio.Width);
                     m_imagePosition.Y = (int)(posInImage.Y / m_imageScaleRatio.Height);
-                    int pixelIndex = m_xScanPoints * m_imagePosition.Y + m_imagePosition.X;
-                    int pixelValue = m_scanTask.GetScanData().ScanImage.Data[m_selectedChannelIndex][pixelIndex];
+                    // int pixelIndex = m_xScanPoints * m_imagePosition.Y + m_imagePosition.X;
+                    // int pixelValue = m_scanTask.GetScanData().ScanImage.Data[m_selectedChannelIndex][pixelIndex];
+                    dynamic pixelValue = MatExtension.GetValue(m_scanTask.GetScanData().ScanImage.GrayMat[m_selectedChannelIndex], m_imagePosition.Y, m_imagePosition.X);
                     this.lbCurrent.Text = string.Format("[{0}, ({1}, {2})]", pixelValue, this.m_imagePosition.X, this.m_imagePosition.Y);
                 }
             }
@@ -195,25 +200,27 @@ namespace confocal_ui
 
         private void btnDisplayCenter_Click(object sender, EventArgs e)
         {
-            pbxImage.Dock = DockStyle.None;
-            pbxImage.SizeMode = PictureBoxSizeMode.AutoSize;
-            PropertyInfo info = pbxImage.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
-            m_imageRectangle = (Rectangle)info.GetValue(pbxImage, null);
+            imageBox.Dock = DockStyle.None;
+            imageBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            // PropertyInfo info = imageBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
+            // m_imageRectangle = (Rectangle)info.GetValue(imageBox, null);
+            m_imageRectangle = imageBox.DisplayRectangle;
             m_imageScaleRatio = new SizeF((float)m_imageRectangle.Width / m_xScanPoints, (float)m_imageRectangle.Height / m_yScanPoints);
         }
 
         private void btnDisplayZoom_Click(object sender, EventArgs e)
         {
-            pbxImage.Dock = DockStyle.Fill;
-            pbxImage.SizeMode = PictureBoxSizeMode.Zoom;
-            PropertyInfo info = pbxImage.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
-            m_imageRectangle = (Rectangle)info.GetValue(pbxImage, null);
+            imageBox.Dock = DockStyle.Fill;
+            imageBox.SizeMode = PictureBoxSizeMode.Zoom;
+            // PropertyInfo info = imageBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
+            // m_imageRectangle = (Rectangle)info.GetValue(imageBox, null);
+            m_imageRectangle = imageBox.DisplayRectangle;
             m_imageScaleRatio = new SizeF((float)m_imageRectangle.Width / m_xScanPoints, (float)m_imageRectangle.Height / m_yScanPoints);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = (Bitmap)pbxImage.Image.Clone();
+            Bitmap bmp = imageBox.Image.Bitmap;
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Jpeg Files (*.)|*.Png";
             dialog.FilterIndex = 1;
@@ -238,7 +245,8 @@ namespace confocal_ui
                 return;
             }
 
-            pbxImage.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(m_selectedChannelIndex, ref m_bitmapArr[m_selectedChannelIndex]);
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+            // pbxImage.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(m_selectedChannelIndex, ref m_bitmapArr[m_selectedChannelIndex]);
             UpdateRTControlers();
         }
 
@@ -251,7 +259,7 @@ namespace confocal_ui
 
             m_activatedChannelDict.TryGetValue(cbxSelect.SelectedItem.ToString(), out CHAN_ID id);
             m_selectedChannelIndex = (int)id;
-            pbxImage.Image = m_bitmapArr[m_selectedChannelIndex];
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
         }
 
         private void m_cursorTimer_Tick(object sender, EventArgs e)
