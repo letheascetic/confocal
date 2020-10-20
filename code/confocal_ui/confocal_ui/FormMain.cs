@@ -71,7 +71,7 @@ namespace confocal_ui
 
             // panel
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
-            m_pFormMeas.Show(this.dockPanel, DockState.DockLeft);
+            // m_pFormMeas.Show(this.dockPanel, DockState.DockLeft);
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
             m_pFormROI.Show(m_pFormScan.Pane, DockAlignment.Bottom, 0.25);
         }

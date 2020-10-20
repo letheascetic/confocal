@@ -62,12 +62,14 @@
             this.tsSelectZone = new System.Windows.Forms.ToolStripMenuItem();
             this.tsStartAOI = new System.Windows.Forms.ToolStripMenuItem();
             this.m_cursorTimer = new System.Windows.Forms.Timer(this.components);
+            this.ibxColorMapping = new Emgu.CV.UI.ImageBox();
             this.imageBox = new Emgu.CV.UI.ImageBox();
             this.statusStrip.SuspendLayout();
             this.toolStripTop.SuspendLayout();
             this.toolStripRight.SuspendLayout();
             this.pnlImage.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -293,6 +295,7 @@
             this.pnlImage.AutoSize = true;
             this.pnlImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlImage.Controls.Add(this.imageBox);
+            this.pnlImage.Controls.Add(this.ibxColorMapping);
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlImage.Location = new System.Drawing.Point(0, 0);
             this.pnlImage.Name = "pnlImage";
@@ -333,13 +336,22 @@
             this.m_cursorTimer.Interval = 500;
             this.m_cursorTimer.Tick += new System.EventHandler(this.m_cursorTimer_Tick);
             // 
+            // ibxColorMapping
+            // 
+            this.ibxColorMapping.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ibxColorMapping.Location = new System.Drawing.Point(0, 485);
+            this.ibxColorMapping.Name = "ibxColorMapping";
+            this.ibxColorMapping.Size = new System.Drawing.Size(563, 23);
+            this.ibxColorMapping.TabIndex = 2;
+            this.ibxColorMapping.TabStop = false;
+            // 
             // imageBox
             // 
             this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageBox.Location = new System.Drawing.Point(0, 0);
             this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(563, 508);
-            this.imageBox.TabIndex = 2;
+            this.imageBox.Size = new System.Drawing.Size(563, 485);
+            this.imageBox.TabIndex = 3;
             this.imageBox.TabStop = false;
             // 
             // FormDisplay
@@ -367,6 +379,7 @@
             this.toolStripRight.PerformLayout();
             this.pnlImage.ResumeLayout(false);
             this.contextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -407,6 +420,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsSelectZone;
         private System.Windows.Forms.ToolStripMenuItem tsResetZone;
         private System.Windows.Forms.ToolStripMenuItem tsStartAOI;
+        private Emgu.CV.UI.ImageBox ibxColorMapping;
         private Emgu.CV.UI.ImageBox imageBox;
     }
 }
