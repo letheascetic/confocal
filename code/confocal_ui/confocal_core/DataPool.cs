@@ -49,6 +49,7 @@ namespace confocal_core
                         {
                             channelSample[j] = (short)-channelSample[j];
                         }
+                        // channelSample[j] = (short)(channelSample[j] >> 8);
                         //if (channelSample[j] <= noiseLevel)
                         //{
                         //    channelSample[j] = 0;
@@ -157,7 +158,7 @@ namespace confocal_core
         {
             lock (m_locker)
             {
-                OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1, 0);
+                OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1.0/128, 0);
                 CvInvoke.ApplyColorMap(GrayMat[index], BGRMat[index], Emgu.CV.CvEnum.ColorMapType.Autumn);
             }
         }

@@ -1,4 +1,5 @@
 ﻿using log4net;
+using Microsoft.Win32.SafeHandles;
 using NationalInstruments;
 using System;
 using System.Collections.Generic;

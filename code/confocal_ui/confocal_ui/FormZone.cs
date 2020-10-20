@@ -41,8 +41,8 @@ namespace confocal_ui
             m_bitmap = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
 
             scanPixelsDict = new Dictionary<int, string>();
-            scanPixelsDict.Add(64, "64x64");
-            scanPixelsDict.Add(128, "128x128");
+            //scanPixelsDict.Add(64, "64x64");
+            //scanPixelsDict.Add(128, "128x128");
             scanPixelsDict.Add(256, "256x256");
             scanPixelsDict.Add(512, "512x512");
             scanPixelsDict.Add(1024, "1024x1024");

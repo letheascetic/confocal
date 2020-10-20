@@ -59,8 +59,8 @@ namespace confocal_ui
         private void InitVariables()
         {
             scanPixelsDict = new Dictionary<int, string>();
-            scanPixelsDict.Add(64, "64x64");
-            scanPixelsDict.Add(128, "128x128");
+            //scanPixelsDict.Add(64, "64x64");
+            //scanPixelsDict.Add(128, "128x128");
             scanPixelsDict.Add(256, "256x256");
             scanPixelsDict.Add(512, "512x512");
             scanPixelsDict.Add(1024, "1024x1024");
@@ -134,7 +134,7 @@ namespace confocal_ui
             rbtnTwo.CheckedChanged += rbtnTwo_CheckedChanged;
 
             // 停留时间
-            cbxDwellTime.DataSource = new string[] { "0.5", "1.0", "2.0", "4.0", "6.0", "8.0", "10.0", "12.0", "14.0", "16.0", "18.0", "20.0" };
+            cbxDwellTime.DataSource = new string[] { "2.0", "4.0", "6.0", "8.0", "10.0", "12.0", "14.0", "16.0", "18.0", "20.0" };
             cbxDwellTime.SelectedIndex = cbxDwellTime.FindString(m_config.GetScanDwellTime().ToString("F1"));
             cbxDwellTime.SelectedIndexChanged += cbxDwellTime_SelectedIndexChanged;
 
