@@ -237,10 +237,7 @@ namespace confocal_ui
             {
                 return;
             }
-            if (!m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].IsEmpty)
-            {
-                pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].Bitmap;
-            }
+            pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].Clone().Bitmap;
             UpdateRTControlers();
         }
 
@@ -253,10 +250,7 @@ namespace confocal_ui
 
             m_activatedChannelDict.TryGetValue(cbxSelect.SelectedItem.ToString(), out CHAN_ID id);
             m_selectedChannelIndex = (int)id;
-            if (!m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].IsEmpty)
-            {
-                pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].Bitmap;
-            }
+            pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].Clone().Bitmap;
         }
 
         private void m_cursorTimer_Tick(object sender, EventArgs e)

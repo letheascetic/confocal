@@ -139,13 +139,13 @@ namespace confocal_core
             m_originMat = new Mat[channelNum];
             m_grayMat = new Mat[channelNum];
             m_bgrMat = new Mat[channelNum];
-            // m_gray3Mat = new Mat[channelNum];
+            m_gray3Mat = new Mat[channelNum];
 
             for (int i = 0; i < channelNum; i++)
             {
                 OriginMat[i] = new Mat(scanXPoints, scanYPoints, DepthType.Cv16S, 1);
                 GrayMat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 1);
-                // Gray3Mat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 3);
+                Gray3Mat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 3);
                 BGRMat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 3);
             }
         }
@@ -157,9 +157,9 @@ namespace confocal_core
                 lock (m_locker)
                 {
                     OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1.0 / 128, 0);
-                    // CvInvoke.CvtColor(GrayMat[index], Gray3Mat[index], ColorConversion.Gray2Bgr);
-                    // CvInvoke.LUT(Gray3Mat[index], mapping, BGRMat[index]);
-                    CvInvoke.ApplyColorMap(GrayMat[index], BGRMat[index], Emgu.CV.CvEnum.ColorMapType.Autumn);
+                    CvInvoke.CvtColor(GrayMat[index], Gray3Mat[index], ColorConversion.Gray2Bgr);
+                    CvInvoke.LUT(Gray3Mat[index], mapping, BGRMat[index]);
+                    // CvInvoke.ApplyColorMap(GrayMat[index], BGRMat[index], Emgu.CV.CvEnum.ColorMapType.Autumn);
                 }
             }
             catch (Exception e)

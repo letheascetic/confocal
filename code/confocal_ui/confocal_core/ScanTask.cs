@@ -266,7 +266,7 @@ namespace confocal_core
         private void PmtReceiveSamples(object sender, short[][] samples)
         {
             PmtSampleData sampleData = new PmtSampleData(samples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
-            // m_scanData.EnqueuePmtSample(sampleData);
+            m_scanData.EnqueuePmtSample(sampleData);
 
             //if (m_config.Debugging)
             //{
@@ -606,8 +606,8 @@ namespace confocal_core
                     {
                         if (channelSwitch[i])
                         {
-                            // Mat mapping = m_params.ColorMappingMat[i];
-                            // m_scanData.ScanImage.UpdateDisplayImage(i, mapping);
+                            Mat mapping = m_params.ColorMappingMat[i];
+                            m_scanData.ScanImage.UpdateDisplayImage(i, mapping);
                         }
                     }
 
