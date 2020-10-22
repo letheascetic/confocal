@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using Emgu.CV;
+using log4net;
 using Microsoft.Win32.SafeHandles;
 using NationalInstruments;
 using System;
@@ -199,6 +200,7 @@ namespace confocal_core
 
             m_imageDataThread = new Thread(UpdateDisplayImageHandler);
             m_imageDataThread.Start();
+
             //m_imageDisplayThread = new Thread(UpdateDisplayImageHandler);
             //m_imageDisplayThread.Start();
             m_scanInfo.StartTime = DateTime.Now;
@@ -264,7 +266,7 @@ namespace confocal_core
         private void PmtReceiveSamples(object sender, short[][] samples)
         {
             PmtSampleData sampleData = new PmtSampleData(samples, m_scanInfo.CurrentFrame, m_scanInfo.CurrentLine);
-            m_scanData.EnqueuePmtSample(sampleData);
+            // m_scanData.EnqueuePmtSample(sampleData);
 
             //if (m_config.Debugging)
             //{
@@ -582,9 +584,7 @@ namespace confocal_core
         {
             int activatedChannelNum = m_config.GetChannelNum();
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
-            
-            // Rectangle lockBitsZoom = new Rectangle(0, 0, m_config.GetScanXPoints(), m_config.GetScanYPoints());
-            
+                        
             double timePerFrame = 1.0f / m_params.Fps;
             double updateNum = timePerFrame / 0.2;
             int updateLines = (int)Math.Ceiling(scanRows / updateNum);
@@ -606,9 +606,8 @@ namespace confocal_core
                     {
                         if (channelSwitch[i])
                         {
-                            // byte[,] mapping = m_params.ColorMappingArr[i];
-                            //m_scanData.ScanImage.UpdateDisplayImage(i, mapping, lockBitsZoom);
-                            m_scanData.ScanImage.UpdateDisplayImage(i);
+                            // Mat mapping = m_params.ColorMappingMat[i];
+                            // m_scanData.ScanImage.UpdateDisplayImage(i, mapping);
                         }
                     }
 

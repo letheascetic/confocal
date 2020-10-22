@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using confocal_base;
+using Emgu.CV;
+using log4net;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,20 +18,23 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         
-        public static void CreateColorMapping(Color color, ref byte[,] colorMapping)
+        public static void CreateColorMapping(Color color, ref Mat colorMappingMat)
         {
             float rCoff = color.R / 256.0f;
             float gCoff = color.G / 256.0f;
             float bCoff = color.B / 256.0f;
 
+            byte[] colorMapping = new byte[256 * 3];
             byte value;
             for (int i = 0; i <= byte.MaxValue; i++)
             {
                 value = (byte)i;
-                colorMapping[i, 2] = (byte)(rCoff * value);
-                colorMapping[i, 1] = (byte)(gCoff * value);
-                colorMapping[i, 0] = (byte)(bCoff * value);
+                colorMapping[i * 3 + 2] = (byte)(rCoff * value);
+                colorMapping[i * 3 + 1] = (byte)(gCoff * value);
+                colorMapping[i * 3 + 0] = (byte)(bCoff * value);
             }
+            colorMappingMat = new Mat(1, 256, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
+            colorMappingMat.SetTo<byte>(colorMapping);
         }
 
         public static void Gray16ToGray8(ushort[] source, out byte[] destnation)

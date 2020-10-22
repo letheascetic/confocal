@@ -103,6 +103,7 @@ namespace confocal_core
 
         private Mat[] m_originMat;      // 原始图像数据
         private Mat[] m_grayMat;        // 灰度图像数据
+        private Mat[] m_gray3Mat;       // 
         private Mat[] m_bgrMat;         // 伪彩色图像数据
         
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -118,6 +119,8 @@ namespace confocal_core
         /// 灰度图像
         /// </summary>
         public Mat[] GrayMat { get { return m_grayMat; } set { m_grayMat = value; } }
+
+        public Mat[] Gray3Mat { get { return m_gray3Mat; } set { m_gray3Mat = value; } }
         /// <summary>
         /// 原始图像
         /// </summary>
@@ -136,30 +139,32 @@ namespace confocal_core
             m_originMat = new Mat[channelNum];
             m_grayMat = new Mat[channelNum];
             m_bgrMat = new Mat[channelNum];
+            // m_gray3Mat = new Mat[channelNum];
 
             for (int i = 0; i < channelNum; i++)
             {
                 OriginMat[i] = new Mat(scanXPoints, scanYPoints, DepthType.Cv16S, 1);
                 GrayMat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 1);
+                // Gray3Mat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 3);
                 BGRMat[i] = new Mat(scanYPoints, scanXPoints, DepthType.Cv8U, 3);
             }
         }
 
-        //public Bitmap GetDisplayImage(int index, ref Bitmap destnation)
-        //{
-        //    lock (m_locker)
-        //    {
-        //        destnation = (Bitmap)m_displayImages[index].Clone();
-        //        return destnation;
-        //    }
-        //}
-
-        public void UpdateDisplayImage(int index)
+        public void UpdateDisplayImage(int index, Mat mapping)
         {
-            lock (m_locker)
+            try
             {
-                OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1.0/128, 0);
-                CvInvoke.ApplyColorMap(GrayMat[index], BGRMat[index], Emgu.CV.CvEnum.ColorMapType.Autumn);
+                lock (m_locker)
+                {
+                    OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1.0 / 128, 0);
+                    // CvInvoke.CvtColor(GrayMat[index], Gray3Mat[index], ColorConversion.Gray2Bgr);
+                    // CvInvoke.LUT(Gray3Mat[index], mapping, BGRMat[index]);
+                    CvInvoke.ApplyColorMap(GrayMat[index], BGRMat[index], Emgu.CV.CvEnum.ColorMapType.Autumn);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Info(string.Format("[{0}].", e));
             }
         }
 

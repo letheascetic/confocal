@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using Emgu.CV.CvEnum;
+using log4net;
 using NationalInstruments.DAQmx;
 using System;
 using System.Collections.Generic;
@@ -113,8 +114,8 @@ namespace confocal_core
     public class PropChannel
     {
         private CHAN_ID id;
-        private Color colorReference;       // 各通道显示的颜色基准
-        private short backgroundNoiseLevel;   // 背景噪声水平
+        private Color colorReference;    // 各通道显示的颜色基准
+        private short backgroundNoiseLevel;     // 背景噪声水平
 
         public CHAN_ID Id { get { return id; } set { id = value; } }
         public Color ColorReference { get { return colorReference; } set { colorReference = value; } }

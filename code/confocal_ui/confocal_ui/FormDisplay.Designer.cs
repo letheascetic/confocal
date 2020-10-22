@@ -48,30 +48,29 @@
             this.toolStripTop = new System.Windows.Forms.ToolStrip();
             this.cbxSelect = new System.Windows.Forms.ToolStripComboBox();
             this.ts1 = new System.Windows.Forms.ToolStripSeparator();
-            this.cbxColor = new System.Windows.Forms.ToolStripComboBox();
             this.btnColor = new System.Windows.Forms.ToolStripButton();
             this.ts3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnOpen = new System.Windows.Forms.ToolStripButton();
             this.ts2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripRight = new System.Windows.Forms.ToolStrip();
             this.btnDisplayCenter = new System.Windows.Forms.ToolStripButton();
             this.btnDisplayZoom = new System.Windows.Forms.ToolStripButton();
             this.pnlImage = new System.Windows.Forms.Panel();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.ibxColorMapping = new Emgu.CV.UI.ImageBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsResetZone = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSelectZone = new System.Windows.Forms.ToolStripMenuItem();
             this.tsStartAOI = new System.Windows.Forms.ToolStripMenuItem();
             this.m_cursorTimer = new System.Windows.Forms.Timer(this.components);
-            this.ibxColorMapping = new Emgu.CV.UI.ImageBox();
-            this.btnOpen = new System.Windows.Forms.ToolStripButton();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.statusStrip.SuspendLayout();
             this.toolStripTop.SuspendLayout();
             this.toolStripRight.SuspendLayout();
             this.pnlImage.SuspendLayout();
-            this.contextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -188,7 +187,6 @@
             this.toolStripTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbxSelect,
             this.ts1,
-            this.cbxColor,
             this.btnColor,
             this.ts3,
             this.btnOpen,
@@ -215,19 +213,6 @@
             this.ts1.Name = "ts1";
             this.ts1.Size = new System.Drawing.Size(6, 27);
             // 
-            // cbxColor
-            // 
-            this.cbxColor.DropDownHeight = 80;
-            this.cbxColor.DropDownWidth = 75;
-            this.cbxColor.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.cbxColor.IntegralHeight = false;
-            this.cbxColor.Items.AddRange(new object[] {
-            "灰度色",
-            "自定义"});
-            this.cbxColor.Name = "cbxColor";
-            this.cbxColor.Size = new System.Drawing.Size(75, 27);
-            this.cbxColor.ToolTipText = "颜色选择";
-            // 
             // btnColor
             // 
             this.btnColor.BackColor = System.Drawing.Color.Gray;
@@ -242,6 +227,21 @@
             this.ts3.Name = "ts3";
             this.ts3.Size = new System.Drawing.Size(6, 27);
             // 
+            // btnOpen
+            // 
+            this.btnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
+            this.btnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(24, 24);
+            this.btnOpen.Text = "保存";
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            // 
+            // ts2
+            // 
+            this.ts2.Name = "ts2";
+            this.ts2.Size = new System.Drawing.Size(6, 27);
+            // 
             // btnSave
             // 
             this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -251,11 +251,6 @@
             this.btnSave.Size = new System.Drawing.Size(24, 24);
             this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // ts2
-            // 
-            this.ts2.Name = "ts2";
-            this.ts2.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripRight
             // 
@@ -304,6 +299,24 @@
             this.pnlImage.Size = new System.Drawing.Size(563, 508);
             this.pnlImage.TabIndex = 7;
             // 
+            // pictureBox
+            // 
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(563, 485);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            // 
+            // ibxColorMapping
+            // 
+            this.ibxColorMapping.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ibxColorMapping.Location = new System.Drawing.Point(0, 485);
+            this.ibxColorMapping.Name = "ibxColorMapping";
+            this.ibxColorMapping.Size = new System.Drawing.Size(563, 23);
+            this.ibxColorMapping.TabIndex = 2;
+            this.ibxColorMapping.TabStop = false;
+            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -338,34 +351,6 @@
             this.m_cursorTimer.Interval = 500;
             this.m_cursorTimer.Tick += new System.EventHandler(this.m_cursorTimer_Tick);
             // 
-            // ibxColorMapping
-            // 
-            this.ibxColorMapping.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ibxColorMapping.Location = new System.Drawing.Point(0, 485);
-            this.ibxColorMapping.Name = "ibxColorMapping";
-            this.ibxColorMapping.Size = new System.Drawing.Size(563, 23);
-            this.ibxColorMapping.TabIndex = 2;
-            this.ibxColorMapping.TabStop = false;
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
-            this.btnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(24, 24);
-            this.btnOpen.Text = "保存";
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(563, 485);
-            this.pictureBox.TabIndex = 3;
-            this.pictureBox.TabStop = false;
-            // 
             // FormDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -390,9 +375,9 @@
             this.toolStripRight.ResumeLayout(false);
             this.toolStripRight.PerformLayout();
             this.pnlImage.ResumeLayout(false);
-            this.contextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,7 +407,6 @@
         private System.Windows.Forms.ToolStripComboBox cbxSelect;
         private System.Windows.Forms.ToolStripSeparator ts1;
         private System.Windows.Forms.ToolStripSeparator ts3;
-        private System.Windows.Forms.ToolStripComboBox cbxColor;
         private System.Windows.Forms.ToolStripButton btnColor;
         private System.Windows.Forms.ToolStripSeparator sp6;
         private System.Windows.Forms.ToolStripStatusLabel lbCurrent;

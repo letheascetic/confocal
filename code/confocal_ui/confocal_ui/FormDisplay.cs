@@ -25,7 +25,6 @@ namespace confocal_ui
         private ScanTask m_scanTask;
         private Params m_params;
         private Config m_config;
-        private Bitmap[] m_bitmapArr;
         private Dictionary<string, CHAN_ID> m_activatedChannelDict;
         private int m_selectedChannelIndex;         // 当前显示图像对应激光通道的索引
         private int m_xScanPoints;                  // X扫描像素点
@@ -87,12 +86,6 @@ namespace confocal_ui
             m_params = Params.GetParams();
 
             int channelNum = m_config.GetChannelNum();
-            m_bitmapArr = new Bitmap[channelNum];
-
-            for (int i = 0; i < channelNum; i++)
-            {
-                m_bitmapArr[i] = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
-            }
 
             m_activatedChannelDict = new Dictionary<string, CHAN_ID>();
             m_selectedChannelIndex = -1;
@@ -102,15 +95,15 @@ namespace confocal_ui
 
         private void InitControlers()
         {
-            // imageBox.Image = m_bitmapArr[0];
+            
         }
 
         private void UpdateVariables()
         {
-            for (int i = 0; i < m_config.GetChannelNum(); i++)
-            {
-                m_bitmapArr[i] = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
-            }
+            //for (int i = 0; i < m_config.GetChannelNum(); i++)
+            //{
+            //    m_bitmapArr[i] = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
+            //}
 
             m_activatedChannelDict.Clear();
             if (m_config.GetLaserSwitch(CHAN_ID.WAVELENGTH_405_NM) == LASER_CHAN_SWITCH.ON)
@@ -244,9 +237,10 @@ namespace confocal_ui
             {
                 return;
             }
-
-            pictureBox.Image = m_scanTask.GetScanData().ScanImage.GrayMat[m_selectedChannelIndex].Bitmap;
-            // pbxImage.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(m_selectedChannelIndex, ref m_bitmapArr[m_selectedChannelIndex]);
+            if (!m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].IsEmpty)
+            {
+                pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].Bitmap;
+            }
             UpdateRTControlers();
         }
 
@@ -259,7 +253,10 @@ namespace confocal_ui
 
             m_activatedChannelDict.TryGetValue(cbxSelect.SelectedItem.ToString(), out CHAN_ID id);
             m_selectedChannelIndex = (int)id;
-            pictureBox.Image = m_scanTask.GetScanData().ScanImage.GrayMat[m_selectedChannelIndex].Bitmap;
+            if (!m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].IsEmpty)
+            {
+                pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex].Bitmap;
+            }
         }
 
         private void m_cursorTimer_Tick(object sender, EventArgs e)

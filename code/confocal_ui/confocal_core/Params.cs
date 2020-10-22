@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,7 +26,7 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Config m_config;
         private SysConfig m_sysConfig;
-        private byte[][,] m_colorMappingArr;
+        private Mat[] m_colorMappingMat;
         private int[] m_aiChannelIndex;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -144,8 +146,8 @@ namespace confocal_core
         /// <summary>
         /// 伪彩色转换映射数组
         /// </summary>
-        public byte[][,] ColorMappingArr
-        { get { return m_colorMappingArr; } set { m_colorMappingArr = value; } }
+        public Mat[] ColorMappingMat
+        { get { return m_colorMappingMat; } set { m_colorMappingMat = value; } }
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         #region apis
@@ -194,7 +196,7 @@ namespace confocal_core
             {
                 CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
                 Color colorReference = m_config.GetChannelColorReference(id);
-                CImage.CreateColorMapping(colorReference, ref m_colorMappingArr[i]);
+                CImage.CreateColorMapping(colorReference, ref m_colorMappingMat[i]);
             }
         }
 
@@ -579,13 +581,14 @@ namespace confocal_core
             m_sysConfig = SysConfig.GetSysConfig();
             m_config = Config.GetConfig();
             int channelNum = m_config.GetChannelNum();
-            m_colorMappingArr = new byte[channelNum][,];
+            m_colorMappingMat = new Mat[channelNum];
             m_aiChannelIndex = new int[channelNum];
             for (int i = 0; i < channelNum; i++)
             {
-                m_colorMappingArr[i] = new byte[256, 3];
+                m_colorMappingMat[i] = new Mat(1, 256, DepthType.Cv8U, 3);
                 m_aiChannelIndex[i] = -1;
             }
+            // GenerateColorMapping();
         }
 
         #endregion
