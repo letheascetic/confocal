@@ -31,18 +31,21 @@ namespace confocal_ui
         {
             InitializeComponent();
         }
+        public void SelectedChannelChanged(CHAN_ID id)
+        {
+            m_selectedChannelIndex = (int)id;
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+        }
 
         private void InitVariables()
         {
+            m_selectedChannelIndex = -1;
+
             m_config = Config.GetConfig();
             m_params = Params.GetParams();
             m_scheduler = Scheduler.CreateInstance();
 
-            m_bitmap = new Bitmap(m_config.GetScanXPoints(), m_config.GetScanYPoints(), PixelFormat.Format24bppRgb);
-
             scanPixelsDict = new Dictionary<int, string>();
-            //scanPixelsDict.Add(64, "64x64");
-            //scanPixelsDict.Add(128, "128x128");
             scanPixelsDict.Add(256, "256x256");
             scanPixelsDict.Add(512, "512x512");
             scanPixelsDict.Add(1024, "1024x1024");
@@ -58,11 +61,9 @@ namespace confocal_ui
             cbxScanPixels.SelectedIndex = cbxScanPixels.FindString(scanPixelsDict[m_config.GetScanXPoints()]);
             // cbxScanPixels.SelectedIndexChanged += cbxScanPixels_SelectedIndexChanged;
 
-            pbxImage.Image = m_bitmap;
-
-            pbxZone.Parent = pbxImage;
-            pbxZone.Size = pbxImage.Size;
-            pbxZone.Location = pbxImage.Location;
+            pbxZone.Parent = imageBox;
+            pbxZone.Size = imageBox.Size;
+            pbxZone.Location = imageBox.Location;
             pbxZone.Dock = DockStyle.Fill;
         }
 
@@ -74,12 +75,17 @@ namespace confocal_ui
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            // pbxImage.Image = m_scanTask.GetScanData().ScanImage.GetDisplayImage(m_selectedChannelIndex, ref m_bitmap);
+            if (m_selectedChannelIndex < 0)
+            {
+                return;
+            }
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
         }
 
         private void m_cursorTimer_Tick(object sender, EventArgs e)
         {
 
         }
+
     }
 }

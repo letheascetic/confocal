@@ -57,7 +57,7 @@
             this.btnDisplayCenter = new System.Windows.Forms.ToolStripButton();
             this.btnDisplayZoom = new System.Windows.Forms.ToolStripButton();
             this.pnlImage = new System.Windows.Forms.Panel();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new Emgu.CV.UI.ImageBox();
             this.ibxColorMapping = new Emgu.CV.UI.ImageBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsResetZone = new System.Windows.Forms.ToolStripMenuItem();
@@ -221,6 +221,8 @@
             this.btnColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(23, 24);
+            this.btnColor.ToolTipText = "选择伪彩色";
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // ts3
             // 
@@ -302,10 +304,12 @@
             // pictureBox
             // 
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.RightClickMenu;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(563, 485);
-            this.pictureBox.TabIndex = 3;
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
             // 
             // ibxColorMapping
@@ -418,6 +422,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsStartAOI;
         private Emgu.CV.UI.ImageBox ibxColorMapping;
         private System.Windows.Forms.ToolStripButton btnOpen;
-        private System.Windows.Forms.PictureBox pictureBox;
+        private Emgu.CV.UI.ImageBox pictureBox;
     }
 }

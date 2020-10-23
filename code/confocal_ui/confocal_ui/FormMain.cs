@@ -50,6 +50,7 @@ namespace confocal_ui
             m_scheduler.ScanTaskReleased += new ScanTaskEventHandler(ScanTaskReleasedHandler);
             m_scheduler.ActivatedChannelChanged += new ScanTaskEventHandler(ActivatedChannelChangedHandler);
             m_scheduler.ScanTaskConfigured += new ScanTaskEventHandler(ConfigScanTaskHandler);
+            m_scheduler.SelectedChannelChanged += new ChannelEventHandler(SelectedChannelChangedHandler); 
         }
 
         private void ConfigDevice()
@@ -127,6 +128,7 @@ namespace confocal_ui
             }
             formImage.ScanTaskStopped();
             m_pFormScan.ScanTaskStopped();
+            
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -151,6 +153,12 @@ namespace confocal_ui
         {
             m_pFormShowBox.ScanTaskConfigured();
             m_pFormScan.ScanTaskConfigured();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private API_RETURN_CODE SelectedChannelChangedHandler(ScanTask scanTask, CHAN_ID id, object paras)
+        {
+            m_pFormROI.SelectedChannelChanged(id);
             return API_RETURN_CODE.API_SUCCESS;
         }
 

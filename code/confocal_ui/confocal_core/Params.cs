@@ -194,10 +194,14 @@ namespace confocal_core
             int channelNum = m_config.GetChannelNum();
             for (int i = 0; i < channelNum; i++)
             {
-                CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
-                Color colorReference = m_config.GetChannelColorReference(id);
-                CImage.CreateColorMapping(colorReference, ref m_colorMappingMat[i]);
+                GenerateColorMapping((CHAN_ID)i);
             }
+        }
+
+        public void GenerateColorMapping(CHAN_ID id)
+        {
+            Color colorReference = m_config.GetChannelColorReference(id);
+            CImage.CreateColorMapping(colorReference, ref m_colorMappingMat[(int)id]);
         }
 
         public void GenerateAiChannelIndex()
@@ -588,7 +592,6 @@ namespace confocal_core
                 m_colorMappingMat[i] = new Mat(1, 256, DepthType.Cv8U, 3);
                 m_aiChannelIndex[i] = -1;
             }
-            // GenerateColorMapping();
         }
 
         #endregion

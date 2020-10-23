@@ -395,20 +395,12 @@ namespace confocal_core
                     m_scanData.SetImageLine(sample.Line);
                 }
 
-                //PmtSampleData convertData = new PmtSampleData(data, sample.Frame, sample.Line);
-                //m_scanData.EnqueuePmtConvertData(convertData);
-
                 // Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
                 if (sample.Line + 1 == scanRows)
                 {
                     Logger.Info(string.Format("convert info: frame[{0}], line[{1}].", sample.Frame, sample.Line));
                 }
 
-                //data = new short[activatedChannelNum][];
-                //for (i = 0; i < activatedChannelNum; i++)
-                //{
-                //    data[i] = channelSwitch[i] ? new short[xSampleCountPerLine] : null;
-                //}
             }
             Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
         }
@@ -463,119 +455,16 @@ namespace confocal_core
                     m_scanData.SetImageFrame(sample.Frame);
                     m_scanData.SetImageLine(sample.Line);
                 }
-                //ApdSampleData convertData = new ApdSampleData(data, sample.Frame, sample.Line, sample.ChannelIndex);
-                //m_scanData.EnqueueApdConvertData(convertData);
 
                 if (sample.Line + 1 == scanRows)
                 {
                     Logger.Info(string.Format("channel[{0}] convert info: frame[{1}], line[{2}].", sample.ChannelIndex, sample.Frame, sample.Line));
                 }
 
-                // data = new int[xSampleCountPerLine];
             }
 
             Logger.Info(string.Format("scan task[{0}|{1}] stop, finish convert samples.", m_taskId, m_taskName));
         }
-
-        //private void UpdateImageDataHandler()
-        //{
-        //    if (m_sysConfig.GetAcqDevice() == ACQ_DEVICE.PMT)
-        //    {
-        //        UpdatePmtImageDataHandler();
-        //    }
-        //    else
-        //    {
-        //        UpdateApdImageDataHandler();
-        //    }
-        //}
-        
-        /// <summary>
-        /// 从ConvertData队列中取出行数据，做伪彩色处理，生成图像的原始数据和BGR数据
-        /// </summary>
-        //private void UpdatePmtImageDataHandler()
-        //{
-        //    int activatedChannelNum = m_config.GetChannelNum();
-        //    int xSampleCountPerLine = m_config.GetScanXPoints();
-        //    int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
-
-        //    int i;
-        //    bool[] channelSwitch = new bool[activatedChannelNum];
-        //    for (i = 0; i < activatedChannelNum; i++)
-        //    {
-        //        channelSwitch[i] = m_config.GetLaserSwitch((CHAN_ID)i) == LASER_CHAN_SWITCH.ON ? true : false;
-        //    }
-
-        //    while (m_scanning)
-        //    {
-        //        if (!m_scanData.DequeuePmtConvertData(out PmtSampleData convertData))
-        //        {
-        //            continue;
-        //        }
-
-        //        for (i = 0; i < activatedChannelNum; i++)
-        //        {
-        //            if (channelSwitch[i])
-        //            {
-        //                m_scanData.ScanImage.OriginMat[i].Row(convertData.Line).SetTo<short>(convertData.NSamples[i]);
-        //            }
-        //        }
-
-        //        if (m_scanData.GetImageLine() < convertData.Line || m_scanData.GetImageFrame() < convertData.Frame)
-        //        {
-        //            m_scanData.SetImageFrame(convertData.Frame);
-        //            m_scanData.SetImageLine(convertData.Line);
-        //        }
-
-        //        // Logger.Info(string.Format("update image data: frame[{0}], line[{1}].", convertData.Frame, convertData.Line));
-
-        //        if (convertData.Line + 1 == scanRows)
-        //        {
-        //            Logger.Info(string.Format("update image data: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
-        //        }
-        //    }
-        //    Logger.Info(string.Format("scan task[{0}|{1}] stop, finish update image data.", m_taskId, m_taskName));
-        //}
-
-        //private void UpdateApdImageDataHandler()
-        //{
-        //    int xSampleCountPerLine = m_config.GetScanXPoints();
-        //    int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
-
-        //    // int index;
-
-        //    while (m_scanning)
-        //    {
-        //        if (!m_scanData.DequeueApdConvertData(out ApdSampleData convertData))
-        //        {
-        //            continue;
-        //        }
-
-        //        short[] data = new short[xSampleCountPerLine];
-        //        Array.Copy(convertData.NSamples, data, xSampleCountPerLine);
-        //        m_scanData.ScanImage.OriginMat[convertData.ChannelIndex].Row(convertData.Line).SetTo<short>(data);
-
-        //        // byte[,] mapping = m_params.ColorMappingArr[convertData.ChannelIndex];
-
-        //        // index = xSampleCountPerLine * convertData.Line;
-
-        //        // Array.Copy(convertData.NSamples, 0, m_scanData.ScanImage.Data[convertData.ChannelIndex], index, xSampleCountPerLine);
-
-        //        //index = index * 3;
-        //        //CImage.IntToBGR24(convertData.NSamples, ref bgrData, index, mapping);
-
-        //        if (m_scanData.GetImageLine() < convertData.Line || m_scanData.GetImageFrame() < convertData.Frame)
-        //        {
-        //            m_scanData.SetImageFrame(convertData.Frame);
-        //            m_scanData.SetImageLine(convertData.Line);
-        //        }
-
-        //        if (convertData.Line + 1 == scanRows)
-        //        {
-        //            Logger.Info(string.Format("channel[{0}] update image data: frame[{1}], line[{2}].", convertData.ChannelIndex, m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
-        //        }
-        //    }
-        //    Logger.Info(string.Format("scan task[{0}|{1}] stop, finish update image data.", m_taskId, m_taskName));
-        //}
 
         /// <summary>
         /// 更新bitmap

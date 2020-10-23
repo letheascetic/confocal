@@ -1,15 +1,19 @@
-﻿using log4net;
+﻿using Emgu.CV;
+using log4net;
 using NationalInstruments;
 using NationalInstruments.DAQmx;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace confocal_core
 {
     public delegate API_RETURN_CODE ScanTaskEventHandler(ScanTask scanTask, Object paras);
+    public delegate API_RETURN_CODE ChannelEventHandler(ScanTask scanTask, CHAN_ID id, Object paras);
 
     /// <summary>
     /// 调度器，单例模式
@@ -29,6 +33,8 @@ namespace confocal_core
         public event ScanTaskEventHandler ScanTaskReleased;
         public event ScanTaskEventHandler ActivatedChannelChanged;
         public event ScanTaskEventHandler ScanTaskConfigured;
+        public event ChannelEventHandler SelectedChannelChanged;
+        public event ChannelEventHandler ChannelColorReferenceChanged;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Params m_params;
         private Config m_config;
@@ -198,6 +204,38 @@ namespace confocal_core
             }
 
             Logger.Info(string.Format("config scan task."));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ChangeSelectedChannel(ScanTask scanTask, CHAN_ID id)
+        {
+            if (SelectedChannelChanged != null)
+            {
+                SelectedChannelChanged.Invoke(scanTask, id, null);
+            }
+
+            Logger.Info(string.Format("change selected channel[{0}].", id));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ChangeChannelColorReference(ScanTask scanTask, CHAN_ID id, Color color)
+        {
+            if (m_config.GetChannelColorReference(id) == color)
+            {
+                return API_RETURN_CODE.API_SUCCESS;
+            }
+
+            m_config.SetChannelColorReference(id, color);
+            m_params.GenerateColorMapping(id);
+            Mat mapping = m_params.ColorMappingMat[(int)id];
+            scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, mapping);
+
+            if (ChannelColorReferenceChanged != null)
+            {
+                ChannelColorReferenceChanged.Invoke(scanTask, id, null);
+            }
+
+            Logger.Info(string.Format("change channel[{0}] color reference[{1}].", id, color));
             return API_RETURN_CODE.API_SUCCESS;
         }
 

@@ -40,20 +40,20 @@
             this.cbxScanPixels = new System.Windows.Forms.ComboBox();
             this.lbScanPixels = new System.Windows.Forms.Label();
             this.pnlImage = new System.Windows.Forms.Panel();
-            this.pbxZone = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsResetZone = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSelectZone = new System.Windows.Forms.ToolStripMenuItem();
             this.tsStartAOI = new System.Windows.Forms.ToolStripMenuItem();
-            this.pbxImage = new System.Windows.Forms.PictureBox();
             this.m_cursorTimer = new System.Windows.Forms.Timer(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.imageBox = new Emgu.CV.UI.ImageBox();
+            this.pbxZone = new System.Windows.Forms.PictureBox();
             this.statusStrip.SuspendLayout();
             this.pnlBottom.SuspendLayout();
             this.pnlImage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -112,7 +112,7 @@
             this.pnlBottom.Controls.Add(this.lbScanPixels);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBottom.Location = new System.Drawing.Point(0, 341);
-            this.pnlBottom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBottom.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(382, 34);
             this.pnlBottom.TabIndex = 4;
@@ -124,7 +124,7 @@
             this.cbxScanPixels.FormattingEnabled = true;
             this.cbxScanPixels.ItemHeight = 12;
             this.cbxScanPixels.Location = new System.Drawing.Point(74, 8);
-            this.cbxScanPixels.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxScanPixels.Margin = new System.Windows.Forms.Padding(2);
             this.cbxScanPixels.Name = "cbxScanPixels";
             this.cbxScanPixels.Size = new System.Drawing.Size(80, 20);
             this.cbxScanPixels.TabIndex = 32;
@@ -146,23 +146,13 @@
             this.pnlImage.AutoSize = true;
             this.pnlImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlImage.Controls.Add(this.pbxZone);
-            this.pnlImage.Controls.Add(this.pbxImage);
+            this.pnlImage.Controls.Add(this.imageBox);
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlImage.Location = new System.Drawing.Point(0, 25);
-            this.pnlImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlImage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlImage.Name = "pnlImage";
             this.pnlImage.Size = new System.Drawing.Size(382, 316);
             this.pnlImage.TabIndex = 5;
-            // 
-            // pbxZone
-            // 
-            this.pbxZone.BackColor = System.Drawing.Color.Transparent;
-            this.pbxZone.ContextMenuStrip = this.contextMenuStrip;
-            this.pbxZone.Location = new System.Drawing.Point(142, 126);
-            this.pbxZone.Name = "pbxZone";
-            this.pbxZone.Size = new System.Drawing.Size(100, 76);
-            this.pbxZone.TabIndex = 11;
-            this.pbxZone.TabStop = false;
             // 
             // contextMenuStrip
             // 
@@ -193,20 +183,6 @@
             this.tsStartAOI.Size = new System.Drawing.Size(147, 22);
             this.tsStartAOI.Text = "扫描感兴趣区域";
             // 
-            // pbxImage
-            // 
-            this.pbxImage.BackColor = System.Drawing.Color.Transparent;
-            this.pbxImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbxImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbxImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxImage.Location = new System.Drawing.Point(0, 0);
-            this.pbxImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pbxImage.Name = "pbxImage";
-            this.pbxImage.Size = new System.Drawing.Size(382, 316);
-            this.pbxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxImage.TabIndex = 0;
-            this.pbxImage.TabStop = false;
-            // 
             // m_cursorTimer
             // 
             this.m_cursorTimer.Interval = 1000;
@@ -216,6 +192,25 @@
             // 
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // imageBox
+            // 
+            this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageBox.Location = new System.Drawing.Point(0, 0);
+            this.imageBox.Name = "imageBox";
+            this.imageBox.Size = new System.Drawing.Size(382, 316);
+            this.imageBox.TabIndex = 2;
+            this.imageBox.TabStop = false;
+            // 
+            // pbxZone
+            // 
+            this.pbxZone.BackColor = System.Drawing.Color.Transparent;
+            this.pbxZone.ContextMenuStrip = this.contextMenuStrip;
+            this.pbxZone.Location = new System.Drawing.Point(141, 120);
+            this.pbxZone.Name = "pbxZone";
+            this.pbxZone.Size = new System.Drawing.Size(100, 76);
+            this.pbxZone.TabIndex = 12;
+            this.pbxZone.TabStop = false;
             // 
             // FormZone
             // 
@@ -232,7 +227,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HideOnClose = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormZone";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "扫描区域";
@@ -242,9 +237,9 @@
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
             this.pnlImage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxZone)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,7 +252,6 @@
         private System.Windows.Forms.ComboBox cbxScanPixels;
         private System.Windows.Forms.Label lbScanPixels;
         private System.Windows.Forms.Panel pnlImage;
-        private System.Windows.Forms.PictureBox pbxImage;
         private System.Windows.Forms.ToolStripStatusLabel lbPixelSize;
         private System.Windows.Forms.ToolStripSeparator sp;
         private System.Windows.Forms.Timer m_cursorTimer;
@@ -265,9 +259,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsResetZone;
         private System.Windows.Forms.ToolStripMenuItem tsSelectZone;
         private System.Windows.Forms.ToolStripMenuItem tsStartAOI;
-        private System.Windows.Forms.PictureBox pbxZone;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ToolStripStatusLabel lbFieldRange;
         private System.Windows.Forms.ToolStripSeparator sp2;
+        private Emgu.CV.UI.ImageBox imageBox;
+        private System.Windows.Forms.PictureBox pbxZone;
     }
 }
