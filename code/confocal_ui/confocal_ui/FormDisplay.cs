@@ -56,8 +56,6 @@ namespace confocal_ui
         public void ScanTaskCreated()
         {
             Logger.Info(string.Format("FormImage scan task[{0}|{1}] created.", m_scanTask.TaskId, m_scanTask.TaskName));
-            UpdateVariables();
-            UpdateControlers();
             this.Activate();
         }
 
@@ -66,6 +64,8 @@ namespace confocal_ui
             Logger.Info(string.Format("FormImage scan task[{0}|{1}] started.", m_scanTask.TaskId, m_scanTask.TaskName));
             string status = m_scanTask.Scannning ? "扫描中" : "暂停";
             this.Text = string.Format(m_scanTask.TaskName, " ", status);
+            UpdateVariables();
+            UpdateControlers();
             m_timer.Start();
         }
 
@@ -80,6 +80,20 @@ namespace confocal_ui
         public void ActivatedChannelChanged()
         {
             Logger.Info(string.Format("FormImage scan task[{0}|{1}] activated channel channged.", m_scanTask.TaskId, m_scanTask.TaskName));
+        }
+
+        public void SelectedChannelChanged(CHAN_ID id)
+        {
+            m_selectedChannelIndex = (int)id;
+            pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+            Color color = m_config.GetChannelColorReference(id);
+            m_scheduler.ChangeChannelColorReference(m_scanTask, id, color);
+        }
+
+        public void ChannelColorReferenceChanged(CHAN_ID id, Color color)
+        {
+            pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+            btnColor.BackColor = color;
         }
 
         private void InitVariables()
@@ -250,13 +264,7 @@ namespace confocal_ui
             }
 
             m_activatedChannelDict.TryGetValue(cbxSelect.SelectedItem.ToString(), out CHAN_ID id);
-            m_selectedChannelIndex = (int)id;
-
             m_scheduler.ChangeSelectedChannel(m_scanTask, id);
-
-            pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
-            Color color = m_config.GetChannelColorReference(id);
-            btnColor.BackColor = color;
         }
 
         private void m_cursorTimer_Tick(object sender, EventArgs e)
@@ -290,7 +298,6 @@ namespace confocal_ui
             {
                 Color color = colorForm.Color;
                 m_scheduler.ChangeChannelColorReference(m_scanTask, (CHAN_ID)m_selectedChannelIndex, color);
-                btnColor.BackColor = color;
             }
         }
     }

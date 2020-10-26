@@ -220,11 +220,6 @@ namespace confocal_core
 
         public API_RETURN_CODE ChangeChannelColorReference(ScanTask scanTask, CHAN_ID id, Color color)
         {
-            if (m_config.GetChannelColorReference(id) == color)
-            {
-                return API_RETURN_CODE.API_SUCCESS;
-            }
-
             m_config.SetChannelColorReference(id, color);
             m_params.GenerateColorMapping(id);
             Mat mapping = m_params.ColorMappingMat[(int)id];
@@ -232,7 +227,7 @@ namespace confocal_core
 
             if (ChannelColorReferenceChanged != null)
             {
-                ChannelColorReferenceChanged.Invoke(scanTask, id, null);
+                ChannelColorReferenceChanged.Invoke(scanTask, id, color);
             }
 
             Logger.Info(string.Format("change channel[{0}] color reference[{1}].", id, color));

@@ -23,18 +23,12 @@ namespace confocal_ui
         private Config m_config;
         private Scheduler m_scheduler;
         private Dictionary<int, string> scanPixelsDict;
-        private Bitmap m_bitmap;
         private int m_selectedChannelIndex;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public FormZone()
         {
             InitializeComponent();
-        }
-        public void SelectedChannelChanged(CHAN_ID id)
-        {
-            m_selectedChannelIndex = (int)id;
-            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
         }
 
         public void ScanTaskCreated(ScanTask scanTask)
@@ -53,6 +47,18 @@ namespace confocal_ui
         {
             Logger.Info(string.Format("FormZone scan task[{0}|{1}] stopped.", m_scanTask.TaskId, m_scanTask.TaskName));
             m_timer.Stop();
+        }
+
+        public void SelectedChannelChanged(CHAN_ID id)
+        {
+            m_selectedChannelIndex = (int)id;
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+        }
+
+        public void ChannelColorReferenceChanged(CHAN_ID id, Color color)
+        {
+            m_selectedChannelIndex = (int)id;
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
         }
 
         private void InitVariables()

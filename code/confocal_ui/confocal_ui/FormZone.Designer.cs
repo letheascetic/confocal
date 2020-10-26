@@ -196,9 +196,11 @@
             // imageBox
             // 
             this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.imageBox.Location = new System.Drawing.Point(0, 0);
             this.imageBox.Name = "imageBox";
             this.imageBox.Size = new System.Drawing.Size(382, 316);
+            this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageBox.TabIndex = 2;
             this.imageBox.TabStop = false;
             // 
