@@ -20,7 +20,7 @@ namespace confocal_ui
         private static readonly ILog Logger = log4net.LogManager.GetLogger("info");
         /************************************************************************************/
         private FormScan m_pFormScan = new FormScan();
-        private FormZone m_pFormROI = new FormZone();
+        private FormZone m_pFormZone = new FormZone();
         private FormMeas m_pFormMeas = new FormMeas();
         private FormParas m_pFormShowBox = new FormParas();
         private List<FormDisplay> m_pFormImages = new List<FormDisplay>();
@@ -74,7 +74,7 @@ namespace confocal_ui
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
             // m_pFormMeas.Show(this.dockPanel, DockState.DockLeft);
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
-            m_pFormROI.Show(m_pFormScan.Pane, DockAlignment.Bottom, 0.25);
+            m_pFormZone.Show(m_pFormScan.Pane, DockAlignment.Bottom, 0.25);
         }
 
         private void UpdateControlers()
@@ -101,6 +101,7 @@ namespace confocal_ui
                 Logger.Info(string.Format("scan task[{0}|{1} alreay created.", scanTask.TaskId, scanTask.TaskName));
             }
             formImage.ScanTaskCreated();
+            m_pFormZone.ScanTaskCreated(scanTask);
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -115,6 +116,7 @@ namespace confocal_ui
             formImage.ScanTaskStrated();
             m_pFormScan.ScanTaskStarted();
             m_pFormShowBox.ScanTaskStarted();
+            m_pFormZone.ScanTaskStrated();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -128,7 +130,7 @@ namespace confocal_ui
             }
             formImage.ScanTaskStopped();
             m_pFormScan.ScanTaskStopped();
-            
+            m_pFormZone.ScanTaskStopped();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -158,7 +160,7 @@ namespace confocal_ui
 
         private API_RETURN_CODE SelectedChannelChangedHandler(ScanTask scanTask, CHAN_ID id, object paras)
         {
-            m_pFormROI.SelectedChannelChanged(id);
+            m_pFormZone.SelectedChannelChanged(id);
             return API_RETURN_CODE.API_SUCCESS;
         }
 

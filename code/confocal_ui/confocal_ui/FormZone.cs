@@ -37,6 +37,24 @@ namespace confocal_ui
             imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
         }
 
+        public void ScanTaskCreated(ScanTask scanTask)
+        {
+            m_scanTask = scanTask;
+            Logger.Info(string.Format("FormZone scan task[{0}|{1}] created.", m_scanTask.TaskId, m_scanTask.TaskName));
+        }
+
+        public void ScanTaskStrated()
+        {
+            Logger.Info(string.Format("FormZone scan task[{0}|{1}] started.", m_scanTask.TaskId, m_scanTask.TaskName));
+            m_timer.Start();
+        }
+
+        public void ScanTaskStopped()
+        {
+            Logger.Info(string.Format("FormZone scan task[{0}|{1}] stopped.", m_scanTask.TaskId, m_scanTask.TaskName));
+            m_timer.Stop();
+        }
+
         private void InitVariables()
         {
             m_selectedChannelIndex = -1;

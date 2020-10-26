@@ -252,7 +252,7 @@ namespace confocal_ui
             m_activatedChannelDict.TryGetValue(cbxSelect.SelectedItem.ToString(), out CHAN_ID id);
             m_selectedChannelIndex = (int)id;
 
-
+            m_scheduler.ChangeSelectedChannel(m_scanTask, id);
 
             pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
             Color color = m_config.GetChannelColorReference(id);
