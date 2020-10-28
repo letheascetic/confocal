@@ -51,7 +51,8 @@ namespace confocal_ui
             m_scheduler.ActivatedChannelChanged += new ScanTaskEventHandler(ActivatedChannelChangedHandler);
             m_scheduler.ScanTaskConfigured += new ScanTaskEventHandler(ConfigScanTaskHandler);
             m_scheduler.SelectedChannelChanged += new ChannelEventHandler(SelectedChannelChangedHandler);
-            m_scheduler.ChannelColorReferenceChanged += new ChannelEventHandler(SelectedColorReferenceChangedHandler);
+            m_scheduler.ChannelColorReferenceChanged += new ChannelEventHandler(ChannelColorReferenceChangedHandler);
+            m_scheduler.ChannelOffsetChanged += new ChannelEventHandler(ChannelOffsetChangedHandler);
         }
 
         private void ConfigDevice()
@@ -102,6 +103,7 @@ namespace confocal_ui
                 Logger.Info(string.Format("scan task[{0}|{1} alreay created.", scanTask.TaskId, scanTask.TaskName));
             }
             formImage.ScanTaskCreated();
+            m_pFormScan.ScanTaskCreated(scanTask);
             m_pFormZone.ScanTaskCreated(scanTask);
             return API_RETURN_CODE.API_SUCCESS;
         }
@@ -172,7 +174,7 @@ namespace confocal_ui
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        private API_RETURN_CODE SelectedColorReferenceChangedHandler(ScanTask scanTask, CHAN_ID id, object paras)
+        private API_RETURN_CODE ChannelColorReferenceChangedHandler(ScanTask scanTask, CHAN_ID id, object paras)
         {
             Color color = (Color)paras;
             FormDisplay formImage = FindFormImage(scanTask);
@@ -183,6 +185,25 @@ namespace confocal_ui
             }
             formImage.ChannelColorReferenceChanged(id, color);
             m_pFormZone.ChannelColorReferenceChanged(id, color);
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private API_RETURN_CODE ChannelOffsetChangedHandler(ScanTask scanTask, CHAN_ID id, object paras)
+        {
+            int offset = (int)paras;
+            if (scanTask != null)
+            {
+                FormDisplay formImage = FindFormImage(scanTask);
+                if (formImage == null)
+                {
+                    Logger.Info(string.Format("scan task matching form image not found."));
+                    return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
+                }
+                formImage.ChannelOffsetChanged(id, offset);
+                m_pFormZone.ChannelOffsetChanged(id, offset);
+            }
+            
+            m_pFormScan.ChannelOffsetChanged(id, offset);
             return API_RETURN_CODE.API_SUCCESS;
         }
 

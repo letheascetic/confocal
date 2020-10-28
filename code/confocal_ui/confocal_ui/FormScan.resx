@@ -127,13 +127,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lbDwellTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 141</value>
-  </data>
-  <data name="lbDwellTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>12, 176</value>
   </data>
   <data name="lbDwellTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 12</value>
+    <value>128, 15</value>
   </data>
   <data name="lbDwellTime.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -160,13 +157,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbScanPixels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 172</value>
-  </data>
-  <data name="lbScanPixels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>12, 215</value>
   </data>
   <data name="lbScanPixels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>82, 15</value>
   </data>
   <data name="lbScanPixels.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -211,16 +205,16 @@
     <value>1</value>
   </data>
   <data name="gbxParams.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 200</value>
+    <value>12, 250</value>
   </data>
   <data name="gbxParams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxParams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 37</value>
+    <value>363, 46</value>
   </data>
   <data name="gbxParams.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -244,13 +238,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbFrameTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 17</value>
-  </data>
-  <data name="lbFrameTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>163, 21</value>
   </data>
   <data name="lbFrameTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>102, 15</value>
   </data>
   <data name="lbFrameTime.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -277,13 +268,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbFps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 17</value>
-  </data>
-  <data name="lbFps.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 21</value>
   </data>
   <data name="lbFps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 12</value>
+    <value>46, 15</value>
   </data>
   <data name="lbFps.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -310,13 +298,13 @@
     <value>NoControl</value>
   </data>
   <data name="chbx405.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>9, 24</value>
   </data>
   <data name="chbx405.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="chbx405.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 16</value>
+    <value>61, 19</value>
   </data>
   <data name="chbx405.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -334,7 +322,19 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;chbx405.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
+  </data>
+  <data name="tbx405Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 118</value>
+  </data>
+  <data name="tbx405Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="tbx405Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 25</value>
+  </data>
+  <data name="tbx405Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
   <data name="&gt;&gt;tbx405Offset.Name" xml:space="preserve">
     <value>tbx405Offset</value>
@@ -348,6 +348,27 @@
   <data name="&gt;&gt;tbx405Offset.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tb405Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb405Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 116</value>
+  </data>
+  <data name="tb405Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb405Offset.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb405Offset.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb405Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb405Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
   <data name="&gt;&gt;tb405Offset.Name" xml:space="preserve">
     <value>tb405Offset</value>
   </data>
@@ -359,6 +380,24 @@
   </data>
   <data name="&gt;&gt;tb405Offset.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lb405Offset.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lb405Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lb405Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 116</value>
+  </data>
+  <data name="lb405Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 15</value>
+  </data>
+  <data name="lb405Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="lb405Offset.Text" xml:space="preserve">
+    <value>偏置</value>
   </data>
   <data name="&gt;&gt;lb405Offset.Name" xml:space="preserve">
     <value>lb405Offset</value>
@@ -372,17 +411,26 @@
   <data name="&gt;&gt;lb405Offset.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;nudBN405.Name" xml:space="preserve">
-    <value>nudBN405</value>
+  <data name="tb405Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;nudBN405.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tb405Power.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 86</value>
   </data>
-  <data name="&gt;&gt;nudBN405.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
+  <data name="tb405Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="&gt;&gt;nudBN405.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="tb405Power.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb405Power.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb405Power.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb405Power.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
   <data name="&gt;&gt;tb405Power.Name" xml:space="preserve">
     <value>tb405Power</value>
@@ -394,7 +442,28 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;tb405Power.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
+  </data>
+  <data name="tb405Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb405Gain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 55</value>
+  </data>
+  <data name="tb405Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb405Gain.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb405Gain.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb405Gain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb405Gain.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
   <data name="&gt;&gt;tb405Gain.Name" xml:space="preserve">
     <value>tb405Gain</value>
@@ -406,127 +475,16 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;tb405Gain.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;tbx405Power.Name" xml:space="preserve">
-    <value>tbx405Power</value>
-  </data>
-  <data name="&gt;&gt;tbx405Power.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbx405Power.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;tbx405Power.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lb405Power.Name" xml:space="preserve">
-    <value>lb405Power</value>
-  </data>
-  <data name="&gt;&gt;lb405Power.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb405Power.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;lb405Power.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;tbx405Gain.Name" xml:space="preserve">
-    <value>tbx405Gain</value>
-  </data>
-  <data name="&gt;&gt;tbx405Gain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbx405Gain.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;tbx405Gain.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lb405Gain.Name" xml:space="preserve">
-    <value>lb405Gain</value>
-  </data>
-  <data name="&gt;&gt;lb405Gain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb405Gain.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;lb405Gain.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lb405.Name" xml:space="preserve">
-    <value>lb405</value>
-  </data>
-  <data name="&gt;&gt;lb405.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb405.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;lb405.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="gbxChan405.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 242</value>
-  </data>
-  <data name="gbxChan405.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="gbxChan405.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="gbxChan405.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 123</value>
-  </data>
-  <data name="gbxChan405.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;gbxChan405.Name" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;gbxChan405.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxChan405.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxChan405.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="nudBN405.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 18</value>
-  </data>
-  <data name="nudBN405.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="nudBN405.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="nudBN405.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="&gt;&gt;nudBN405.Name" xml:space="preserve">
-    <value>nudBN405</value>
-  </data>
-  <data name="&gt;&gt;nudBN405.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudBN405.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;nudBN405.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tbx405Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 69</value>
+    <value>288, 86</value>
   </data>
   <data name="tbx405Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx405Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx405Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -541,7 +499,7 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;tbx405Power.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lb405Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -550,13 +508,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb405Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 71</value>
-  </data>
-  <data name="lb405Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 89</value>
   </data>
   <data name="lb405Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb405Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -574,16 +529,16 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;lb405Power.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="tbx405Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 44</value>
+    <value>288, 55</value>
   </data>
   <data name="tbx405Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx405Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx405Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -598,7 +553,7 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;tbx405Gain.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="lb405Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -607,13 +562,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb405Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 46</value>
-  </data>
-  <data name="lb405Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 58</value>
   </data>
   <data name="lb405Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb405Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -631,7 +583,7 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;lb405Gain.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lb405.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -640,13 +592,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb405.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 20</value>
-  </data>
-  <data name="lb405.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>159, 25</value>
   </data>
   <data name="lb405.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>111, 15</value>
   </data>
   <data name="lb405.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -664,7 +613,34 @@
     <value>gbxChan405</value>
   </data>
   <data name="&gt;&gt;lb405.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
+  </data>
+  <data name="gbxChan405.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 302</value>
+  </data>
+  <data name="gbxChan405.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="gbxChan405.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="gbxChan405.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 154</value>
+  </data>
+  <data name="gbxChan405.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Name" xml:space="preserve">
+    <value>gbxChan405</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxChan405.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="&gt;&gt;tbx488Offset.Name" xml:space="preserve">
     <value>tbx488Offset</value>
@@ -678,18 +654,6 @@
   <data name="&gt;&gt;tbx488Offset.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;nudBN488.Name" xml:space="preserve">
-    <value>nudBN488</value>
-  </data>
-  <data name="&gt;&gt;nudBN488.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudBN488.Parent" xml:space="preserve">
-    <value>gbx488</value>
-  </data>
-  <data name="&gt;&gt;nudBN488.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;tb488Offset.Name" xml:space="preserve">
     <value>tb488Offset</value>
   </data>
@@ -700,7 +664,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;tb488Offset.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lb488Offset.Name" xml:space="preserve">
     <value>lb488Offset</value>
@@ -712,7 +676,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;lb488Offset.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tb488Power.Name" xml:space="preserve">
     <value>tb488Power</value>
@@ -724,7 +688,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;tb488Power.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;tb488Gain.Name" xml:space="preserve">
     <value>tb488Gain</value>
@@ -736,7 +700,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;tb488Gain.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;tbx488Power.Name" xml:space="preserve">
     <value>tbx488Power</value>
@@ -748,7 +712,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;tbx488Power.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;lb488Power.Name" xml:space="preserve">
     <value>lb488Power</value>
@@ -760,7 +724,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;lb488Power.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;tbx488Gain.Name" xml:space="preserve">
     <value>tbx488Gain</value>
@@ -772,7 +736,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;tbx488Gain.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;lb488Gain.Name" xml:space="preserve">
     <value>lb488Gain</value>
@@ -784,7 +748,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;lb488Gain.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;lb488.Name" xml:space="preserve">
     <value>lb488</value>
@@ -796,7 +760,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;lb488.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;chbx488.Name" xml:space="preserve">
     <value>chbx488</value>
@@ -808,19 +772,19 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="gbx488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 369</value>
+    <value>12, 461</value>
   </data>
   <data name="gbx488.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbx488.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbx488.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 125</value>
+    <value>357, 156</value>
   </data>
   <data name="gbx488.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -837,38 +801,167 @@
   <data name="&gt;&gt;gbx488.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="nudBN488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 19</value>
+  <data name="tbx488Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 119</value>
   </data>
-  <data name="nudBN488.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="tbx488Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
-  <data name="nudBN488.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 21</value>
+  <data name="tbx488Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 25</value>
   </data>
-  <data name="nudBN488.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="tbx488Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
   </data>
-  <data name="&gt;&gt;nudBN488.Name" xml:space="preserve">
-    <value>nudBN488</value>
+  <data name="&gt;&gt;tbx488Offset.Name" xml:space="preserve">
+    <value>tbx488Offset</value>
   </data>
-  <data name="&gt;&gt;nudBN488.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbx488Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nudBN488.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbx488Offset.Parent" xml:space="preserve">
     <value>gbx488</value>
   </data>
-  <data name="&gt;&gt;nudBN488.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbx488Offset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tb488Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb488Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 118</value>
+  </data>
+  <data name="tb488Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb488Offset.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb488Offset.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb488Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb488Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;tb488Offset.Name" xml:space="preserve">
+    <value>tb488Offset</value>
+  </data>
+  <data name="&gt;&gt;tb488Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb488Offset.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tb488Offset.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lb488Offset.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lb488Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lb488Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 118</value>
+  </data>
+  <data name="lb488Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 15</value>
+  </data>
+  <data name="lb488Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="lb488Offset.Text" xml:space="preserve">
+    <value>偏置</value>
+  </data>
+  <data name="&gt;&gt;lb488Offset.Name" xml:space="preserve">
+    <value>lb488Offset</value>
+  </data>
+  <data name="&gt;&gt;lb488Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb488Offset.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;lb488Offset.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tb488Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb488Power.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 86</value>
+  </data>
+  <data name="tb488Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb488Power.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb488Power.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb488Power.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb488Power.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.Name" xml:space="preserve">
+    <value>tb488Power</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tb488Power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tb488Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb488Gain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 55</value>
+  </data>
+  <data name="tb488Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb488Gain.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb488Gain.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb488Gain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb488Gain.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Name" xml:space="preserve">
+    <value>tb488Gain</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.Parent" xml:space="preserve">
+    <value>gbx488</value>
+  </data>
+  <data name="&gt;&gt;tb488Gain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="tbx488Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 69</value>
+    <value>288, 86</value>
   </data>
   <data name="tbx488Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx488Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx488Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -883,7 +976,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;tbx488Power.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lb488Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -892,13 +985,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb488Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 71</value>
-  </data>
-  <data name="lb488Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 89</value>
   </data>
   <data name="lb488Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb488Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -916,16 +1006,16 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;lb488Power.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="tbx488Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 44</value>
+    <value>288, 55</value>
   </data>
   <data name="tbx488Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx488Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx488Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -940,7 +1030,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;tbx488Gain.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="lb488Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -949,13 +1039,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb488Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 46</value>
-  </data>
-  <data name="lb488Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 58</value>
   </data>
   <data name="lb488Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb488Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -973,7 +1060,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;lb488Gain.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lb488.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -982,13 +1069,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 19</value>
-  </data>
-  <data name="lb488.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>159, 24</value>
   </data>
   <data name="lb488.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>111, 15</value>
   </data>
   <data name="lb488.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1006,7 +1090,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;lb488.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="chbx488.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1015,13 +1099,13 @@
     <value>NoControl</value>
   </data>
   <data name="chbx488.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>9, 24</value>
   </data>
   <data name="chbx488.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="chbx488.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 16</value>
+    <value>61, 19</value>
   </data>
   <data name="chbx488.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1039,7 +1123,7 @@
     <value>gbx488</value>
   </data>
   <data name="&gt;&gt;chbx488.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;tbx561Offset.Name" xml:space="preserve">
     <value>tbx561Offset</value>
@@ -1053,18 +1137,6 @@
   <data name="&gt;&gt;tbx561Offset.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;nudBN561.Name" xml:space="preserve">
-    <value>nudBN561</value>
-  </data>
-  <data name="&gt;&gt;nudBN561.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudBN561.Parent" xml:space="preserve">
-    <value>gbx561</value>
-  </data>
-  <data name="&gt;&gt;nudBN561.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;tb561Offset.Name" xml:space="preserve">
     <value>tb561Offset</value>
   </data>
@@ -1075,7 +1147,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;tb561Offset.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tb561Power.Name" xml:space="preserve">
     <value>tb561Power</value>
@@ -1087,7 +1159,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;tb561Power.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;lb561Offset.Name" xml:space="preserve">
     <value>lb561Offset</value>
@@ -1099,7 +1171,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;lb561Offset.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;tb561Gain.Name" xml:space="preserve">
     <value>tb561Gain</value>
@@ -1111,7 +1183,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;tb561Gain.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;tbx561Power.Name" xml:space="preserve">
     <value>tbx561Power</value>
@@ -1123,7 +1195,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;tbx561Power.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;lb561Power.Name" xml:space="preserve">
     <value>lb561Power</value>
@@ -1135,7 +1207,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;lb561Power.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;tbx561Gain.Name" xml:space="preserve">
     <value>tbx561Gain</value>
@@ -1147,7 +1219,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;tbx561Gain.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;lb561Gain.Name" xml:space="preserve">
     <value>lb561Gain</value>
@@ -1159,7 +1231,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;lb561Gain.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;lb561.Name" xml:space="preserve">
     <value>lb561</value>
@@ -1171,7 +1243,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;lb561.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;chbx561.Name" xml:space="preserve">
     <value>chbx561</value>
@@ -1183,19 +1255,19 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;chbx561.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="gbx561.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 498</value>
+    <value>12, 622</value>
   </data>
   <data name="gbx561.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbx561.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbx561.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 122</value>
+    <value>357, 152</value>
   </data>
   <data name="gbx561.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1212,38 +1284,167 @@
   <data name="&gt;&gt;gbx561.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="nudBN561.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 18</value>
+  <data name="tbx561Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 118</value>
   </data>
-  <data name="nudBN561.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="tbx561Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
-  <data name="nudBN561.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 21</value>
+  <data name="tbx561Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 25</value>
   </data>
-  <data name="nudBN561.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="tbx561Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
   </data>
-  <data name="&gt;&gt;nudBN561.Name" xml:space="preserve">
-    <value>nudBN561</value>
+  <data name="&gt;&gt;tbx561Offset.Name" xml:space="preserve">
+    <value>tbx561Offset</value>
   </data>
-  <data name="&gt;&gt;nudBN561.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbx561Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nudBN561.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbx561Offset.Parent" xml:space="preserve">
     <value>gbx561</value>
   </data>
-  <data name="&gt;&gt;nudBN561.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbx561Offset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tb561Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb561Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 116</value>
+  </data>
+  <data name="tb561Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb561Offset.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb561Offset.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb561Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb561Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;tb561Offset.Name" xml:space="preserve">
+    <value>tb561Offset</value>
+  </data>
+  <data name="&gt;&gt;tb561Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb561Offset.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tb561Offset.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="tb561Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb561Power.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 86</value>
+  </data>
+  <data name="tb561Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb561Power.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb561Power.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb561Power.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb561Power.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;tb561Power.Name" xml:space="preserve">
+    <value>tb561Power</value>
+  </data>
+  <data name="&gt;&gt;tb561Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb561Power.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tb561Power.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lb561Offset.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lb561Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lb561Offset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 116</value>
+  </data>
+  <data name="lb561Offset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 15</value>
+  </data>
+  <data name="lb561Offset.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="lb561Offset.Text" xml:space="preserve">
+    <value>偏置</value>
+  </data>
+  <data name="&gt;&gt;lb561Offset.Name" xml:space="preserve">
+    <value>lb561Offset</value>
+  </data>
+  <data name="&gt;&gt;lb561Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb561Offset.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;lb561Offset.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tb561Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tb561Gain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 55</value>
+  </data>
+  <data name="tb561Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tb561Gain.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="tb561Gain.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>187, 25</value>
+  </data>
+  <data name="tb561Gain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 56</value>
+  </data>
+  <data name="tb561Gain.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.Name" xml:space="preserve">
+    <value>tb561Gain</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.Parent" xml:space="preserve">
+    <value>gbx561</value>
+  </data>
+  <data name="&gt;&gt;tb561Gain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="tbx561Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 69</value>
+    <value>288, 86</value>
   </data>
   <data name="tbx561Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx561Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx561Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1258,7 +1459,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;tbx561Power.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lb561Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1267,13 +1468,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb561Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 71</value>
-  </data>
-  <data name="lb561Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 89</value>
   </data>
   <data name="lb561Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb561Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1291,16 +1489,16 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;lb561Power.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="tbx561Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 44</value>
+    <value>288, 55</value>
   </data>
   <data name="tbx561Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx561Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx561Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1315,7 +1513,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;tbx561Gain.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="lb561Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1324,13 +1522,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb561Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 46</value>
-  </data>
-  <data name="lb561Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 58</value>
   </data>
   <data name="lb561Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb561Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1348,7 +1543,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;lb561Gain.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lb561.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1357,13 +1552,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb561.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 22</value>
-  </data>
-  <data name="lb561.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>159, 28</value>
   </data>
   <data name="lb561.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>111, 15</value>
   </data>
   <data name="lb561.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1381,7 +1573,7 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;lb561.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="chbx561.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1390,13 +1582,13 @@
     <value>NoControl</value>
   </data>
   <data name="chbx561.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>9, 24</value>
   </data>
   <data name="chbx561.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="chbx561.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 16</value>
+    <value>69, 19</value>
   </data>
   <data name="chbx561.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1414,16 +1606,175 @@
     <value>gbx561</value>
   </data>
   <data name="&gt;&gt;chbx561.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;tbx640Offset.Name" xml:space="preserve">
+    <value>tbx640Offset</value>
+  </data>
+  <data name="&gt;&gt;tbx640Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx640Offset.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tbx640Offset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tb640Offset.Name" xml:space="preserve">
+    <value>tb640Offset</value>
+  </data>
+  <data name="&gt;&gt;tb640Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb640Offset.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tb640Offset.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lb640Offset.Name" xml:space="preserve">
+    <value>lb640Offset</value>
+  </data>
+  <data name="&gt;&gt;lb640Offset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640Offset.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640Offset.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tb640Power.Name" xml:space="preserve">
+    <value>tb640Power</value>
+  </data>
+  <data name="&gt;&gt;tb640Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb640Power.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tb640Power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.Name" xml:space="preserve">
+    <value>tb640Gain</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tb640Gain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.Name" xml:space="preserve">
+    <value>tbx640Power</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tbx640Power.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.Name" xml:space="preserve">
+    <value>lb640Power</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640Power.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.Name" xml:space="preserve">
+    <value>tbx640Gain</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;tbx640Gain.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.Name" xml:space="preserve">
+    <value>lb640Gain</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640Gain.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lb640.Name" xml:space="preserve">
+    <value>lb640</value>
+  </data>
+  <data name="&gt;&gt;lb640.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb640.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;lb640.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Name" xml:space="preserve">
+    <value>chbx640</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbx640.Parent" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;chbx640.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="gbx640.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 780</value>
+  </data>
+  <data name="gbx640.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="gbx640.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="gbx640.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 154</value>
+  </data>
+  <data name="gbx640.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;gbx640.Name" xml:space="preserve">
+    <value>gbx640</value>
+  </data>
+  <data name="&gt;&gt;gbx640.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbx640.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbx640.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="tbx640Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 95</value>
+    <value>288, 119</value>
   </data>
   <data name="tbx640Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx640Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx640Offset.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -1440,47 +1791,23 @@
   <data name="&gt;&gt;tbx640Offset.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="nudBN640.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 18</value>
-  </data>
-  <data name="nudBN640.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="nudBN640.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 21</value>
-  </data>
-  <data name="nudBN640.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;nudBN640.Name" xml:space="preserve">
-    <value>nudBN640</value>
-  </data>
-  <data name="&gt;&gt;nudBN640.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudBN640.Parent" xml:space="preserve">
-    <value>gbx640</value>
-  </data>
-  <data name="&gt;&gt;nudBN640.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="tb640Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="tb640Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 94</value>
+    <value>65, 118</value>
   </data>
   <data name="tb640Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tb640Offset.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+    <value>200, 25</value>
   </data>
   <data name="tb640Offset.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>187, 25</value>
   </data>
   <data name="tb640Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+    <value>200, 56</value>
   </data>
   <data name="tb640Offset.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -1495,7 +1822,7 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;tb640Offset.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="lb640Offset.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1504,13 +1831,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb640Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 94</value>
-  </data>
-  <data name="lb640Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>7, 118</value>
   </data>
   <data name="lb640Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb640Offset.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -1528,25 +1852,25 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;lb640Offset.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="tb640Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="tb640Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 69</value>
+    <value>65, 86</value>
   </data>
   <data name="tb640Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tb640Power.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+    <value>200, 25</value>
   </data>
   <data name="tb640Power.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>187, 25</value>
   </data>
   <data name="tb640Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+    <value>200, 56</value>
   </data>
   <data name="tb640Power.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -1561,25 +1885,25 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;tb640Power.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="tb640Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="tb640Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 44</value>
+    <value>65, 55</value>
   </data>
   <data name="tb640Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tb640Gain.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+    <value>200, 25</value>
   </data>
   <data name="tb640Gain.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>187, 25</value>
   </data>
   <data name="tb640Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+    <value>200, 56</value>
   </data>
   <data name="tb640Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1594,16 +1918,16 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;tb640Gain.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="tbx640Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 69</value>
+    <value>288, 86</value>
   </data>
   <data name="tbx640Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx640Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx640Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1618,7 +1942,7 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;tbx640Power.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lb640Power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1627,13 +1951,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb640Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 71</value>
-  </data>
-  <data name="lb640Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 89</value>
   </data>
   <data name="lb640Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb640Power.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1651,16 +1972,16 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;lb640Power.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="tbx640Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 44</value>
+    <value>288, 55</value>
   </data>
   <data name="tbx640Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="tbx640Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+    <value>55, 25</value>
   </data>
   <data name="tbx640Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1675,7 +1996,7 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;tbx640Gain.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="lb640Gain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1684,13 +2005,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb640Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 46</value>
-  </data>
-  <data name="lb640Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>5, 58</value>
   </data>
   <data name="lb640Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>37, 15</value>
   </data>
   <data name="lb640Gain.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1708,7 +2026,7 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;lb640Gain.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lb640.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1717,13 +2035,10 @@
     <value>NoControl</value>
   </data>
   <data name="lb640.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 20</value>
-  </data>
-  <data name="lb640.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>159, 25</value>
   </data>
   <data name="lb640.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>111, 15</value>
   </data>
   <data name="lb640.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1741,7 +2056,7 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;lb640.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="chbx640.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1750,13 +2065,13 @@
     <value>NoControl</value>
   </data>
   <data name="chbx640.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>9, 24</value>
   </data>
   <data name="chbx640.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="chbx640.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 16</value>
+    <value>69, 19</value>
   </data>
   <data name="chbx640.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1774,34 +2089,7 @@
     <value>gbx640</value>
   </data>
   <data name="&gt;&gt;chbx640.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="gbx640.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 624</value>
-  </data>
-  <data name="gbx640.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="gbx640.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="gbx640.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 123</value>
-  </data>
-  <data name="gbx640.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;gbx640.Name" xml:space="preserve">
-    <value>gbx640</value>
-  </data>
-  <data name="&gt;&gt;gbx640.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbx640.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbx640.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;rbtnRes.Name" xml:space="preserve">
     <value>rbtnRes</value>
@@ -1828,16 +2116,16 @@
     <value>1</value>
   </data>
   <data name="gbxMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 3</value>
+    <value>184, 4</value>
   </data>
   <data name="gbxMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 54</value>
+    <value>103, 68</value>
   </data>
   <data name="gbxMode.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -1861,13 +2149,13 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnRes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 34</value>
+    <value>5, 42</value>
   </data>
   <data name="rbtnRes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="rbtnRes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 16</value>
+    <value>92, 19</value>
   </data>
   <data name="rbtnRes.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1894,13 +2182,13 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnGalv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 14</value>
+    <value>5, 18</value>
   </data>
   <data name="rbtnGalv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="rbtnGalv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 16</value>
+    <value>84, 19</value>
   </data>
   <data name="rbtnGalv.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1924,16 +2212,16 @@
     <value>Flat</value>
   </data>
   <data name="cbxScanPixels.ItemHeight" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="cbxScanPixels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 170</value>
+    <value>147, 212</value>
   </data>
   <data name="cbxScanPixels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="cbxScanPixels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 20</value>
+    <value>105, 23</value>
   </data>
   <data name="cbxScanPixels.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -1954,16 +2242,16 @@
     <value>Flat</value>
   </data>
   <data name="cbxScanStrategy.ItemHeight" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="cbxScanStrategy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 74</value>
+    <value>100, 92</value>
   </data>
   <data name="cbxScanStrategy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="cbxScanStrategy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
+    <value>79, 23</value>
   </data>
   <data name="cbxScanStrategy.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -2005,16 +2293,16 @@
     <value>1</value>
   </data>
   <data name="gbxMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 3</value>
+    <value>293, 4</value>
   </data>
   <data name="gbxMirror.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxMirror.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="gbxMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 54</value>
+    <value>83, 68</value>
   </data>
   <data name="gbxMirror.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -2038,13 +2326,13 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnThree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 34</value>
+    <value>5, 42</value>
   </data>
   <data name="rbtnThree.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="rbtnThree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 16</value>
+    <value>73, 19</value>
   </data>
   <data name="rbtnThree.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2071,13 +2359,13 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 14</value>
+    <value>5, 18</value>
   </data>
   <data name="rbtnTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="rbtnTwo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 16</value>
+    <value>73, 19</value>
   </data>
   <data name="rbtnTwo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2104,13 +2392,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbScanStrategy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 76</value>
-  </data>
-  <data name="lbScanStrategy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>12, 95</value>
   </data>
   <data name="lbScanStrategy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>82, 15</value>
   </data>
   <data name="lbScanStrategy.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -2137,13 +2422,10 @@
     <value>NoControl</value>
   </data>
   <data name="lbAcquisitionMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 107</value>
-  </data>
-  <data name="lbAcquisitionMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+    <value>12, 134</value>
   </data>
   <data name="lbAcquisitionMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>82, 15</value>
   </data>
   <data name="lbAcquisitionMode.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -2167,16 +2449,16 @@
     <value>Flat</value>
   </data>
   <data name="cbxAcquisitionMode.ItemHeight" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="cbxAcquisitionMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 105</value>
+    <value>100, 131</value>
   </data>
   <data name="cbxAcquisitionMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="cbxAcquisitionMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
+    <value>79, 23</value>
   </data>
   <data name="cbxAcquisitionMode.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -2197,16 +2479,16 @@
     <value>Flat</value>
   </data>
   <data name="cbxAcquisitionModeNum.ItemHeight" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="cbxAcquisitionModeNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 105</value>
+    <value>184, 131</value>
   </data>
   <data name="cbxAcquisitionModeNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="cbxAcquisitionModeNum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>57, 23</value>
   </data>
   <data name="cbxAcquisitionModeNum.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -2233,13 +2515,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnCapture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 10</value>
+    <value>99, 12</value>
   </data>
   <data name="btnCapture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="btnCapture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 48</value>
+    <value>80, 60</value>
   </data>
   <data name="btnCapture.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2269,13 +2551,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnScan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 10</value>
+    <value>12, 12</value>
   </data>
   <data name="btnScan.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 48</value>
+    <value>80, 60</value>
   </data>
   <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2299,16 +2581,16 @@
     <value>Flat</value>
   </data>
   <data name="cbxDwellTime.ItemHeight" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="cbxDwellTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 138</value>
+    <value>147, 172</value>
   </data>
   <data name="cbxDwellTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="cbxDwellTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 20</value>
+    <value>105, 23</value>
   </data>
   <data name="cbxDwellTime.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -2326,13 +2608,13 @@
     <value>2</value>
   </data>
   <data name="nudScanPixelOffset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 74</value>
+    <value>184, 92</value>
   </data>
   <data name="nudScanPixelOffset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="nudScanPixelOffset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 21</value>
+    <value>59, 25</value>
   </data>
   <data name="nudScanPixelOffset.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -2350,13 +2632,13 @@
     <value>1</value>
   </data>
   <data name="nudScanPixelCali.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 74</value>
+    <value>248, 92</value>
   </data>
   <data name="nudScanPixelCali.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="nudScanPixelCali.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 21</value>
+    <value>59, 25</value>
   </data>
   <data name="nudScanPixelCali.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -2373,479 +2655,11 @@
   <data name="&gt;&gt;nudScanPixelCali.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lb405Offset.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb405Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lb405Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 93</value>
-  </data>
-  <data name="lb405Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lb405Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
-  </data>
-  <data name="lb405Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="lb405Offset.Text" xml:space="preserve">
-    <value>偏置</value>
-  </data>
-  <data name="&gt;&gt;lb405Offset.Name" xml:space="preserve">
-    <value>lb405Offset</value>
-  </data>
-  <data name="&gt;&gt;lb405Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb405Offset.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;lb405Offset.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tb405Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb405Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 93</value>
-  </data>
-  <data name="tb405Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb405Offset.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb405Offset.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb405Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb405Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;tb405Offset.Name" xml:space="preserve">
-    <value>tb405Offset</value>
-  </data>
-  <data name="&gt;&gt;tb405Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb405Offset.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;tb405Offset.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tb405Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb405Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 69</value>
-  </data>
-  <data name="tb405Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb405Power.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb405Power.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb405Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb405Power.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;tb405Power.Name" xml:space="preserve">
-    <value>tb405Power</value>
-  </data>
-  <data name="&gt;&gt;tb405Power.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb405Power.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;tb405Power.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tb405Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb405Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 44</value>
-  </data>
-  <data name="tb405Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb405Gain.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb405Gain.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb405Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb405Gain.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;tb405Gain.Name" xml:space="preserve">
-    <value>tb405Gain</value>
-  </data>
-  <data name="&gt;&gt;tb405Gain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb405Gain.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;tb405Gain.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbx405Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 94</value>
-  </data>
-  <data name="tbx405Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tbx405Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="tbx405Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;tbx405Offset.Name" xml:space="preserve">
-    <value>tbx405Offset</value>
-  </data>
-  <data name="&gt;&gt;tbx405Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbx405Offset.Parent" xml:space="preserve">
-    <value>gbxChan405</value>
-  </data>
-  <data name="&gt;&gt;tbx405Offset.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbx488Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 95</value>
-  </data>
-  <data name="tbx488Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tbx488Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="tbx488Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="&gt;&gt;tbx488Offset.Name" xml:space="preserve">
-    <value>tbx488Offset</value>
-  </data>
-  <data name="&gt;&gt;tbx488Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbx488Offset.Parent" xml:space="preserve">
-    <value>gbx488</value>
-  </data>
-  <data name="&gt;&gt;tbx488Offset.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tb488Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb488Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 94</value>
-  </data>
-  <data name="tb488Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb488Offset.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb488Offset.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb488Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb488Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;tb488Offset.Name" xml:space="preserve">
-    <value>tb488Offset</value>
-  </data>
-  <data name="&gt;&gt;tb488Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb488Offset.Parent" xml:space="preserve">
-    <value>gbx488</value>
-  </data>
-  <data name="&gt;&gt;tb488Offset.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lb488Offset.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb488Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lb488Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 94</value>
-  </data>
-  <data name="lb488Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lb488Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
-  </data>
-  <data name="lb488Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="lb488Offset.Text" xml:space="preserve">
-    <value>偏置</value>
-  </data>
-  <data name="&gt;&gt;lb488Offset.Name" xml:space="preserve">
-    <value>lb488Offset</value>
-  </data>
-  <data name="&gt;&gt;lb488Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb488Offset.Parent" xml:space="preserve">
-    <value>gbx488</value>
-  </data>
-  <data name="&gt;&gt;lb488Offset.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tb488Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb488Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 69</value>
-  </data>
-  <data name="tb488Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb488Power.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb488Power.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb488Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb488Power.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;tb488Power.Name" xml:space="preserve">
-    <value>tb488Power</value>
-  </data>
-  <data name="&gt;&gt;tb488Power.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb488Power.Parent" xml:space="preserve">
-    <value>gbx488</value>
-  </data>
-  <data name="&gt;&gt;tb488Power.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tb488Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb488Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 44</value>
-  </data>
-  <data name="tb488Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb488Gain.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb488Gain.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb488Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb488Gain.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;tb488Gain.Name" xml:space="preserve">
-    <value>tb488Gain</value>
-  </data>
-  <data name="&gt;&gt;tb488Gain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb488Gain.Parent" xml:space="preserve">
-    <value>gbx488</value>
-  </data>
-  <data name="&gt;&gt;tb488Gain.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbx561Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 94</value>
-  </data>
-  <data name="tbx561Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tbx561Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="tbx561Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="&gt;&gt;tbx561Offset.Name" xml:space="preserve">
-    <value>tbx561Offset</value>
-  </data>
-  <data name="&gt;&gt;tbx561Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbx561Offset.Parent" xml:space="preserve">
-    <value>gbx561</value>
-  </data>
-  <data name="&gt;&gt;tbx561Offset.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tb561Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb561Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 93</value>
-  </data>
-  <data name="tb561Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb561Offset.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb561Offset.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb561Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb561Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="&gt;&gt;tb561Offset.Name" xml:space="preserve">
-    <value>tb561Offset</value>
-  </data>
-  <data name="&gt;&gt;tb561Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb561Offset.Parent" xml:space="preserve">
-    <value>gbx561</value>
-  </data>
-  <data name="&gt;&gt;tb561Offset.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lb561Offset.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb561Offset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lb561Offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 93</value>
-  </data>
-  <data name="lb561Offset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lb561Offset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
-  </data>
-  <data name="lb561Offset.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="lb561Offset.Text" xml:space="preserve">
-    <value>偏置</value>
-  </data>
-  <data name="&gt;&gt;lb561Offset.Name" xml:space="preserve">
-    <value>lb561Offset</value>
-  </data>
-  <data name="&gt;&gt;lb561Offset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb561Offset.Parent" xml:space="preserve">
-    <value>gbx561</value>
-  </data>
-  <data name="&gt;&gt;lb561Offset.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tb561Gain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb561Gain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 44</value>
-  </data>
-  <data name="tb561Gain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb561Gain.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb561Gain.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb561Gain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb561Gain.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;tb561Gain.Name" xml:space="preserve">
-    <value>tb561Gain</value>
-  </data>
-  <data name="&gt;&gt;tb561Gain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb561Gain.Parent" xml:space="preserve">
-    <value>gbx561</value>
-  </data>
-  <data name="&gt;&gt;tb561Gain.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tb561Power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tb561Power.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 69</value>
-  </data>
-  <data name="tb561Power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tb561Power.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb561Power.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="tb561Power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
-  </data>
-  <data name="tb561Power.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;tb561Power.Name" xml:space="preserve">
-    <value>tb561Power</value>
-  </data>
-  <data name="&gt;&gt;tb561Power.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb561Power.Parent" xml:space="preserve">
-    <value>gbx561</value>
-  </data>
-  <data name="&gt;&gt;tb561Power.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+    <value>8, 15</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2854,7 +2668,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>286, 754</value>
+    <value>381, 942</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3143,11 +2957,8 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

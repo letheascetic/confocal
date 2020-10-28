@@ -495,8 +495,9 @@ namespace confocal_core
                     {
                         if (channelSwitch[i])
                         {
+                            int offset = m_config.GetChannelOffset((CHAN_ID)i);
                             Mat mapping = m_params.ColorMappingMat[i];
-                            m_scanData.ScanImage.UpdateDisplayImage(i, mapping);
+                            m_scanData.ScanImage.UpdateDisplayImage(i, mapping, offset);
                         }
                     }
 

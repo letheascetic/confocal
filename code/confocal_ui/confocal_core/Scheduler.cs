@@ -35,6 +35,7 @@ namespace confocal_core
         public event ScanTaskEventHandler ScanTaskConfigured;
         public event ChannelEventHandler SelectedChannelChanged;
         public event ChannelEventHandler ChannelColorReferenceChanged;
+        public event ChannelEventHandler ChannelOffsetChanged;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Params m_params;
         private Config m_config;
@@ -223,7 +224,8 @@ namespace confocal_core
             m_config.SetChannelColorReference(id, color);
             m_params.GenerateColorMapping(id);
             Mat mapping = m_params.ColorMappingMat[(int)id];
-            scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, mapping);
+            int offset = m_config.GetChannelOffset(id);
+            scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, mapping, offset);
 
             if (ChannelColorReferenceChanged != null)
             {
@@ -231,6 +233,25 @@ namespace confocal_core
             }
 
             Logger.Info(string.Format("change channel[{0}] color reference[{1}].", id, color));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ChangeChannelOffset(ScanTask scanTask, CHAN_ID id, int offset)
+        {
+            m_config.SetChannelOffset(id, offset);
+
+            if (scanTask != null)
+            {
+                Mat mapping = m_params.ColorMappingMat[(int)id];
+                scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, mapping, offset);
+            }
+
+            if (ChannelOffsetChanged != null)
+            {
+                ChannelOffsetChanged.Invoke(scanTask, id, offset);
+            }
+
+            Logger.Info(string.Format("change channel[{0}] offset[{1}].", id, offset));
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -254,7 +275,7 @@ namespace confocal_core
             m_params.Calculate();
         }
 
-        private ScanTask FindScanTask(int taskId)
+        public ScanTask FindScanTask(int taskId)
         {
             foreach (ScanTask scanTask in m_scanTasks)
             {

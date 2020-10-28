@@ -150,13 +150,13 @@ namespace confocal_core
             }
         }
 
-        public void UpdateDisplayImage(int index, Mat mapping)
+        public void UpdateDisplayImage(int index, Mat mapping, int offset)
         {
             try
             {
                 lock (m_locker)
                 {
-                    OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1.0 / 128, 0);
+                    OriginMat[index].ConvertTo(GrayMat[index], DepthType.Cv8U, 1.0 / 128, offset);
                     CvInvoke.CvtColor(GrayMat[index], Gray3Mat[index], ColorConversion.Gray2Bgr);
                     CvInvoke.LUT(Gray3Mat[index], mapping, BGRMat[index]);
                     // CvInvoke.ApplyColorMap(GrayMat[index], BGRMat[index], Emgu.CV.CvEnum.ColorMapType.Autumn);

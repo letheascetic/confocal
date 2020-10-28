@@ -96,6 +96,11 @@ namespace confocal_ui
             btnColor.BackColor = color;
         }
 
+        public void ChannelOffsetChanged(CHAN_ID id, int offset)
+        {
+            pictureBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+        }
+
         private void InitVariables()
         {
             m_config = Config.GetConfig();

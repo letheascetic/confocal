@@ -1,4 +1,6 @@
 ﻿using confocal_core;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -61,6 +63,11 @@ namespace confocal_ui
             imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
         }
 
+        public void ChannelOffsetChanged(CHAN_ID id, int offset)
+        {
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+        }
+
         private void InitVariables()
         {
             m_selectedChannelIndex = -1;
@@ -89,6 +96,8 @@ namespace confocal_ui
             pbxZone.Size = imageBox.Size;
             pbxZone.Location = imageBox.Location;
             pbxZone.Dock = DockStyle.Fill;
+
+            imageBox.Image = new Mat(m_config.GetScanYPoints(), m_config.GetScanXPoints(), DepthType.Cv8U, 3);
         }
 
         private void FormZone_Load(object sender, EventArgs e)

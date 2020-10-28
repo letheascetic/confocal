@@ -36,14 +36,22 @@
             this.lbFps = new System.Windows.Forms.Label();
             this.chbx405 = new System.Windows.Forms.CheckBox();
             this.gbxChan405 = new System.Windows.Forms.GroupBox();
-            this.nudBN405 = new System.Windows.Forms.NumericUpDown();
+            this.tbx405Offset = new System.Windows.Forms.TextBox();
+            this.tb405Offset = new System.Windows.Forms.TrackBar();
+            this.lb405Offset = new System.Windows.Forms.Label();
+            this.tb405Power = new System.Windows.Forms.TrackBar();
+            this.tb405Gain = new System.Windows.Forms.TrackBar();
             this.tbx405Power = new System.Windows.Forms.TextBox();
             this.lb405Power = new System.Windows.Forms.Label();
             this.tbx405Gain = new System.Windows.Forms.TextBox();
             this.lb405Gain = new System.Windows.Forms.Label();
             this.lb405 = new System.Windows.Forms.Label();
             this.gbx488 = new System.Windows.Forms.GroupBox();
-            this.nudBN488 = new System.Windows.Forms.NumericUpDown();
+            this.tbx488Offset = new System.Windows.Forms.TextBox();
+            this.tb488Offset = new System.Windows.Forms.TrackBar();
+            this.lb488Offset = new System.Windows.Forms.Label();
+            this.tb488Power = new System.Windows.Forms.TrackBar();
+            this.tb488Gain = new System.Windows.Forms.TrackBar();
             this.tbx488Power = new System.Windows.Forms.TextBox();
             this.lb488Power = new System.Windows.Forms.Label();
             this.tbx488Gain = new System.Windows.Forms.TextBox();
@@ -51,7 +59,11 @@
             this.lb488 = new System.Windows.Forms.Label();
             this.chbx488 = new System.Windows.Forms.CheckBox();
             this.gbx561 = new System.Windows.Forms.GroupBox();
-            this.nudBN561 = new System.Windows.Forms.NumericUpDown();
+            this.tbx561Offset = new System.Windows.Forms.TextBox();
+            this.tb561Offset = new System.Windows.Forms.TrackBar();
+            this.tb561Power = new System.Windows.Forms.TrackBar();
+            this.lb561Offset = new System.Windows.Forms.Label();
+            this.tb561Gain = new System.Windows.Forms.TrackBar();
             this.tbx561Power = new System.Windows.Forms.TextBox();
             this.lb561Power = new System.Windows.Forms.Label();
             this.tbx561Gain = new System.Windows.Forms.TextBox();
@@ -59,7 +71,11 @@
             this.lb561 = new System.Windows.Forms.Label();
             this.chbx561 = new System.Windows.Forms.CheckBox();
             this.gbx640 = new System.Windows.Forms.GroupBox();
-            this.nudBN640 = new System.Windows.Forms.NumericUpDown();
+            this.tbx640Offset = new System.Windows.Forms.TextBox();
+            this.tb640Offset = new System.Windows.Forms.TrackBar();
+            this.lb640Offset = new System.Windows.Forms.Label();
+            this.tb640Power = new System.Windows.Forms.TrackBar();
+            this.tb640Gain = new System.Windows.Forms.TrackBar();
             this.tbx640Power = new System.Windows.Forms.TextBox();
             this.lb640Power = new System.Windows.Forms.Label();
             this.tbx640Gain = new System.Windows.Forms.TextBox();
@@ -83,51 +99,27 @@
             this.cbxDwellTime = new System.Windows.Forms.ComboBox();
             this.nudScanPixelOffset = new System.Windows.Forms.NumericUpDown();
             this.nudScanPixelCali = new System.Windows.Forms.NumericUpDown();
-            this.lb405Offset = new System.Windows.Forms.Label();
-            this.tb405Offset = new System.Windows.Forms.TrackBar();
-            this.tb405Power = new System.Windows.Forms.TrackBar();
-            this.tb405Gain = new System.Windows.Forms.TrackBar();
-            this.tbx405Offset = new System.Windows.Forms.TextBox();
-            this.tbx488Offset = new System.Windows.Forms.TextBox();
-            this.tb488Offset = new System.Windows.Forms.TrackBar();
-            this.lb488Offset = new System.Windows.Forms.Label();
-            this.tb488Power = new System.Windows.Forms.TrackBar();
-            this.tb488Gain = new System.Windows.Forms.TrackBar();
-            this.tbx561Offset = new System.Windows.Forms.TextBox();
-            this.tb561Offset = new System.Windows.Forms.TrackBar();
-            this.lb561Offset = new System.Windows.Forms.Label();
-            this.tb561Gain = new System.Windows.Forms.TrackBar();
-            this.tb561Power = new System.Windows.Forms.TrackBar();
-            this.tbx640Offset = new System.Windows.Forms.TextBox();
-            this.tb640Offset = new System.Windows.Forms.TrackBar();
-            this.lb640Offset = new System.Windows.Forms.Label();
-            this.tb640Power = new System.Windows.Forms.TrackBar();
-            this.tb640Gain = new System.Windows.Forms.TrackBar();
             this.gbxParams.SuspendLayout();
             this.gbxChan405.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN405)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Offset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Gain)).BeginInit();
             this.gbx488.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN488)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Offset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Gain)).BeginInit();
             this.gbx561.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN561)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Offset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Gain)).BeginInit();
             this.gbx640.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN640)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Offset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).BeginInit();
             this.gbxMode.SuspendLayout();
             this.gbxMirror.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelCali)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Offset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Gain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488Offset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488Gain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561Offset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561Gain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640Offset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).BeginInit();
             this.SuspendLayout();
             // 
             // lbDwellTime
@@ -171,7 +163,6 @@
             this.gbxChan405.Controls.Add(this.tbx405Offset);
             this.gbxChan405.Controls.Add(this.tb405Offset);
             this.gbxChan405.Controls.Add(this.lb405Offset);
-            this.gbxChan405.Controls.Add(this.nudBN405);
             this.gbxChan405.Controls.Add(this.tb405Power);
             this.gbxChan405.Controls.Add(this.tb405Gain);
             this.gbxChan405.Controls.Add(this.tbx405Power);
@@ -184,10 +175,53 @@
             this.gbxChan405.Name = "gbxChan405";
             this.gbxChan405.TabStop = false;
             // 
-            // nudBN405
+            // tbx405Offset
             // 
-            resources.ApplyResources(this.nudBN405, "nudBN405");
-            this.nudBN405.Name = "nudBN405";
+            this.tbx405Offset.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx405Offset, "tbx405Offset");
+            this.tbx405Offset.Name = "tbx405Offset";
+            // 
+            // tb405Offset
+            // 
+            resources.ApplyResources(this.tb405Offset, "tb405Offset");
+            this.tb405Offset.LargeChange = 1;
+            this.tb405Offset.Maximum = 128;
+            this.tb405Offset.Minimum = -128;
+            this.tb405Offset.Name = "tb405Offset";
+            this.tb405Offset.TabStop = false;
+            this.tb405Offset.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb405Offset.ValueChanged += new System.EventHandler(this.tb405Offset_ValueChanged);
+            // 
+            // lb405Offset
+            // 
+            resources.ApplyResources(this.lb405Offset, "lb405Offset");
+            this.lb405Offset.Name = "lb405Offset";
+            // 
+            // tb405Power
+            // 
+            resources.ApplyResources(this.tb405Power, "tb405Power");
+            this.tb405Power.LargeChange = 100;
+            this.tb405Power.Maximum = 2499;
+            this.tb405Power.Minimum = 50;
+            this.tb405Power.Name = "tb405Power";
+            this.tb405Power.SmallChange = 50;
+            this.tb405Power.TabStop = false;
+            this.tb405Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb405Power.Value = 100;
+            this.tb405Power.ValueChanged += new System.EventHandler(this.tb405Power_ValueChanged);
+            // 
+            // tb405Gain
+            // 
+            resources.ApplyResources(this.tb405Gain, "tb405Gain");
+            this.tb405Gain.LargeChange = 20;
+            this.tb405Gain.Maximum = 1000;
+            this.tb405Gain.Minimum = 1;
+            this.tb405Gain.Name = "tb405Gain";
+            this.tb405Gain.SmallChange = 10;
+            this.tb405Gain.TabStop = false;
+            this.tb405Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb405Gain.Value = 1;
+            this.tb405Gain.ValueChanged += new System.EventHandler(this.tb405Gain_ValueChanged);
             // 
             // tbx405Power
             // 
@@ -219,7 +253,6 @@
             // gbx488
             // 
             this.gbx488.Controls.Add(this.tbx488Offset);
-            this.gbx488.Controls.Add(this.nudBN488);
             this.gbx488.Controls.Add(this.tb488Offset);
             this.gbx488.Controls.Add(this.lb488Offset);
             this.gbx488.Controls.Add(this.tb488Power);
@@ -234,10 +267,53 @@
             this.gbx488.Name = "gbx488";
             this.gbx488.TabStop = false;
             // 
-            // nudBN488
+            // tbx488Offset
             // 
-            resources.ApplyResources(this.nudBN488, "nudBN488");
-            this.nudBN488.Name = "nudBN488";
+            this.tbx488Offset.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx488Offset, "tbx488Offset");
+            this.tbx488Offset.Name = "tbx488Offset";
+            // 
+            // tb488Offset
+            // 
+            resources.ApplyResources(this.tb488Offset, "tb488Offset");
+            this.tb488Offset.LargeChange = 1;
+            this.tb488Offset.Maximum = 128;
+            this.tb488Offset.Minimum = -128;
+            this.tb488Offset.Name = "tb488Offset";
+            this.tb488Offset.TabStop = false;
+            this.tb488Offset.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb488Offset.ValueChanged += new System.EventHandler(this.tb488Offset_ValueChanged);
+            // 
+            // lb488Offset
+            // 
+            resources.ApplyResources(this.lb488Offset, "lb488Offset");
+            this.lb488Offset.Name = "lb488Offset";
+            // 
+            // tb488Power
+            // 
+            resources.ApplyResources(this.tb488Power, "tb488Power");
+            this.tb488Power.LargeChange = 100;
+            this.tb488Power.Maximum = 2499;
+            this.tb488Power.Minimum = 50;
+            this.tb488Power.Name = "tb488Power";
+            this.tb488Power.SmallChange = 50;
+            this.tb488Power.TabStop = false;
+            this.tb488Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb488Power.Value = 100;
+            this.tb488Power.ValueChanged += new System.EventHandler(this.tb488Power_ValueChanged);
+            // 
+            // tb488Gain
+            // 
+            resources.ApplyResources(this.tb488Gain, "tb488Gain");
+            this.tb488Gain.LargeChange = 20;
+            this.tb488Gain.Maximum = 1000;
+            this.tb488Gain.Minimum = 1;
+            this.tb488Gain.Name = "tb488Gain";
+            this.tb488Gain.SmallChange = 10;
+            this.tb488Gain.TabStop = false;
+            this.tb488Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb488Gain.Value = 1;
+            this.tb488Gain.ValueChanged += new System.EventHandler(this.tb488Gain_ValueChanged);
             // 
             // tbx488Power
             // 
@@ -277,7 +353,6 @@
             // gbx561
             // 
             this.gbx561.Controls.Add(this.tbx561Offset);
-            this.gbx561.Controls.Add(this.nudBN561);
             this.gbx561.Controls.Add(this.tb561Offset);
             this.gbx561.Controls.Add(this.tb561Power);
             this.gbx561.Controls.Add(this.lb561Offset);
@@ -292,11 +367,53 @@
             this.gbx561.Name = "gbx561";
             this.gbx561.TabStop = false;
             // 
-            // nudBN561
+            // tbx561Offset
             // 
-            resources.ApplyResources(this.nudBN561, "nudBN561");
-            this.nudBN561.Name = "nudBN561";
-            this.nudBN561.ValueChanged += new System.EventHandler(this.nudBN561_ValueChanged);
+            this.tbx561Offset.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx561Offset, "tbx561Offset");
+            this.tbx561Offset.Name = "tbx561Offset";
+            // 
+            // tb561Offset
+            // 
+            resources.ApplyResources(this.tb561Offset, "tb561Offset");
+            this.tb561Offset.LargeChange = 1;
+            this.tb561Offset.Maximum = 128;
+            this.tb561Offset.Minimum = -128;
+            this.tb561Offset.Name = "tb561Offset";
+            this.tb561Offset.TabStop = false;
+            this.tb561Offset.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb561Offset.ValueChanged += new System.EventHandler(this.tb561Offset_ValueChanged);
+            // 
+            // tb561Power
+            // 
+            resources.ApplyResources(this.tb561Power, "tb561Power");
+            this.tb561Power.LargeChange = 100;
+            this.tb561Power.Maximum = 2499;
+            this.tb561Power.Minimum = 50;
+            this.tb561Power.Name = "tb561Power";
+            this.tb561Power.SmallChange = 50;
+            this.tb561Power.TabStop = false;
+            this.tb561Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb561Power.Value = 100;
+            this.tb561Power.ValueChanged += new System.EventHandler(this.tb561Power_ValueChanged);
+            // 
+            // lb561Offset
+            // 
+            resources.ApplyResources(this.lb561Offset, "lb561Offset");
+            this.lb561Offset.Name = "lb561Offset";
+            // 
+            // tb561Gain
+            // 
+            resources.ApplyResources(this.tb561Gain, "tb561Gain");
+            this.tb561Gain.LargeChange = 20;
+            this.tb561Gain.Maximum = 1000;
+            this.tb561Gain.Minimum = 1;
+            this.tb561Gain.Name = "tb561Gain";
+            this.tb561Gain.SmallChange = 10;
+            this.tb561Gain.TabStop = false;
+            this.tb561Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb561Gain.Value = 1;
+            this.tb561Gain.ValueChanged += new System.EventHandler(this.tb561Gain_ValueChanged);
             // 
             // tbx561Power
             // 
@@ -336,7 +453,6 @@
             // gbx640
             // 
             this.gbx640.Controls.Add(this.tbx640Offset);
-            this.gbx640.Controls.Add(this.nudBN640);
             this.gbx640.Controls.Add(this.tb640Offset);
             this.gbx640.Controls.Add(this.lb640Offset);
             this.gbx640.Controls.Add(this.tb640Power);
@@ -351,10 +467,53 @@
             this.gbx640.Name = "gbx640";
             this.gbx640.TabStop = false;
             // 
-            // nudBN640
+            // tbx640Offset
             // 
-            resources.ApplyResources(this.nudBN640, "nudBN640");
-            this.nudBN640.Name = "nudBN640";
+            this.tbx640Offset.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tbx640Offset, "tbx640Offset");
+            this.tbx640Offset.Name = "tbx640Offset";
+            // 
+            // tb640Offset
+            // 
+            resources.ApplyResources(this.tb640Offset, "tb640Offset");
+            this.tb640Offset.LargeChange = 1;
+            this.tb640Offset.Maximum = 128;
+            this.tb640Offset.Minimum = -128;
+            this.tb640Offset.Name = "tb640Offset";
+            this.tb640Offset.TabStop = false;
+            this.tb640Offset.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb640Offset.ValueChanged += new System.EventHandler(this.tb640Offset_ValueChanged);
+            // 
+            // lb640Offset
+            // 
+            resources.ApplyResources(this.lb640Offset, "lb640Offset");
+            this.lb640Offset.Name = "lb640Offset";
+            // 
+            // tb640Power
+            // 
+            resources.ApplyResources(this.tb640Power, "tb640Power");
+            this.tb640Power.LargeChange = 100;
+            this.tb640Power.Maximum = 2499;
+            this.tb640Power.Minimum = 50;
+            this.tb640Power.Name = "tb640Power";
+            this.tb640Power.SmallChange = 50;
+            this.tb640Power.TabStop = false;
+            this.tb640Power.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb640Power.Value = 100;
+            this.tb640Power.ValueChanged += new System.EventHandler(this.tb640Power_ValueChanged);
+            // 
+            // tb640Gain
+            // 
+            resources.ApplyResources(this.tb640Gain, "tb640Gain");
+            this.tb640Gain.LargeChange = 20;
+            this.tb640Gain.Maximum = 1000;
+            this.tb640Gain.Minimum = 1;
+            this.tb640Gain.Name = "tb640Gain";
+            this.tb640Gain.SmallChange = 10;
+            this.tb640Gain.TabStop = false;
+            this.tb640Gain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb640Gain.Value = 1;
+            this.tb640Gain.ValueChanged += new System.EventHandler(this.tb640Gain_ValueChanged);
             // 
             // tbx640Power
             // 
@@ -527,194 +686,6 @@
             this.nudScanPixelCali.Name = "nudScanPixelCali";
             this.nudScanPixelCali.ValueChanged += new System.EventHandler(this.nudScanPixelCali_ValueChanged);
             // 
-            // lb405Offset
-            // 
-            resources.ApplyResources(this.lb405Offset, "lb405Offset");
-            this.lb405Offset.Name = "lb405Offset";
-            // 
-            // tb405Offset
-            // 
-            resources.ApplyResources(this.tb405Offset, "tb405Offset");
-            this.tb405Offset.LargeChange = 1;
-            this.tb405Offset.Maximum = 128;
-            this.tb405Offset.Minimum = -128;
-            this.tb405Offset.Name = "tb405Offset";
-            this.tb405Offset.TabStop = false;
-            this.tb405Offset.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // tb405Power
-            // 
-            resources.ApplyResources(this.tb405Power, "tb405Power");
-            this.tb405Power.LargeChange = 100;
-            this.tb405Power.Maximum = 2499;
-            this.tb405Power.Minimum = 50;
-            this.tb405Power.Name = "tb405Power";
-            this.tb405Power.SmallChange = 50;
-            this.tb405Power.TabStop = false;
-            this.tb405Power.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb405Power.Value = 100;
-            this.tb405Power.ValueChanged += new System.EventHandler(this.tb405Power_ValueChanged);
-            // 
-            // tb405Gain
-            // 
-            resources.ApplyResources(this.tb405Gain, "tb405Gain");
-            this.tb405Gain.LargeChange = 20;
-            this.tb405Gain.Maximum = 1000;
-            this.tb405Gain.Minimum = 1;
-            this.tb405Gain.Name = "tb405Gain";
-            this.tb405Gain.SmallChange = 10;
-            this.tb405Gain.TabStop = false;
-            this.tb405Gain.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb405Gain.Value = 1;
-            this.tb405Gain.ValueChanged += new System.EventHandler(this.tb405Gain_ValueChanged);
-            // 
-            // tbx405Offset
-            // 
-            this.tbx405Offset.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx405Offset, "tbx405Offset");
-            this.tbx405Offset.Name = "tbx405Offset";
-            // 
-            // tbx488Offset
-            // 
-            this.tbx488Offset.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx488Offset, "tbx488Offset");
-            this.tbx488Offset.Name = "tbx488Offset";
-            // 
-            // tb488Offset
-            // 
-            resources.ApplyResources(this.tb488Offset, "tb488Offset");
-            this.tb488Offset.LargeChange = 1;
-            this.tb488Offset.Maximum = 128;
-            this.tb488Offset.Minimum = -128;
-            this.tb488Offset.Name = "tb488Offset";
-            this.tb488Offset.TabStop = false;
-            this.tb488Offset.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // lb488Offset
-            // 
-            resources.ApplyResources(this.lb488Offset, "lb488Offset");
-            this.lb488Offset.Name = "lb488Offset";
-            // 
-            // tb488Power
-            // 
-            resources.ApplyResources(this.tb488Power, "tb488Power");
-            this.tb488Power.LargeChange = 100;
-            this.tb488Power.Maximum = 2499;
-            this.tb488Power.Minimum = 50;
-            this.tb488Power.Name = "tb488Power";
-            this.tb488Power.SmallChange = 50;
-            this.tb488Power.TabStop = false;
-            this.tb488Power.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb488Power.Value = 100;
-            this.tb488Power.ValueChanged += new System.EventHandler(this.tb488Power_ValueChanged);
-            // 
-            // tb488Gain
-            // 
-            resources.ApplyResources(this.tb488Gain, "tb488Gain");
-            this.tb488Gain.LargeChange = 20;
-            this.tb488Gain.Maximum = 1000;
-            this.tb488Gain.Minimum = 1;
-            this.tb488Gain.Name = "tb488Gain";
-            this.tb488Gain.SmallChange = 10;
-            this.tb488Gain.TabStop = false;
-            this.tb488Gain.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb488Gain.Value = 1;
-            this.tb488Gain.ValueChanged += new System.EventHandler(this.tb488Gain_ValueChanged);
-            // 
-            // tbx561Offset
-            // 
-            this.tbx561Offset.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx561Offset, "tbx561Offset");
-            this.tbx561Offset.Name = "tbx561Offset";
-            // 
-            // tb561Offset
-            // 
-            resources.ApplyResources(this.tb561Offset, "tb561Offset");
-            this.tb561Offset.LargeChange = 1;
-            this.tb561Offset.Maximum = 128;
-            this.tb561Offset.Minimum = -128;
-            this.tb561Offset.Name = "tb561Offset";
-            this.tb561Offset.TabStop = false;
-            this.tb561Offset.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // lb561Offset
-            // 
-            resources.ApplyResources(this.lb561Offset, "lb561Offset");
-            this.lb561Offset.Name = "lb561Offset";
-            // 
-            // tb561Gain
-            // 
-            resources.ApplyResources(this.tb561Gain, "tb561Gain");
-            this.tb561Gain.LargeChange = 20;
-            this.tb561Gain.Maximum = 1000;
-            this.tb561Gain.Minimum = 1;
-            this.tb561Gain.Name = "tb561Gain";
-            this.tb561Gain.SmallChange = 10;
-            this.tb561Gain.TabStop = false;
-            this.tb561Gain.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb561Gain.Value = 1;
-            this.tb561Gain.ValueChanged += new System.EventHandler(this.tb561Gain_ValueChanged);
-            // 
-            // tb561Power
-            // 
-            resources.ApplyResources(this.tb561Power, "tb561Power");
-            this.tb561Power.LargeChange = 100;
-            this.tb561Power.Maximum = 2499;
-            this.tb561Power.Minimum = 50;
-            this.tb561Power.Name = "tb561Power";
-            this.tb561Power.SmallChange = 50;
-            this.tb561Power.TabStop = false;
-            this.tb561Power.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb561Power.Value = 100;
-            this.tb561Power.ValueChanged += new System.EventHandler(this.tb561Power_ValueChanged);
-            // 
-            // tbx640Offset
-            // 
-            this.tbx640Offset.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tbx640Offset, "tbx640Offset");
-            this.tbx640Offset.Name = "tbx640Offset";
-            // 
-            // tb640Offset
-            // 
-            resources.ApplyResources(this.tb640Offset, "tb640Offset");
-            this.tb640Offset.LargeChange = 1;
-            this.tb640Offset.Maximum = 128;
-            this.tb640Offset.Minimum = -128;
-            this.tb640Offset.Name = "tb640Offset";
-            this.tb640Offset.TabStop = false;
-            this.tb640Offset.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // lb640Offset
-            // 
-            resources.ApplyResources(this.lb640Offset, "lb640Offset");
-            this.lb640Offset.Name = "lb640Offset";
-            // 
-            // tb640Power
-            // 
-            resources.ApplyResources(this.tb640Power, "tb640Power");
-            this.tb640Power.LargeChange = 100;
-            this.tb640Power.Maximum = 2499;
-            this.tb640Power.Minimum = 50;
-            this.tb640Power.Name = "tb640Power";
-            this.tb640Power.SmallChange = 50;
-            this.tb640Power.TabStop = false;
-            this.tb640Power.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb640Power.Value = 100;
-            this.tb640Power.ValueChanged += new System.EventHandler(this.tb640Power_ValueChanged);
-            // 
-            // tb640Gain
-            // 
-            resources.ApplyResources(this.tb640Gain, "tb640Gain");
-            this.tb640Gain.LargeChange = 20;
-            this.tb640Gain.Maximum = 1000;
-            this.tb640Gain.Minimum = 1;
-            this.tb640Gain.Name = "tb640Gain";
-            this.tb640Gain.SmallChange = 10;
-            this.tb640Gain.TabStop = false;
-            this.tb640Gain.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb640Gain.Value = 1;
-            this.tb640Gain.ValueChanged += new System.EventHandler(this.tb640Gain_ValueChanged);
-            // 
             // FormScan
             // 
             this.AutoHidePortion = 0.2D;
@@ -752,34 +723,30 @@
             this.gbxParams.PerformLayout();
             this.gbxChan405.ResumeLayout(false);
             this.gbxChan405.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN405)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Offset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb405Gain)).EndInit();
             this.gbx488.ResumeLayout(false);
             this.gbx488.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN488)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Offset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb488Gain)).EndInit();
             this.gbx561.ResumeLayout(false);
             this.gbx561.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN561)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Offset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb561Gain)).EndInit();
             this.gbx640.ResumeLayout(false);
             this.gbx640.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBN640)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Offset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).EndInit();
             this.gbxMode.ResumeLayout(false);
             this.gbxMode.PerformLayout();
             this.gbxMirror.ResumeLayout(false);
             this.gbxMirror.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudScanPixelCali)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Offset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb405Gain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488Offset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb488Gain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561Offset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561Gain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb561Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640Offset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640Power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb640Gain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -837,10 +804,6 @@
         private System.Windows.Forms.ComboBox cbxDwellTime;
         private System.Windows.Forms.NumericUpDown nudScanPixelOffset;
         private System.Windows.Forms.NumericUpDown nudScanPixelCali;
-        private System.Windows.Forms.NumericUpDown nudBN405;
-        private System.Windows.Forms.NumericUpDown nudBN488;
-        private System.Windows.Forms.NumericUpDown nudBN561;
-        private System.Windows.Forms.NumericUpDown nudBN640;
         private System.Windows.Forms.Label lb405Offset;
         private System.Windows.Forms.TrackBar tb405Offset;
         private System.Windows.Forms.TrackBar tb405Power;

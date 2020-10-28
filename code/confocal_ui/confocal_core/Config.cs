@@ -114,12 +114,12 @@ namespace confocal_core
     public class PropChannel
     {
         private CHAN_ID id;
-        private Color colorReference;    // 各通道显示的颜色基准
-        private short backgroundNoiseLevel;     // 背景噪声水平
+        private Color colorReference;           // 各通道显示的颜色基准
+        private int offset;     // 背景噪声水平
 
         public CHAN_ID Id { get { return id; } set { id = value; } }
         public Color ColorReference { get { return colorReference; } set { colorReference = value; } }
-        public short BackgroundNoiseLevel { get { return backgroundNoiseLevel; } set { backgroundNoiseLevel = value; } }
+        public int Offset { get { return offset; } set { offset = value; } }
     }
 
     public class Properties
@@ -607,16 +607,16 @@ namespace confocal_core
             return GetPropChannel(id).ColorReference;
         }
 
-        public API_RETURN_CODE SetChannelBackgroundNoiseLevel(CHAN_ID id, short noiseLevel)
+        public API_RETURN_CODE SetChannelOffset(CHAN_ID id, int offset)
         {
-            Logger.Info(string.Format("set channel background noise level: [id:{0}], [level:{1}].", id, noiseLevel));
-            GetPropChannel(id).BackgroundNoiseLevel = noiseLevel;
+            Logger.Info(string.Format("set channel offset: [id:{0}], [level:{1}].", id, offset));
+            GetPropChannel(id).Offset = offset;
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        public short GetChannelBackgroundNoiseLevel(CHAN_ID id)
+        public int GetChannelOffset(CHAN_ID id)
         {
-            return GetPropChannel(id).BackgroundNoiseLevel;
+            return GetPropChannel(id).Offset;
         }
 
         #endregion
@@ -700,7 +700,7 @@ namespace confocal_core
                 {
                     Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i),
                     ColorReference = clolrs[i],
-                    BackgroundNoiseLevel = 0
+                    Offset = 0
                 };
             }
 

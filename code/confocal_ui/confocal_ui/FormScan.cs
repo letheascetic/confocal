@@ -25,6 +25,7 @@ namespace confocal_ui
         private Config m_config;
         private Params m_params;
         private Scheduler m_scheduler;
+        private ScanTask m_scanTask;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public FormScan()
@@ -35,12 +36,17 @@ namespace confocal_ui
             SetStyle(ControlStyles.DoubleBuffer, true);         // 双缓冲  
         }
 
+        public void ScanTaskCreated(ScanTask scanTask)
+        {
+            Logger.Info(string.Format("FormScan scan task created."));
+            m_scanTask = scanTask;
+        }
+
         public void ScanTaskStarted()
         {
             Logger.Info(string.Format("FormScan scan task started."));
             btnScan.Image = m_scheduler.TaskScanning() ? global::confocal_ui.Properties.Resources.Stop : global::confocal_ui.Properties.Resources.Scan;
             btnScan.BackColor = m_scheduler.TaskScanning() ? System.Drawing.SystemColors.GradientActiveCaption : System.Drawing.SystemColors.Control;
-
             UpdateControlers();
         }
 
@@ -54,6 +60,31 @@ namespace confocal_ui
         public void ScanTaskConfigured()
         {
             UpdateControlers();
+        }
+        public void ChannelOffsetChanged(CHAN_ID id, int offset)
+        {
+            TextBox textBox = null;
+            switch (id)
+            {
+                case CHAN_ID.WAVELENGTH_405_NM:
+                    textBox = tbx405Offset;
+                    break;
+                case CHAN_ID.WAVELENGTH_488_NM:
+                    textBox = tbx488Offset;
+                    break;
+                case CHAN_ID.WAVELENGTH_561_NM:
+                    textBox = tbx561Offset;
+                    break;
+                case CHAN_ID.WAVELENGTH_640_NM:
+                    textBox = tbx640Offset;
+                    break;
+                default:
+                    break;
+            }
+            if (textBox != null)
+            {
+                textBox.Text = offset.ToString();
+            }
         }
 
         private void InitVariables()
@@ -163,6 +194,17 @@ namespace confocal_ui
             tbx488Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_488_NM).ToString("F1"), "");
             tbx561Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_561_NM).ToString("F1"), "");
             tbx640Gain.Text = string.Concat(m_config.GetPmtGain(CHAN_ID.WAVELENGTH_640_NM).ToString("F1"), "");
+
+            tb405Offset.Value = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_405_NM);
+            tb488Offset.Value = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_488_NM);
+            tb561Offset.Value = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_561_NM);
+            tb640Offset.Value = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_640_NM);
+
+            tbx405Offset.Text = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_405_NM).ToString();
+            tbx488Offset.Text = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_488_NM).ToString();
+            tbx561Offset.Text = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_561_NM).ToString();
+            tbx640Offset.Text = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_640_NM).ToString();
+
         }
 
         private void UpdateVariables()
@@ -636,13 +678,6 @@ namespace confocal_ui
             m_config.SetScanPixelCalibration(bsOffset);
         }
 
-        private void nudBN561_ValueChanged(object sender, EventArgs e)
-        {
-            int value = (int)nudBN561.Value;
-            short noiseLevel = (short)(short.MaxValue * value / 100);
-            m_config.SetChannelBackgroundNoiseLevel(CHAN_ID.WAVELENGTH_561_NM, noiseLevel);
-        }
-
         private void chbx405_Click(object sender, EventArgs e)
         {
             UpdateLaserSwitch(chbx405, CHAN_ID.WAVELENGTH_405_NM);
@@ -661,6 +696,29 @@ namespace confocal_ui
         private void chbx640_Click(object sender, EventArgs e)
         {
             UpdateLaserSwitch(chbx640, CHAN_ID.WAVELENGTH_640_NM);
+        }
+
+        private void tb405Offset_ValueChanged(object sender, EventArgs e)
+        {
+            //int offset = tb405Offset.Value;
+            //m_config.SetChannelOffset(CHAN_ID.WAVELENGTH_405_NM, offset);
+            //tbx405Offset.Text = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_405_NM).ToString();
+            m_scheduler.ChangeChannelOffset(m_scanTask, CHAN_ID.WAVELENGTH_405_NM, tb405Offset.Value);
+        }
+
+        private void tb488Offset_ValueChanged(object sender, EventArgs e)
+        {
+            m_scheduler.ChangeChannelOffset(m_scanTask, CHAN_ID.WAVELENGTH_488_NM, tb488Offset.Value);
+        }
+
+        private void tb561Offset_ValueChanged(object sender, EventArgs e)
+        {
+            m_scheduler.ChangeChannelOffset(m_scanTask, CHAN_ID.WAVELENGTH_561_NM, tb561Offset.Value);
+        }
+
+        private void tb640Offset_ValueChanged(object sender, EventArgs e)
+        {
+            m_scheduler.ChangeChannelOffset(m_scanTask, CHAN_ID.WAVELENGTH_640_NM, tb640Offset.Value);
         }
     }
 }
