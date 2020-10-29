@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Web.UI.WebControls;
 
 namespace confocal_core
 {
@@ -115,11 +116,14 @@ namespace confocal_core
     {
         private CHAN_ID id;
         private Color colorReference;           // 各通道显示的颜色基准
-        private int offset;     // 背景噪声水平
+        private int offset;                     // 背景噪声水平
+        private double gamma;                   // 伽马矫正
 
         public CHAN_ID Id { get { return id; } set { id = value; } }
         public Color ColorReference { get { return colorReference; } set { colorReference = value; } }
         public int Offset { get { return offset; } set { offset = value; } }
+        public double Gamma { get { return gamma; } set { gamma = value; } }
+
     }
 
     public class Properties

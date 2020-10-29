@@ -72,21 +72,21 @@
             this.menuItemHelp});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1186, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(1581, 24);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "menuStrip1";
             // 
             // menuItemFile
             // 
             this.menuItemFile.Name = "menuItemFile";
-            this.menuItemFile.Size = new System.Drawing.Size(41, 20);
+            this.menuItemFile.Size = new System.Drawing.Size(51, 20);
             this.menuItemFile.Text = "文件";
             // 
             // menuItemOption
             // 
             this.menuItemOption.Name = "menuItemOption";
-            this.menuItemOption.Size = new System.Drawing.Size(41, 20);
+            this.menuItemOption.Size = new System.Drawing.Size(51, 20);
             this.menuItemOption.Text = "操作";
             // 
             // menuItemView
@@ -98,28 +98,28 @@
             this.tsmiShow,
             this.tsmiSysCfg});
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(41, 20);
+            this.menuItemView.Size = new System.Drawing.Size(51, 20);
             this.menuItemView.Tag = "0";
             this.menuItemView.Text = "窗口";
             // 
             // tsmiScan
             // 
             this.tsmiScan.Name = "tsmiScan";
-            this.tsmiScan.Size = new System.Drawing.Size(118, 22);
+            this.tsmiScan.Size = new System.Drawing.Size(148, 26);
             this.tsmiScan.Text = "扫描控制";
             this.tsmiScan.Click += new System.EventHandler(this.tsmiScan_Click);
             // 
             // tsmiShow
             // 
             this.tsmiShow.Name = "tsmiShow";
-            this.tsmiShow.Size = new System.Drawing.Size(118, 22);
+            this.tsmiShow.Size = new System.Drawing.Size(148, 26);
             this.tsmiShow.Text = "参数显示";
             this.tsmiShow.Click += new System.EventHandler(this.tsmiShow_Click);
             // 
             // tsmiSysCfg
             // 
             this.tsmiSysCfg.Name = "tsmiSysCfg";
-            this.tsmiSysCfg.Size = new System.Drawing.Size(118, 22);
+            this.tsmiSysCfg.Size = new System.Drawing.Size(148, 26);
             this.tsmiSysCfg.Text = "系统配置";
             this.tsmiSysCfg.Click += new System.EventHandler(this.tsmiSysCfg_Click);
             // 
@@ -130,7 +130,7 @@
             this.menuItemSkin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSkinDefault});
             this.menuItemSkin.Name = "menuItemSkin";
-            this.menuItemSkin.Size = new System.Drawing.Size(41, 20);
+            this.menuItemSkin.Size = new System.Drawing.Size(51, 20);
             this.menuItemSkin.Tag = "0";
             this.menuItemSkin.Text = "皮肤";
             // 
@@ -139,7 +139,7 @@
             this.menuItemSkinDefault.Checked = true;
             this.menuItemSkinDefault.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuItemSkinDefault.Name = "menuItemSkinDefault";
-            this.menuItemSkinDefault.Size = new System.Drawing.Size(112, 22);
+            this.menuItemSkinDefault.Size = new System.Drawing.Size(144, 26);
             this.menuItemSkinDefault.Text = "Default";
             // 
             // menuItemHelp
@@ -148,19 +148,19 @@
             this.menuItemManual,
             this.menuItemAbout});
             this.menuItemHelp.Name = "menuItemHelp";
-            this.menuItemHelp.Size = new System.Drawing.Size(41, 20);
+            this.menuItemHelp.Size = new System.Drawing.Size(51, 20);
             this.menuItemHelp.Text = "帮助";
             // 
             // menuItemManual
             // 
             this.menuItemManual.Name = "menuItemManual";
-            this.menuItemManual.Size = new System.Drawing.Size(118, 22);
+            this.menuItemManual.Size = new System.Drawing.Size(148, 26);
             this.menuItemManual.Text = "用户手册";
             // 
             // menuItemAbout
             // 
             this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(118, 22);
+            this.menuItemAbout.Size = new System.Drawing.Size(148, 26);
             this.menuItemAbout.Text = "关于我们";
             // 
             // toolStrip
@@ -179,14 +179,14 @@
             this.sp2});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1186, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1581, 27);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
             // lbSelectLaser
             // 
             this.lbSelectLaser.Name = "lbSelectLaser";
-            this.lbSelectLaser.Size = new System.Drawing.Size(59, 24);
+            this.lbSelectLaser.Size = new System.Drawing.Size(75, 24);
             this.lbSelectLaser.Text = "激光端口:";
             // 
             // cbxSelectLaser
@@ -205,7 +205,7 @@
             "COM7",
             "COM8"});
             this.cbxSelectLaser.Name = "cbxSelectLaser";
-            this.cbxSelectLaser.Size = new System.Drawing.Size(92, 27);
+            this.cbxSelectLaser.Size = new System.Drawing.Size(121, 27);
             // 
             // btnLaserConnect
             // 
@@ -213,7 +213,7 @@
             this.btnLaserConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnLaserConnect.Image")));
             this.btnLaserConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLaserConnect.Name = "btnLaserConnect";
-            this.btnLaserConnect.Size = new System.Drawing.Size(24, 24);
+            this.btnLaserConnect.Size = new System.Drawing.Size(29, 24);
             this.btnLaserConnect.Click += new System.EventHandler(this.btnLaserConnect_Click);
             // 
             // btnLaserRelease
@@ -222,7 +222,7 @@
             this.btnLaserRelease.Image = ((System.Drawing.Image)(resources.GetObject("btnLaserRelease.Image")));
             this.btnLaserRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLaserRelease.Name = "btnLaserRelease";
-            this.btnLaserRelease.Size = new System.Drawing.Size(24, 24);
+            this.btnLaserRelease.Size = new System.Drawing.Size(29, 24);
             this.btnLaserRelease.Click += new System.EventHandler(this.btnLaserRelease_Click);
             // 
             // sp1
@@ -239,33 +239,33 @@
             this.itemDeleteDevice});
             this.btnOperateDevice.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnOperateDevice.Name = "btnOperateDevice";
-            this.btnOperateDevice.Size = new System.Drawing.Size(66, 24);
+            this.btnOperateDevice.Size = new System.Drawing.Size(81, 24);
             this.btnOperateDevice.Text = "操作设备";
             // 
             // itemAddDevice
             // 
             this.itemAddDevice.Name = "itemAddDevice";
-            this.itemAddDevice.Size = new System.Drawing.Size(118, 22);
+            this.itemAddDevice.Size = new System.Drawing.Size(148, 26);
             this.itemAddDevice.Text = "添加设备";
             // 
             // itemConfigDevice
             // 
             this.itemConfigDevice.Name = "itemConfigDevice";
-            this.itemConfigDevice.Size = new System.Drawing.Size(118, 22);
+            this.itemConfigDevice.Size = new System.Drawing.Size(148, 26);
             this.itemConfigDevice.Text = "配置设备";
             this.itemConfigDevice.ToolTipText = "复位所有CAN通道";
             // 
             // itemResetDevice
             // 
             this.itemResetDevice.Name = "itemResetDevice";
-            this.itemResetDevice.Size = new System.Drawing.Size(118, 22);
+            this.itemResetDevice.Size = new System.Drawing.Size(148, 26);
             this.itemResetDevice.Text = "复位设备";
             this.itemResetDevice.ToolTipText = "复位所有CAN通道";
             // 
             // itemDeleteDevice
             // 
             this.itemDeleteDevice.Name = "itemDeleteDevice";
-            this.itemDeleteDevice.Size = new System.Drawing.Size(118, 22);
+            this.itemDeleteDevice.Size = new System.Drawing.Size(148, 26);
             this.itemDeleteDevice.Text = "删除设备";
             this.itemDeleteDevice.ToolTipText = "复位所有CAN通道";
             // 
@@ -278,10 +278,10 @@
             // 
             this.statusStrip.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Location = new System.Drawing.Point(0, 660);
+            this.statusStrip.Location = new System.Drawing.Point(0, 830);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1186, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1581, 22);
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -293,19 +293,20 @@
             this.dockPanel.DockBackColor = System.Drawing.SystemColors.ActiveBorder;
             this.dockPanel.DockBottomPortion = 0.16D;
             this.dockPanel.DockLeftPortion = 0.16D;
-            this.dockPanel.DockRightPortion = 0.16D;
+            this.dockPanel.DockRightPortion = 0.32D;
             this.dockPanel.DockTopPortion = 0.16D;
+            this.dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockPanel.Location = new System.Drawing.Point(0, 51);
-            this.dockPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dockPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dockPanel.Name = "dockPanel";
-            this.dockPanel.Size = new System.Drawing.Size(1186, 609);
+            this.dockPanel.Size = new System.Drawing.Size(1581, 779);
             this.dockPanel.TabIndex = 12;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1186, 682);
+            this.ClientSize = new System.Drawing.Size(1581, 852);
             this.Controls.Add(this.dockPanel);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
@@ -313,7 +314,7 @@
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Confocal Imaging v";

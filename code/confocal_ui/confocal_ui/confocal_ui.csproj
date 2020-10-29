@@ -38,6 +38,9 @@
     <Reference Include="Emgu.CV.World">
       <HintPath>..\dll\Emgu.CV.World.dll</HintPath>
     </Reference>
+    <Reference Include="gTrackBar">
+      <HintPath>..\dll\gTrackBar.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -84,17 +87,17 @@
     <Compile Include="FormDisplay.Designer.cs">
       <DependentUpon>FormDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormHistogram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistogram.Designer.cs">
+      <DependentUpon>FormHistogram.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormMeas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMeas.Designer.cs">
-      <DependentUpon>FormMeas.cs</DependentUpon>
     </Compile>
     <Compile Include="FormZone.cs">
       <SubType>Form</SubType>
@@ -125,11 +128,11 @@
     <EmbeddedResource Include="FormDisplay.resx">
       <DependentUpon>FormDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormHistogram.resx">
+      <DependentUpon>FormHistogram.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMeas.resx">
-      <DependentUpon>FormMeas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormZone.resx">
       <DependentUpon>FormZone.cs</DependentUpon>

@@ -21,8 +21,8 @@ namespace confocal_ui
         /************************************************************************************/
         private FormScan m_pFormScan = new FormScan();
         private FormZone m_pFormZone = new FormZone();
-        private FormMeas m_pFormMeas = new FormMeas();
         private FormParas m_pFormShowBox = new FormParas();
+        private FormHistogram m_pFormHistogram = new FormHistogram();
         private List<FormDisplay> m_pFormImages = new List<FormDisplay>();
 
         private Config m_config;
@@ -76,7 +76,9 @@ namespace confocal_ui
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
             // m_pFormMeas.Show(this.dockPanel, DockState.DockLeft);
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
-            m_pFormZone.Show(m_pFormScan.Pane, DockAlignment.Bottom, 0.25);
+            m_pFormZone.Show(this.dockPanel, DockState.DockRight);
+            m_pFormHistogram.Show(m_pFormZone.Pane, DockAlignment.Bottom, 0.5);
+            
         }
 
         private void UpdateControlers()
@@ -105,6 +107,7 @@ namespace confocal_ui
             formImage.ScanTaskCreated();
             m_pFormScan.ScanTaskCreated(scanTask);
             m_pFormZone.ScanTaskCreated(scanTask);
+            m_pFormHistogram.ScanTaskCreated(scanTask);
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -120,6 +123,7 @@ namespace confocal_ui
             m_pFormScan.ScanTaskStarted();
             m_pFormShowBox.ScanTaskStarted();
             m_pFormZone.ScanTaskStrated();
+            m_pFormHistogram.ScanTaskStrated();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -134,6 +138,7 @@ namespace confocal_ui
             formImage.ScanTaskStopped();
             m_pFormScan.ScanTaskStopped();
             m_pFormZone.ScanTaskStopped();
+            m_pFormHistogram.ScanTaskStopped();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -171,6 +176,7 @@ namespace confocal_ui
             }
             formImage.SelectedChannelChanged(id);
             m_pFormZone.SelectedChannelChanged(id);
+            m_pFormHistogram.SelectedChannelChanged(id);
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -204,6 +210,7 @@ namespace confocal_ui
             }
             
             m_pFormScan.ChannelOffsetChanged(id, offset);
+            m_pFormHistogram.ChannelOffsetChanged(id, offset);
             return API_RETURN_CODE.API_SUCCESS;
         }
 

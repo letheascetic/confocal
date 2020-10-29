@@ -61,7 +61,7 @@
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(382, 25);
+            this.toolStrip.Size = new System.Drawing.Size(636, 39);
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -73,10 +73,10 @@
             this.sp,
             this.lbFieldRange,
             this.sp2});
-            this.statusStrip.Location = new System.Drawing.Point(0, 375);
+            this.statusStrip.Location = new System.Drawing.Point(0, 472);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip.Size = new System.Drawing.Size(382, 23);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
+            this.statusStrip.Size = new System.Drawing.Size(509, 26);
             this.statusStrip.TabIndex = 3;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -84,24 +84,24 @@
             // 
             this.lbPixelSize.BackColor = System.Drawing.Color.Transparent;
             this.lbPixelSize.Name = "lbPixelSize";
-            this.lbPixelSize.Size = new System.Drawing.Size(64, 18);
+            this.lbPixelSize.Size = new System.Drawing.Size(79, 20);
             this.lbPixelSize.Text = "{0} um/px";
             // 
             // sp
             // 
             this.sp.Name = "sp";
-            this.sp.Size = new System.Drawing.Size(6, 23);
+            this.sp.Size = new System.Drawing.Size(6, 26);
             // 
             // lbFieldRange
             // 
             this.lbFieldRange.Name = "lbFieldRange";
-            this.lbFieldRange.Size = new System.Drawing.Size(215, 18);
+            this.lbFieldRange.Size = new System.Drawing.Size(268, 20);
             this.lbFieldRange.Text = "Field: [{0}um, {1}um] [{2}um x {3}um]";
             // 
             // sp2
             // 
             this.sp2.Name = "sp2";
-            this.sp2.Size = new System.Drawing.Size(6, 23);
+            this.sp2.Size = new System.Drawing.Size(6, 26);
             // 
             // pnlBottom
             // 
@@ -111,10 +111,10 @@
             this.pnlBottom.Controls.Add(this.cbxScanPixels);
             this.pnlBottom.Controls.Add(this.lbScanPixels);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 341);
-            this.pnlBottom.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 433);
+            this.pnlBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(382, 34);
+            this.pnlBottom.Size = new System.Drawing.Size(509, 39);
             this.pnlBottom.TabIndex = 4;
             // 
             // cbxScanPixels
@@ -122,21 +122,20 @@
             this.cbxScanPixels.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cbxScanPixels.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxScanPixels.FormattingEnabled = true;
-            this.cbxScanPixels.ItemHeight = 12;
-            this.cbxScanPixels.Location = new System.Drawing.Point(74, 8);
-            this.cbxScanPixels.Margin = new System.Windows.Forms.Padding(2);
+            this.cbxScanPixels.ItemHeight = 15;
+            this.cbxScanPixels.Location = new System.Drawing.Point(99, 10);
+            this.cbxScanPixels.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxScanPixels.Name = "cbxScanPixels";
-            this.cbxScanPixels.Size = new System.Drawing.Size(80, 20);
+            this.cbxScanPixels.Size = new System.Drawing.Size(105, 23);
             this.cbxScanPixels.TabIndex = 32;
             // 
             // lbScanPixels
             // 
             this.lbScanPixels.AutoSize = true;
             this.lbScanPixels.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lbScanPixels.Location = new System.Drawing.Point(8, 10);
-            this.lbScanPixels.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbScanPixels.Location = new System.Drawing.Point(11, 12);
             this.lbScanPixels.Name = "lbScanPixels";
-            this.lbScanPixels.Size = new System.Drawing.Size(65, 12);
+            this.lbScanPixels.Size = new System.Drawing.Size(72, 13);
             this.lbScanPixels.TabIndex = 31;
             this.lbScanPixels.Text = "扫描像素：";
             // 
@@ -148,19 +147,20 @@
             this.pnlImage.Controls.Add(this.pbxZone);
             this.pnlImage.Controls.Add(this.imageBox);
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlImage.Location = new System.Drawing.Point(0, 25);
-            this.pnlImage.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlImage.Location = new System.Drawing.Point(0, 49);
+            this.pnlImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlImage.Name = "pnlImage";
-            this.pnlImage.Size = new System.Drawing.Size(382, 316);
+            this.pnlImage.Size = new System.Drawing.Size(636, 493);
             this.pnlImage.TabIndex = 5;
             // 
             // pbxZone
             // 
             this.pbxZone.BackColor = System.Drawing.Color.Transparent;
             this.pbxZone.ContextMenuStrip = this.contextMenuStrip;
-            this.pbxZone.Location = new System.Drawing.Point(141, 120);
+            this.pbxZone.Location = new System.Drawing.Point(188, 150);
+            this.pbxZone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbxZone.Name = "pbxZone";
-            this.pbxZone.Size = new System.Drawing.Size(100, 76);
+            this.pbxZone.Size = new System.Drawing.Size(133, 95);
             this.pbxZone.TabIndex = 12;
             this.pbxZone.TabStop = false;
             // 
@@ -173,24 +173,24 @@
             this.tsStartAOI});
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(148, 70);
+            this.contextMenuStrip.Size = new System.Drawing.Size(174, 76);
             // 
             // tsResetZone
             // 
             this.tsResetZone.Name = "tsResetZone";
-            this.tsResetZone.Size = new System.Drawing.Size(147, 22);
+            this.tsResetZone.Size = new System.Drawing.Size(173, 24);
             this.tsResetZone.Text = "重置到视图全区域";
             // 
             // tsSelectZone
             // 
             this.tsSelectZone.Name = "tsSelectZone";
-            this.tsSelectZone.Size = new System.Drawing.Size(147, 22);
+            this.tsSelectZone.Size = new System.Drawing.Size(173, 24);
             this.tsSelectZone.Text = "选择指定扫描区域";
             // 
             // tsStartAOI
             // 
             this.tsStartAOI.Name = "tsStartAOI";
-            this.tsStartAOI.Size = new System.Drawing.Size(147, 22);
+            this.tsStartAOI.Size = new System.Drawing.Size(173, 24);
             this.tsStartAOI.Text = "扫描感兴趣区域";
             // 
             // imageBox
@@ -198,8 +198,9 @@
             this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.imageBox.Location = new System.Drawing.Point(0, 0);
+            this.imageBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(382, 316);
+            this.imageBox.Size = new System.Drawing.Size(636, 493);
             this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageBox.TabIndex = 2;
             this.imageBox.TabStop = false;
@@ -217,9 +218,9 @@
             // FormZone
             // 
             this.AutoHidePortion = 0.4D;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 398);
+            this.ClientSize = new System.Drawing.Size(509, 498);
             this.Controls.Add(this.pnlImage);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.statusStrip);
@@ -229,7 +230,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HideOnClose = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormZone";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "扫描区域";
