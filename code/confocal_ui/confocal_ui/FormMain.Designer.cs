@@ -72,8 +72,8 @@
             this.menuItemHelp});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1581, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(1186, 24);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -179,7 +179,7 @@
             this.sp2});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1581, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1186, 27);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -205,7 +205,7 @@
             "COM7",
             "COM8"});
             this.cbxSelectLaser.Name = "cbxSelectLaser";
-            this.cbxSelectLaser.Size = new System.Drawing.Size(121, 27);
+            this.cbxSelectLaser.Size = new System.Drawing.Size(92, 27);
             // 
             // btnLaserConnect
             // 
@@ -278,10 +278,10 @@
             // 
             this.statusStrip.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Location = new System.Drawing.Point(0, 830);
+            this.statusStrip.Location = new System.Drawing.Point(0, 660);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1581, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1186, 22);
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -293,20 +293,20 @@
             this.dockPanel.DockBackColor = System.Drawing.SystemColors.ActiveBorder;
             this.dockPanel.DockBottomPortion = 0.16D;
             this.dockPanel.DockLeftPortion = 0.16D;
-            this.dockPanel.DockRightPortion = 0.32D;
+            this.dockPanel.DockRightPortion = 0.16D;
             this.dockPanel.DockTopPortion = 0.16D;
             this.dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockPanel.Location = new System.Drawing.Point(0, 51);
-            this.dockPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockPanel.Name = "dockPanel";
-            this.dockPanel.Size = new System.Drawing.Size(1581, 779);
+            this.dockPanel.Size = new System.Drawing.Size(1186, 609);
             this.dockPanel.TabIndex = 12;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1581, 852);
+            this.ClientSize = new System.Drawing.Size(1186, 682);
             this.Controls.Add(this.dockPanel);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
@@ -314,7 +314,7 @@
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Confocal Imaging v";

@@ -33,143 +33,19 @@ namespace confocal_core
                 colorMapping[i * 3 + 1] = (byte)(gCoff * value);
                 colorMapping[i * 3 + 0] = (byte)(bCoff * value);
             }
-            colorMappingMat = new Mat(1, 256, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
+            // colorMappingMat = new Mat(1, 256, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
             colorMappingMat.SetTo<byte>(colorMapping);
         }
 
-        public static void Gray16ToGray8(ushort[] source, out byte[] destnation)
+        public static void CreateGammaMapping(double gamma, ref Mat gammaMappingMat)
         {
-            destnation = new byte[source.Length];
-            for (int i = 0; i < source.Length; i++)
+            byte[] data = new byte[256];
+            for (int i = 0; i < 256; i++)
             {
-                destnation[i] = (byte)(source[i] >> 8);
+                data[i] = (byte)(Math.Pow(i / 255.0, gamma) * 255.0);
             }
+            gammaMappingMat.SetTo<byte>(data);
         }
-
-        public static void Gray16ToGray24(ushort[] source, out byte[] destnation)
-        {
-            destnation = new byte[source.Length * 3];
-            for (int i = 0, j = 0; i < source.Length; i++)
-            {
-                j = i * 3;
-                destnation[j] = (byte)(source[i] >> 8);
-                destnation[j + 1] = destnation[j];
-                destnation[j + 2] = destnation[j];
-            }
-        }
-
-        public static void Gray16ToBGR24(short[] source, out byte[] destnation)
-        {
-            int i, j;
-            byte value;
-
-            destnation = new byte[source.Length * 3];
-
-            for (i = 0; i < source.Length; i++)
-            {
-                value = (byte)(source[i] >> 8);
-                j = i * 3;
-
-                if (value < 64)
-                {
-                    destnation[j + 2] = 0;                      // R
-                    destnation[j + 1] = (byte)(value << 2);     // G
-                    destnation[j] = 255;              // B
-                }
-                else if (value < 128)
-                {
-                    destnation[j + 2] = 0;
-                    destnation[j + 1] = 255;
-                    destnation[j] = (byte)(255 - ((value - 64) << 2));
-                }
-                else if (value < 192)
-                {
-                    destnation[j + 2] = (byte)((value - 128) << 2);
-                    destnation[j + 1] = 255;
-                    destnation[j] = 0;
-                }
-                else
-                {
-                    destnation[j + 2] = 255;
-                    destnation[j + 1] = (byte)(255 - ((source[i] - 192) << 2));
-                    destnation[j] = 0;
-                }
-            }
-        }
-
-        public static void Gray16ToBGR24(Color color, short[] source, out byte[] destnation)
-        {
-            float rCoff = color.R / 256.0f;
-            float gCoff = color.G / 256.0f;
-            float bCoff = color.B / 256.0f;
-
-            destnation = new byte[source.Length * 3];
-
-            int i, j;
-            byte value;
-
-            for (i = 0; i < source.Length; i++)
-            {
-                j = i * 3;
-
-                value = (byte)(source[i] >> 8);
-
-                destnation[j + 2] = (byte)(rCoff * value);
-                destnation[j + 1] = (byte)(gCoff * value);
-                destnation[j] = (byte)(bCoff * value);
-            }
-        }
-
-        public static void Gray16ToBGR24(short[] source, ref byte[] destnation, int destIndex, byte[,] mapping)
-        {
-            byte value;
-            int i, j;
-            for (i = 0; i < source.Length; i++)
-            {
-                value = (byte)(source[i] >> 8);
-                j = i * 3 + destIndex;
-                destnation[j] = mapping[value, 0];
-                destnation[j + 1] = mapping[value, 1];
-                destnation[j + 2] = mapping[value, 2];
-            }
-        }
-
-        public static void IntToBGR24(int[] source, ref byte[] destnation, int destIndex, byte[,] mapping)
-        {
-            byte value;
-            int i, j;
-            for (i = 0; i < source.Length; i++)
-            {
-                value = (byte)(source[i]);
-                j = i * 3 + destIndex;
-                destnation[j] = mapping[value, 0];
-                destnation[j + 1] = mapping[value, 1];
-                destnation[j + 2] = mapping[value, 2];
-            }
-        }
-
-        public static void IntToGray(int[] source, ref byte[] destnation, int destIndex)
-        {
-            byte value;
-            int i, j;
-            for (i = 0; i < source.Length; i++)
-            {
-                value = (byte)(source[i]);
-                j = i * 3 + destIndex;
-                destnation[j] = value;
-                destnation[j + 1] = value;
-                destnation[j + 2] = value;
-            }
-        }
-
-        public static Bitmap CreateBitmap(byte[] data, int width, int height)
-        {
-            Bitmap Canvas = new Bitmap(width, height);
-            BitmapData CanvasData = Canvas.LockBits(new System.Drawing.Rectangle(0, 0, Canvas.Width, Canvas.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
-            IntPtr ptr = CanvasData.Scan0;
-            Marshal.Copy(data, 0, ptr, data.Length);
-            Canvas.UnlockBits(CanvasData);
-            return Canvas;
-        }
+        
     }
 }

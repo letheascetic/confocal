@@ -53,6 +53,7 @@ namespace confocal_ui
             m_scheduler.SelectedChannelChanged += new ChannelEventHandler(SelectedChannelChangedHandler);
             m_scheduler.ChannelColorReferenceChanged += new ChannelEventHandler(ChannelColorReferenceChangedHandler);
             m_scheduler.ChannelOffsetChanged += new ChannelEventHandler(ChannelOffsetChangedHandler);
+            m_scheduler.ChannelGammaChanged += new ChannelEventHandler(ChannelGammaChangedHandler);
         }
 
         private void ConfigDevice()
@@ -74,11 +75,12 @@ namespace confocal_ui
 
             // panel
             m_pFormShowBox.Show(this.dockPanel, DockState.DockLeft);
-            // m_pFormMeas.Show(this.dockPanel, DockState.DockLeft);
+            m_pFormShowBox.DockState = DockState.DockLeftAutoHide;
+
             m_pFormScan.Show(this.dockPanel, DockState.DockRight);
-            m_pFormZone.Show(this.dockPanel, DockState.DockRight);
+
+            m_pFormZone.Show(this.dockPanel, DockState.DockLeft);
             m_pFormHistogram.Show(m_pFormZone.Pane, DockAlignment.Bottom, 0.5);
-            
         }
 
         private void UpdateControlers()
@@ -211,6 +213,25 @@ namespace confocal_ui
             
             m_pFormScan.ChannelOffsetChanged(id, offset);
             m_pFormHistogram.ChannelOffsetChanged(id, offset);
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private API_RETURN_CODE ChannelGammaChangedHandler(ScanTask scanTask, CHAN_ID id, object paras)
+        {
+            double gamma = (double)paras;
+            if (scanTask != null)
+            {
+                FormDisplay formImage = FindFormImage(scanTask);
+                if (formImage == null)
+                {
+                    Logger.Info(string.Format("scan task matching form image not found."));
+                    return API_RETURN_CODE.API_FAILED_SCAN_TASK_START_FAILED;
+                }
+                formImage.ChannelGammaChanged(id, gamma);
+                m_pFormZone.ChannelGammaChanged(id, gamma);
+                m_pFormHistogram.ChannelGammaChanged(id, gamma);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 

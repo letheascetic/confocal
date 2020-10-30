@@ -68,6 +68,11 @@ namespace confocal_ui
             imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
         }
 
+        public void ChannelGammaChanged(CHAN_ID id, double gamma)
+        {
+            imageBox.Image = m_scanTask.GetScanData().ScanImage.BGRMat[m_selectedChannelIndex];
+        }
+
         private void InitVariables()
         {
             m_selectedChannelIndex = -1;

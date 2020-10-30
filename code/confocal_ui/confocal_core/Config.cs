@@ -623,6 +623,18 @@ namespace confocal_core
             return GetPropChannel(id).Offset;
         }
 
+        public double GetChannelGamma(CHAN_ID id)
+        {
+            return GetPropChannel(id).Gamma;
+        }
+
+        public API_RETURN_CODE SetChannelGamma(CHAN_ID id, double gamma)
+        {
+            Logger.Info(string.Format("set channel gamma: [id:{0}], [level:{1}].", id, gamma));
+            GetPropChannel(id).Gamma = gamma;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         #endregion
 
         #region private apis
@@ -704,7 +716,8 @@ namespace confocal_core
                 {
                     Id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i),
                     ColorReference = clolrs[i],
-                    Offset = 0
+                    Offset = 0,
+                    Gamma = 1.0
                 };
             }
 

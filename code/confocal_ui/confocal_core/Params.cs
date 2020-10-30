@@ -27,6 +27,7 @@ namespace confocal_core
         private Config m_config;
         private SysConfig m_sysConfig;
         private Mat[] m_colorMappingMat;
+        private Mat[] m_gammaMappigMat;
         private int[] m_aiChannelIndex;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -98,7 +99,7 @@ namespace confocal_core
         /// <summary>
         /// 每次采集扫描的行数
         /// </summary>
-        public int ScanRowsPerAcquisition{ get; set; }
+        public int ScanRowsPerAcquisition { get; set; }
         /// <summary>
         /// 每次采集的像素数
         /// </summary>
@@ -148,6 +149,9 @@ namespace confocal_core
         /// </summary>
         public Mat[] ColorMappingMat
         { get { return m_colorMappingMat; } set { m_colorMappingMat = value; } }
+
+        public Mat[] GammaMappingMat
+        { get { return m_gammaMappigMat; } set { m_gammaMappigMat = value; } }
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         #region apis
@@ -198,10 +202,25 @@ namespace confocal_core
             }
         }
 
+        public void GenerateGammaMapping()
+        {
+            int channelNum = m_config.GetChannelNum();
+            for (int i = 0; i < channelNum; i++)
+            {
+                GenerateGammaMapping((CHAN_ID)i);
+            }
+        }
+
         public void GenerateColorMapping(CHAN_ID id)
         {
             Color colorReference = m_config.GetChannelColorReference(id);
             CImage.CreateColorMapping(colorReference, ref m_colorMappingMat[(int)id]);
+        }
+
+        public void GenerateGammaMapping(CHAN_ID id)
+        {
+            double gamma = m_config.GetChannelGamma(id);
+            CImage.CreateGammaMapping(gamma, ref m_gammaMappigMat[(int)id]);
         }
 
         public void GenerateAiChannelIndex()
@@ -586,9 +605,11 @@ namespace confocal_core
             m_config = Config.GetConfig();
             int channelNum = m_config.GetChannelNum();
             m_colorMappingMat = new Mat[channelNum];
+            m_gammaMappigMat = new Mat[channelNum];
             m_aiChannelIndex = new int[channelNum];
             for (int i = 0; i < channelNum; i++)
             {
+                m_gammaMappigMat[i] = new Mat(1, 256, DepthType.Cv8U, 1);
                 m_colorMappingMat[i] = new Mat(1, 256, DepthType.Cv8U, 3);
                 m_aiChannelIndex[i] = -1;
             }

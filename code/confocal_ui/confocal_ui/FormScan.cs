@@ -700,9 +700,6 @@ namespace confocal_ui
 
         private void tb405Offset_ValueChanged(object sender, EventArgs e)
         {
-            //int offset = tb405Offset.Value;
-            //m_config.SetChannelOffset(CHAN_ID.WAVELENGTH_405_NM, offset);
-            //tbx405Offset.Text = m_config.GetChannelOffset(CHAN_ID.WAVELENGTH_405_NM).ToString();
             m_scheduler.ChangeChannelOffset(m_scanTask, CHAN_ID.WAVELENGTH_405_NM, tb405Offset.Value);
         }
 

@@ -475,7 +475,7 @@ namespace confocal_core
             int scanRows = m_config.GetScanStrategy() == SCAN_STRATEGY.Z_BIDIRECTION ? m_params.ScanRows * 2 : m_params.ScanRows;
                         
             double timePerFrame = 1.0f / m_params.Fps;
-            double updateNum = timePerFrame / 0.2;
+            double updateNum = timePerFrame / 0.25;
             int updateLines = (int)Math.Ceiling(scanRows / updateNum);
 
             int i, line = -1;
@@ -487,6 +487,8 @@ namespace confocal_core
 
             while (m_scanning)
             {
+                Thread.Sleep(100);
+
                 if (line > m_scanData.ScanImage.Line || (m_scanData.ScanImage.Line - line) >= updateLines)
                 {
                     line = m_scanData.ScanImage.Line;
@@ -496,12 +498,13 @@ namespace confocal_core
                         if (channelSwitch[i])
                         {
                             int offset = m_config.GetChannelOffset((CHAN_ID)i);
-                            Mat mapping = m_params.ColorMappingMat[i];
-                            m_scanData.ScanImage.UpdateDisplayImage(i, mapping, offset);
+                            Mat colormMapping = m_params.ColorMappingMat[i];
+                            Mat grayMapping = m_params.GammaMappingMat[i];
+                            m_scanData.ScanImage.UpdateDisplayImage(i, colormMapping, grayMapping, offset);
                         }
                     }
 
-                    Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
+                    // Logger.Info(string.Format("update display images: frame[{0}], line[{1}].", m_scanData.ScanImage.Frame, m_scanData.ScanImage.Line));
 
                     //if (line + 1 == scanRows)
                     //{

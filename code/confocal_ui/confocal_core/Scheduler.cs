@@ -36,6 +36,7 @@ namespace confocal_core
         public event ChannelEventHandler SelectedChannelChanged;
         public event ChannelEventHandler ChannelColorReferenceChanged;
         public event ChannelEventHandler ChannelOffsetChanged;
+        public event ChannelEventHandler ChannelGammaChanged;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private Params m_params;
         private Config m_config;
@@ -107,7 +108,8 @@ namespace confocal_core
             }
 
             m_params.Calculate();                       // 计算参数
-            m_params.GenerateColorMapping();            // 
+            m_params.GenerateColorMapping();            //
+            m_params.GenerateGammaMapping();
             m_params.GenerateAiChannelIndex();          // 计算使用PMT的情况下各个AI通道采集数据对应的Index
             m_waver.Generate();                         // 计算AO输出波形和触发信号
             scanTask.Config();                          // 配置扫描任务
@@ -223,9 +225,10 @@ namespace confocal_core
         {
             m_config.SetChannelColorReference(id, color);
             m_params.GenerateColorMapping(id);
-            Mat mapping = m_params.ColorMappingMat[(int)id];
+            Mat colorMapping = m_params.ColorMappingMat[(int)id];
+            Mat gammaMapping = m_params.GammaMappingMat[(int)id];
             int offset = m_config.GetChannelOffset(id);
-            scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, mapping, offset);
+            scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, colorMapping, gammaMapping, offset);
 
             if (ChannelColorReferenceChanged != null)
             {
@@ -242,8 +245,9 @@ namespace confocal_core
 
             if (scanTask != null)
             {
-                Mat mapping = m_params.ColorMappingMat[(int)id];
-                scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, mapping, offset);
+                Mat colorMapping = m_params.ColorMappingMat[(int)id];
+                Mat gammaMapping = m_params.GammaMappingMat[(int)id];
+                scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, colorMapping, gammaMapping, offset);
             }
 
             if (ChannelOffsetChanged != null)
@@ -252,6 +256,28 @@ namespace confocal_core
             }
 
             Logger.Info(string.Format("change channel[{0}] offset[{1}].", id, offset));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ChangeChannelGamma(ScanTask scanTask, CHAN_ID id, double gamma)
+        {            
+            m_config.SetChannelGamma(id, gamma);
+            m_params.GenerateGammaMapping(id);
+
+            if (scanTask != null)
+            {
+                Mat colorMapping = m_params.ColorMappingMat[(int)id];
+                Mat gammaMapping = m_params.GammaMappingMat[(int)id];
+                int offset = m_config.GetChannelOffset(id);
+                scanTask.GetScanData().ScanImage.UpdateDisplayImage((int)id, colorMapping, gammaMapping, offset);
+            }
+
+            if (ChannelGammaChanged != null)
+            {
+                ChannelGammaChanged.Invoke(scanTask, id, gamma);
+            }
+
+            Logger.Info(string.Format("change channel[{0}] gamma[{1}].", id, gamma));
             return API_RETURN_CODE.API_SUCCESS;
         }
 
