@@ -84,9 +84,9 @@ namespace confocal_core
     }
 
     /// <summary>
-    /// 激光开关
+    /// 通道开关
     /// </summary>
-    public enum LASER_SWITCH : int
+    public enum CHAN_SWITCH : int
     {
         OFF = 0,
         ON = 1
@@ -213,6 +213,29 @@ namespace confocal_core
         BANK = 2,
         LINE = 3
     };
+
+    public class ChannelProperty
+    {
+        private CHAN_ID mChannelId;             // 通道ID[激光波长]
+        private string mChannelName;            // 通道名
+        private CHAN_SWITCH mChannelSwitch;     // 通道[激光]状态
+        private double mLaserPower;             // 通道[激光]功率
+        private double mGain;                   // PMT增益
+        private double mPinHole;                // 小孔孔径
+        private int mOffset;                    // 图像像素补偿[偏移]
+        private double mGamma;                  // 伽马校正
+        private Color mColor;                   // 伪彩色
+
+        public CHAN_ID ChannelId
+        { get { return mChannelId; } }
+        public string ChannelName
+        { get { return mChannelName; } }
+        public CHAN_SWITCH ChannelSwitch
+        { get { return mChannelSwitch; } set { mChannelSwitch = value; } }
+
+
+    }
+
 
     public class ZConfig
     {
