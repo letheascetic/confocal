@@ -115,8 +115,8 @@ namespace confocal_core
     /// </summary>
     public enum SCANNER_SYSTEM
     {
-        TWO_SCANNERS = 0,
-        THREE_SCANNERS = 1
+        TWO_SCANNERS = 2,
+        THREE_SCANNERS = 3
     };
 
     /// <summary>
@@ -162,13 +162,57 @@ namespace confocal_core
         REPEAT16 = 16
     };
 
-
+    /// <summary>
+    /// 扫描像素
+    /// </summary>
     public enum SCAN_PIXELS
     { 
-        X64 = 0,
-        X128 = 1
+        X64 = 64,
+        X128 = 128,
+        X256 = 256,
+        X512 = 512,
+        X1024 = 1024,
+        X2048 = 2048,
+        X4096 = 4096
     };
 
+    /// <summary>
+    /// 扫描像素时间
+    /// </summary>
+    public enum SCAN_PIXEL_DWELL
+    {
+        MICROSECONDS2 = 2,
+        MICROSECONDS4 = 4,
+        MICROSECONDS8 = 8,
+        MICROSECONDS16 = 16,
+        MICROSECONDS32 = 32,
+        MICROSECONDS64 = 64,
+        MICROSECONDS128 = 128,
+        MICROSECONDS256 = 256,
+        MICROSECONDS512 = 512,
+        MICROSECONDS1024 = 1024
+    };
+
+    /// <summary>
+    /// 扫描通道序列
+    /// </summary>
+    public enum SCAN_CHANNEL_SEQUENCE
+    {
+        NONE = 0,
+        CH1TO4 = 1,
+        CH4TO1 = 2
+    };
+
+    /// <summary>
+    /// 扫描区域
+    /// </summary>
+    public enum SCAN_AREA
+    {
+        FULLFIELD = 0,
+        SQUARE = 1,
+        BANK = 2,
+        LINE = 3
+    };
 
     public class Config
     {
