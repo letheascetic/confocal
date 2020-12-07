@@ -214,7 +214,7 @@ namespace confocal_core
         LINE = 3
     };
 
-    public class Config
+    public class ZConfig
     {
 
     }
