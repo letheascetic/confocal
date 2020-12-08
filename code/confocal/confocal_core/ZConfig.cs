@@ -146,7 +146,7 @@ namespace confocal_core
     /// <summary>
     /// 扫描线操作模式
     /// </summary>
-    public enum SCAN_LINE_OPTION_MODE
+    public enum SCAN_LINE_OPTION
     {
         NONE = 0,
         AVERAGE = 1,
@@ -246,7 +246,21 @@ namespace confocal_core
 
     }
 
+    public class ScanProperty
+    {
+        public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
+        public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
+        public SCANNER_SYSTEM Scanners { get; set; }                        // 扫描振镜
+        public SCAN_ACQUISITION_MODE ScanAcquisitionMode { get; set; }      // 采集模式
+        public SCAN_LINE_SKIPPING ScanLineSkipping { get; set; }            // Line Skipping
+        public SCAN_LINE_OPTION ScanLineOption { get; set; }                // Line Option
+        public SCAN_LINE_OPTION_PARA ScanLineOptionPara { get; set; }       // Line Option 参数
+        public SCAN_PIXELS ScanPixels { get; set; }                         // 扫描像素
+        public SCAN_PIXEL_DWELL ScanPixelDwell { get; set; }                // 扫描时间
+        public SCAN_CHANNEL_SEQUENCE ScanChannelSequence { get; set; }      // 扫描通道序列
+        public SCAN_AREA ScanArea { get; set; }                             // 扫描区域
 
+    }
 
 
 
@@ -271,8 +285,8 @@ namespace confocal_core
         private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
         private static readonly int SCAN_PIXEL_COMPENSATION = 64;           // Z形扫描中有效像素补偿
         ///////////////////////////////////////////////////////////////////////////////////////////
-
-
+        
+        private ChannelProperty mChannels;
 
     }
 }
