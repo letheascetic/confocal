@@ -222,6 +222,11 @@ namespace confocal_core
     /// </summary>
     public class Z1ScanChannel
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly double LASER_POWER_DEFAULT = 2.0;
+        private static readonly double PMT_HV_DEFAULT = 2.5;
+        private static readonly double PIN_HOLE_SIZE_DEFAULT = 50;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private readonly CHAN_ID mChannelId;    // 通道ID[激光波长]
         private readonly string mChannelName;   // 通道名
         private CHAN_SWITCH mChannelSwitch;     // 通道[激光]状态
@@ -231,7 +236,7 @@ namespace confocal_core
         private int mOffset;                    // 图像像素补偿[偏移]
         private double mGamma;                  // 伽马校正
         private Color mColor;                   // 伪彩色
-
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public CHAN_ID ChannelId { get { return mChannelId; } }
         public string ChannelName { get { return mChannelName; } }
         public CHAN_SWITCH ChannelSwitch { get { return mChannelSwitch; } set { mChannelSwitch = value; } }
@@ -241,11 +246,18 @@ namespace confocal_core
         public int Offset { get { return mOffset; } set { mOffset = value; } }
         public double Gamma { get { return mGamma; } set { mGamma = value; } }
         public Color ColorReference { get { return mColor; } set { mColor = value; } }
-
-        public Z1ScanChannel(CHAN_ID channelId, string channelName)
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public Z1ScanChannel(CHAN_ID channelId, string channelName, Color color)
         {
             mChannelId = channelId;
             mChannelName = channelName;
+            mChannelSwitch = CHAN_SWITCH.OFF;
+            mLaserPower = LASER_POWER_DEFAULT;
+            mGain = PMT_HV_DEFAULT;
+            mPinHole = PIN_HOLE_SIZE_DEFAULT;
+            mOffset = 0;
+            mGamma = 1.0;
+            mColor = color;
         }
 
     }
@@ -291,7 +303,7 @@ namespace confocal_core
         /// 双向扫描中奇数偶数行像素错位校准
         /// </summary>
         public int ScanPixelCalibration { get; set; }
-
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanCompensation()
         {
             ScanColumnPreCompensationRows = 2;
@@ -308,11 +320,27 @@ namespace confocal_core
     /// </summary>
     public class Z1ScanField
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly float FIELD_SIZE_DEFAULT = 200.0F;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public RectangleF ScanField { get; set; }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public Z1ScanField()
+        {
+            ScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT);
+        }
     }
 
+    /// <summary>
+    /// 扫描属性
+    /// </summary>
     public class Z1ScanProperty
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;          // 振镜响应时间, us
+        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5;      // 校准[标定]电压,V
+        private static readonly double CURVE_COFF_DEFAULT = 10.0;                   // 曲线系数
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
         public SCANNER_SYSTEM Scanners { get; set; }                        // 扫描振镜
@@ -326,8 +354,11 @@ namespace confocal_core
         public SCAN_AREA ScanArea { get; set; }                             // 扫描区域
         public Z1ScanCompensation ScanCompensation { get; set; }            // 扫描补偿
         public Z1ScanField ScanField { get; set; }                          // 扫描范围  
-        public Z1ScanChannel[] ScanChannels { get; set; }
-
+        public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
+        public double GalvanoResponseTime { get; set; }                     // 振镜响应时间
+        public double GalvanoCalibrationVoltage { get; set; }               // 振镜校准电压
+        public double CurveCalibrationFactor { get; set; }                  // 曲线校正因子
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanProperty()
         {
             ScanMode = SCAN_MODE.GALVANO;
@@ -345,15 +376,16 @@ namespace confocal_core
             ScanField = new Z1ScanField();
             ScanChannels = new Z1ScanChannel[]
             {
-                new Z1ScanChannel(CHAN_ID.WAVELENGTH_405_NM, "405nm"),
-                new Z1ScanChannel(CHAN_ID.WAVELENGTH_488_NM, "488nm"),
-                new Z1ScanChannel(CHAN_ID.WAVELENGTH_561_NM, "561nm"),
-                new Z1ScanChannel(CHAN_ID.WAVELENGTH_640_NM, "640nm")
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_405_NM, "405nm", Color.MediumPurple),
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_488_NM, "488nm", Color.DarkCyan),
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_561_NM, "561nm", Color.YellowGreen),
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_640_NM, "640nm", Color.Red)
             };
+            GalvanoResponseTime = GALV_RESPONSE_TIME_DEFAULT;
+            GalvanoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
+            CurveCalibrationFactor = CURVE_COFF_DEFAULT;
         }
     }
-
-
 
 
     public class Z1Config
@@ -364,20 +396,142 @@ namespace confocal_core
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
         public static readonly int CHAN_NUM = 4;
-        private static readonly double LASER_POWER_DEFAULT = 2.0;
-        private static readonly double PMT_HV_DEFAULT = 2.5;
-        private static readonly double CRS_AMPLITUDE_DEFAULT = 3.3;
-        private static readonly int SCAN_PIXELS_DEFAULT = 512;              // 默认扫描像素
-        private static readonly double SCAN_PIXEL_DWELL_DEFAULT = 4.0;      // 像素时间, us
-        private static readonly double PIN_HOLE_SIZE_DEFAULT = 50;          // 小孔尺寸
-        private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;  // 振镜响应时间, us
-        private static readonly double FIELD_SIZE_DEFAULT = 200.0;          // 视场大小, um
-        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5;      // 校准[标定]电压,V
-        private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
-        private static readonly int SCAN_PIXEL_COMPENSATION = 64;           // Z形扫描中有效像素补偿
         ///////////////////////////////////////////////////////////////////////////////////////////
-        
-        private Z1ScanChannel mChannels;
+        public bool Debugging { get; set; }
+        public string LaserPortName { get; set; }
+        public Z1ScanProperty ScanProperty { get; set; }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public static Z1Config GetConfig()
+        {
+            if (pConfig == null)
+            {
+                lock (locker)
+                {
+                    if (pConfig == null)
+                    {
+                        pConfig = new Z1Config();
+                    }
+                }
+            }
+            return pConfig;
+        }
+        /// <summary>
+        /// 通道数
+        /// </summary>
+        /// <returns></returns>
+        public int GetChannelNum()
+        {
+            return CHAN_NUM;
+        }
+        /// <summary>
+        /// 当前激活的通道数
+        /// </summary>
+        /// <returns></returns>
+        public int GetActivatedChannelNum()
+        {
+            int activatedChannelNum = 0;
+            for (int i = 0; i < CHAN_NUM; i++)
+            {
+                CHAN_ID id = (CHAN_ID)Enum.ToObject(typeof(CHAN_ID), i);
+                if (ScanProperty.ScanChannels[i].ChannelSwitch == CHAN_SWITCH.ON)
+                {
+                    activatedChannelNum++;
+                }
+            }
+            return activatedChannelNum;
+        }
+        /// <summary>
+        /// 使能/禁能通道
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE SetChannelSwitch(CHAN_ID id, CHAN_SWITCH status)
+        {
+            Logger.Info(string.Format("set channel swicth: [id:{0}], [status:{1}].", id, status));
+            ScanProperty.ScanChannels[(int)id].ChannelSwitch = status;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 获取通道使能/禁能状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CHAN_SWITCH GetChannelSwitch(CHAN_ID id)
+        {
+            return ScanProperty.ScanChannels[(int)id].ChannelSwitch;
+        }
+        /// <summary>
+        /// 设置激光功率
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="power"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE SetLaserPower(CHAN_ID id, double power)
+        {
+            Logger.Info(string.Format("set laser power: [id:{0}], [power:{1}].", id, power));
+            ScanProperty.ScanChannels[(int)id].LaserPower = power;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 读取激光功率
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public double GetLaserPower(CHAN_ID id)
+        {
+            return ScanProperty.ScanChannels[(int)id].LaserPower;
+        }
+        /// <summary>
+        /// 设置PMT增益（HV）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="gain"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE SetGain(CHAN_ID id, double gain)
+        {
+            Logger.Info(string.Format("set pmt gain: [id:{0}], [gain:{1}].", id, gain));
+            ScanProperty.ScanChannels[(int)id].HV = gain;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 读取PMT增益（HV）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public double GetPmtGain(CHAN_ID id)
+        {
+            return ScanProperty.ScanChannels[(int)id].HV;
+        }
+        /// <summary>
+        /// 设置通道的PinHole
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE SetPinHole(CHAN_ID id, double size)
+        {
+            Logger.Info(string.Format("set pin hole size: [id:{0}], [size:{1}].", id, size));
+            ScanProperty.ScanChannels[(int)id].PinHole = size;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 读取通道的PinHole
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public double GetPinHole(CHAN_ID id)
+        {
+            return ScanProperty.ScanChannels[(int)id].PinHole;
+        }
+
+
+        private Z1Config()
+        {
+            Debugging = true;
+            LaserPortName = null;
+            ScanProperty = new Z1ScanProperty();
+        }
 
     }
 }
