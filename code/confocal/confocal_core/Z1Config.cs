@@ -185,6 +185,7 @@ namespace confocal_core
     {
         MICROSECONDS2 = 2,
         MICROSECONDS4 = 4,
+        MICROSECONDS6 = 6,
         MICROSECONDS8 = 8,
         MICROSECONDS16 = 16,
         MICROSECONDS32 = 32,
@@ -216,7 +217,10 @@ namespace confocal_core
         LINE = 3
     };
 
-    public class ChannelProperty
+    /// <summary>
+    /// 扫描通道
+    /// </summary>
+    public class Z1ScanChannel
     {
         private readonly CHAN_ID mChannelId;    // 通道ID[激光波长]
         private readonly string mChannelName;   // 通道名
@@ -238,7 +242,7 @@ namespace confocal_core
         public double Gamma { get { return mGamma; } set { mGamma = value; } }
         public Color ColorReference { get { return mColor; } set { mColor = value; } }
 
-        public ChannelProperty(CHAN_ID channelId, string channelName)
+        public Z1ScanChannel(CHAN_ID channelId, string channelName)
         {
             mChannelId = channelId;
             mChannelName = channelName;
@@ -246,7 +250,68 @@ namespace confocal_core
 
     }
 
-    public class ScanProperty
+    /// <summary>
+    /// 扫描补偿
+    /// </summary>
+    public class Z1ScanCompensation
+    {
+        /// <summary>
+        /// 扫描列前置补偿时间
+        /// </summary>
+        // public double ScanColumnPreCompensationTime { get; set; }
+        /// <summary>
+        /// 扫描列后置补偿时间
+        /// </summary>
+        // public double ScanColumnPostCompensationTime { get; set; }
+        /// <summary>
+        /// 扫描列前置补偿行数
+        /// </summary>
+        public int ScanColumnPreCompensationRows { get; set; }
+        /// <summary>
+        /// 扫描列后置补偿行数
+        /// </summary>
+        public int ScanColumnPostCompensationRows { get; set; }
+        /// <summary>
+        /// 扫描列补偿偏置
+        /// </summary>
+        public int ScanColumnCompensationOffset { get; set; }
+        /// <summary>
+        /// 扫描行补偿时间
+        /// </summary>
+        // public double ScanRowCompensationTime { get; set; }
+        /// <summary>
+        /// 扫描行补偿像素数
+        /// </summary>
+        public int ScanRowCompensationPixels { get; set; }
+        /// <summary>
+        /// 扫描行补偿偏置
+        /// </summary>
+        public int ScanRowCompensationOffset { get; set; }
+        /// <summary>
+        /// 双向扫描中奇数偶数行像素错位校准
+        /// </summary>
+        public int ScanPixelCalibration { get; set; }
+
+        public Z1ScanCompensation()
+        {
+            ScanColumnPreCompensationRows = 2;
+            ScanColumnPostCompensationRows = 2;
+            ScanColumnCompensationOffset = 0;
+            ScanRowCompensationPixels = 64;
+            ScanRowCompensationOffset = 0;
+            ScanPixelCalibration = 0;
+        }
+    }
+
+    /// <summary>
+    /// 扫描范围
+    /// </summary>
+    public class Z1ScanField
+    {
+        public RectangleF ScanField { get; set; }
+    }
+
+    public class Z1ScanProperty
     {
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
@@ -259,20 +324,46 @@ namespace confocal_core
         public SCAN_PIXEL_DWELL ScanPixelDwell { get; set; }                // 扫描时间
         public SCAN_CHANNEL_SEQUENCE ScanChannelSequence { get; set; }      // 扫描通道序列
         public SCAN_AREA ScanArea { get; set; }                             // 扫描区域
+        public Z1ScanCompensation ScanCompensation { get; set; }            // 扫描补偿
+        public Z1ScanField ScanField { get; set; }                          // 扫描范围  
+        public Z1ScanChannel[] ScanChannels { get; set; }
 
+        public Z1ScanProperty()
+        {
+            ScanMode = SCAN_MODE.GALVANO;
+            ScanDirection = SCAN_DIRECTION.UNIDIRECTION;
+            Scanners = SCANNER_SYSTEM.TWO_SCANNERS;
+            ScanAcquisitionMode = SCAN_ACQUISITION_MODE.LIVE;
+            ScanLineSkipping = SCAN_LINE_SKIPPING.NONE;
+            ScanLineOption = SCAN_LINE_OPTION.NONE;
+            ScanLineOptionPara = SCAN_LINE_OPTION_PARA.REPEAT2;
+            ScanPixels = SCAN_PIXELS.X512;
+            ScanPixelDwell = SCAN_PIXEL_DWELL.MICROSECONDS2;
+            ScanChannelSequence = SCAN_CHANNEL_SEQUENCE.NONE;
+            ScanArea = SCAN_AREA.FULLFIELD;
+            ScanCompensation = new Z1ScanCompensation();
+            ScanField = new Z1ScanField();
+            ScanChannels = new Z1ScanChannel[]
+            {
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_405_NM, "405nm"),
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_488_NM, "488nm"),
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_561_NM, "561nm"),
+                new Z1ScanChannel(CHAN_ID.WAVELENGTH_640_NM, "640nm")
+            };
+        }
     }
 
 
 
 
-    public class ZConfig
+    public class Z1Config
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
-        private volatile static ZConfig pConfig = null;
+        private volatile static Z1Config pConfig = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly int CHAN_NUM = 4;
+        public static readonly int CHAN_NUM = 4;
         private static readonly double LASER_POWER_DEFAULT = 2.0;
         private static readonly double PMT_HV_DEFAULT = 2.5;
         private static readonly double CRS_AMPLITUDE_DEFAULT = 3.3;
@@ -286,7 +377,7 @@ namespace confocal_core
         private static readonly int SCAN_PIXEL_COMPENSATION = 64;           // Z形扫描中有效像素补偿
         ///////////////////////////////////////////////////////////////////////////////////////////
         
-        private ChannelProperty mChannels;
+        private Z1ScanChannel mChannels;
 
     }
 }

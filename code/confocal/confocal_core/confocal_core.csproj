@@ -56,8 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZConfig.cs" />
-    <Compile Include="ZSettings.cs" />
+    <Compile Include="Z1Config.cs" />
+    <Compile Include="Z1Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

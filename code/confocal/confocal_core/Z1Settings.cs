@@ -26,11 +26,11 @@ namespace confocal_core
         ATS9440 = 0x02
     }
 
-    public class ZSettings
+    public class Z1Settings
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
-        private volatile static ZSettings pSettings = null;
+        private volatile static Z1Settings pSettings = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ACQ_BOARD m_acqBoard;
@@ -110,7 +110,7 @@ namespace confocal_core
             return pfis.ToArray();
         }
 
-        public static ZSettings GetSysConfig()
+        public static Z1Settings GetSysConfig()
         {
             if (pSettings == null)
             {
@@ -118,7 +118,7 @@ namespace confocal_core
                 {
                     if (pSettings == null)
                     {
-                        pSettings = new ZSettings();
+                        pSettings = new Z1Settings();
                     }
                 }
             }
@@ -259,7 +259,7 @@ namespace confocal_core
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        private ZSettings()
+        private Z1Settings()
         {
             m_acqBoard = ACQ_BOARD.NIUSB6363;
             m_acqDevice = ACQ_DEVICE.PMT;
