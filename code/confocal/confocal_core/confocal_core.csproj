@@ -59,6 +59,7 @@
     <Compile Include="Z1Config.cs" />
     <Compile Include="Z1Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Z1Wave.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="log4net.config" />

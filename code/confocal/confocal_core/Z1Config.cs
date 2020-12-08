@@ -387,7 +387,9 @@ namespace confocal_core
         }
     }
 
-
+    /// <summary>
+    /// 配置属性
+    /// </summary>
     public class Z1Config
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -440,91 +442,6 @@ namespace confocal_core
             }
             return activatedChannelNum;
         }
-        /// <summary>
-        /// 使能/禁能通道
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="status"></param>
-        /// <returns></returns>
-        public API_RETURN_CODE SetChannelSwitch(CHAN_ID id, CHAN_SWITCH status)
-        {
-            Logger.Info(string.Format("set channel swicth: [id:{0}], [status:{1}].", id, status));
-            ScanProperty.ScanChannels[(int)id].ChannelSwitch = status;
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 获取通道使能/禁能状态
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public CHAN_SWITCH GetChannelSwitch(CHAN_ID id)
-        {
-            return ScanProperty.ScanChannels[(int)id].ChannelSwitch;
-        }
-        /// <summary>
-        /// 设置激光功率
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="power"></param>
-        /// <returns></returns>
-        public API_RETURN_CODE SetLaserPower(CHAN_ID id, double power)
-        {
-            Logger.Info(string.Format("set laser power: [id:{0}], [power:{1}].", id, power));
-            ScanProperty.ScanChannels[(int)id].LaserPower = power;
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 读取激光功率
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public double GetLaserPower(CHAN_ID id)
-        {
-            return ScanProperty.ScanChannels[(int)id].LaserPower;
-        }
-        /// <summary>
-        /// 设置PMT增益（HV）
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="gain"></param>
-        /// <returns></returns>
-        public API_RETURN_CODE SetGain(CHAN_ID id, double gain)
-        {
-            Logger.Info(string.Format("set pmt gain: [id:{0}], [gain:{1}].", id, gain));
-            ScanProperty.ScanChannels[(int)id].HV = gain;
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 读取PMT增益（HV）
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public double GetPmtGain(CHAN_ID id)
-        {
-            return ScanProperty.ScanChannels[(int)id].HV;
-        }
-        /// <summary>
-        /// 设置通道的PinHole
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
-        public API_RETURN_CODE SetPinHole(CHAN_ID id, double size)
-        {
-            Logger.Info(string.Format("set pin hole size: [id:{0}], [size:{1}].", id, size));
-            ScanProperty.ScanChannels[(int)id].PinHole = size;
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 读取通道的PinHole
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public double GetPinHole(CHAN_ID id)
-        {
-            return ScanProperty.ScanChannels[(int)id].PinHole;
-        }
-
 
         private Z1Config()
         {
