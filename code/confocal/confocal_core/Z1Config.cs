@@ -187,13 +187,13 @@ namespace confocal_core
         MICROSECONDS4 = 4,
         MICROSECONDS6 = 6,
         MICROSECONDS8 = 8,
-        MICROSECONDS16 = 16,
-        MICROSECONDS32 = 32,
-        MICROSECONDS64 = 64,
-        MICROSECONDS128 = 128,
-        MICROSECONDS256 = 256,
-        MICROSECONDS512 = 512,
-        MICROSECONDS1024 = 1024
+        MICROSECONDS10 = 10,
+        MICROSECONDS20 = 20,
+        MICROSECONDS50 = 50,
+        MICROSECONDS100 = 100,
+        MICROSECONDS200 = 200,
+        MICROSECONDS500 = 500,
+        MICROSECONDS1000 = 1000
     };
 
     /// <summary>
@@ -340,6 +340,7 @@ namespace confocal_core
         private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;          // 振镜响应时间, us
         private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5;      // 校准[标定]电压,V
         private static readonly double CURVE_COFF_DEFAULT = 10.0;                   // 曲线系数
+        private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;             // 像素采样速率
         ///////////////////////////////////////////////////////////////////////////////////////////
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
@@ -355,6 +356,7 @@ namespace confocal_core
         public Z1ScanCompensation ScanCompensation { get; set; }            // 扫描补偿
         public Z1ScanField ScanField { get; set; }                          // 扫描范围  
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
+        public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
         public double GalvanoResponseTime { get; set; }                     // 振镜响应时间
         public double GalvanoCalibrationVoltage { get; set; }               // 振镜校准电压
         public double CurveCalibrationFactor { get; set; }                  // 曲线校正因子
@@ -384,6 +386,7 @@ namespace confocal_core
             GalvanoResponseTime = GALV_RESPONSE_TIME_DEFAULT;
             GalvanoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
             CurveCalibrationFactor = CURVE_COFF_DEFAULT;
+            PixelSampleRate = PIXEL_SAMPLE_RATE_DEFAULT;
         }
     }
 
