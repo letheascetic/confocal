@@ -1,5 +1,7 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -216,8 +218,8 @@ namespace confocal_core
 
     public class ChannelProperty
     {
-        private CHAN_ID mChannelId;             // 通道ID[激光波长]
-        private string mChannelName;            // 通道名
+        private readonly CHAN_ID mChannelId;    // 通道ID[激光波长]
+        private readonly string mChannelName;   // 通道名
         private CHAN_SWITCH mChannelSwitch;     // 通道[激光]状态
         private double mLaserPower;             // 通道[激光]功率
         private double mGain;                   // PMT增益
@@ -226,19 +228,51 @@ namespace confocal_core
         private double mGamma;                  // 伽马校正
         private Color mColor;                   // 伪彩色
 
-        public CHAN_ID ChannelId
-        { get { return mChannelId; } }
-        public string ChannelName
-        { get { return mChannelName; } }
-        public CHAN_SWITCH ChannelSwitch
-        { get { return mChannelSwitch; } set { mChannelSwitch = value; } }
+        public CHAN_ID ChannelId { get { return mChannelId; } }
+        public string ChannelName { get { return mChannelName; } }
+        public CHAN_SWITCH ChannelSwitch { get { return mChannelSwitch; } set { mChannelSwitch = value; } }
+        public double LaserPower { get { return mLaserPower; } set { mLaserPower = value; } }
+        public double HV { get { return mGain; } set { mGain = value; } }
+        public double PinHole { get { return mPinHole; } set { mPinHole = value; } }
+        public int Offset { get { return mOffset; } set { mOffset = value; } }
+        public double Gamma { get { return mGamma; } set { mGamma = value; } }
+        public Color ColorReference { get { return mColor; } set { mColor = value; } }
 
+        public ChannelProperty(CHAN_ID channelId, string channelName)
+        {
+            mChannelId = channelId;
+            mChannelName = channelName;
+        }
 
     }
 
 
+
+
+
+
     public class ZConfig
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        private volatile static ZConfig pConfig = null;
+        private static readonly object locker = new object();
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly int CHAN_NUM = 4;
+        private static readonly double LASER_POWER_DEFAULT = 2.0;
+        private static readonly double PMT_HV_DEFAULT = 2.5;
+        private static readonly double CRS_AMPLITUDE_DEFAULT = 3.3;
+        private static readonly int SCAN_PIXELS_DEFAULT = 512;              // 默认扫描像素
+        private static readonly double SCAN_PIXEL_DWELL_DEFAULT = 4.0;      // 像素时间, us
+        private static readonly double PIN_HOLE_SIZE_DEFAULT = 50;          // 小孔尺寸
+        private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;  // 振镜响应时间, us
+        private static readonly double FIELD_SIZE_DEFAULT = 200.0;          // 视场大小, um
+        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5;      // 校准[标定]电压,V
+        private static readonly double CURVE_COFF_DEFAULT = 10.0;           // 曲线系数
+        private static readonly int SCAN_PIXEL_COMPENSATION = 64;           // Z形扫描中有效像素补偿
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     }
 }
