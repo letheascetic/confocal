@@ -370,10 +370,11 @@ namespace confocal_core
 
         public double[] XCoordinateToVoltage(double[] xCoordinates)
         {
+            double coff = GalvanoCalibrationVoltage * GalvanoCalibrationFactor;
             double[] xVoltages = new double[xCoordinates.Length];
             for (int i = 0; i < xCoordinates.Length; i++)
             {
-                xVoltages[i] = XCoordinateToVoltage(xCoordinates[i]);
+                xVoltages[i] = xCoordinates[i] * coff + XOffsetVoltage;
             }
             return xVoltages;
         }
@@ -385,10 +386,11 @@ namespace confocal_core
 
         public double[] YCoordinateToVoltage(double[] yCoordinates)
         {
+            double coff = GalvanoCalibrationVoltage * GalvanoCalibrationFactor;
             double[] yVoltages = new double[yCoordinates.Length];
             for (int i = 0; i < yCoordinates.Length; i++)
             {
-                yVoltages[i] = YCoordinateToVoltage(yCoordinates[i]);
+                yVoltages[i] = yCoordinates[i] * coff + YOffsetVoltage;
             }
             return yVoltages;
         }
@@ -400,10 +402,11 @@ namespace confocal_core
 
         public double[] XVoltageToCoordinate(double[] xVoltages)
         {
+            double coff = GalvanoCalibrationFactor * GalvanoCalibrationVoltage;
             double[] xCoordinates = new double[xVoltages.Length];
             for (int i = 0; i < xVoltages.Length; i++)
             {
-                xCoordinates[i] = XVoltageToCoordinate(xVoltages[i]);
+                xCoordinates[i] = (xVoltages[i] - XOffsetVoltage) / coff;
             }
             return xCoordinates;
         }
@@ -415,10 +418,11 @@ namespace confocal_core
 
         public double[] YVoltageToCoordinate(double[] yVoltages)
         {
+            double coff = GalvanoCalibrationFactor * GalvanoCalibrationVoltage;
             double[] yCoordinates = new double[yVoltages.Length];
             for (int i = 0; i < yVoltages.Length; i++)
             {
-                yCoordinates[i] = YVoltageToCoordinate(yVoltages[i]);
+                yCoordinates[i] = (yVoltages[i] - YOffsetVoltage) / coff;
             }
             return yCoordinates;
         }
@@ -453,6 +457,9 @@ namespace confocal_core
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
         public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
         public double CurveCalibrationFactor { get; set; }                  // 曲线校正因子
+        public double ScanLineStartTime { get { return GalvanoProperty.GalvanoResponseTime * 2; } }     // 扫描行起始时间[单双向有效]
+        public double ScanLineHoldTime { get { return GalvanoProperty.GalvanoResponseTime; } }          // 扫描行起始时间[只对单向扫描有效]
+        public double ScanLineEndTime { get { return GalvanoProperty.GalvanoResponseTime; } }           // 扫描行结束时间[只对单向扫描有效]
         ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanProperty()
         {
@@ -500,21 +507,21 @@ namespace confocal_core
         /// 扩展前的扫描范围[单位：um]
         /// </summary>
         /// <returns></returns>
-        public RectangleF GetScanField()
+        public Z1ScanField GetScanField()
         {
-            return ScanFields[(int)ScanArea].ScanField;
+            return ScanFields[(int)ScanArea];
         }
 
         /// <summary>
         /// 扩展后的扫描范围[单位：um]
         /// </summary>
         /// <returns></returns>
-        public RectangleF GetExtendScanField()
+        public Z1ScanField GetExtendScanField()
         {
             RectangleF scanField = ScanFields[(int)ScanArea].ScanField;
             float xExtendRange = scanField.Width / ((int)ScanPixelDwell * (int)ScanPixels);
             float yExtendRange = GetPixelSize() * ScanRangeExtend.ScanRangeYExtendRows;
-            return new RectangleF(scanField.X - xExtendRange / 2, scanField.Y - yExtendRange / 2, scanField.Width + xExtendRange, scanField.Height + yExtendRange);
+            return new Z1ScanField(scanField.X - xExtendRange / 2, scanField.Y - yExtendRange / 2, scanField.Width + xExtendRange, scanField.Height + yExtendRange);
         }
 
         /// <summary>

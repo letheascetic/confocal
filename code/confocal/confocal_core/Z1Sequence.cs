@@ -13,6 +13,7 @@ namespace confocal_core
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
 
+        private T[] mTimeSequence;
         private T[] mXSequence;
         private T[] mYSequence;
         private T[] mTSequence;
@@ -20,8 +21,17 @@ namespace confocal_core
 
         public Z1Sequence(Z1ScanProperty scanProperty)
         {
-            RectangleF scanField = scanProperty.ScanFields[(int)scanProperty.ScanArea].ScanField;
-            
+            Z1ScanField extendScanField = scanProperty.GetExtendScanField();
+
+            if (scanProperty.ScanDirection == SCAN_DIRECTION.UNIDIRECTION)
+            {
+                int lineStartSamples = (int)(scanProperty.ScanLineStartTime / (int)scanProperty.ScanPixelDwell);
+                int lineHoldSamples = (int)(scanProperty.ScanLineHoldTime / (int)scanProperty.ScanPixelDwell);
+                int lineEndSamples = (int)(scanProperty.ScanLineEndTime / (int)scanProperty.ScanPixelDwell);
+
+            }
+
+
 
         }
 
