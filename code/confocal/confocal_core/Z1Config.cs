@@ -309,36 +309,14 @@ namespace confocal_core
     public class Z1ScanField
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly float FIELD_SIZE_DEFAULT = 200.0F;
+        public static readonly float FULL_SCAN_FIELD_SIZE_DEFAULT = 200.0F;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public RectangleF FullScanField { get; set; }
-        public RectangleF SquareScanField { get; set; }
-        public RectangleF BankScanField { get; set; }
-        public RectangleF LineScanField { get; set; }
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        public Z1ScanField()
-        {
-            FullScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT);
-            SquareScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT);
-            BankScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT / 2);
-            LineScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, 0, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT / (int)SCAN_PIXELS.X512);
-        }
+        public RectangleF ScanField { get; set; }
 
-        public RectangleF GetScanField(SCAN_AREA scanArea)
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public Z1ScanField(float x, float y, float width, float height)
         {
-            switch (scanArea)
-            {
-                case SCAN_AREA.FULLFIELD:
-                    return FullScanField;
-                case SCAN_AREA.BANK:
-                    return BankScanField;
-                case SCAN_AREA.SQUARE:
-                    return SquareScanField;
-                case SCAN_AREA.LINE:
-                    return LineScanField;
-                default:
-                    return FullScanField;
-            }
+            ScanField = new RectangleF(x, y, width, height);
         }
 
     }
@@ -470,7 +448,7 @@ namespace confocal_core
         public SCAN_CHANNEL_SEQUENCE ScanChannelSequence { get; set; }      // 扫描通道序列
         public SCAN_AREA ScanArea { get; set; }                             // 扫描区域类型
         public Z1ScanRangeExtend ScanRangeExtend { get; set; }              // 扫描范围补偿
-        public Z1ScanField ScanFields { get; set; }                         // 扫描范围  
+        public Z1ScanField[] ScanFields { get; set; }                       // 扫描范围  
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
         public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
@@ -490,7 +468,13 @@ namespace confocal_core
             ScanChannelSequence = SCAN_CHANNEL_SEQUENCE.NONE;
             ScanArea = SCAN_AREA.FULLFIELD;
             ScanRangeExtend = new Z1ScanRangeExtend();
-            ScanFields = new Z1ScanField();
+            ScanFields = new Z1ScanField[]
+            {
+                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, -Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT),
+                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, -Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT),
+                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, -Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2),
+                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, 0, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / (int)ScanPixels)
+            };
             ScanChannels = new Z1ScanChannel[]
             {
                 new Z1ScanChannel(CHAN_ID.WAVELENGTH_405_NM, "405nm", Color.MediumPurple),
@@ -509,7 +493,16 @@ namespace confocal_core
         /// <returns></returns>
         public float GetPixelSize()
         {
-            return ScanFields.GetScanField(ScanArea).Width / (int)ScanPixels;
+            return ScanFields[(int)ScanArea].ScanField.Width / (int)ScanPixels;
+        }
+
+        /// <summary>
+        /// 扩展前的扫描范围[单位：um]
+        /// </summary>
+        /// <returns></returns>
+        public RectangleF GetScanField()
+        {
+            return ScanFields[(int)ScanArea].ScanField;
         }
 
         /// <summary>
@@ -518,7 +511,7 @@ namespace confocal_core
         /// <returns></returns>
         public RectangleF GetExtendScanField()
         {
-            RectangleF scanField = ScanFields.GetScanField(ScanArea);
+            RectangleF scanField = ScanFields[(int)ScanArea].ScanField;
             float xExtendRange = scanField.Width / ((int)ScanPixelDwell * (int)ScanPixels);
             float yExtendRange = GetPixelSize() * ScanRangeExtend.ScanRangeYExtendRows;
             return new RectangleF(scanField.X - xExtendRange / 2, scanField.Y - yExtendRange / 2, scanField.Width + xExtendRange, scanField.Height + yExtendRange);

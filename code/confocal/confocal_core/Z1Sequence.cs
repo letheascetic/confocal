@@ -20,7 +20,7 @@ namespace confocal_core
 
         public Z1Sequence(Z1ScanProperty scanProperty)
         {
-            RectangleF scanField = scanProperty.ScanFields.GetScanField(scanProperty.ScanArea);
+            RectangleF scanField = scanProperty.ScanFields[(int)scanProperty.ScanArea].ScanField;
             
 
         }

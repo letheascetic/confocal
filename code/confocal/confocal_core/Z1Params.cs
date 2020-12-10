@@ -57,7 +57,7 @@ namespace confocal_core
         public static void CalculateScanParams(Z1Config config, ref Z1ScanParams scanParams)
         {
             Z1ScanProperty scanProperty = config.ScanProperty;
-            RectangleF scanField = scanProperty.ScanFields.GetScanField(scanProperty.ScanArea);
+            RectangleF scanField = scanProperty.ScanFields[(int)scanProperty.ScanArea].ScanField;
 
             scanParams.PixelSampleRate = scanProperty.PixelSampleRate;
             scanParams.AiSampleRate = scanParams.PixelSampleRate;
