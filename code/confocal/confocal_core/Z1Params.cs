@@ -1,6 +1,7 @@
 ﻿using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -56,17 +57,21 @@ namespace confocal_core
 
         public static void CalculateScanParams(Z1Config config, ref Z1ScanParams scanParams)
         {
-            scanParams.PixelSampleRate = config.ScanProperty.PixelSampleRate;
+            Z1ScanProperty scanProperty = config.ScanProperty;
+            RectangleF scanField = scanProperty.ScanFields.GetScanField(scanProperty.ScanArea);
+
+            scanParams.PixelSampleRate = scanProperty.PixelSampleRate;
             scanParams.AiSampleRate = scanParams.PixelSampleRate;
             scanParams.CtrSampleRate = scanParams.PixelSampleRate;
-            scanParams.AoSampleRate = 1e6 / (int)config.ScanProperty.ScanPixelDwell;
+            scanParams.AoSampleRate = 1e6 / (int)scanProperty.ScanPixelDwell;       // 扫描
 
-            double pixelSampleTime = 1e6 / config.ScanProperty.PixelSampleRate;
+            double pixelSize = scanField.Width / (int)scanProperty.ScanPixels;                                          // 像素尺寸 = 扫描宽度(um) / 行成像像素数, 单位：um/pixel
+            int xScanPixels = (int)scanProperty.ScanPixels + scanProperty.ScanCompensation.ScanRowCompensationPixels;   // 行扫描像素数 = 行成像像素数 + 补偿像素数
+            double voltagePerPixel = scanProperty.GalvanoProperty.GalvanoCalibrationVoltage * scanProperty.GalvanoProperty.GalvanoCalibrationFactor * pixelSize;  // 像素电压, 单位：V/pixel
 
-            scanParams.PixelSize = config.ScanProperty.ScanField.ScanField.Width / (int)config.ScanProperty.ScanPixels;
-            scanParams.AoVoltagePerPixel = config.ScanProperty.GalvanoCalibrationVoltage * 1000 * scanParams.PixelSize;
-
-
+            double w = (int)scanProperty.ScanPixelDwell * xScanPixels / 1000;        // 行有效样本区间的时间范围，单位：ms
+            double h = voltagePerPixel * xScanPixels;                                // 行有效样本区间的电压范围，单位：V
+            double r = scanProperty.CurveCalibrationFactor * h;                      // 圆弧半径
 
 
 

@@ -303,6 +303,7 @@ namespace confocal_core
         /// 双向扫描中奇数偶数行像素错位校准
         /// </summary>
         public int ScanPixelCalibration { get; set; }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanCompensation()
         {
@@ -323,12 +324,140 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly float FIELD_SIZE_DEFAULT = 200.0F;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public RectangleF ScanField { get; set; }
+        public RectangleF FullScanField { get; set; }
+        public RectangleF SquareScanField { get; set; }
+        public RectangleF BankScanField { get; set; }
+        public RectangleF LineScanField { get; set; }
         ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanField()
         {
-            ScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT);
+            FullScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT);
+            SquareScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT);
+            BankScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, -FIELD_SIZE_DEFAULT / 2, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT / 2);
+            LineScanField = new RectangleF(-FIELD_SIZE_DEFAULT / 2, 0, FIELD_SIZE_DEFAULT, FIELD_SIZE_DEFAULT / (int)SCAN_PIXELS.X512);
         }
+
+        public RectangleF GetScanField(SCAN_AREA scanArea)
+        {
+            switch (scanArea)
+            {
+                case SCAN_AREA.FULLFIELD:
+                    return FullScanField;
+                case SCAN_AREA.BANK:
+                    return BankScanField;
+                case SCAN_AREA.SQUARE:
+                    return SquareScanField;
+                case SCAN_AREA.LINE:
+                    return LineScanField;
+                default:
+                    return FullScanField;
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// 振镜属性
+    /// </summary>
+    public class Z1GalvanoProperty
+    {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;              // 振镜响应时间, us
+        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5 * 1000;   // 校准[标定]电压,um/V
+        private static readonly double CALIBRATION_FACTOR_DEFAULT = 1.0;                // 校准系数
+        private static readonly double XOFFSET_VOLTAGE_DEFAULT = 0; 
+        private static readonly double YOFFSET_VOLTAGE_DEFAULT = 0;
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// X轴原点坐标对应的振镜电压偏置
+        /// </summary>
+        public double XOffsetVoltage { get; set; }
+        /// <summary>
+        /// Y轴原点坐标对应的振镜电压偏置
+        /// </summary>
+        public double YOffsetVoltage { get; set; }
+        /// <summary>
+        /// 振镜响应时间
+        /// </summary>
+        public double GalvanoResponseTime { get; set; }
+        /// <summary>
+        /// 振镜校准电压，单位：um/V
+        /// </summary>
+        public double GalvanoCalibrationVoltage { get; set; }
+        /// <summary>
+        /// 振镜校准系数
+        /// </summary>
+        public double GalvanoCalibrationFactor { get; set; }
+
+        public Z1GalvanoProperty()
+        {
+            XOffsetVoltage = XOFFSET_VOLTAGE_DEFAULT;
+            YOffsetVoltage = YOFFSET_VOLTAGE_DEFAULT;
+            GalvanoResponseTime = GALV_RESPONSE_TIME_DEFAULT;
+            GalvanoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
+            GalvanoCalibrationFactor = CALIBRATION_FACTOR_DEFAULT;
+        }
+
+        public double XCoordinateToVoltage(double xCoordinate)
+        {
+            return xCoordinate * GalvanoCalibrationVoltage * GalvanoCalibrationFactor + XOffsetVoltage;
+        }
+
+        public double[] XCoordinateToVoltage(double[] xCoordinates)
+        {
+            double[] xVoltages = new double[xCoordinates.Length];
+            for (int i = 0; i < xCoordinates.Length; i++)
+            {
+                xVoltages[i] = XCoordinateToVoltage(xCoordinates[i]);
+            }
+            return xVoltages;
+        }
+
+        public double YCoordinateToVoltage(double yCoordinate)
+        {
+            return yCoordinate * GalvanoCalibrationVoltage * GalvanoCalibrationFactor + YOffsetVoltage;
+        }
+
+        public double[] YCoordinateToVoltage(double[] yCoordinates)
+        {
+            double[] yVoltages = new double[yCoordinates.Length];
+            for (int i = 0; i < yCoordinates.Length; i++)
+            {
+                yVoltages[i] = YCoordinateToVoltage(yCoordinates[i]);
+            }
+            return yVoltages;
+        }
+
+        public double XVoltageToCoordinate(double xVoltage)
+        {
+            return (xVoltage - XOffsetVoltage) / GalvanoCalibrationFactor / GalvanoCalibrationVoltage;
+        }
+
+        public double[] XVoltageToCoordinate(double[] xVoltages)
+        {
+            double[] xCoordinates = new double[xVoltages.Length];
+            for (int i = 0; i < xVoltages.Length; i++)
+            {
+                xCoordinates[i] = XVoltageToCoordinate(xVoltages[i]);
+            }
+            return xCoordinates;
+        }
+
+        public double YVoltageToCoordinate(double yVoltage)
+        {
+            return (yVoltage - YOffsetVoltage) / GalvanoCalibrationFactor / GalvanoCalibrationVoltage;
+        }
+
+        public double[] YVoltageToCoordinate(double[] yVoltages)
+        {
+            double[] yCoordinates = new double[yVoltages.Length];
+            for (int i = 0; i < yVoltages.Length; i++)
+            {
+                yCoordinates[i] = YVoltageToCoordinate(yVoltages[i]);
+            }
+            return yCoordinates;
+        }
+
     }
 
     /// <summary>
@@ -337,10 +466,8 @@ namespace confocal_core
     public class Z1ScanProperty
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;          // 振镜响应时间, us
-        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5;      // 校准[标定]电压,V
-        private static readonly double CURVE_COFF_DEFAULT = 10.0;                   // 曲线系数
-        private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;             // 像素采样速率
+        private static readonly double CURVE_COFF_DEFAULT = 1.1;                        // 曲线系数
+        private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;                 // 像素采样速率
         ///////////////////////////////////////////////////////////////////////////////////////////
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
@@ -354,13 +481,12 @@ namespace confocal_core
         public SCAN_CHANNEL_SEQUENCE ScanChannelSequence { get; set; }      // 扫描通道序列
         public SCAN_AREA ScanArea { get; set; }                             // 扫描区域
         public Z1ScanCompensation ScanCompensation { get; set; }            // 扫描补偿
-        public Z1ScanField ScanField { get; set; }                          // 扫描范围  
+        public Z1ScanField ScanFields { get; set; }                         // 扫描范围  
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
+        public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
         public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
-        public double GalvanoResponseTime { get; set; }                     // 振镜响应时间
-        public double GalvanoCalibrationVoltage { get; set; }               // 振镜校准电压
         public double CurveCalibrationFactor { get; set; }                  // 曲线校正因子
-        ///////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////s////////////////////////////////////////////////////
         public Z1ScanProperty()
         {
             ScanMode = SCAN_MODE.GALVANO;
@@ -375,7 +501,7 @@ namespace confocal_core
             ScanChannelSequence = SCAN_CHANNEL_SEQUENCE.NONE;
             ScanArea = SCAN_AREA.FULLFIELD;
             ScanCompensation = new Z1ScanCompensation();
-            ScanField = new Z1ScanField();
+            ScanFields = new Z1ScanField();
             ScanChannels = new Z1ScanChannel[]
             {
                 new Z1ScanChannel(CHAN_ID.WAVELENGTH_405_NM, "405nm", Color.MediumPurple),
@@ -383,8 +509,7 @@ namespace confocal_core
                 new Z1ScanChannel(CHAN_ID.WAVELENGTH_561_NM, "561nm", Color.YellowGreen),
                 new Z1ScanChannel(CHAN_ID.WAVELENGTH_640_NM, "640nm", Color.Red)
             };
-            GalvanoResponseTime = GALV_RESPONSE_TIME_DEFAULT;
-            GalvanoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
+            GalvanoProperty = new Z1GalvanoProperty();
             CurveCalibrationFactor = CURVE_COFF_DEFAULT;
             PixelSampleRate = PIXEL_SAMPLE_RATE_DEFAULT;
         }
