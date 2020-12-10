@@ -41,7 +41,6 @@ namespace confocal_core
         /// 像素尺寸，单位：um
         /// </summary>
         public double PixelSize { get; set; }
-
         /// <summary>
         /// 相邻像素间电压差，单位：V
         /// </summary>
@@ -66,7 +65,7 @@ namespace confocal_core
             scanParams.AoSampleRate = 1e6 / (int)scanProperty.ScanPixelDwell;       // 扫描
 
             double pixelSize = scanField.Width / (int)scanProperty.ScanPixels;                                          // 像素尺寸 = 扫描宽度(um) / 行成像像素数, 单位：um/pixel
-            int xScanPixels = (int)scanProperty.ScanPixels + scanProperty.ScanCompensation.ScanRowCompensationPixels;   // 行扫描像素数 = 行成像像素数 + 补偿像素数
+            int xScanPixels = (int)scanProperty.ScanPixels + scanProperty.GetScanCompensationXPixels();                 // 行扫描像素数 = 行成像像素数 + 补偿像素数
             double voltagePerPixel = scanProperty.GalvanoProperty.GalvanoCalibrationVoltage * scanProperty.GalvanoProperty.GalvanoCalibrationFactor * pixelSize;  // 像素电压, 单位：V/pixel
 
             double w = (int)scanProperty.ScanPixelDwell * xScanPixels / 1000;        // 行有效样本区间的时间范围，单位：ms

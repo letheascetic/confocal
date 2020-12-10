@@ -263,57 +263,54 @@ namespace confocal_core
     }
 
     /// <summary>
-    /// 扫描补偿
+    /// 扫描范围
     /// </summary>
-    public class Z1ScanCompensation
+    public class Z1ScanRange
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly int SCAN_RANGE_X_DIV_DEFAULT = 32;
+        private static readonly int SCAN_RANGE_Y_DIV_DEFAULT = 64;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// 扫描列前置补偿时间
+        /// 扫描列补偿因子
         /// </summary>
-        // public double ScanColumnPreCompensationTime { get; set; }
+        public int ScanRangeYDiv { get; set; }
         /// <summary>
-        /// 扫描列后置补偿时间
+        /// 扫描行补偿范围除数因子
         /// </summary>
-        // public double ScanColumnPostCompensationTime { get; set; }
+        public int ScanRangeXDiv { get; set; }
         /// <summary>
-        /// 扫描列前置补偿行数
+        /// 扫描列补偿开关
         /// </summary>
-        public int ScanColumnPreCompensationRows { get; set; }
+        public bool ScanRangeYSwitch { get; set; }
         /// <summary>
-        /// 扫描列后置补偿行数
+        /// 扫描行补偿开关
         /// </summary>
-        public int ScanColumnPostCompensationRows { get; set; }
+        public bool ScanRangeXSwitch { get; set; }
         /// <summary>
-        /// 扫描列补偿偏置
+        /// 扫描列偏置
         /// </summary>
-        public int ScanColumnCompensationOffset { get; set; }
+        public int ScanRangeYOffset { get; set; }
         /// <summary>
-        /// 扫描行补偿时间
+        /// 扫描行偏置
         /// </summary>
-        // public double ScanRowCompensationTime { get; set; }
-        /// <summary>
-        /// 扫描行补偿像素数
-        /// </summary>
-        public int ScanRowCompensationPixels { get; set; }
-        /// <summary>
-        /// 扫描行补偿偏置
-        /// </summary>
-        public int ScanRowCompensationOffset { get; set; }
+        public int ScanRangeXOffset { get; set; }
         /// <summary>
         /// 双向扫描中奇数偶数行像素错位校准
         /// </summary>
         public int ScanPixelCalibration { get; set; }
-
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public Z1ScanCompensation()
+        public Z1ScanRange()
         {
-            ScanColumnPreCompensationRows = 2;
-            ScanColumnPostCompensationRows = 2;
-            ScanColumnCompensationOffset = 0;
-            ScanRowCompensationPixels = 64;
-            ScanRowCompensationOffset = 0;
+            ScanRangeYDiv = SCAN_RANGE_Y_DIV_DEFAULT;
+            ScanRangeXDiv = SCAN_RANGE_X_DIV_DEFAULT;
+            ScanRangeXSwitch = true;
+            ScanRangeYSwitch = false;
+            ScanRangeXOffset = 0;
+            ScanRangeYOffset = 0;
             ScanPixelCalibration = 0;
         }
+
     }
 
     /// <summary>
@@ -469,6 +466,8 @@ namespace confocal_core
         private static readonly double CURVE_COFF_DEFAULT = 1.1;                        // 曲线系数
         private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;                 // 像素采样速率
         ///////////////////////////////////////////////////////////////////////////////////////////
+ 
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
         public SCANNER_SYSTEM Scanners { get; set; }                        // 扫描振镜
@@ -480,13 +479,13 @@ namespace confocal_core
         public SCAN_PIXEL_DWELL ScanPixelDwell { get; set; }                // 扫描时间
         public SCAN_CHANNEL_SEQUENCE ScanChannelSequence { get; set; }      // 扫描通道序列
         public SCAN_AREA ScanArea { get; set; }                             // 扫描区域
-        public Z1ScanCompensation ScanCompensation { get; set; }            // 扫描补偿
+        public Z1ScanRange ScanRange { get; set; }                          // 扫描补偿
         public Z1ScanField ScanFields { get; set; }                         // 扫描范围  
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
         public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
         public double CurveCalibrationFactor { get; set; }                  // 曲线校正因子
-        ///////////////////////////////////////s////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanProperty()
         {
             ScanMode = SCAN_MODE.GALVANO;
@@ -500,7 +499,7 @@ namespace confocal_core
             ScanPixelDwell = SCAN_PIXEL_DWELL.MICROSECONDS2;
             ScanChannelSequence = SCAN_CHANNEL_SEQUENCE.NONE;
             ScanArea = SCAN_AREA.FULLFIELD;
-            ScanCompensation = new Z1ScanCompensation();
+            ScanRange = new Z1ScanRange();
             ScanFields = new Z1ScanField();
             ScanChannels = new Z1ScanChannel[]
             {
@@ -513,6 +512,68 @@ namespace confocal_core
             CurveCalibrationFactor = CURVE_COFF_DEFAULT;
             PixelSampleRate = PIXEL_SAMPLE_RATE_DEFAULT;
         }
+
+        /// <summary>
+        /// 行补偿的范围[单位：um]
+        /// </summary>
+        /// <returns></returns>
+        public double GetScanCompensationXRange()
+        {
+            if (ScanRange.ScanRangeXSwitch)
+            {
+                return ScanFields.GetScanField(ScanArea).Width / ScanRange.ScanRangeXDiv * 2;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        /// <summary>
+        /// 行补偿的像素数
+        /// </summary>
+        /// <returns></returns>
+        public int GetScanCompensationXPixels()
+        {
+            if (ScanRange.ScanRangeXSwitch)
+            {
+                return (int)((int)ScanPixels / ScanRange.ScanRangeXDiv * 2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        /// <summary>
+        /// 列补偿的范围[单位：um]
+        /// </summary>
+        /// <returns></returns>
+        public double GetScanCompensationYRange()
+        {
+            if (ScanRange.ScanRangeYSwitch)
+            {
+                return ScanFields.GetScanField(ScanArea).Height / ScanRange.ScanRangeYDiv * 2;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        /// <summary>
+        /// 列补偿的像素数
+        /// </summary>
+        /// <returns></returns>
+        public int GetScanCompensationYPixels()
+        {
+            if (ScanRange.ScanRangeYSwitch)
+            {
+                return (int)((int)ScanPixels / ScanRange.ScanRangeYDiv * 2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
     }
 
     /// <summary>
