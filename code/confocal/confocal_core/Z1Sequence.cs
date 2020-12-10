@@ -1,6 +1,7 @@
 ﻿using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -16,8 +17,15 @@ namespace confocal_core
         private T[] mYSequence;
         private T[] mTSequence;
         private int mXCycles;
-        
-        
+
+        public Z1Sequence(Z1ScanProperty scanProperty)
+        {
+            RectangleF scanField = scanProperty.ScanFields.GetScanField(scanProperty.ScanArea);
+            
+
+        }
+
+
 
     }
 }

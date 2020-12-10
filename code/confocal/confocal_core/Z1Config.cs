@@ -265,47 +265,37 @@ namespace confocal_core
     /// <summary>
     /// 扫描范围
     /// </summary>
-    public class Z1ScanRange
+    public class Z1ScanRangeExtend
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly int SCAN_RANGE_X_DIV_DEFAULT = 32;
-        private static readonly int SCAN_RANGE_Y_DIV_DEFAULT = 64;
+        private static readonly int SCAN_RANGE_X_EXTEND_TIME_DEFAULT = 100;
+        private static readonly int SCAN_RANGE_Y_EXTEND_ROWS_DEFAULT = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// 扫描列补偿因子
+        /// 扫描行扩展的时间[单位：us]
         /// </summary>
-        public int ScanRangeYDiv { get; set; }
+        public int ScanRangeXExtendTime { get; set; }
         /// <summary>
-        /// 扫描行补偿范围除数因子
+        /// 扫描列扩展的行数
         /// </summary>
-        public int ScanRangeXDiv { get; set; }
+        public int ScanRangeYExtendRows { get; set; }
         /// <summary>
-        /// 扫描列补偿开关
-        /// </summary>
-        public bool ScanRangeYSwitch { get; set; }
-        /// <summary>
-        /// 扫描行补偿开关
-        /// </summary>
-        public bool ScanRangeXSwitch { get; set; }
-        /// <summary>
-        /// 扫描列偏置
-        /// </summary>
-        public int ScanRangeYOffset { get; set; }
-        /// <summary>
-        /// 扫描行偏置
+        /// 扫描行的偏置时间[单位：us]
         /// </summary>
         public int ScanRangeXOffset { get; set; }
         /// <summary>
-        /// 双向扫描中奇数偶数行像素错位校准
+        /// 扫描列的偏置行数
+        /// </summary>
+        public int ScanRangeYOffset { get; set; }
+        /// <summary>
+        /// 双向扫描中奇数偶数行错位的像素数
         /// </summary>
         public int ScanPixelCalibration { get; set; }
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public Z1ScanRange()
+        public Z1ScanRangeExtend()
         {
-            ScanRangeYDiv = SCAN_RANGE_Y_DIV_DEFAULT;
-            ScanRangeXDiv = SCAN_RANGE_X_DIV_DEFAULT;
-            ScanRangeXSwitch = true;
-            ScanRangeYSwitch = false;
+            ScanRangeXExtendTime = SCAN_RANGE_X_EXTEND_TIME_DEFAULT;
+            ScanRangeYExtendRows = SCAN_RANGE_Y_EXTEND_ROWS_DEFAULT;
             ScanRangeXOffset = 0;
             ScanRangeYOffset = 0;
             ScanPixelCalibration = 0;
@@ -478,8 +468,8 @@ namespace confocal_core
         public SCAN_PIXELS ScanPixels { get; set; }                         // 扫描像素
         public SCAN_PIXEL_DWELL ScanPixelDwell { get; set; }                // 扫描时间
         public SCAN_CHANNEL_SEQUENCE ScanChannelSequence { get; set; }      // 扫描通道序列
-        public SCAN_AREA ScanArea { get; set; }                             // 扫描区域
-        public Z1ScanRange ScanRange { get; set; }                          // 扫描补偿
+        public SCAN_AREA ScanArea { get; set; }                             // 扫描区域类型
+        public Z1ScanRangeExtend ScanRangeExtend { get; set; }              // 扫描范围补偿
         public Z1ScanField ScanFields { get; set; }                         // 扫描范围  
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
@@ -499,7 +489,7 @@ namespace confocal_core
             ScanPixelDwell = SCAN_PIXEL_DWELL.MICROSECONDS2;
             ScanChannelSequence = SCAN_CHANNEL_SEQUENCE.NONE;
             ScanArea = SCAN_AREA.FULLFIELD;
-            ScanRange = new Z1ScanRange();
+            ScanRangeExtend = new Z1ScanRangeExtend();
             ScanFields = new Z1ScanField();
             ScanChannels = new Z1ScanChannel[]
             {
@@ -514,64 +504,42 @@ namespace confocal_core
         }
 
         /// <summary>
-        /// 行补偿的范围[单位：um]
+        /// 像素尺寸[单位：um/pixel]
         /// </summary>
         /// <returns></returns>
-        public double GetScanCompensationXRange()
+        public float GetPixelSize()
         {
-            if (ScanRange.ScanRangeXSwitch)
-            {
-                return ScanFields.GetScanField(ScanArea).Width / ScanRange.ScanRangeXDiv * 2;
-            }
-            else
-            {
-                return 0;
-            }
+            return ScanFields.GetScanField(ScanArea).Width / (int)ScanPixels;
         }
+
         /// <summary>
-        /// 行补偿的像素数
+        /// 扩展后的扫描范围[单位：um]
         /// </summary>
         /// <returns></returns>
-        public int GetScanCompensationXPixels()
+        public RectangleF GetExtendScanField()
         {
-            if (ScanRange.ScanRangeXSwitch)
-            {
-                return (int)((int)ScanPixels / ScanRange.ScanRangeXDiv * 2);
-            }
-            else
-            {
-                return 0;
-            }
+            RectangleF scanField = ScanFields.GetScanField(ScanArea);
+            float xExtendRange = scanField.Width / ((int)ScanPixelDwell * (int)ScanPixels);
+            float yExtendRange = GetPixelSize() * ScanRangeExtend.ScanRangeYExtendRows;
+            return new RectangleF(scanField.X - xExtendRange / 2, scanField.Y - yExtendRange / 2, scanField.Width + xExtendRange, scanField.Height + yExtendRange);
         }
+
         /// <summary>
-        /// 列补偿的范围[单位：um]
+        /// 扩展后行扫描像素数
         /// </summary>
         /// <returns></returns>
-        public double GetScanCompensationYRange()
+        public int GetExtendScanXPixels()
         {
-            if (ScanRange.ScanRangeYSwitch)
-            {
-                return ScanFields.GetScanField(ScanArea).Height / ScanRange.ScanRangeYDiv * 2;
-            }
-            else
-            {
-                return 0;
-            }
+            return (int)ScanPixels + (ScanRangeExtend.ScanRangeXExtendTime >> 1) / (int)ScanPixelDwell * 2;
         }
+
         /// <summary>
-        /// 列补偿的像素数
+        /// 扩展后扫描列数
         /// </summary>
         /// <returns></returns>
-        public int GetScanCompensationYPixels()
+        public int GetExtendScanYPixels()
         {
-            if (ScanRange.ScanRangeYSwitch)
-            {
-                return (int)((int)ScanPixels / ScanRange.ScanRangeYDiv * 2);
-            }
-            else
-            {
-                return 0;
-            }
+            return (int)ScanPixels + ScanRangeExtend.ScanRangeYExtendRows;
         }
 
     }
