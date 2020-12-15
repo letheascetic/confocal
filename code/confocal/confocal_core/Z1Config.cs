@@ -219,6 +219,7 @@ namespace confocal_core
 
     /// <summary>
     /// 扫描通道
+    /// 包括：通道ID、通道状态[开/关]、功率、增益、小孔孔径、像素偏置、伽马、伪彩色
     /// </summary>
     public class Z1ScanChannel
     {
@@ -233,7 +234,7 @@ namespace confocal_core
         private double mLaserPower;             // 通道[激光]功率
         private double mGain;                   // PMT增益
         private double mPinHole;                // 小孔孔径
-        private int mOffset;                    // 图像像素补偿[偏移]
+        private int mOffset;                    // 图像像素补偿[偏置]
         private double mGamma;                  // 伽马校正
         private Color mColor;                   // 伪彩色
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -265,60 +266,61 @@ namespace confocal_core
     /// <summary>
     /// 扫描范围
     /// </summary>
-    public class Z1ScanRangeExtend
-    {
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly int SCAN_RANGE_X_EXTEND_TIME_DEFAULT = 100;
-        private static readonly int SCAN_RANGE_Y_EXTEND_ROWS_DEFAULT = 0;
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        /// 扫描行扩展的时间[单位：us]
-        /// </summary>
-        public int ScanRangeXExtendTime { get; set; }
-        /// <summary>
-        /// 扫描列扩展的行数
-        /// </summary>
-        public int ScanRangeYExtendRows { get; set; }
-        /// <summary>
-        /// 扫描行的偏置时间[单位：us]
-        /// </summary>
-        public int ScanRangeXOffset { get; set; }
-        /// <summary>
-        /// 扫描列的偏置行数
-        /// </summary>
-        public int ScanRangeYOffset { get; set; }
-        /// <summary>
-        /// 双向扫描中奇数偶数行错位的像素数
-        /// </summary>
-        public int ScanPixelCalibration { get; set; }
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        public Z1ScanRangeExtend()
-        {
-            ScanRangeXExtendTime = SCAN_RANGE_X_EXTEND_TIME_DEFAULT;
-            ScanRangeYExtendRows = SCAN_RANGE_Y_EXTEND_ROWS_DEFAULT;
-            ScanRangeXOffset = 0;
-            ScanRangeYOffset = 0;
-            ScanPixelCalibration = 0;
-        }
-
-    }
-
-    /// <summary>
-    /// 扫描范围
-    /// </summary>
     public class Z1ScanField
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public static readonly float FULL_SCAN_FIELD_SIZE_DEFAULT = 200.0F;
+        private static readonly float FULL_FIELD_DEFAULT = 200.0F;
+        private static readonly int EXTEND_LINE_TIME_DEFAULT = 100;
+        private static readonly int EXTEND_ROW_COUNT_DEFAULT = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public RectangleF ScanField { get; set; }
-
+        /// <summary>
+        /// 行[X方向]扩展时间[单位：us]
+        /// </summary>
+        public static int ExtendLineTime { get; set; }
+        /// <summary>
+        /// [Y方向]扩展的行数
+        /// </summary>
+        public static int ExtendRowCount { get; set; }
+        /// <summary>
+        /// 行偏置时间[单位：us]
+        /// </summary>
+        public static int ExtendLineOffset { get; set; }
+        /// <summary>
+        /// [Y方向]的偏置
+        /// </summary>
+        public static int ExtendRowOffset { get; set; }
+        /// <summary>
+        /// 双向扫描中奇数偶数行错位的像素数
+        /// </summary>
+        public static int ScanPixelCalibration { get; set; }
+        /// <summary>
+        /// 行边缘区域除数因子
+        /// </summary>
+        public static double ExtendLineMarginDiv { get; set; }
+        /// <summary>
+        /// 全视场范围
+        /// </summary>
+        public static RectangleF FullRange { get; }
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public Z1ScanField(float x, float y, float width, float height)
+        public RectangleF ScanRange { get { return mScanRange; } set { mScanRange = value; } }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private RectangleF mScanRange;
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        static Z1ScanField()
         {
-            ScanField = new RectangleF(x, y, width, height);
+            ExtendLineTime = EXTEND_LINE_TIME_DEFAULT;
+            ExtendRowCount = EXTEND_ROW_COUNT_DEFAULT;
+            ExtendLineOffset = 0;
+            ExtendRowOffset = 0;
+            ScanPixelCalibration = 0;
+            ExtendLineMarginDiv = 50;
+            FullRange = new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT);
         }
 
+        public Z1ScanField(float x, float y, float width, float height)
+        {
+            mScanRange = new RectangleF(x, y, width, height);
+        }
     }
 
     /// <summary>
@@ -438,8 +440,6 @@ namespace confocal_core
         private static readonly double CURVE_COFF_DEFAULT = 1.1;                        // 曲线系数
         private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;                 // 像素采样速率
         ///////////////////////////////////////////////////////////////////////////////////////////
- 
-        ///////////////////////////////////////////////////////////////////////////////////////////
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
         public SCANNER_SYSTEM Scanners { get; set; }                        // 扫描振镜
@@ -451,7 +451,6 @@ namespace confocal_core
         public SCAN_PIXEL_DWELL ScanPixelDwell { get; set; }                // 扫描时间
         public SCAN_CHANNEL_SEQUENCE ScanChannelSequence { get; set; }      // 扫描通道序列
         public SCAN_AREA ScanArea { get; set; }                             // 扫描区域类型
-        public Z1ScanRangeExtend ScanRangeExtend { get; set; }              // 扫描范围补偿
         public Z1ScanField[] ScanFields { get; set; }                       // 扫描范围  
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
@@ -474,14 +473,16 @@ namespace confocal_core
             ScanPixelDwell = SCAN_PIXEL_DWELL.MICROSECONDS2;
             ScanChannelSequence = SCAN_CHANNEL_SEQUENCE.NONE;
             ScanArea = SCAN_AREA.FULLFIELD;
-            ScanRangeExtend = new Z1ScanRangeExtend();
+
+            float fullRange = Z1ScanField.FullRange.Width;
             ScanFields = new Z1ScanField[]
             {
-                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, -Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT),
-                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, -Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT),
-                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, -Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2),
-                new Z1ScanField(-Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / 2, 0, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT, Z1ScanField.FULL_SCAN_FIELD_SIZE_DEFAULT / (int)ScanPixels)
+                new Z1ScanField(-fullRange / 2, -fullRange / 2, fullRange, fullRange),
+                new Z1ScanField(-fullRange / 2, -fullRange / 2, fullRange, fullRange),
+                new Z1ScanField(-fullRange / 2, -fullRange / 2, fullRange, fullRange / 2),
+                new Z1ScanField(-fullRange / 2, 0, fullRange, fullRange / (int)ScanPixels)
             };
+
             ScanChannels = new Z1ScanChannel[]
             {
                 new Z1ScanChannel(CHAN_ID.WAVELENGTH_405_NM, "405nm", Color.MediumPurple),
@@ -500,7 +501,7 @@ namespace confocal_core
         /// <returns></returns>
         public float GetPixelSize()
         {
-            return ScanFields[(int)ScanArea].ScanField.Width / (int)ScanPixels;
+            return ScanFields[(int)ScanArea].ScanRange.Width / (int)ScanPixels;
         }
 
         /// <summary>
@@ -518,10 +519,10 @@ namespace confocal_core
         /// <returns></returns>
         public Z1ScanField GetExtendScanField()
         {
-            RectangleF scanField = ScanFields[(int)ScanArea].ScanField;
-            float xExtendRange = scanField.Width / ((int)ScanPixelDwell * (int)ScanPixels);
-            float yExtendRange = GetPixelSize() * ScanRangeExtend.ScanRangeYExtendRows;
-            return new Z1ScanField(scanField.X - xExtendRange / 2, scanField.Y - yExtendRange / 2, scanField.Width + xExtendRange, scanField.Height + yExtendRange);
+            RectangleF scanRange = ScanFields[(int)ScanArea].ScanRange;
+            float xExtendRange = scanRange.Width / ((int)ScanPixelDwell * (int)ScanPixels);
+            float yExtendRange = GetPixelSize() * Z1ScanField.ExtendRowCount;
+            return new Z1ScanField(scanRange.X - xExtendRange / 2, scanRange.Y - yExtendRange / 2, scanRange.Width + xExtendRange, scanRange.Height + yExtendRange);
         }
 
         /// <summary>
@@ -530,7 +531,7 @@ namespace confocal_core
         /// <returns></returns>
         public int GetExtendScanXPixels()
         {
-            return (int)ScanPixels + (ScanRangeExtend.ScanRangeXExtendTime >> 1) / (int)ScanPixelDwell * 2;
+            return (int)ScanPixels + (Z1ScanField.ExtendLineTime >> 1) / (int)ScanPixelDwell * 2;
         }
 
         /// <summary>
@@ -539,7 +540,7 @@ namespace confocal_core
         /// <returns></returns>
         public int GetExtendScanYPixels()
         {
-            return (int)ScanPixels + ScanRangeExtend.ScanRangeYExtendRows;
+            return (int)ScanPixels + Z1ScanField.ExtendRowCount;
         }
 
     }

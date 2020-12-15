@@ -57,14 +57,14 @@ namespace confocal_core
         public static void CalculateScanParams(Z1Config config, ref Z1ScanParams scanParams)
         {
             Z1ScanProperty scanProperty = config.ScanProperty;
-            RectangleF scanField = scanProperty.ScanFields[(int)scanProperty.ScanArea].ScanField;
+            RectangleF scanField = scanProperty.ScanFields[(int)scanProperty.ScanArea].ScanRange;
 
             scanParams.PixelSampleRate = scanProperty.PixelSampleRate;
             scanParams.AiSampleRate = scanParams.PixelSampleRate;
             scanParams.CtrSampleRate = scanParams.PixelSampleRate;
             scanParams.AoSampleRate = 1e6 / (int)scanProperty.ScanPixelDwell;       // 扫描
 
-            double pixelSize = scanField.Width / (int)scanProperty.ScanPixels;                                          // 像素尺寸 = 扫描宽度(um) / 行成像像素数, 单位：um/pixel
+            double pixelSize = scanField.Width / (int)scanProperty.ScanPixels;       // 像素尺寸 = 扫描宽度(um) / 行成像像素数, 单位：um/pixel
             int xScanPixels = scanProperty.GetExtendScanXPixels();                   // 行扫描像素数 = 行成像像素数 + 补偿像素数
             double voltagePerPixel = scanProperty.GalvanoProperty.GalvanoCalibrationVoltage * scanProperty.GalvanoProperty.GalvanoCalibrationFactor * pixelSize;  // 像素电压, 单位：V/pixel
 
