@@ -303,8 +303,10 @@ namespace confocal_core
         public static RectangleF FullRange { get; }
         ///////////////////////////////////////////////////////////////////////////////////////////
         public RectangleF ScanRange { get { return mScanRange; } set { mScanRange = value; } }
+        public SCAN_AREA ScanArea { get { return mScanArea; } set { mScanArea = value; } }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private RectangleF mScanRange;
+        private SCAN_AREA mScanArea;
         ///////////////////////////////////////////////////////////////////////////////////////////
         static Z1ScanField()
         {
@@ -317,10 +319,24 @@ namespace confocal_core
             FullRange = new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT);
         }
 
-        public Z1ScanField(float x, float y, float width, float height)
+        public Z1ScanField(SCAN_AREA scanArea, float x, float y, float width, float height)
         {
+            mScanArea = scanArea;
             mScanRange = new RectangleF(x, y, width, height);
         }
+
+        public Z1ScanField(SCAN_AREA scanArea, RectangleF scanRange)
+        {
+            mScanArea = scanArea;
+            mScanRange = scanRange;
+        }
+
+        public Z1ScanField(SCAN_AREA scanArea, PointF location, SizeF size)
+        {
+            mScanArea = scanArea;
+            mScanRange = new RectangleF(location, size);
+        }
+
     }
 
     /// <summary>
@@ -330,33 +346,33 @@ namespace confocal_core
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;              // 振镜响应时间, us
-        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5 * 1000;   // 校准[标定]电压,um/V
+        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5 * 1000;   // 校准[标定]电压,V/um
         private static readonly double CALIBRATION_FACTOR_DEFAULT = 1.0;                // 校准系数
-        private static readonly double XOFFSET_VOLTAGE_DEFAULT = 0; 
-        private static readonly double YOFFSET_VOLTAGE_DEFAULT = 0;
+        private static readonly double XOFFSET_VOLTAGE_DEFAULT = 0;                     // X=0位置对应的偏置电压
+        private static readonly double YOFFSET_VOLTAGE_DEFAULT = 0;                     // Y=0位置对应的偏置电压
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// X轴原点坐标对应的振镜电压偏置
         /// </summary>
-        public double XOffsetVoltage { get; set; }
+        public static double XOffsetVoltage { get; set; }
         /// <summary>
         /// Y轴原点坐标对应的振镜电压偏置
         /// </summary>
-        public double YOffsetVoltage { get; set; }
+        public static double YOffsetVoltage { get; set; }
         /// <summary>
         /// 振镜响应时间
         /// </summary>
-        public double GalvanoResponseTime { get; set; }
+        public static double GalvanoResponseTime { get; set; }
         /// <summary>
-        /// 振镜校准电压，单位：um/V
+        /// 振镜校准电压，单位：V/um
         /// </summary>
-        public double GalvanoCalibrationVoltage { get; set; }
+        public static double GalvanoCalibrationVoltage { get; set; }
         /// <summary>
         /// 振镜校准系数
         /// </summary>
-        public double GalvanoCalibrationFactor { get; set; }
+        public static double GalvanoCalibrationFactor { get; set; }
 
-        public Z1GalvanoProperty()
+        static Z1GalvanoProperty()
         {
             XOffsetVoltage = XOFFSET_VOLTAGE_DEFAULT;
             YOffsetVoltage = YOFFSET_VOLTAGE_DEFAULT;
@@ -365,12 +381,22 @@ namespace confocal_core
             GalvanoCalibrationFactor = CALIBRATION_FACTOR_DEFAULT;
         }
 
-        public double XCoordinateToVoltage(double xCoordinate)
+        /// <summary>
+        /// X坐标->X振镜电压
+        /// </summary>
+        /// <param name="xCoordinate"></param>
+        /// <returns></returns>
+        public static double XCoordinateToVoltage(double xCoordinate)
         {
             return xCoordinate * GalvanoCalibrationVoltage * GalvanoCalibrationFactor + XOffsetVoltage;
         }
 
-        public double[] XCoordinateToVoltage(double[] xCoordinates)
+        /// <summary>
+        /// X坐标序列->X振镜电压序列
+        /// </summary>
+        /// <param name="xCoordinates"></param>
+        /// <returns></returns>
+        public static double[] XCoordinateToVoltage(double[] xCoordinates)
         {
             double coff = GalvanoCalibrationVoltage * GalvanoCalibrationFactor;
             double[] xVoltages = new double[xCoordinates.Length];
@@ -381,12 +407,22 @@ namespace confocal_core
             return xVoltages;
         }
 
-        public double YCoordinateToVoltage(double yCoordinate)
+        /// <summary>
+        /// Y坐标->Y振镜电压
+        /// </summary>
+        /// <param name="yCoordinate"></param>
+        /// <returns></returns>
+        public static double YCoordinateToVoltage(double yCoordinate)
         {
             return yCoordinate * GalvanoCalibrationVoltage * GalvanoCalibrationFactor + YOffsetVoltage;
         }
 
-        public double[] YCoordinateToVoltage(double[] yCoordinates)
+        /// <summary>
+        /// Y坐标序列->Y振镜电压序列
+        /// </summary>
+        /// <param name="yCoordinates"></param>
+        /// <returns></returns>
+        public static double[] YCoordinateToVoltage(double[] yCoordinates)
         {
             double coff = GalvanoCalibrationVoltage * GalvanoCalibrationFactor;
             double[] yVoltages = new double[yCoordinates.Length];
@@ -397,12 +433,22 @@ namespace confocal_core
             return yVoltages;
         }
 
-        public double XVoltageToCoordinate(double xVoltage)
+        /// <summary>
+        /// X振镜电压->X坐标
+        /// </summary>
+        /// <param name="xVoltage"></param>
+        /// <returns></returns>
+        public static double XVoltageToCoordinate(double xVoltage)
         {
             return (xVoltage - XOffsetVoltage) / GalvanoCalibrationFactor / GalvanoCalibrationVoltage;
         }
 
-        public double[] XVoltageToCoordinate(double[] xVoltages)
+        /// <summary>
+        /// X振镜电压序列->X坐标序列
+        /// </summary>
+        /// <param name="xVoltages"></param>
+        /// <returns></returns>
+        public static double[] XVoltageToCoordinate(double[] xVoltages)
         {
             double coff = GalvanoCalibrationFactor * GalvanoCalibrationVoltage;
             double[] xCoordinates = new double[xVoltages.Length];
@@ -413,12 +459,22 @@ namespace confocal_core
             return xCoordinates;
         }
 
-        public double YVoltageToCoordinate(double yVoltage)
+        /// <summary>
+        /// Y振镜电压->Y坐标
+        /// </summary>
+        /// <param name="yVoltage"></param>
+        /// <returns></returns>
+        public static double YVoltageToCoordinate(double yVoltage)
         {
             return (yVoltage - YOffsetVoltage) / GalvanoCalibrationFactor / GalvanoCalibrationVoltage;
         }
 
-        public double[] YVoltageToCoordinate(double[] yVoltages)
+        /// <summary>
+        /// Y振镜电压序列->Y坐标序列
+        /// </summary>
+        /// <param name="yVoltages"></param>
+        /// <returns></returns>
+        public static double[] YVoltageToCoordinate(double[] yVoltages)
         {
             double coff = GalvanoCalibrationFactor * GalvanoCalibrationVoltage;
             double[] yCoordinates = new double[yVoltages.Length];
@@ -456,9 +512,9 @@ namespace confocal_core
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
         public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
         public double CurveCalibrationFactor { get; set; }                  // 曲线校正因子
-        public double ScanLineStartTime { get { return GalvanoProperty.GalvanoResponseTime * 2; } }     // 扫描行起始时间[单双向有效]
-        public double ScanLineHoldTime { get { return GalvanoProperty.GalvanoResponseTime; } }          // 扫描行起始时间[只对单向扫描有效]
-        public double ScanLineEndTime { get { return GalvanoProperty.GalvanoResponseTime; } }           // 扫描行结束时间[只对单向扫描有效]
+        public double ScanLineStartTime { get { return Z1GalvanoProperty.GalvanoResponseTime * 2; } }     // 扫描行起始时间[单双向有效]
+        public double ScanLineHoldTime { get { return Z1GalvanoProperty.GalvanoResponseTime; } }          // 扫描行起始时间[只对单向扫描有效]
+        public double ScanLineEndTime { get { return Z1GalvanoProperty.GalvanoResponseTime; } }           // 扫描行结束时间[只对单向扫描有效]
         ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanProperty()
         {
@@ -477,10 +533,10 @@ namespace confocal_core
             float fullRange = Z1ScanField.FullRange.Width;
             ScanFields = new Z1ScanField[]
             {
-                new Z1ScanField(-fullRange / 2, -fullRange / 2, fullRange, fullRange),
-                new Z1ScanField(-fullRange / 2, -fullRange / 2, fullRange, fullRange),
-                new Z1ScanField(-fullRange / 2, -fullRange / 2, fullRange, fullRange / 2),
-                new Z1ScanField(-fullRange / 2, 0, fullRange, fullRange / (int)ScanPixels)
+                new Z1ScanField(SCAN_AREA.FULLFIELD, -fullRange / 2, -fullRange / 2, fullRange, fullRange),
+                new Z1ScanField(SCAN_AREA.SQUARE, -fullRange / 2, -fullRange / 2, fullRange, fullRange),
+                new Z1ScanField(SCAN_AREA.BANK, -fullRange / 2, -fullRange / 2, fullRange, fullRange / 2),
+                new Z1ScanField(SCAN_AREA.LINE, -fullRange / 2, 0, fullRange, fullRange / (int)ScanPixels)
             };
 
             ScanChannels = new Z1ScanChannel[]
@@ -501,7 +557,16 @@ namespace confocal_core
         /// <returns></returns>
         public float GetPixelSize()
         {
-            return ScanFields[(int)ScanArea].ScanRange.Width / (int)ScanPixels;
+            return GetScanField().ScanRange.Width / (int)ScanPixels;
+        }
+
+        /// <summary>
+        /// 像素电压[单位：V/pixel]
+        /// </summary>
+        /// <returns></returns>
+        public double GetPixelVoltage()
+        {
+            return GetPixelSize() * Z1GalvanoProperty.GalvanoCalibrationVoltage * Z1GalvanoProperty.GalvanoCalibrationFactor;
         }
 
         /// <summary>
@@ -519,10 +584,11 @@ namespace confocal_core
         /// <returns></returns>
         public Z1ScanField GetExtendScanField()
         {
-            RectangleF scanRange = ScanFields[(int)ScanArea].ScanRange;
-            float xExtendRange = scanRange.Width / ((int)ScanPixelDwell * (int)ScanPixels);
-            float yExtendRange = GetPixelSize() * Z1ScanField.ExtendRowCount;
-            return new Z1ScanField(scanRange.X - xExtendRange / 2, scanRange.Y - yExtendRange / 2, scanRange.Width + xExtendRange, scanRange.Height + yExtendRange);
+            Z1ScanField scanField = GetScanField();
+            RectangleF scanRange = scanField.ScanRange;
+            float xExtendRange = Z1ScanField.ExtendLineTime * scanRange.Width / ((int)ScanPixelDwell * (int)ScanPixels);
+            float yExtendRange = Z1ScanField.ExtendRowCount * GetPixelSize();
+            return new Z1ScanField(scanField.ScanArea, scanRange.X - xExtendRange / 2, scanRange.Y - yExtendRange / 2, scanRange.Width + xExtendRange, scanRange.Height + yExtendRange);
         }
 
         /// <summary>
@@ -531,7 +597,25 @@ namespace confocal_core
         /// <returns></returns>
         public int GetExtendScanXPixels()
         {
-            return (int)ScanPixels + (Z1ScanField.ExtendLineTime >> 1) / (int)ScanPixelDwell * 2;
+            return GetScanXPixels() + (Z1ScanField.ExtendLineTime >> 1) / (int)ScanPixelDwell * 2;
+        }
+
+        /// <summary>
+        /// 默认的扫描行数
+        /// </summary>
+        /// <returns></returns>
+        public int GetScanXPixels()
+        {
+            return (int)ScanPixels;
+        }
+
+        /// <summary>
+        /// 默认的扫描列数
+        /// </summary>
+        /// <returns></returns>
+        public int GetScanYPixels()
+        {
+            return (int)ScanPixels;
         }
 
         /// <summary>
@@ -540,7 +624,7 @@ namespace confocal_core
         /// <returns></returns>
         public int GetExtendScanYPixels()
         {
-            return (int)ScanPixels + Z1ScanField.ExtendRowCount;
+            return GetScanYPixels() + Z1ScanField.ExtendRowCount;
         }
 
     }

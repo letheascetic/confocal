@@ -66,7 +66,7 @@ namespace confocal_core
 
             double pixelSize = scanField.Width / (int)scanProperty.ScanPixels;       // 像素尺寸 = 扫描宽度(um) / 行成像像素数, 单位：um/pixel
             int xScanPixels = scanProperty.GetExtendScanXPixels();                   // 行扫描像素数 = 行成像像素数 + 补偿像素数
-            double voltagePerPixel = scanProperty.GalvanoProperty.GalvanoCalibrationVoltage * scanProperty.GalvanoProperty.GalvanoCalibrationFactor * pixelSize;  // 像素电压, 单位：V/pixel
+            double voltagePerPixel = scanProperty.GetPixelVoltage();                 // 像素电压, 单位：V/pixel
 
             double w = (int)scanProperty.ScanPixelDwell * xScanPixels / 1000;        // 行有效样本区间的时间范围，单位：ms
             double h = voltagePerPixel * xScanPixels;                                // 行有效样本区间的电压范围，单位：V
