@@ -301,9 +301,21 @@ namespace confocal_core
         /// 全视场范围
         /// </summary>
         public static RectangleF FullRange { get; }
+        /// <summary>
+        /// 扫描行起始时间[单双向有效]
+        /// </summary>
+        public static double ScanLineStartTime { get { return Z1GalvanoProperty.GalvanoResponseTime * 2; } }
+        /// <summary>
+        /// 扫描行起始时间[只对单向扫描有效]
+        /// </summary>
+        public static double ScanLineHoldTime { get { return Z1GalvanoProperty.GalvanoResponseTime; } }
+        /// <summary>
+        /// 扫描行结束时间[只对单向扫描有效]
+        /// </summary>
+        public static double ScanLineEndTime { get { return Z1GalvanoProperty.GalvanoResponseTime; } }           
         ///////////////////////////////////////////////////////////////////////////////////////////
         public RectangleF ScanRange { get { return mScanRange; } set { mScanRange = value; } }
-        public SCAN_AREA ScanArea { get { return mScanArea; } set { mScanArea = value; } }
+        public SCAN_AREA ScanArea { get { return mScanArea; } }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private RectangleF mScanRange;
         private SCAN_AREA mScanArea;
@@ -493,8 +505,7 @@ namespace confocal_core
     public class Z1ScanProperty
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly double CURVE_COFF_DEFAULT = 1.1;                        // 曲线系数
-        private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;                 // 像素采样速率
+        private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;     // 像素采样速率
         ///////////////////////////////////////////////////////////////////////////////////////////
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
@@ -511,10 +522,6 @@ namespace confocal_core
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
         public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
-        public double CurveCalibrationFactor { get; set; }                  // 曲线校正因子
-        public double ScanLineStartTime { get { return Z1GalvanoProperty.GalvanoResponseTime * 2; } }     // 扫描行起始时间[单双向有效]
-        public double ScanLineHoldTime { get { return Z1GalvanoProperty.GalvanoResponseTime; } }          // 扫描行起始时间[只对单向扫描有效]
-        public double ScanLineEndTime { get { return Z1GalvanoProperty.GalvanoResponseTime; } }           // 扫描行结束时间[只对单向扫描有效]
         ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanProperty()
         {
@@ -547,7 +554,6 @@ namespace confocal_core
                 new Z1ScanChannel(CHAN_ID.WAVELENGTH_640_NM, "640nm", Color.Red)
             };
             GalvanoProperty = new Z1GalvanoProperty();
-            CurveCalibrationFactor = CURVE_COFF_DEFAULT;
             PixelSampleRate = PIXEL_SAMPLE_RATE_DEFAULT;
         }
 

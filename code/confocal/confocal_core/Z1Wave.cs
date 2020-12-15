@@ -10,31 +10,17 @@ namespace confocal_core
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
-        private volatile static Z1Wave pMave = null;
-        private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public byte[] TriggerWave { get; set; }
-        public double[] XWave { get; set; }
-        public double[] Y1Wave { get; set; }
-        public double[] Y2Wave { get; set; }
+        public static byte[] TriggerWave { get; set; }
+        public static double[] XWave { get; set; }
+        public static double[] Y1Wave { get; set; }
+        public static double[] Y2Wave { get; set; }
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public static Z1Wave GetScanWave()
+        public static void GenerateWave()
         {
-            if (pMave == null)
-            {
-                lock (locker)
-                {
-                    if (pMave == null)
-                    {
-                        pMave = new Z1Wave();
-                    }
-                }
-            }
-            return pMave;
+            
         }
-
-
 
     }
 }

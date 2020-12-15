@@ -70,7 +70,7 @@ namespace confocal_core
 
             double w = (int)scanProperty.ScanPixelDwell * xScanPixels / 1000;        // 行有效样本区间的时间范围，单位：ms
             double h = voltagePerPixel * xScanPixels;                                // 行有效样本区间的电压范围，单位：V
-            double r = scanProperty.CurveCalibrationFactor * h;                      // 圆弧半径
+            // double r = Z1ScanField.CurveCalibrationFactor * h;                      // 圆弧半径
 
         }
 
