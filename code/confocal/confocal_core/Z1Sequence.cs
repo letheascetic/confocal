@@ -14,7 +14,7 @@ namespace confocal_core
         private static readonly int TRIGGER_WIDTH_DEFAULT = 4;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// 触发电压序列[一次往返]
+        /// 触发电压序列[一帧]
         /// </summary>
         public static byte[] TriggerWave { get; set; }
         /// <summary>
@@ -32,15 +32,23 @@ namespace confocal_core
         /// <summary>
         /// 单帧电压序列数
         /// </summary>
-        public static long FrameCount { get; set; }
+        public static int FrameCount { get; set; }
         /// <summary>
         /// 单帧的往返次数
         /// </summary>
-        public static long RoundTripCount { get; set; }
+        public static int RoundTripCount { get; set; }
         /// <summary>
         /// 单行电压序列数
         /// </summary>
-        public static long LineCount { get; set; }
+        public static int LineCount { get; set; }
+        /// <summary>
+        /// 帧率
+        /// </summary>
+        public static double FPS { get; set; }
+        /// <summary>
+        /// 帧时间[单位：seconds/frame]
+        /// </summary>
+        public static double FrameTime { get; set; }
         ///////////////////////////////////////////////////////////////////////////////////////////
         public static double[] XCoordinates { get; set; }
         public static double[] YCoordinates { get; set; }
@@ -133,9 +141,61 @@ namespace confocal_core
             LineCount = XVoltages.Length;
             RoundTripCount = scanProperty.ScanDirection == SCAN_DIRECTION.UNIDIRECTION ? YVoltaegs.Length : YVoltaegs.Length / 2;
             FrameCount = LineCount * RoundTripCount;
+
+            FrameTime = FrameCount * (int)scanProperty.ScanPixelDwell / 1e6;
+            FPS = 1.0 / FrameTime;
         }
 
-        
+        /// <summary>
+        /// 生成帧电压序列 -- [暂未考虑LineAverage和LineIntegrate]
+        /// </summary>
+        /// <param name="scanProperty"></param>
+        public static void GenerateFrameScanWaves(Z1ScanProperty scanProperty)
+        {
+            WaveInitialize(scanProperty);
+
+            if (scanProperty.ScanDirection == SCAN_DIRECTION.UNIDIRECTION)
+            {
+                int index = -LineCount;
+                for (int n = 0; n < RoundTripCount; n++)
+                {
+                    index += LineCount;
+                    Array.Copy(XVoltages, 0, XWave, index, LineCount);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n], LineCount).ToArray(), 0, Y1Wave, index, LineCount);
+                    if (scanProperty.Scanners == SCANNER_SYSTEM.THREE_SCANNERS)
+                    {
+                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n] * 2, LineCount).ToArray(), 0, Y2Wave, index, LineCount);
+                    }
+                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, LineCount);
+                }
+            }
+            else
+            {
+                int index = -LineCount;
+                for (int n = 0; n < RoundTripCount; n++)
+                {
+                    index += LineCount;
+                    Array.Copy(XVoltages, 0, XWave, index, LineCount);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n], LineCount >> 1).ToArray(), 0, Y1Wave, index, LineCount >> 1);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1], LineCount >> 1).ToArray(), 0, Y1Wave, index + (LineCount >> 1), LineCount >> 1);
+                    if (scanProperty.Scanners == SCANNER_SYSTEM.THREE_SCANNERS)
+                    {
+                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n] * 2, LineCount >> 1).ToArray(), 0, Y2Wave, index, LineCount >> 1);
+                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1] * 2, LineCount >> 1).ToArray(), 0, Y2Wave, index + (LineCount >> 1), LineCount >> 1);
+                    }
+                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, LineCount);
+                }
+            }
+
+            int resetSampleCount = (int)(Z1ScanField.ScanLineStartTime / (int)scanProperty.ScanPixelDwell);
+            double[] y1ResetVoltages = CreateLinearArray(YVoltaegs.Last(), YVoltaegs[0], resetSampleCount);
+            Array.Copy(y1ResetVoltages, 0, Y1Wave, 0, resetSampleCount);
+            if (scanProperty.Scanners == SCANNER_SYSTEM.THREE_SCANNERS)
+            {
+                double[] y2ResetVoltages = CreateLinearArray(YVoltaegs.Last() * 2, YVoltaegs[0] * 2, resetSampleCount);
+                Array.Copy(y2ResetVoltages, 0, Y2Wave, 0, resetSampleCount);
+            }
+        }
 
         private static void WaveInitialize(Z1ScanProperty scanProperty)
         {
@@ -197,10 +257,5 @@ namespace confocal_core
             return array;
         }
 
-        public static void GenerateFrameScanWaves(Z1ScanProperty scanProperty)
-        {
-            WaveInitialize(scanProperty);
-            
-        }
     }
 }
