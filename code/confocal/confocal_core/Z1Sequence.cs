@@ -12,6 +12,7 @@ namespace confocal_core
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         private static readonly int TRIGGER_WIDTH_DEFAULT = 4;
+        private static readonly double ACQUISITION_INTERVAL_DEFAULT = 50;
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// 触发电压序列[一帧]
@@ -32,15 +33,56 @@ namespace confocal_core
         /// <summary>
         /// 单帧电压序列数
         /// </summary>
-        public static int FrameCount { get; set; }
+        public static int OutputSampleCountPerFrame { get; set; }
         /// <summary>
         /// 单帧的往返次数
         /// </summary>
-        public static int RoundTripCount { get; set; }
+        public static int OutputRoundTripCountPerFrame { get; set; }
         /// <summary>
         /// 单行电压序列数
         /// </summary>
-        public static int LineCount { get; set; }
+        public static int OutputSampleCountPerRoundTrip { get; set; }
+        /// <summary>
+        /// 电压序列输出速率
+        /// </summary>
+        public static double OutputSampleRate { get; set; }
+        /// <summary>
+        /// 样本采样速率
+        /// </summary>
+        public static double InputSampleRate { get; set; }
+        /// <summary>
+        /// 单次往返采集的样本数
+        /// </summary>
+        public static int InputSampleCountPerRoundTrip { get; set; }
+        /// <summary>
+        /// 单帧采集的往返次数
+        /// </summary>
+        public static int InputRoundTripCountPerFrame { get; set; }
+        /// <summary>
+        /// 单帧采集的样本数
+        /// </summary>
+        public static int InputSampleCountPerFrame { get; set; }
+        /// <summary>
+        /// 单像素采集的样本数
+        /// </summary>
+        public static int InputSampleCountPerPixel { get; set; }
+        /// <summary>
+        /// 单次采集的样本数
+        /// </summary>
+        public static int InputSampleCountPerAcquisition { get; set; }
+        /// <summary>
+        /// 单次采集的像素数
+        /// </summary>
+        public static int InputPixelCountPerAcquisition { get; set; }
+        /// <summary>
+        /// 单次采集的往返次数
+        /// </summary>
+        public static int InputRoundTripCountPerAcquisition { get; set; }
+        /// <summary>
+        /// 单帧包含的采集次数
+        /// </summary>
+        public static int InputAcquisitionCountPerFrame { get; set; }
+
         /// <summary>
         /// 帧率
         /// </summary>
@@ -138,11 +180,43 @@ namespace confocal_core
             XVoltages = Z1GalvanoProperty.XCoordinateToVoltage(XCoordinates);
             YVoltaegs = Z1GalvanoProperty.YCoordinateToVoltage(YCoordinates);
 
-            LineCount = XVoltages.Length;
-            RoundTripCount = scanProperty.ScanDirection == SCAN_DIRECTION.UNIDIRECTION ? YVoltaegs.Length : YVoltaegs.Length / 2;
-            FrameCount = LineCount * RoundTripCount;
+            // 计算输出相关参数
+            OutputSampleRate = 1e6 / (int)scanProperty.ScanPixelDwell;
+            OutputSampleCountPerRoundTrip = XVoltages.Length;
+            OutputRoundTripCountPerFrame = scanProperty.ScanDirection == SCAN_DIRECTION.UNIDIRECTION ? YVoltaegs.Length : YVoltaegs.Length / 2;
+            OutputSampleCountPerFrame = OutputSampleCountPerRoundTrip * OutputRoundTripCountPerFrame;
 
-            FrameTime = FrameCount * (int)scanProperty.ScanPixelDwell / 1e6;
+            // 计算采集相关参数
+            InputSampleRate = scanProperty.InputSampleRate;
+            InputSampleCountPerPixel = (int)(InputSampleRate / OutputSampleRate);
+            InputRoundTripCountPerFrame = OutputRoundTripCountPerFrame;
+            if (scanProperty.ScanDirection == SCAN_DIRECTION.UNIDIRECTION)
+            {
+                InputSampleCountPerRoundTrip = (int)(extendScanRange.Width / scanProperty.GetPixelSize()) * InputSampleCountPerPixel;
+            }
+            else
+            {
+                InputSampleCountPerRoundTrip = (int)(extendScanRange.Width / scanProperty.GetPixelSize()) * InputSampleCountPerPixel * 2;
+            }
+            InputSampleCountPerFrame = InputRoundTripCountPerFrame * InputSampleCountPerRoundTrip;
+
+            double roundTripTime = OutputSampleCountPerRoundTrip * (int)scanProperty.ScanPixelDwell / 1e6;
+            int nRoundTrips = (int)Math.Ceiling(ACQUISITION_INTERVAL_DEFAULT / roundTripTime);
+            while (nRoundTrips > 1)
+            {
+                if (OutputRoundTripCountPerFrame % nRoundTrips == 0)
+                {
+                    break;
+                }
+                nRoundTrips--;
+            }
+            InputRoundTripCountPerAcquisition = nRoundTrips;                                // 单次采集的往返次数
+            InputSampleCountPerAcquisition = InputSampleCountPerRoundTrip * nRoundTrips;    // 单次采集的样本数
+            InputPixelCountPerAcquisition = InputSampleCountPerAcquisition / InputSampleCountPerPixel;  // 单次采集的像素数
+            InputAcquisitionCountPerFrame = InputRoundTripCountPerFrame / nRoundTrips;      // 单帧包含的采集次数
+
+            // 帧率和帧时间
+            FrameTime = OutputSampleCountPerFrame * (int)scanProperty.ScanPixelDwell / 1e6;
             FPS = 1.0 / FrameTime;
         }
 
@@ -156,34 +230,34 @@ namespace confocal_core
 
             if (scanProperty.ScanDirection == SCAN_DIRECTION.UNIDIRECTION)
             {
-                int index = -LineCount;
-                for (int n = 0; n < RoundTripCount; n++)
+                int index = -OutputSampleCountPerRoundTrip;
+                for (int n = 0; n < OutputRoundTripCountPerFrame; n++)
                 {
-                    index += LineCount;
-                    Array.Copy(XVoltages, 0, XWave, index, LineCount);
-                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n], LineCount).ToArray(), 0, Y1Wave, index, LineCount);
+                    index += OutputSampleCountPerRoundTrip;
+                    Array.Copy(XVoltages, 0, XWave, index, OutputSampleCountPerRoundTrip);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n], OutputSampleCountPerRoundTrip).ToArray(), 0, Y1Wave, index, OutputSampleCountPerRoundTrip);
                     if (scanProperty.Scanners == SCANNER_SYSTEM.THREE_SCANNERS)
                     {
-                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n] * 2, LineCount).ToArray(), 0, Y2Wave, index, LineCount);
+                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n] * 2, OutputSampleCountPerRoundTrip).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip);
                     }
-                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, LineCount);
+                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, OutputSampleCountPerRoundTrip);
                 }
             }
             else
             {
-                int index = -LineCount;
-                for (int n = 0; n < RoundTripCount; n++)
+                int index = -OutputSampleCountPerRoundTrip;
+                for (int n = 0; n < OutputRoundTripCountPerFrame; n++)
                 {
-                    index += LineCount;
-                    Array.Copy(XVoltages, 0, XWave, index, LineCount);
-                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n], LineCount >> 1).ToArray(), 0, Y1Wave, index, LineCount >> 1);
-                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1], LineCount >> 1).ToArray(), 0, Y1Wave, index + (LineCount >> 1), LineCount >> 1);
+                    index += OutputSampleCountPerRoundTrip;
+                    Array.Copy(XVoltages, 0, XWave, index, OutputSampleCountPerRoundTrip);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n], OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y1Wave, index, OutputSampleCountPerRoundTrip >> 1);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1], OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y1Wave, index + (OutputSampleCountPerRoundTrip >> 1), OutputSampleCountPerRoundTrip >> 1);
                     if (scanProperty.Scanners == SCANNER_SYSTEM.THREE_SCANNERS)
                     {
-                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n] * 2, LineCount >> 1).ToArray(), 0, Y2Wave, index, LineCount >> 1);
-                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1] * 2, LineCount >> 1).ToArray(), 0, Y2Wave, index + (LineCount >> 1), LineCount >> 1);
+                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip >> 1);
+                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index + (OutputSampleCountPerRoundTrip >> 1), OutputSampleCountPerRoundTrip >> 1);
                     }
-                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, LineCount);
+                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, OutputSampleCountPerRoundTrip);
                 }
             }
 
@@ -199,26 +273,26 @@ namespace confocal_core
 
         private static void WaveInitialize(Z1ScanProperty scanProperty)
         {
-            if (TriggerWave == null || TriggerWave.Length != LineCount)
+            if (TriggerWave == null || TriggerWave.Length != OutputSampleCountPerRoundTrip)
             {
-                TriggerWave = new byte[LineCount];
+                TriggerWave = new byte[OutputSampleCountPerRoundTrip];
             }
 
-            if (XWave == null || XWave.Length != FrameCount)
+            if (XWave == null || XWave.Length != OutputSampleCountPerFrame)
             {
-                XWave = new double[FrameCount];
+                XWave = new double[OutputSampleCountPerFrame];
             }
 
-            if (Y1Wave == null || Y1Wave.Length != FrameCount)
+            if (Y1Wave == null || Y1Wave.Length != OutputSampleCountPerFrame)
             {
-                Y1Wave = new double[FrameCount];
+                Y1Wave = new double[OutputSampleCountPerFrame];
             }
 
             if (scanProperty.Scanners == SCANNER_SYSTEM.THREE_SCANNERS)
             {
-                if (Y2Wave == null || Y2Wave.Length != FrameCount)
+                if (Y2Wave == null || Y2Wave.Length != OutputSampleCountPerFrame)
                 {
-                    Y2Wave = new double[FrameCount];
+                    Y2Wave = new double[OutputSampleCountPerFrame];
                 }
             }
         }

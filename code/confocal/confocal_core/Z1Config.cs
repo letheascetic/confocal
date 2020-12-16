@@ -505,7 +505,7 @@ namespace confocal_core
     public class Z1ScanProperty
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly double PIXEL_SAMPLE_RATE_DEFAULT = 1e6;     // 像素采样速率
+        private static readonly double INPUT_SAMPLE_RATE_DEFAULT = 1e6;     // 像素采样速率
         ///////////////////////////////////////////////////////////////////////////////////////////
         public SCAN_MODE ScanMode { get; set; }                             // 扫描模式
         public SCAN_DIRECTION ScanDirection { get; set; }                   // 扫描方向
@@ -521,7 +521,7 @@ namespace confocal_core
         public Z1ScanField[] ScanFields { get; set; }                       // 扫描范围  
         public Z1ScanChannel[] ScanChannels { get; set; }                   // 扫描通道
         public Z1GalvanoProperty GalvanoProperty { get; set; }              // 振镜属性
-        public double PixelSampleRate { get; set; }                         // 像素速率[采样速率]
+        public double InputSampleRate { get; set; }                         // 像素速率[采样速率]
         ///////////////////////////////////////////////////////////////////////////////////////////
         public Z1ScanProperty()
         {
@@ -554,7 +554,7 @@ namespace confocal_core
                 new Z1ScanChannel(CHAN_ID.WAVELENGTH_640_NM, "640nm", Color.Red)
             };
             GalvanoProperty = new Z1GalvanoProperty();
-            PixelSampleRate = PIXEL_SAMPLE_RATE_DEFAULT;
+            InputSampleRate = INPUT_SAMPLE_RATE_DEFAULT;
         }
 
         /// <summary>

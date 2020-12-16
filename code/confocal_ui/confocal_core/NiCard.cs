@@ -33,6 +33,7 @@ namespace confocal_core
         private Task m_doTask;
         private Task m_aiTask;
         private Task[] m_ciTasks;
+
         private AnalogUnscaledReader m_aiUnscaledReader;
         private CounterSingleChannelReader[] m_ciChannelReaders;
         ///////////////////////////////////////////////////////////////////////////////////////////

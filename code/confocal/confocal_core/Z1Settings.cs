@@ -110,7 +110,7 @@ namespace confocal_core
             return pfis.ToArray();
         }
 
-        public static Z1Settings GetSysConfig()
+        public static Z1Settings GetSettings()
         {
             if (pSettings == null)
             {
