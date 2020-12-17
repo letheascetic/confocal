@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "confocal_ui", "confocal_ui\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "confocal_core", "confocal_core\confocal_core.csproj", "{432AA977-3289-4711-8622-07C69DA4CE08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "confocal_wpf", "confocal_wpf\confocal_wpf.csproj", "{A37C602B-F5EA-4CBF-B679-B133567AB239}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{432AA977-3289-4711-8622-07C69DA4CE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{432AA977-3289-4711-8622-07C69DA4CE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432AA977-3289-4711-8622-07C69DA4CE08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
