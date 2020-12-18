@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:confocal_wpf"
         mc:Ignorable="d"
         Title="Confocal Imaging" Height="450" Width="800">
+    <Window.DataContext>
+        <Binding Path="Main" Source="{StaticResource Locator}"></Binding>
+    </Window.DataContext>
     <Grid>
-        
+        <Button Content="Button" HorizontalAlignment="Left" Height="32.653" Margin="113.347,160.755,0,0" VerticalAlignment="Top" Width="93.877"/>
+
     </Grid>
 </Window>
