@@ -18,6 +18,7 @@ namespace confocal_wpf.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ScanWindowViewModel>();
         }
 
         public MainViewModel Main
@@ -25,6 +26,14 @@ namespace confocal_wpf.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public ScanWindowViewModel ScanWindow
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ScanWindowViewModel>();
             }
         }
         
