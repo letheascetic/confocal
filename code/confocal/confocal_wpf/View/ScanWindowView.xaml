@@ -1,0 +1,32 @@
+﻿<Window x:Class="confocal_wpf.View.ScanWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:confocal_wpf.View"
+        mc:Ignorable="d"
+        Title="ScanWindowView" Height="600" Width="350" Background="#FF646464">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                <Button Content="LIVE" Width="100" Height="50" Margin="5" Background="{x:Null}" />
+                <Button Content="CAPTURE" Width="100" Height="50" Margin="5" Background="{x:Null}" />
+                <Button Content="SCANNERS" Width="100" Height="50" Margin="5" Background="{x:Null}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <GroupBox Margin="5">
+                    <GroupBox.Header >
+                        <TextBlock Text ="帧信息"/>
+                    </GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="帧率：1.00fps" Width="100" Margin="0,10"/>
+                    <TextBlock Text="帧时间：1.00s" Width="100" Margin="0,10"/>
+                    </StackPanel>
+                </GroupBox>
+                <Button Content="SCANNERS" Width="100" Height="50" Margin="5" Background="{x:Null}" />
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
