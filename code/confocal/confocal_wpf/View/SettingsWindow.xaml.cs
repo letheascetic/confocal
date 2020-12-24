@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,11 +15,11 @@ using System.Windows.Shapes;
 namespace confocal_wpf.View
 {
     /// <summary>
-    /// ScanWindowView.xaml 的交互逻辑
+    /// SettingsWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ScanWindowView : Window
+    public partial class SettingsWindow : Window
     {
-        public ScanWindowView()
+        public SettingsWindow()
         {
             InitializeComponent();
         }

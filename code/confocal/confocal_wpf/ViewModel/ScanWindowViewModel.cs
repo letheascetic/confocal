@@ -162,12 +162,16 @@ namespace confocal_wpf.ViewModel
             set { selectScanPixelDwellCommand = value; }
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
+        private List<ScanChannelModel> scanChannels;
+         
+        /// <summary>
+        /// 扫描通道
+        /// </summary>
+        public List<ScanChannelModel> ScanChannels
+        {
+            get { return scanChannels; }
+            set { scanChannels = value; RaisePropertyChanged(() => ScanChannels); }
+        }
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -178,6 +182,7 @@ namespace confocal_wpf.ViewModel
             ScanModeList = ScanModeModel.Initialize();
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();
             ScanPixelsList = ScanPixelsModel.Initialize();
+            ScanChannels = ScanChannelModel.Initialize();
         }
 
     }

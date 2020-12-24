@@ -2,9 +2,9 @@ using GalaSoft.MvvmLight;
 
 namespace confocal_wpf.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
-        public MainViewModel()
+        public MainWindowViewModel()
         {
 
         }

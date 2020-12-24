@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:confocal_wpf.View"
-        xmlns:ni="http://schemas.ni.com/controls/2009/xaml/presentation" x:Class="confocal_wpf.View.ScanWindowView"
+        xmlns:ni="http://schemas.ni.com/controls/2009/xaml/presentation" x:Class="confocal_wpf.View.ScanWindow"
         mc:Ignorable="d"
         DataContext="{Binding Source={StaticResource Locator}, Path=ScanWindow}"
         Title="扫描" Height="600" Width="350" Background="#FF646464">
