@@ -15,10 +15,6 @@ namespace confocal_wpf.Model
     public class ScanChannelModel : ObservableObject
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly double LASER_POWER_DEFAULT = 2.0;
-        private static readonly double PMT_HV_DEFAULT = 2.5;
-        private static readonly double PIN_HOLE_SIZE_DEFAULT = 50;
-        ///////////////////////////////////////////////////////////////////////////////////////////
         private int id;                     // 通道ID
         private string name;                // 通道名
 
@@ -32,7 +28,7 @@ namespace confocal_wpf.Model
         private int offset;                 // 偏置
         private double gamma;               // 伽马
         private Color pseudoColor;          // 伪彩色
-
+        ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// 通道ID
         /// </summary>
@@ -137,16 +133,16 @@ namespace confocal_wpf.Model
             return new List<ScanChannelModel>()
             {
                 new ScanChannelModel(){ID = 0, Name = "405nm",
-                    LaserPower = LASER_POWER_DEFAULT, LaserColor = Color.MediumPurple, LaserWaveLength = "405nm",
+                    LaserPower = 2.0, LaserColor = Color.MediumPurple, LaserWaveLength = "405nm",
                     Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.MediumPurple},
                 new ScanChannelModel(){ID = 0, Name = "488nm",
-                    LaserPower = LASER_POWER_DEFAULT, LaserColor = Color.DarkCyan, LaserWaveLength = "488nm",
+                    LaserPower = 2.0, LaserColor = Color.DarkCyan, LaserWaveLength = "488nm",
                     Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.DarkCyan},
                 new ScanChannelModel(){ID = 0, Name = "561nm",
-                    LaserPower = LASER_POWER_DEFAULT, LaserColor = Color.YellowGreen, LaserWaveLength = "561nm",
+                    LaserPower = 2.0, LaserColor = Color.YellowGreen, LaserWaveLength = "561nm",
                     Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.YellowGreen},
                 new ScanChannelModel(){ID = 0, Name = "640nm",
-                    LaserPower = LASER_POWER_DEFAULT, LaserColor = Color.MediumVioletRed, LaserWaveLength = "640nm",
+                    LaserPower = 2.0, LaserColor = Color.MediumVioletRed, LaserWaveLength = "640nm",
                     Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.MediumVioletRed},
             };
         }

@@ -42,6 +42,12 @@
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,5,5,5" />
         </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Margin" Value="5,5,5,5" />
+        </Style>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Margin" Value="5,5,5,5" />
+        </Style>
 
     </Window.Resources>
 
@@ -118,11 +124,27 @@
         </GroupBox>
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-            <CheckBox Content="405nm"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <CheckBox Content="405nm" Width="200"/>
+                <Label Content="Laser 405nm" HorizontalContentAlignment="Right"/>
+                <Label Content="0.0" HorizontalContentAlignment="Right"/>
+            </StackPanel>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                <Slider>
-                    
-                </Slider>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="功率"/>
+                    <Slider Value="100"/>
+                    <TextBox Text="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="增益"/>
+                    <Slider Value="100"/>
+                    <TextBox Text="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="偏置"/>
+                    <Slider Value="100"/>
+                    <TextBox Text="100"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
