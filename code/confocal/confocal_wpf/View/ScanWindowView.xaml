@@ -17,7 +17,7 @@
             <Setter Property="Background" Value="#FF787878" />
             <Setter Property="BorderBrush" Value="#FF6464FF" />
         </Style>
-        <Style x:Key="BtnPixelDwellStyle"  TargetType="{x:Type Button}">
+        <Style x:Key="BtnPixelDwellStyle"  TargetType="{x:Type ToggleButton}">
             <Setter Property="Margin" Value="0,5,0,5" />
             <Setter Property="MinWidth" Value="35" />
             <Setter Property="Background" Value="#FF787878" />
@@ -76,14 +76,14 @@
 
         <GroupBox Header="像素停留时间(us)：" HorizontalAlignment="Left" >
             <WrapPanel Orientation="Horizontal">
-                <Button Content="2" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <Button Content="4" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <Button Content="6" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <Button Content="8" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <Button Content="10" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <Button Content="20" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <Button Content="50" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <Button Content="100" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="2" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="4" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="6" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="8" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="10" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="20" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="50" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ToggleButton Content="100" Style="{StaticResource BtnPixelDwellStyle}"/>
             </WrapPanel>
         </GroupBox>
 
