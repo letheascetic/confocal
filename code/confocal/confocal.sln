@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio Version 16
-VisualStudioVersion = 16.0.30517.126
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "confocal_ui", "confocal_ui\confocal_ui.csproj", "{1EA2C3B3-0046-4106-BFDF-7C34648C2019}"
 EndProject
@@ -12,21 +12,35 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Debug|x64.ActiveCfg = Debug|x64
+		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Debug|x64.Build.0 = Debug|x64
 		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Release|x64.ActiveCfg = Release|x64
+		{1EA2C3B3-0046-4106-BFDF-7C34648C2019}.Release|x64.Build.0 = Release|x64
 		{432AA977-3289-4711-8622-07C69DA4CE08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{432AA977-3289-4711-8622-07C69DA4CE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{432AA977-3289-4711-8622-07C69DA4CE08}.Debug|x64.ActiveCfg = Debug|x64
+		{432AA977-3289-4711-8622-07C69DA4CE08}.Debug|x64.Build.0 = Debug|x64
 		{432AA977-3289-4711-8622-07C69DA4CE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432AA977-3289-4711-8622-07C69DA4CE08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{432AA977-3289-4711-8622-07C69DA4CE08}.Release|x64.ActiveCfg = Release|x64
+		{432AA977-3289-4711-8622-07C69DA4CE08}.Release|x64.Build.0 = Release|x64
 		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Debug|x64.ActiveCfg = Debug|x64
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Debug|x64.Build.0 = Debug|x64
 		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Release|x64.ActiveCfg = Release|x64
+		{A37C602B-F5EA-4CBF-B679-B133567AB239}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,14 +17,14 @@
             <Setter Property="Background" Value="#FF787878" />
             <Setter Property="BorderBrush" Value="#FF6464FF" />
         </Style>
-        <Style x:Key="BtnPixelDwellStyle"  TargetType="{x:Type ToggleButton}">
-            <Setter Property="Margin" Value="0,5,0,5" />
+        <Style x:Key="BtnPixelDwellStyle"  TargetType="{x:Type RadioButton}">
+            <Setter Property="Margin" Value="5,5,5,5" />
             <Setter Property="MinWidth" Value="35" />
             <Setter Property="Background" Value="#FF787878" />
             <Setter Property="BorderBrush" Value="#FF6464FF" />
         </Style>
-        <Style x:Key="BtnScanPixelStyle"  TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="0,5,0,5" />
+        <Style x:Key="BtnScanPixelStyle"  TargetType="{x:Type RadioButton}">
+            <Setter Property="Margin" Value="5,5,5,5" />
             <Setter Property="MinWidth" Value="40" />
             <Setter Property="Background" Value="#FF787878" />
             <Setter Property="BorderBrush" Value="#FF6464FF" />
@@ -34,6 +34,15 @@
             <Setter Property="Background" Value="#FF787878" />
             <Setter Property="BorderBrush" Value="#FF6464FF" />
         </Style>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Margin" Value="5,5,5,5" />
+            <Setter Property="Background" Value="#FF787878" />
+            <Setter Property="BorderBrush" Value="#FF6464FF" />
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5,5,5,5" />
+        </Style>
+
     </Window.Resources>
 
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" >
@@ -57,8 +66,8 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <GroupBox Header="帧信息" Margin="5">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="帧率：1.00 fps" Width="100" Margin="0,10"/>
-                    <TextBlock Text="帧时间：1.00 s" Width="100" Margin="0,10"/>
+                    <TextBlock Text="帧率：1.00 fps" Width="100" Margin="0,10,0,10"/>
+                    <TextBlock Text="帧时间：1.00 s" Width="100" Margin="0,10,0,10"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="扫描方向" Width="100">
@@ -74,35 +83,49 @@
             </GroupBox>
         </StackPanel>
 
-        <GroupBox Header="像素停留时间(us)：" HorizontalAlignment="Left" >
+        <GroupBox Header="像素停留时间(us)：" HorizontalAlignment="Left">
             <WrapPanel Orientation="Horizontal">
-                <ToggleButton Content="2" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <ToggleButton Content="4" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <ToggleButton Content="6" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <ToggleButton Content="8" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <ToggleButton Content="10" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <ToggleButton Content="20" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <ToggleButton Content="50" Style="{StaticResource BtnPixelDwellStyle}"/>
-                <ToggleButton Content="100" Style="{StaticResource BtnPixelDwellStyle}"/>
+                <ItemsControl ItemsSource="{Binding ScanPixelDwellList}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Style="{StaticResource BtnPixelDwellStyle}" Content="{Binding Text}" IsChecked="{Binding IsChecked}" GroupName="ScanPixelDwellList" Command="{Binding DataContext.SelectScanPixelDwellCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ItemsControl}}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </WrapPanel>
         </GroupBox>
 
         <GroupBox Header="扫描像素：" HorizontalAlignment="Left" Margin="5,5,5,5">
             <WrapPanel Orientation="Horizontal">
-                <Button Content="64" Style="{StaticResource BtnScanPixelStyle}"/>
-                <Button Content="128" Style="{StaticResource BtnScanPixelStyle}"/>
-                <Button Content="256" Style="{StaticResource BtnScanPixelStyle}"/>
-                <Button Content="512" Style="{StaticResource BtnScanPixelStyle}"/>
-                <Button Content="1024" Style="{StaticResource BtnScanPixelStyle}"/>
-                <Button Content="2048" Style="{StaticResource BtnScanPixelStyle}"/>
-                <Button Content="4096" Style="{StaticResource BtnScanPixelStyle}"/>
+                <ItemsControl ItemsSource="{Binding ScanPixelsList}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Style="{StaticResource BtnScanPixelStyle}" Content="{Binding Text}" IsChecked="{Binding IsChecked}" GroupName="ScanPixelsList" Command="{Binding DataContext.SelectScanPixelsCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ItemsControl}}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </WrapPanel>
         </GroupBox>
 
-        <GroupBox Header="扫描行操作：" HorizontalAlignment="Left" Margin="5,5,5,5">
-            <CheckBox Content="跳行扫描"/>
-            
-        </GroupBox>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+            <CheckBox Content="405nm"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <Slider>
+                    
+                </Slider>
+            </StackPanel>
+        </StackPanel>
+
 
     </StackPanel>
 

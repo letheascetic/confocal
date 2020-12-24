@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace confocal_wpf.Model
 {
@@ -33,14 +34,14 @@ namespace confocal_wpf.Model
 
     }
 
-    public class ScanPropWithValueModelBase : ScanPropModelBase
+    public class ScanPropWithValueModelBase<T> : ScanPropModelBase
     {
-        private int value;
+        private T data;
 
-        public int Value
+        public T Data
         {
-            get { return value; }
-            set { this.value = value; RaisePropertyChanged(() => Value); }
+            get { return data; }
+            set { this.data = value; RaisePropertyChanged(() => Data); }
         }
     }
 
@@ -175,57 +176,161 @@ namespace confocal_wpf.Model
     /// <summary>
     /// 扫描像素
     /// </summary>
-    public class ScanPixelsMode : ObservableObject
+    public class ScanPixelsModel : ScanPropWithValueModelBase<int>
     {
-        private int id;
-        private string text;
-        private int value;
-
-        public int ID
+        public static List<ScanPixelsModel> Initialize()
         {
-            get { return id; }
-            set { id = value; RaisePropertyChanged(() => ID); }
-        }
-
-        public string Text
-        {
-            get { return text; }
-            set { text = value; RaisePropertyChanged(() => Text); }
-        }
-
-        public int Value
-        {
-            get { return value; }
-            set { this.value = value; RaisePropertyChanged(() => Value); }
+            return new List<ScanPixelsModel>()
+            {
+                //new ScanPixelsModel(){ ID = 0, IsChecked = false, Text = "64", Value = 64 },
+                //new ScanPixelsModel(){ ID = 1, IsChecked = false, Text = "128", Value = 128 },
+                new ScanPixelsModel(){ ID = 2, IsChecked = false, Text = "256", Data = 256 },
+                new ScanPixelsModel(){ ID = 3, IsChecked = true, Text = "512", Data = 512 },
+                new ScanPixelsModel(){ ID = 4, IsChecked = false, Text = "1024", Data = 1024 },
+                new ScanPixelsModel(){ ID = 5, IsChecked = false, Text = "2048", Data = 2048 },
+                new ScanPixelsModel(){ ID = 6, IsChecked = false, Text = "4096", Data = 4096 }
+            };
         }
     }
 
     /// <summary>
     /// 扫描停留时间
     /// </summary>
-    public class ScanPixelDwellMode : ObservableObject
+    public class ScanPixelDwellModel : ScanPropWithValueModelBase<int>
+    {
+        public static List<ScanPixelDwellModel> Initialize()
+        {
+            return new List<ScanPixelDwellModel>()
+            {
+                new ScanPixelDwellModel(){ ID = 0, IsChecked = false, Text = "2", Data = 2 },
+                new ScanPixelDwellModel(){ ID = 1, IsChecked = false, Text = "4", Data = 4 },
+                new ScanPixelDwellModel(){ ID = 2, IsChecked = false, Text = "6", Data = 6 },
+                new ScanPixelDwellModel(){ ID = 3, IsChecked = true, Text = "8", Data = 8 },
+                new ScanPixelDwellModel(){ ID = 4, IsChecked = false, Text = "10", Data = 10 },
+                new ScanPixelDwellModel(){ ID = 5, IsChecked = false, Text = "20", Data = 20 },
+                new ScanPixelDwellModel(){ ID = 6, IsChecked = false, Text = "50", Data = 50 },
+                new ScanPixelDwellModel(){ ID = 7, IsChecked = false, Text = "100", Data = 100 }
+            };
+        }
+    }
+
+    public class ScanChannel : ObservableObject
     {
         private int id;
-        private string text;
-        private int value;
+        private string name;
+        
+        private double laserPower;
+        private Color laserColor;
+        private string laserWaveLength;
 
+        private bool activated;
+        private double pinHole;
+        private double gain;
+        private int offset;
+        private double gamma;
+        private Color pseudoColor;
+
+        /// <summary>
+        /// 通道ID
+        /// </summary>
         public int ID
         {
             get { return id; }
             set { id = value; RaisePropertyChanged(() => ID); }
         }
 
-        public string Text
+        /// <summary>
+        /// 通道名
+        /// </summary>
+        public string Name
         {
-            get { return text; }
-            set { text = value; RaisePropertyChanged(() => Text); }
+            get { return name; }
+            set { name = value; RaisePropertyChanged(() => Name); }
         }
 
-        public int Value
+        /// <summary>
+        /// 激光功率
+        /// </summary>
+        public double LaserPower
         {
-            get { return value; }
-            set { this.value = value; RaisePropertyChanged(() => Value); }
+            get { return laserPower; }
+            set { laserPower = value; RaisePropertyChanged(() => LaserPower); }
         }
+
+        /// <summary>
+        /// 激光颜色
+        /// </summary>
+        public Color LaserColor
+        {
+            get { return laserColor; }
+            set { laserColor = value; RaisePropertyChanged(() => LaserColor); }
+        }
+
+        /// <summary>
+        /// 激光波长
+        /// </summary>
+        public string LaserWaveLength
+        {
+            get { return laserWaveLength; }
+            set { laserWaveLength = value; RaisePropertyChanged(() => LaserWaveLength); }
+        }
+
+        /// <summary>
+        /// 通道状态：激活 or 关闭
+        /// </summary>
+        public bool Activated
+        {
+            get { return activated; }
+            set { activated = value; RaisePropertyChanged(() => Activated); }
+        }
+
+        /// <summary>
+        /// 小孔孔径
+        /// </summary>
+        public double PinHole
+        {
+            get { return pinHole; }
+            set { pinHole = value; RaisePropertyChanged(() => PinHole); }
+        }
+
+        /// <summary>
+        /// 增益
+        /// </summary>
+        public double Gain
+        {
+            get { return gain; }
+            set { gain = value; RaisePropertyChanged(() => Gain); }
+        }
+
+        /// <summary>
+        /// 偏置
+        /// </summary>
+        public int Offset
+        {
+            get { return offset; }
+            set { offset = value; RaisePropertyChanged(() => Offset); }
+        }
+
+        /// <summary>
+        /// 伽马校正
+        /// </summary>
+        public double Gamma
+        {
+            get { return gamma; }
+            set { gamma = value; RaisePropertyChanged(() => gamma); }
+        }
+
+        /// <summary>
+        /// 伪彩色
+        /// </summary>
+        public Color PseudoColor
+        {
+            get { return pseudoColor; }
+            set { pseudoColor = value; RaisePropertyChanged(() => PseudoColor); }
+        }
+
     }
+
+
 
 }

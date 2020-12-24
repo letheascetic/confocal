@@ -22,11 +22,6 @@ namespace confocal_wpf.ViewModel
         private ScanDirectionModel selectedScanDirection;
         private RelayCommand selectScanDirectionCommand;
 
-        private List<ScanModeModel> scanModeList;
-        private ScanModeModel selectedScanMode;
-        private RelayCommand selectScanModeCommand;
-
-        ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// 扫描方向列表
         /// </summary>
@@ -48,7 +43,7 @@ namespace confocal_wpf.ViewModel
         /// </summary>
         public RelayCommand SelectScanDirectionCommand
         {
-            get 
+            get
             {
                 if (selectScanDirectionCommand == null)
                 {
@@ -58,7 +53,11 @@ namespace confocal_wpf.ViewModel
             }
             set { selectScanDirectionCommand = value; }
         }
-        
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private List<ScanModeModel> scanModeList;
+        private ScanModeModel selectedScanMode;
+        private RelayCommand selectScanModeCommand;
+
         /// <summary>
         /// 扫描模式列表
         /// </summary>
@@ -90,6 +89,86 @@ namespace confocal_wpf.ViewModel
             }
             set { selectScanModeCommand = value; }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private List<ScanPixelsModel> scanPixelsList;
+        private ScanPixelsModel selectedScanPixels;
+        private RelayCommand selectScanPixelsCommand;
+
+        /// <summary>
+        /// 扫描像素列表
+        /// </summary>
+        public List<ScanPixelsModel> ScanPixelsList
+        {
+            get { return scanPixelsList; }
+            set { scanPixelsList = value; RaisePropertyChanged(() => ScanPixelsList); }
+        }
+        /// <summary>
+        /// 选择的扫描像素 
+        /// </summary>
+        public ScanPixelsModel SelectedScanPixels
+        {
+            get { return selectedScanPixels; }
+            set { selectedScanPixels = value; RaisePropertyChanged(() => SelectedScanPixels); }
+        }
+        /// <summary>
+        /// 选择扫描像素
+        /// </summary>
+        public RelayCommand SelectScanPixelsCommand
+        {
+            get
+            {
+                if (selectScanPixelsCommand == null)
+                {
+                    selectScanPixelsCommand = new RelayCommand(() => { SelectedScanPixels = ScanPixelsList.Where(p => p.IsChecked).First(); });
+                }
+                return selectScanPixelsCommand;
+            }
+            set { selectScanPixelsCommand = value; }
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private List<ScanPixelDwellModel> scanPixelDwellList;
+        private ScanPixelDwellModel selectedScanPixelDwell;
+        private RelayCommand selectScanPixelDwellCommand;
+
+        /// <summary>
+        /// 像素停留时间列表
+        /// </summary>
+        public List<ScanPixelDwellModel> ScanPixelDwellList
+        {
+            get { return scanPixelDwellList; }
+            set { scanPixelDwellList = value; RaisePropertyChanged(() => ScanPixelDwellList); }
+        }
+        /// <summary>
+        /// 选择的像素停留时间
+        /// </summary>
+        public ScanPixelDwellModel SelectedScanPixelDwell
+        {
+            get { return selectedScanPixelDwell; }
+            set { selectedScanPixelDwell = value; RaisePropertyChanged(() => SelectedScanPixelDwell); }
+        }
+        /// <summary>
+        /// 选择像素停留时间
+        /// </summary>
+        public RelayCommand SelectScanPixelDwellCommand
+        {
+            get
+            {
+                if (selectScanPixelDwellCommand == null)
+                {
+                    selectScanPixelDwellCommand = new RelayCommand(() => { SelectedScanPixelDwell = ScanPixelDwellList.Where(p => p.IsChecked).First(); });
+                }
+                return selectScanPixelDwellCommand;
+            }
+            set { selectScanPixelDwellCommand = value; }
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 
         ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -97,6 +176,8 @@ namespace confocal_wpf.ViewModel
         {
             ScanDirectionList = ScanDirectionModel.Initialize();
             ScanModeList = ScanModeModel.Initialize();
+            ScanPixelDwellList = ScanPixelDwellModel.Initialize();
+            ScanPixelsList = ScanPixelsModel.Initialize();
         }
 
     }
