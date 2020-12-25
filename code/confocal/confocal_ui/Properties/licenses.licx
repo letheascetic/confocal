@@ -1,1 +1,7 @@
+C1.Win.C1Command.C1CommandDock, C1.Win.C1Command.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=e808566f358766d8
+C1.Win.C1Input.C1Button, C1.Win.C1Input.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a
+C1.Win.C1Command.C1DockingTab, C1.Win.C1Command.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=e808566f358766d8
 C1.Win.C1Themes.C1ThemeController, C1.Win.C1Themes.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=594a0605db190bb9
+C1.Win.C1Command.C1MainMenu, C1.Win.C1Command.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=e808566f358766d8
+C1.Win.C1Input.C1SplitButton, C1.Win.C1Input.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a
+C1.Win.C1Command.C1CommandHolder, C1.Win.C1Command.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=e808566f358766d8
