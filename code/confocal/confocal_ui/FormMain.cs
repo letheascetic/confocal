@@ -15,10 +15,5 @@ namespace confocal_ui
         {
             InitializeComponent();
         }
-
-        private void listOpenFiles_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
     }
 }
