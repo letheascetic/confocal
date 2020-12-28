@@ -44,7 +44,7 @@
             this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
             this.tpgScanSettings = new C1.Win.C1Command.C1DockingTabPage();
             this.dockRight = new C1.Win.C1Command.C1DockingTab();
-            this.c1DockingTabPage3 = new C1.Win.C1Command.C1DockingTabPage();
+            this.tpgLog = new C1.Win.C1Command.C1DockingTabPage();
             this.textLog = new System.Windows.Forms.TextBox();
             this.dockBottom = new C1.Win.C1Command.C1DockingTab();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
@@ -54,7 +54,7 @@
             this.dockLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockRight)).BeginInit();
             this.dockRight.SuspendLayout();
-            this.c1DockingTabPage3.SuspendLayout();
+            this.tpgLog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockBottom)).BeginInit();
             this.dockBottom.SuspendLayout();
             this.SuspendLayout();
@@ -201,15 +201,15 @@
             this.dockRight.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockRight.TabsSpacing = 0;
             // 
-            // c1DockingTabPage3
+            // tpgLog
             // 
-            this.c1DockingTabPage3.CaptionVisible = true;
-            this.c1DockingTabPage3.Controls.Add(this.textLog);
-            this.c1DockingTabPage3.Location = new System.Drawing.Point(0, 0);
-            this.c1DockingTabPage3.Name = "c1DockingTabPage3";
-            this.c1DockingTabPage3.Size = new System.Drawing.Size(478, 115);
-            this.c1DockingTabPage3.TabIndex = 0;
-            this.c1DockingTabPage3.Text = "Log";
+            this.tpgLog.CaptionVisible = true;
+            this.tpgLog.Controls.Add(this.textLog);
+            this.tpgLog.Location = new System.Drawing.Point(0, 0);
+            this.tpgLog.Name = "tpgLog";
+            this.tpgLog.Size = new System.Drawing.Size(478, 115);
+            this.tpgLog.TabIndex = 0;
+            this.tpgLog.Text = "Log";
             // 
             // textLog
             // 
@@ -229,7 +229,7 @@
             this.dockBottom.CanAutoHide = true;
             this.dockBottom.CanCloseTabs = true;
             this.dockBottom.CanMoveTabs = true;
-            this.dockBottom.Controls.Add(this.c1DockingTabPage3);
+            this.dockBottom.Controls.Add(this.tpgLog);
             this.dockBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockBottom.Location = new System.Drawing.Point(203, 401);
             this.dockBottom.Name = "dockBottom";
@@ -261,8 +261,8 @@
             this.dockLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockRight)).EndInit();
             this.dockRight.ResumeLayout(false);
-            this.c1DockingTabPage3.ResumeLayout(false);
-            this.c1DockingTabPage3.PerformLayout();
+            this.tpgLog.ResumeLayout(false);
+            this.tpgLog.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockBottom)).EndInit();
             this.dockBottom.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -282,7 +282,7 @@
         private C1.Win.C1Command.C1CommandLink cmdLineFileNew;
         private System.Windows.Forms.StatusStrip statusStrip;
         private C1.Win.C1Command.C1DockingTab dockBottom;
-        private C1.Win.C1Command.C1DockingTabPage c1DockingTabPage3;
+        private C1.Win.C1Command.C1DockingTabPage tpgLog;
         private System.Windows.Forms.TextBox textLog;
         private C1.Win.C1Command.C1DockingTab dockLeft;
         private C1.Win.C1Command.C1DockingTabPage tpgImage;
