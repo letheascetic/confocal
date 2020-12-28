@@ -1,5 +1,4 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,13 +11,14 @@ namespace confocal_ui
 {
     public partial class FormMain : Form
     {
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly ILog Logger = LogManager.GetLogger("info");
-        ///////////////////////////////////////////////////////////////////////////////////////////
-
         public FormMain()
         {
             InitializeComponent();
+        }
+
+        private void listOpenFiles_DoubleClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

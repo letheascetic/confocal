@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.c1ThemeController = new C1.Win.C1Themes.C1ThemeController();
             this.btnLive = new C1.Win.C1Input.C1Button();
             this.btnCapture = new C1.Win.C1Input.C1Button();
-            ((System.ComponentModel.ISupportInitialize)(this.c1ThemeController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLive)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCapture)).BeginInit();
             this.SuspendLayout();
@@ -43,7 +41,6 @@
             this.btnLive.Size = new System.Drawing.Size(60, 50);
             this.btnLive.TabIndex = 0;
             this.btnLive.Text = "实时";
-            this.c1ThemeController.SetTheme(this.btnLive, "(default)");
             this.btnLive.UseVisualStyleBackColor = true;
             this.btnLive.VisualStyleBaseStyle = C1.Win.C1Input.VisualStyle.Office2010Blue;
             // 
@@ -54,7 +51,6 @@
             this.btnCapture.Size = new System.Drawing.Size(60, 50);
             this.btnCapture.TabIndex = 1;
             this.btnCapture.Text = "捕捉";
-            this.c1ThemeController.SetTheme(this.btnCapture, "(default)");
             this.btnCapture.UseVisualStyleBackColor = true;
             this.btnCapture.VisualStyleBaseStyle = C1.Win.C1Input.VisualStyle.Office2010Blue;
             // 
@@ -71,9 +67,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormScan";
             this.Text = "扫描控制";
-            this.c1ThemeController.SetTheme(this, "(default)");
             this.Load += new System.EventHandler(this.FormScan_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.c1ThemeController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLive)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCapture)).EndInit();
             this.ResumeLayout(false);
@@ -81,8 +75,6 @@
         }
 
         #endregion
-
-        private C1.Win.C1Themes.C1ThemeController c1ThemeController;
         private C1.Win.C1Input.C1Button btnLive;
         private C1.Win.C1Input.C1Button btnCapture;
     }

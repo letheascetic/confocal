@@ -56,10 +56,12 @@
     </Reference>
     <Reference Include="C1.Win.C1Command.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=e808566f358766d8" />
     <Reference Include="C1.Win.C1Input.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Themes.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=594a0605db190bb9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\c1\v4.0\C1.Win.C1Themes.4.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.C1TouchToolKit.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=5e531fc0479701e7, processorArchitecture=MSIL" />
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net40\log4net.dll</HintPath>
     </Reference>
