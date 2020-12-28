@@ -50,12 +50,25 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.C1Excel.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.C1Pdf.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
+    <Reference Include="C1.C1Zip.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
+    <Reference Include="C1.DataEngine.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
     <Reference Include="C1.Win.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\c1\v4.0\C1.Win.4.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.BarCode.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
+    <Reference Include="C1.Win.C1Chart.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=a22e16972c085838" />
     <Reference Include="C1.Win.C1Command.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=e808566f358766d8" />
+    <Reference Include="C1.Win.C1Document.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
+    <Reference Include="C1.Win.C1DX.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
+    <Reference Include="C1.Win.C1Editor.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1FlexGrid.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
+    <Reference Include="C1.Win.C1Gauge.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Input.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1InputPanel.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
+    <Reference Include="C1.Win.C1List.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=6b24f8f981dbd7bc, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Themes.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=594a0605db190bb9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -63,6 +76,10 @@
     </Reference>
     <Reference Include="C1.Win.C1TouchToolKit.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=5e531fc0479701e7, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1TrueDBGrid.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=75ae3fb0e2b1e0da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Win7Pack.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.FlexPivot.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.FlexViewer.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.ImportServices.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net40\log4net.dll</HintPath>
     </Reference>
@@ -92,6 +109,12 @@
     <Compile Include="FormScan.Designer.cs">
       <DependentUpon>FormScan.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTest.Designer.cs">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTheme.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +129,9 @@
     <EmbeddedResource Include="FormScan.resx">
       <DependentUpon>FormScan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTest.resx">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTheme.resx">
       <DependentUpon>FormTheme.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +144,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="log4net.config" />
@@ -134,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Scan.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

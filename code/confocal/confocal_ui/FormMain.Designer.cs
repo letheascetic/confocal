@@ -57,6 +57,15 @@
             this.tpgScanSettings = new C1.Win.C1Command.C1DockingTabPage();
             this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
+            this.btnLive = new C1.Win.C1InputPanel.InputButton();
+            this.btnCapture = new C1.Win.C1InputPanel.InputButton();
+            this.cbxScanners = new C1.Win.C1InputPanel.InputComboBox();
+            this.twoGalv = new C1.Win.C1InputPanel.InputOption();
+            this.threeGalv = new C1.Win.C1InputPanel.InputOption();
+            this.cbxScanDirection = new C1.Win.C1InputPanel.InputComboBox();
+            this.unidirectional = new C1.Win.C1InputPanel.InputOption();
+            this.bidirectional = new C1.Win.C1InputPanel.InputOption();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -70,6 +79,8 @@
             this.dockLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockTabScan)).BeginInit();
             this.dockTabScan.SuspendLayout();
+            this.tpgScanSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -82,7 +93,7 @@
             this.mainMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(984, 26);
+            this.mainMenu.Size = new System.Drawing.Size(992, 26);
             this.mainMenu.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.mainMenu.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
@@ -197,7 +208,7 @@
             this.dockToolBar.Id = 3;
             this.dockToolBar.Location = new System.Drawing.Point(0, 26);
             this.dockToolBar.Name = "dockToolBar";
-            this.dockToolBar.Size = new System.Drawing.Size(984, 26);
+            this.dockToolBar.Size = new System.Drawing.Size(992, 26);
             // 
             // toolBar
             // 
@@ -206,7 +217,7 @@
             this.toolBar.Location = new System.Drawing.Point(3, 0);
             this.toolBar.Name = "toolBar";
             this.toolBar.Size = new System.Drawing.Size(25, 25);
-            this.toolBar.Text = "c1ToolBar1";
+            this.toolBar.Text = "工具栏";
             this.toolBar.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.toolBar.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
@@ -219,7 +230,7 @@
             this.dockMain.HotTrack = true;
             this.dockMain.Location = new System.Drawing.Point(0, 52);
             this.dockMain.Name = "dockMain";
-            this.dockMain.Size = new System.Drawing.Size(751, 549);
+            this.dockMain.Size = new System.Drawing.Size(731, 555);
             this.dockMain.TabIndex = 11;
             this.dockMain.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockMain.TabsSpacing = 5;
@@ -234,9 +245,9 @@
             this.dockBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockBottom.Id = 1;
-            this.dockBottom.Location = new System.Drawing.Point(0, 601);
+            this.dockBottom.Location = new System.Drawing.Point(0, 607);
             this.dockBottom.Name = "dockBottom";
-            this.dockBottom.Size = new System.Drawing.Size(751, 138);
+            this.dockBottom.Size = new System.Drawing.Size(731, 138);
             // 
             // dockTabOutput
             // 
@@ -251,12 +262,12 @@
             this.dockTabOutput.Location = new System.Drawing.Point(0, 0);
             this.dockTabOutput.Name = "dockTabOutput";
             this.dockTabOutput.ShowCaption = true;
-            this.dockTabOutput.Size = new System.Drawing.Size(751, 138);
+            this.dockTabOutput.Size = new System.Drawing.Size(731, 138);
             this.dockTabOutput.TabIndex = 1;
             this.dockTabOutput.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabOutput.TabsSpacing = 5;
             this.dockTabOutput.TabStyle = C1.Win.C1Command.TabStyleEnum.Office2010;
-            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
+            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Office2010Blue;
             this.dockTabOutput.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
             // tpgLog
@@ -265,7 +276,7 @@
             this.tpgLog.Controls.Add(this.textLog);
             this.tpgLog.Location = new System.Drawing.Point(1, 4);
             this.tpgLog.Name = "tpgLog";
-            this.tpgLog.Size = new System.Drawing.Size(749, 111);
+            this.tpgLog.Size = new System.Drawing.Size(729, 111);
             this.tpgLog.TabIndex = 0;
             this.tpgLog.Text = "Log";
             // 
@@ -279,7 +290,7 @@
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
             this.textLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textLog.Size = new System.Drawing.Size(749, 88);
+            this.textLog.Size = new System.Drawing.Size(729, 88);
             this.textLog.TabIndex = 0;
             // 
             // dockLeft
@@ -289,9 +300,9 @@
             this.dockLeft.Dock = System.Windows.Forms.DockStyle.Right;
             this.dockLeft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockLeft.Id = 3;
-            this.dockLeft.Location = new System.Drawing.Point(751, 52);
+            this.dockLeft.Location = new System.Drawing.Point(731, 52);
             this.dockLeft.Name = "dockLeft";
-            this.dockLeft.Size = new System.Drawing.Size(233, 687);
+            this.dockLeft.Size = new System.Drawing.Size(261, 693);
             // 
             // dockTabScan
             // 
@@ -307,20 +318,21 @@
             this.dockTabScan.Name = "dockTabScan";
             this.dockTabScan.SelectedIndex = 1;
             this.dockTabScan.ShowCaption = true;
-            this.dockTabScan.Size = new System.Drawing.Size(233, 687);
+            this.dockTabScan.Size = new System.Drawing.Size(261, 693);
             this.dockTabScan.TabIndex = 0;
             this.dockTabScan.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabScan.TabsSpacing = 5;
             this.dockTabScan.TabStyle = C1.Win.C1Command.TabStyleEnum.Office2010;
-            this.dockTabScan.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
+            this.dockTabScan.VisualStyle = C1.Win.C1Command.VisualStyle.Office2010Blue;
             this.dockTabScan.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
             // tpgScanSettings
             // 
             this.tpgScanSettings.CaptionVisible = true;
+            this.tpgScanSettings.Controls.Add(this.inputPanel);
             this.tpgScanSettings.Location = new System.Drawing.Point(4, 1);
             this.tpgScanSettings.Name = "tpgScanSettings";
-            this.tpgScanSettings.Size = new System.Drawing.Size(228, 663);
+            this.tpgScanSettings.Size = new System.Drawing.Size(256, 669);
             this.tpgScanSettings.TabIndex = 0;
             this.tpgScanSettings.Text = "Scan Settings";
             // 
@@ -329,24 +341,100 @@
             this.tpgScanField.CaptionVisible = true;
             this.tpgScanField.Location = new System.Drawing.Point(4, 1);
             this.tpgScanField.Name = "tpgScanField";
-            this.tpgScanField.Size = new System.Drawing.Size(228, 663);
+            this.tpgScanField.Size = new System.Drawing.Size(256, 669);
             this.tpgScanField.TabIndex = 1;
             this.tpgScanField.Text = "Scan Field";
             // 
             // statusStrip
             // 
             this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
-            this.statusStrip.Location = new System.Drawing.Point(0, 739);
+            this.statusStrip.Location = new System.Drawing.Point(0, 745);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(984, 22);
+            this.statusStrip.Size = new System.Drawing.Size(992, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
+            // 
+            // inputPanel
+            // 
+            this.inputPanel.AutoSizeElement = C1.Framework.AutoSizeElement.Both;
+            this.inputPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputPanel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.inputPanel.Items.Add(this.btnLive);
+            this.inputPanel.Items.Add(this.btnCapture);
+            this.inputPanel.Items.Add(this.cbxScanners);
+            this.inputPanel.Items.Add(this.cbxScanDirection);
+            this.inputPanel.Location = new System.Drawing.Point(0, 23);
+            this.inputPanel.Name = "inputPanel";
+            this.inputPanel.Size = new System.Drawing.Size(256, 646);
+            this.inputPanel.TabIndex = 2;
+            // 
+            // btnLive
+            // 
+            this.btnLive.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnLive.CheckOnClick = true;
+            this.btnLive.Height = 40;
+            this.btnLive.Name = "btnLive";
+            this.btnLive.Text = "实时";
+            this.btnLive.Width = 50;
+            // 
+            // btnCapture
+            // 
+            this.btnCapture.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.btnCapture.CheckOnClick = true;
+            this.btnCapture.Height = 40;
+            this.btnCapture.Name = "btnCapture";
+            this.btnCapture.Text = "捕捉";
+            this.btnCapture.Width = 50;
+            // 
+            // cbxScanners
+            // 
+            this.cbxScanners.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxScanners.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxScanners.Height = 20;
+            this.cbxScanners.Items.Add(this.twoGalv);
+            this.cbxScanners.Items.Add(this.threeGalv);
+            this.cbxScanners.MaxDropDownItems = 2;
+            this.cbxScanners.MaxLength = 60;
+            this.cbxScanners.Name = "cbxScanners";
+            this.cbxScanners.Width = 60;
+            // 
+            // twoGalv
+            // 
+            this.twoGalv.Name = "twoGalv";
+            this.twoGalv.Text = "双振镜";
+            // 
+            // threeGalv
+            // 
+            this.threeGalv.Name = "threeGalv";
+            this.threeGalv.Text = "三振镜";
+            // 
+            // cbxScanDirection
+            // 
+            this.cbxScanDirection.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxScanDirection.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxScanDirection.Height = 20;
+            this.cbxScanDirection.Items.Add(this.unidirectional);
+            this.cbxScanDirection.Items.Add(this.bidirectional);
+            this.cbxScanDirection.MaxDropDownItems = 2;
+            this.cbxScanDirection.MaxLength = 60;
+            this.cbxScanDirection.Name = "cbxScanDirection";
+            this.cbxScanDirection.Width = 60;
+            // 
+            // unidirectional
+            // 
+            this.unidirectional.Name = "unidirectional";
+            this.unidirectional.Text = "单向";
+            // 
+            // bidirectional
+            // 
+            this.bidirectional.Name = "bidirectional";
+            this.bidirectional.Text = "双向";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 761);
+            this.ClientSize = new System.Drawing.Size(992, 767);
             this.Controls.Add(this.dockMain);
             this.Controls.Add(this.dockBottom);
             this.Controls.Add(this.dockLeft);
@@ -374,6 +462,8 @@
             this.dockLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockTabScan)).EndInit();
             this.dockTabScan.ResumeLayout(false);
+            this.tpgScanSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,7 +480,6 @@
         private System.Windows.Forms.TextBox textLog;
         private C1.Win.C1Command.C1CommandDock dockLeft;
         private C1.Win.C1Command.C1DockingTab dockTabScan;
-        private C1.Win.C1Command.C1DockingTabPage tpgScanSettings;
         private C1.Win.C1Command.C1DockingTabPage tpgScanField;
         private System.Windows.Forms.StatusStrip statusStrip;
         private C1.Win.C1Command.C1CommandDock dockToolBar;
@@ -409,5 +498,15 @@
         private C1.Win.C1Command.C1CommandLink cmdLinkTheme;
         private C1.Win.C1Command.C1CommandLink cmdLinkView;
         private C1.Win.C1Command.C1Command cmdTheme;
+        private C1.Win.C1Command.C1DockingTabPage tpgScanSettings;
+        private C1.Win.C1InputPanel.C1InputPanel inputPanel;
+        private C1.Win.C1InputPanel.InputButton btnLive;
+        private C1.Win.C1InputPanel.InputButton btnCapture;
+        private C1.Win.C1InputPanel.InputComboBox cbxScanners;
+        private C1.Win.C1InputPanel.InputOption twoGalv;
+        private C1.Win.C1InputPanel.InputOption threeGalv;
+        private C1.Win.C1InputPanel.InputComboBox cbxScanDirection;
+        private C1.Win.C1InputPanel.InputOption unidirectional;
+        private C1.Win.C1InputPanel.InputOption bidirectional;
     }
 }
