@@ -40,6 +40,7 @@
             this.dockTabScan = new C1.Win.C1Command.C1DockingTab();
             this.tpgScanSettings = new C1.Win.C1Command.C1DockingTabPage();
             this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
+            this.dockMain = new C1.Win.C1Command.C1DockingTab();
             ((System.ComponentModel.ISupportInitialize)(this.dockLeft)).BeginInit();
             this.dockLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockBottom)).BeginInit();
@@ -49,6 +50,7 @@
             this.tpgLog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockTabScan)).BeginInit();
             this.dockTabScan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dockMain)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -167,11 +169,25 @@
             this.tpgScanField.TabIndex = 1;
             this.tpgScanField.Text = "Scan Field";
             // 
+            // dockMain
+            // 
+            this.dockMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.dockMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dockMain.CanCloseTabs = true;
+            this.dockMain.CanMoveTabs = true;
+            this.dockMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dockMain.Location = new System.Drawing.Point(0, 49);
+            this.dockMain.Name = "dockMain";
+            this.dockMain.Size = new System.Drawing.Size(751, 552);
+            this.dockMain.TabIndex = 7;
+            this.dockMain.TabsSpacing = 0;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.dockMain);
             this.Controls.Add(this.dockBottom);
             this.Controls.Add(this.dockLeft);
             this.Controls.Add(this.toolStrip);
@@ -192,6 +208,7 @@
             this.tpgLog.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockTabScan)).EndInit();
             this.dockTabScan.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dockMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +227,6 @@
         private C1.Win.C1Command.C1DockingTab dockTabScan;
         private C1.Win.C1Command.C1DockingTabPage tpgScanSettings;
         private C1.Win.C1Command.C1DockingTabPage tpgScanField;
+        private C1.Win.C1Command.C1DockingTab dockMain;
     }
 }
