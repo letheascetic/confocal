@@ -72,7 +72,6 @@ namespace confocal_ui
             
         }
 
-
         /// <summary>
         /// 选择主题
         /// </summary>
@@ -126,6 +125,7 @@ namespace confocal_ui
         {
             mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled = rbtnTwoScanners.Checked;
             mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled = rbtnThreeScanners.Checked;
+            mScanSettingsViewModel.SelectScannerHeadCommand();
         }
 
         /// <summary>
@@ -137,7 +137,33 @@ namespace confocal_ui
         {
             mScanSettingsViewModel.ScanModeGalavano.IsEnabled = rbtnGalvano.Checked;
             mScanSettingsViewModel.ScanModeResonant.IsEnabled = rbtnResonant.Checked;
+            mScanSettingsViewModel.SelectScanModeCommand();
         }
 
+        private void btnUniDirection_Click(object sender, EventArgs e)
+        {
+            if (mScanSettingsViewModel.ScanUniDirection.IsEnabled)
+            {
+                btnUniDirection.Pressed = true;
+                return;
+            }
+            btnBiDirection.Pressed = !btnUniDirection.Pressed;
+            mScanSettingsViewModel.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
+            mScanSettingsViewModel.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
+            mScanSettingsViewModel.SelectScanDirectionCommand();
+        }
+
+        private void btnBiDirection_Click(object sender, EventArgs e)
+        {
+            if (mScanSettingsViewModel.ScanBiDirection.IsEnabled)
+            {
+                btnBiDirection.Pressed = true;
+                return;
+            }
+            btnUniDirection.Pressed = !btnBiDirection.Pressed;
+            mScanSettingsViewModel.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
+            mScanSettingsViewModel.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
+            mScanSettingsViewModel.SelectScanDirectionCommand();
+        }
     }
 }

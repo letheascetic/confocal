@@ -16,7 +16,6 @@ namespace confocal_ui.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScannerHeadModel> scannerHeadList;
         private ScannerHeadModel selectedScannerHead;
-        private RelayCommand selectScanHeadCommand;
 
         /// <summary>
         /// 扫描头列表
@@ -35,21 +34,6 @@ namespace confocal_ui.ViewModel
             set { selectedScannerHead = value; RaisePropertyChanged(() => SelectedScannerHead); }
         }
         /// <summary>
-        /// 选择扫描头命令
-        /// </summary>
-        public RelayCommand SelectScannerHeadCommand
-        {
-            get
-            {
-                if (selectScanHeadCommand == null)
-                {
-                    selectScanHeadCommand = new RelayCommand(() => { SelectedScannerHead = ScannerHeadList.Where(p => p.IsEnabled).First(); });
-                }
-                return selectScanHeadCommand;
-            }
-            set { selectScanHeadCommand = value; }
-        }
-        /// <summary>
         /// 双镜
         /// </summary>
         public ScannerHeadModel ScannerHeadTwoGalv
@@ -63,11 +47,17 @@ namespace confocal_ui.ViewModel
         {
             get { return scannerHeadList.Where(p => p.ID == ScannerHeadModel.THREE_SCANNERS).First(); }
         }
-
+        /// <summary>
+        /// 选择扫描头
+        /// </summary>
+        public void SelectScannerHeadCommand()
+        {
+            SelectedScannerHead = ScannerHeadList.Where(p => p.IsEnabled).First();
+            Logger.Info(string.Format("Select Scanner Head [{0}].", SelectedScannerHead.Text));
+        }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanDirectionModel> scanDirectionList;
         private ScanDirectionModel selectedScanDirection;
-        private RelayCommand selectScanDirectionCommand;
 
         /// <summary>
         /// 扫描方向列表
@@ -86,19 +76,12 @@ namespace confocal_ui.ViewModel
             set { selectedScanDirection = value; RaisePropertyChanged(() => SelectedScanDirection); }
         }
         /// <summary>
-        /// 选择扫描方向命令
+        /// 选择扫描方向
         /// </summary>
-        public RelayCommand SelectScanDirectionCommand
+        public void SelectScanDirectionCommand()
         {
-            get
-            {
-                if (selectScanDirectionCommand == null)
-                {
-                    selectScanDirectionCommand = new RelayCommand(() => { SelectedScanDirection = ScanDirectionList.Where(p => p.IsEnabled).First(); });
-                }
-                return selectScanDirectionCommand;
-            }
-            set { selectScanDirectionCommand = value; }
+            SelectedScanDirection = ScanDirectionList.Where(p => p.IsEnabled).First();
+            Logger.Info(string.Format("Select Scan Direction [{0}].", SelectedScanDirection.Text));
         }
         
         public ScanDirectionModel ScanUniDirection
@@ -114,7 +97,6 @@ namespace confocal_ui.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanModeModel> scanModeList;
         private ScanModeModel selectedScanMode;
-        private RelayCommand selectScanModeCommand;
 
         /// <summary>
         /// 扫描模式列表
@@ -133,19 +115,12 @@ namespace confocal_ui.ViewModel
             set { selectedScanMode = value; RaisePropertyChanged(() => SelectedScanMode); }
         }
         /// <summary>
-        /// 选择扫描模式命令
+        /// 选择扫描模式
         /// </summary>
-        public RelayCommand SelectScanModeCommand
+        public void SelectScanModeCommand()
         {
-            get
-            {
-                if (selectScanModeCommand == null)
-                {
-                    selectScanModeCommand = new RelayCommand(() => { SelectedScanMode = ScanModeList.Where(p => p.IsEnabled).First(); });
-                }
-                return selectScanModeCommand;
-            }
-            set { selectScanModeCommand = value; }
+            SelectedScanMode = ScanModeList.Where(p => p.IsEnabled).First();
+            Logger.Info(string.Format("Select Scan Mode [{0}].", SelectedScanMode.Text));
         }
         /// <summary>
         /// Galvano扫描模式

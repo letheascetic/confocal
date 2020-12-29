@@ -519,7 +519,6 @@
             // btnLive
             // 
             this.btnLive.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.btnLive.CheckOnClick = true;
             this.btnLive.Height = 40;
             this.btnLive.Name = "btnLive";
             this.btnLive.Text = "实时";
@@ -528,7 +527,6 @@
             // btnCapture
             // 
             this.btnCapture.Break = C1.Win.C1InputPanel.BreakType.Column;
-            this.btnCapture.CheckOnClick = true;
             this.btnCapture.Height = 40;
             this.btnCapture.Name = "btnCapture";
             this.btnCapture.Text = "捕捉";
@@ -579,6 +577,7 @@
             this.btnUniDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnUniDirection.Name = "btnUniDirection";
             this.btnUniDirection.Text = "单向";
+            this.btnUniDirection.Click += new System.EventHandler(this.btnUniDirection_Click);
             // 
             // btnBiDirection
             // 
@@ -587,6 +586,7 @@
             this.btnBiDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnBiDirection.Name = "btnBiDirection";
             this.btnBiDirection.Text = "双向";
+            this.btnBiDirection.Click += new System.EventHandler(this.btnBiDirection_Click);
             // 
             // chbxLineSkip
             // 
