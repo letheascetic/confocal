@@ -1,4 +1,5 @@
-﻿using C1.Win.C1Ribbon;
+﻿using C1.Win.C1InputPanel;
+using C1.Win.C1Ribbon;
 using C1.Win.C1Themes;
 using confocal_core.Model;
 using confocal_ui.ViewModel;
@@ -20,11 +21,41 @@ namespace confocal_ui
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         
-        private ScanSettingsViewModel mScanSettingsViewModel = new ScanSettingsViewModel();
+        private ScanSettingsViewModel mScanSettingsViewModel;
+        private InputButton[] mScanPixelDwellButtons;
+        private InputButton[] mScanPixelButtons;
 
         public FormMain()
         {
             InitializeComponent();
+        }
+
+        private void Initialize()
+        {
+            mScanSettingsViewModel = new ScanSettingsViewModel();
+
+            mScanPixelDwellButtons = new InputButton[]
+            {
+                btnPixelDwell2,
+                btnPixelDwell4,
+                btnPixelDwell6,
+                btnPixelDwell8,
+                btnPixelDwell10,
+                btnPixelDwell20,
+                btnPixelDwell50,
+                btnPixelDwell100,
+            };
+
+            mScanPixelButtons = new InputButton[]
+            {
+                btnScanPixel64,
+                btnScanPixel128,
+                btnScanPixel256,
+                btnScanPixel512,
+                btnScanPixel1024,
+                btnScanPixel2048
+            };
+
         }
 
         /// <summary>
@@ -45,6 +76,7 @@ namespace confocal_ui
         {
             this.rbtnTwoScanners.CheckedChanged += ScannerHeadChanged;
             this.rbtnGalvano.CheckedChanged += ScanModeChanged;
+
         }
 
         /// <summary>
@@ -67,6 +99,9 @@ namespace confocal_ui
             // Scan Direction
             this.btnUniDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanUniDirection, "IsEnabled");
             this.btnBiDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanBiDirection, "IsEnabled");
+
+            // Scan Pixel Dwell
+            // this.btnPixelDwell2.DataBindings.Add("Text", mScanSettingsViewModel.scan)
 
             this.inputTextBox1.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeResonant, "Text");
             
@@ -97,6 +132,9 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
+            // init variables & controlers
+            Initialize();
+
             // register events
             ScanSettingsRegisterEvents();
 

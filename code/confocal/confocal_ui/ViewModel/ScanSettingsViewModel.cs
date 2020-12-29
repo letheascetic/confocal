@@ -83,12 +83,10 @@ namespace confocal_ui.ViewModel
             SelectedScanDirection = ScanDirectionList.Where(p => p.IsEnabled).First();
             Logger.Info(string.Format("Select Scan Direction [{0}].", SelectedScanDirection.Text));
         }
-        
         public ScanDirectionModel ScanUniDirection
         {
             get { return scanDirectionList.Where(p => p.ID == ScanDirectionModel.UNIDIRECTION).First(); }
         }
-
         public ScanDirectionModel ScanBiDirection
         {
             get { return scanDirectionList.Where(p => p.ID == ScanDirectionModel.BIDIRECTION).First(); }
