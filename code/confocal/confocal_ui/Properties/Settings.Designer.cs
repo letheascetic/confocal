@@ -25,7 +25,7 @@ namespace confocal_ui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BeigeOne")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ExpressionLight")]
         public string ThemeName {
             get {
                 return ((string)(this["ThemeName"]));

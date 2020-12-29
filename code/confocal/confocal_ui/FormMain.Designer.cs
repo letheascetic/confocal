@@ -60,12 +60,41 @@
             this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
             this.btnLive = new C1.Win.C1InputPanel.InputButton();
             this.btnCapture = new C1.Win.C1InputPanel.InputButton();
-            this.cbxScanners = new C1.Win.C1InputPanel.InputComboBox();
-            this.twoGalv = new C1.Win.C1InputPanel.InputOption();
-            this.threeGalv = new C1.Win.C1InputPanel.InputOption();
-            this.cbxScanDirection = new C1.Win.C1InputPanel.InputComboBox();
-            this.unidirectional = new C1.Win.C1InputPanel.InputOption();
-            this.bidirectional = new C1.Win.C1InputPanel.InputOption();
+            this.rbtnGalvano = new C1.Win.C1InputPanel.InputRadioButton();
+            this.rbtnResonant = new C1.Win.C1InputPanel.InputRadioButton();
+            this.rbtnTwoScanners = new C1.Win.C1InputPanel.InputRadioButton();
+            this.rbtnThreeScanners = new C1.Win.C1InputPanel.InputRadioButton();
+            this.btnPixelDwell2 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPixelDwell4 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPixelDwell6 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPixelDwell8 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPixelDwell10 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPixelDwell20 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPixelDwell50 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPixelDwell100 = new C1.Win.C1InputPanel.InputButton();
+            this.btnScanPixel64 = new C1.Win.C1InputPanel.InputButton();
+            this.btnScanPixel128 = new C1.Win.C1InputPanel.InputButton();
+            this.btnScanPixel256 = new C1.Win.C1InputPanel.InputButton();
+            this.btnScanPixel512 = new C1.Win.C1InputPanel.InputButton();
+            this.btnScanPixel1024 = new C1.Win.C1InputPanel.InputButton();
+            this.btnScanPixel2048 = new C1.Win.C1InputPanel.InputButton();
+            this.btnScanPixel4096 = new C1.Win.C1InputPanel.InputButton();
+            this.rbtnFastMode = new C1.Win.C1InputPanel.InputButton();
+            this.separator2 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
+            this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbScanPixel = new C1.Win.C1InputPanel.InputLabel();
+            this.separator3 = new C1.Win.C1InputPanel.InputSeparator();
+            this.btnLineOptionNormal = new C1.Win.C1InputPanel.InputButton();
+            this.btnAveraging = new C1.Win.C1InputPanel.InputSplitButton();
+            this.btnIntegrate = new C1.Win.C1InputPanel.InputSplitButton();
+            this.chbxSequence = new C1.Win.C1InputPanel.InputCheckBox();
+            this.btnSequence = new C1.Win.C1InputPanel.InputSplitButton();
+            this.separator4 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbFrameTime = new C1.Win.C1InputPanel.InputLabel();
+            this.lbFrame = new C1.Win.C1InputPanel.InputLabel();
+            this.lbPinHole = new C1.Win.C1InputPanel.InputLabel();
+            this.tbarPinHole = new C1.Win.C1InputPanel.InputTrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -361,8 +390,41 @@
             this.inputPanel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.inputPanel.Items.Add(this.btnLive);
             this.inputPanel.Items.Add(this.btnCapture);
-            this.inputPanel.Items.Add(this.cbxScanners);
-            this.inputPanel.Items.Add(this.cbxScanDirection);
+            this.inputPanel.Items.Add(this.rbtnTwoScanners);
+            this.inputPanel.Items.Add(this.rbtnThreeScanners);
+            this.inputPanel.Items.Add(this.rbtnGalvano);
+            this.inputPanel.Items.Add(this.rbtnResonant);
+            this.inputPanel.Items.Add(this.separator1);
+            this.inputPanel.Items.Add(this.lbPixelDwell);
+            this.inputPanel.Items.Add(this.rbtnFastMode);
+            this.inputPanel.Items.Add(this.btnPixelDwell2);
+            this.inputPanel.Items.Add(this.btnPixelDwell4);
+            this.inputPanel.Items.Add(this.btnPixelDwell6);
+            this.inputPanel.Items.Add(this.btnPixelDwell8);
+            this.inputPanel.Items.Add(this.btnPixelDwell10);
+            this.inputPanel.Items.Add(this.btnPixelDwell20);
+            this.inputPanel.Items.Add(this.btnPixelDwell50);
+            this.inputPanel.Items.Add(this.btnPixelDwell100);
+            this.inputPanel.Items.Add(this.separator2);
+            this.inputPanel.Items.Add(this.lbScanPixel);
+            this.inputPanel.Items.Add(this.btnScanPixel64);
+            this.inputPanel.Items.Add(this.btnScanPixel128);
+            this.inputPanel.Items.Add(this.btnScanPixel256);
+            this.inputPanel.Items.Add(this.btnScanPixel512);
+            this.inputPanel.Items.Add(this.btnScanPixel1024);
+            this.inputPanel.Items.Add(this.btnScanPixel2048);
+            this.inputPanel.Items.Add(this.btnScanPixel4096);
+            this.inputPanel.Items.Add(this.separator3);
+            this.inputPanel.Items.Add(this.btnLineOptionNormal);
+            this.inputPanel.Items.Add(this.btnAveraging);
+            this.inputPanel.Items.Add(this.btnIntegrate);
+            this.inputPanel.Items.Add(this.chbxSequence);
+            this.inputPanel.Items.Add(this.btnSequence);
+            this.inputPanel.Items.Add(this.lbFrame);
+            this.inputPanel.Items.Add(this.lbFrameTime);
+            this.inputPanel.Items.Add(this.separator4);
+            this.inputPanel.Items.Add(this.lbPinHole);
+            this.inputPanel.Items.Add(this.tbarPinHole);
             this.inputPanel.Location = new System.Drawing.Point(0, 23);
             this.inputPanel.Name = "inputPanel";
             this.inputPanel.Size = new System.Drawing.Size(256, 646);
@@ -386,49 +448,261 @@
             this.btnCapture.Text = "捕捉";
             this.btnCapture.Width = 50;
             // 
-            // cbxScanners
+            // rbtnGalvano
             // 
-            this.cbxScanners.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbxScanners.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxScanners.Height = 20;
-            this.cbxScanners.Items.Add(this.twoGalv);
-            this.cbxScanners.Items.Add(this.threeGalv);
-            this.cbxScanners.MaxDropDownItems = 2;
-            this.cbxScanners.MaxLength = 60;
-            this.cbxScanners.Name = "cbxScanners";
-            this.cbxScanners.Width = 60;
+            this.rbtnGalvano.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnGalvano.GroupName = "ScanMode";
+            this.rbtnGalvano.Name = "rbtnGalvano";
+            this.rbtnGalvano.Text = "Galvano";
+            this.rbtnGalvano.Width = 60;
             // 
-            // twoGalv
+            // rbtnResonant
             // 
-            this.twoGalv.Name = "twoGalv";
-            this.twoGalv.Text = "双振镜";
+            this.rbtnResonant.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.rbtnResonant.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnResonant.GroupName = "ScanMode";
+            this.rbtnResonant.Name = "rbtnResonant";
+            this.rbtnResonant.Text = "Resonant";
             // 
-            // threeGalv
+            // rbtnTwoScanners
             // 
-            this.threeGalv.Name = "threeGalv";
-            this.threeGalv.Text = "三振镜";
+            this.rbtnTwoScanners.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnTwoScanners.GroupName = "Scanners";
+            this.rbtnTwoScanners.Name = "rbtnTwoScanners";
+            this.rbtnTwoScanners.Text = "双镜";
             // 
-            // cbxScanDirection
+            // rbtnThreeScanners
             // 
-            this.cbxScanDirection.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbxScanDirection.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxScanDirection.Height = 20;
-            this.cbxScanDirection.Items.Add(this.unidirectional);
-            this.cbxScanDirection.Items.Add(this.bidirectional);
-            this.cbxScanDirection.MaxDropDownItems = 2;
-            this.cbxScanDirection.MaxLength = 60;
-            this.cbxScanDirection.Name = "cbxScanDirection";
-            this.cbxScanDirection.Width = 60;
+            this.rbtnThreeScanners.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.rbtnThreeScanners.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnThreeScanners.GroupName = "Scanners";
+            this.rbtnThreeScanners.Name = "rbtnThreeScanners";
+            this.rbtnThreeScanners.Text = "三镜";
             // 
-            // unidirectional
+            // btnPixelDwell2
             // 
-            this.unidirectional.Name = "unidirectional";
-            this.unidirectional.Text = "单向";
+            this.btnPixelDwell2.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnPixelDwell2.CheckOnClick = true;
+            this.btnPixelDwell2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell2.Name = "btnPixelDwell2";
+            this.btnPixelDwell2.Text = "2";
             // 
-            // bidirectional
+            // btnPixelDwell4
             // 
-            this.bidirectional.Name = "bidirectional";
-            this.bidirectional.Text = "双向";
+            this.btnPixelDwell4.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnPixelDwell4.CheckOnClick = true;
+            this.btnPixelDwell4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell4.Name = "btnPixelDwell4";
+            this.btnPixelDwell4.Text = "4";
+            // 
+            // btnPixelDwell6
+            // 
+            this.btnPixelDwell6.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnPixelDwell6.CheckOnClick = true;
+            this.btnPixelDwell6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell6.Name = "btnPixelDwell6";
+            this.btnPixelDwell6.Text = "6";
+            // 
+            // btnPixelDwell8
+            // 
+            this.btnPixelDwell8.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnPixelDwell8.CheckOnClick = true;
+            this.btnPixelDwell8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell8.Name = "btnPixelDwell8";
+            this.btnPixelDwell8.Text = "8";
+            // 
+            // btnPixelDwell10
+            // 
+            this.btnPixelDwell10.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnPixelDwell10.CheckOnClick = true;
+            this.btnPixelDwell10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell10.Name = "btnPixelDwell10";
+            this.btnPixelDwell10.Text = "10";
+            // 
+            // btnPixelDwell20
+            // 
+            this.btnPixelDwell20.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnPixelDwell20.CheckOnClick = true;
+            this.btnPixelDwell20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell20.Name = "btnPixelDwell20";
+            this.btnPixelDwell20.Text = "20";
+            // 
+            // btnPixelDwell50
+            // 
+            this.btnPixelDwell50.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnPixelDwell50.CheckOnClick = true;
+            this.btnPixelDwell50.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell50.Name = "btnPixelDwell50";
+            this.btnPixelDwell50.Text = "50";
+            // 
+            // btnPixelDwell100
+            // 
+            this.btnPixelDwell100.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.btnPixelDwell100.CheckOnClick = true;
+            this.btnPixelDwell100.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPixelDwell100.Name = "btnPixelDwell100";
+            this.btnPixelDwell100.Text = "100";
+            // 
+            // btnScanPixel64
+            // 
+            this.btnScanPixel64.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnScanPixel64.CheckOnClick = true;
+            this.btnScanPixel64.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnScanPixel64.Name = "btnScanPixel64";
+            this.btnScanPixel64.Text = "64 ";
+            // 
+            // btnScanPixel128
+            // 
+            this.btnScanPixel128.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnScanPixel128.CheckOnClick = true;
+            this.btnScanPixel128.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnScanPixel128.Name = "btnScanPixel128";
+            this.btnScanPixel128.Text = "128";
+            // 
+            // btnScanPixel256
+            // 
+            this.btnScanPixel256.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnScanPixel256.CheckOnClick = true;
+            this.btnScanPixel256.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnScanPixel256.Name = "btnScanPixel256";
+            this.btnScanPixel256.Text = "256";
+            // 
+            // btnScanPixel512
+            // 
+            this.btnScanPixel512.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnScanPixel512.CheckOnClick = true;
+            this.btnScanPixel512.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnScanPixel512.Name = "btnScanPixel512";
+            this.btnScanPixel512.Text = "512";
+            // 
+            // btnScanPixel1024
+            // 
+            this.btnScanPixel1024.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnScanPixel1024.CheckOnClick = true;
+            this.btnScanPixel1024.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnScanPixel1024.Name = "btnScanPixel1024";
+            this.btnScanPixel1024.Text = "1024";
+            // 
+            // btnScanPixel2048
+            // 
+            this.btnScanPixel2048.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnScanPixel2048.CheckOnClick = true;
+            this.btnScanPixel2048.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnScanPixel2048.Name = "btnScanPixel2048";
+            this.btnScanPixel2048.Text = "2048";
+            // 
+            // btnScanPixel4096
+            // 
+            this.btnScanPixel4096.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.btnScanPixel4096.CheckOnClick = true;
+            this.btnScanPixel4096.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnScanPixel4096.Name = "btnScanPixel4096";
+            this.btnScanPixel4096.Text = "4096";
+            // 
+            // rbtnFastMode
+            // 
+            this.rbtnFastMode.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.rbtnFastMode.CheckOnClick = true;
+            this.rbtnFastMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnFastMode.Name = "rbtnFastMode";
+            this.rbtnFastMode.Text = "快速模式";
+            // 
+            // separator2
+            // 
+            this.separator2.Height = 10;
+            this.separator2.Name = "separator2";
+            this.separator2.Width = 240;
+            // 
+            // lbPixelDwell
+            // 
+            this.lbPixelDwell.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbPixelDwell.Height = 20;
+            this.lbPixelDwell.Name = "lbPixelDwell";
+            this.lbPixelDwell.Text = "像素时间（us）";
+            // 
+            // separator1
+            // 
+            this.separator1.Height = 10;
+            this.separator1.Name = "separator1";
+            this.separator1.Width = 240;
+            // 
+            // lbScanPixel
+            // 
+            this.lbScanPixel.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbScanPixel.Height = 20;
+            this.lbScanPixel.Name = "lbScanPixel";
+            this.lbScanPixel.Text = "扫描像素";
+            // 
+            // separator3
+            // 
+            this.separator3.Height = 10;
+            this.separator3.Name = "separator3";
+            this.separator3.Width = 240;
+            // 
+            // btnLineOptionNormal
+            // 
+            this.btnLineOptionNormal.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnLineOptionNormal.CheckOnClick = true;
+            this.btnLineOptionNormal.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnLineOptionNormal.Name = "btnLineOptionNormal";
+            this.btnLineOptionNormal.Text = "标准";
+            // 
+            // btnAveraging
+            // 
+            this.btnAveraging.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnAveraging.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAveraging.Name = "btnAveraging";
+            this.btnAveraging.Text = "平均";
+            // 
+            // btnIntegrate
+            // 
+            this.btnIntegrate.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnIntegrate.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnIntegrate.Name = "btnIntegrate";
+            this.btnIntegrate.Text = "积分";
+            // 
+            // chbxSequence
+            // 
+            this.chbxSequence.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.chbxSequence.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chbxSequence.Name = "chbxSequence";
+            this.chbxSequence.Text = "扫描序列";
+            // 
+            // btnSequence
+            // 
+            this.btnSequence.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.btnSequence.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSequence.Name = "btnSequence";
+            this.btnSequence.Text = "序列";
+            // 
+            // separator4
+            // 
+            this.separator4.Height = 10;
+            this.separator4.Name = "separator4";
+            this.separator4.Width = 240;
+            // 
+            // lbFrameTime
+            // 
+            this.lbFrameTime.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbFrameTime.Name = "lbFrameTime";
+            this.lbFrameTime.Text = "帧时间：";
+            this.lbFrameTime.Width = 80;
+            // 
+            // lbFrame
+            // 
+            this.lbFrame.Name = "lbFrame";
+            this.lbFrame.Text = "帧率：";
+            this.lbFrame.Width = 80;
+            // 
+            // lbPinHole
+            // 
+            this.lbPinHole.Name = "lbPinHole";
+            this.lbPinHole.Text = "小孔：";
+            // 
+            // tbarPinHole
+            // 
+            this.tbarPinHole.Name = "tbarPinHole";
+            this.tbarPinHole.TickFrequency = 1;
             // 
             // FormMain
             // 
@@ -502,11 +776,40 @@
         private C1.Win.C1InputPanel.C1InputPanel inputPanel;
         private C1.Win.C1InputPanel.InputButton btnLive;
         private C1.Win.C1InputPanel.InputButton btnCapture;
-        private C1.Win.C1InputPanel.InputComboBox cbxScanners;
-        private C1.Win.C1InputPanel.InputOption twoGalv;
-        private C1.Win.C1InputPanel.InputOption threeGalv;
-        private C1.Win.C1InputPanel.InputComboBox cbxScanDirection;
-        private C1.Win.C1InputPanel.InputOption unidirectional;
-        private C1.Win.C1InputPanel.InputOption bidirectional;
+        private C1.Win.C1InputPanel.InputRadioButton rbtnGalvano;
+        private C1.Win.C1InputPanel.InputRadioButton rbtnResonant;
+        private C1.Win.C1InputPanel.InputRadioButton rbtnTwoScanners;
+        private C1.Win.C1InputPanel.InputRadioButton rbtnThreeScanners;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell2;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell4;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell6;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell8;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell10;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell20;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell50;
+        private C1.Win.C1InputPanel.InputButton btnPixelDwell100;
+        private C1.Win.C1InputPanel.InputButton btnScanPixel64;
+        private C1.Win.C1InputPanel.InputButton btnScanPixel128;
+        private C1.Win.C1InputPanel.InputButton btnScanPixel256;
+        private C1.Win.C1InputPanel.InputButton btnScanPixel512;
+        private C1.Win.C1InputPanel.InputButton btnScanPixel1024;
+        private C1.Win.C1InputPanel.InputButton btnScanPixel2048;
+        private C1.Win.C1InputPanel.InputButton btnScanPixel4096;
+        private C1.Win.C1InputPanel.InputButton rbtnFastMode;
+        private C1.Win.C1InputPanel.InputSeparator separator2;
+        private C1.Win.C1InputPanel.InputSeparator separator1;
+        private C1.Win.C1InputPanel.InputLabel lbPixelDwell;
+        private C1.Win.C1InputPanel.InputLabel lbScanPixel;
+        private C1.Win.C1InputPanel.InputSeparator separator3;
+        private C1.Win.C1InputPanel.InputButton btnLineOptionNormal;
+        private C1.Win.C1InputPanel.InputSplitButton btnAveraging;
+        private C1.Win.C1InputPanel.InputSplitButton btnIntegrate;
+        private C1.Win.C1InputPanel.InputCheckBox chbxSequence;
+        private C1.Win.C1InputPanel.InputSplitButton btnSequence;
+        private C1.Win.C1InputPanel.InputSeparator separator4;
+        private C1.Win.C1InputPanel.InputLabel lbFrameTime;
+        private C1.Win.C1InputPanel.InputLabel lbFrame;
+        private C1.Win.C1InputPanel.InputLabel lbPinHole;
+        private C1.Win.C1InputPanel.InputTrackBar tbarPinHole;
     }
 }
