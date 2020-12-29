@@ -1,5 +1,4 @@
 ﻿using confocal_core.Model;
-using confocal_util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using log4net;
@@ -15,7 +14,6 @@ namespace confocal_ui.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-
         private List<ScanDirectionModel> scanDirectionList;
         private ScanDirectionModel selectedScanDirection;
         private RelayCommand selectScanDirectionCommand;
@@ -87,6 +85,21 @@ namespace confocal_ui.ViewModel
             }
             set { selectScanModeCommand = value; }
         }
+        /// <summary>
+        /// Galvano扫描模式
+        /// </summary>
+        public ScanModeModel ScanModeGalavano
+        {
+            get { return scanModeList.Where(p => p.ID == ScanModeModel.GALVANO).First(); }
+        }
+        /// <summary>
+        /// Resonant扫描模式
+        /// </summary>
+        public ScanModeModel ScanModeResonant
+        {
+            get { return scanModeList.Where(p => p.ID == ScanModeModel.RESONANT).First(); }
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanPixelsModel> scanPixelsList;
         private ScanPixelsModel selectedScanPixels;
@@ -158,6 +171,15 @@ namespace confocal_ui.ViewModel
                 return selectScanPixelDwellCommand;
             }
             set { selectScanPixelDwellCommand = value; }
+        }
+
+
+        public ScanSettingsViewModel()
+        {
+            ScanDirectionList = ScanDirectionModel.Initialize();
+            ScanModeList = ScanModeModel.Initialize();
+            ScanPixelDwellList = ScanPixelDwellModel.Initialize();
+            ScanPixelsList = ScanPixelsModel.Initialize();
         }
 
     }

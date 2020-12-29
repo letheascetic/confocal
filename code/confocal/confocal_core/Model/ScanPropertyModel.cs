@@ -1,5 +1,4 @@
-﻿using confocal_util;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;

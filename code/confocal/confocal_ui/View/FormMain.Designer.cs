@@ -140,6 +140,11 @@
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
             this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.btnUniDirection = new C1.Win.C1InputPanel.InputButton();
+            this.btnBiDirection = new C1.Win.C1InputPanel.InputButton();
+            this.separator6 = new C1.Win.C1InputPanel.InputSeparator();
+            this.btnLineSkip = new C1.Win.C1InputPanel.InputSplitButton();
+            this.chbxLineSkip = new C1.Win.C1InputPanel.InputCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -304,7 +309,7 @@
             this.dockMain.HotTrack = true;
             this.dockMain.Location = new System.Drawing.Point(0, 52);
             this.dockMain.Name = "dockMain";
-            this.dockMain.Size = new System.Drawing.Size(730, 605);
+            this.dockMain.Size = new System.Drawing.Size(729, 655);
             this.dockMain.TabIndex = 11;
             this.dockMain.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockMain.TabsSpacing = 5;
@@ -319,9 +324,9 @@
             this.dockBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockBottom.Id = 1;
-            this.dockBottom.Location = new System.Drawing.Point(0, 657);
+            this.dockBottom.Location = new System.Drawing.Point(0, 707);
             this.dockBottom.Name = "dockBottom";
-            this.dockBottom.Size = new System.Drawing.Size(730, 138);
+            this.dockBottom.Size = new System.Drawing.Size(729, 138);
             // 
             // dockTabOutput
             // 
@@ -336,7 +341,7 @@
             this.dockTabOutput.Location = new System.Drawing.Point(0, 0);
             this.dockTabOutput.Name = "dockTabOutput";
             this.dockTabOutput.ShowCaption = true;
-            this.dockTabOutput.Size = new System.Drawing.Size(730, 138);
+            this.dockTabOutput.Size = new System.Drawing.Size(729, 138);
             this.dockTabOutput.TabIndex = 1;
             this.dockTabOutput.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabOutput.TabsSpacing = 5;
@@ -350,7 +355,7 @@
             this.tpgLog.Controls.Add(this.textLog);
             this.tpgLog.Location = new System.Drawing.Point(1, 4);
             this.tpgLog.Name = "tpgLog";
-            this.tpgLog.Size = new System.Drawing.Size(728, 111);
+            this.tpgLog.Size = new System.Drawing.Size(727, 111);
             this.tpgLog.TabIndex = 0;
             this.tpgLog.Text = "Log";
             // 
@@ -364,7 +369,7 @@
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
             this.textLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textLog.Size = new System.Drawing.Size(728, 88);
+            this.textLog.Size = new System.Drawing.Size(727, 88);
             this.textLog.TabIndex = 0;
             // 
             // dockLeft
@@ -374,9 +379,9 @@
             this.dockLeft.Dock = System.Windows.Forms.DockStyle.Right;
             this.dockLeft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockLeft.Id = 3;
-            this.dockLeft.Location = new System.Drawing.Point(730, 52);
+            this.dockLeft.Location = new System.Drawing.Point(729, 52);
             this.dockLeft.Name = "dockLeft";
-            this.dockLeft.Size = new System.Drawing.Size(262, 743);
+            this.dockLeft.Size = new System.Drawing.Size(263, 793);
             // 
             // dockTabScan
             // 
@@ -392,7 +397,7 @@
             this.dockTabScan.Name = "dockTabScan";
             this.dockTabScan.SelectedIndex = 1;
             this.dockTabScan.ShowCaption = true;
-            this.dockTabScan.Size = new System.Drawing.Size(262, 743);
+            this.dockTabScan.Size = new System.Drawing.Size(263, 793);
             this.dockTabScan.TabIndex = 0;
             this.dockTabScan.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabScan.TabsSpacing = 5;
@@ -406,7 +411,7 @@
             this.tpgScanSettings.Controls.Add(this.inputPanel);
             this.tpgScanSettings.Location = new System.Drawing.Point(4, 1);
             this.tpgScanSettings.Name = "tpgScanSettings";
-            this.tpgScanSettings.Size = new System.Drawing.Size(257, 717);
+            this.tpgScanSettings.Size = new System.Drawing.Size(258, 767);
             this.tpgScanSettings.TabIndex = 0;
             this.tpgScanSettings.Text = "扫描设置";
             // 
@@ -421,6 +426,11 @@
             this.inputPanel.Items.Add(this.rbtnThreeScanners);
             this.inputPanel.Items.Add(this.rbtnGalvano);
             this.inputPanel.Items.Add(this.rbtnResonant);
+            this.inputPanel.Items.Add(this.separator6);
+            this.inputPanel.Items.Add(this.btnUniDirection);
+            this.inputPanel.Items.Add(this.btnBiDirection);
+            this.inputPanel.Items.Add(this.chbxLineSkip);
+            this.inputPanel.Items.Add(this.btnLineSkip);
             this.inputPanel.Items.Add(this.separator1);
             this.inputPanel.Items.Add(this.lbPixelDwell);
             this.inputPanel.Items.Add(this.rbtnFastMode);
@@ -499,7 +509,7 @@
             this.inputPanel.Items.Add(this.tbx640Power);
             this.inputPanel.Location = new System.Drawing.Point(0, 23);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(257, 694);
+            this.inputPanel.Size = new System.Drawing.Size(258, 744);
             this.inputPanel.TabIndex = 2;
             // 
             // btnLive
@@ -1104,24 +1114,62 @@
             this.tpgScanField.CaptionVisible = true;
             this.tpgScanField.Location = new System.Drawing.Point(4, 1);
             this.tpgScanField.Name = "tpgScanField";
-            this.tpgScanField.Size = new System.Drawing.Size(257, 717);
+            this.tpgScanField.Size = new System.Drawing.Size(258, 767);
             this.tpgScanField.TabIndex = 1;
             this.tpgScanField.Text = "扫描区域";
             // 
             // statusStrip
             // 
             this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
-            this.statusStrip.Location = new System.Drawing.Point(0, 795);
+            this.statusStrip.Location = new System.Drawing.Point(0, 845);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(992, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
+            // btnUniDirection
+            // 
+            this.btnUniDirection.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnUniDirection.CheckOnClick = true;
+            this.btnUniDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnUniDirection.Name = "btnUniDirection";
+            this.btnUniDirection.Text = "单向";
+            // 
+            // btnBiDirection
+            // 
+            this.btnBiDirection.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.btnBiDirection.CheckOnClick = true;
+            this.btnBiDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnBiDirection.Name = "btnBiDirection";
+            this.btnBiDirection.Text = "双向";
+            // 
+            // separator6
+            // 
+            this.separator6.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.separator6.Height = 10;
+            this.separator6.Name = "separator6";
+            this.separator6.Width = 240;
+            // 
+            // btnLineSkip
+            // 
+            this.btnLineSkip.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.btnLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnLineSkip.Name = "btnLineSkip";
+            this.btnLineSkip.Text = "2x";
+            this.btnLineSkip.Width = 40;
+            // 
+            // chbxLineSkip
+            // 
+            this.chbxLineSkip.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.chbxLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chbxLineSkip.Name = "chbxLineSkip";
+            this.chbxLineSkip.Text = "跳行扫描";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 817);
+            this.ClientSize = new System.Drawing.Size(992, 867);
             this.Controls.Add(this.dockMain);
             this.Controls.Add(this.dockBottom);
             this.Controls.Add(this.dockLeft);
@@ -1269,5 +1317,10 @@
         private C1.Win.C1InputPanel.InputButton btn640Power;
         private C1.Win.C1InputPanel.InputTrackBar tbar640Power;
         private C1.Win.C1InputPanel.InputTextBox tbx640Power;
+        private C1.Win.C1InputPanel.InputButton btnUniDirection;
+        private C1.Win.C1InputPanel.InputButton btnBiDirection;
+        private C1.Win.C1InputPanel.InputSeparator separator6;
+        private C1.Win.C1InputPanel.InputSplitButton btnLineSkip;
+        private C1.Win.C1InputPanel.InputCheckBox chbxLineSkip;
     }
 }

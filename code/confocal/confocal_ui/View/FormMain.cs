@@ -1,5 +1,8 @@
 ﻿using C1.Win.C1Ribbon;
 using C1.Win.C1Themes;
+using confocal_core.Model;
+using confocal_ui.ViewModel;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +16,12 @@ namespace confocal_ui
 {
     public partial class FormMain : C1RibbonForm
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        
+        private ScanSettingsViewModel mScanSettingsViewModel = new ScanSettingsViewModel();
+
         public FormMain()
         {
             InitializeComponent();
@@ -28,6 +37,24 @@ namespace confocal_ui
             C1ThemeController.ApplyThemeToControlTree(this, C1ThemeController.GetThemeByName(themeName, false));
             this.ResumePainting();
         }
+
+        /// <summary>
+        /// 设置ScanSettings的DataBindings
+        /// </summary>
+        private void ScanSettingsDataBindings()
+        {
+            // Scan Mode Controlers
+            this.rbtnGalvano.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeGalavano, "Text");
+            this.rbtnGalvano.DataBindings.Add("Checked", mScanSettingsViewModel.ScanModeGalavano, "IsEnabled");
+            this.rbtnResonant.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeResonant, "Text");
+            this.rbtnResonant.DataBindings.Add("Checked", mScanSettingsViewModel.ScanModeResonant, "IsEnabled");
+
+            // Scanners
+            
+
+
+        }
+
 
         /// <summary>
         /// 选择主题
@@ -55,6 +82,7 @@ namespace confocal_ui
         private void FormMain_Load(object sender, EventArgs e)
         {
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+            ScanSettingsDataBindings();
             ApplyTheme(confocal_ui.Properties.Settings.Default.ThemeName);
         }
 
