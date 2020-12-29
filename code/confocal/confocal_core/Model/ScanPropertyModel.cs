@@ -1,4 +1,5 @@
 ﻿using confocal_util;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace confocal_core.Model
 {
-    public class ScanPropertyBaseModel : NotifyObject
+    public class ScanPropertyBaseModel : ObservableObject
     {
         private int id;
         private string text;
@@ -15,19 +16,19 @@ namespace confocal_core.Model
         public int ID
         {
             get { return id; }
-            set { id = value; RaisePropertyChanged("ID"); }
+            set { id = value; RaisePropertyChanged(() => ID); }
         }
 
         public string Text
         {
             get { return text; }
-            set { text = value; RaisePropertyChanged("Text"); }
+            set { text = value; RaisePropertyChanged(() => Text); }
         }
 
         public bool IsEnabled
         {
             get { return isEnabled; }
-            set { isEnabled = value; RaisePropertyChanged("IsEnabled"); }
+            set { isEnabled = value; RaisePropertyChanged(() => IsEnabled); }
         }
 
     }
@@ -39,7 +40,7 @@ namespace confocal_core.Model
         public T Data
         {
             get { return data; }
-            set { this.data = value; RaisePropertyChanged("Data"); }
+            set { this.data = value; RaisePropertyChanged(() => Data); }
         }
     }
 

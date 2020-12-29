@@ -1,4 +1,5 @@
 ﻿using confocal_util;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +13,7 @@ namespace confocal_wpf.Model
     /// <summary>
     /// 扫描通道
     /// </summary>
-    public class ScanChannelModel : NotifyObject
+    public class ScanChannelModel : ObservableObject
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private int id;                     // 通道ID
@@ -35,7 +36,7 @@ namespace confocal_wpf.Model
         public int ID
         {
             get { return id; }
-            set { id = value; RaisePropertyChanged("ID"); }
+            set { id = value; RaisePropertyChanged(() => ID); }
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace confocal_wpf.Model
         public string Name
         {
             get { return name; }
-            set { name = value; RaisePropertyChanged("Name"); }
+            set { name = value; RaisePropertyChanged(() => Name); }
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace confocal_wpf.Model
         public double LaserPower
         {
             get { return laserPower; }
-            set { laserPower = value; RaisePropertyChanged("LaserPower"); }
+            set { laserPower = value; RaisePropertyChanged(() => LaserPower); }
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace confocal_wpf.Model
         public Color LaserColor
         {
             get { return laserColor; }
-            set { laserColor = value; RaisePropertyChanged("LaserColor"); }
+            set { laserColor = value; RaisePropertyChanged(() => LaserColor); }
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace confocal_wpf.Model
         public string LaserWaveLength
         {
             get { return laserWaveLength; }
-            set { laserWaveLength = value; RaisePropertyChanged("LaserWaveLength"); }
+            set { laserWaveLength = value; RaisePropertyChanged(() => LaserWaveLength); }
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace confocal_wpf.Model
         public bool Activated
         {
             get { return activated; }
-            set { activated = value; RaisePropertyChanged("Activated"); }
+            set { activated = value; RaisePropertyChanged(() => Activated); }
         }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace confocal_wpf.Model
         public double PinHole
         {
             get { return pinHole; }
-            set { pinHole = value; RaisePropertyChanged("PinHole"); }
+            set { pinHole = value; RaisePropertyChanged(() => PinHole); }
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace confocal_wpf.Model
         public double Gain
         {
             get { return gain; }
-            set { gain = value; RaisePropertyChanged("Gain"); }
+            set { gain = value; RaisePropertyChanged(() => Gain); }
         }
 
         /// <summary>
@@ -107,7 +108,7 @@ namespace confocal_wpf.Model
         public int Offset
         {
             get { return offset; }
-            set { offset = value; RaisePropertyChanged("Offset"); }
+            set { offset = value; RaisePropertyChanged(() => Offset); }
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace confocal_wpf.Model
         public double Gamma
         {
             get { return gamma; }
-            set { gamma = value; RaisePropertyChanged("Gamma"); }
+            set { gamma = value; RaisePropertyChanged(() => gamma); }
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace confocal_wpf.Model
         public Color PseudoColor
         {
             get { return pseudoColor; }
-            set { pseudoColor = value; RaisePropertyChanged("PseudoColor"); }
+            set { pseudoColor = value; RaisePropertyChanged(() => PseudoColor); }
         }
 
         public static List<ScanChannelModel> Initialize()
