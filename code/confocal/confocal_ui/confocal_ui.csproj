@@ -109,12 +109,6 @@
     <Compile Include="View\FormScan.Designer.cs">
       <DependentUpon>FormScan.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FormTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\FormTest.Designer.cs">
-      <DependentUpon>FormTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\FormTheme.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,9 +122,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormScan.resx">
       <DependentUpon>FormScan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\FormTest.resx">
-      <DependentUpon>FormTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormTheme.resx">
       <DependentUpon>FormTheme.cs</DependentUpon>
@@ -146,7 +137,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
     <None Include="log4net.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
