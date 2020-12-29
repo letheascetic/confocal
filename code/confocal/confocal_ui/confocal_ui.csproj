@@ -97,6 +97,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModel\ScanSettingsViewModel.cs" />
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Scan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\confocal_util\confocal_util.csproj">
+      <Project>{38e5177c-fa83-4b36-afb0-df90600fa986}</Project>
+      <Name>confocal_util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

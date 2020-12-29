@@ -55,15 +55,16 @@
             this.dockLeft = new C1.Win.C1Command.C1CommandDock();
             this.dockTabScan = new C1.Win.C1Command.C1DockingTab();
             this.tpgScanSettings = new C1.Win.C1Command.C1DockingTabPage();
-            this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
             this.btnLive = new C1.Win.C1InputPanel.InputButton();
             this.btnCapture = new C1.Win.C1InputPanel.InputButton();
-            this.rbtnGalvano = new C1.Win.C1InputPanel.InputRadioButton();
-            this.rbtnResonant = new C1.Win.C1InputPanel.InputRadioButton();
             this.rbtnTwoScanners = new C1.Win.C1InputPanel.InputRadioButton();
             this.rbtnThreeScanners = new C1.Win.C1InputPanel.InputRadioButton();
+            this.rbtnGalvano = new C1.Win.C1InputPanel.InputRadioButton();
+            this.rbtnResonant = new C1.Win.C1InputPanel.InputRadioButton();
+            this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
+            this.rbtnFastMode = new C1.Win.C1InputPanel.InputButton();
             this.btnPixelDwell2 = new C1.Win.C1InputPanel.InputButton();
             this.btnPixelDwell4 = new C1.Win.C1InputPanel.InputButton();
             this.btnPixelDwell6 = new C1.Win.C1InputPanel.InputButton();
@@ -72,6 +73,8 @@
             this.btnPixelDwell20 = new C1.Win.C1InputPanel.InputButton();
             this.btnPixelDwell50 = new C1.Win.C1InputPanel.InputButton();
             this.btnPixelDwell100 = new C1.Win.C1InputPanel.InputButton();
+            this.separator2 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbScanPixel = new C1.Win.C1InputPanel.InputLabel();
             this.btnScanPixel64 = new C1.Win.C1InputPanel.InputButton();
             this.btnScanPixel128 = new C1.Win.C1InputPanel.InputButton();
             this.btnScanPixel256 = new C1.Win.C1InputPanel.InputButton();
@@ -79,26 +82,21 @@
             this.btnScanPixel1024 = new C1.Win.C1InputPanel.InputButton();
             this.btnScanPixel2048 = new C1.Win.C1InputPanel.InputButton();
             this.btnScanPixel4096 = new C1.Win.C1InputPanel.InputButton();
-            this.rbtnFastMode = new C1.Win.C1InputPanel.InputButton();
-            this.separator2 = new C1.Win.C1InputPanel.InputSeparator();
-            this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
-            this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
-            this.lbScanPixel = new C1.Win.C1InputPanel.InputLabel();
             this.separator3 = new C1.Win.C1InputPanel.InputSeparator();
             this.btnLineOptionNormal = new C1.Win.C1InputPanel.InputButton();
             this.btnAveraging = new C1.Win.C1InputPanel.InputSplitButton();
             this.btnIntegrate = new C1.Win.C1InputPanel.InputSplitButton();
             this.chbxSequence = new C1.Win.C1InputPanel.InputCheckBox();
             this.btnSequence = new C1.Win.C1InputPanel.InputSplitButton();
-            this.separator4 = new C1.Win.C1InputPanel.InputSeparator();
-            this.lbFrameTime = new C1.Win.C1InputPanel.InputLabel();
             this.lbFrame = new C1.Win.C1InputPanel.InputLabel();
+            this.lbFrameTime = new C1.Win.C1InputPanel.InputLabel();
+            this.separator4 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbPinHoleSelect = new C1.Win.C1InputPanel.InputLabel();
+            this.cbxPinHoleSelect = new C1.Win.C1InputPanel.InputComboBox();
             this.lbPinHole = new C1.Win.C1InputPanel.InputLabel();
             this.tbarPinHole = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbxPinHole = new C1.Win.C1InputPanel.InputTextBox();
             this.tbxPinHoleAU = new C1.Win.C1InputPanel.InputTextBox();
-            this.lbPinHoleSelect = new C1.Win.C1InputPanel.InputLabel();
-            this.cbxPinHoleSelect = new C1.Win.C1InputPanel.InputComboBox();
             this.separator5 = new C1.Win.C1InputPanel.InputSeparator();
             this.gh405 = new C1.Win.C1InputPanel.InputGroupHeader();
             this.lb405HV = new C1.Win.C1InputPanel.InputLabel();
@@ -140,6 +138,8 @@
             this.btn640Power = new C1.Win.C1InputPanel.InputButton();
             this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
+            this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -304,7 +304,7 @@
             this.dockMain.HotTrack = true;
             this.dockMain.Location = new System.Drawing.Point(0, 52);
             this.dockMain.Name = "dockMain";
-            this.dockMain.Size = new System.Drawing.Size(731, 555);
+            this.dockMain.Size = new System.Drawing.Size(730, 605);
             this.dockMain.TabIndex = 11;
             this.dockMain.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockMain.TabsSpacing = 5;
@@ -319,9 +319,9 @@
             this.dockBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockBottom.Id = 1;
-            this.dockBottom.Location = new System.Drawing.Point(0, 607);
+            this.dockBottom.Location = new System.Drawing.Point(0, 657);
             this.dockBottom.Name = "dockBottom";
-            this.dockBottom.Size = new System.Drawing.Size(731, 138);
+            this.dockBottom.Size = new System.Drawing.Size(730, 138);
             // 
             // dockTabOutput
             // 
@@ -336,12 +336,12 @@
             this.dockTabOutput.Location = new System.Drawing.Point(0, 0);
             this.dockTabOutput.Name = "dockTabOutput";
             this.dockTabOutput.ShowCaption = true;
-            this.dockTabOutput.Size = new System.Drawing.Size(731, 138);
+            this.dockTabOutput.Size = new System.Drawing.Size(730, 138);
             this.dockTabOutput.TabIndex = 1;
             this.dockTabOutput.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabOutput.TabsSpacing = 5;
             this.dockTabOutput.TabStyle = C1.Win.C1Command.TabStyleEnum.Office2010;
-            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Office2010Blue;
+            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.dockTabOutput.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
             // tpgLog
@@ -350,7 +350,7 @@
             this.tpgLog.Controls.Add(this.textLog);
             this.tpgLog.Location = new System.Drawing.Point(1, 4);
             this.tpgLog.Name = "tpgLog";
-            this.tpgLog.Size = new System.Drawing.Size(729, 111);
+            this.tpgLog.Size = new System.Drawing.Size(728, 111);
             this.tpgLog.TabIndex = 0;
             this.tpgLog.Text = "Log";
             // 
@@ -364,7 +364,7 @@
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
             this.textLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textLog.Size = new System.Drawing.Size(729, 88);
+            this.textLog.Size = new System.Drawing.Size(728, 88);
             this.textLog.TabIndex = 0;
             // 
             // dockLeft
@@ -374,9 +374,9 @@
             this.dockLeft.Dock = System.Windows.Forms.DockStyle.Right;
             this.dockLeft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockLeft.Id = 3;
-            this.dockLeft.Location = new System.Drawing.Point(731, 52);
+            this.dockLeft.Location = new System.Drawing.Point(730, 52);
             this.dockLeft.Name = "dockLeft";
-            this.dockLeft.Size = new System.Drawing.Size(261, 693);
+            this.dockLeft.Size = new System.Drawing.Size(262, 743);
             // 
             // dockTabScan
             // 
@@ -392,12 +392,12 @@
             this.dockTabScan.Name = "dockTabScan";
             this.dockTabScan.SelectedIndex = 1;
             this.dockTabScan.ShowCaption = true;
-            this.dockTabScan.Size = new System.Drawing.Size(261, 693);
+            this.dockTabScan.Size = new System.Drawing.Size(262, 743);
             this.dockTabScan.TabIndex = 0;
             this.dockTabScan.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabScan.TabsSpacing = 5;
             this.dockTabScan.TabStyle = C1.Win.C1Command.TabStyleEnum.Office2010;
-            this.dockTabScan.VisualStyle = C1.Win.C1Command.VisualStyle.Office2010Blue;
+            this.dockTabScan.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.dockTabScan.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
             // tpgScanSettings
@@ -406,27 +406,9 @@
             this.tpgScanSettings.Controls.Add(this.inputPanel);
             this.tpgScanSettings.Location = new System.Drawing.Point(4, 1);
             this.tpgScanSettings.Name = "tpgScanSettings";
-            this.tpgScanSettings.Size = new System.Drawing.Size(256, 667);
+            this.tpgScanSettings.Size = new System.Drawing.Size(257, 717);
             this.tpgScanSettings.TabIndex = 0;
             this.tpgScanSettings.Text = "扫描设置";
-            // 
-            // tpgScanField
-            // 
-            this.tpgScanField.CaptionVisible = true;
-            this.tpgScanField.Location = new System.Drawing.Point(4, 1);
-            this.tpgScanField.Name = "tpgScanField";
-            this.tpgScanField.Size = new System.Drawing.Size(256, 667);
-            this.tpgScanField.TabIndex = 1;
-            this.tpgScanField.Text = "Scan Field";
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
-            this.statusStrip.Location = new System.Drawing.Point(0, 745);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(992, 22);
-            this.statusStrip.TabIndex = 10;
-            this.statusStrip.Text = "statusStrip1";
             // 
             // inputPanel
             // 
@@ -517,7 +499,7 @@
             this.inputPanel.Items.Add(this.tbx640Power);
             this.inputPanel.Location = new System.Drawing.Point(0, 23);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(256, 644);
+            this.inputPanel.Size = new System.Drawing.Size(257, 694);
             this.inputPanel.TabIndex = 2;
             // 
             // btnLive
@@ -538,6 +520,21 @@
             this.btnCapture.Text = "捕捉";
             this.btnCapture.Width = 50;
             // 
+            // rbtnTwoScanners
+            // 
+            this.rbtnTwoScanners.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnTwoScanners.GroupName = "Scanners";
+            this.rbtnTwoScanners.Name = "rbtnTwoScanners";
+            this.rbtnTwoScanners.Text = "双镜";
+            // 
+            // rbtnThreeScanners
+            // 
+            this.rbtnThreeScanners.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.rbtnThreeScanners.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnThreeScanners.GroupName = "Scanners";
+            this.rbtnThreeScanners.Name = "rbtnThreeScanners";
+            this.rbtnThreeScanners.Text = "三镜";
+            // 
             // rbtnGalvano
             // 
             this.rbtnGalvano.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -554,20 +551,26 @@
             this.rbtnResonant.Name = "rbtnResonant";
             this.rbtnResonant.Text = "Resonant";
             // 
-            // rbtnTwoScanners
+            // separator1
             // 
-            this.rbtnTwoScanners.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rbtnTwoScanners.GroupName = "Scanners";
-            this.rbtnTwoScanners.Name = "rbtnTwoScanners";
-            this.rbtnTwoScanners.Text = "双镜";
+            this.separator1.Height = 10;
+            this.separator1.Name = "separator1";
+            this.separator1.Width = 240;
             // 
-            // rbtnThreeScanners
+            // lbPixelDwell
             // 
-            this.rbtnThreeScanners.Break = C1.Win.C1InputPanel.BreakType.Column;
-            this.rbtnThreeScanners.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rbtnThreeScanners.GroupName = "Scanners";
-            this.rbtnThreeScanners.Name = "rbtnThreeScanners";
-            this.rbtnThreeScanners.Text = "三镜";
+            this.lbPixelDwell.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbPixelDwell.Height = 20;
+            this.lbPixelDwell.Name = "lbPixelDwell";
+            this.lbPixelDwell.Text = "像素时间（us）";
+            // 
+            // rbtnFastMode
+            // 
+            this.rbtnFastMode.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.rbtnFastMode.CheckOnClick = true;
+            this.rbtnFastMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rbtnFastMode.Name = "rbtnFastMode";
+            this.rbtnFastMode.Text = "快速模式";
             // 
             // btnPixelDwell2
             // 
@@ -633,6 +636,19 @@
             this.btnPixelDwell100.Name = "btnPixelDwell100";
             this.btnPixelDwell100.Text = "100";
             // 
+            // separator2
+            // 
+            this.separator2.Height = 10;
+            this.separator2.Name = "separator2";
+            this.separator2.Width = 240;
+            // 
+            // lbScanPixel
+            // 
+            this.lbScanPixel.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbScanPixel.Height = 20;
+            this.lbScanPixel.Name = "lbScanPixel";
+            this.lbScanPixel.Text = "扫描像素";
+            // 
             // btnScanPixel64
             // 
             this.btnScanPixel64.Break = C1.Win.C1InputPanel.BreakType.None;
@@ -689,40 +705,6 @@
             this.btnScanPixel4096.Name = "btnScanPixel4096";
             this.btnScanPixel4096.Text = "4096";
             // 
-            // rbtnFastMode
-            // 
-            this.rbtnFastMode.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.rbtnFastMode.CheckOnClick = true;
-            this.rbtnFastMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rbtnFastMode.Name = "rbtnFastMode";
-            this.rbtnFastMode.Text = "快速模式";
-            // 
-            // separator2
-            // 
-            this.separator2.Height = 10;
-            this.separator2.Name = "separator2";
-            this.separator2.Width = 240;
-            // 
-            // lbPixelDwell
-            // 
-            this.lbPixelDwell.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbPixelDwell.Height = 20;
-            this.lbPixelDwell.Name = "lbPixelDwell";
-            this.lbPixelDwell.Text = "像素时间（us）";
-            // 
-            // separator1
-            // 
-            this.separator1.Height = 10;
-            this.separator1.Name = "separator1";
-            this.separator1.Width = 240;
-            // 
-            // lbScanPixel
-            // 
-            this.lbScanPixel.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbScanPixel.Height = 20;
-            this.lbScanPixel.Name = "lbScanPixel";
-            this.lbScanPixel.Text = "扫描像素";
-            // 
             // separator3
             // 
             this.separator3.Height = 10;
@@ -765,11 +747,11 @@
             this.btnSequence.Name = "btnSequence";
             this.btnSequence.Text = "序列";
             // 
-            // separator4
+            // lbFrame
             // 
-            this.separator4.Height = 10;
-            this.separator4.Name = "separator4";
-            this.separator4.Width = 240;
+            this.lbFrame.Name = "lbFrame";
+            this.lbFrame.Text = "帧率：";
+            this.lbFrame.Width = 80;
             // 
             // lbFrameTime
             // 
@@ -778,11 +760,24 @@
             this.lbFrameTime.Text = "帧时间：";
             this.lbFrameTime.Width = 80;
             // 
-            // lbFrame
+            // separator4
             // 
-            this.lbFrame.Name = "lbFrame";
-            this.lbFrame.Text = "帧率：";
-            this.lbFrame.Width = 80;
+            this.separator4.Height = 10;
+            this.separator4.Name = "separator4";
+            this.separator4.Width = 240;
+            // 
+            // lbPinHoleSelect
+            // 
+            this.lbPinHoleSelect.Name = "lbPinHoleSelect";
+            this.lbPinHoleSelect.Text = "选择小孔：";
+            // 
+            // cbxPinHoleSelect
+            // 
+            this.cbxPinHoleSelect.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbxPinHoleSelect.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxPinHoleSelect.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxPinHoleSelect.Name = "cbxPinHoleSelect";
+            this.cbxPinHoleSelect.Width = 44;
             // 
             // lbPinHole
             // 
@@ -809,19 +804,6 @@
             this.tbxPinHoleAU.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxPinHoleAU.Name = "tbxPinHoleAU";
             this.tbxPinHoleAU.Width = 30;
-            // 
-            // lbPinHoleSelect
-            // 
-            this.lbPinHoleSelect.Name = "lbPinHoleSelect";
-            this.lbPinHoleSelect.Text = "选择小孔：";
-            // 
-            // cbxPinHoleSelect
-            // 
-            this.cbxPinHoleSelect.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbxPinHoleSelect.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbxPinHoleSelect.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxPinHoleSelect.Name = "cbxPinHoleSelect";
-            this.cbxPinHoleSelect.Width = 44;
             // 
             // separator5
             // 
@@ -1117,11 +1099,29 @@
             this.tbx640Power.Name = "tbx640Power";
             this.tbx640Power.Width = 40;
             // 
+            // tpgScanField
+            // 
+            this.tpgScanField.CaptionVisible = true;
+            this.tpgScanField.Location = new System.Drawing.Point(4, 1);
+            this.tpgScanField.Name = "tpgScanField";
+            this.tpgScanField.Size = new System.Drawing.Size(257, 717);
+            this.tpgScanField.TabIndex = 1;
+            this.tpgScanField.Text = "扫描区域";
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
+            this.statusStrip.Location = new System.Drawing.Point(0, 795);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(992, 22);
+            this.statusStrip.TabIndex = 10;
+            this.statusStrip.Text = "statusStrip1";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 767);
+            this.ClientSize = new System.Drawing.Size(992, 817);
             this.Controls.Add(this.dockMain);
             this.Controls.Add(this.dockBottom);
             this.Controls.Add(this.dockLeft);

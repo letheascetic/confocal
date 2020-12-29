@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ScanChannelModel.cs" />
+    <Compile Include="Model\ScanPropertyModel.cs" />
     <Compile Include="Z1Acquisition.cs" />
     <Compile Include="Z1Config.cs" />
     <Compile Include="Z1NiDaq.cs" />
@@ -84,6 +86,13 @@
   <ItemGroup>
     <None Include="log4net.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\confocal_util\confocal_util.csproj">
+      <Project>{38e5177c-fa83-4b36-afb0-df90600fa986}</Project>
+      <Name>confocal_util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
