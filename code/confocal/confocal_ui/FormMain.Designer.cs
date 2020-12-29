@@ -95,6 +95,51 @@
             this.lbFrame = new C1.Win.C1InputPanel.InputLabel();
             this.lbPinHole = new C1.Win.C1InputPanel.InputLabel();
             this.tbarPinHole = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbxPinHole = new C1.Win.C1InputPanel.InputTextBox();
+            this.tbxPinHoleAU = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbPinHoleSelect = new C1.Win.C1InputPanel.InputLabel();
+            this.cbxPinHoleSelect = new C1.Win.C1InputPanel.InputComboBox();
+            this.separator5 = new C1.Win.C1InputPanel.InputSeparator();
+            this.gh405 = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.lb405HV = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar405HV = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx405HV = new C1.Win.C1InputPanel.InputTextBox();
+            this.lb405Offset = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar405Offset = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx405Offset = new C1.Win.C1InputPanel.InputTextBox();
+            this.btn405Power = new C1.Win.C1InputPanel.InputButton();
+            this.tbar405Power = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx405Power = new C1.Win.C1InputPanel.InputTextBox();
+            this.gh488 = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.lb488HV = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar488HV = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx488HV = new C1.Win.C1InputPanel.InputTextBox();
+            this.lb488Offset = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar488Offset = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx488Offset = new C1.Win.C1InputPanel.InputTextBox();
+            this.btn488Power = new C1.Win.C1InputPanel.InputButton();
+            this.tbar488Power = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx488Power = new C1.Win.C1InputPanel.InputTextBox();
+            this.gh561 = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.lb561HV = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar561HV = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx561HV = new C1.Win.C1InputPanel.InputTextBox();
+            this.lb561Offset = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar561Offset = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx561Offset = new C1.Win.C1InputPanel.InputTextBox();
+            this.btn561Power = new C1.Win.C1InputPanel.InputButton();
+            this.tbar561Power = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx561Power = new C1.Win.C1InputPanel.InputTextBox();
+            this.gh640 = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.lb640HV = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar640HV = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx640HV = new C1.Win.C1InputPanel.InputTextBox();
+            this.lb640Offset = new C1.Win.C1InputPanel.InputLabel();
+            this.tbar640Offset = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx640Offset = new C1.Win.C1InputPanel.InputTextBox();
+            this.btn640Power = new C1.Win.C1InputPanel.InputButton();
+            this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
+            this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -361,16 +406,16 @@
             this.tpgScanSettings.Controls.Add(this.inputPanel);
             this.tpgScanSettings.Location = new System.Drawing.Point(4, 1);
             this.tpgScanSettings.Name = "tpgScanSettings";
-            this.tpgScanSettings.Size = new System.Drawing.Size(256, 669);
+            this.tpgScanSettings.Size = new System.Drawing.Size(256, 667);
             this.tpgScanSettings.TabIndex = 0;
-            this.tpgScanSettings.Text = "Scan Settings";
+            this.tpgScanSettings.Text = "扫描设置";
             // 
             // tpgScanField
             // 
             this.tpgScanField.CaptionVisible = true;
             this.tpgScanField.Location = new System.Drawing.Point(4, 1);
             this.tpgScanField.Name = "tpgScanField";
-            this.tpgScanField.Size = new System.Drawing.Size(256, 669);
+            this.tpgScanField.Size = new System.Drawing.Size(256, 667);
             this.tpgScanField.TabIndex = 1;
             this.tpgScanField.Text = "Scan Field";
             // 
@@ -423,11 +468,56 @@
             this.inputPanel.Items.Add(this.lbFrame);
             this.inputPanel.Items.Add(this.lbFrameTime);
             this.inputPanel.Items.Add(this.separator4);
+            this.inputPanel.Items.Add(this.lbPinHoleSelect);
+            this.inputPanel.Items.Add(this.cbxPinHoleSelect);
             this.inputPanel.Items.Add(this.lbPinHole);
             this.inputPanel.Items.Add(this.tbarPinHole);
+            this.inputPanel.Items.Add(this.tbxPinHole);
+            this.inputPanel.Items.Add(this.tbxPinHoleAU);
+            this.inputPanel.Items.Add(this.separator5);
+            this.inputPanel.Items.Add(this.gh405);
+            this.inputPanel.Items.Add(this.lb405HV);
+            this.inputPanel.Items.Add(this.tbar405HV);
+            this.inputPanel.Items.Add(this.tbx405HV);
+            this.inputPanel.Items.Add(this.lb405Offset);
+            this.inputPanel.Items.Add(this.tbar405Offset);
+            this.inputPanel.Items.Add(this.tbx405Offset);
+            this.inputPanel.Items.Add(this.btn405Power);
+            this.inputPanel.Items.Add(this.tbar405Power);
+            this.inputPanel.Items.Add(this.tbx405Power);
+            this.inputPanel.Items.Add(this.gh488);
+            this.inputPanel.Items.Add(this.lb488HV);
+            this.inputPanel.Items.Add(this.tbar488HV);
+            this.inputPanel.Items.Add(this.tbx488HV);
+            this.inputPanel.Items.Add(this.lb488Offset);
+            this.inputPanel.Items.Add(this.tbar488Offset);
+            this.inputPanel.Items.Add(this.tbx488Offset);
+            this.inputPanel.Items.Add(this.btn488Power);
+            this.inputPanel.Items.Add(this.tbar488Power);
+            this.inputPanel.Items.Add(this.tbx488Power);
+            this.inputPanel.Items.Add(this.gh561);
+            this.inputPanel.Items.Add(this.lb561HV);
+            this.inputPanel.Items.Add(this.tbar561HV);
+            this.inputPanel.Items.Add(this.tbx561HV);
+            this.inputPanel.Items.Add(this.lb561Offset);
+            this.inputPanel.Items.Add(this.tbar561Offset);
+            this.inputPanel.Items.Add(this.tbx561Offset);
+            this.inputPanel.Items.Add(this.btn561Power);
+            this.inputPanel.Items.Add(this.tbar561Power);
+            this.inputPanel.Items.Add(this.tbx561Power);
+            this.inputPanel.Items.Add(this.gh640);
+            this.inputPanel.Items.Add(this.lb640HV);
+            this.inputPanel.Items.Add(this.tbar640HV);
+            this.inputPanel.Items.Add(this.tbx640HV);
+            this.inputPanel.Items.Add(this.lb640Offset);
+            this.inputPanel.Items.Add(this.tbar640Offset);
+            this.inputPanel.Items.Add(this.tbx640Offset);
+            this.inputPanel.Items.Add(this.btn640Power);
+            this.inputPanel.Items.Add(this.tbar640Power);
+            this.inputPanel.Items.Add(this.tbx640Power);
             this.inputPanel.Location = new System.Drawing.Point(0, 23);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(256, 646);
+            this.inputPanel.Size = new System.Drawing.Size(256, 644);
             this.inputPanel.TabIndex = 2;
             // 
             // btnLive
@@ -697,12 +787,335 @@
             // lbPinHole
             // 
             this.lbPinHole.Name = "lbPinHole";
-            this.lbPinHole.Text = "小孔：";
+            this.lbPinHole.Text = "孔径：";
             // 
             // tbarPinHole
             // 
+            this.tbarPinHole.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbarPinHole.Maximum = 100;
             this.tbarPinHole.Name = "tbarPinHole";
-            this.tbarPinHole.TickFrequency = 1;
+            this.tbarPinHole.TickFrequency = 10;
+            // 
+            // tbxPinHole
+            // 
+            this.tbxPinHole.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbxPinHole.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxPinHole.Name = "tbxPinHole";
+            this.tbxPinHole.Width = 30;
+            // 
+            // tbxPinHoleAU
+            // 
+            this.tbxPinHoleAU.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbxPinHoleAU.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxPinHoleAU.Name = "tbxPinHoleAU";
+            this.tbxPinHoleAU.Width = 30;
+            // 
+            // lbPinHoleSelect
+            // 
+            this.lbPinHoleSelect.Name = "lbPinHoleSelect";
+            this.lbPinHoleSelect.Text = "选择小孔：";
+            // 
+            // cbxPinHoleSelect
+            // 
+            this.cbxPinHoleSelect.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbxPinHoleSelect.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxPinHoleSelect.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxPinHoleSelect.Name = "cbxPinHoleSelect";
+            this.cbxPinHoleSelect.Width = 44;
+            // 
+            // separator5
+            // 
+            this.separator5.Height = 10;
+            this.separator5.Name = "separator5";
+            this.separator5.Width = 240;
+            // 
+            // gh405
+            // 
+            this.gh405.Collapsible = true;
+            this.gh405.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gh405.FontPadding = true;
+            this.gh405.Name = "gh405";
+            this.gh405.Text = "405nm                                  0.0";
+            // 
+            // lb405HV
+            // 
+            this.lb405HV.Name = "lb405HV";
+            this.lb405HV.Text = "增益 ";
+            // 
+            // tbar405HV
+            // 
+            this.tbar405HV.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar405HV.Maximum = 100;
+            this.tbar405HV.Name = "tbar405HV";
+            this.tbar405HV.TickFrequency = 10;
+            this.tbar405HV.Width = 160;
+            // 
+            // tbx405HV
+            // 
+            this.tbx405HV.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx405HV.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx405HV.Name = "tbx405HV";
+            this.tbx405HV.Width = 40;
+            // 
+            // lb405Offset
+            // 
+            this.lb405Offset.Name = "lb405Offset";
+            this.lb405Offset.Text = "偏置 ";
+            // 
+            // tbar405Offset
+            // 
+            this.tbar405Offset.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar405Offset.Maximum = 128;
+            this.tbar405Offset.Minimum = -128;
+            this.tbar405Offset.Name = "tbar405Offset";
+            this.tbar405Offset.TickFrequency = 16;
+            this.tbar405Offset.Width = 160;
+            // 
+            // tbx405Offset
+            // 
+            this.tbx405Offset.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx405Offset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx405Offset.Name = "tbx405Offset";
+            this.tbx405Offset.Width = 40;
+            // 
+            // btn405Power
+            // 
+            this.btn405Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btn405Power.CheckOnClick = true;
+            this.btn405Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn405Power.Name = "btn405Power";
+            this.btn405Power.Text = "功率";
+            // 
+            // tbar405Power
+            // 
+            this.tbar405Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar405Power.Maximum = 100;
+            this.tbar405Power.Name = "tbar405Power";
+            this.tbar405Power.TickFrequency = 10;
+            this.tbar405Power.Width = 160;
+            // 
+            // tbx405Power
+            // 
+            this.tbx405Power.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx405Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx405Power.Name = "tbx405Power";
+            this.tbx405Power.Width = 40;
+            // 
+            // gh488
+            // 
+            this.gh488.Collapsible = true;
+            this.gh488.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gh488.FontPadding = true;
+            this.gh488.Name = "gh488";
+            this.gh488.Text = "488nm                                  0.0";
+            // 
+            // lb488HV
+            // 
+            this.lb488HV.Name = "lb488HV";
+            this.lb488HV.Text = "增益 ";
+            // 
+            // tbar488HV
+            // 
+            this.tbar488HV.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar488HV.Maximum = 100;
+            this.tbar488HV.Name = "tbar488HV";
+            this.tbar488HV.TickFrequency = 10;
+            this.tbar488HV.Width = 160;
+            // 
+            // tbx488HV
+            // 
+            this.tbx488HV.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx488HV.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx488HV.Name = "tbx488HV";
+            this.tbx488HV.Width = 40;
+            // 
+            // lb488Offset
+            // 
+            this.lb488Offset.Name = "lb488Offset";
+            this.lb488Offset.Text = "偏置 ";
+            // 
+            // tbar488Offset
+            // 
+            this.tbar488Offset.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar488Offset.Maximum = 128;
+            this.tbar488Offset.Minimum = -128;
+            this.tbar488Offset.Name = "tbar488Offset";
+            this.tbar488Offset.TickFrequency = 16;
+            this.tbar488Offset.Width = 160;
+            // 
+            // tbx488Offset
+            // 
+            this.tbx488Offset.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx488Offset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx488Offset.Name = "tbx488Offset";
+            this.tbx488Offset.Width = 40;
+            // 
+            // btn488Power
+            // 
+            this.btn488Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btn488Power.CheckOnClick = true;
+            this.btn488Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn488Power.Name = "btn488Power";
+            this.btn488Power.Text = "功率";
+            // 
+            // tbar488Power
+            // 
+            this.tbar488Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar488Power.Maximum = 100;
+            this.tbar488Power.Name = "tbar488Power";
+            this.tbar488Power.TickFrequency = 10;
+            this.tbar488Power.Width = 160;
+            // 
+            // tbx488Power
+            // 
+            this.tbx488Power.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx488Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx488Power.Name = "tbx488Power";
+            this.tbx488Power.Width = 40;
+            // 
+            // gh561
+            // 
+            this.gh561.Collapsible = true;
+            this.gh561.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gh561.FontPadding = true;
+            this.gh561.Name = "gh561";
+            this.gh561.Text = "561nm                                  0.0";
+            // 
+            // lb561HV
+            // 
+            this.lb561HV.Name = "lb561HV";
+            this.lb561HV.Text = "增益 ";
+            // 
+            // tbar561HV
+            // 
+            this.tbar561HV.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar561HV.Maximum = 100;
+            this.tbar561HV.Name = "tbar561HV";
+            this.tbar561HV.TickFrequency = 10;
+            this.tbar561HV.Width = 160;
+            // 
+            // tbx561HV
+            // 
+            this.tbx561HV.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx561HV.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx561HV.Name = "tbx561HV";
+            this.tbx561HV.Width = 40;
+            // 
+            // lb561Offset
+            // 
+            this.lb561Offset.Name = "lb561Offset";
+            this.lb561Offset.Text = "偏置 ";
+            // 
+            // tbar561Offset
+            // 
+            this.tbar561Offset.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar561Offset.Maximum = 128;
+            this.tbar561Offset.Minimum = -128;
+            this.tbar561Offset.Name = "tbar561Offset";
+            this.tbar561Offset.TickFrequency = 16;
+            this.tbar561Offset.Width = 160;
+            // 
+            // tbx561Offset
+            // 
+            this.tbx561Offset.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx561Offset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx561Offset.Name = "tbx561Offset";
+            this.tbx561Offset.Width = 40;
+            // 
+            // btn561Power
+            // 
+            this.btn561Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btn561Power.CheckOnClick = true;
+            this.btn561Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn561Power.Name = "btn561Power";
+            this.btn561Power.Text = "功率";
+            // 
+            // tbar561Power
+            // 
+            this.tbar561Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar561Power.Maximum = 100;
+            this.tbar561Power.Name = "tbar561Power";
+            this.tbar561Power.TickFrequency = 10;
+            this.tbar561Power.Width = 160;
+            // 
+            // tbx561Power
+            // 
+            this.tbx561Power.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx561Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx561Power.Name = "tbx561Power";
+            this.tbx561Power.Width = 40;
+            // 
+            // gh640
+            // 
+            this.gh640.Collapsible = true;
+            this.gh640.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gh640.FontPadding = true;
+            this.gh640.Name = "gh640";
+            this.gh640.Text = "640nm                                  0.0";
+            // 
+            // lb640HV
+            // 
+            this.lb640HV.Name = "lb640HV";
+            this.lb640HV.Text = "增益 ";
+            // 
+            // tbar640HV
+            // 
+            this.tbar640HV.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar640HV.Maximum = 100;
+            this.tbar640HV.Name = "tbar640HV";
+            this.tbar640HV.TickFrequency = 10;
+            this.tbar640HV.Width = 160;
+            // 
+            // tbx640HV
+            // 
+            this.tbx640HV.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx640HV.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx640HV.Name = "tbx640HV";
+            this.tbx640HV.Width = 40;
+            // 
+            // lb640Offset
+            // 
+            this.lb640Offset.Name = "lb640Offset";
+            this.lb640Offset.Text = "偏置 ";
+            // 
+            // tbar640Offset
+            // 
+            this.tbar640Offset.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar640Offset.Maximum = 128;
+            this.tbar640Offset.Minimum = -128;
+            this.tbar640Offset.Name = "tbar640Offset";
+            this.tbar640Offset.TickFrequency = 16;
+            this.tbar640Offset.Width = 160;
+            // 
+            // tbx640Offset
+            // 
+            this.tbx640Offset.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx640Offset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx640Offset.Name = "tbx640Offset";
+            this.tbx640Offset.Width = 40;
+            // 
+            // btn640Power
+            // 
+            this.btn640Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btn640Power.CheckOnClick = true;
+            this.btn640Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn640Power.Name = "btn640Power";
+            this.btn640Power.Text = "功率";
+            // 
+            // tbar640Power
+            // 
+            this.tbar640Power.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbar640Power.Maximum = 100;
+            this.tbar640Power.Name = "tbar640Power";
+            this.tbar640Power.TickFrequency = 10;
+            this.tbar640Power.Width = 160;
+            // 
+            // tbx640Power
+            // 
+            this.tbx640Power.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbx640Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbx640Power.Name = "tbx640Power";
+            this.tbx640Power.Width = 40;
             // 
             // FormMain
             // 
@@ -811,5 +1224,50 @@
         private C1.Win.C1InputPanel.InputLabel lbFrame;
         private C1.Win.C1InputPanel.InputLabel lbPinHole;
         private C1.Win.C1InputPanel.InputTrackBar tbarPinHole;
+        private C1.Win.C1InputPanel.InputTextBox tbxPinHole;
+        private C1.Win.C1InputPanel.InputTextBox tbxPinHoleAU;
+        private C1.Win.C1InputPanel.InputLabel lbPinHoleSelect;
+        private C1.Win.C1InputPanel.InputComboBox cbxPinHoleSelect;
+        private C1.Win.C1InputPanel.InputSeparator separator5;
+        private C1.Win.C1InputPanel.InputGroupHeader gh405;
+        private C1.Win.C1InputPanel.InputLabel lb405HV;
+        private C1.Win.C1InputPanel.InputTrackBar tbar405HV;
+        private C1.Win.C1InputPanel.InputTextBox tbx405HV;
+        private C1.Win.C1InputPanel.InputLabel lb405Offset;
+        private C1.Win.C1InputPanel.InputTrackBar tbar405Offset;
+        private C1.Win.C1InputPanel.InputTextBox tbx405Offset;
+        private C1.Win.C1InputPanel.InputButton btn405Power;
+        private C1.Win.C1InputPanel.InputTrackBar tbar405Power;
+        private C1.Win.C1InputPanel.InputTextBox tbx405Power;
+        private C1.Win.C1InputPanel.InputGroupHeader gh488;
+        private C1.Win.C1InputPanel.InputLabel lb488HV;
+        private C1.Win.C1InputPanel.InputTrackBar tbar488HV;
+        private C1.Win.C1InputPanel.InputTextBox tbx488HV;
+        private C1.Win.C1InputPanel.InputLabel lb488Offset;
+        private C1.Win.C1InputPanel.InputTrackBar tbar488Offset;
+        private C1.Win.C1InputPanel.InputTextBox tbx488Offset;
+        private C1.Win.C1InputPanel.InputButton btn488Power;
+        private C1.Win.C1InputPanel.InputTrackBar tbar488Power;
+        private C1.Win.C1InputPanel.InputTextBox tbx488Power;
+        private C1.Win.C1InputPanel.InputGroupHeader gh561;
+        private C1.Win.C1InputPanel.InputLabel lb561HV;
+        private C1.Win.C1InputPanel.InputTrackBar tbar561HV;
+        private C1.Win.C1InputPanel.InputTextBox tbx561HV;
+        private C1.Win.C1InputPanel.InputLabel lb561Offset;
+        private C1.Win.C1InputPanel.InputTrackBar tbar561Offset;
+        private C1.Win.C1InputPanel.InputTextBox tbx561Offset;
+        private C1.Win.C1InputPanel.InputButton btn561Power;
+        private C1.Win.C1InputPanel.InputTrackBar tbar561Power;
+        private C1.Win.C1InputPanel.InputTextBox tbx561Power;
+        private C1.Win.C1InputPanel.InputGroupHeader gh640;
+        private C1.Win.C1InputPanel.InputLabel lb640HV;
+        private C1.Win.C1InputPanel.InputTrackBar tbar640HV;
+        private C1.Win.C1InputPanel.InputTextBox tbx640HV;
+        private C1.Win.C1InputPanel.InputLabel lb640Offset;
+        private C1.Win.C1InputPanel.InputTrackBar tbar640Offset;
+        private C1.Win.C1InputPanel.InputTextBox tbx640Offset;
+        private C1.Win.C1InputPanel.InputButton btn640Power;
+        private C1.Win.C1InputPanel.InputTrackBar tbar640Power;
+        private C1.Win.C1InputPanel.InputTextBox tbx640Power;
     }
 }
