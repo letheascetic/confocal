@@ -39,6 +39,15 @@ namespace confocal_ui
         }
 
         /// <summary>
+        /// 注册ScanSettings的Events
+        /// </summary>
+        private void ScanSettingsRegisterEvents()
+        {
+            this.rbtnTwoScanners.CheckedChanged += ScannerHeadChanged;
+            this.rbtnGalvano.CheckedChanged += ScanModeChanged;
+        }
+
+        /// <summary>
         /// 设置ScanSettings的DataBindings
         /// </summary>
         private void ScanSettingsDataBindings()
@@ -50,9 +59,17 @@ namespace confocal_ui
             this.rbtnResonant.DataBindings.Add("Checked", mScanSettingsViewModel.ScanModeResonant, "IsEnabled");
 
             // Scanners
+            this.rbtnTwoScanners.DataBindings.Add("Text", mScanSettingsViewModel.ScannerHeadTwoGalv, "Text");
+            this.rbtnTwoScanners.DataBindings.Add("Checked", mScanSettingsViewModel.ScannerHeadTwoGalv, "IsEnabled");
+            this.rbtnThreeScanners.DataBindings.Add("Text", mScanSettingsViewModel.ScannerHeadThreeGalv, "Text");
+            this.rbtnThreeScanners.DataBindings.Add("Checked", mScanSettingsViewModel.ScannerHeadThreeGalv, "IsEnabled");
+
+            // Scan Direction
+            this.btnUniDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanUniDirection, "IsEnabled");
+            this.btnBiDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanBiDirection, "IsEnabled");
+
+            this.inputTextBox1.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeResonant, "Text");
             
-
-
         }
 
 
@@ -81,9 +98,45 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+            // register events
+            ScanSettingsRegisterEvents();
+
+            // set data bindings
             ScanSettingsDataBindings();
+
+            // apply theme
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             ApplyTheme(confocal_ui.Properties.Settings.Default.ThemeName);
+        }
+
+        private void inputButton1_Click(object sender, EventArgs e)
+        {
+            Logger.Info(string.Format("ScannerHead [{0}][{1}]", mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled, mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled));
+            Logger.Info(string.Format("SelectedScannerHead [{0}]", mScanSettingsViewModel.SelectedScannerHead.Text));
+            Logger.Info(string.Format("SelectedScanMode [{0}]", mScanSettingsViewModel.SelectedScanMode.Text));
+            Logger.Info(string.Format("SelectedScanDirection [{0}]", mScanSettingsViewModel.SelectedScanDirection.Text));
+        }
+
+        /// <summary>
+        /// 扫描头切换
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScannerHeadChanged(object sender, EventArgs e)
+        {
+            mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled = rbtnTwoScanners.Checked;
+            mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled = rbtnThreeScanners.Checked;
+        }
+
+        /// <summary>
+        /// 切换扫描模式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScanModeChanged(object sender, EventArgs e)
+        {
+            mScanSettingsViewModel.ScanModeGalavano.IsEnabled = rbtnGalvano.Checked;
+            mScanSettingsViewModel.ScanModeResonant.IsEnabled = rbtnResonant.Checked;
         }
 
     }

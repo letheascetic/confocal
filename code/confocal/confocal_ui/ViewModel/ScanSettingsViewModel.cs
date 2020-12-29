@@ -14,6 +14,57 @@ namespace confocal_ui.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private List<ScannerHeadModel> scannerHeadList;
+        private ScannerHeadModel selectedScannerHead;
+        private RelayCommand selectScanHeadCommand;
+
+        /// <summary>
+        /// 扫描头列表
+        /// </summary>
+        public List<ScannerHeadModel> ScannerHeadList
+        {
+            get { return scannerHeadList; }
+            set { scannerHeadList = value; RaisePropertyChanged(() => ScannerHeadList); }
+        }
+        /// <summary>
+        /// 选择的扫描头
+        /// </summary>
+        public ScannerHeadModel SelectedScannerHead
+        {
+            get { return selectedScannerHead; }
+            set { selectedScannerHead = value; RaisePropertyChanged(() => SelectedScannerHead); }
+        }
+        /// <summary>
+        /// 选择扫描头命令
+        /// </summary>
+        public RelayCommand SelectScannerHeadCommand
+        {
+            get
+            {
+                if (selectScanHeadCommand == null)
+                {
+                    selectScanHeadCommand = new RelayCommand(() => { SelectedScannerHead = ScannerHeadList.Where(p => p.IsEnabled).First(); });
+                }
+                return selectScanHeadCommand;
+            }
+            set { selectScanHeadCommand = value; }
+        }
+        /// <summary>
+        /// 双镜
+        /// </summary>
+        public ScannerHeadModel ScannerHeadTwoGalv
+        {
+            get { return scannerHeadList.Where(p => p.ID == ScannerHeadModel.TWO_SCANNERS).First(); }
+        }
+        /// <summary>
+        /// 三镜
+        /// </summary>
+        public ScannerHeadModel ScannerHeadThreeGalv
+        {
+            get { return scannerHeadList.Where(p => p.ID == ScannerHeadModel.THREE_SCANNERS).First(); }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanDirectionModel> scanDirectionList;
         private ScanDirectionModel selectedScanDirection;
         private RelayCommand selectScanDirectionCommand;
@@ -49,6 +100,17 @@ namespace confocal_ui.ViewModel
             }
             set { selectScanDirectionCommand = value; }
         }
+        
+        public ScanDirectionModel ScanUniDirection
+        {
+            get { return scanDirectionList.Where(p => p.ID == ScanDirectionModel.UNIDIRECTION).First(); }
+        }
+
+        public ScanDirectionModel ScanBiDirection
+        {
+            get { return scanDirectionList.Where(p => p.ID == ScanDirectionModel.BIDIRECTION).First(); }
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanModeModel> scanModeList;
         private ScanModeModel selectedScanMode;
@@ -173,9 +235,9 @@ namespace confocal_ui.ViewModel
             set { selectScanPixelDwellCommand = value; }
         }
 
-
         public ScanSettingsViewModel()
         {
+            ScannerHeadList = ScannerHeadModel.Initialize();
             ScanDirectionList = ScanDirectionModel.Initialize();
             ScanModeList = ScanModeModel.Initialize();
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();

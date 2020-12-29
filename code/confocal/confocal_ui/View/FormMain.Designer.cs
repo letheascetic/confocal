@@ -62,6 +62,11 @@
             this.rbtnThreeScanners = new C1.Win.C1InputPanel.InputRadioButton();
             this.rbtnGalvano = new C1.Win.C1InputPanel.InputRadioButton();
             this.rbtnResonant = new C1.Win.C1InputPanel.InputRadioButton();
+            this.separator6 = new C1.Win.C1InputPanel.InputSeparator();
+            this.btnUniDirection = new C1.Win.C1InputPanel.InputButton();
+            this.btnBiDirection = new C1.Win.C1InputPanel.InputButton();
+            this.chbxLineSkip = new C1.Win.C1InputPanel.InputCheckBox();
+            this.btnLineSkip = new C1.Win.C1InputPanel.InputSplitButton();
             this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
             this.rbtnFastMode = new C1.Win.C1InputPanel.InputButton();
@@ -138,13 +143,10 @@
             this.btn640Power = new C1.Win.C1InputPanel.InputButton();
             this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
+            this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
             this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.btnUniDirection = new C1.Win.C1InputPanel.InputButton();
-            this.btnBiDirection = new C1.Win.C1InputPanel.InputButton();
-            this.separator6 = new C1.Win.C1InputPanel.InputSeparator();
-            this.btnLineSkip = new C1.Win.C1InputPanel.InputSplitButton();
-            this.chbxLineSkip = new C1.Win.C1InputPanel.InputCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -507,6 +509,8 @@
             this.inputPanel.Items.Add(this.btn640Power);
             this.inputPanel.Items.Add(this.tbar640Power);
             this.inputPanel.Items.Add(this.tbx640Power);
+            this.inputPanel.Items.Add(this.inputButton1);
+            this.inputPanel.Items.Add(this.inputTextBox1);
             this.inputPanel.Location = new System.Drawing.Point(0, 23);
             this.inputPanel.Name = "inputPanel";
             this.inputPanel.Size = new System.Drawing.Size(258, 744);
@@ -560,6 +564,44 @@
             this.rbtnResonant.GroupName = "ScanMode";
             this.rbtnResonant.Name = "rbtnResonant";
             this.rbtnResonant.Text = "Resonant";
+            // 
+            // separator6
+            // 
+            this.separator6.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.separator6.Height = 10;
+            this.separator6.Name = "separator6";
+            this.separator6.Width = 240;
+            // 
+            // btnUniDirection
+            // 
+            this.btnUniDirection.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnUniDirection.CheckOnClick = true;
+            this.btnUniDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnUniDirection.Name = "btnUniDirection";
+            this.btnUniDirection.Text = "单向";
+            // 
+            // btnBiDirection
+            // 
+            this.btnBiDirection.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.btnBiDirection.CheckOnClick = true;
+            this.btnBiDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnBiDirection.Name = "btnBiDirection";
+            this.btnBiDirection.Text = "双向";
+            // 
+            // chbxLineSkip
+            // 
+            this.chbxLineSkip.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.chbxLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chbxLineSkip.Name = "chbxLineSkip";
+            this.chbxLineSkip.Text = "跳行扫描";
+            // 
+            // btnLineSkip
+            // 
+            this.btnLineSkip.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.btnLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnLineSkip.Name = "btnLineSkip";
+            this.btnLineSkip.Text = "2x";
+            this.btnLineSkip.Width = 40;
             // 
             // separator1
             // 
@@ -1109,6 +1151,22 @@
             this.tbx640Power.Name = "tbx640Power";
             this.tbx640Power.Width = 40;
             // 
+            // inputButton1
+            // 
+            this.inputButton1.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButton1.CheckOnClick = true;
+            this.inputButton1.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.inputButton1.Name = "inputButton1";
+            this.inputButton1.Text = "功率";
+            this.inputButton1.Click += new System.EventHandler(this.inputButton1_Click);
+            // 
+            // inputTextBox1
+            // 
+            this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.inputTextBox1.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.inputTextBox1.Name = "inputTextBox1";
+            this.inputTextBox1.Width = 40;
+            // 
             // tpgScanField
             // 
             this.tpgScanField.CaptionVisible = true;
@@ -1126,44 +1184,6 @@
             this.statusStrip.Size = new System.Drawing.Size(992, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
-            // 
-            // btnUniDirection
-            // 
-            this.btnUniDirection.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.btnUniDirection.CheckOnClick = true;
-            this.btnUniDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnUniDirection.Name = "btnUniDirection";
-            this.btnUniDirection.Text = "单向";
-            // 
-            // btnBiDirection
-            // 
-            this.btnBiDirection.Break = C1.Win.C1InputPanel.BreakType.Column;
-            this.btnBiDirection.CheckOnClick = true;
-            this.btnBiDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnBiDirection.Name = "btnBiDirection";
-            this.btnBiDirection.Text = "双向";
-            // 
-            // separator6
-            // 
-            this.separator6.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.separator6.Height = 10;
-            this.separator6.Name = "separator6";
-            this.separator6.Width = 240;
-            // 
-            // btnLineSkip
-            // 
-            this.btnLineSkip.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.btnLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnLineSkip.Name = "btnLineSkip";
-            this.btnLineSkip.Text = "2x";
-            this.btnLineSkip.Width = 40;
-            // 
-            // chbxLineSkip
-            // 
-            this.chbxLineSkip.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.chbxLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chbxLineSkip.Name = "chbxLineSkip";
-            this.chbxLineSkip.Text = "跳行扫描";
             // 
             // FormMain
             // 
@@ -1322,5 +1342,7 @@
         private C1.Win.C1InputPanel.InputSeparator separator6;
         private C1.Win.C1InputPanel.InputSplitButton btnLineSkip;
         private C1.Win.C1InputPanel.InputCheckBox chbxLineSkip;
+        private C1.Win.C1InputPanel.InputButton inputButton1;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBox1;
     }
 }
