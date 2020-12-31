@@ -21,41 +21,27 @@ namespace confocal_ui
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        
-        private ScanSettingsViewModel mScanSettingsViewModel;
-        private InputButton[] mScanPixelDwellButtons;
-        private InputButton[] mScanPixelButtons;
+
+        private FormScanSettings mFormScanSetting;
+        private FormScanArea mFormScanArea;
 
         public FormMain()
         {
             InitializeComponent();
+            Initialize();
         }
 
         private void Initialize()
         {
-            mScanSettingsViewModel = new ScanSettingsViewModel();
+            WindowState = FormWindowState.Maximized;
 
-            mScanPixelDwellButtons = new InputButton[]
-            {
-                btnPixelDwell2,
-                btnPixelDwell4,
-                btnPixelDwell6,
-                btnPixelDwell8,
-                btnPixelDwell10,
-                btnPixelDwell20,
-                btnPixelDwell50,
-                btnPixelDwell100,
-            };
+            mFormScanArea = new FormScanArea();
+            mFormScanArea.MdiParent = this;
+            mFormScanArea.Visible = true;
 
-            mScanPixelButtons = new InputButton[]
-            {
-                btnScanPixel64,
-                btnScanPixel128,
-                btnScanPixel256,
-                btnScanPixel512,
-                btnScanPixel1024,
-                btnScanPixel2048
-            };
+            mFormScanSetting = new FormScanSettings();
+            mFormScanSetting.MdiParent = this;
+            mFormScanSetting.Visible = true;
 
         }
 
@@ -75,8 +61,8 @@ namespace confocal_ui
         /// </summary>
         private void ScanSettingsRegisterEvents()
         {
-            this.rbtnTwoScanners.CheckedChanged += ScannerHeadChanged;
-            this.rbtnGalvano.CheckedChanged += ScanModeChanged;
+            //this.rbtnTwoScanners.CheckedChanged += ScannerHeadChanged;
+            //this.rbtnGalvano.CheckedChanged += ScanModeChanged;
 
         }
 
@@ -86,25 +72,25 @@ namespace confocal_ui
         private void ScanSettingsDataBindings()
         {
             // Scan Mode Controlers
-            this.rbtnGalvano.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeGalavano, "Text");
-            this.rbtnGalvano.DataBindings.Add("Checked", mScanSettingsViewModel.ScanModeGalavano, "IsEnabled");
-            this.rbtnResonant.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeResonant, "Text");
-            this.rbtnResonant.DataBindings.Add("Checked", mScanSettingsViewModel.ScanModeResonant, "IsEnabled");
+            //this.rbtnGalvano.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeGalavano, "Text");
+            //this.rbtnGalvano.DataBindings.Add("Checked", mScanSettingsViewModel.ScanModeGalavano, "IsEnabled");
+            //this.rbtnResonant.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeResonant, "Text");
+            //this.rbtnResonant.DataBindings.Add("Checked", mScanSettingsViewModel.ScanModeResonant, "IsEnabled");
 
-            // Scanners
-            this.rbtnTwoScanners.DataBindings.Add("Text", mScanSettingsViewModel.ScannerHeadTwoGalv, "Text");
-            this.rbtnTwoScanners.DataBindings.Add("Checked", mScanSettingsViewModel.ScannerHeadTwoGalv, "IsEnabled");
-            this.rbtnThreeScanners.DataBindings.Add("Text", mScanSettingsViewModel.ScannerHeadThreeGalv, "Text");
-            this.rbtnThreeScanners.DataBindings.Add("Checked", mScanSettingsViewModel.ScannerHeadThreeGalv, "IsEnabled");
+            //// Scanners
+            //this.rbtnTwoScanners.DataBindings.Add("Text", mScanSettingsViewModel.ScannerHeadTwoGalv, "Text");
+            //this.rbtnTwoScanners.DataBindings.Add("Checked", mScanSettingsViewModel.ScannerHeadTwoGalv, "IsEnabled");
+            //this.rbtnThreeScanners.DataBindings.Add("Text", mScanSettingsViewModel.ScannerHeadThreeGalv, "Text");
+            //this.rbtnThreeScanners.DataBindings.Add("Checked", mScanSettingsViewModel.ScannerHeadThreeGalv, "IsEnabled");
 
-            // Scan Direction
-            this.btnUniDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanUniDirection, "IsEnabled");
-            this.btnBiDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanBiDirection, "IsEnabled");
+            //// Scan Direction
+            //this.btnUniDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanUniDirection, "IsEnabled");
+            //this.btnBiDirection.DataBindings.Add("Pressed", mScanSettingsViewModel.ScanBiDirection, "IsEnabled");
 
-            // Scan Pixel Dwell
-            // this.btnPixelDwell2.DataBindings.Add("Text", mScanSettingsViewModel.scan)
+            //// Scan Pixel Dwell
+            //// this.btnPixelDwell2.DataBindings.Add("Text", mScanSettingsViewModel.scan)
 
-            this.inputTextBox1.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeResonant, "Text");
+            //this.inputTextBox1.DataBindings.Add("Text", mScanSettingsViewModel.ScanModeResonant, "Text");
             
         }
 
@@ -134,7 +120,7 @@ namespace confocal_ui
         private void FormMain_Load(object sender, EventArgs e)
         {
             // init variables & controlers
-            Initialize();
+            // Initialize();
 
             // register events
             ScanSettingsRegisterEvents();
@@ -149,10 +135,10 @@ namespace confocal_ui
 
         private void inputButton1_Click(object sender, EventArgs e)
         {
-            Logger.Info(string.Format("ScannerHead [{0}][{1}]", mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled, mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled));
-            Logger.Info(string.Format("SelectedScannerHead [{0}]", mScanSettingsViewModel.SelectedScannerHead.Text));
-            Logger.Info(string.Format("SelectedScanMode [{0}]", mScanSettingsViewModel.SelectedScanMode.Text));
-            Logger.Info(string.Format("SelectedScanDirection [{0}]", mScanSettingsViewModel.SelectedScanDirection.Text));
+            //Logger.Info(string.Format("ScannerHead [{0}][{1}]", mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled, mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled));
+            //Logger.Info(string.Format("SelectedScannerHead [{0}]", mScanSettingsViewModel.SelectedScannerHead.Text));
+            //Logger.Info(string.Format("SelectedScanMode [{0}]", mScanSettingsViewModel.SelectedScanMode.Text));
+            //Logger.Info(string.Format("SelectedScanDirection [{0}]", mScanSettingsViewModel.SelectedScanDirection.Text));
         }
 
         /// <summary>
@@ -162,9 +148,9 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void ScannerHeadChanged(object sender, EventArgs e)
         {
-            mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled = rbtnTwoScanners.Checked;
-            mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled = rbtnThreeScanners.Checked;
-            mScanSettingsViewModel.SelectScannerHeadCommand();
+            //mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled = rbtnTwoScanners.Checked;
+            //mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled = rbtnThreeScanners.Checked;
+            //mScanSettingsViewModel.SelectScannerHeadCommand();
         }
 
         /// <summary>
@@ -174,35 +160,35 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void ScanModeChanged(object sender, EventArgs e)
         {
-            mScanSettingsViewModel.ScanModeGalavano.IsEnabled = rbtnGalvano.Checked;
-            mScanSettingsViewModel.ScanModeResonant.IsEnabled = rbtnResonant.Checked;
-            mScanSettingsViewModel.SelectScanModeCommand();
+            //mScanSettingsViewModel.ScanModeGalavano.IsEnabled = rbtnGalvano.Checked;
+            //mScanSettingsViewModel.ScanModeResonant.IsEnabled = rbtnResonant.Checked;
+            //mScanSettingsViewModel.SelectScanModeCommand();
         }
 
         private void btnUniDirection_Click(object sender, EventArgs e)
         {
-            if (mScanSettingsViewModel.ScanUniDirection.IsEnabled)
-            {
-                btnUniDirection.Pressed = true;
-                return;
-            }
-            btnBiDirection.Pressed = !btnUniDirection.Pressed;
-            mScanSettingsViewModel.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
-            mScanSettingsViewModel.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
-            mScanSettingsViewModel.SelectScanDirectionCommand();
+            //if (mScanSettingsViewModel.ScanUniDirection.IsEnabled)
+            //{
+            //    btnUniDirection.Pressed = true;
+            //    return;
+            //}
+            //btnBiDirection.Pressed = !btnUniDirection.Pressed;
+            //mScanSettingsViewModel.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
+            //mScanSettingsViewModel.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
+            //mScanSettingsViewModel.SelectScanDirectionCommand();
         }
 
         private void btnBiDirection_Click(object sender, EventArgs e)
         {
-            if (mScanSettingsViewModel.ScanBiDirection.IsEnabled)
-            {
-                btnBiDirection.Pressed = true;
-                return;
-            }
-            btnUniDirection.Pressed = !btnBiDirection.Pressed;
-            mScanSettingsViewModel.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
-            mScanSettingsViewModel.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
-            mScanSettingsViewModel.SelectScanDirectionCommand();
+            //if (mScanSettingsViewModel.ScanBiDirection.IsEnabled)
+            //{
+            //    btnBiDirection.Pressed = true;
+            //    return;
+            //}
+            //btnUniDirection.Pressed = !btnBiDirection.Pressed;
+            //mScanSettingsViewModel.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
+            //mScanSettingsViewModel.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
+            //mScanSettingsViewModel.SelectScanDirectionCommand();
         }
 
         private void cmdScanArea_Click(object sender, C1.Win.C1Command.ClickEventArgs e)

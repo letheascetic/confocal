@@ -1,4 +1,5 @@
 ﻿using C1.Win.C1Ribbon;
+using confocal_ui.ViewModel;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,27 @@ namespace confocal_ui
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         
+        private ScanSettingsViewModel mScanSettingsVM;
+
+
         public FormScanSettings()
         {
             InitializeComponent();
+        }
+
+        private void Initialize()
+        {
+            mScanSettingsVM = new ScanSettingsViewModel();
+        }
+
+        /// <summary>
+        /// 加载窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormScanSettings_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

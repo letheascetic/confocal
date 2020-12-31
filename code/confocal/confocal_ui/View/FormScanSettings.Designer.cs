@@ -886,6 +886,7 @@
             this.Name = "FormScanSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "扫描设置";
+            this.Load += new System.EventHandler(this.FormScanSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
             this.ResumeLayout(false);
 
