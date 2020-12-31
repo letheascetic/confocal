@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.mainMenu = new C1.Win.C1Command.C1MainMenu();
             this.cmdHolder = new C1.Win.C1Command.C1CommandHolder();
@@ -147,6 +148,11 @@
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
             this.tpgScanField = new C1.Win.C1Command.C1DockingTabPage();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.snapFormExtender = new SnapFormExtender.SnapFormExtender(this.components);
+            this.cmdLinkWindow = new C1.Win.C1Command.C1CommandLink();
+            this.cmdMenuWindow = new C1.Win.C1Command.C1CommandMenu();
+            this.cmdLinkScanArea = new C1.Win.C1Command.C1CommandLink();
+            this.cmdScanArea = new C1.Win.C1Command.C1Command();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -162,6 +168,7 @@
             this.dockTabScan.SuspendLayout();
             this.tpgScanSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapFormExtender)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -170,7 +177,8 @@
             this.mainMenu.CommandHolder = this.cmdHolder;
             this.mainMenu.CommandLinks.AddRange(new C1.Win.C1Command.C1CommandLink[] {
             this.cmdLinkFile,
-            this.cmdLinkView});
+            this.cmdLinkView,
+            this.cmdLinkWindow});
             this.mainMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -187,6 +195,8 @@
             this.cmdHolder.Commands.Add(this.cmdFileClose);
             this.cmdHolder.Commands.Add(this.cmdMenuView);
             this.cmdHolder.Commands.Add(this.cmdTheme);
+            this.cmdHolder.Commands.Add(this.cmdMenuWindow);
+            this.cmdHolder.Commands.Add(this.cmdScanArea);
             this.cmdHolder.Owner = this;
             // 
             // cmdMenuFile
@@ -1185,6 +1195,36 @@
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
+            // snapFormExtender
+            // 
+            this.snapFormExtender.Distance = 5;
+            this.snapFormExtender.Form = this;
+            // 
+            // cmdLinkWindow
+            // 
+            this.cmdLinkWindow.Command = this.cmdMenuWindow;
+            this.cmdLinkWindow.SortOrder = 2;
+            // 
+            // cmdMenuWindow
+            // 
+            this.cmdMenuWindow.CommandLinks.AddRange(new C1.Win.C1Command.C1CommandLink[] {
+            this.cmdLinkScanArea});
+            this.cmdMenuWindow.HideNonRecentLinks = false;
+            this.cmdMenuWindow.Name = "cmdMenuWindow";
+            this.cmdMenuWindow.ShortcutText = "";
+            this.cmdMenuWindow.Text = "窗口（&W）";
+            // 
+            // cmdLinkScanArea
+            // 
+            this.cmdLinkScanArea.Command = this.cmdScanArea;
+            // 
+            // cmdScanArea
+            // 
+            this.cmdScanArea.Name = "cmdScanArea";
+            this.cmdScanArea.ShortcutText = "";
+            this.cmdScanArea.Text = "扫描区域（&A）";
+            this.cmdScanArea.Click += new C1.Win.C1Command.ClickEventHandler(this.cmdScanArea_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1198,6 +1238,7 @@
             this.Controls.Add(this.mainMenu);
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Z1 Confocal v";
@@ -1219,6 +1260,7 @@
             this.dockTabScan.ResumeLayout(false);
             this.tpgScanSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapFormExtender)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1344,5 +1386,10 @@
         private C1.Win.C1InputPanel.InputCheckBox chbxLineSkip;
         private C1.Win.C1InputPanel.InputButton inputButton1;
         private C1.Win.C1InputPanel.InputTextBox inputTextBox1;
+        private SnapFormExtender.SnapFormExtender snapFormExtender;
+        private C1.Win.C1Command.C1CommandMenu cmdMenuWindow;
+        private C1.Win.C1Command.C1CommandLink cmdLinkWindow;
+        private C1.Win.C1Command.C1CommandLink cmdLinkScanArea;
+        private C1.Win.C1Command.C1Command cmdScanArea;
     }
 }

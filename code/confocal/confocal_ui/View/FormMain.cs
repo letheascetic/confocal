@@ -2,6 +2,7 @@
 using C1.Win.C1Ribbon;
 using C1.Win.C1Themes;
 using confocal_core.Model;
+using confocal_ui.View;
 using confocal_ui.ViewModel;
 using log4net;
 using System;
@@ -202,6 +203,13 @@ namespace confocal_ui
             mScanSettingsViewModel.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
             mScanSettingsViewModel.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
             mScanSettingsViewModel.SelectScanDirectionCommand();
+        }
+
+        private void cmdScanArea_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            FormScanArea scanArea = new FormScanArea();
+            scanArea.MdiParent = this;
+            scanArea.Show();
         }
     }
 }
