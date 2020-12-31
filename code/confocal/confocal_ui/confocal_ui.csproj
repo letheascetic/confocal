@@ -120,11 +120,11 @@
     <Compile Include="View\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FormScan.cs">
+    <Compile Include="View\FormScanSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormScan.Designer.cs">
-      <DependentUpon>FormScan.cs</DependentUpon>
+    <Compile Include="View\FormScanSettings.Designer.cs">
+      <DependentUpon>FormScanSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormScanArea.cs">
       <SubType>Form</SubType>
@@ -143,8 +143,8 @@
     <EmbeddedResource Include="View\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\FormScan.resx">
-      <DependentUpon>FormScan.cs</DependentUpon>
+    <EmbeddedResource Include="View\FormScanSettings.resx">
+      <DependentUpon>FormScanSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormScanArea.resx">
       <DependentUpon>FormScanArea.cs</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using C1.Win.C1Ribbon;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,20 +11,16 @@ using System.Windows.Forms;
 
 namespace confocal_ui
 {
-    public partial class FormScan : Form
+    public partial class FormScanSettings : C1RibbonForm
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         
-        public FormScan()
+        public FormScanSettings()
         {
             InitializeComponent();
         }
 
-        private void FormScan_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -211,5 +211,12 @@ namespace confocal_ui
             scanArea.MdiParent = this;
             scanArea.Show();
         }
+
+        private void cmdScanSettings_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            FormScanSettings mFormScanSettings = new FormScanSettings();
+            mFormScanSettings.MdiParent = this;
+            mFormScanSettings.Show();
+        }
     }
 }
