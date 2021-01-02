@@ -121,7 +121,6 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxx");
             // init variables & controlers
             // Initialize();
 
@@ -142,18 +141,6 @@ namespace confocal_ui
             //Logger.Info(string.Format("SelectedScannerHead [{0}]", mScanSettingsViewModel.SelectedScannerHead.Text));
             //Logger.Info(string.Format("SelectedScanMode [{0}]", mScanSettingsViewModel.SelectedScanMode.Text));
             //Logger.Info(string.Format("SelectedScanDirection [{0}]", mScanSettingsViewModel.SelectedScanDirection.Text));
-        }
-
-        /// <summary>
-        /// 切换扫描模式
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScanModeChanged(object sender, EventArgs e)
-        {
-            //mScanSettingsViewModel.ScanModeGalavano.IsEnabled = rbtnGalvano.Checked;
-            //mScanSettingsViewModel.ScanModeResonant.IsEnabled = rbtnResonant.Checked;
-            //mScanSettingsViewModel.SelectScanModeCommand();
         }
 
         private void btnUniDirection_Click(object sender, EventArgs e)
@@ -184,7 +171,6 @@ namespace confocal_ui
 
         private void cmdScanArea_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             FormScanArea scanArea = new FormScanArea();
             scanArea.MdiParent = this;
             scanArea.Show();

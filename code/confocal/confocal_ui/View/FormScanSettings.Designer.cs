@@ -117,8 +117,8 @@
             this.btn640Power = new C1.Win.C1InputPanel.InputButton();
             this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
-            this.btnTest = new C1.Win.C1InputPanel.InputButton();
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
+            this.btnTest = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -283,6 +283,7 @@
             this.btnUniDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnUniDirection.Name = "btnUniDirection";
             this.btnUniDirection.Text = "单向";
+            this.btnUniDirection.Click += new System.EventHandler(this.btnUniDirection_Click);
             // 
             // btnBiDirection
             // 
@@ -291,6 +292,7 @@
             this.btnBiDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnBiDirection.Name = "btnBiDirection";
             this.btnBiDirection.Text = "双向";
+            this.btnBiDirection.Click += new System.EventHandler(this.btnBiDirection_Click);
             // 
             // chbxLineSkip
             // 
@@ -855,6 +857,13 @@
             this.tbx640Power.Name = "tbx640Power";
             this.tbx640Power.Width = 40;
             // 
+            // inputTextBox1
+            // 
+            this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputTextBox1.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.inputTextBox1.Name = "inputTextBox1";
+            this.inputTextBox1.Width = 40;
+            // 
             // btnTest
             // 
             this.btnTest.Break = C1.Win.C1InputPanel.BreakType.Group;
@@ -862,13 +871,6 @@
             this.btnTest.Name = "btnTest";
             this.btnTest.Text = "测试";
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // inputTextBox1
-            // 
-            this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputTextBox1.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.inputTextBox1.Name = "inputTextBox1";
-            this.inputTextBox1.Width = 40;
             // 
             // FormScanSettings
             // 

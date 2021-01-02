@@ -53,15 +53,21 @@ namespace confocal_core.Model
         public static readonly int BIDIRECTION = 1;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public static List<ScanDirectionModel> Initialize()
+        public static ScanDirectionModel Initialize(int id)
         {
-            return new List<ScanDirectionModel>()
+            if (id == UNIDIRECTION)
             {
-                new ScanDirectionModel(){ID = UNIDIRECTION, Text = "单向", IsEnabled = true},
-                new ScanDirectionModel(){ID = BIDIRECTION, Text = "双向", IsEnabled = false}
-            };
+                return new ScanDirectionModel() { ID = UNIDIRECTION, Text = "单向", IsEnabled = true };
+            }
+            else if (id == BIDIRECTION)
+            {
+                return new ScanDirectionModel() { ID = BIDIRECTION, Text = "双向", IsEnabled = false };
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("ID Exception");
+            }
         }
-
     }
 
     /// <summary>

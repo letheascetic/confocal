@@ -42,40 +42,31 @@ namespace confocal_ui.ViewModel
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private List<ScanDirectionModel> scanDirectionList;
-        private ScanDirectionModel selectedScanDirection;
+        private ScanDirectionModel scanUniDirection;
+        private ScanDirectionModel scanBiDirection;
 
-        /// <summary>
-        /// 扫描方向列表
-        /// </summary>
-        public List<ScanDirectionModel> ScanDirectionList
-        {
-            get { return scanDirectionList; }
-            set { scanDirectionList = value; RaisePropertyChanged(() => ScanDirectionList); }
-        }
         /// <summary>
         /// 选择的扫描方向
         /// </summary>
         public ScanDirectionModel SelectedScanDirection
         {
-            get { return selectedScanDirection; }
-            set { selectedScanDirection = value; RaisePropertyChanged(() => SelectedScanDirection); }
+            get { return ScanUniDirection.IsEnabled ? ScanUniDirection : ScanBiDirection; }
         }
         /// <summary>
-        /// 选择扫描方向
+        /// 单向
         /// </summary>
-        public void SelectScanDirectionCommand()
-        {
-            SelectedScanDirection = ScanDirectionList.Where(p => p.IsEnabled).First();
-            Logger.Info(string.Format("Select Scan Direction [{0}].", SelectedScanDirection.Text));
-        }
         public ScanDirectionModel ScanUniDirection
         {
-            get { return scanDirectionList.Where(p => p.ID == ScanDirectionModel.UNIDIRECTION).First(); }
+            get { return scanUniDirection; }
+            set { scanUniDirection = value; RaisePropertyChanged(() => ScanUniDirection); }
         }
+        /// <summary>
+        /// 双向
+        /// </summary>
         public ScanDirectionModel ScanBiDirection
         {
-            get { return scanDirectionList.Where(p => p.ID == ScanDirectionModel.BIDIRECTION).First(); }
+            get { return scanBiDirection; }
+            set { scanBiDirection = value; RaisePropertyChanged(() => ScanBiDirection); }
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -124,28 +115,12 @@ namespace confocal_ui.ViewModel
         /// </summary>
         public ScanPixelsModel SelectedScanPixels
         {
-            get { return selectedScanPixels; }
-            set { selectedScanPixels = value; RaisePropertyChanged(() => SelectedScanPixels); }
+            get { return ScanPixelsList.Where(p => p.IsEnabled).First(); }
         }
-        /// <summary>
-        /// 选择扫描像素
-        /// </summary>
-        public RelayCommand SelectScanPixelsCommand
-        {
-            get
-            {
-                if (selectScanPixelsCommand == null)
-                {
-                    selectScanPixelsCommand = new RelayCommand(() => { SelectedScanPixels = ScanPixelsList.Where(p => p.IsEnabled).First(); });
-                }
-                return selectScanPixelsCommand;
-            }
-            set { selectScanPixelsCommand = value; }
-        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanPixelDwellModel> scanPixelDwellList;
         private ScanPixelDwellModel selectedScanPixelDwell;
-        private RelayCommand selectScanPixelDwellCommand;
 
         /// <summary>
         /// 像素停留时间列表
@@ -160,24 +135,10 @@ namespace confocal_ui.ViewModel
         /// </summary>
         public ScanPixelDwellModel SelectedScanPixelDwell
         {
-            get { return selectedScanPixelDwell; }
-            set { selectedScanPixelDwell = value; RaisePropertyChanged(() => SelectedScanPixelDwell); }
+            get { return scanPixelDwellList.Where(p => p.IsEnabled).First(); }
         }
-        /// <summary>
-        /// 选择像素停留时间
-        /// </summary>
-        public RelayCommand SelectScanPixelDwellCommand
-        {
-            get
-            {
-                if (selectScanPixelDwellCommand == null)
-                {
-                    selectScanPixelDwellCommand = new RelayCommand(() => { SelectedScanPixelDwell = ScanPixelDwellList.Where(p => p.IsEnabled).First(); });
-                }
-                return selectScanPixelDwellCommand;
-            }
-            set { selectScanPixelDwellCommand = value; }
-        }
+
+
 
         public ScanSettingsViewModel()
         {
@@ -187,9 +148,12 @@ namespace confocal_ui.ViewModel
             // 扫描模式
             ScanModeResonant = ScanModeModel.Initialize(ScanModeModel.RESONANT);
             ScanModeGalavano = ScanModeModel.Initialize(ScanModeModel.GALVANO);
-
-            ScanDirectionList = ScanDirectionModel.Initialize();
+            // 扫描方向
+            ScanUniDirection = ScanDirectionModel.Initialize(ScanDirectionModel.UNIDIRECTION);
+            ScanBiDirection = ScanDirectionModel.Initialize(ScanDirectionModel.BIDIRECTION);
+            // 像素时间
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();
+            // 扫描像素
             ScanPixelsList = ScanPixelsModel.Initialize();
         }
 
