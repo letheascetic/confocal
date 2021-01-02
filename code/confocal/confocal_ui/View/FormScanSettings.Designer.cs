@@ -40,6 +40,7 @@
             this.btnUniDirection = new C1.Win.C1InputPanel.InputButton();
             this.btnBiDirection = new C1.Win.C1InputPanel.InputButton();
             this.chbxLineSkip = new C1.Win.C1InputPanel.InputCheckBox();
+            this.cbxLineSkip = new C1.Win.C1InputPanel.InputComboBox();
             this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
             this.rbtnFastMode = new C1.Win.C1InputPanel.InputButton();
@@ -118,7 +119,6 @@
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
             this.btnTest = new C1.Win.C1InputPanel.InputButton();
-            this.cbxLineSkip = new C1.Win.C1InputPanel.InputComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -300,6 +300,14 @@
             this.chbxLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chbxLineSkip.Name = "chbxLineSkip";
             this.chbxLineSkip.Text = "跳行扫描";
+            // 
+            // cbxLineSkip
+            // 
+            this.cbxLineSkip.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbxLineSkip.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxLineSkip.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxLineSkip.Name = "cbxLineSkip";
+            this.cbxLineSkip.Width = 44;
             // 
             // separator1
             // 
@@ -863,14 +871,6 @@
             this.btnTest.Name = "btnTest";
             this.btnTest.Text = "测试";
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // cbxLineSkip
-            // 
-            this.cbxLineSkip.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbxLineSkip.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbxLineSkip.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxLineSkip.Name = "cbxLineSkip";
-            this.cbxLineSkip.Width = 44;
             // 
             // FormScanSettings
             // 

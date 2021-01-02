@@ -166,6 +166,49 @@ namespace confocal_ui.ViewModel
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private ScanChannelModel scanChannel405;
+        private ScanChannelModel scanChannel488;
+        private ScanChannelModel scanChannel561;
+        private ScanChannelModel scanChannel640;
+
+        /// <summary>
+        /// 405nm通道
+        /// </summary>
+        public ScanChannelModel ScanChannel405
+        {
+            get { return scanChannel405; }
+            set { scanChannel405 = value; RaisePropertyChanged(() => ScanChannel405); }
+        }
+
+        /// <summary>
+        /// 488nm通道
+        /// </summary>
+        public ScanChannelModel ScanChannel488
+        {
+            get { return scanChannel488; }
+            set { scanChannel488 = value; RaisePropertyChanged(() => ScanChannel488); }
+        }
+
+        /// <summary>
+        /// 561nm通道
+        /// </summary>
+        public ScanChannelModel ScanChannel561
+        {
+            get { return scanChannel561; }
+            set { scanChannel561 = value; RaisePropertyChanged(() => ScanChannel561); }
+        }
+
+        /// <summary>
+        /// 640nm通道
+        /// </summary>
+        public ScanChannelModel ScanChannel640
+        {
+            get { return scanChannel640; }
+            set { scanChannel640 = value; RaisePropertyChanged(() => ScanChannel640); }
+        }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public ScanSettingsViewModel()
         {
             // 扫描头

@@ -1,5 +1,4 @@
-﻿using confocal_util;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,15 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace confocal_wpf.Model
+namespace confocal_core.Model
 {
     /// <summary>
     /// 扫描通道
     /// </summary>
     public class ScanChannelModel : ObservableObject
     {
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private int id;                     // 通道ID
+        private bool collapesd;             // 折叠
         private string name;                // 通道名
 
         private double laserPower;          // 激光功率
@@ -24,7 +25,6 @@ namespace confocal_wpf.Model
         private string laserWaveLength;     // 激光波长
 
         private bool activated;             // 通道激活状态
-        private double pinHole;             // 小孔孔径
         private double gain;                // 增益
         private int offset;                 // 偏置
         private double gamma;               // 伽马
@@ -37,6 +37,15 @@ namespace confocal_wpf.Model
         {
             get { return id; }
             set { id = value; RaisePropertyChanged(() => ID); }
+        }
+
+        /// <summary>
+        /// 是否可见
+        /// </summary>
+        public bool Collapsed
+        {
+            get { return collapesd; }
+            set { collapesd = value; RaisePropertyChanged(() => Collapsed); }
         }
 
         /// <summary>
@@ -84,14 +93,14 @@ namespace confocal_wpf.Model
             set { activated = value; RaisePropertyChanged(() => Activated); }
         }
 
-        /// <summary>
-        /// 小孔孔径
-        /// </summary>
-        public double PinHole
-        {
-            get { return pinHole; }
-            set { pinHole = value; RaisePropertyChanged(() => PinHole); }
-        }
+        ///// <summary>
+        ///// 小孔孔径
+        ///// </summary>
+        //public double PinHole
+        //{
+        //    get { return pinHole; }
+        //    set { pinHole = value; RaisePropertyChanged(() => PinHole); }
+        //}
 
         /// <summary>
         /// 增益
@@ -129,23 +138,74 @@ namespace confocal_wpf.Model
             set { pseudoColor = value; RaisePropertyChanged(() => PseudoColor); }
         }
 
-        public static List<ScanChannelModel> Initialize()
+        public static ScanChannelModel Initialize(int id)
         {
-            return new List<ScanChannelModel>()
+            switch (id)
             {
-                new ScanChannelModel(){ID = 0, Name = "405nm",
-                    LaserPower = 2.0, LaserColor = Color.MediumPurple, LaserWaveLength = "405nm",
-                    Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.MediumPurple},
-                new ScanChannelModel(){ID = 0, Name = "488nm",
-                    LaserPower = 2.0, LaserColor = Color.DarkCyan, LaserWaveLength = "488nm",
-                    Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.DarkCyan},
-                new ScanChannelModel(){ID = 0, Name = "561nm",
-                    LaserPower = 2.0, LaserColor = Color.YellowGreen, LaserWaveLength = "561nm",
-                    Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.YellowGreen},
-                new ScanChannelModel(){ID = 0, Name = "640nm",
-                    LaserPower = 2.0, LaserColor = Color.MediumVioletRed, LaserWaveLength = "640nm",
-                    Activated = false, PinHole = 2.0, Gain = 50, Offset = 0, Gamma = 1.0, PseudoColor = Color.MediumVioletRed},
-            };
+                case 0:
+                    return new ScanChannelModel()
+                    {
+                        ID = 0,
+                        Collapsed = false,
+                        Name = "通道1",
+                        LaserPower = 2.0,
+                        LaserColor = Color.MediumPurple,
+                        LaserWaveLength = "405nm",
+                        Activated = false,
+                        Gain = 50,
+                        Offset = 0,
+                        Gamma = 1.0,
+                        PseudoColor = Color.MediumPurple
+                    };
+                case 1:
+                    return new ScanChannelModel()
+                    {
+                        ID = 1,
+                        Collapsed = false,
+                        Name = "通道2",
+                        LaserPower = 2.0,
+                        LaserColor = Color.DarkCyan,
+                        LaserWaveLength = "488nm",
+                        Activated = false,
+                        Gain = 50,
+                        Offset = 0,
+                        Gamma = 1.0,
+                        PseudoColor = Color.DarkCyan
+                    };
+                case 2:
+                    return new ScanChannelModel()
+                    {
+                        ID = 2,
+                        Collapsed = false,
+                        Name = "通道3",
+                        LaserPower = 2.0,
+                        LaserColor = Color.YellowGreen,
+                        LaserWaveLength = "561nm",
+                        Activated = false,
+                        Gain = 50,
+                        Offset = 0,
+                        Gamma = 1.0,
+                        PseudoColor = Color.YellowGreen
+                    };
+                case 3:
+                    return new ScanChannelModel()
+                    {
+                        ID = 3,
+                        Collapsed = false,
+                        Name = "通道4",
+                        LaserPower = 2.0,
+                        LaserColor = Color.MediumVioletRed,
+                        LaserWaveLength = "640nm",
+                        Activated = false,
+                        Gain = 50,
+                        Offset = 0,
+                        Gamma = 1.0,
+                        PseudoColor = Color.MediumVioletRed
+                    };
+                default:
+                    throw new ArgumentOutOfRangeException("ID Exception");
+            }
         }
+
     }
 }
