@@ -74,15 +74,21 @@ namespace confocal_core.Model
         public static readonly int GALVANO = 1;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public static List<ScanModeModel> Initialize()
+        public static ScanModeModel Initialize(int id)
         {
-            return new List<ScanModeModel>()
+            if (id == RESONANT)
             {
-                new ScanModeModel(){ID = RESONANT, Text = "Resonant", IsEnabled = false},
-                new ScanModeModel(){ID = GALVANO, Text = "Galvano", IsEnabled = true}
-            };
+                return new ScanModeModel() { ID = RESONANT, Text = "Resonant", IsEnabled = false };
+            }
+            else if (id == GALVANO)
+            {
+                return new ScanModeModel() { ID = GALVANO, Text = "Galvano", IsEnabled = true };
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("ID Exception");
+            }
         }
-
     }
 
     /// <summary>
@@ -95,15 +101,21 @@ namespace confocal_core.Model
         public static readonly int THREE_SCANNERS = 1;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public static List<ScannerHeadModel> Initialize()
+        public static ScannerHeadModel Initialize(int id)
         {
-            return new List<ScannerHeadModel>()
+            if (id == TWO_SCANNERS)
             {
-                new ScannerHeadModel(){ID = TWO_SCANNERS, Text = "双镜", IsEnabled = true},
-                new ScannerHeadModel(){ID = THREE_SCANNERS, Text = "三镜", IsEnabled = false}
-            };
+                return new ScannerHeadModel() { ID = TWO_SCANNERS, Text = "双镜", IsEnabled = true };
+            }
+            else if (id == THREE_SCANNERS)
+            {
+                return new ScannerHeadModel() { ID = THREE_SCANNERS, Text = "三镜", IsEnabled = false };
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("ID Exception");
+            }
         }
-
     }
 
     /// <summary>

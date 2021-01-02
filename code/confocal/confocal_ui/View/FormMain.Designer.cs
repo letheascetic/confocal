@@ -81,8 +81,9 @@
             this.cmdLinkWindow});
             this.mainMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1592, 26);
+            this.mainMenu.Size = new System.Drawing.Size(1934, 30);
             this.mainMenu.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.mainMenu.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
@@ -236,9 +237,9 @@
             this.dockToolBar.Controls.Add(this.toolBar);
             this.dockToolBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockToolBar.Id = 3;
-            this.dockToolBar.Location = new System.Drawing.Point(0, 26);
+            this.dockToolBar.Location = new System.Drawing.Point(0, 30);
             this.dockToolBar.Name = "dockToolBar";
-            this.dockToolBar.Size = new System.Drawing.Size(1592, 26);
+            this.dockToolBar.Size = new System.Drawing.Size(1934, 26);
             // 
             // toolBar
             // 
@@ -258,9 +259,10 @@
             this.dockBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockBottom.Id = 1;
-            this.dockBottom.Location = new System.Drawing.Point(0, 707);
+            this.dockBottom.Location = new System.Drawing.Point(0, 869);
+            this.dockBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dockBottom.Name = "dockBottom";
-            this.dockBottom.Size = new System.Drawing.Size(1592, 138);
+            this.dockBottom.Size = new System.Drawing.Size(1934, 172);
             // 
             // dockTabOutput
             // 
@@ -273,9 +275,10 @@
             this.dockTabOutput.Controls.Add(this.tpgLog);
             this.dockTabOutput.HotTrack = true;
             this.dockTabOutput.Location = new System.Drawing.Point(0, 0);
+            this.dockTabOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dockTabOutput.Name = "dockTabOutput";
             this.dockTabOutput.ShowCaption = true;
-            this.dockTabOutput.Size = new System.Drawing.Size(1592, 138);
+            this.dockTabOutput.Size = new System.Drawing.Size(1934, 172);
             this.dockTabOutput.TabIndex = 1;
             this.dockTabOutput.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabOutput.TabsSpacing = 5;
@@ -289,7 +292,7 @@
             this.tpgLog.Controls.Add(this.textLog);
             this.tpgLog.Location = new System.Drawing.Point(1, 4);
             this.tpgLog.Name = "tpgLog";
-            this.tpgLog.Size = new System.Drawing.Size(1590, 111);
+            this.tpgLog.Size = new System.Drawing.Size(1932, 141);
             this.tpgLog.TabIndex = 0;
             this.tpgLog.Text = "Log";
             // 
@@ -298,20 +301,23 @@
             this.textLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.textLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textLog.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.textLog.Location = new System.Drawing.Point(0, 23);
+            this.textLog.Location = new System.Drawing.Point(0, 27);
+            this.textLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textLog.Multiline = true;
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
             this.textLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textLog.Size = new System.Drawing.Size(1590, 88);
+            this.textLog.Size = new System.Drawing.Size(1932, 114);
             this.textLog.TabIndex = 0;
             // 
             // statusStrip
             // 
             this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
-            this.statusStrip.Location = new System.Drawing.Point(0, 845);
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Location = new System.Drawing.Point(0, 1041);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1592, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1934, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -322,9 +328,9 @@
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1592, 867);
+            this.ClientSize = new System.Drawing.Size(1934, 1063);
             this.Controls.Add(this.dockBottom);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dockToolBar);
@@ -332,6 +338,7 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Z1 Confocal v";

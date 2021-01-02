@@ -35,14 +35,14 @@ namespace confocal_ui.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 241);
+            this.ClientSize = new System.Drawing.Size(272, 249);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(280, 280);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(280, 280);
             this.Name = "FormScanArea";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "扫描区域";
             this.ResumeLayout(false);
 

@@ -35,13 +35,15 @@ namespace confocal_ui
         {
             WindowState = FormWindowState.Maximized;
 
-            mFormScanArea = new FormScanArea();
-            mFormScanArea.MdiParent = this;
-            mFormScanArea.Visible = true;
-
             mFormScanSetting = new FormScanSettings();
             mFormScanSetting.MdiParent = this;
+            mFormScanSetting.Location = new Point(this.ClientRectangle.Right - mFormScanSetting.Width, 0);
             mFormScanSetting.Visible = true;
+
+            mFormScanArea = new FormScanArea();
+            mFormScanArea.MdiParent = this;
+            mFormScanArea.Location = new Point(mFormScanSetting.Location.X - mFormScanArea.Width, 0);
+            mFormScanArea.Visible = true;
 
         }
 
@@ -119,6 +121,7 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
+            Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxx");
             // init variables & controlers
             // Initialize();
 
@@ -139,18 +142,6 @@ namespace confocal_ui
             //Logger.Info(string.Format("SelectedScannerHead [{0}]", mScanSettingsViewModel.SelectedScannerHead.Text));
             //Logger.Info(string.Format("SelectedScanMode [{0}]", mScanSettingsViewModel.SelectedScanMode.Text));
             //Logger.Info(string.Format("SelectedScanDirection [{0}]", mScanSettingsViewModel.SelectedScanDirection.Text));
-        }
-
-        /// <summary>
-        /// 扫描头切换
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScannerHeadChanged(object sender, EventArgs e)
-        {
-            //mScanSettingsViewModel.ScannerHeadTwoGalv.IsEnabled = rbtnTwoScanners.Checked;
-            //mScanSettingsViewModel.ScannerHeadThreeGalv.IsEnabled = rbtnThreeScanners.Checked;
-            //mScanSettingsViewModel.SelectScannerHeadCommand();
         }
 
         /// <summary>
@@ -193,6 +184,7 @@ namespace confocal_ui
 
         private void cmdScanArea_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
+            Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             FormScanArea scanArea = new FormScanArea();
             scanArea.MdiParent = this;
             scanArea.Show();

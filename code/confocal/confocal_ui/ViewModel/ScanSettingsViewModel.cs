@@ -14,47 +14,33 @@ namespace confocal_ui.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private List<ScannerHeadModel> scannerHeadList;
-        private ScannerHeadModel selectedScannerHead;
+        private ScannerHeadModel scannerHeadTwoGalv;
+        private ScannerHeadModel scannerHeadThreeGalv;
 
-        /// <summary>
-        /// 扫描头列表
-        /// </summary>
-        public List<ScannerHeadModel> ScannerHeadList
-        {
-            get { return scannerHeadList; }
-            set { scannerHeadList = value; RaisePropertyChanged(() => ScannerHeadList); }
-        }
         /// <summary>
         /// 选择的扫描头
         /// </summary>
         public ScannerHeadModel SelectedScannerHead
         {
-            get { return selectedScannerHead; }
-            set { selectedScannerHead = value; RaisePropertyChanged(() => SelectedScannerHead); }
+            get { return ScannerHeadTwoGalv.IsEnabled ? ScannerHeadTwoGalv : ScannerHeadThreeGalv; }
         }
         /// <summary>
         /// 双镜
         /// </summary>
         public ScannerHeadModel ScannerHeadTwoGalv
         {
-            get { return scannerHeadList.Where(p => p.ID == ScannerHeadModel.TWO_SCANNERS).First(); }
+            get { return scannerHeadTwoGalv; }
+            set { scannerHeadTwoGalv = value; RaisePropertyChanged(() => ScannerHeadTwoGalv); }
         }
         /// <summary>
         /// 三镜
         /// </summary>
         public ScannerHeadModel ScannerHeadThreeGalv
         {
-            get { return scannerHeadList.Where(p => p.ID == ScannerHeadModel.THREE_SCANNERS).First(); }
+            get { return scannerHeadThreeGalv; }
+            set { scannerHeadThreeGalv = value; RaisePropertyChanged(() => ScannerHeadThreeGalv); }
         }
-        /// <summary>
-        /// 选择扫描头
-        /// </summary>
-        public void SelectScannerHeadCommand()
-        {
-            SelectedScannerHead = ScannerHeadList.Where(p => p.IsEnabled).First();
-            Logger.Info(string.Format("Select Scanner Head [{0}].", SelectedScannerHead.Text));
-        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanDirectionModel> scanDirectionList;
         private ScanDirectionModel selectedScanDirection;
@@ -93,46 +79,31 @@ namespace confocal_ui.ViewModel
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private List<ScanModeModel> scanModeList;
-        private ScanModeModel selectedScanMode;
+        private ScanModeModel scanModeGalvano;
+        private ScanModeModel scanModeResonant;
 
-        /// <summary>
-        /// 扫描模式列表
-        /// </summary>
-        public List<ScanModeModel> ScanModeList
-        {
-            get { return scanModeList; }
-            set { scanModeList = value; RaisePropertyChanged(() => ScanModeList); }
-        }
         /// <summary>
         /// 选择的扫描模式
         /// </summary>
         public ScanModeModel SelectedScanMode
         {
-            get { return selectedScanMode; }
-            set { selectedScanMode = value; RaisePropertyChanged(() => SelectedScanMode); }
-        }
-        /// <summary>
-        /// 选择扫描模式
-        /// </summary>
-        public void SelectScanModeCommand()
-        {
-            SelectedScanMode = ScanModeList.Where(p => p.IsEnabled).First();
-            Logger.Info(string.Format("Select Scan Mode [{0}].", SelectedScanMode.Text));
+            get { return ScanModeGalavano.IsEnabled ? ScanModeGalavano : ScanModeResonant; }
         }
         /// <summary>
         /// Galvano扫描模式
         /// </summary>
         public ScanModeModel ScanModeGalavano
         {
-            get { return scanModeList.Where(p => p.ID == ScanModeModel.GALVANO).First(); }
+            get { return scanModeGalvano; }
+            set { scanModeGalvano = value; RaisePropertyChanged(() => ScanModeGalavano); }
         }
         /// <summary>
         /// Resonant扫描模式
         /// </summary>
         public ScanModeModel ScanModeResonant
         {
-            get { return scanModeList.Where(p => p.ID == ScanModeModel.RESONANT).First(); }
+            get { return scanModeResonant; }
+            set { scanModeResonant = value; RaisePropertyChanged(() => ScanModeResonant); }
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -210,9 +181,14 @@ namespace confocal_ui.ViewModel
 
         public ScanSettingsViewModel()
         {
-            ScannerHeadList = ScannerHeadModel.Initialize();
+            // 扫描头
+            ScannerHeadTwoGalv = ScannerHeadModel.Initialize(ScannerHeadModel.TWO_SCANNERS);
+            ScannerHeadThreeGalv = ScannerHeadModel.Initialize(ScannerHeadModel.THREE_SCANNERS);
+            // 扫描模式
+            ScanModeResonant = ScanModeModel.Initialize(ScanModeModel.RESONANT);
+            ScanModeGalavano = ScanModeModel.Initialize(ScanModeModel.GALVANO);
+
             ScanDirectionList = ScanDirectionModel.Initialize();
-            ScanModeList = ScanModeModel.Initialize();
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();
             ScanPixelsList = ScanPixelsModel.Initialize();
         }
