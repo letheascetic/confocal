@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ScanChannelModel.cs" />
+    <Compile Include="Model\ScanLineSkipModel.cs" />
     <Compile Include="Model\ScanPropertyModel.cs" />
     <Compile Include="Z1Acquisition.cs" />
     <Compile Include="Z1Config.cs" />

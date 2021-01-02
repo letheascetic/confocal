@@ -40,7 +40,6 @@
             this.btnUniDirection = new C1.Win.C1InputPanel.InputButton();
             this.btnBiDirection = new C1.Win.C1InputPanel.InputButton();
             this.chbxLineSkip = new C1.Win.C1InputPanel.InputCheckBox();
-            this.btnLineSkip = new C1.Win.C1InputPanel.InputSplitButton();
             this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
             this.rbtnFastMode = new C1.Win.C1InputPanel.InputButton();
@@ -119,6 +118,7 @@
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
             this.btnTest = new C1.Win.C1InputPanel.InputButton();
+            this.cbxLineSkip = new C1.Win.C1InputPanel.InputComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,7 +138,7 @@
             this.inputPanel.Items.Add(this.btnUniDirection);
             this.inputPanel.Items.Add(this.btnBiDirection);
             this.inputPanel.Items.Add(this.chbxLineSkip);
-            this.inputPanel.Items.Add(this.btnLineSkip);
+            this.inputPanel.Items.Add(this.cbxLineSkip);
             this.inputPanel.Items.Add(this.separator1);
             this.inputPanel.Items.Add(this.lbPixelDwell);
             this.inputPanel.Items.Add(this.rbtnFastMode);
@@ -300,14 +300,6 @@
             this.chbxLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chbxLineSkip.Name = "chbxLineSkip";
             this.chbxLineSkip.Text = "跳行扫描";
-            // 
-            // btnLineSkip
-            // 
-            this.btnLineSkip.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.btnLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnLineSkip.Name = "btnLineSkip";
-            this.btnLineSkip.Text = "2x";
-            this.btnLineSkip.Width = 40;
             // 
             // separator1
             // 
@@ -872,6 +864,14 @@
             this.btnTest.Text = "测试";
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
+            // cbxLineSkip
+            // 
+            this.cbxLineSkip.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbxLineSkip.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxLineSkip.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxLineSkip.Name = "cbxLineSkip";
+            this.cbxLineSkip.Width = 44;
+            // 
             // FormScanSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -908,7 +908,6 @@
         private C1.Win.C1InputPanel.InputButton btnUniDirection;
         private C1.Win.C1InputPanel.InputButton btnBiDirection;
         private C1.Win.C1InputPanel.InputCheckBox chbxLineSkip;
-        private C1.Win.C1InputPanel.InputSplitButton btnLineSkip;
         private C1.Win.C1InputPanel.InputSeparator separator1;
         private C1.Win.C1InputPanel.InputLabel lbPixelDwell;
         private C1.Win.C1InputPanel.InputButton rbtnFastMode;
@@ -987,5 +986,6 @@
         private C1.Win.C1InputPanel.InputTextBox tbx640Power;
         private C1.Win.C1InputPanel.InputButton btnTest;
         private C1.Win.C1InputPanel.InputTextBox inputTextBox1;
+        private C1.Win.C1InputPanel.InputComboBox cbxLineSkip;
     }
 }

@@ -68,10 +68,10 @@ namespace confocal_ui
         private void RegisterEvents()
         {
             this.rbtnTwoScanners.CheckedChanged += ScannerHeadChanged;
-            this.rbtnGalvano.CheckedChanged += ScannerHeadChanged;
+            // this.rbtnThreeScanners.CheckedChanged += ScannerHeadChanged;
 
             this.rbtnGalvano.CheckedChanged += ScanModeChanged;
-            this.rbtnResonant.CheckedChanged += ScanModeChanged;
+            // this.rbtnResonant.CheckedChanged += ScanModeChanged;
 
             for (int i = 0; i < mPixelDwellButtons.Length; i++)
             {
@@ -84,6 +84,8 @@ namespace confocal_ui
                 mScanPixelButtons[i].Tag = mScanSettingsVM.ScanPixelList[i];
                 mScanPixelButtons[i].Click += ScanPixelChanged;
             }
+
+            cbxLineSkip.SelectedIndexChanged += ScanbLineSkipChanged;
         }
 
         /// <summary>
@@ -120,6 +122,12 @@ namespace confocal_ui
                 button.DataBindings.Add("Text", model, "Text");
                 button.DataBindings.Add("Pressed", model, "IsEnabled");
             }
+            // 跳行扫描
+            this.chbxLineSkip.DataBindings.Add("Checked", mScanSettingsVM, "ScanLineSkipEnabled");
+            this.cbxLineSkip.DataSource = mScanSettingsVM.ScanLineSkipList;
+            this.cbxLineSkip.DisplayMember = "Text";
+            this.cbxLineSkip.ValueMember = "Data";
+            this.cbxLineSkip.SelectedItem = mScanSettingsVM.SelectedScanLineSkip;
 
             this.inputTextBox1.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
         }
@@ -146,6 +154,8 @@ namespace confocal_ui
 
             Logger.Info(string.Format("Scan Direction: [{0}:{1}].", mScanSettingsVM.ScanUniDirection.Text, mScanSettingsVM.ScanUniDirection.IsEnabled));
             Logger.Info(string.Format("Scan Direction: [{0}:{1}].", mScanSettingsVM.ScanBiDirection.Text, mScanSettingsVM.ScanBiDirection.IsEnabled));
+
+            Logger.Info(string.Format("Scan Line Skip: [{0}:{1}].", mScanSettingsVM.ScanLineSkipEnabled, mScanSettingsVM.SelectedScanLineSkip.Text));
         }
 
         /// <summary>
@@ -157,6 +167,7 @@ namespace confocal_ui
         {
             mScanSettingsVM.ScannerHeadTwoGalv.IsEnabled = rbtnTwoScanners.Checked;
             mScanSettingsVM.ScannerHeadThreeGalv.IsEnabled = rbtnThreeScanners.Checked;
+            Logger.Info(string.Format("Scan Header [{0}].", mScanSettingsVM.SelectedScannerHead.Text));
         }
 
         /// <summary>
@@ -168,6 +179,7 @@ namespace confocal_ui
         {
             mScanSettingsVM.ScanModeGalavano.IsEnabled = rbtnGalvano.Checked;
             mScanSettingsVM.ScanModeResonant.IsEnabled = rbtnResonant.Checked;
+            Logger.Info(string.Format("Scan Mode [{0}].", mScanSettingsVM.SelectedScanMode.Text));
         }
 
         /// <summary>
@@ -185,6 +197,7 @@ namespace confocal_ui
             btnBiDirection.Pressed = !btnUniDirection.Pressed;
             mScanSettingsVM.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
             mScanSettingsVM.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
+            Logger.Info(string.Format("Scan Direction [{0}].", mScanSettingsVM.SelectedScanDirection.Text));
         }
 
         /// <summary>
@@ -202,6 +215,7 @@ namespace confocal_ui
             btnUniDirection.Pressed = !btnBiDirection.Pressed;
             mScanSettingsVM.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
             mScanSettingsVM.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
+            Logger.Info(string.Format("Scan Direction [{0}].", mScanSettingsVM.SelectedScanDirection.Text));
         }
 
         /// <summary>
@@ -229,6 +243,7 @@ namespace confocal_ui
             }
             button.Pressed = true;
             model.IsEnabled = true;
+            Logger.Info(string.Format("Scan Pixel Dwell [{0}].", mScanSettingsVM.SelectedScanPixelDwell.Text));
         }
 
         /// <summary>
@@ -256,7 +271,18 @@ namespace confocal_ui
             }
             button.Pressed = true;
             model.IsEnabled = true;
+            Logger.Info(string.Format("Scan Pixel [{0}].", mScanSettingsVM.SelectedScanPixel.Text));
         }
 
+        /// <summary>
+        /// 切换跳行扫描事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScanbLineSkipChanged(object sender, EventArgs e)
+        {
+            mScanSettingsVM.SelectedScanLineSkip = (ScanLineSkipModel)cbxLineSkip.SelectedItem;
+            Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", mScanSettingsVM.ScanLineSkipEnabled, mScanSettingsVM.SelectedScanLineSkip.Text));
+        }
     }
 }

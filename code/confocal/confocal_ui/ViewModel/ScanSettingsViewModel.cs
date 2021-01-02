@@ -135,8 +135,37 @@ namespace confocal_ui.ViewModel
             get { return scanPixelDwellList.Where(p => p.IsEnabled).First(); }
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private bool scanLineSkipEnabled;
+        private ScanLineSkipModel selectedScanLineSkip;
+        private List<ScanLineSkipModel> scanLineSkipList;
 
+        /// <summary>
+        /// 跳行扫描使能
+        /// </summary>
+        public bool ScanLineSkipEnabled
+        {
+            get { return scanLineSkipEnabled; }
+            set { scanLineSkipEnabled = value; RaisePropertyChanged(() => ScanLineSkipEnabled); }
+        }
+        /// <summary>
+        /// 选择的跳行扫描
+        /// </summary>
+        public ScanLineSkipModel SelectedScanLineSkip
+        {
+            get { return selectedScanLineSkip; }
+            set { selectedScanLineSkip = value; RaisePropertyChanged(() => SelectedScanLineSkip); }
+        }
+        /// <summary>
+        /// 跳行扫描列表
+        /// </summary>
+        public List<ScanLineSkipModel> ScanLineSkipList
+        {
+            get { return scanLineSkipList; }
+            set { scanLineSkipList = value; RaisePropertyChanged(() => SelectedScanLineSkip); }
+        }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public ScanSettingsViewModel()
         {
             // 扫描头
@@ -152,6 +181,11 @@ namespace confocal_ui.ViewModel
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();
             // 扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
+            // 跳行扫描
+            ScanLineSkipEnabled = false;
+            ScanLineSkipList = ScanLineSkipModel.Initialize();
+            SelectedScanLineSkip = ScanLineSkipList[0];
+            // 
         }
 
     }
