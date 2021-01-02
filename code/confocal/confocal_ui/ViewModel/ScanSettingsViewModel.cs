@@ -98,29 +98,26 @@ namespace confocal_ui.ViewModel
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private List<ScanPixelsModel> scanPixelsList;
-        private ScanPixelsModel selectedScanPixels;
-        private RelayCommand selectScanPixelsCommand;
+        private List<ScanPixelModel> scanPixelList;
 
         /// <summary>
         /// 扫描像素列表
         /// </summary>
-        public List<ScanPixelsModel> ScanPixelsList
+        public List<ScanPixelModel> ScanPixelList
         {
-            get { return scanPixelsList; }
-            set { scanPixelsList = value; RaisePropertyChanged(() => ScanPixelsList); }
+            get { return scanPixelList; }
+            set { scanPixelList = value; RaisePropertyChanged(() => ScanPixelList); }
         }
         /// <summary>
         /// 选择的扫描像素 
         /// </summary>
-        public ScanPixelsModel SelectedScanPixels
+        public ScanPixelModel SelectedScanPixel
         {
-            get { return ScanPixelsList.Where(p => p.IsEnabled).First(); }
+            get { return ScanPixelList.Where(p => p.IsEnabled).First(); }
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanPixelDwellModel> scanPixelDwellList;
-        private ScanPixelDwellModel selectedScanPixelDwell;
 
         /// <summary>
         /// 像素停留时间列表
@@ -154,7 +151,7 @@ namespace confocal_ui.ViewModel
             // 像素时间
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();
             // 扫描像素
-            ScanPixelsList = ScanPixelsModel.Initialize();
+            ScanPixelList = ScanPixelModel.Initialize();
         }
 
     }

@@ -60,24 +60,30 @@ namespace confocal_ui
                 btnScanPixel4096
             };
 
-            for (int i = 0; i < mPixelDwellButtons.Length; i++)
-            {
-                mPixelDwellButtons[i].Tag = mScanSettingsVM.ScanPixelDwellList[i];
-                mPixelDwellButtons[i].Click += ScanPixelDwellChanged;
-            }
-
         }
 
         /// <summary>
         /// 注册事件
         /// </summary>
-        private void ScanSettingsRegisterEvents()
+        private void RegisterEvents()
         {
             this.rbtnTwoScanners.CheckedChanged += ScannerHeadChanged;
             this.rbtnGalvano.CheckedChanged += ScannerHeadChanged;
 
             this.rbtnGalvano.CheckedChanged += ScanModeChanged;
             this.rbtnResonant.CheckedChanged += ScanModeChanged;
+
+            for (int i = 0; i < mPixelDwellButtons.Length; i++)
+            {
+                mPixelDwellButtons[i].Tag = mScanSettingsVM.ScanPixelDwellList[i];
+                mPixelDwellButtons[i].Click += ScanPixelDwellChanged;
+            }
+
+            for (int i = 0; i < mScanPixelButtons.Length; i++)
+            {
+                mScanPixelButtons[i].Tag = mScanSettingsVM.ScanPixelList[i];
+                mScanPixelButtons[i].Click += ScanPixelChanged;
+            }
         }
 
         /// <summary>
@@ -107,8 +113,13 @@ namespace confocal_ui
                 button.DataBindings.Add("Text", model, "Text");
                 button.DataBindings.Add("Pressed", model, "IsEnabled");
             }
-
             // 扫描像素
+            foreach (InputButton button in mScanPixelButtons)
+            {
+                ScanPixelModel model = (ScanPixelModel)button.Tag;
+                button.DataBindings.Add("Text", model, "Text");
+                button.DataBindings.Add("Pressed", model, "IsEnabled");
+            }
 
             this.inputTextBox1.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
         }
@@ -121,8 +132,8 @@ namespace confocal_ui
         private void FormScanSettings_Load(object sender, EventArgs e)
         {
             Initialize();
+            RegisterEvents();
             SetDataBindings();
-            ScanSettingsRegisterEvents();
         }
 
         private void btnTest_Click(object sender, EventArgs e)
@@ -194,7 +205,7 @@ namespace confocal_ui
         }
 
         /// <summary>
-        /// 扫描像素按钮点击事件
+        /// 像素停留时间按钮点击事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -219,5 +230,33 @@ namespace confocal_ui
             button.Pressed = true;
             model.IsEnabled = true;
         }
+
+        /// <summary>
+        /// 扫描像素按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScanPixelChanged(object sender, EventArgs e)
+        {
+            InputButton button = (InputButton)sender;
+            ScanPixelModel model = (ScanPixelModel)button.Tag;
+            if (model.IsEnabled)
+            {
+                button.Pressed = true;
+                return;
+            }
+            foreach (InputButton otherButton in mScanPixelButtons)
+            {
+                if (!otherButton.Equals(button))
+                {
+                    ScanPixelModel otherModel = (ScanPixelModel)otherButton.Tag;
+                    otherButton.Pressed = false;
+                    otherModel.IsEnabled = false;
+                }
+            }
+            button.Pressed = true;
+            model.IsEnabled = true;
+        }
+
     }
 }

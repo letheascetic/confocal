@@ -127,19 +127,19 @@ namespace confocal_core.Model
     /// <summary>
     /// 扫描像素
     /// </summary>
-    public class ScanPixelsModel : ScanPropertyWithValueBaseModel<int>
+    public class ScanPixelModel : ScanPropertyWithValueBaseModel<int>
     {
-        public static List<ScanPixelsModel> Initialize()
+        public static List<ScanPixelModel> Initialize()
         {
-            return new List<ScanPixelsModel>()
+            return new List<ScanPixelModel>()
             {
-                new ScanPixelsModel(){ ID = 0, IsEnabled = false, Text = "64", Data = 64 },
-                new ScanPixelsModel(){ ID = 1, IsEnabled = false, Text = "128", Data = 128 },
-                new ScanPixelsModel(){ ID = 2, IsEnabled = false, Text = "256", Data = 256 },
-                new ScanPixelsModel(){ ID = 3, IsEnabled = true, Text = "512", Data = 512 },
-                new ScanPixelsModel(){ ID = 4, IsEnabled = false, Text = "1024", Data = 1024 },
-                new ScanPixelsModel(){ ID = 5, IsEnabled = false, Text = "2048", Data = 2048 },
-                new ScanPixelsModel(){ ID = 6, IsEnabled = false, Text = "4096", Data = 4096 }
+                new ScanPixelModel(){ ID = 0, IsEnabled = false, Text = "64", Data = 64 },
+                new ScanPixelModel(){ ID = 1, IsEnabled = false, Text = "128", Data = 128 },
+                new ScanPixelModel(){ ID = 2, IsEnabled = false, Text = "256", Data = 256 },
+                new ScanPixelModel(){ ID = 3, IsEnabled = true, Text = "512", Data = 512 },
+                new ScanPixelModel(){ ID = 4, IsEnabled = false, Text = "1024", Data = 1024 },
+                new ScanPixelModel(){ ID = 5, IsEnabled = false, Text = "2048", Data = 2048 },
+                new ScanPixelModel(){ ID = 6, IsEnabled = false, Text = "4096", Data = 4096 }
             };
         }
     }
