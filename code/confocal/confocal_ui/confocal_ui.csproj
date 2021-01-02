@@ -92,9 +92,8 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="SnapFormExtender, Version=1.0.1524.31270, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\make\bin\debug\SnapFormExtender.dll</HintPath>
+    <Reference Include="SnapFormExtender">
+      <HintPath>..\dll\SnapFormExtender.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
