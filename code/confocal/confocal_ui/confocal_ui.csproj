@@ -50,6 +50,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.C1DataExtender.2, Version=2.0.20113.81, Culture=neutral, PublicKeyToken=7c4b5683f80b910e, processorArchitecture=MSIL" />
     <Reference Include="C1.C1Excel.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.C1Pdf.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
     <Reference Include="C1.C1Zip.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da" />
@@ -80,6 +81,15 @@
     <Reference Include="C1.Win.FlexPivot.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.FlexViewer.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.ImportServices.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>..\dll\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI.GL">
+      <HintPath>..\dll\Emgu.CV.UI.GL.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.World">
+      <HintPath>..\dll\Emgu.CV.World.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19038, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -98,6 +108,9 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
@@ -113,6 +126,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModel\ScanSettingsViewModel.cs" />
+    <Compile Include="View\FormImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormImage.Designer.cs">
+      <DependentUpon>FormImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +158,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FormImage.resx">
+      <DependentUpon>FormImage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

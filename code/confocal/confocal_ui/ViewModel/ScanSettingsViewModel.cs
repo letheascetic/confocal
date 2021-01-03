@@ -14,6 +14,48 @@ namespace confocal_ui.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private ScanAcquisitionModel scanLiveMode;
+        private ScanAcquisitionModel scanCaptureMode;
+
+        /// <summary>
+        /// 实时模式
+        /// </summary>
+        public ScanAcquisitionModel ScanLiveMode
+        {
+            get { return scanLiveMode; }
+            set { scanLiveMode = value; RaisePropertyChanged(() => ScanLiveMode); }
+        }
+        /// <summary>
+        /// 捕捉模式
+        /// </summary>
+        public ScanAcquisitionModel ScanCaptureMode
+        {
+            get { return scanCaptureMode; }
+            set { scanCaptureMode = value; RaisePropertyChanged(() => ScanCaptureMode); }
+        }
+        /// <summary>
+        /// 扫描状态
+        /// </summary>
+        public bool IsScanning
+        {
+            get { return ScanLiveMode.IsEnabled || ScanCaptureMode.IsEnabled; }
+        }
+        /// <summary>
+        /// 当前采集的模式
+        /// </summary>
+        public ScanAcquisitionModel CurrentAcquisitionMode
+        {
+            get
+            {
+                if (!IsScanning)
+                {
+                    return null;
+                }
+                return ScanLiveMode.IsEnabled ? ScanLiveMode : ScanCaptureMode;
+            }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private ScannerHeadModel scannerHeadTwoGalv;
         private ScannerHeadModel scannerHeadThreeGalv;
 
@@ -231,6 +273,10 @@ namespace confocal_ui.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         public ScanSettingsViewModel()
         {
+            // 采集模式
+            ScanLiveMode = ScanAcquisitionModel.Initialize(0);
+            ScanCaptureMode = ScanAcquisitionModel.Initialize(1);
+
             // 扫描头
             ScannerHeadTwoGalv = ScannerHeadModel.Initialize(ScannerHeadModel.TWO_SCANNERS);
             ScannerHeadThreeGalv = ScannerHeadModel.Initialize(ScannerHeadModel.THREE_SCANNERS);

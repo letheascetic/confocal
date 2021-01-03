@@ -95,6 +95,11 @@ namespace confocal_ui
         /// </summary>
         private void SetDataBindings()
         {
+            // 采集模式
+            this.btnLive.DataBindings.Add("Text", mScanSettingsVM.ScanLiveMode, "Text");
+            this.btnLive.DataBindings.Add("Pressed", mScanSettingsVM.ScanLiveMode, "IsEnabled");
+            this.btnCapture.DataBindings.Add("Text", mScanSettingsVM.ScanCaptureMode, "Text");
+            this.btnCapture.DataBindings.Add("Pressed", mScanSettingsVM.ScanCaptureMode, "IsEnabled");
             // 扫描头
             this.rbtnTwoScanners.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
             this.rbtnTwoScanners.DataBindings.Add("Checked", mScanSettingsVM.ScannerHeadTwoGalv, "IsEnabled");
@@ -345,7 +350,42 @@ namespace confocal_ui
             Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", mScanSettingsVM.SelectedPinHole.Name, mScanSettingsVM.SelectedPinHole.Size));
         }
 
+        /// <summary>
+        /// 实时采集模式点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLive_Click(object sender, EventArgs e)
+        {
+            if (btnLive.Pressed && btnCapture.Pressed)
+            {
+                btnCapture.Pressed = false;
+            }
+            mScanSettingsVM.ScanLiveMode.IsEnabled = btnLive.Pressed;
+            mScanSettingsVM.ScanCaptureMode.IsEnabled = btnCapture.Pressed;
+            if (mScanSettingsVM.IsScanning)
+            {
+                Logger.Info(string.Format("Current Acquisition Mode [{0}].", mScanSettingsVM.CurrentAcquisitionMode.Text));
+            }
+        }
 
-
+        /// <summary>
+        /// 捕捉模式点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCapture_Click(object sender, EventArgs e)
+        {
+            if (btnLive.Pressed && btnCapture.Pressed)
+            {
+                btnLive.Pressed = false;
+            }
+            mScanSettingsVM.ScanLiveMode.IsEnabled = btnLive.Pressed;
+            mScanSettingsVM.ScanCaptureMode.IsEnabled = btnCapture.Pressed;
+            if (mScanSettingsVM.IsScanning)
+            {
+                Logger.Info(string.Format("Current Acquisition Mode [{0}].", mScanSettingsVM.CurrentAcquisitionMode.Text));
+            }
+        }
     }
 }

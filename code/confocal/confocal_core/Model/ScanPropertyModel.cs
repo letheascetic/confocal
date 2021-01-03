@@ -44,6 +44,28 @@ namespace confocal_core.Model
     }
 
     /// <summary>
+    /// 采集模式：实时、捕捉
+    /// </summary>
+    public class ScanAcquisitionModel : ScanPropertyBaseModel
+    {
+        public static ScanAcquisitionModel Initialize(int id)
+        {
+            if (id == 0)
+            {
+                return new ScanAcquisitionModel() { ID = 0, IsEnabled = false, Text = "实时" };
+            }
+            else if (id == 1)
+            {
+                return new ScanAcquisitionModel() { ID = 1, IsEnabled = false, Text = "捕捉" };
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("ID Exception");
+            }
+        }
+    }
+
+    /// <summary>
     /// 扫描方向：单向、双向
     /// </summary>
     public class ScanDirectionModel : ScanPropertyBaseModel

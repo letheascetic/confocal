@@ -229,6 +229,7 @@
             this.btnLive.Name = "btnLive";
             this.btnLive.Text = "实时";
             this.btnLive.Width = 50;
+            this.btnLive.Click += new System.EventHandler(this.btnLive_Click);
             // 
             // btnCapture
             // 
@@ -237,6 +238,7 @@
             this.btnCapture.Name = "btnCapture";
             this.btnCapture.Text = "捕捉";
             this.btnCapture.Width = 50;
+            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
             // 
             // rbtnTwoScanners
             // 
