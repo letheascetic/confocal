@@ -14,7 +14,6 @@ namespace confocal_core.Model
     /// </summary>
     public class ScanChannelModel : ObservableObject
     {
-
         ///////////////////////////////////////////////////////////////////////////////////////////
         private int id;                     // 通道ID
         private bool collapesd;             // 折叠
@@ -25,9 +24,9 @@ namespace confocal_core.Model
         private string laserWaveLength;     // 激光波长
 
         private bool activated;             // 通道激活状态
-        private double gain;                // 增益
+        private int gain;                   // 增益
         private int offset;                 // 偏置
-        private double gamma;               // 伽马
+        private int gamma;                  // 伽马
         private Color pseudoColor;          // 伪彩色
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -105,7 +104,7 @@ namespace confocal_core.Model
         /// <summary>
         /// 增益
         /// </summary>
-        public double Gain
+        public int Gain
         {
             get { return gain; }
             set { gain = value; RaisePropertyChanged(() => Gain); }
@@ -123,7 +122,7 @@ namespace confocal_core.Model
         /// <summary>
         /// 伽马校正
         /// </summary>
-        public double Gamma
+        public int Gamma
         {
             get { return gamma; }
             set { gamma = value; RaisePropertyChanged(() => gamma); }
@@ -138,6 +137,11 @@ namespace confocal_core.Model
             set { pseudoColor = value; RaisePropertyChanged(() => PseudoColor); }
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static ScanChannelModel Initialize(int id)
         {
             switch (id)
@@ -154,7 +158,7 @@ namespace confocal_core.Model
                         Activated = false,
                         Gain = 50,
                         Offset = 0,
-                        Gamma = 1.0,
+                        Gamma = 50,
                         PseudoColor = Color.MediumPurple
                     };
                 case 1:
@@ -169,7 +173,7 @@ namespace confocal_core.Model
                         Activated = false,
                         Gain = 50,
                         Offset = 0,
-                        Gamma = 1.0,
+                        Gamma = 50,
                         PseudoColor = Color.DarkCyan
                     };
                 case 2:
@@ -184,7 +188,7 @@ namespace confocal_core.Model
                         Activated = false,
                         Gain = 50,
                         Offset = 0,
-                        Gamma = 1.0,
+                        Gamma = 50,
                         PseudoColor = Color.YellowGreen
                     };
                 case 3:
@@ -199,7 +203,7 @@ namespace confocal_core.Model
                         Activated = false,
                         Gain = 50,
                         Offset = 0,
-                        Gamma = 1.0,
+                        Gamma = 50,
                         PseudoColor = Color.MediumVioletRed
                     };
                 default:

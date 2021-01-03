@@ -128,6 +128,46 @@ namespace confocal_ui
             this.cbxLineSkip.DisplayMember = "Text";
             this.cbxLineSkip.ValueMember = "Data";
             this.cbxLineSkip.SelectedItem = mScanSettingsVM.SelectedScanLineSkip;
+            // 扫描通道1 - 405nm
+            this.gh405.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel405, "PseudoColor");
+            this.gh405.DataBindings.Add("Collapsed", mScanSettingsVM.ScanChannel405, "Collapsed");
+            this.tbar405HV.DataBindings.Add("Value", mScanSettingsVM.ScanChannel405, "Gain");
+            this.tbx405HV.DataBindings.Add("Text", mScanSettingsVM.ScanChannel405, "Gain");
+            this.tbar405Offset.DataBindings.Add("Value", mScanSettingsVM.ScanChannel405, "Offset");
+            this.tbx405Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel405, "Offset");
+            this.tbar405Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel405, "LaserPower");
+            this.tbx405Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel405, "LaserPower");
+            this.btn405Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel405, "Activated");
+            // 扫描通道2 - 488nm
+            this.gh488.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel488, "PseudoColor");
+            this.gh488.DataBindings.Add("Collapsed", mScanSettingsVM.ScanChannel488, "Collapsed");
+            this.tbar488HV.DataBindings.Add("Value", mScanSettingsVM.ScanChannel488, "Gain");
+            this.tbx488HV.DataBindings.Add("Text", mScanSettingsVM.ScanChannel488, "Gain");
+            this.tbar488Offset.DataBindings.Add("Value", mScanSettingsVM.ScanChannel488, "Offset");
+            this.tbx488Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel488, "Offset");
+            this.tbar488Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel488, "LaserPower");
+            this.tbx488Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel488, "LaserPower");
+            this.tbx488Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel488, "Activated");
+            // 扫描通道3 - 561nm
+            this.gh561.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel561, "PseudoColor");
+            this.gh561.DataBindings.Add("Collapsed", mScanSettingsVM.ScanChannel561, "Collapsed");
+            this.tbar561HV.DataBindings.Add("Value", mScanSettingsVM.ScanChannel561, "Gain");
+            this.tbx561HV.DataBindings.Add("Text", mScanSettingsVM.ScanChannel561, "Gain");
+            this.tbar561Offset.DataBindings.Add("Value", mScanSettingsVM.ScanChannel561, "Offset");
+            this.tbx561Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel561, "Offset");
+            this.tbar561Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel561, "LaserPower");
+            this.tbx561Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel561, "LaserPower");
+            this.tbx561Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel561, "Activated");
+            // 扫描通道4 - 640nm
+            this.gh640.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel640, "PseudoColor");
+            this.gh640.DataBindings.Add("Collapsed", mScanSettingsVM.ScanChannel640, "Collapsed");
+            this.tbar640HV.DataBindings.Add("Value", mScanSettingsVM.ScanChannel640, "Gain");
+            this.tbx640HV.DataBindings.Add("Text", mScanSettingsVM.ScanChannel640, "Gain");
+            this.tbar640Offset.DataBindings.Add("Value", mScanSettingsVM.ScanChannel640, "Offset");
+            this.tbx640Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel640, "Offset");
+            this.tbar640Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel640, "LaserPower");
+            this.tbx640Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel640, "LaserPower");
+            this.tbx640Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel640, "Activated");
 
             this.inputTextBox1.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
         }

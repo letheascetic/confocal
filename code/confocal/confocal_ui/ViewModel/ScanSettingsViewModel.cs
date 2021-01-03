@@ -228,7 +228,11 @@ namespace confocal_ui.ViewModel
             ScanLineSkipEnabled = false;
             ScanLineSkipList = ScanLineSkipModel.Initialize();
             SelectedScanLineSkip = ScanLineSkipList[0];
-            // 
+            // 扫描通道
+            ScanChannel405 = ScanChannelModel.Initialize(0);
+            ScanChannel488 = ScanChannelModel.Initialize(1);
+            ScanChannel561 = ScanChannelModel.Initialize(2);
+            ScanChannel640 = ScanChannelModel.Initialize(3);
         }
 
     }
