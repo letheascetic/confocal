@@ -86,6 +86,8 @@ namespace confocal_ui
             }
 
             cbxLineSkip.SelectedIndexChanged += ScanbLineSkipChanged;
+
+            cbxPinHoleSelect.SelectedIndexChanged += ScanPinHoleChanged;
         }
 
         /// <summary>
@@ -147,7 +149,7 @@ namespace confocal_ui
             this.tbx488Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel488, "Offset");
             this.tbar488Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel488, "LaserPower");
             this.tbx488Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel488, "LaserPower");
-            this.tbx488Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel488, "Activated");
+            this.btn488Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel488, "Activated");
             // 扫描通道3 - 561nm
             this.gh561.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel561, "PseudoColor");
             this.gh561.DataBindings.Add("Collapsed", mScanSettingsVM.ScanChannel561, "Collapsed");
@@ -157,7 +159,7 @@ namespace confocal_ui
             this.tbx561Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel561, "Offset");
             this.tbar561Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel561, "LaserPower");
             this.tbx561Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel561, "LaserPower");
-            this.tbx561Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel561, "Activated");
+            this.btn561Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel561, "Activated");
             // 扫描通道4 - 640nm
             this.gh640.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel640, "PseudoColor");
             this.gh640.DataBindings.Add("Collapsed", mScanSettingsVM.ScanChannel640, "Collapsed");
@@ -167,8 +169,15 @@ namespace confocal_ui
             this.tbx640Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel640, "Offset");
             this.tbar640Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel640, "LaserPower");
             this.tbx640Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel640, "LaserPower");
-            this.tbx640Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel640, "Activated");
-
+            this.btn640Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel640, "Activated");
+            // 小孔
+            this.cbxPinHoleSelect.DataSource = mScanSettingsVM.ScanPinHoleList;
+            this.cbxPinHoleSelect.DisplayMember = "Name";
+            this.cbxPinHoleSelect.ValueMember = "Size";
+            this.cbxPinHoleSelect.SelectedItem = mScanSettingsVM.SelectedPinHole;
+            this.tbarPinHole.DataBindings.Add("Value", mScanSettingsVM.SelectedPinHole, "Size");
+            this.tbxPinHole.DataBindings.Add("Text", mScanSettingsVM.SelectedPinHole, "Size");
+            // 其他
             this.inputTextBox1.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
         }
 
@@ -324,5 +333,19 @@ namespace confocal_ui
             mScanSettingsVM.SelectedScanLineSkip = (ScanLineSkipModel)cbxLineSkip.SelectedItem;
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", mScanSettingsVM.ScanLineSkipEnabled, mScanSettingsVM.SelectedScanLineSkip.Text));
         }
+
+        /// <summary>
+        /// 切换小孔事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScanPinHoleChanged(object sender, EventArgs e)
+        {
+            mScanSettingsVM.SelectedPinHole = (ScanPinHoleModel)cbxPinHoleSelect.SelectedItem;
+            Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", mScanSettingsVM.SelectedPinHole.Name, mScanSettingsVM.SelectedPinHole.Size));
+        }
+
+
+
     }
 }

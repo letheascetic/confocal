@@ -207,6 +207,26 @@ namespace confocal_ui.ViewModel
             set { scanChannel640 = value; RaisePropertyChanged(() => ScanChannel640); }
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private List<ScanPinHoleModel> scanPinHoleList;
+        private ScanPinHoleModel selectedPinHole;
+
+        /// <summary>
+        /// 小孔列表
+        /// </summary>
+        public List<ScanPinHoleModel> ScanPinHoleList
+        {
+            get { return scanPinHoleList; }
+            set { scanPinHoleList = value; RaisePropertyChanged(() => ScanPinHoleList); }
+        }
+        /// <summary>
+        /// 选择的小孔
+        /// </summary>
+        public ScanPinHoleModel SelectedPinHole
+        {
+            get { return selectedPinHole; }
+            set { selectedPinHole = value; RaisePropertyChanged(() => SelectedPinHole); }
+        }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         public ScanSettingsViewModel()
@@ -233,6 +253,9 @@ namespace confocal_ui.ViewModel
             ScanChannel488 = ScanChannelModel.Initialize(1);
             ScanChannel561 = ScanChannelModel.Initialize(2);
             ScanChannel640 = ScanChannelModel.Initialize(3);
+            // 小孔
+            ScanPinHoleList = ScanPinHoleModel.Initialize();
+            SelectedPinHole = ScanPinHoleList[0];
         }
 
     }

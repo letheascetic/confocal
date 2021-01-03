@@ -535,7 +535,7 @@
             this.cbxPinHoleSelect.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
             this.cbxPinHoleSelect.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxPinHoleSelect.Name = "cbxPinHoleSelect";
-            this.cbxPinHoleSelect.Width = 44;
+            this.cbxPinHoleSelect.Width = 63;
             // 
             // lbPinHole
             // 
