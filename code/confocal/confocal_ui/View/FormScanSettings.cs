@@ -141,11 +141,11 @@ namespace confocal_ui
             this.gh405.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel405, "PseudoColor");
             this.gh405.DataBindings.Add("Collapsed", mScanSettingsVM.ScanChannel405, "Collapsed");
             this.tbar405HV.DataBindings.Add("Value", mScanSettingsVM.ScanChannel405, "Gain");
-            this.tbx405HV.DataBindings.Add("Text", mScanSettingsVM.ScanChannel405, "Gain");
+            this.tbx405HV.DataBindings.Add("Text", tbar405HV, "Value");
             this.tbar405Offset.DataBindings.Add("Value", mScanSettingsVM.ScanChannel405, "Offset");
-            this.tbx405Offset.DataBindings.Add("Text", mScanSettingsVM.ScanChannel405, "Offset");
+            this.tbx405Offset.DataBindings.Add("Text", tbar405Offset, "Value");
             this.tbar405Power.DataBindings.Add("Value", mScanSettingsVM.ScanChannel405, "LaserPower");
-            this.tbx405Power.DataBindings.Add("Text", mScanSettingsVM.ScanChannel405, "LaserPower");
+            this.tbx405Power.DataBindings.Add("Text", tbar405Power, "Value");
             this.btn405Power.DataBindings.Add("Pressed", mScanSettingsVM.ScanChannel405, "Activated");
             // 扫描通道2 - 488nm
             this.gh488.DataBindings.Add("BackColor", mScanSettingsVM.ScanChannel488, "PseudoColor");
