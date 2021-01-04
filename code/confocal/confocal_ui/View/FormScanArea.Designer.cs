@@ -1,4 +1,6 @@
 ﻿
+using C1.Win.C1InputPanel;
+
 namespace confocal_ui.View
 {
     partial class FormScanArea
