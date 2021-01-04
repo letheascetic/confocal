@@ -225,6 +225,7 @@
             // btnLive
             // 
             this.btnLive.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnLive.CheckOnClick = true;
             this.btnLive.Height = 40;
             this.btnLive.Name = "btnLive";
             this.btnLive.Text = "实时";
@@ -234,6 +235,7 @@
             // btnCapture
             // 
             this.btnCapture.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.btnCapture.CheckOnClick = true;
             this.btnCapture.Height = 40;
             this.btnCapture.Name = "btnCapture";
             this.btnCapture.Text = "捕捉";
@@ -331,6 +333,7 @@
             this.rbtnFastMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rbtnFastMode.Name = "rbtnFastMode";
             this.rbtnFastMode.Text = "快速模式";
+            this.rbtnFastMode.Click += new System.EventHandler(this.rbtnFastMode_Click);
             // 
             // btnPixelDwell2
             // 
@@ -557,6 +560,7 @@
             this.tbxPinHole.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxPinHole.Name = "tbxPinHole";
             this.tbxPinHole.Width = 30;
+            this.tbxPinHole.ChangeCommitted += new System.EventHandler(this.tbxPinHole_ChangeCommitted);
             // 
             // tbxPinHoleAU
             // 

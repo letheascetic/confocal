@@ -116,6 +116,8 @@ namespace confocal_ui
             this.btnBiDirection.DataBindings.Add("Text", mScanSettingsVM.ScanBiDirection, "Text");
             this.btnBiDirection.DataBindings.Add("Pressed", mScanSettingsVM.ScanBiDirection, "IsEnabled");
             // 像素时间
+            // 快速模式使能
+            this.rbtnFastMode.DataBindings.Add("Pressed", mScanSettingsVM, "FastModeEnabled");
             foreach (InputButton button in mPixelDwellButtons)
             {
                 ScanPixelDwellModel model = (ScanPixelDwellModel)button.Tag;
@@ -180,8 +182,11 @@ namespace confocal_ui
             this.cbxPinHoleSelect.DisplayMember = "Name";
             this.cbxPinHoleSelect.ValueMember = "Size";
             this.cbxPinHoleSelect.SelectedItem = mScanSettingsVM.SelectedPinHole;
-            this.tbarPinHole.DataBindings.Add("Value", mScanSettingsVM.SelectedPinHole, "Size");
-            this.tbxPinHole.DataBindings.Add("Text", mScanSettingsVM.SelectedPinHole, "Size");
+            // this.tbarPinHole.DataBindings.Add("Value", mScanSettingsVM.SelectedPinHole, "Size");
+            // this.tbxPinHole.DataBindings.Add("Text", mScanSettingsVM.SelectedPinHole, "Size");
+            // this.tbarPinHole.DataBindings.Add("Value", tbxPinHole, "Text");
+            // this.tbxPinHole.DataBindings.Add("Text", this.tbarPinHole, "Value");
+
             // 其他
             this.inputTextBox1.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
         }
@@ -347,6 +352,10 @@ namespace confocal_ui
         private void ScanPinHoleChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.SelectedPinHole = (ScanPinHoleModel)cbxPinHoleSelect.SelectedItem;
+            this.tbarPinHole.DataBindings.Clear();
+            this.tbxPinHole.DataBindings.Clear();
+            this.tbarPinHole.DataBindings.Add("Value", mScanSettingsVM.SelectedPinHole, "Size");
+            this.tbxPinHole.DataBindings.Add("Text", tbarPinHole, "Value");
             Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", mScanSettingsVM.SelectedPinHole.Name, mScanSettingsVM.SelectedPinHole.Size));
         }
 
@@ -386,6 +395,28 @@ namespace confocal_ui
             {
                 Logger.Info(string.Format("Current Acquisition Mode [{0}].", mScanSettingsVM.CurrentAcquisitionMode.Text));
             }
+        }
+
+        /// <summary>
+        /// 快速模式使能点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rbtnFastMode_Click(object sender, EventArgs e)
+        {
+            mScanSettingsVM.FastModeEnabled = rbtnFastMode.Pressed;
+            Logger.Info(string.Format("Fast Mode Enabled [{0}].", mScanSettingsVM.FastModeEnabled));
+        }
+
+        /// <summary>
+        /// 小孔孔径设置提交事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbxPinHole_ChangeCommitted(object sender, EventArgs e)
+        {
+            mScanSettingsVM.SelectedPinHole.Size = int.Parse(tbxPinHole.Text);
+            Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", mScanSettingsVM.SelectedPinHole.Name, mScanSettingsVM.SelectedPinHole.Size));
         }
     }
 }

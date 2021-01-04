@@ -159,8 +159,17 @@ namespace confocal_ui.ViewModel
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private bool fastModeEnabled;
         private List<ScanPixelDwellModel> scanPixelDwellList;
 
+        /// <summary>
+        /// 快速模式使能
+        /// </summary>
+        public bool FastModeEnabled
+        {
+            get { return fastModeEnabled; }
+            set { fastModeEnabled = value; RaisePropertyChanged(() => FastModeEnabled); }
+        }
         /// <summary>
         /// 像素停留时间列表
         /// </summary>
@@ -287,6 +296,7 @@ namespace confocal_ui.ViewModel
             ScanUniDirection = ScanDirectionModel.Initialize(ScanDirectionModel.UNIDIRECTION);
             ScanBiDirection = ScanDirectionModel.Initialize(ScanDirectionModel.BIDIRECTION);
             // 像素时间
+            FastModeEnabled = false;
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();
             // 扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
