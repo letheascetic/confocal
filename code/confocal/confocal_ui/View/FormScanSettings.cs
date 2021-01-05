@@ -301,18 +301,8 @@ namespace confocal_ui
                 button.Pressed = true;
                 return;
             }
-            foreach (InputButton otherButton in mScanPixelButtons)
-            {
-                if (!otherButton.Equals(button))
-                {
-                    ScanPixelModel otherModel = (ScanPixelModel)otherButton.Tag;
-                    otherButton.Pressed = false;
-                    otherModel.IsEnabled = false;
-                }
-            }
-            button.Pressed = true;
-            model.IsEnabled = true;
-            Logger.Info(string.Format("Scan Pixel [{0}].", mScanSettingsVM.SelectedScanPixel.Text));
+
+            mScanSettingsVM.ScanPixelChangeCommand(model);
         }
 
         /// <summary>

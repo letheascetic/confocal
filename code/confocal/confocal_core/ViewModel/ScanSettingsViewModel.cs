@@ -226,6 +226,28 @@ namespace confocal_core.ViewModel
         {
             get { return ScanPixelList.Where(p => p.IsEnabled).First(); }
         }
+        /// <summary>
+        /// 扫描像素切换事件
+        /// </summary>
+        /// <param name="selectedScanPixel"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
+        {
+            BeforePropertyChanged();
+
+            foreach (ScanPixelModel scanPixel in ScanPixelList)
+            {
+                if (scanPixel.ID != selectedScanPixel.ID)
+                {
+                    scanPixel.IsEnabled = false;
+                }
+            }
+            selectedScanPixel.IsEnabled = true;
+            Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         private bool fastModeEnabled;
