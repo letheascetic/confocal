@@ -90,6 +90,8 @@
     <Compile Include="Model\ScanLineSkipModel.cs" />
     <Compile Include="Model\ScanPinHoleModel.cs" />
     <Compile Include="Model\ScanPropertyModel.cs" />
+    <Compile Include="ViewModel\ScanAreaViewModel.cs" />
+    <Compile Include="ViewModel\ScanSettingsViewModel.cs" />
     <Compile Include="Z1Acquisition.cs" />
     <Compile Include="Z1Config.cs" />
     <Compile Include="Z1NiDaq.cs" />

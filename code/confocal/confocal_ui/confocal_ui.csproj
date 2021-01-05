@@ -125,8 +125,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModel\ScanAreaViewModel.cs" />
-    <Compile Include="ViewModel\ScanSettingsViewModel.cs" />
     <Compile Include="View\FormImage.cs">
       <SubType>Form</SubType>
     </Compile>

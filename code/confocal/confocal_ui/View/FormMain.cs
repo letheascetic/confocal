@@ -3,7 +3,6 @@ using C1.Win.C1Ribbon;
 using C1.Win.C1Themes;
 using confocal_core.Model;
 using confocal_ui.View;
-using confocal_ui.ViewModel;
 using log4net;
 using System;
 using System.Collections.Generic;
