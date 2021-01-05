@@ -55,6 +55,25 @@ namespace confocal_core.ViewModel
             }
         }
 
+        /// <summary>
+        /// 采集模式状态[启动、切换、停止]变化事件处理
+        /// </summary>
+        /// <param name="liveModeEnabled"></param>
+        /// <param name="captureModeEnabled"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanAcquisitionChangeCommand(bool liveModeEnabled, bool captureModeEnabled)
+        {
+            BeforePropertyChanged();
+
+            // 更新状态
+            ScanLiveMode.IsEnabled = liveModeEnabled;
+            ScanCaptureMode.IsEnabled = captureModeEnabled;
+            Logger.Info(string.Format("Scan Acquisition Mode [{0}:{1}].", IsScanning, IsScanning ? CurrentAcquisitionMode.Text : "None"));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ScannerHeadModel scannerHeadTwoGalv;
         private ScannerHeadModel scannerHeadThreeGalv;
@@ -81,6 +100,23 @@ namespace confocal_core.ViewModel
         {
             get { return scannerHeadThreeGalv; }
             set { scannerHeadThreeGalv = value; RaisePropertyChanged(() => ScannerHeadThreeGalv); }
+        }
+
+        /// <summary>
+        /// 扫描头切换事件处理
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE ScannerHeadChangeCommand(bool twoGalvEnabled)
+        {
+            BeforePropertyChanged();
+
+            // 更新扫描头
+            ScannerHeadTwoGalv.IsEnabled = twoGalvEnabled;
+            ScannerHeadThreeGalv.IsEnabled = !twoGalvEnabled;
+            Logger.Info(string.Format("Scan Header [{0}].", SelectedScannerHead.Text));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -110,6 +146,22 @@ namespace confocal_core.ViewModel
             get { return scanBiDirection; }
             set { scanBiDirection = value; RaisePropertyChanged(() => ScanBiDirection); }
         }
+        /// <summary>
+        /// 扫描方向切换事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanDirectionChangeCommand(bool uniDirectionEnabled)
+        {
+            BeforePropertyChanged();
+
+            // 更新扫描方向
+            ScanUniDirection.IsEnabled = uniDirectionEnabled;
+            ScanBiDirection.IsEnabled = !uniDirectionEnabled;
+            Logger.Info(string.Format("Scan Direction [{0}].", SelectedScanDirection.Text));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ScanModeModel scanModeGalvano;
@@ -137,6 +189,23 @@ namespace confocal_core.ViewModel
         {
             get { return scanModeResonant; }
             set { scanModeResonant = value; RaisePropertyChanged(() => ScanModeResonant); }
+        }
+        /// <summary>
+        /// 扫描模式切换事件
+        /// </summary>
+        /// <param name="galvEnabled"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanModeChangeCommand(bool galvEnabled)
+        {
+            BeforePropertyChanged();
+
+            // 更新扫描模式
+            ScanModeGalavano.IsEnabled = galvEnabled;
+            ScanModeResonant.IsEnabled = !galvEnabled;
+            Logger.Info(string.Format("Scan Mode [{0}].", SelectedScanMode.Text));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -186,6 +255,28 @@ namespace confocal_core.ViewModel
             get { return scanPixelDwellList.Where(p => p.IsEnabled).First(); }
         }
 
+        /// <summary>
+        /// 像素时间变更事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
+        {
+            BeforePropertyChanged();
+
+            foreach (ScanPixelDwellModel pixelDwell in ScanPixelDwellList)
+            {
+                if (pixelDwell.ID != selectedPixelDwell.ID)
+                {
+                    pixelDwell.IsEnabled = false;
+                }
+            }
+            selectedPixelDwell.IsEnabled = true;
+            Logger.Info(string.Format("Scan Pixel Dwell [{0}].", SelectedScanPixelDwell.Text));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private bool scanLineSkipEnabled;
         private ScanLineSkipModel selectedScanLineSkip;
@@ -214,6 +305,36 @@ namespace confocal_core.ViewModel
         {
             get { return scanLineSkipList; }
             set { scanLineSkipList = value; RaisePropertyChanged(() => SelectedScanLineSkip); }
+        }
+
+        /// <summary>
+        /// 跳行扫描使能变更事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE LineSkipEnableChangeCommand(bool lineSkipEnabled)
+        {
+            BeforePropertyChanged();
+
+            ScanLineSkipEnabled = lineSkipEnabled;
+            Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 跳行扫描值变更事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE LineSkipValueChangeCommand(ScanLineSkipModel lineSkip)
+        {
+            BeforePropertyChanged();
+
+            SelectedScanLineSkip = lineSkip;
+            Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
+
+            AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -314,5 +435,32 @@ namespace confocal_core.ViewModel
             SelectedPinHole = ScanPinHoleList[0];
         }
 
+        /// <summary>
+        /// 在属性变化前执行
+        /// </summary>
+        /// <returns></returns>
+        private API_RETURN_CODE BeforePropertyChanged()
+        {
+            // 如果当前正在采集(有任一采集模式使能)，则先停止采集
+            if (IsScanning)
+            {
+                // TO DO：停止采集
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 在属性变化后执行
+        /// </summary>
+        /// <returns></returns>
+        private API_RETURN_CODE AfterPropertyChanged()
+        {
+            // 如果有任一采集模式使能，则重新开启采集
+            if (IsScanning)
+            {
+                // TO DO：开启指定的采集模式
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
     }
 }

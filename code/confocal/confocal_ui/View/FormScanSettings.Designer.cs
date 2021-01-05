@@ -304,6 +304,7 @@
             this.chbxLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chbxLineSkip.Name = "chbxLineSkip";
             this.chbxLineSkip.Text = "跳行扫描";
+            this.chbxLineSkip.CheckedChanged += new System.EventHandler(this.chbxLineSkip_CheckedChanged);
             // 
             // cbxLineSkip
             // 

@@ -85,7 +85,7 @@ namespace confocal_ui
                 mScanPixelButtons[i].Click += ScanPixelChanged;
             }
 
-            cbxLineSkip.SelectedIndexChanged += ScanbLineSkipChanged;
+            cbxLineSkip.SelectedIndexChanged += ScanLineSkipChanged;
 
             cbxPinHoleSelect.SelectedIndexChanged += ScanPinHoleChanged;
         }
@@ -224,9 +224,7 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void ScannerHeadChanged(object sender, EventArgs e)
         {
-            mScanSettingsVM.ScannerHeadTwoGalv.IsEnabled = rbtnTwoScanners.Checked;
-            mScanSettingsVM.ScannerHeadThreeGalv.IsEnabled = rbtnThreeScanners.Checked;
-            Logger.Info(string.Format("Scan Header [{0}].", mScanSettingsVM.SelectedScannerHead.Text));
+            mScanSettingsVM.ScannerHeadChangeCommand(rbtnTwoScanners.Checked);
         }
 
         /// <summary>
@@ -236,9 +234,7 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void ScanModeChanged(object sender, EventArgs e)
         {
-            mScanSettingsVM.ScanModeGalavano.IsEnabled = rbtnGalvano.Checked;
-            mScanSettingsVM.ScanModeResonant.IsEnabled = rbtnResonant.Checked;
-            Logger.Info(string.Format("Scan Mode [{0}].", mScanSettingsVM.SelectedScanMode.Text));
+            mScanSettingsVM.ScanModeChangeCommand(rbtnGalvano.Checked);
         }
 
         /// <summary>
@@ -254,9 +250,7 @@ namespace confocal_ui
                 return;
             }
             btnBiDirection.Pressed = !btnUniDirection.Pressed;
-            mScanSettingsVM.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
-            mScanSettingsVM.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
-            Logger.Info(string.Format("Scan Direction [{0}].", mScanSettingsVM.SelectedScanDirection.Text));
+            mScanSettingsVM.ScanDirectionChangeCommand(btnUniDirection.Pressed);
         }
 
         /// <summary>
@@ -272,9 +266,7 @@ namespace confocal_ui
                 return;
             }
             btnUniDirection.Pressed = !btnBiDirection.Pressed;
-            mScanSettingsVM.ScanBiDirection.IsEnabled = btnBiDirection.Pressed;
-            mScanSettingsVM.ScanUniDirection.IsEnabled = btnUniDirection.Pressed;
-            Logger.Info(string.Format("Scan Direction [{0}].", mScanSettingsVM.SelectedScanDirection.Text));
+            mScanSettingsVM.ScanDirectionChangeCommand(btnUniDirection.Pressed);
         }
 
         /// <summary>
@@ -291,18 +283,8 @@ namespace confocal_ui
                 button.Pressed = true;
                 return;
             }
-            foreach (InputButton otherButton in mPixelDwellButtons)
-            {
-                if (!otherButton.Equals(button))
-                {
-                    ScanPixelDwellModel otherModel = (ScanPixelDwellModel)otherButton.Tag;
-                    otherButton.Pressed = false;
-                    otherModel.IsEnabled = false;
-                }
-            }
-            button.Pressed = true;
-            model.IsEnabled = true;
-            Logger.Info(string.Format("Scan Pixel Dwell [{0}].", mScanSettingsVM.SelectedScanPixelDwell.Text));
+
+            mScanSettingsVM.ScanPixelDwellChangeCommand(model);
         }
 
         /// <summary>
@@ -338,10 +320,9 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ScanbLineSkipChanged(object sender, EventArgs e)
+        private void ScanLineSkipChanged(object sender, EventArgs e)
         {
-            mScanSettingsVM.SelectedScanLineSkip = (ScanLineSkipModel)cbxLineSkip.SelectedItem;
-            Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", mScanSettingsVM.ScanLineSkipEnabled, mScanSettingsVM.SelectedScanLineSkip.Text));
+            mScanSettingsVM.LineSkipValueChangeCommand((ScanLineSkipModel)cbxLineSkip.SelectedItem);
         }
 
         /// <summary>
@@ -370,12 +351,7 @@ namespace confocal_ui
             {
                 btnCapture.Pressed = false;
             }
-            mScanSettingsVM.ScanLiveMode.IsEnabled = btnLive.Pressed;
-            mScanSettingsVM.ScanCaptureMode.IsEnabled = btnCapture.Pressed;
-            if (mScanSettingsVM.IsScanning)
-            {
-                Logger.Info(string.Format("Current Acquisition Mode [{0}].", mScanSettingsVM.CurrentAcquisitionMode.Text));
-            }
+            mScanSettingsVM.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed);
         }
 
         /// <summary>
@@ -389,12 +365,7 @@ namespace confocal_ui
             {
                 btnLive.Pressed = false;
             }
-            mScanSettingsVM.ScanLiveMode.IsEnabled = btnLive.Pressed;
-            mScanSettingsVM.ScanCaptureMode.IsEnabled = btnCapture.Pressed;
-            if (mScanSettingsVM.IsScanning)
-            {
-                Logger.Info(string.Format("Current Acquisition Mode [{0}].", mScanSettingsVM.CurrentAcquisitionMode.Text));
-            }
+            mScanSettingsVM.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed);
         }
 
         /// <summary>
@@ -417,6 +388,16 @@ namespace confocal_ui
         {
             mScanSettingsVM.SelectedPinHole.Size = int.Parse(tbxPinHole.Text);
             Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", mScanSettingsVM.SelectedPinHole.Name, mScanSettingsVM.SelectedPinHole.Size));
+        }
+
+        /// <summary>
+        /// 跳行扫描使能变更事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chbxLineSkip_CheckedChanged(object sender, EventArgs e)
+        {
+            mScanSettingsVM.LineSkipEnableChangeCommand(chbxLineSkip.Checked);
         }
     }
 }
