@@ -554,6 +554,7 @@
             this.tbarPinHole.Maximum = 100;
             this.tbarPinHole.Name = "tbarPinHole";
             this.tbarPinHole.TickFrequency = 10;
+            this.tbarPinHole.ValueChanged += new System.EventHandler(this.tbarPinHole_ValueChanged);
             // 
             // tbxPinHole
             // 
@@ -561,7 +562,6 @@
             this.tbxPinHole.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxPinHole.Name = "tbxPinHole";
             this.tbxPinHole.Width = 30;
-            this.tbxPinHole.ChangeCommitted += new System.EventHandler(this.tbxPinHole_ChangeCommitted);
             // 
             // tbxPinHoleAU
             // 

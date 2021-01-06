@@ -24,6 +24,9 @@ namespace confocal_ui
 
         private InputButton[] mPixelDwellButtons;
         private InputButton[] mScanPixelButtons;
+        private InputTrackBar[] mChannelGainBars;
+        private InputTrackBar[] mChannelOffsetBars;
+        private InputTrackBar[] mChannelPowerBars;
 
         public FormScanSettings()
         {
@@ -60,6 +63,30 @@ namespace confocal_ui
                 btnScanPixel4096
             };
 
+            mChannelGainBars = new InputTrackBar[]
+            {
+                tbar405HV,
+                tbar488HV,
+                tbar561HV,
+                tbar640HV
+            };
+
+            mChannelOffsetBars = new InputTrackBar[]
+            {
+                tbar405Offset,
+                tbar488Offset,
+                tbar561Offset,
+                tbar640Offset
+            };
+
+            mChannelPowerBars = new InputTrackBar[]
+            {
+                tbar405Power,
+                tbar488Power,
+                tbar561Power,
+                tbar640Power
+            };
+
         }
 
         /// <summary>
@@ -88,6 +115,16 @@ namespace confocal_ui
             cbxLineSkip.SelectedIndexChanged += ScanLineSkipChanged;
 
             cbxPinHoleSelect.SelectedIndexChanged += ScanPinHoleChanged;
+
+            for (int i = 0; i < mChannelGainBars.Length; i++)
+            {
+                mChannelGainBars[i].Tag = i;
+                mChannelGainBars[i].ValueChanged += ChannelGainChanged;
+                mChannelOffsetBars[i].Tag = i;
+                mChannelOffsetBars[i].ValueChanged += ChannelOffsetChanged;
+                mChannelPowerBars[i].Tag = i;
+                mChannelPowerBars[i].ValueChanged += ChannelPowerChanged;
+            }
         }
 
         /// <summary>
@@ -182,10 +219,7 @@ namespace confocal_ui
             this.cbxPinHoleSelect.DisplayMember = "Name";
             this.cbxPinHoleSelect.ValueMember = "Size";
             this.cbxPinHoleSelect.SelectedItem = mScanSettingsVM.SelectedPinHole;
-            // this.tbarPinHole.DataBindings.Add("Value", mScanSettingsVM.SelectedPinHole, "Size");
-            // this.tbxPinHole.DataBindings.Add("Text", mScanSettingsVM.SelectedPinHole, "Size");
-            // this.tbarPinHole.DataBindings.Add("Value", tbxPinHole, "Text");
-            // this.tbxPinHole.DataBindings.Add("Text", this.tbarPinHole, "Value");
+            this.tbxPinHole.DataBindings.Add("Text", tbarPinHole, "Value");
 
             // 其他
             this.inputTextBox1.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
@@ -322,12 +356,9 @@ namespace confocal_ui
         /// <param name="e"></param>
         private void ScanPinHoleChanged(object sender, EventArgs e)
         {
-            mScanSettingsVM.SelectedPinHole = (ScanPinHoleModel)cbxPinHoleSelect.SelectedItem;
             this.tbarPinHole.DataBindings.Clear();
-            this.tbxPinHole.DataBindings.Clear();
+            mScanSettingsVM.PinHoleSelectChangeCommand((ScanPinHoleModel)cbxPinHoleSelect.SelectedItem);
             this.tbarPinHole.DataBindings.Add("Value", mScanSettingsVM.SelectedPinHole, "Size");
-            this.tbxPinHole.DataBindings.Add("Text", tbarPinHole, "Value");
-            Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", mScanSettingsVM.SelectedPinHole.Name, mScanSettingsVM.SelectedPinHole.Size));
         }
 
         /// <summary>
@@ -370,17 +401,6 @@ namespace confocal_ui
         }
 
         /// <summary>
-        /// 小孔孔径设置提交事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tbxPinHole_ChangeCommitted(object sender, EventArgs e)
-        {
-            mScanSettingsVM.SelectedPinHole.Size = int.Parse(tbxPinHole.Text);
-            Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", mScanSettingsVM.SelectedPinHole.Name, mScanSettingsVM.SelectedPinHole.Size));
-        }
-
-        /// <summary>
         /// 跳行扫描使能变更事件
         /// </summary>
         /// <param name="sender"></param>
@@ -388,6 +408,49 @@ namespace confocal_ui
         private void chbxLineSkip_CheckedChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.LineSkipEnableChangeCommand(chbxLineSkip.Checked);
+        }
+
+        /// <summary>
+        /// 小孔孔径变化事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbarPinHole_ValueChanged(object sender, EventArgs e)
+        {
+            mScanSettingsVM.PinHoleValueChangeCommand(tbarPinHole.Value);
+        }
+
+        /// <summary>
+        /// 通道增益更新事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChannelGainChanged(object sender, EventArgs e)
+        {
+            InputTrackBar bar = (InputTrackBar)sender;
+            mScanSettingsVM.ChannelGainChangeCommand((int)bar.Tag, bar.Value);
+        }
+
+        /// <summary>
+        /// 通道偏置更新事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChannelOffsetChanged(object sender, EventArgs e)
+        {
+            InputTrackBar bar = (InputTrackBar)sender;
+            mScanSettingsVM.ChannelOffsetChangeCommand((int)bar.Tag, bar.Value);
+        }
+
+        /// <summary>
+        /// 通道功率更新事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChannelPowerChanged(object sender, EventArgs e)
+        {
+            InputTrackBar bar = (InputTrackBar)sender;
+            mScanSettingsVM.ChannelPowerChangeCommand((int)bar.Tag, bar.Value);
         }
     }
 }

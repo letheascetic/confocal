@@ -401,6 +401,62 @@ namespace confocal_core.ViewModel
             set { scanChannel640 = value; RaisePropertyChanged(() => ScanChannel640); }
         }
 
+        /// <summary>
+        /// 通道增益更新事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="gain"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelGainChangeCommand(int id, int gain)
+        {
+            FindScanChannel(id).Gain = gain;
+            Logger.Info(string.Format("Channel Gain [{0}:{1}].", id, gain));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 通道偏置更新事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelOffsetChangeCommand(int id, int offset)
+        {
+            FindScanChannel(id).Offset = offset;
+            Logger.Info(string.Format("Channel Offset [{0}:{1}].", id, offset));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 通道功率更新事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="power"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelPowerChangeCommand(int id, int power)
+        {
+            FindScanChannel(id).LaserPower = power;
+            Logger.Info(string.Format("Channel Power [{0}:{1}].", id, power));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private ScanChannelModel FindScanChannel(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    return ScanChannel405;
+                case 1:
+                    return ScanChannel488;
+                case 2:
+                    return ScanChannel561;
+                case 3:
+                    return ScanChannel640;
+                default:
+                    throw new ArgumentOutOfRangeException("ID Exception.");
+            }
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanPinHoleModel> scanPinHoleList;
         private ScanPinHoleModel selectedPinHole;
@@ -420,6 +476,32 @@ namespace confocal_core.ViewModel
         {
             get { return selectedPinHole; }
             set { selectedPinHole = value; RaisePropertyChanged(() => SelectedPinHole); }
+        }
+        /// <summary>
+        /// 小孔切换事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE PinHoleSelectChangeCommand(ScanPinHoleModel selected)
+        {
+            // BeforePropertyChanged();
+
+            SelectedPinHole = selected;
+            Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", SelectedPinHole.Name, SelectedPinHole.Size));
+
+            // AfterPropertyChanged();
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 小孔孔径变化事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE PinHoleValueChangeCommand(int value)
+        {
+            // TO DO: 操作小孔孔径变化
+            
+            SelectedPinHole.Size = value;
+            Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", SelectedPinHole.Name, SelectedPinHole.Size));
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
