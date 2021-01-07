@@ -103,7 +103,9 @@
     <None Include="log4net.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\confocal_util\confocal_util.csproj">
       <Project>{38e5177c-fa83-4b36-afb0-df90600fa986}</Project>

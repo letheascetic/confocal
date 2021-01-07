@@ -117,8 +117,6 @@
             this.btn640Power = new C1.Win.C1InputPanel.InputButton();
             this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
-            this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
-            this.btnTest = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -215,11 +213,9 @@
             this.inputPanel.Items.Add(this.btn640Power);
             this.inputPanel.Items.Add(this.tbar640Power);
             this.inputPanel.Items.Add(this.tbx640Power);
-            this.inputPanel.Items.Add(this.inputTextBox1);
-            this.inputPanel.Items.Add(this.btnTest);
             this.inputPanel.Location = new System.Drawing.Point(0, 0);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(272, 689);
+            this.inputPanel.Size = new System.Drawing.Size(272, 669);
             this.inputPanel.TabIndex = 3;
             // 
             // btnLive
@@ -864,27 +860,12 @@
             this.tbx640Power.Name = "tbx640Power";
             this.tbx640Power.Width = 40;
             // 
-            // inputTextBox1
-            // 
-            this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputTextBox1.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.inputTextBox1.Name = "inputTextBox1";
-            this.inputTextBox1.Width = 40;
-            // 
-            // btnTest
-            // 
-            this.btnTest.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Text = "测试";
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
             // FormScanSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(272, 689);
+            this.ClientSize = new System.Drawing.Size(272, 669);
             this.Controls.Add(this.inputPanel);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -991,8 +972,6 @@
         private C1.Win.C1InputPanel.InputButton btn640Power;
         private C1.Win.C1InputPanel.InputTrackBar tbar640Power;
         private C1.Win.C1InputPanel.InputTextBox tbx640Power;
-        private C1.Win.C1InputPanel.InputButton btnTest;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox1;
         private C1.Win.C1InputPanel.InputComboBox cbxLineSkip;
     }
 }

@@ -6,6 +6,8 @@ using System.Text;
 
 namespace confocal_core.Model
 {
+    public delegate API_RETURN_CODE ScanPixelChangedEventHandler(ScanPixelModel scanPixel);
+
     public class ScanPropertyBaseModel : ObservableObject
     {
         private int id;

@@ -36,19 +36,19 @@ namespace confocal_ui.View
             this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
             this.toolBar = new C1.Win.C1Command.C1ToolBar();
             this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
-            this.pictureBox = new Emgu.CV.UI.ImageBox();
-            this.lbPixelSize = new C1.Win.C1InputPanel.InputLabel();
-            this.lbWidth = new C1.Win.C1InputPanel.InputLabel();
-            this.lbHeight = new C1.Win.C1InputPanel.InputLabel();
             this.inputSeparator1 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbScanPixel = new C1.Win.C1InputPanel.InputLabel();
             this.cbxScanPixel = new C1.Win.C1InputPanel.InputComboBox();
             this.inputSeparator2 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbPixelSize = new C1.Win.C1InputPanel.InputLabel();
             this.lbPixelSizeValue = new C1.Win.C1InputPanel.InputLabel();
             this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
             this.lbPixelDwellValue = new C1.Win.C1InputPanel.InputLabel();
+            this.lbWidth = new C1.Win.C1InputPanel.InputLabel();
             this.lbScanWidth = new C1.Win.C1InputPanel.InputLabel();
+            this.lbHeight = new C1.Win.C1InputPanel.InputLabel();
             this.lbScanHeight = new C1.Win.C1InputPanel.InputLabel();
+            this.pictureBox = new Emgu.CV.UI.ImageBox();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
@@ -98,33 +98,6 @@ namespace confocal_ui.View
             this.inputPanel.Size = new System.Drawing.Size(272, 75);
             this.inputPanel.TabIndex = 2;
             // 
-            // pictureBox
-            // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.RightClickMenu;
-            this.pictureBox.Location = new System.Drawing.Point(0, 26);
-            this.pictureBox.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(272, 218);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox.TabIndex = 16;
-            this.pictureBox.TabStop = false;
-            // 
-            // lbPixelSize
-            // 
-            this.lbPixelSize.Name = "lbPixelSize";
-            this.lbPixelSize.Text = "像素尺寸：";
-            // 
-            // lbWidth
-            // 
-            this.lbWidth.Name = "lbWidth";
-            this.lbWidth.Text = "扫描宽度：";
-            // 
-            // lbHeight
-            // 
-            this.lbHeight.Name = "lbHeight";
-            this.lbHeight.Text = "扫描高度：";
-            // 
             // inputSeparator1
             // 
             this.inputSeparator1.Break = C1.Win.C1InputPanel.BreakType.Group;
@@ -150,6 +123,11 @@ namespace confocal_ui.View
             this.inputSeparator2.Name = "inputSeparator2";
             this.inputSeparator2.Width = 260;
             // 
+            // lbPixelSize
+            // 
+            this.lbPixelSize.Name = "lbPixelSize";
+            this.lbPixelSize.Text = "像素尺寸：";
+            // 
             // lbPixelSizeValue
             // 
             this.lbPixelSizeValue.Name = "lbPixelSizeValue";
@@ -168,17 +146,39 @@ namespace confocal_ui.View
             this.lbPixelDwellValue.Text = "2.0us";
             this.lbPixelDwellValue.Width = 60;
             // 
+            // lbWidth
+            // 
+            this.lbWidth.Name = "lbWidth";
+            this.lbWidth.Text = "扫描宽度：";
+            // 
             // lbScanWidth
             // 
             this.lbScanWidth.Name = "lbScanWidth";
             this.lbScanWidth.Text = "512";
             this.lbScanWidth.Width = 60;
             // 
+            // lbHeight
+            // 
+            this.lbHeight.Name = "lbHeight";
+            this.lbHeight.Text = "扫描高度：";
+            // 
             // lbScanHeight
             // 
             this.lbScanHeight.Name = "lbScanHeight";
             this.lbScanHeight.Text = "512";
             this.lbScanHeight.Width = 60;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.RightClickMenu;
+            this.pictureBox.Location = new System.Drawing.Point(0, 26);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(272, 218);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox.TabIndex = 16;
+            this.pictureBox.TabStop = false;
             // 
             // FormScanArea
             // 
@@ -197,6 +197,7 @@ namespace confocal_ui.View
             this.Name = "FormScanArea";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "扫描区域";
+            this.Load += new System.EventHandler(this.FormScanArea_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).EndInit();
             this.dockToolBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();

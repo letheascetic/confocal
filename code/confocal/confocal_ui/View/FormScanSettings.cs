@@ -1,5 +1,6 @@
 ﻿using C1.Win.C1InputPanel;
 using C1.Win.C1Ribbon;
+using confocal_core;
 using confocal_core.Model;
 using confocal_core.ViewModel;
 using log4net;
@@ -19,18 +20,31 @@ namespace confocal_ui
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        
+        public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
         private ScanSettingsViewModel mScanSettingsVM;
+
+        public ScanSettingsViewModel ScanSettingsVM
+        {
+            get { return mScanSettingsVM; }
+        }
 
         private InputButton[] mPixelDwellButtons;
         private InputButton[] mScanPixelButtons;
         private InputTrackBar[] mChannelGainBars;
         private InputTrackBar[] mChannelOffsetBars;
         private InputTrackBar[] mChannelPowerBars;
+        private InputButton[] mChannelActivateButtons;
 
         public FormScanSettings()
         {
             InitializeComponent();
+        }
+
+        public API_RETURN_CODE ScanPixelChangedHandler(ScanPixelModel scanPixel)
+        {
+            return mScanSettingsVM.ScanPixelChangeCommand(scanPixel);
         }
 
         /// <summary>
@@ -87,6 +101,14 @@ namespace confocal_ui
                 tbar640Power
             };
 
+            mChannelActivateButtons = new InputButton[]
+            {
+                btn405Power,
+                btn488Power,
+                btn561Power,
+                btn640Power
+            };
+
         }
 
         /// <summary>
@@ -124,6 +146,8 @@ namespace confocal_ui
                 mChannelOffsetBars[i].ValueChanged += ChannelOffsetChanged;
                 mChannelPowerBars[i].Tag = i;
                 mChannelPowerBars[i].ValueChanged += ChannelPowerChanged;
+                mChannelActivateButtons[i].Tag = i;
+                mChannelActivateButtons[i].Click += ChannelActivateChanged;
             }
         }
 
@@ -222,7 +246,6 @@ namespace confocal_ui
             this.tbxPinHole.DataBindings.Add("Text", tbarPinHole, "Value");
 
             // 其他
-            this.inputTextBox1.DataBindings.Add("Text", mScanSettingsVM.ScannerHeadTwoGalv, "Text");
         }
 
         /// <summary>
@@ -235,20 +258,6 @@ namespace confocal_ui
             Initialize();
             RegisterEvents();
             SetDataBindings();
-        }
-
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            Logger.Info(string.Format("Scanner Header: [{0}:{1}].", mScanSettingsVM.ScannerHeadTwoGalv.Text, mScanSettingsVM.ScannerHeadTwoGalv.IsEnabled));
-            Logger.Info(string.Format("Scanner Header: [{0}:{1}].", mScanSettingsVM.ScannerHeadThreeGalv.Text, mScanSettingsVM.ScannerHeadThreeGalv.IsEnabled));
-
-            Logger.Info(string.Format("Scan Mode: [{0}:{1}].", mScanSettingsVM.ScanModeGalavano.Text, mScanSettingsVM.ScanModeGalavano.IsEnabled));
-            Logger.Info(string.Format("Scan Mode: [{0}:{1}].", mScanSettingsVM.ScanModeResonant.Text, mScanSettingsVM.ScanModeResonant.IsEnabled));
-
-            Logger.Info(string.Format("Scan Direction: [{0}:{1}].", mScanSettingsVM.ScanUniDirection.Text, mScanSettingsVM.ScanUniDirection.IsEnabled));
-            Logger.Info(string.Format("Scan Direction: [{0}:{1}].", mScanSettingsVM.ScanBiDirection.Text, mScanSettingsVM.ScanBiDirection.IsEnabled));
-
-            Logger.Info(string.Format("Scan Line Skip: [{0}:{1}].", mScanSettingsVM.ScanLineSkipEnabled, mScanSettingsVM.SelectedScanLineSkip.Text));
         }
 
         /// <summary>
@@ -337,6 +346,11 @@ namespace confocal_ui
             }
 
             mScanSettingsVM.ScanPixelChangeCommand(model);
+
+            if (ScanPixelChangedEvent != null)
+            {
+                ScanPixelChangedEvent.Invoke(model);
+            }
         }
 
         /// <summary>
@@ -451,6 +465,17 @@ namespace confocal_ui
         {
             InputTrackBar bar = (InputTrackBar)sender;
             mScanSettingsVM.ChannelPowerChangeCommand((int)bar.Tag, bar.Value);
+        }
+
+        /// <summary>
+        /// 通道激光开关事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChannelActivateChanged(object sender, EventArgs e)
+        {
+            InputButton button = (InputButton)sender;
+            mScanSettingsVM.ChannelActivateChangeCommand((int)button.Tag, button.Pressed);
         }
     }
 }

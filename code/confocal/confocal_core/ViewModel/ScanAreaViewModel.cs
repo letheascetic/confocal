@@ -8,6 +8,7 @@ using System.Text;
 
 namespace confocal_core.ViewModel
 {
+    
     public class ScanAreaViewModel : ViewModelBase
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -15,6 +16,8 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         private List<ScanPixelModel> scanPixelList;
+        private ScanPixelModel selectedScanPixel;
+
         /// <summary>
         /// 扫描像素列表
         /// </summary>
@@ -28,13 +31,39 @@ namespace confocal_core.ViewModel
         /// </summary>
         public ScanPixelModel SelectedScanPixel
         {
-            get { return ScanPixelList.Where(p => p.IsEnabled).First(); }
+            get { return selectedScanPixel; }
+            set { selectedScanPixel = value; RaisePropertyChanged(() => SelectedScanPixel); }
+        }
+
+        /// <summary>
+        /// 扫描像素切换事件
+        /// </summary>
+        /// <param name="selectedScanPixel"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
+        {
+            foreach (ScanPixelModel scanPixel in ScanPixelList)
+            {
+                if (scanPixel.ID != selectedScanPixel.ID)
+                {
+                    scanPixel.IsEnabled = false;
+                }
+                else
+                {
+                    SelectedScanPixel = scanPixel;
+                    SelectedScanPixel.IsEnabled = true;
+                }
+            }
+            Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         public ScanAreaViewModel()
         {
             // 扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
+            SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
         }
+
     }
 }

@@ -14,6 +14,7 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+
         private ScanAcquisitionModel scanLiveMode;
         private ScanAcquisitionModel scanCaptureMode;
 
@@ -241,11 +242,15 @@ namespace confocal_core.ViewModel
                 {
                     scanPixel.IsEnabled = false;
                 }
+                else
+                {
+                    scanPixel.IsEnabled = true;
+                }
             }
-            selectedScanPixel.IsEnabled = true;
             Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
 
             AfterPropertyChanged();
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -437,6 +442,24 @@ namespace confocal_core.ViewModel
         {
             FindScanChannel(id).LaserPower = power;
             Logger.Info(string.Format("Channel Power [{0}:{1}].", id, power));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 通道激光开关事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="activated"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelActivateChangeCommand(int id, bool activated)
+        {
+            BeforePropertyChanged();
+
+            ScanChannelModel channel = FindScanChannel(id);
+            channel.Activated = activated;
+            Logger.Info(string.Format("Channel Status [{0}:{1}].", id, activated));
+
+            AfterPropertyChanged();
             return API_RETURN_CODE.API_SUCCESS;
         }
 
