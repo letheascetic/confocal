@@ -55,6 +55,7 @@ namespace confocal_ui
         {
             mFormScanSetting.ScanPixelChangedEvent += mFormScanArea.ScanPixelChangedHandler;
             mFormScanArea.ScanPixelChangedEvent += mFormScanSetting.ScanPixelChangedHandler;
+            mFormScanSetting.ScanPixelDwellChangedEvent += mFormScanArea.ScanPixelDwellChangedHandler;
         }
 
         /// <summary>

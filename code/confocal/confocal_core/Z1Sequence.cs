@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using confocal_core.Common;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -177,8 +178,8 @@ namespace confocal_core
                 }
             }
 
-            XVoltages = Z1GalvanoProperty.XCoordinateToVoltage(XCoordinates);
-            YVoltaegs = Z1GalvanoProperty.YCoordinateToVoltage(YCoordinates);
+            XVoltages = GalvanoProperty.XCoordinateToVoltage(XCoordinates);
+            YVoltaegs = GalvanoProperty.YCoordinateToVoltage(YCoordinates);
 
             // 计算输出相关参数
             OutputSampleRate = 1e6 / (int)scanProperty.ScanPixelDwell;

@@ -35,6 +35,10 @@ namespace confocal_ui.View
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormScanArea));
             this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
             this.toolBar = new C1.Win.C1Command.C1ToolBar();
+            this.cmdLinkSquare = new C1.Win.C1Command.C1CommandLink();
+            this.cmdSquare = new C1.Win.C1Command.C1Command();
+            this.cmdLinkRectangle = new C1.Win.C1Command.C1CommandLink();
+            this.cmdRectangle = new C1.Win.C1Command.C1Command();
             this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputSeparator1 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbScanPixel = new C1.Win.C1InputPanel.InputLabel();
@@ -49,10 +53,12 @@ namespace confocal_ui.View
             this.lbHeight = new C1.Win.C1InputPanel.InputLabel();
             this.lbScanHeight = new C1.Win.C1InputPanel.InputLabel();
             this.pictureBox = new Emgu.CV.UI.ImageBox();
+            this.c1CommandHolder = new C1.Win.C1Command.C1CommandHolder();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c1CommandHolder)).BeginInit();
             this.SuspendLayout();
             // 
             // dockToolBar
@@ -69,12 +75,42 @@ namespace confocal_ui.View
             // 
             this.toolBar.AccessibleName = "Tool Bar";
             this.toolBar.CommandHolder = null;
+            this.toolBar.CommandLinks.AddRange(new C1.Win.C1Command.C1CommandLink[] {
+            this.cmdLinkSquare,
+            this.cmdLinkRectangle});
             this.toolBar.Location = new System.Drawing.Point(3, 0);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(25, 25);
+            this.toolBar.Size = new System.Drawing.Size(80, 26);
             this.toolBar.Text = "工具栏";
             this.toolBar.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.toolBar.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
+            // 
+            // cmdLinkSquare
+            // 
+            this.cmdLinkSquare.ButtonLook = C1.Win.C1Command.ButtonLookFlags.Text;
+            this.cmdLinkSquare.Command = this.cmdSquare;
+            // 
+            // cmdSquare
+            // 
+            this.cmdSquare.CheckAutoToggle = true;
+            this.cmdSquare.Name = "cmdSquare";
+            this.cmdSquare.Pressed = true;
+            this.cmdSquare.ShortcutText = "";
+            this.cmdSquare.Text = "方形";
+            // 
+            // cmdLinkRectangle
+            // 
+            this.cmdLinkRectangle.ButtonLook = C1.Win.C1Command.ButtonLookFlags.Text;
+            this.cmdLinkRectangle.Command = this.cmdRectangle;
+            this.cmdLinkRectangle.SortOrder = 1;
+            // 
+            // cmdRectangle
+            // 
+            this.cmdRectangle.CheckAutoToggle = true;
+            this.cmdRectangle.Enabled = false;
+            this.cmdRectangle.Name = "cmdRectangle";
+            this.cmdRectangle.ShortcutText = "";
+            this.cmdRectangle.Text = "矩形";
             // 
             // inputPanel
             // 
@@ -115,7 +151,7 @@ namespace confocal_ui.View
             this.cbxScanPixel.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.cbxScanPixel.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxScanPixel.Name = "cbxScanPixel";
-            this.cbxScanPixel.Width = 56;
+            this.cbxScanPixel.Width = 50;
             // 
             // inputSeparator2
             // 
@@ -180,6 +216,12 @@ namespace confocal_ui.View
             this.pictureBox.TabIndex = 16;
             this.pictureBox.TabStop = false;
             // 
+            // c1CommandHolder
+            // 
+            this.c1CommandHolder.Commands.Add(this.cmdSquare);
+            this.c1CommandHolder.Commands.Add(this.cmdRectangle);
+            this.c1CommandHolder.Owner = this;
+            // 
             // FormScanArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -202,6 +244,7 @@ namespace confocal_ui.View
             this.dockToolBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c1CommandHolder)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,5 +267,10 @@ namespace confocal_ui.View
         private InputLabel lbPixelDwellValue;
         private InputLabel lbScanWidth;
         private InputLabel lbScanHeight;
+        private C1.Win.C1Command.C1CommandLink cmdLinkSquare;
+        private C1.Win.C1Command.C1Command cmdSquare;
+        private C1.Win.C1Command.C1CommandHolder c1CommandHolder;
+        private C1.Win.C1Command.C1CommandLink cmdLinkRectangle;
+        private C1.Win.C1Command.C1Command cmdRectangle;
     }
 }

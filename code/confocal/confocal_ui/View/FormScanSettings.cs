@@ -21,6 +21,7 @@ namespace confocal_ui
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
+        public event ScanPixelDwellChangedEventHandler ScanPixelDwellChangedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         private ScanSettingsViewModel mScanSettingsVM;
@@ -328,6 +329,11 @@ namespace confocal_ui
             }
 
             mScanSettingsVM.ScanPixelDwellChangeCommand(model);
+
+            if (ScanPixelDwellChangedEvent != null)
+            {
+                ScanPixelDwellChangedEvent.Invoke(model);
+            }
         }
 
         /// <summary>

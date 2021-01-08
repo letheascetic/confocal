@@ -41,6 +41,11 @@ namespace confocal_ui.View
             return code;
         }
 
+        public API_RETURN_CODE ScanPixelDwellChangedHandler(ScanPixelDwellModel scanPixelDwell)
+        {
+            return mScanAreaViewModel.ScanPixelDwellChangeCommand(scanPixelDwell);
+        }
+
         private void Initialize()
         {
             mScanAreaViewModel = new ScanAreaViewModel();
@@ -59,10 +64,16 @@ namespace confocal_ui.View
         /// </summary>
         private void SetDataBindings()
         {
+            // 扫描像素
             cbxScanPixel.DataSource = mScanAreaViewModel.ScanPixelList;
             cbxScanPixel.DisplayMember = "Text";
             cbxScanPixel.ValueMember = "Data";
             cbxScanPixel.SelectedItem = mScanAreaViewModel.SelectedScanPixel;
+
+            // 显示的数据
+            lbScanWidth.DataBindings.Add("Text", mScanAreaViewModel, "ScanWidth");
+            lbScanHeight.DataBindings.Add("Text", mScanAreaViewModel, "ScanHeight");
+            lbPixelDwellValue.DataBindings.Add("Text", mScanAreaViewModel, "ScanPixelDwell", true, DataSourceUpdateMode.OnPropertyChanged, null, "0 us");
         }
 
         /// <summary>

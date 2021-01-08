@@ -6,7 +6,18 @@ using System.Text;
 
 namespace confocal_core.Model
 {
+    /// <summary>
+    /// 扫描像素更新事件委托
+    /// </summary>
+    /// <param name="scanPixel"></param>
+    /// <returns></returns>
     public delegate API_RETURN_CODE ScanPixelChangedEventHandler(ScanPixelModel scanPixel);
+    /// <summary>
+    /// 扫描像素时间更新事件委托
+    /// </summary>
+    /// <param name="scanPixelDwell"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ScanPixelDwellChangedEventHandler(ScanPixelDwellModel scanPixelDwell);
 
     public class ScanPropertyBaseModel : ObservableObject
     {
