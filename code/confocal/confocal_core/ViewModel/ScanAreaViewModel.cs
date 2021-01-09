@@ -1,4 +1,6 @@
 ﻿using confocal_core.Model;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
 using GalaSoft.MvvmLight;
 using log4net;
 using System;
@@ -76,11 +78,21 @@ namespace confocal_core.ViewModel
             return API_RETURN_CODE.API_SUCCESS;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
-
+        private ScanAreaModel scanArea;
+        private Mat scanImage;
         private float scanPixelSize;
         private int scanPixelDwell;
         private int scanWidth;
         private int scanHeight;
+
+        /// <summary>
+        /// 扫描区域
+        /// </summary>
+        public ScanAreaModel ScanArea
+        {
+            get { return scanArea; }
+            set { scanArea = value; RaisePropertyChanged(() => ScanArea); }
+        }
 
         /// <summary>
         /// 扫描像素尺寸
@@ -90,6 +102,16 @@ namespace confocal_core.ViewModel
             get { return scanPixelSize; }
             set { scanPixelSize = value; RaisePropertyChanged(() => ScanPixelSize); }
         }
+
+        /// <summary>
+        /// 扫描像素时间
+        /// </summary>
+        public int ScanPixelDwell
+        {
+            get { return scanPixelDwell; }
+            set { scanPixelDwell = value; RaisePropertyChanged(() => ScanPixelDwell); }
+        }
+
         /// <summary>
         /// 扫描宽度
         /// </summary>
@@ -98,6 +120,7 @@ namespace confocal_core.ViewModel
             get { return scanWidth; }
             set { scanWidth = value; RaisePropertyChanged(() => ScanWidth); }
         }
+        
         /// <summary>
         /// 扫描高度
         /// </summary>
@@ -106,13 +129,14 @@ namespace confocal_core.ViewModel
             get { return scanHeight; }
             set { scanHeight = value; RaisePropertyChanged(() => scanHeight); }
         }
+
         /// <summary>
-        /// 扫描像素时间
+        /// 扫描图像
         /// </summary>
-        public int ScanPixelDwell
+        public Mat ScanImage
         {
-            get { return scanPixelDwell; }
-            set { scanPixelDwell = value; RaisePropertyChanged(() => ScanPixelDwell); }
+            get { return scanImage; }
+            set { scanImage = value; RaisePropertyChanged(() => ScanImage); }
         }
 
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel scanPixelDwell)
@@ -125,12 +149,12 @@ namespace confocal_core.ViewModel
         
         public ScanAreaViewModel()
         {
-            // 扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
             SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
             ScanWidth = SelectedScanPixel.Data;
             ScanHeight = SelectedScanPixel.Data;
             ScanPixelDwell = 8;
+            ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
         }
 
     }

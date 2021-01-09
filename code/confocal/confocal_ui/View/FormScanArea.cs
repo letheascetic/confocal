@@ -49,6 +49,7 @@ namespace confocal_ui.View
         private void Initialize()
         {
             mScanAreaViewModel = new ScanAreaViewModel();
+            pictureBox.Image = mScanAreaViewModel.ScanImage;
         }
 
         /// <summary>

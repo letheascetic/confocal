@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -39,11 +41,9 @@ namespace confocal_core.Model
         private static readonly int EXTEND_LINE_TIME_DEFAULT = 100;
         private static readonly int EXTEND_ROW_COUNT_DEFAULT = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////
+
         private RectangleF fullScanRange;
-
-
         private ScanAreaTypeModel scanAreaType;
-        
         private RectangleF selectedScanRange;
 
         /// <summary>
@@ -54,7 +54,6 @@ namespace confocal_core.Model
             get { return scanAreaType; }
             set { scanAreaType = value; RaisePropertyChanged(() => ScanAreaType); }
         }
-
         /// <summary>
         /// 全扫描范围
         /// </summary>
@@ -63,7 +62,6 @@ namespace confocal_core.Model
             get { return fullScanRange; }
             set { fullScanRange = value; RaisePropertyChanged(() => FullScanRange); }
         }
-
         /// <summary>
         /// 当前选择的扫描范围
         /// </summary>
