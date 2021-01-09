@@ -73,7 +73,7 @@ namespace confocal_ui.View
             // 显示的数据
             lbScanWidth.DataBindings.Add("Text", mScanAreaViewModel, "ScanWidth");
             lbScanHeight.DataBindings.Add("Text", mScanAreaViewModel, "ScanHeight");
-            lbPixelDwellValue.DataBindings.Add("Text", mScanAreaViewModel, "ScanPixelDwell", true, DataSourceUpdateMode.OnPropertyChanged, null, "0 us");
+            lbPixelDwellValue.DataBindings.Add("Text", mScanAreaViewModel, "ScanPixelDwell", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.0 us");
         }
 
         /// <summary>
