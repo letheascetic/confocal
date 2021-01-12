@@ -215,7 +215,7 @@
             this.inputPanel.Items.Add(this.tbx640Power);
             this.inputPanel.Location = new System.Drawing.Point(0, 0);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(272, 669);
+            this.inputPanel.Size = new System.Drawing.Size(272, 679);
             this.inputPanel.TabIndex = 3;
             // 
             // btnLive
@@ -865,7 +865,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(272, 669);
+            this.ClientSize = new System.Drawing.Size(272, 679);
             this.Controls.Add(this.inputPanel);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;

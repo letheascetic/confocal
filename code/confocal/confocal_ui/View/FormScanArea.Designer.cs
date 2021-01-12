@@ -33,16 +33,12 @@ namespace confocal_ui.View
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormScanArea));
-            this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
-            this.toolBar = new C1.Win.C1Command.C1ToolBar();
-            this.cmdLinkSquare = new C1.Win.C1Command.C1CommandLink();
-            this.cmdSquare = new C1.Win.C1Command.C1Command();
-            this.cmdLinkRectangle = new C1.Win.C1Command.C1CommandLink();
-            this.cmdRectangle = new C1.Win.C1Command.C1Command();
             this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputSeparator1 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbScanPixel = new C1.Win.C1InputPanel.InputLabel();
             this.cbxScanPixel = new C1.Win.C1InputPanel.InputComboBox();
+            this.lbPosition = new C1.Win.C1InputPanel.InputLabel();
+            this.lbPixelPosition = new C1.Win.C1InputPanel.InputLabel();
             this.inputSeparator2 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbPixelSize = new C1.Win.C1InputPanel.InputLabel();
             this.lbPixelSizeValue = new C1.Win.C1InputPanel.InputLabel();
@@ -53,64 +49,16 @@ namespace confocal_ui.View
             this.lbHeight = new C1.Win.C1InputPanel.InputLabel();
             this.lbScanHeight = new C1.Win.C1InputPanel.InputLabel();
             this.pictureBox = new Emgu.CV.UI.ImageBox();
-            this.c1CommandHolder = new C1.Win.C1Command.C1CommandHolder();
-            ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
-            this.dockToolBar.SuspendLayout();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
+            this.toolBar = new C1.Win.C1Command.C1ToolBar();
+            this.pbxScanArea = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c1CommandHolder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
+            this.dockToolBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxScanArea)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dockToolBar
-            // 
-            this.dockToolBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
-            this.dockToolBar.Controls.Add(this.toolBar);
-            this.dockToolBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.dockToolBar.Id = 3;
-            this.dockToolBar.Location = new System.Drawing.Point(0, 0);
-            this.dockToolBar.Name = "dockToolBar";
-            this.dockToolBar.Size = new System.Drawing.Size(272, 26);
-            // 
-            // toolBar
-            // 
-            this.toolBar.AccessibleName = "Tool Bar";
-            this.toolBar.CommandHolder = null;
-            this.toolBar.CommandLinks.AddRange(new C1.Win.C1Command.C1CommandLink[] {
-            this.cmdLinkSquare,
-            this.cmdLinkRectangle});
-            this.toolBar.Location = new System.Drawing.Point(3, 0);
-            this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(80, 26);
-            this.toolBar.Text = "工具栏";
-            this.toolBar.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
-            this.toolBar.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
-            // 
-            // cmdLinkSquare
-            // 
-            this.cmdLinkSquare.ButtonLook = C1.Win.C1Command.ButtonLookFlags.Text;
-            this.cmdLinkSquare.Command = this.cmdSquare;
-            // 
-            // cmdSquare
-            // 
-            this.cmdSquare.CheckAutoToggle = true;
-            this.cmdSquare.Name = "cmdSquare";
-            this.cmdSquare.Pressed = true;
-            this.cmdSquare.ShortcutText = "";
-            this.cmdSquare.Text = "方形";
-            // 
-            // cmdLinkRectangle
-            // 
-            this.cmdLinkRectangle.ButtonLook = C1.Win.C1Command.ButtonLookFlags.Text;
-            this.cmdLinkRectangle.Command = this.cmdRectangle;
-            this.cmdLinkRectangle.SortOrder = 1;
-            // 
-            // cmdRectangle
-            // 
-            this.cmdRectangle.CheckAutoToggle = true;
-            this.cmdRectangle.Enabled = false;
-            this.cmdRectangle.Name = "cmdRectangle";
-            this.cmdRectangle.ShortcutText = "";
-            this.cmdRectangle.Text = "矩形";
             // 
             // inputPanel
             // 
@@ -120,6 +68,8 @@ namespace confocal_ui.View
             this.inputPanel.Items.Add(this.inputSeparator1);
             this.inputPanel.Items.Add(this.lbScanPixel);
             this.inputPanel.Items.Add(this.cbxScanPixel);
+            this.inputPanel.Items.Add(this.lbPosition);
+            this.inputPanel.Items.Add(this.lbPixelPosition);
             this.inputPanel.Items.Add(this.inputSeparator2);
             this.inputPanel.Items.Add(this.lbPixelSize);
             this.inputPanel.Items.Add(this.lbPixelSizeValue);
@@ -129,7 +79,7 @@ namespace confocal_ui.View
             this.inputPanel.Items.Add(this.lbScanWidth);
             this.inputPanel.Items.Add(this.lbHeight);
             this.inputPanel.Items.Add(this.lbScanHeight);
-            this.inputPanel.Location = new System.Drawing.Point(0, 244);
+            this.inputPanel.Location = new System.Drawing.Point(0, 304);
             this.inputPanel.Name = "inputPanel";
             this.inputPanel.Size = new System.Drawing.Size(272, 75);
             this.inputPanel.TabIndex = 2;
@@ -142,16 +92,26 @@ namespace confocal_ui.View
             // 
             // lbScanPixel
             // 
-            this.lbScanPixel.Break = C1.Win.C1InputPanel.BreakType.Column;
             this.lbScanPixel.Name = "lbScanPixel";
             this.lbScanPixel.Text = "扫描像素：";
             // 
             // cbxScanPixel
             // 
-            this.cbxScanPixel.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbxScanPixel.Break = C1.Win.C1InputPanel.BreakType.None;
             this.cbxScanPixel.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxScanPixel.Name = "cbxScanPixel";
-            this.cbxScanPixel.Width = 50;
+            this.cbxScanPixel.Width = 60;
+            // 
+            // lbPosition
+            // 
+            this.lbPosition.Name = "lbPosition";
+            this.lbPosition.Text = "像素位置：";
+            // 
+            // lbPixelPosition
+            // 
+            this.lbPixelPosition.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbPixelPosition.Name = "lbPixelPosition";
+            this.lbPixelPosition.Text = "[9999,1000]";
             // 
             // inputSeparator2
             // 
@@ -206,53 +166,81 @@ namespace confocal_ui.View
             // 
             // pictureBox
             // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.BackColor = System.Drawing.Color.Black;
             this.pictureBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
-            this.pictureBox.Location = new System.Drawing.Point(0, 26);
-            this.pictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox.Location = new System.Drawing.Point(0, 30);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(272, 218);
+            this.pictureBox.Size = new System.Drawing.Size(272, 272);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 16;
             this.pictureBox.TabStop = false;
             // 
-            // c1CommandHolder
+            // timer
             // 
-            this.c1CommandHolder.Commands.Add(this.cmdSquare);
-            this.c1CommandHolder.Commands.Add(this.cmdRectangle);
-            this.c1CommandHolder.Owner = this;
+            this.timer.Interval = 250;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // dockToolBar
+            // 
+            this.dockToolBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
+            this.dockToolBar.Controls.Add(this.toolBar);
+            this.dockToolBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.dockToolBar.Id = 3;
+            this.dockToolBar.Location = new System.Drawing.Point(0, 0);
+            this.dockToolBar.Name = "dockToolBar";
+            this.dockToolBar.Size = new System.Drawing.Size(272, 26);
+            // 
+            // toolBar
+            // 
+            this.toolBar.AccessibleName = "Tool Bar";
+            this.toolBar.CommandHolder = null;
+            this.toolBar.Location = new System.Drawing.Point(3, 0);
+            this.toolBar.Name = "toolBar";
+            this.toolBar.Size = new System.Drawing.Size(25, 25);
+            this.toolBar.Text = "工具栏";
+            this.toolBar.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
+            this.toolBar.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
+            // 
+            // pbxScanArea
+            // 
+            this.pbxScanArea.BackColor = System.Drawing.Color.Transparent;
+            this.pbxScanArea.Location = new System.Drawing.Point(12, 43);
+            this.pbxScanArea.Name = "pbxScanArea";
+            this.pbxScanArea.Size = new System.Drawing.Size(100, 100);
+            this.pbxScanArea.TabIndex = 21;
+            this.pbxScanArea.TabStop = false;
+            this.pbxScanArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDownChanged);
+            this.pbxScanArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ScanRangeMoved);
             // 
             // FormScanArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 319);
+            this.ClientSize = new System.Drawing.Size(272, 379);
+            this.Controls.Add(this.pbxScanArea);
+            this.Controls.Add(this.dockToolBar);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.inputPanel);
-            this.Controls.Add(this.dockToolBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(280, 350);
+            this.MaximumSize = new System.Drawing.Size(280, 410);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(280, 350);
+            this.MinimumSize = new System.Drawing.Size(280, 410);
             this.Name = "FormScanArea";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "扫描区域";
             this.Load += new System.EventHandler(this.FormScanArea_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).EndInit();
-            this.dockToolBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c1CommandHolder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).EndInit();
+            this.dockToolBar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxScanArea)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private C1.Win.C1Command.C1CommandDock dockToolBar;
-        private C1.Win.C1Command.C1ToolBar toolBar;
         private C1InputPanel inputPanel;
         private Emgu.CV.UI.ImageBox pictureBox;
         private InputLabel lbPixelSize;
@@ -267,10 +255,11 @@ namespace confocal_ui.View
         private InputLabel lbPixelDwellValue;
         private InputLabel lbScanWidth;
         private InputLabel lbScanHeight;
-        private C1.Win.C1Command.C1CommandLink cmdLinkSquare;
-        private C1.Win.C1Command.C1Command cmdSquare;
-        private C1.Win.C1Command.C1CommandHolder c1CommandHolder;
-        private C1.Win.C1Command.C1CommandLink cmdLinkRectangle;
-        private C1.Win.C1Command.C1Command cmdRectangle;
+        private InputLabel lbPosition;
+        private InputLabel lbPixelPosition;
+        private System.Windows.Forms.Timer timer;
+        private C1.Win.C1Command.C1CommandDock dockToolBar;
+        private C1.Win.C1Command.C1ToolBar toolBar;
+        private System.Windows.Forms.PictureBox pbxScanArea;
     }
 }

@@ -149,12 +149,14 @@ namespace confocal_core.ViewModel
         
         public ScanAreaViewModel()
         {
+            ScanArea = new ScanAreaModel();
             ScanPixelList = ScanPixelModel.Initialize();
             SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
             ScanWidth = SelectedScanPixel.Data;
             ScanHeight = SelectedScanPixel.Data;
             ScanPixelDwell = 8;
             ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
+            ScanPixelSize = ScanArea.SelectedScanRange.Width / ScanWidth;
         }
 
     }
