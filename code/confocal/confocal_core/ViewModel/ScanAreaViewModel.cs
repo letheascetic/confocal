@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -78,7 +79,8 @@ namespace confocal_core.ViewModel
             return API_RETURN_CODE.API_SUCCESS;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private ScanAreaModel scanArea;
+        private ScanAreaModel selectedScanArea;
+        private ScanAreaModel fullScanArea;
         private Mat scanImage;
         private float scanPixelSize;
         private int scanPixelDwell;
@@ -86,12 +88,21 @@ namespace confocal_core.ViewModel
         private int scanHeight;
 
         /// <summary>
-        /// 扫描区域
+        /// 当前选择的扫描区域
         /// </summary>
-        public ScanAreaModel ScanArea
+        public ScanAreaModel SelectedScanArea
         {
-            get { return scanArea; }
-            set { scanArea = value; RaisePropertyChanged(() => ScanArea); }
+            get { return selectedScanArea; }
+            set { selectedScanArea = value; RaisePropertyChanged(() => SelectedScanArea); }
+        }
+        
+        /// <summary>
+        /// 全视场
+        /// </summary>
+        public ScanAreaModel FullScanArea
+        {
+            get { return fullScanArea; }
+            set { fullScanArea = value; RaisePropertyChanged(() => FullScanArea); }
         }
 
         /// <summary>
@@ -149,14 +160,53 @@ namespace confocal_core.ViewModel
         
         public ScanAreaViewModel()
         {
-            ScanArea = new ScanAreaModel();
+            // 初始化扫描区域类型
+            ScaAreaTypeList = new List<ScanAreaTypeModel>()
+            {
+                ScanAreaTypeModel.Initialize(0),
+                ScanAreaTypeModel.Initialize(1)
+            };
+            // 初始化扫描范围
+            FullScanArea = ScanAreaModel.CreateFullScanArea();
+            SelectedScanArea = ScanAreaModel.CreateFullScanArea();
+            // 初始化扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
             SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
+            // 初始化扫描宽度[X方向像素数]和高度[Y方向像素数]
             ScanWidth = SelectedScanPixel.Data;
             ScanHeight = SelectedScanPixel.Data;
+            // 初始化像素停留时间、扫描图像、像素尺寸
             ScanPixelDwell = 8;
             ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
-            ScanPixelSize = ScanArea.SelectedScanRange.Width / ScanWidth;
+            ScanPixelSize = SelectedScanArea.ScanRange.Width / ScanWidth;
+        }
+
+        /// <summary>
+        /// 扫描像素范围转换成扫描范围
+        /// </summary>
+        /// <param name="scanPixelRange"></param>
+        /// <returns></returns>
+        public RectangleF ScanPixelRangeToScanRange(Rectangle scanPixelRange)
+        {
+            float x = SelectedScanArea.ScanRange.X + ScanPixelSize * scanPixelRange.X;
+            float y = SelectedScanArea.ScanRange.Y + ScanPixelSize * scanPixelRange.Y;
+            float width = ScanPixelSize * scanPixelRange.Width;
+            float height = ScanPixelSize * scanPixelRange.Height;
+            return new RectangleF(x, y, width, height);
+        }
+
+        /// <summary>
+        /// 扫描范围转换成扫描像素范围
+        /// </summary>
+        /// <param name="scanRange"></param>
+        /// <returns></returns>
+        public Rectangle ScanRangeToScanPixelRange(RectangleF scanRange)
+        {
+            int x = (int)((scanRange.X - SelectedScanArea.ScanRange.X) / ScanPixelSize);
+            int y = (int)((scanRange.Y - SelectedScanArea.ScanRange.Y) / ScanPixelSize);
+            int width = (int)(scanRange.Width / ScanPixelSize);
+            int height = (int)(scanRange.Height / ScanPixelSize);
+            return new Rectangle(x, y, width, height);
         }
 
     }

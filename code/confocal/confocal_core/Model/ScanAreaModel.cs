@@ -42,70 +42,20 @@ namespace confocal_core.Model
         private static readonly int EXTEND_ROW_COUNT_DEFAULT = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        private RectangleF fullScanRange;
-        private ScanAreaTypeModel scanAreaType;
-        private RectangleF selectedScanRange;
+        private RectangleF scanRange;
 
         /// <summary>
-        /// 扫描范围类型
+        /// 扫描范围
         /// </summary>
-        public ScanAreaTypeModel ScanAreaType
+        public RectangleF ScanRange
         {
-            get { return scanAreaType; }
-            set { scanAreaType = value; RaisePropertyChanged(() => ScanAreaType); }
-        }
-        /// <summary>
-        /// 全扫描范围
-        /// </summary>
-        public RectangleF FullScanRange
-        {
-            get { return fullScanRange; }
-            set { fullScanRange = value; RaisePropertyChanged(() => FullScanRange); }
-        }
-        /// <summary>
-        /// 当前选择的扫描范围
-        /// </summary>
-        public RectangleF SelectedScanRange
-        {
-            get { return selectedScanRange; }
-            set { selectedScanRange = value; RaisePropertyChanged(() => SelectedScanRange); }
+            get { return scanRange; }
+            set { scanRange = value; RaisePropertyChanged(() => ScanRange); }
         }
 
-        public ScanAreaModel()
+        public static ScanAreaModel CreateFullScanArea()
         {
-            ScanAreaType = ScanAreaTypeModel.Initialize(0);
-            FullScanRange = new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT);
-            SelectedScanRange = new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT);
+            return new ScanAreaModel() { ScanRange = new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT) };
         }
-
-        /// <summary>
-        /// 像素范围转扫描范围
-        /// </summary>
-        /// <param name="scanPixelRange"></param>
-        /// <returns></returns>
-        public RectangleF ScanPixelRangeToScanRange(Rectangle scanPixelRange, float pixelSize)
-        {
-            float x = SelectedScanRange.X + pixelSize * scanPixelRange.X;
-            float y = SelectedScanRange.Y + pixelSize * scanPixelRange.Y;
-            float width = pixelSize * scanPixelRange.Width;
-            float height = pixelSize * scanPixelRange.Height;
-            return new RectangleF(x, y, width, height);
-        }
-
-        /// <summary>
-        /// 扫描范围转换成像素范围
-        /// </summary>
-        /// <param name="scanRange"></param>
-        /// <param name="pixelSize"></param>
-        /// <returns></returns>
-        public Rectangle ScanRangeToScanPixelRange(RectangleF scanRange, float pixelSize)
-        {
-            int x = (int)((scanRange.X - SelectedScanRange.X) / pixelSize);
-            int y = (int)((scanRange.Y - SelectedScanRange.Y) / pixelSize);
-            int width = (int)(scanRange.Width / pixelSize);
-            int height = (int)(scanRange.Height / pixelSize);
-            return new Rectangle(x, y, width, height);
-        }
-
     }
 }

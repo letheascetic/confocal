@@ -31,8 +31,8 @@ namespace confocal_ui.View
         private Rectangle mScanPixelRange;   // 图像中的扫描范围
         private RectangleF mScanRange;       // 视场中的扫描范围（包含未确定状态）
 
-        private Bitmap mScanAreaBmp;        
-        private Graphics mScanAreaGra;      
+        private Bitmap mScanAreaBmp;         // 扫描范围图层的Bitmap
+        private Graphics mScanAreaGra;       // 扫描范围图层的画图句柄[在Bitmap上的画图操作不会丢失，直接在pbxScanArea上画图会丢失]
 
         private ScanAreaViewModel mScanAreaViewModel;
 
@@ -65,8 +65,8 @@ namespace confocal_ui.View
             pbxScanArea.Size = pictureBox.Size;
 
             mScanAreaViewModel = new ScanAreaViewModel();
-            mScanRange = mScanAreaViewModel.ScanArea.SelectedScanRange;
-            mScanPixelRange = mScanAreaViewModel.ScanArea.ScanRangeToScanPixelRange(mScanAreaViewModel.ScanArea.SelectedScanRange, mScanAreaViewModel.ScanPixelSize);
+            mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
+            mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
 
             mMousePosition = new Point();
