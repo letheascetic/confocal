@@ -20,6 +20,7 @@ namespace confocal_ui.View
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
+        public event ScanRangeChangedEventHandler ScanRangeChangedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         private Point mMouseDownPosition;    // 鼠标在图像区域按下时的坐标
@@ -64,6 +65,10 @@ namespace confocal_ui.View
             pbxScanArea.Location = new Point(0, 0);
             pbxScanArea.Size = pictureBox.Size;
 
+            contextMenu.CommandLinks.Add(cmdLinkFullRange);
+            contextMenu.CommandLinks.Add(cmdLinkLastScanRange);
+            contextMenu.CommandLinks.Add(cmdLinkConfirm);
+
             mScanAreaViewModel = new ScanAreaViewModel();
             mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
@@ -107,6 +112,7 @@ namespace confocal_ui.View
             lbScanWidth.DataBindings.Add("Text", mScanAreaViewModel, "ScanWidth");
             lbScanHeight.DataBindings.Add("Text", mScanAreaViewModel, "ScanHeight");
             lbPixelDwellValue.DataBindings.Add("Text", mScanAreaViewModel, "ScanPixelDwell", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.0 us");
+            lbPixelSizeValue.DataBindings.Add("Text", mScanAreaViewModel, "ScanPixelSize", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.00 um/pxl");
         }
 
         private void DrawScanArea(Rectangle rectangle, Graphics graphics, Control control)
@@ -153,7 +159,7 @@ namespace confocal_ui.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormScanArea_Load(object sender, EventArgs e)
+        private void FormScanAreaLoad(object sender, EventArgs e)
         {
             Initialize();
             SetDataBindings();
@@ -191,7 +197,7 @@ namespace confocal_ui.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timer_Tick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
             //mMousePosition = pictureBox.PointToClient(MousePosition);
             //mPixelPosition.X = (int)((float)mScanAreaViewModel.ScanWidth / pictureBox.Width * mMousePosition.X);
@@ -256,7 +262,33 @@ namespace confocal_ui.View
                 mMouseDownPosition = e.Location;
                 Logger.Info(string.Format("Mouse Down Position [{0}].", mMouseDownPosition));
             }
+            else if (e.Button == MouseButtons.Right)
+            {
+                contextMenu.ShowContextMenu(pbxScanArea, e.Location);
+            }
         }
 
+        private void FullRangeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
+            mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
+            mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
+        }
+
+        private void LastScanRangeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
+            mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
+            mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
+        }
+
+        private void ScanRangeConfirmClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+
+        }
     }
 }

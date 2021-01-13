@@ -226,7 +226,7 @@
             this.btnLive.Name = "btnLive";
             this.btnLive.Text = "实时";
             this.btnLive.Width = 50;
-            this.btnLive.Click += new System.EventHandler(this.btnLive_Click);
+            this.btnLive.Click += new System.EventHandler(this.LiveClick);
             // 
             // btnCapture
             // 
@@ -236,7 +236,7 @@
             this.btnCapture.Name = "btnCapture";
             this.btnCapture.Text = "捕捉";
             this.btnCapture.Width = 50;
-            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
+            this.btnCapture.Click += new System.EventHandler(this.CaptureClick);
             // 
             // rbtnTwoScanners
             // 
@@ -300,7 +300,7 @@
             this.chbxLineSkip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chbxLineSkip.Name = "chbxLineSkip";
             this.chbxLineSkip.Text = "跳行扫描";
-            this.chbxLineSkip.CheckedChanged += new System.EventHandler(this.chbxLineSkip_CheckedChanged);
+            this.chbxLineSkip.CheckedChanged += new System.EventHandler(this.LineSkipCheckedChanged);
             // 
             // cbxLineSkip
             // 
@@ -330,7 +330,7 @@
             this.rbtnFastMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rbtnFastMode.Name = "rbtnFastMode";
             this.rbtnFastMode.Text = "快速模式";
-            this.rbtnFastMode.Click += new System.EventHandler(this.rbtnFastMode_Click);
+            this.rbtnFastMode.Click += new System.EventHandler(this.FastModeClick);
             // 
             // btnPixelDwell2
             // 
@@ -550,7 +550,7 @@
             this.tbarPinHole.Maximum = 100;
             this.tbarPinHole.Name = "tbarPinHole";
             this.tbarPinHole.TickFrequency = 10;
-            this.tbarPinHole.ValueChanged += new System.EventHandler(this.tbarPinHole_ValueChanged);
+            this.tbarPinHole.ValueChanged += new System.EventHandler(this.PinHoleValueChanged);
             // 
             // tbxPinHole
             // 

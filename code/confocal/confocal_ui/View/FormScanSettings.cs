@@ -386,7 +386,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnLive_Click(object sender, EventArgs e)
+        private void LiveClick(object sender, EventArgs e)
         {
             if (btnLive.Pressed && btnCapture.Pressed)
             {
@@ -400,7 +400,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCapture_Click(object sender, EventArgs e)
+        private void CaptureClick(object sender, EventArgs e)
         {
             if (btnLive.Pressed && btnCapture.Pressed)
             {
@@ -414,7 +414,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void rbtnFastMode_Click(object sender, EventArgs e)
+        private void FastModeClick(object sender, EventArgs e)
         {
             mScanSettingsVM.FastModeEnabled = rbtnFastMode.Pressed;
             Logger.Info(string.Format("Fast Mode Enabled [{0}].", mScanSettingsVM.FastModeEnabled));
@@ -425,7 +425,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void chbxLineSkip_CheckedChanged(object sender, EventArgs e)
+        private void LineSkipCheckedChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.LineSkipEnableChangeCommand(chbxLineSkip.Checked);
         }
@@ -435,7 +435,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tbarPinHole_ValueChanged(object sender, EventArgs e)
+        private void PinHoleValueChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.PinHoleValueChangeCommand(tbarPinHole.Value);
         }

@@ -10,6 +10,13 @@ using System.Text;
 namespace confocal_core.Model
 {
     /// <summary>
+    /// 扫描范围变化事件委托
+    /// </summary>
+    /// <param name="scanRange"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ScanRangeChangedEventHandler(ScanAreaModel scanRange);
+
+    /// <summary>
     /// 扫描区域类型
     /// </summary>
     public class ScanAreaTypeModel : ScanPropertyBaseModel

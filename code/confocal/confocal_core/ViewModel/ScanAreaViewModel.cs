@@ -75,7 +75,10 @@ namespace confocal_core.ViewModel
                     SelectedScanPixel.IsEnabled = true;
                 }
             }
-            Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
+            ScanWidth = SelectedScanPixel.Data;
+            ScanHeight = SelectedScanPixel.Data;
+            ScanPixelSize = SelectedScanArea.ScanRange.Width / ScanWidth;
+            Logger.Info(string.Format("Scan Pixel [{0}], Pixel Size [{1}].", SelectedScanPixel.Text, ScanPixelSize));
             return API_RETURN_CODE.API_SUCCESS;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +141,7 @@ namespace confocal_core.ViewModel
         public int ScanHeight
         {
             get { return scanHeight; }
-            set { scanHeight = value; RaisePropertyChanged(() => scanHeight); }
+            set { scanHeight = value; RaisePropertyChanged(() => ScanHeight); }
         }
 
         /// <summary>
