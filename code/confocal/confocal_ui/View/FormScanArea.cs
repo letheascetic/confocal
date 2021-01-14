@@ -22,12 +22,12 @@ namespace confocal_ui.View
         public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
         public event ScanRangeChangedEventHandler ScanRangeChangedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
-
         private Point mMouseDownPosition;    // 鼠标在图像区域按下时的坐标
 
         private Point mMousePosition;        // 鼠标在图像区域的坐标
         private Point mPixelPosition;        // 鼠标在图像区域的像素坐标
 
+        private bool mCoordinateChanged;     
         private Rectangle mCoordinate;       // 控件中的扫描范围
         private Rectangle mScanPixelRange;   // 图像中的扫描范围
         private RectangleF mScanRange;       // 视场中的扫描范围（包含未确定状态）
@@ -73,6 +73,7 @@ namespace confocal_ui.View
             mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
+            mCoordinateChanged = false;
 
             mMousePosition = new Point();
             mPixelPosition = new Point();
@@ -113,6 +114,9 @@ namespace confocal_ui.View
             lbScanHeight.DataBindings.Add("Text", mScanAreaViewModel, "ScanHeight");
             lbPixelDwellValue.DataBindings.Add("Text", mScanAreaViewModel, "ScanPixelDwell", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.0 us");
             lbPixelSizeValue.DataBindings.Add("Text", mScanAreaViewModel, "ScanPixelSize", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.00 um/pxl");
+
+            lbScanRangeValue.DataBindings.Add("Text", mScanAreaViewModel.SelectedScanArea, "Text");
+            lbMaxScanRangeValue.DataBindings.Add("Text", mScanAreaViewModel.FullScanArea, "Text");
         }
 
         private void DrawScanArea(Rectangle rectangle, Graphics graphics, Control control)
@@ -120,7 +124,8 @@ namespace confocal_ui.View
             control.Invalidate();
             control.Update();
             graphics.Clear(Color.Transparent);
-            graphics.DrawRectangle(new Pen(Color.Red, 5), rectangle);
+            Pen pen = mCoordinateChanged ? new Pen(Color.Red, 5) : new Pen(Color.Green, 5);
+            graphics.DrawRectangle(pen, rectangle);
         }
 
         /// <summary>
@@ -207,19 +212,26 @@ namespace confocal_ui.View
             //    mMousePosition.X, mMousePosition.Y, mPixelPosition.X, mPixelPosition.Y));
         }
 
+        /// <summary>
+        /// 扫描范围缩放
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScanRangeZoomed(object sender, MouseEventArgs e)
         {
             Rectangle coordinate = mCoordinate;
+            // 缩放
             if (e.Delta > 0)
             {
-                coordinate.Width += 5;
-                coordinate.Height += 5;
+                coordinate.Width += mScanAreaViewModel.ZoomFactor;
+                coordinate.Height += mScanAreaViewModel.ZoomFactor;
             }
             else
             {
-                coordinate.Width -= 5;
-                coordinate.Height -= 5;
+                coordinate.Width -= mScanAreaViewModel.ZoomFactor;
+                coordinate.Height -= mScanAreaViewModel.ZoomFactor;
             }
+            // 缩放后判断是否还在区域内部 & 是否小于最小尺寸
             if (coordinate.Right > pbxScanArea.Right || coordinate.Bottom > pbxScanArea.Bottom)
             {
                 return;
@@ -228,19 +240,26 @@ namespace confocal_ui.View
             {
                 return;
             }
+            // 标记坐标范围已经改变
+            mCoordinateChanged = true;
             mCoordinate = coordinate;
-            Logger.Info(string.Format("Coordinate [{0}].", mCoordinate.ToString()));
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
         }
 
+        /// <summary>
+        /// 扫描范围移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScanRangeMoved(object sender, MouseEventArgs e)
         {
+            // 按下左键移动
             if (e.Button == MouseButtons.Left)
             {
-                Logger.Info(string.Format("Coordinate [{0}].", mCoordinate.ToString()));
+                // Logger.Info(string.Format("Coordinate [{0}].", mCoordinate.ToString()));
                 if (mCoordinate.Contains(mMouseDownPosition))
                 {
-                    Logger.Info(string.Format("Mouse Down Position [{0}].", mMouseDownPosition));
+                    // Logger.Info(string.Format("Mouse Down Position [{0}].", mMouseDownPosition));
                     Rectangle coordinate = mCoordinate;
                     coordinate.X += e.X - mMouseDownPosition.X;
                     coordinate.Y += e.Y - mMouseDownPosition.Y;
@@ -249,18 +268,24 @@ namespace confocal_ui.View
                         return;
                     }
                     mMouseDownPosition = e.Location;
+                    mCoordinateChanged = true;
                     mCoordinate = coordinate;
                     DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
                 }
             }
         }
 
+        /// <summary>
+        /// 图像区域鼠标按下
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MouseDownChanged(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 mMouseDownPosition = e.Location;
-                Logger.Info(string.Format("Mouse Down Position [{0}].", mMouseDownPosition));
+                // Logger.Info(string.Format("Mouse Down Position [{0}].", mMouseDownPosition));
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -268,27 +293,57 @@ namespace confocal_ui.View
             }
         }
 
+        /// <summary>
+        /// 使用最大扫描范围
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FullRangeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
+            mScanAreaViewModel.ScanRangeChangeCommand(mScanAreaViewModel.FullScanArea);
             mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
+            mCoordinateChanged = false;
+
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
         }
 
+        /// <summary>
+        /// 使用上一个扫描范围
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LastScanRangeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
             mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
+            mCoordinateChanged = false;
+
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
         }
 
+        /// <summary>
+        /// 使用当前扫描范围
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScanRangeConfirmClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
+            mScanPixelRange = CoordinateToScanPixelRange(mCoordinate);
+            mScanRange = mScanAreaViewModel.ScanPixelRangeToScanRange(mScanPixelRange);
+            mScanAreaViewModel.ScanRangeChangeCommand(new ScanAreaModel(mScanRange));
 
+            mScanRange = mScanAreaViewModel.SelectedScanArea.ScanRange;
+            mScanPixelRange = mScanAreaViewModel.ScanRangeToScanPixelRange(mScanRange);
+            mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
+            mCoordinateChanged = false;
+
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
         }
     }
 }

@@ -90,6 +90,8 @@ namespace confocal_core.ViewModel
         private int scanWidth;
         private int scanHeight;
 
+        private int zoomFactor;
+
         /// <summary>
         /// 当前选择的扫描区域
         /// </summary>
@@ -98,7 +100,6 @@ namespace confocal_core.ViewModel
             get { return selectedScanArea; }
             set { selectedScanArea = value; RaisePropertyChanged(() => SelectedScanArea); }
         }
-        
         /// <summary>
         /// 全视场
         /// </summary>
@@ -107,7 +108,6 @@ namespace confocal_core.ViewModel
             get { return fullScanArea; }
             set { fullScanArea = value; RaisePropertyChanged(() => FullScanArea); }
         }
-
         /// <summary>
         /// 扫描像素尺寸
         /// </summary>
@@ -116,7 +116,6 @@ namespace confocal_core.ViewModel
             get { return scanPixelSize; }
             set { scanPixelSize = value; RaisePropertyChanged(() => ScanPixelSize); }
         }
-
         /// <summary>
         /// 扫描像素时间
         /// </summary>
@@ -125,7 +124,6 @@ namespace confocal_core.ViewModel
             get { return scanPixelDwell; }
             set { scanPixelDwell = value; RaisePropertyChanged(() => ScanPixelDwell); }
         }
-
         /// <summary>
         /// 扫描宽度
         /// </summary>
@@ -134,7 +132,6 @@ namespace confocal_core.ViewModel
             get { return scanWidth; }
             set { scanWidth = value; RaisePropertyChanged(() => ScanWidth); }
         }
-        
         /// <summary>
         /// 扫描高度
         /// </summary>
@@ -143,7 +140,6 @@ namespace confocal_core.ViewModel
             get { return scanHeight; }
             set { scanHeight = value; RaisePropertyChanged(() => ScanHeight); }
         }
-
         /// <summary>
         /// 扫描图像
         /// </summary>
@@ -152,10 +148,26 @@ namespace confocal_core.ViewModel
             get { return scanImage; }
             set { scanImage = value; RaisePropertyChanged(() => ScanImage); }
         }
+        /// <summary>
+        /// 扫描区域缩放因子
+        /// </summary>
+        public int ZoomFactor
+        {
+            get { return zoomFactor; }
+            set { zoomFactor = value; RaisePropertyChanged(() => ZoomFactor); }
+        }
 
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel scanPixelDwell)
         {
             ScanPixelDwell = scanPixelDwell.Data;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ScanRangeChangeCommand(ScanAreaModel scanRange)
+        {
+            SelectedScanArea.Update(scanRange.ScanRange);
+            ScanPixelSize = SelectedScanArea.ScanRange.Width / ScanWidth;
+            Logger.Info(string.Format("Selected Scan Range [{0}].", SelectedScanArea.ScanRange));
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -182,6 +194,8 @@ namespace confocal_core.ViewModel
             ScanPixelDwell = 8;
             ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
             ScanPixelSize = SelectedScanArea.ScanRange.Width / ScanWidth;
+
+            ZoomFactor = 5;
         }
 
         /// <summary>
