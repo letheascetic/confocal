@@ -48,6 +48,10 @@ namespace confocal_ui.View
             this.lbScanWidth = new C1.Win.C1InputPanel.InputLabel();
             this.lbHeight = new C1.Win.C1InputPanel.InputLabel();
             this.lbScanHeight = new C1.Win.C1InputPanel.InputLabel();
+            this.lbScanRange = new C1.Win.C1InputPanel.InputLabel();
+            this.lbScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
+            this.lbMaxScanRange = new C1.Win.C1InputPanel.InputLabel();
+            this.lbMaxScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
             this.toolBar = new C1.Win.C1Command.C1ToolBar();
@@ -56,15 +60,15 @@ namespace confocal_ui.View
             this.cmdLinkRect = new C1.Win.C1Command.C1CommandLink();
             this.cmdRect = new C1.Win.C1Command.C1Command();
             this.cmdLinkFullRange = new C1.Win.C1Command.C1CommandLink();
-            this.contextMenu = new C1.Win.C1Command.C1ContextMenu();
+            this.cmdFullRange = new C1.Win.C1Command.C1Command();
             this.cmdLinkLastScanRange = new C1.Win.C1Command.C1CommandLink();
+            this.cmdLastScanRange = new C1.Win.C1Command.C1Command();
+            this.contextMenu = new C1.Win.C1Command.C1ContextMenu();
+            this.cmdLinkConfirm = new C1.Win.C1Command.C1CommandLink();
+            this.cmdConfirm = new C1.Win.C1Command.C1Command();
             this.c1CommandHolder = new C1.Win.C1Command.C1CommandHolder();
             this.pbxScanArea = new System.Windows.Forms.PictureBox();
-            this.cmdFullRange = new C1.Win.C1Command.C1Command();
-            this.cmdConfirm = new C1.Win.C1Command.C1Command();
-            this.cmdLastScanRange = new C1.Win.C1Command.C1Command();
             this.pictureBox = new Emgu.CV.UI.ImageBox();
-            this.cmdLinkConfirm = new C1.Win.C1Command.C1CommandLink();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -92,9 +96,13 @@ namespace confocal_ui.View
             this.inputPanel.Items.Add(this.lbScanWidth);
             this.inputPanel.Items.Add(this.lbHeight);
             this.inputPanel.Items.Add(this.lbScanHeight);
-            this.inputPanel.Location = new System.Drawing.Point(0, 304);
+            this.inputPanel.Items.Add(this.lbScanRange);
+            this.inputPanel.Items.Add(this.lbScanRangeValue);
+            this.inputPanel.Items.Add(this.lbMaxScanRange);
+            this.inputPanel.Items.Add(this.lbMaxScanRangeValue);
+            this.inputPanel.Location = new System.Drawing.Point(0, 308);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(272, 75);
+            this.inputPanel.Size = new System.Drawing.Size(272, 121);
             this.inputPanel.TabIndex = 2;
             // 
             // inputSeparator1
@@ -111,6 +119,7 @@ namespace confocal_ui.View
             // cbxScanPixel
             // 
             this.cbxScanPixel.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.cbxScanPixel.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
             this.cbxScanPixel.Font = new System.Drawing.Font("宋体", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxScanPixel.Name = "cbxScanPixel";
             this.cbxScanPixel.Width = 60;
@@ -124,7 +133,7 @@ namespace confocal_ui.View
             // 
             this.lbPixelPosition.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.lbPixelPosition.Name = "lbPixelPosition";
-            this.lbPixelPosition.Text = "[9999,1000]";
+            this.lbPixelPosition.Text = "[0, 0]";
             // 
             // inputSeparator2
             // 
@@ -173,9 +182,31 @@ namespace confocal_ui.View
             // 
             // lbScanHeight
             // 
+            this.lbScanHeight.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.lbScanHeight.Name = "lbScanHeight";
             this.lbScanHeight.Text = "512";
             this.lbScanHeight.Width = 60;
+            // 
+            // lbScanRange
+            // 
+            this.lbScanRange.Name = "lbScanRange";
+            this.lbScanRange.Text = "当前视场：";
+            // 
+            // lbScanRangeValue
+            // 
+            this.lbScanRangeValue.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbScanRangeValue.Name = "lbScanRangeValue";
+            this.lbScanRangeValue.Text = "xxxx";
+            // 
+            // lbMaxScanRange
+            // 
+            this.lbMaxScanRange.Name = "lbMaxScanRange";
+            this.lbMaxScanRange.Text = "最大视场：";
+            // 
+            // lbMaxScanRangeValue
+            // 
+            this.lbMaxScanRangeValue.Name = "lbMaxScanRangeValue";
+            this.lbMaxScanRangeValue.Text = "xxxx";
             // 
             // timer
             // 
@@ -236,18 +267,48 @@ namespace confocal_ui.View
             // 
             this.cmdLinkFullRange.Command = this.cmdFullRange;
             this.cmdLinkFullRange.SortOrder = 2;
-            this.cmdLinkFullRange.Text = "使用最大扫描视场";
+            this.cmdLinkFullRange.Text = "使用最大的扫描视场";
             // 
-            // contextMenu
+            // cmdFullRange
             // 
-            this.contextMenu.Name = "contextMenu";
-            this.contextMenu.ShortcutText = "";
+            this.cmdFullRange.Image = global::confocal_ui.Properties.Resources.fullrange;
+            this.cmdFullRange.Name = "cmdFullRange";
+            this.cmdFullRange.ShortcutText = "";
+            this.cmdFullRange.Text = "全视场";
+            this.cmdFullRange.Click += new C1.Win.C1Command.ClickEventHandler(this.FullRangeClick);
             // 
             // cmdLinkLastScanRange
             // 
             this.cmdLinkLastScanRange.Command = this.cmdLastScanRange;
             this.cmdLinkLastScanRange.SortOrder = 3;
             this.cmdLinkLastScanRange.Text = "使用上一个扫描视场";
+            // 
+            // cmdLastScanRange
+            // 
+            this.cmdLastScanRange.C1ContextMenu = this.contextMenu;
+            this.cmdLastScanRange.Image = global::confocal_ui.Properties.Resources.reset;
+            this.cmdLastScanRange.Name = "cmdLastScanRange";
+            this.cmdLastScanRange.ShortcutText = "";
+            this.cmdLastScanRange.Text = "上一个视场";
+            this.cmdLastScanRange.Click += new C1.Win.C1Command.ClickEventHandler(this.LastScanRangeClick);
+            // 
+            // contextMenu
+            // 
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.ShortcutText = "";
+            // 
+            // cmdLinkConfirm
+            // 
+            this.cmdLinkConfirm.Command = this.cmdConfirm;
+            this.cmdLinkConfirm.SortOrder = 4;
+            // 
+            // cmdConfirm
+            // 
+            this.cmdConfirm.Image = global::confocal_ui.Properties.Resources.confirm;
+            this.cmdConfirm.Name = "cmdConfirm";
+            this.cmdConfirm.ShortcutText = "";
+            this.cmdConfirm.Text = "设置为当前扫描视场";
+            this.cmdConfirm.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanRangeConfirmClick);
             // 
             // c1CommandHolder
             // 
@@ -270,31 +331,6 @@ namespace confocal_ui.View
             this.pbxScanArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDownChanged);
             this.pbxScanArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ScanRangeMoved);
             // 
-            // cmdFullRange
-            // 
-            this.cmdFullRange.Image = global::confocal_ui.Properties.Resources.fullrange;
-            this.cmdFullRange.Name = "cmdFullRange";
-            this.cmdFullRange.ShortcutText = "";
-            this.cmdFullRange.Text = "全视场";
-            this.cmdFullRange.Click += new C1.Win.C1Command.ClickEventHandler(this.FullRangeClick);
-            // 
-            // cmdConfirm
-            // 
-            this.cmdConfirm.Image = global::confocal_ui.Properties.Resources.confirm;
-            this.cmdConfirm.Name = "cmdConfirm";
-            this.cmdConfirm.ShortcutText = "";
-            this.cmdConfirm.Text = "设置为当前扫描视场";
-            this.cmdConfirm.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanRangeConfirmClick);
-            // 
-            // cmdLastScanRange
-            // 
-            this.cmdLastScanRange.C1ContextMenu = this.contextMenu;
-            this.cmdLastScanRange.Image = global::confocal_ui.Properties.Resources.reset;
-            this.cmdLastScanRange.Name = "cmdLastScanRange";
-            this.cmdLastScanRange.ShortcutText = "";
-            this.cmdLastScanRange.Text = "上一个视场";
-            this.cmdLastScanRange.Click += new C1.Win.C1Command.ClickEventHandler(this.LastScanRangeClick);
-            // 
             // pictureBox
             // 
             this.pictureBox.BackColor = System.Drawing.Color.Black;
@@ -306,16 +342,11 @@ namespace confocal_ui.View
             this.pictureBox.TabIndex = 16;
             this.pictureBox.TabStop = false;
             // 
-            // cmdLinkConfirm
-            // 
-            this.cmdLinkConfirm.Command = this.cmdConfirm;
-            this.cmdLinkConfirm.SortOrder = 4;
-            // 
             // FormScanArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 379);
+            this.ClientSize = new System.Drawing.Size(272, 429);
             this.Controls.Add(this.pbxScanArea);
             this.Controls.Add(this.dockToolBar);
             this.Controls.Add(this.pictureBox);
@@ -323,9 +354,9 @@ namespace confocal_ui.View
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(280, 410);
+            this.MaximumSize = new System.Drawing.Size(280, 460);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(280, 410);
+            this.MinimumSize = new System.Drawing.Size(280, 460);
             this.Name = "FormScanArea";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "扫描区域";
@@ -373,5 +404,9 @@ namespace confocal_ui.View
         private C1.Win.C1Command.C1Command cmdLastScanRange;
         private C1.Win.C1Command.C1Command cmdConfirm;
         private C1.Win.C1Command.C1CommandLink cmdLinkConfirm;
+        private InputLabel lbScanRange;
+        private InputLabel lbScanRangeValue;
+        private InputLabel lbMaxScanRange;
+        private InputLabel lbMaxScanRangeValue;
     }
 }

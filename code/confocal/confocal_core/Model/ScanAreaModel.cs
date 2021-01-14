@@ -50,6 +50,7 @@ namespace confocal_core.Model
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         private RectangleF scanRange;
+        private string text;
 
         /// <summary>
         /// 扫描范围
@@ -60,9 +61,29 @@ namespace confocal_core.Model
             set { scanRange = value; RaisePropertyChanged(() => ScanRange); }
         }
 
+        public string Text
+        {
+            get { return text; }
+            set { text = value; RaisePropertyChanged(() => Text); }
+        }
+
+        public ScanAreaModel(RectangleF scanRange)
+        {
+            ScanRange = scanRange;
+            Text = string.Format("[{0}, {1}][{2}, {3}]", ScanRange.X.ToString("0.0"), ScanRange.Y.ToString("0.0"),
+                ScanRange.Width.ToString("0.0"), ScanRange.Height.ToString("0.0"));
+        }
+
+        public void Update(RectangleF scanRange)
+        {
+            ScanRange = scanRange;
+            Text = string.Format("[{0}, {1}][{2}, {3}]", ScanRange.X.ToString("0.0"), ScanRange.Y.ToString("0.0"), 
+                ScanRange.Width.ToString("0.0"), ScanRange.Height.ToString("0.0"));
+        }
+
         public static ScanAreaModel CreateFullScanArea()
         {
-            return new ScanAreaModel() { ScanRange = new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT) };
+            return new ScanAreaModel(new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT));
         }
     }
 }
