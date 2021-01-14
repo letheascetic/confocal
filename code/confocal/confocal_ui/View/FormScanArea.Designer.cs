@@ -69,6 +69,12 @@ namespace confocal_ui.View
             this.c1CommandHolder = new C1.Win.C1Command.C1CommandHolder();
             this.pbxScanArea = new System.Windows.Forms.PictureBox();
             this.pictureBox = new Emgu.CV.UI.ImageBox();
+
+            this.lbScanRange = new C1.Win.C1InputPanel.InputLabel();
+            this.lbScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
+            this.lbMaxScanRange = new C1.Win.C1InputPanel.InputLabel();
+            this.lbMaxScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
+
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -341,6 +347,27 @@ namespace confocal_ui.View
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 16;
             this.pictureBox.TabStop = false;
+            // 
+            // lbScanRange
+            // 
+            this.lbScanRange.Name = "lbScanRange";
+            this.lbScanRange.Text = "当前视场：";
+            // 
+            // lbScanRangeValue
+            // 
+            this.lbScanRangeValue.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbScanRangeValue.Name = "lbScanRangeValue";
+            this.lbScanRangeValue.Text = "xxxx";
+            // 
+            // lbMaxScanRange
+            // 
+            this.lbMaxScanRange.Name = "lbMaxScanRange";
+            this.lbMaxScanRange.Text = "最大视场：";
+            // 
+            // lbMaxScanRangeValue
+            // 
+            this.lbMaxScanRangeValue.Name = "lbMaxScanRangeValue";
+            this.lbMaxScanRangeValue.Text = "xxxx";
             // 
             // FormScanArea
             // 

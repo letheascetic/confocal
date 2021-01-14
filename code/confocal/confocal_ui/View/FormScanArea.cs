@@ -369,6 +369,8 @@ namespace confocal_ui.View
                 ScanRangeChangedEvent.Invoke(mScanAreaViewModel.SelectedScanArea);
             }
 
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
+            DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
         }
     }
 }
