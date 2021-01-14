@@ -60,21 +60,15 @@ namespace confocal_ui.View
             this.cmdLinkRect = new C1.Win.C1Command.C1CommandLink();
             this.cmdRect = new C1.Win.C1Command.C1Command();
             this.cmdLinkFullRange = new C1.Win.C1Command.C1CommandLink();
-            this.cmdFullRange = new C1.Win.C1Command.C1Command();
             this.cmdLinkLastScanRange = new C1.Win.C1Command.C1CommandLink();
-            this.cmdLastScanRange = new C1.Win.C1Command.C1Command();
             this.contextMenu = new C1.Win.C1Command.C1ContextMenu();
             this.cmdLinkConfirm = new C1.Win.C1Command.C1CommandLink();
-            this.cmdConfirm = new C1.Win.C1Command.C1Command();
             this.c1CommandHolder = new C1.Win.C1Command.C1CommandHolder();
             this.pbxScanArea = new System.Windows.Forms.PictureBox();
+            this.cmdFullRange = new C1.Win.C1Command.C1Command();
+            this.cmdLastScanRange = new C1.Win.C1Command.C1Command();
+            this.cmdConfirm = new C1.Win.C1Command.C1Command();
             this.pictureBox = new Emgu.CV.UI.ImageBox();
-
-            this.lbScanRange = new C1.Win.C1InputPanel.InputLabel();
-            this.lbScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
-            this.lbMaxScanRange = new C1.Win.C1InputPanel.InputLabel();
-            this.lbMaxScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
-
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -275,28 +269,11 @@ namespace confocal_ui.View
             this.cmdLinkFullRange.SortOrder = 2;
             this.cmdLinkFullRange.Text = "使用最大的扫描视场";
             // 
-            // cmdFullRange
-            // 
-            this.cmdFullRange.Image = global::confocal_ui.Properties.Resources.fullrange;
-            this.cmdFullRange.Name = "cmdFullRange";
-            this.cmdFullRange.ShortcutText = "";
-            this.cmdFullRange.Text = "全视场";
-            this.cmdFullRange.Click += new C1.Win.C1Command.ClickEventHandler(this.FullRangeClick);
-            // 
             // cmdLinkLastScanRange
             // 
             this.cmdLinkLastScanRange.Command = this.cmdLastScanRange;
             this.cmdLinkLastScanRange.SortOrder = 3;
             this.cmdLinkLastScanRange.Text = "使用上一个扫描视场";
-            // 
-            // cmdLastScanRange
-            // 
-            this.cmdLastScanRange.C1ContextMenu = this.contextMenu;
-            this.cmdLastScanRange.Image = global::confocal_ui.Properties.Resources.reset;
-            this.cmdLastScanRange.Name = "cmdLastScanRange";
-            this.cmdLastScanRange.ShortcutText = "";
-            this.cmdLastScanRange.Text = "上一个视场";
-            this.cmdLastScanRange.Click += new C1.Win.C1Command.ClickEventHandler(this.LastScanRangeClick);
             // 
             // contextMenu
             // 
@@ -307,14 +284,6 @@ namespace confocal_ui.View
             // 
             this.cmdLinkConfirm.Command = this.cmdConfirm;
             this.cmdLinkConfirm.SortOrder = 4;
-            // 
-            // cmdConfirm
-            // 
-            this.cmdConfirm.Image = global::confocal_ui.Properties.Resources.confirm;
-            this.cmdConfirm.Name = "cmdConfirm";
-            this.cmdConfirm.ShortcutText = "";
-            this.cmdConfirm.Text = "设置为当前扫描视场";
-            this.cmdConfirm.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanRangeConfirmClick);
             // 
             // c1CommandHolder
             // 
@@ -337,6 +306,31 @@ namespace confocal_ui.View
             this.pbxScanArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDownChanged);
             this.pbxScanArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ScanRangeMoved);
             // 
+            // cmdFullRange
+            // 
+            this.cmdFullRange.Image = global::confocal_ui.Properties.Resources.fullrange;
+            this.cmdFullRange.Name = "cmdFullRange";
+            this.cmdFullRange.ShortcutText = "";
+            this.cmdFullRange.Text = "全视场";
+            this.cmdFullRange.Click += new C1.Win.C1Command.ClickEventHandler(this.FullRangeClick);
+            // 
+            // cmdLastScanRange
+            // 
+            this.cmdLastScanRange.C1ContextMenu = this.contextMenu;
+            this.cmdLastScanRange.Image = global::confocal_ui.Properties.Resources.reset;
+            this.cmdLastScanRange.Name = "cmdLastScanRange";
+            this.cmdLastScanRange.ShortcutText = "";
+            this.cmdLastScanRange.Text = "上一个视场";
+            this.cmdLastScanRange.Click += new C1.Win.C1Command.ClickEventHandler(this.LastScanRangeClick);
+            // 
+            // cmdConfirm
+            // 
+            this.cmdConfirm.Image = global::confocal_ui.Properties.Resources.confirm;
+            this.cmdConfirm.Name = "cmdConfirm";
+            this.cmdConfirm.ShortcutText = "";
+            this.cmdConfirm.Text = "设置为当前扫描视场";
+            this.cmdConfirm.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanRangeConfirmClick);
+            // 
             // pictureBox
             // 
             this.pictureBox.BackColor = System.Drawing.Color.Black;
@@ -347,27 +341,6 @@ namespace confocal_ui.View
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 16;
             this.pictureBox.TabStop = false;
-            // 
-            // lbScanRange
-            // 
-            this.lbScanRange.Name = "lbScanRange";
-            this.lbScanRange.Text = "当前视场：";
-            // 
-            // lbScanRangeValue
-            // 
-            this.lbScanRangeValue.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbScanRangeValue.Name = "lbScanRangeValue";
-            this.lbScanRangeValue.Text = "xxxx";
-            // 
-            // lbMaxScanRange
-            // 
-            this.lbMaxScanRange.Name = "lbMaxScanRange";
-            this.lbMaxScanRange.Text = "最大视场：";
-            // 
-            // lbMaxScanRangeValue
-            // 
-            this.lbMaxScanRangeValue.Name = "lbMaxScanRangeValue";
-            this.lbMaxScanRangeValue.Text = "xxxx";
             // 
             // FormScanArea
             // 

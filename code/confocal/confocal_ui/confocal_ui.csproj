@@ -125,6 +125,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="View\FormConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormConfig.Designer.cs">
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormImage.cs">
       <SubType>Form</SubType>
     </Compile>

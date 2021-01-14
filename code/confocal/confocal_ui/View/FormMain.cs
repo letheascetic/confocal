@@ -74,9 +74,8 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdTheme_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
+        private void ThemeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            string themeName = confocal_ui.Properties.Settings.Default.ThemeName;
             FormTheme themeManager = new FormTheme();
             if (themeManager.ShowDialog() == DialogResult.OK)
             {
@@ -92,7 +91,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormMain_Load(object sender, EventArgs e)
+        private void FormMainLoad(object sender, EventArgs e)
         {
             // init variables & controlers
             // Initialize();
@@ -105,21 +104,21 @@ namespace confocal_ui
             ApplyTheme(confocal_ui.Properties.Settings.Default.ThemeName);
         }
 
-        private void cmdScanArea_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
+        private void ScanAreaClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
             FormScanArea scanArea = new FormScanArea();
             scanArea.MdiParent = this;
             scanArea.Show();
         }
 
-        private void cmdScanSettings_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
+        private void ScanSettingsClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
             FormScanSettings mFormScanSettings = new FormScanSettings();
             mFormScanSettings.MdiParent = this;
             mFormScanSettings.Show();
         }
 
-        private void cmdScanImage_Click(object sender, C1.Win.C1Command.ClickEventArgs e)
+        private void ScanImageClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
             FormImage mFormImage = new FormImage();
             mFormImage.MdiParent = this;

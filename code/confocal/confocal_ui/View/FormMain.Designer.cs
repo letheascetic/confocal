@@ -184,7 +184,7 @@
             this.cmdTheme.Name = "cmdTheme";
             this.cmdTheme.ShortcutText = "";
             this.cmdTheme.Text = "主题（&T）";
-            this.cmdTheme.Click += new C1.Win.C1Command.ClickEventHandler(this.cmdTheme_Click);
+            this.cmdTheme.Click += new C1.Win.C1Command.ClickEventHandler(this.ThemeClick);
             // 
             // cmdMenuWindow
             // 
@@ -206,7 +206,7 @@
             this.cmdScanArea.Name = "cmdScanArea";
             this.cmdScanArea.ShortcutText = "";
             this.cmdScanArea.Text = "扫描区域（&A）";
-            this.cmdScanArea.Click += new C1.Win.C1Command.ClickEventHandler(this.cmdScanArea_Click);
+            this.cmdScanArea.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanAreaClick);
             // 
             // cmdLinkScanSettings
             // 
@@ -218,7 +218,7 @@
             this.cmdScanSettings.Name = "cmdScanSettings";
             this.cmdScanSettings.ShortcutText = "";
             this.cmdScanSettings.Text = "扫描设置（&S）";
-            this.cmdScanSettings.Click += new C1.Win.C1Command.ClickEventHandler(this.cmdScanSettings_Click);
+            this.cmdScanSettings.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanSettingsClick);
             // 
             // cmdLinkFile
             // 
@@ -335,7 +335,7 @@
             this.cmdScanImage.Name = "cmdScanImage";
             this.cmdScanImage.ShortcutText = "";
             this.cmdScanImage.Text = "扫描图像（&I）";
-            this.cmdScanImage.Click += new C1.Win.C1Command.ClickEventHandler(this.cmdScanImage_Click);
+            this.cmdScanImage.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanImageClick);
             // 
             // FormMain
             // 
@@ -353,7 +353,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Z1 Confocal v";
             this.VisualStyleHolder = C1.Win.C1Ribbon.VisualStyle.Custom;
-            this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Load += new System.EventHandler(this.FormMainLoad);
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).EndInit();
             this.dockToolBar.ResumeLayout(false);
