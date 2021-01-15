@@ -31,73 +31,73 @@ namespace confocal_ui.View
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSysSettings));
             this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
+            this.ghDevice = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.btnSearch = new C1.Win.C1InputPanel.InputButton();
+            this.lbInfo = new C1.Win.C1InputPanel.InputLabel();
             this.ghScanControl = new C1.Win.C1InputPanel.InputGroupHeader();
             this.lbXGalvo = new C1.Win.C1InputPanel.InputLabel();
             this.cbxXGalvo = new C1.Win.C1InputPanel.InputComboBox();
-            this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
-            this.lbInfo = new C1.Win.C1InputPanel.InputLabel();
             this.lbYGalvo = new C1.Win.C1InputPanel.InputLabel();
-            this.lbYGalvo2 = new C1.Win.C1InputPanel.InputLabel();
             this.cbxYGalvo = new C1.Win.C1InputPanel.InputComboBox();
+            this.lbYGalvo2 = new C1.Win.C1InputPanel.InputLabel();
             this.cbxYGalvo2 = new C1.Win.C1InputPanel.InputComboBox();
-            this.ghScanPara = new C1.Win.C1InputPanel.InputGroupHeader();
-            this.lbGalvoResponseTime = new C1.Win.C1InputPanel.InputLabel();
-            this.lbScanRange = new C1.Win.C1InputPanel.InputLabel();
-            this.lbGalvoResponseTimeUnit = new C1.Win.C1InputPanel.InputLabel();
-            this.lbScanRangeUnit = new C1.Win.C1InputPanel.InputLabel();
-            this.nbGalvoResponseTime = new C1.Win.C1InputPanel.InputNumericBox();
-            this.nbScanRange = new C1.Win.C1InputPanel.InputNumericBox();
-            this.lbXGalvaOffset = new C1.Win.C1InputPanel.InputLabel();
             this.inputSeparator1 = new C1.Win.C1InputPanel.InputSeparator();
+            this.lbXGalvaOffset = new C1.Win.C1InputPanel.InputLabel();
             this.tbxXGalvoOffset = new C1.Win.C1InputPanel.InputTextBox();
             this.lbYGalvoOffset = new C1.Win.C1InputPanel.InputLabel();
             this.tbxYGalvoOffset = new C1.Win.C1InputPanel.InputTextBox();
             this.lbXGalvoScaleFactor = new C1.Win.C1InputPanel.InputLabel();
-            this.lbYGalvoScaleFactor = new C1.Win.C1InputPanel.InputLabel();
             this.tbxXGalvoScaleFactor = new C1.Win.C1InputPanel.InputTextBox();
-            this.inputTextBox2 = new C1.Win.C1InputPanel.InputTextBox();
-            this.lbUnit2 = new C1.Win.C1InputPanel.InputLabel();
             this.lbUnit1 = new C1.Win.C1InputPanel.InputLabel();
+            this.lbYGalvoScaleFactor = new C1.Win.C1InputPanel.InputLabel();
+            this.tbxYGalvoScaleFactor = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbUnit2 = new C1.Win.C1InputPanel.InputLabel();
+            this.ghScanPara = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.lbGalvoResponseTime = new C1.Win.C1InputPanel.InputLabel();
+            this.nbGalvoResponseTime = new C1.Win.C1InputPanel.InputNumericBox();
+            this.lbGalvoResponseTimeUnit = new C1.Win.C1InputPanel.InputLabel();
+            this.lbScanRange = new C1.Win.C1InputPanel.InputLabel();
+            this.nbScanRange = new C1.Win.C1InputPanel.InputNumericBox();
+            this.lbScanRangeUnit = new C1.Win.C1InputPanel.InputLabel();
             this.ghAcq = new C1.Win.C1InputPanel.InputGroupHeader();
             this.rbtnPMT = new C1.Win.C1InputPanel.InputRadioButton();
             this.rbtnAPD = new C1.Win.C1InputPanel.InputRadioButton();
             this.lbStartSync = new C1.Win.C1InputPanel.InputLabel();
+            this.cbxStartSync = new C1.Win.C1InputPanel.InputComboBox();
             this.lbTrigger = new C1.Win.C1InputPanel.InputLabel();
             this.cbxTrigger = new C1.Win.C1InputPanel.InputComboBox();
-            this.cbxStartSync = new C1.Win.C1InputPanel.InputComboBox();
+            this.lbTriggerR = new C1.Win.C1InputPanel.InputLabel();
+            this.cbxTriggerR = new C1.Win.C1InputPanel.InputComboBox();
             this.ghPMT = new C1.Win.C1InputPanel.InputGroupHeader();
             this.lb405 = new C1.Win.C1InputPanel.InputLabel();
-            this.lb488 = new C1.Win.C1InputPanel.InputLabel();
-            this.lb561 = new C1.Win.C1InputPanel.InputLabel();
-            this.lb640 = new C1.Win.C1InputPanel.InputLabel();
-            this.lbTriggerR = new C1.Win.C1InputPanel.InputLabel();
             this.cbx405PMT = new C1.Win.C1InputPanel.InputComboBox();
-            this.cbxTriggerR = new C1.Win.C1InputPanel.InputComboBox();
+            this.lb488 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx488PMT = new C1.Win.C1InputPanel.InputComboBox();
+            this.lb561 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx561PMT = new C1.Win.C1InputPanel.InputComboBox();
+            this.lb640 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx640PMT = new C1.Win.C1InputPanel.InputComboBox();
-            this.inputGroupHeader1 = new C1.Win.C1InputPanel.InputGroupHeader();
             this.ghAPD = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.lbCtr = new C1.Win.C1InputPanel.InputLabel();
+            this.lbAPDSource = new C1.Win.C1InputPanel.InputLabel();
             this.lb4052 = new C1.Win.C1InputPanel.InputLabel();
-            this.lb4882 = new C1.Win.C1InputPanel.InputLabel();
-            this.lb5612 = new C1.Win.C1InputPanel.InputLabel();
-            this.lb6402 = new C1.Win.C1InputPanel.InputLabel();
-            this.cbx405CtrSource = new C1.Win.C1InputPanel.InputComboBox();
             this.cbx405Ctr = new C1.Win.C1InputPanel.InputComboBox();
-            this.cbx488Source = new C1.Win.C1InputPanel.InputComboBox();
+            this.cbx405CtrSource = new C1.Win.C1InputPanel.InputComboBox();
+            this.lb4882 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx488Ctr = new C1.Win.C1InputPanel.InputComboBox();
+            this.cbx488Source = new C1.Win.C1InputPanel.InputComboBox();
+            this.lb5612 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx561Ctr = new C1.Win.C1InputPanel.InputComboBox();
             this.cbx561Source = new C1.Win.C1InputPanel.InputComboBox();
+            this.lb6402 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx640Ctr = new C1.Win.C1InputPanel.InputComboBox();
             this.cbx640Source = new C1.Win.C1InputPanel.InputComboBox();
-            this.lbAPDSource = new C1.Win.C1InputPanel.InputLabel();
-            this.lbCtr = new C1.Win.C1InputPanel.InputLabel();
-            this.ghDevice = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputGroupHeader1 = new C1.Win.C1InputPanel.InputGroupHeader();
             this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
-            this.btnSearch = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,7 +125,7 @@ namespace confocal_ui.View
             this.inputPanel.Items.Add(this.tbxXGalvoScaleFactor);
             this.inputPanel.Items.Add(this.lbUnit1);
             this.inputPanel.Items.Add(this.lbYGalvoScaleFactor);
-            this.inputPanel.Items.Add(this.inputTextBox2);
+            this.inputPanel.Items.Add(this.tbxYGalvoScaleFactor);
             this.inputPanel.Items.Add(this.lbUnit2);
             this.inputPanel.Items.Add(this.ghScanPara);
             this.inputPanel.Items.Add(this.lbGalvoResponseTime);
@@ -172,6 +172,26 @@ namespace confocal_ui.View
             this.inputPanel.Size = new System.Drawing.Size(272, 569);
             this.inputPanel.TabIndex = 0;
             // 
+            // ghDevice
+            // 
+            this.ghDevice.Collapsible = true;
+            this.ghDevice.Name = "ghDevice";
+            this.ghDevice.Text = "设备";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnSearch.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Text = "搜索设备";
+            // 
+            // lbInfo
+            // 
+            this.lbInfo.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbInfo.Name = "lbInfo";
+            this.lbInfo.Text = "                        没有发现NI设备！";
+            this.lbInfo.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Far;
+            // 
             // ghScanControl
             // 
             this.ghScanControl.Collapsible = true;
@@ -190,24 +210,7 @@ namespace confocal_ui.View
             this.cbxXGalvo.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
             this.cbxXGalvo.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxXGalvo.Name = "cbxXGalvo";
-            this.cbxXGalvo.Width = 60;
-            // 
-            // inputLabel1
-            // 
-            this.inputLabel1.Name = "inputLabel1";
-            this.inputLabel1.Text = "X振镜：";
-            // 
-            // inputLabel2
-            // 
-            this.inputLabel2.Name = "inputLabel2";
-            this.inputLabel2.Text = "X振镜：";
-            // 
-            // lbInfo
-            // 
-            this.lbInfo.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Text = "                        没有发现NI设备！";
-            this.lbInfo.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Far;
+            this.cbxXGalvo.Width = 70;
             // 
             // lbYGalvo
             // 
@@ -215,18 +218,18 @@ namespace confocal_ui.View
             this.lbYGalvo.Text = "Y振镜：";
             this.lbYGalvo.Width = 45;
             // 
+            // cbxYGalvo
+            // 
+            this.cbxYGalvo.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.cbxYGalvo.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxYGalvo.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxYGalvo.Name = "cbxYGalvo";
+            this.cbxYGalvo.Width = 70;
+            // 
             // lbYGalvo2
             // 
             this.lbYGalvo2.Name = "lbYGalvo2";
             this.lbYGalvo2.Text = "Y补偿镜：";
-            // 
-            // cbxYGalvo
-            // 
-            this.cbxYGalvo.Break = C1.Win.C1InputPanel.BreakType.Column;
-            this.cbxYGalvo.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbxYGalvo.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxYGalvo.Name = "cbxYGalvo";
-            this.cbxYGalvo.Width = 60;
             // 
             // cbxYGalvo2
             // 
@@ -234,7 +237,76 @@ namespace confocal_ui.View
             this.cbxYGalvo2.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
             this.cbxYGalvo2.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxYGalvo2.Name = "cbxYGalvo2";
-            this.cbxYGalvo2.Width = 60;
+            this.cbxYGalvo2.Width = 70;
+            // 
+            // inputSeparator1
+            // 
+            this.inputSeparator1.Name = "inputSeparator1";
+            this.inputSeparator1.Width = 250;
+            // 
+            // lbXGalvaOffset
+            // 
+            this.lbXGalvaOffset.Name = "lbXGalvaOffset";
+            this.lbXGalvaOffset.Text = "X振镜偏置：";
+            this.lbXGalvaOffset.Width = 70;
+            // 
+            // tbxXGalvoOffset
+            // 
+            this.tbxXGalvoOffset.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbxXGalvoOffset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxXGalvoOffset.Name = "tbxXGalvoOffset";
+            this.tbxXGalvoOffset.Width = 50;
+            // 
+            // lbYGalvoOffset
+            // 
+            this.lbYGalvoOffset.Name = "lbYGalvoOffset";
+            this.lbYGalvoOffset.Text = "Y振镜偏置：";
+            this.lbYGalvoOffset.Width = 70;
+            // 
+            // tbxYGalvoOffset
+            // 
+            this.tbxYGalvoOffset.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.tbxYGalvoOffset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxYGalvoOffset.Name = "tbxYGalvoOffset";
+            this.tbxYGalvoOffset.Width = 50;
+            // 
+            // lbXGalvoScaleFactor
+            // 
+            this.lbXGalvoScaleFactor.Name = "lbXGalvoScaleFactor";
+            this.lbXGalvoScaleFactor.Text = "X振镜标定电压：";
+            this.lbXGalvoScaleFactor.Width = 95;
+            // 
+            // tbxXGalvoScaleFactor
+            // 
+            this.tbxXGalvoScaleFactor.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbxXGalvoScaleFactor.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxXGalvoScaleFactor.Name = "tbxXGalvoScaleFactor";
+            this.tbxXGalvoScaleFactor.Width = 50;
+            // 
+            // lbUnit1
+            // 
+            this.lbUnit1.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbUnit1.Name = "lbUnit1";
+            this.lbUnit1.Text = "V/um";
+            // 
+            // lbYGalvoScaleFactor
+            // 
+            this.lbYGalvoScaleFactor.Name = "lbYGalvoScaleFactor";
+            this.lbYGalvoScaleFactor.Text = "Y振镜标定电压：";
+            this.lbYGalvoScaleFactor.Width = 95;
+            // 
+            // tbxYGalvoScaleFactor
+            // 
+            this.tbxYGalvoScaleFactor.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.tbxYGalvoScaleFactor.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxYGalvoScaleFactor.Name = "tbxYGalvoScaleFactor";
+            this.tbxYGalvoScaleFactor.Width = 50;
+            // 
+            // lbUnit2
+            // 
+            this.lbUnit2.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbUnit2.Name = "lbUnit2";
+            this.lbUnit2.Text = "V/um";
             // 
             // ghScanPara
             // 
@@ -246,23 +318,6 @@ namespace confocal_ui.View
             // 
             this.lbGalvoResponseTime.Name = "lbGalvoResponseTime";
             this.lbGalvoResponseTime.Text = "振镜响应时间：";
-            // 
-            // lbScanRange
-            // 
-            this.lbScanRange.Name = "lbScanRange";
-            this.lbScanRange.Text = "扫描视场大小：";
-            // 
-            // lbGalvoResponseTimeUnit
-            // 
-            this.lbGalvoResponseTimeUnit.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbGalvoResponseTimeUnit.Name = "lbGalvoResponseTimeUnit";
-            this.lbGalvoResponseTimeUnit.Text = "us";
-            // 
-            // lbScanRangeUnit
-            // 
-            this.lbScanRangeUnit.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbScanRangeUnit.Name = "lbScanRangeUnit";
-            this.lbScanRangeUnit.Text = "um";
             // 
             // nbGalvoResponseTime
             // 
@@ -291,6 +346,17 @@ namespace confocal_ui.View
             0});
             this.nbGalvoResponseTime.Width = 50;
             // 
+            // lbGalvoResponseTimeUnit
+            // 
+            this.lbGalvoResponseTimeUnit.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbGalvoResponseTimeUnit.Name = "lbGalvoResponseTimeUnit";
+            this.lbGalvoResponseTimeUnit.Text = "us";
+            // 
+            // lbScanRange
+            // 
+            this.lbScanRange.Name = "lbScanRange";
+            this.lbScanRange.Text = "扫描视场大小：";
+            // 
             // nbScanRange
             // 
             this.nbScanRange.Break = C1.Win.C1InputPanel.BreakType.None;
@@ -318,74 +384,11 @@ namespace confocal_ui.View
             0});
             this.nbScanRange.Width = 50;
             // 
-            // lbXGalvaOffset
+            // lbScanRangeUnit
             // 
-            this.lbXGalvaOffset.Name = "lbXGalvaOffset";
-            this.lbXGalvaOffset.Text = "X振镜偏置：";
-            this.lbXGalvaOffset.Width = 70;
-            // 
-            // inputSeparator1
-            // 
-            this.inputSeparator1.Name = "inputSeparator1";
-            this.inputSeparator1.Width = 250;
-            // 
-            // tbxXGalvoOffset
-            // 
-            this.tbxXGalvoOffset.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.tbxXGalvoOffset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxXGalvoOffset.Name = "tbxXGalvoOffset";
-            this.tbxXGalvoOffset.Width = 50;
-            // 
-            // lbYGalvoOffset
-            // 
-            this.lbYGalvoOffset.Name = "lbYGalvoOffset";
-            this.lbYGalvoOffset.Text = "Y振镜偏置：";
-            this.lbYGalvoOffset.Width = 70;
-            // 
-            // tbxYGalvoOffset
-            // 
-            this.tbxYGalvoOffset.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.tbxYGalvoOffset.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxYGalvoOffset.Name = "tbxYGalvoOffset";
-            this.tbxYGalvoOffset.Width = 50;
-            // 
-            // lbXGalvoScaleFactor
-            // 
-            this.lbXGalvoScaleFactor.Name = "lbXGalvoScaleFactor";
-            this.lbXGalvoScaleFactor.Text = "X振镜标定电压：";
-            this.lbXGalvoScaleFactor.Width = 95;
-            // 
-            // lbYGalvoScaleFactor
-            // 
-            this.lbYGalvoScaleFactor.Name = "lbYGalvoScaleFactor";
-            this.lbYGalvoScaleFactor.Text = "Y振镜标定电压：";
-            this.lbYGalvoScaleFactor.Width = 95;
-            // 
-            // tbxXGalvoScaleFactor
-            // 
-            this.tbxXGalvoScaleFactor.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.tbxXGalvoScaleFactor.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxXGalvoScaleFactor.Name = "tbxXGalvoScaleFactor";
-            this.tbxXGalvoScaleFactor.Width = 50;
-            // 
-            // inputTextBox2
-            // 
-            this.inputTextBox2.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputTextBox2.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.inputTextBox2.Name = "inputTextBox2";
-            this.inputTextBox2.Width = 50;
-            // 
-            // lbUnit2
-            // 
-            this.lbUnit2.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbUnit2.Name = "lbUnit2";
-            this.lbUnit2.Text = "V/nm";
-            // 
-            // lbUnit1
-            // 
-            this.lbUnit1.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbUnit1.Name = "lbUnit1";
-            this.lbUnit1.Text = "V/nm";
+            this.lbScanRangeUnit.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbScanRangeUnit.Name = "lbScanRangeUnit";
+            this.lbScanRangeUnit.Text = "um";
             // 
             // ghAcq
             // 
@@ -412,6 +415,13 @@ namespace confocal_ui.View
             this.lbStartSync.Name = "lbStartSync";
             this.lbStartSync.Text = "启动同步：";
             // 
+            // cbxStartSync
+            // 
+            this.cbxStartSync.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxStartSync.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxStartSync.Name = "cbxStartSync";
+            this.cbxStartSync.Width = 80;
+            // 
             // lbTrigger
             // 
             this.lbTrigger.Name = "lbTrigger";
@@ -424,12 +434,17 @@ namespace confocal_ui.View
             this.cbxTrigger.Name = "cbxTrigger";
             this.cbxTrigger.Width = 80;
             // 
-            // cbxStartSync
+            // lbTriggerR
             // 
-            this.cbxStartSync.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbxStartSync.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxStartSync.Name = "cbxStartSync";
-            this.cbxStartSync.Width = 80;
+            this.lbTriggerR.Name = "lbTriggerR";
+            this.lbTriggerR.Text = "触发接收：";
+            // 
+            // cbxTriggerR
+            // 
+            this.cbxTriggerR.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbxTriggerR.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxTriggerR.Name = "cbxTriggerR";
+            this.cbxTriggerR.Width = 80;
             // 
             // ghPMT
             // 
@@ -442,26 +457,6 @@ namespace confocal_ui.View
             this.lb405.Name = "lb405";
             this.lb405.Text = "405nm：";
             // 
-            // lb488
-            // 
-            this.lb488.Name = "lb488";
-            this.lb488.Text = "488nm：";
-            // 
-            // lb561
-            // 
-            this.lb561.Name = "lb561";
-            this.lb561.Text = "561nm：";
-            // 
-            // lb640
-            // 
-            this.lb640.Name = "lb640";
-            this.lb640.Text = "640nm：";
-            // 
-            // lbTriggerR
-            // 
-            this.lbTriggerR.Name = "lbTriggerR";
-            this.lbTriggerR.Text = "触发接收：";
-            // 
             // cbx405PMT
             // 
             this.cbx405PMT.Break = C1.Win.C1InputPanel.BreakType.Column;
@@ -470,12 +465,10 @@ namespace confocal_ui.View
             this.cbx405PMT.Name = "cbx405PMT";
             this.cbx405PMT.Width = 60;
             // 
-            // cbxTriggerR
+            // lb488
             // 
-            this.cbxTriggerR.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbxTriggerR.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxTriggerR.Name = "cbxTriggerR";
-            this.cbxTriggerR.Width = 80;
+            this.lb488.Name = "lb488";
+            this.lb488.Text = "488nm：";
             // 
             // cbx488PMT
             // 
@@ -485,6 +478,11 @@ namespace confocal_ui.View
             this.cbx488PMT.Name = "cbx488PMT";
             this.cbx488PMT.Width = 60;
             // 
+            // lb561
+            // 
+            this.lb561.Name = "lb561";
+            this.lb561.Text = "561nm：";
+            // 
             // cbx561PMT
             // 
             this.cbx561PMT.Break = C1.Win.C1InputPanel.BreakType.Column;
@@ -492,6 +490,11 @@ namespace confocal_ui.View
             this.cbx561PMT.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbx561PMT.Name = "cbx561PMT";
             this.cbx561PMT.Width = 60;
+            // 
+            // lb640
+            // 
+            this.lb640.Name = "lb640";
+            this.lb640.Text = "640nm：";
             // 
             // cbx640PMT
             // 
@@ -501,45 +504,30 @@ namespace confocal_ui.View
             this.cbx640PMT.Name = "cbx640PMT";
             this.cbx640PMT.Width = 60;
             // 
-            // inputGroupHeader1
-            // 
-            this.inputGroupHeader1.Collapsible = true;
-            this.inputGroupHeader1.Name = "inputGroupHeader1";
-            this.inputGroupHeader1.Text = "PMT";
-            // 
             // ghAPD
             // 
             this.ghAPD.Collapsible = true;
             this.ghAPD.Name = "ghAPD";
             this.ghAPD.Text = "APD";
             // 
+            // lbCtr
+            // 
+            this.lbCtr.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.lbCtr.HorizontalAlign = C1.Win.C1InputPanel.InputContentAlignment.Far;
+            this.lbCtr.Name = "lbCtr";
+            this.lbCtr.Text = "                 计数器通道";
+            // 
+            // lbAPDSource
+            // 
+            this.lbAPDSource.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbAPDSource.Name = "lbAPDSource";
+            this.lbAPDSource.Text = "    APD接收端";
+            this.lbAPDSource.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Far;
+            // 
             // lb4052
             // 
             this.lb4052.Name = "lb4052";
             this.lb4052.Text = "405nm：";
-            // 
-            // lb4882
-            // 
-            this.lb4882.Name = "lb4882";
-            this.lb4882.Text = "488nm：";
-            // 
-            // lb5612
-            // 
-            this.lb5612.Name = "lb5612";
-            this.lb5612.Text = "561nm：";
-            // 
-            // lb6402
-            // 
-            this.lb6402.Name = "lb6402";
-            this.lb6402.Text = "640nm：";
-            // 
-            // cbx405CtrSource
-            // 
-            this.cbx405CtrSource.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbx405CtrSource.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbx405CtrSource.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx405CtrSource.Name = "cbx405CtrSource";
-            this.cbx405CtrSource.Width = 80;
             // 
             // cbx405Ctr
             // 
@@ -549,13 +537,18 @@ namespace confocal_ui.View
             this.cbx405Ctr.Name = "cbx405Ctr";
             this.cbx405Ctr.Width = 80;
             // 
-            // cbx488Source
+            // cbx405CtrSource
             // 
-            this.cbx488Source.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbx488Source.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbx488Source.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx488Source.Name = "cbx488Source";
-            this.cbx488Source.Width = 80;
+            this.cbx405CtrSource.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbx405CtrSource.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbx405CtrSource.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx405CtrSource.Name = "cbx405CtrSource";
+            this.cbx405CtrSource.Width = 80;
+            // 
+            // lb4882
+            // 
+            this.lb4882.Name = "lb4882";
+            this.lb4882.Text = "488nm：";
             // 
             // cbx488Ctr
             // 
@@ -564,6 +557,19 @@ namespace confocal_ui.View
             this.cbx488Ctr.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbx488Ctr.Name = "cbx488Ctr";
             this.cbx488Ctr.Width = 80;
+            // 
+            // cbx488Source
+            // 
+            this.cbx488Source.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbx488Source.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbx488Source.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx488Source.Name = "cbx488Source";
+            this.cbx488Source.Width = 80;
+            // 
+            // lb5612
+            // 
+            this.lb5612.Name = "lb5612";
+            this.lb5612.Text = "561nm：";
             // 
             // cbx561Ctr
             // 
@@ -581,6 +587,11 @@ namespace confocal_ui.View
             this.cbx561Source.Name = "cbx561Source";
             this.cbx561Source.Width = 80;
             // 
+            // lb6402
+            // 
+            this.lb6402.Name = "lb6402";
+            this.lb6402.Text = "640nm：";
+            // 
             // cbx640Ctr
             // 
             this.cbx640Ctr.Break = C1.Win.C1InputPanel.BreakType.Column;
@@ -597,25 +608,21 @@ namespace confocal_ui.View
             this.cbx640Source.Name = "cbx640Source";
             this.cbx640Source.Width = 80;
             // 
-            // lbAPDSource
+            // inputLabel1
             // 
-            this.lbAPDSource.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbAPDSource.Name = "lbAPDSource";
-            this.lbAPDSource.Text = "    APD接收端";
-            this.lbAPDSource.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Far;
+            this.inputLabel1.Name = "inputLabel1";
+            this.inputLabel1.Text = "X振镜：";
             // 
-            // lbCtr
+            // inputLabel2
             // 
-            this.lbCtr.Break = C1.Win.C1InputPanel.BreakType.Column;
-            this.lbCtr.HorizontalAlign = C1.Win.C1InputPanel.InputContentAlignment.Far;
-            this.lbCtr.Name = "lbCtr";
-            this.lbCtr.Text = "                 计数器通道";
+            this.inputLabel2.Name = "inputLabel2";
+            this.inputLabel2.Text = "X振镜：";
             // 
-            // ghDevice
+            // inputGroupHeader1
             // 
-            this.ghDevice.Collapsible = true;
-            this.ghDevice.Name = "ghDevice";
-            this.ghDevice.Text = "设备";
+            this.inputGroupHeader1.Collapsible = true;
+            this.inputGroupHeader1.Name = "inputGroupHeader1";
+            this.inputGroupHeader1.Text = "PMT";
             // 
             // inputLabel3
             // 
@@ -635,22 +642,16 @@ namespace confocal_ui.View
             this.inputLabel5.Name = "inputLabel5";
             this.inputLabel5.Text = "信息提示";
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.btnSearch.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Text = "搜索设备";
-            // 
-            // FormConfig
+            // FormSysSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(272, 569);
             this.Controls.Add(this.inputPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FormConfig";
+            this.Name = "FormSysSettings";
             this.Text = "系统配置";
+            this.Load += new System.EventHandler(this.FormSysSettingsLoad);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
             this.ResumeLayout(false);
 
@@ -684,7 +685,7 @@ namespace confocal_ui.View
         private C1.Win.C1InputPanel.InputLabel lbXGalvoScaleFactor;
         private C1.Win.C1InputPanel.InputTextBox tbxXGalvoScaleFactor;
         private C1.Win.C1InputPanel.InputLabel lbYGalvoScaleFactor;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox2;
+        private C1.Win.C1InputPanel.InputTextBox tbxYGalvoScaleFactor;
         private C1.Win.C1InputPanel.InputLabel lbUnit1;
         private C1.Win.C1InputPanel.InputLabel lbUnit2;
         private C1.Win.C1InputPanel.InputGroupHeader ghAcq;

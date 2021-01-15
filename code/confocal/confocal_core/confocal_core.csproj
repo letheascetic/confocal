@@ -99,11 +99,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\GalvanoProperty.cs" />
+    <Compile Include="Common\NiDaq.cs" />
+    <Compile Include="Model\GalvoPrppertyModel.cs" />
     <Compile Include="Model\ScanAreaModel.cs" />
     <Compile Include="Model\ScanChannelModel.cs" />
     <Compile Include="Model\ScanLineSkipModel.cs" />
     <Compile Include="Model\ScanPinHoleModel.cs" />
     <Compile Include="Model\ScanPropertyModel.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ScanAreaViewModel.cs" />
     <Compile Include="ViewModel\ScanSettingsViewModel.cs" />
     <Compile Include="ViewModel\SysSettingsViewModel.cs" />
@@ -115,8 +122,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="log4net.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

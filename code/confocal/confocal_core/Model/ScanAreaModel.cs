@@ -44,7 +44,6 @@ namespace confocal_core.Model
     public class ScanAreaModel : ObservableObject
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly float FULL_FIELD_DEFAULT = 200.0F;
         private static readonly int EXTEND_LINE_TIME_DEFAULT = 100;
         private static readonly int EXTEND_ROW_COUNT_DEFAULT = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +82,8 @@ namespace confocal_core.Model
 
         public static ScanAreaModel CreateFullScanArea()
         {
-            return new ScanAreaModel(new RectangleF(-FULL_FIELD_DEFAULT / 2, -FULL_FIELD_DEFAULT / 2, FULL_FIELD_DEFAULT, FULL_FIELD_DEFAULT));
+            float fullScanRange = confocal_core.Properties.Settings.Default.FullScanRange;
+            return new ScanAreaModel(new RectangleF(-fullScanRange / 2, -fullScanRange / 2, fullScanRange, fullScanRange));
         }
     }
 }
