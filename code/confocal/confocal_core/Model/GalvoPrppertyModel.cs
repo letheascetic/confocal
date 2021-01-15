@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using confocal_core.Common;
 
 namespace confocal_core.Model
 {
@@ -21,6 +22,10 @@ namespace confocal_core.Model
         private double galvoResponseTime;
         private double xGalvoCalibrationVoltage;
         private double yGalvoCalibrationVoltage;
+
+        private string xGalvoChannel;       // X振镜控制电压 - AO输出
+        private string yGalvoAoChannel;     // Y振镜控制电压 - AO输出
+        private string y2GalvoAoChannel;    // Y补偿镜控制电压 - AO输出
 
         /// <summary>
         /// X振镜偏置电压
@@ -70,6 +75,30 @@ namespace confocal_core.Model
             get { return yGalvoCalibrationVoltage; }
             set { yGalvoCalibrationVoltage = value; RaisePropertyChanged(() => YGalvoCalibrationVoltage); }
         }
+        /// <summary>
+        /// X振镜模拟输出通道
+        /// </summary>
+        public string XGalvoAoChannel
+        {
+            get { return xGalvoChannel; }
+            set { xGalvoChannel = value; RaisePropertyChanged(() => XGalvoAoChannel); }
+        }
+        /// <summary>
+        /// Y振镜模拟输出通道
+        /// </summary>
+        public string YGalvoAoChannel
+        {
+            get { return yGalvoAoChannel; }
+            set { yGalvoAoChannel = value; RaisePropertyChanged(() => YGalvoAoChannel); }
+        }
+        /// <summary>
+        /// Y2补偿镜模拟输出通道
+        /// </summary>
+        public string Y2GalvoAoChannel
+        {
+            get { return y2GalvoAoChannel; }
+            set { y2GalvoAoChannel = value; RaisePropertyChanged(() => Y2GalvoAoChannel); }
+        }
 
         public GalvoPrppertyModel()
         {
@@ -79,6 +108,13 @@ namespace confocal_core.Model
             GalvoResponseTime = GALV_RESPONSE_TIME_DEFAULT;
             XGalvoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
             YGalvoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
+
+            string[] devices = NiDaq.GetDeviceNames();
+            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+
+            XGalvoAoChannel = string.Concat(deviceName, "/ao0");
+            YGalvoAoChannel = string.Concat(deviceName, "/ao1");
+            Y2GalvoAoChannel = string.Concat(deviceName, "/ao2");
         }
 
     }

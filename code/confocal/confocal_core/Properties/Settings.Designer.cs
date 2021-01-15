@@ -25,7 +25,7 @@ namespace confocal_core.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public float FullScanRange {
             get {
                 return ((float)(this["FullScanRange"]));

@@ -42,7 +42,6 @@ namespace confocal_core.Model
             get { return isEnabled; }
             set { isEnabled = value; RaisePropertyChanged(() => IsEnabled); }
         }
-
     }
 
     public class ScanPropertyWithValueBaseModel<T> : ScanPropertyBaseModel

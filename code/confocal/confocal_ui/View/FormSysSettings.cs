@@ -46,9 +46,9 @@ namespace confocal_ui.View
             cbxYGalvo.DataSource = mSysSettingsViewModel.YGalvoAoChannels;
             cbxYGalvo2.DataSource = mSysSettingsViewModel.Y2GalvoAoChannels;
 
-            cbxXGalvo.SelectedItem = mSysSettingsViewModel.XGalvoAoChannel;
-            cbxYGalvo.SelectedItem = mSysSettingsViewModel.YGalvoAoChannel;
-            cbxYGalvo2.SelectedItem = mSysSettingsViewModel.Y2GalvoAoChannel;
+            cbxXGalvo.SelectedItem = mSysSettingsViewModel.GalvoProperty.XGalvoAoChannel;
+            cbxYGalvo.SelectedItem = mSysSettingsViewModel.GalvoProperty.YGalvoAoChannel;
+            cbxYGalvo2.SelectedItem = mSysSettingsViewModel.GalvoProperty.Y2GalvoAoChannel;
 
             // 振镜偏置电压和校准电压
             tbxXGalvoOffset.DataBindings.Add("Text", mSysSettingsViewModel.GalvoProperty, "XGalvoOffsetVoltage");
@@ -57,8 +57,9 @@ namespace confocal_ui.View
             tbxXGalvoScaleFactor.DataBindings.Add("Text", mSysSettingsViewModel.GalvoProperty, "XGalvoCalibrationVoltage");
             tbxYGalvoScaleFactor.DataBindings.Add("Text", mSysSettingsViewModel.GalvoProperty, "YGalvoCalibrationVoltage");
 
-            // 振镜响应时间和扫描视场
-
+            // 振镜响应时间和视场大小
+            nbGalvoResponseTime.DataBindings.Add("Value", mSysSettingsViewModel.GalvoProperty, "GalvoResponseTime");
+            nbScanRange.DataBindings.Add("Value", mSysSettingsViewModel.FullScanArea.ScanRange, "Width");
 
         }
 
