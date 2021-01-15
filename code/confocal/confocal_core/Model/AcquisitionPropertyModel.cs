@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using confocal_core.Common;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,23 +102,54 @@ namespace confocal_core.Model
             get { return pmtChannel405; }
             set { pmtChannel405 = value; RaisePropertyChanged(() => PmtChannel405); }
         }
-
         public PmtChannelModel PmtChannel488
         {
             get { return pmtChannel488; }
             set { pmtChannel488 = value; RaisePropertyChanged(() => PmtChannel488); }
         }
-
         public PmtChannelModel PmtChannel561
         {
             get { return pmtChannel561; }
             set { pmtChannel561 = value; RaisePropertyChanged(() => PmtChannel561); }
         }
-
         public PmtChannelModel PmtChannel640
         {
             get { return pmtChannel640; }
             set { pmtChannel640 = value; RaisePropertyChanged(() => PmtChannel640); }
+        }
+
+        public ApdChannelModel ApdChannel405
+        {
+            get { return apdChannel405; }
+            set { apdChannel405 = value; RaisePropertyChanged(() => ApdChannel405); }
+        }
+        public ApdChannelModel ApdChannel488
+        {
+            get { return apdChannel488; }
+            set { apdChannel488 = value; RaisePropertyChanged(() => ApdChannel488); }
+        }
+        public ApdChannelModel ApdChannel561
+        {
+            get { return apdChannel561; }
+            set { apdChannel561 = value; RaisePropertyChanged(() => ApdChannel561); }
+        }
+        public ApdChannelModel ApdChannel640
+        {
+            get { return apdChannel640; }
+            set { apdChannel640 = value; RaisePropertyChanged(() => ApdChannel640); }
+        }
+
+        public DetectorModel()
+        {
+            DetectorPmt = DetectorTypeModel.Initialize(0);
+            DetectorApd = DetectorTypeModel.Initialize(1);
+
+            string[] devices = NiDaq.GetDeviceNames();
+            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+
+            StartTrigger = string.Concat("/", deviceName, "/ao/StartTrigger");
+            TriggerSignal = string.Concat(deviceName, "/port0/line0");
+            TriggerReceive = string.Concat("/", deviceName, "/PFI9");
         }
 
     }
@@ -138,6 +170,23 @@ namespace confocal_core.Model
             get { return aiChannel; }
             set { aiChannel = value; RaisePropertyChanged(() => AiChannel); }
         }
+
+        public PmtChannelModel(int id)
+        {
+            string[] devices = NiDaq.GetDeviceNames();
+            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+
+            if (id >= 0 && id <= 3)
+            {
+                ID = id;
+                AiChannel = string.Concat(deviceName, string.Format("/ai{0}", id));
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("ID Exception");
+            }
+        }
+
     }
 
     public class ApdChannelModel : ObservableObject
@@ -162,6 +211,39 @@ namespace confocal_core.Model
         {
             get { return ciChannel; }
             set { ciChannel = value; RaisePropertyChanged(() => CiChannel); }
+        }
+
+        public ApdChannelModel(int id)
+        {
+            string[] devices = NiDaq.GetDeviceNames();
+            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+
+            switch (id)
+            {
+                case 0:
+                    ID = id;
+                    CiSource = string.Concat(deviceName, "/ctr0");
+                    CiChannel = string.Concat("/", deviceName, "/PFI8");
+                    break;
+                case 1:
+                    ID = id;
+                    CiSource = string.Concat(deviceName, "/ctr1");
+                    CiChannel = string.Concat("/", deviceName, "/PFI3");
+                    break;
+                case 2:
+                    ID = id;
+                    CiSource = string.Concat(deviceName, "/ctr2");
+                    CiChannel = string.Concat("/", deviceName, "/PFI0");
+                    break;
+                case 3:
+                    ID = id;
+                    CiSource = string.Concat(deviceName, "/ctr3");
+                    CiChannel = string.Concat("/", deviceName, "/PFI5");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("ID Exception");
+            }
+
         }
 
     }
