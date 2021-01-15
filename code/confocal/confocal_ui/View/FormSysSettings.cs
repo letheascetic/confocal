@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace confocal_ui.View
 {
-    public partial class FormConfig : C1RibbonForm
+    public partial class FormSysSettings : C1RibbonForm
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public FormConfig()
+        public FormSysSettings()
         {
             InitializeComponent();
         }

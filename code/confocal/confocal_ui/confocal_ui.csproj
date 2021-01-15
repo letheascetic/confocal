@@ -125,11 +125,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="View\FormConfig.cs">
+    <Compile Include="View\FormSysSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormConfig.Designer.cs">
-      <DependentUpon>FormConfig.cs</DependentUpon>
+    <Compile Include="View\FormSysSettings.Designer.cs">
+      <DependentUpon>FormSysSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormImage.cs">
       <SubType>Form</SubType>
@@ -163,6 +163,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FormSysSettings.resx">
+      <DependentUpon>FormSysSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormImage.resx">
       <DependentUpon>FormImage.cs</DependentUpon>
     </EmbeddedResource>

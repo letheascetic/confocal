@@ -124,5 +124,12 @@ namespace confocal_ui
             mFormImage.MdiParent = this;
             mFormImage.Show();
         }
+
+        private void SysConfigClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            FormSysSettings mFormSysSettings = new FormSysSettings();
+            mFormSysSettings.MdiParent = this;
+            mFormSysSettings.Show();
+        }
     }
 }
