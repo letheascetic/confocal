@@ -123,19 +123,16 @@ namespace confocal_core.Model
             get { return apdChannel405; }
             set { apdChannel405 = value; RaisePropertyChanged(() => ApdChannel405); }
         }
-
         public ApdChannelModel ApdChannel488
         {
             get { return apdChannel488; }
             set { apdChannel488 = value; RaisePropertyChanged(() => ApdChannel488); }
         }
-
         public ApdChannelModel ApdChannel561
         {
             get { return apdChannel561; }
             set { apdChannel561 = value; RaisePropertyChanged(() => ApdChannel561); }
         }
-
         public ApdChannelModel ApdChannel640
         {
             get { return apdChannel640; }
@@ -153,6 +150,16 @@ namespace confocal_core.Model
             StartTrigger = string.Concat("/", deviceName, "/ao/StartTrigger");
             TriggerSignal = string.Concat(deviceName, "/port0/line0");
             TriggerReceive = string.Concat("/", deviceName, "/PFI9");
+
+            PmtChannel405 = new PmtChannelModel(0);
+            PmtChannel488 = new PmtChannelModel(1);
+            PmtChannel561 = new PmtChannelModel(2);
+            PmtChannel640 = new PmtChannelModel(3);
+
+            ApdChannel405 = new ApdChannelModel(0);
+            ApdChannel488 = new ApdChannelModel(1);
+            ApdChannel561 = new ApdChannelModel(2);
+            ApdChannel640 = new ApdChannelModel(3);
         }
 
     }

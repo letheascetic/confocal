@@ -48,34 +48,41 @@ namespace confocal_core.ViewModel
             set { mY2GalvoChannels = value; RaisePropertyChanged(() => Y2GalvoAoChannels); }
         }
 
-        private string[] mAiChannels;
-        private string[] mCiChannels;
-        private string[] mDoLines;
-        private string[] mPFIs;
+        private string[][] mAiChannels;
+        private string[][] mCiSources;
+        private string[][] mCiChannels;
+        private string[] mTriggerSignals;
+        private string[] mTriggerReceivers;
         private string[] mStartTriggers;
 
-        public string[] AiChannels
+        public string[][] AiChannels
         {
             get { return mAiChannels; }
             set { mAiChannels = value; RaisePropertyChanged(() => AiChannels); }
         }
 
-        public string[] CiChannels
+        public string[][] CiSources
+        {
+            get { return mCiSources; }
+            set { mCiSources = value; RaisePropertyChanged(() => CiSources); }
+        }
+
+        public string[][] CiChannels
         {
             get { return mCiChannels; }
             set { mCiChannels = value; RaisePropertyChanged(() => CiChannels); }
         }
 
-        public string[] DoLines
+        public string[] TriggerSignals
         {
-            get { return mDoLines; }
-            set { mDoLines = value; RaisePropertyChanged(() => DoLines); }
+            get { return mTriggerSignals; }
+            set { mTriggerSignals = value; RaisePropertyChanged(() => TriggerSignals); }
         }
 
-        public string[] PFIs
+        public string[] TriggerReceivers
         {
-            get { return mPFIs; }
-            set { mPFIs = value; RaisePropertyChanged(() => PFIs); }
+            get { return mTriggerReceivers; }
+            set { mTriggerReceivers = value; RaisePropertyChanged(() => TriggerReceivers); }
         }
 
         public string[] StartTriggers
@@ -93,11 +100,30 @@ namespace confocal_core.ViewModel
             YGalvoAoChannels = NiDaq.GetAoChannels();
             Y2GalvoAoChannels = NiDaq.GetAoChannels();
 
-            AiChannels = NiDaq.GetAiChannels();
-            CiChannels = NiDaq.GetCiChannels();
-            DoLines = NiDaq.GetDoLines();
-            PFIs = NiDaq.GetPFIs();
+            AiChannels = new string[4][] 
+            {
+                NiDaq.GetAiChannels(),
+                NiDaq.GetAiChannels(),
+                NiDaq.GetAiChannels(),
+                NiDaq.GetAiChannels()
+            };
+            CiSources = new string[4][]
+            {
+                NiDaq.GetCiChannels(),
+                NiDaq.GetCiChannels(),
+                NiDaq.GetCiChannels(),
+                NiDaq.GetCiChannels()
+            };
+            CiChannels = new string[4][] 
+            {
+                NiDaq.GetPFIs(),
+                NiDaq.GetPFIs(),
+                NiDaq.GetPFIs(),
+                NiDaq.GetPFIs()
+            };
             StartTriggers = NiDaq.GetStartSyncSignals();
+            TriggerSignals = NiDaq.GetDoLines();
+            TriggerReceivers = NiDaq.GetPFIs();
         }
 
     }
