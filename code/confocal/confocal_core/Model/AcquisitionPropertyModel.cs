@@ -120,6 +120,36 @@ namespace confocal_core.Model
             set { pmtChannel640 = value; RaisePropertyChanged(() => PmtChannel640); }
         }
 
+        public ApdChannelModel ApdChannel405
+        {
+            get { return apdChannel405; }
+            set { apdChannel405 = value; RaisePropertyChanged(() => ApdChannel405); }
+        }
+
+        public ApdChannelModel ApdChannel488
+        {
+            get { return apdChannel488; }
+            set { apdChannel488 = value; RaisePropertyChanged(() => ApdChannel488); }
+        }
+
+        public ApdChannelModel ApdChannel561
+        {
+            get { return apdChannel561; }
+            set { apdChannel561 = value; RaisePropertyChanged(() => ApdChannel561); }
+        }
+
+        public ApdChannelModel ApdChannel640
+        {
+            get { return apdChannel640; }
+            set { apdChannel640 = value; RaisePropertyChanged(() => ApdChannel640); }
+        }
+
+        public DetectorModel()
+        {
+            DetectorApd = DetectorTypeModel.Initialize(DetectorTypeModel.APD);
+            DetectorPmt = DetectorTypeModel.Initialize(DetectorTypeModel.PMT);
+        }
+
     }
 
     public class PmtChannelModel : ObservableObject
@@ -163,7 +193,6 @@ namespace confocal_core.Model
             get { return ciChannel; }
             set { ciChannel = value; RaisePropertyChanged(() => CiChannel); }
         }
-
     }
 
 }

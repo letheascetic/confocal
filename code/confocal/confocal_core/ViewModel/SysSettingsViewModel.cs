@@ -84,7 +84,6 @@ namespace confocal_core.ViewModel
             set { mStartTriggers = value; RaisePropertyChanged(() => StartTriggers); }
         }
 
-
         public SysSettingsViewModel()
         {
             GalvoProperty = new GalvoPrppertyModel();
