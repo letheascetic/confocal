@@ -1,4 +1,5 @@
-﻿using C1.Win.C1Ribbon;
+﻿using C1.Win.C1InputPanel;
+using C1.Win.C1Ribbon;
 using confocal_core.ViewModel;
 using log4net;
 using System;
@@ -20,6 +21,10 @@ namespace confocal_ui.View
 
         private SysSettingsViewModel mSysSettingsViewModel;
 
+        private InputComboBox[] mPmtChannelCbx;
+        private InputComboBox[] mApdSourceCbx;
+        private InputComboBox[] mApdChannelCbx;
+        
         public SysSettingsViewModel SysSettingsVM
         {
             get { return mSysSettingsViewModel; }
@@ -36,7 +41,27 @@ namespace confocal_ui.View
         private void Initialize()
         {
             mSysSettingsViewModel = new SysSettingsViewModel();
-
+            mPmtChannelCbx = new InputComboBox[]
+            {
+                cbx405PMT,
+                cbx488PMT,
+                cbx561PMT,
+                cbx640PMT
+            };
+            mApdSourceCbx = new InputComboBox[]
+            {
+                cbx405Ctr,
+                cbx488Ctr,
+                cbx561Ctr,
+                cbx640Ctr
+            };
+            mApdChannelCbx = new InputComboBox[]
+            {
+                cbx405Channel,
+                cbx488Channel,
+                cbx561Channel,
+                cbx640Channel
+            };
         }
 
         private void SetDataBindings()
@@ -61,11 +86,38 @@ namespace confocal_ui.View
             nbGalvoResponseTime.DataBindings.Add("Value", mSysSettingsViewModel.GalvoProperty, "GalvoResponseTime");
             nbScanRange.DataBindings.Add("Value", mSysSettingsViewModel.FullScanArea.ScanRange, "Width");
 
+            // 采集控制
+            rbtnPMT.DataBindings.Add("Checked", mSysSettingsViewModel.Detector.DetectorPmt, "IsEnabled");
+            rbtnAPD.DataBindings.Add("Checked", mSysSettingsViewModel.Detector.DetectorApd, "IsEnabled");
+            cbxStartSync.DataSource = mSysSettingsViewModel.StartTriggers;
+            cbxStartSync.SelectedItem = mSysSettingsViewModel.Detector.StartTrigger;
+            cbxTrigger.DataSource = mSysSettingsViewModel.TriggerSignals;
+            cbxTrigger.SelectedItem = mSysSettingsViewModel.Detector.TriggerSignal;
+            cbxTriggerR.DataSource = mSysSettingsViewModel.TriggerReceivers;
+            cbxTriggerR.SelectedItem = mSysSettingsViewModel.Detector.TriggerReceive;
+
+            // PMT
+
         }
 
         private void RegisterEvents()
         {
             
+            for (int i = 0; i < mPmtChannelCbx.Length; i++)
+            {
+                mPmtChannelCbx[i].Tag = i;
+            }
+
+            for (int i = 0; i < mApdSourceCbx.Length; i++)
+            {
+                mApdSourceCbx[i].Tag = i;
+            }
+
+            for (int i = 0; i < mApdChannelCbx.Length; i++)
+            {
+                mApdChannelCbx[i].Tag = i;
+            }
+
         }
 
         private void FormSysSettingsLoad(object sender, EventArgs e)

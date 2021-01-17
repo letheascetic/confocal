@@ -16,16 +16,31 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private GalvoPrppertyModel mGalvoPrpperty;
         private ScanAreaModel mFullScanArea;
+        private DetectorModel mDetector;
 
+        /// <summary>
+        /// 振镜属性
+        /// </summary>
         public GalvoPrppertyModel GalvoProperty
         {
             get { return mGalvoPrpperty; }
             set { mGalvoPrpperty = value; RaisePropertyChanged(() => GalvoProperty); }
         }
+        /// <summary>
+        /// 最大扫描视场范围
+        /// </summary>
         public ScanAreaModel FullScanArea
         {
             get { return mFullScanArea; }
             set { mFullScanArea = value; RaisePropertyChanged(() => FullScanArea); }
+        }
+        /// <summary>
+        /// 探测器属性
+        /// </summary>
+        public DetectorModel Detector
+        {
+            get { return mDetector; }
+            set { mDetector = value; RaisePropertyChanged(() => Detector); }
         }
 
         private string[] mXGalvoChannels;
@@ -95,6 +110,7 @@ namespace confocal_core.ViewModel
         {
             GalvoProperty = new GalvoPrppertyModel();
             FullScanArea = ScanAreaModel.CreateFullScanArea();
+            Detector = new DetectorModel();
 
             XGalvoAoChannels = NiDaq.GetAoChannels();
             YGalvoAoChannels = NiDaq.GetAoChannels();

@@ -82,16 +82,16 @@ namespace confocal_ui.View
             this.lbAPDSource = new C1.Win.C1InputPanel.InputLabel();
             this.lb4052 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx405Ctr = new C1.Win.C1InputPanel.InputComboBox();
-            this.cbx405CtrSource = new C1.Win.C1InputPanel.InputComboBox();
+            this.cbx405Channel = new C1.Win.C1InputPanel.InputComboBox();
             this.lb4882 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx488Ctr = new C1.Win.C1InputPanel.InputComboBox();
-            this.cbx488Source = new C1.Win.C1InputPanel.InputComboBox();
+            this.cbx488Channel = new C1.Win.C1InputPanel.InputComboBox();
             this.lb5612 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx561Ctr = new C1.Win.C1InputPanel.InputComboBox();
-            this.cbx561Source = new C1.Win.C1InputPanel.InputComboBox();
+            this.cbx561Channel = new C1.Win.C1InputPanel.InputComboBox();
             this.lb6402 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx640Ctr = new C1.Win.C1InputPanel.InputComboBox();
-            this.cbx640Source = new C1.Win.C1InputPanel.InputComboBox();
+            this.cbx640Channel = new C1.Win.C1InputPanel.InputComboBox();
             this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
             this.inputGroupHeader1 = new C1.Win.C1InputPanel.InputGroupHeader();
@@ -157,16 +157,16 @@ namespace confocal_ui.View
             this.inputPanel.Items.Add(this.lbAPDSource);
             this.inputPanel.Items.Add(this.lb4052);
             this.inputPanel.Items.Add(this.cbx405Ctr);
-            this.inputPanel.Items.Add(this.cbx405CtrSource);
+            this.inputPanel.Items.Add(this.cbx405Channel);
             this.inputPanel.Items.Add(this.lb4882);
             this.inputPanel.Items.Add(this.cbx488Ctr);
-            this.inputPanel.Items.Add(this.cbx488Source);
+            this.inputPanel.Items.Add(this.cbx488Channel);
             this.inputPanel.Items.Add(this.lb5612);
             this.inputPanel.Items.Add(this.cbx561Ctr);
-            this.inputPanel.Items.Add(this.cbx561Source);
+            this.inputPanel.Items.Add(this.cbx561Channel);
             this.inputPanel.Items.Add(this.lb6402);
             this.inputPanel.Items.Add(this.cbx640Ctr);
-            this.inputPanel.Items.Add(this.cbx640Source);
+            this.inputPanel.Items.Add(this.cbx640Channel);
             this.inputPanel.Location = new System.Drawing.Point(0, 0);
             this.inputPanel.Name = "inputPanel";
             this.inputPanel.Size = new System.Drawing.Size(272, 569);
@@ -537,13 +537,13 @@ namespace confocal_ui.View
             this.cbx405Ctr.Name = "cbx405Ctr";
             this.cbx405Ctr.Width = 80;
             // 
-            // cbx405CtrSource
+            // cbx405Channel
             // 
-            this.cbx405CtrSource.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbx405CtrSource.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbx405CtrSource.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx405CtrSource.Name = "cbx405CtrSource";
-            this.cbx405CtrSource.Width = 80;
+            this.cbx405Channel.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbx405Channel.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbx405Channel.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx405Channel.Name = "cbx405Channel";
+            this.cbx405Channel.Width = 80;
             // 
             // lb4882
             // 
@@ -558,13 +558,13 @@ namespace confocal_ui.View
             this.cbx488Ctr.Name = "cbx488Ctr";
             this.cbx488Ctr.Width = 80;
             // 
-            // cbx488Source
+            // cbx488Channel
             // 
-            this.cbx488Source.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbx488Source.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbx488Source.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx488Source.Name = "cbx488Source";
-            this.cbx488Source.Width = 80;
+            this.cbx488Channel.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbx488Channel.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbx488Channel.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx488Channel.Name = "cbx488Channel";
+            this.cbx488Channel.Width = 80;
             // 
             // lb5612
             // 
@@ -579,13 +579,13 @@ namespace confocal_ui.View
             this.cbx561Ctr.Name = "cbx561Ctr";
             this.cbx561Ctr.Width = 80;
             // 
-            // cbx561Source
+            // cbx561Channel
             // 
-            this.cbx561Source.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbx561Source.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbx561Source.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx561Source.Name = "cbx561Source";
-            this.cbx561Source.Width = 80;
+            this.cbx561Channel.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbx561Channel.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbx561Channel.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx561Channel.Name = "cbx561Channel";
+            this.cbx561Channel.Width = 80;
             // 
             // lb6402
             // 
@@ -600,13 +600,13 @@ namespace confocal_ui.View
             this.cbx640Ctr.Name = "cbx640Ctr";
             this.cbx640Ctr.Width = 80;
             // 
-            // cbx640Source
+            // cbx640Channel
             // 
-            this.cbx640Source.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.cbx640Source.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.cbx640Source.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx640Source.Name = "cbx640Source";
-            this.cbx640Source.Width = 80;
+            this.cbx640Channel.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.cbx640Channel.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.cbx640Channel.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx640Channel.Name = "cbx640Channel";
+            this.cbx640Channel.Width = 80;
             // 
             // inputLabel1
             // 
@@ -712,14 +712,14 @@ namespace confocal_ui.View
         private C1.Win.C1InputPanel.InputLabel lb4882;
         private C1.Win.C1InputPanel.InputLabel lb5612;
         private C1.Win.C1InputPanel.InputLabel lb6402;
-        private C1.Win.C1InputPanel.InputComboBox cbx405CtrSource;
+        private C1.Win.C1InputPanel.InputComboBox cbx405Channel;
         private C1.Win.C1InputPanel.InputComboBox cbx405Ctr;
-        private C1.Win.C1InputPanel.InputComboBox cbx488Source;
+        private C1.Win.C1InputPanel.InputComboBox cbx488Channel;
         private C1.Win.C1InputPanel.InputComboBox cbx488Ctr;
         private C1.Win.C1InputPanel.InputComboBox cbx561Ctr;
-        private C1.Win.C1InputPanel.InputComboBox cbx561Source;
+        private C1.Win.C1InputPanel.InputComboBox cbx561Channel;
         private C1.Win.C1InputPanel.InputComboBox cbx640Ctr;
-        private C1.Win.C1InputPanel.InputComboBox cbx640Source;
+        private C1.Win.C1InputPanel.InputComboBox cbx640Channel;
         private C1.Win.C1InputPanel.InputLabel lbCtr;
         private C1.Win.C1InputPanel.InputLabel lbAPDSource;
         private C1.Win.C1InputPanel.InputGroupHeader ghDevice;
