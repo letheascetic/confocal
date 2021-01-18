@@ -20,8 +20,19 @@ namespace confocal_ui
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        public event ScanAcquisitionChangedEventHandler ScanAcquisitionChangedEvent;
+        public event ScannerHeadModelChangedEventHandler ScannerHeadModelChangedEvent;
+        public event ScanDirectionChangedEventHandler ScanDirectionChangedEvent;
+        public event ScanModeChangedEventHandler ScanModeChangedEvent;
+        public event LineSkipEnableChangedEventHandler LineSkipEnableChangedEvent;
+        public event LineSkipChangedEventHandler LineSkipChangedEvent;
         public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
         public event ScanPixelDwellChangedEventHandler ScanPixelDwellChangedEvent;
+        public event PinHoleChangedEventHandler PinHoleChangedEvent;
+        public event ChannelGainChangedEventHandler ChannelGainChangedEvent;
+        public event ChannelOffsetChangedEventHandler ChannelOffsetChangedEvent;
+        public event ChannelPowerChangedEventHandler ChannelPowerChangedEvent;
+        public event ChannelActivateChangedEventHandler ChannelActivateChangedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         private ScanSettingsViewModel mScanSettingsVM;
@@ -118,10 +129,7 @@ namespace confocal_ui
         private void RegisterEvents()
         {
             this.rbtnTwoScanners.CheckedChanged += ScannerHeadChanged;
-            // this.rbtnThreeScanners.CheckedChanged += ScannerHeadChanged;
-
             this.rbtnGalvano.CheckedChanged += ScanModeChanged;
-            // this.rbtnResonant.CheckedChanged += ScanModeChanged;
 
             for (int i = 0; i < mPixelDwellButtons.Length; i++)
             {
@@ -269,6 +277,10 @@ namespace confocal_ui
         private void ScannerHeadChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.ScannerHeadChangeCommand(rbtnTwoScanners.Checked);
+            if (ScannerHeadModelChangedEvent != null)
+            {
+                ScannerHeadModelChangedEvent.Invoke(mScanSettingsVM.SelectedScannerHead);
+            }
         }
 
         /// <summary>
@@ -279,6 +291,10 @@ namespace confocal_ui
         private void ScanModeChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.ScanModeChangeCommand(rbtnGalvano.Checked);
+            if (ScanModeChangedEvent != null)
+            {
+                ScanModeChangedEvent.Invoke(mScanSettingsVM.SelectedScanMode);
+            }
         }
 
         /// <summary>
@@ -295,6 +311,10 @@ namespace confocal_ui
             }
             btnBiDirection.Pressed = !btnUniDirection.Pressed;
             mScanSettingsVM.ScanDirectionChangeCommand(btnUniDirection.Pressed);
+            if (ScanDirectionChangedEvent != null)
+            {
+                ScanDirectionChangedEvent.Invoke(mScanSettingsVM.SelectedScanDirection);
+            }
         }
 
         /// <summary>
@@ -311,6 +331,10 @@ namespace confocal_ui
             }
             btnUniDirection.Pressed = !btnBiDirection.Pressed;
             mScanSettingsVM.ScanDirectionChangeCommand(btnUniDirection.Pressed);
+            if (ScanDirectionChangedEvent != null)
+            {
+                ScanDirectionChangedEvent.Invoke(mScanSettingsVM.SelectedScanDirection);
+            }
         }
 
         /// <summary>
@@ -367,6 +391,10 @@ namespace confocal_ui
         private void ScanLineSkipChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.LineSkipValueChangeCommand((ScanLineSkipModel)cbxLineSkip.SelectedItem);
+            if (LineSkipChangedEvent != null)
+            {
+                LineSkipChangedEvent.Invoke(mScanSettingsVM.SelectedScanLineSkip);
+            }
         }
 
         /// <summary>
@@ -393,6 +421,10 @@ namespace confocal_ui
                 btnCapture.Pressed = false;
             }
             mScanSettingsVM.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed);
+            if (ScanAcquisitionChangedEvent != null)
+            {
+                ScanAcquisitionChangedEvent.Invoke(mScanSettingsVM.CurrentAcquisitionMode);
+            }
         }
 
         /// <summary>
@@ -407,6 +439,10 @@ namespace confocal_ui
                 btnLive.Pressed = false;
             }
             mScanSettingsVM.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed);
+            if (ScanAcquisitionChangedEvent != null)
+            {
+                ScanAcquisitionChangedEvent.Invoke(mScanSettingsVM.CurrentAcquisitionMode);
+            }
         }
 
         /// <summary>
@@ -428,6 +464,10 @@ namespace confocal_ui
         private void LineSkipCheckedChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.LineSkipEnableChangeCommand(chbxLineSkip.Checked);
+            if (LineSkipEnableChangedEvent != null)
+            {
+                LineSkipEnableChangedEvent.Invoke(mScanSettingsVM.ScanLineSkipEnabled);
+            }
         }
 
         /// <summary>
@@ -438,6 +478,10 @@ namespace confocal_ui
         private void PinHoleValueChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.PinHoleValueChangeCommand(tbarPinHole.Value);
+            if (PinHoleChangedEvent != null)
+            {
+                PinHoleChangedEvent.Invoke(mScanSettingsVM.SelectedPinHole.ID, mScanSettingsVM.SelectedPinHole.Size);
+            }
         }
 
         /// <summary>
@@ -449,6 +493,10 @@ namespace confocal_ui
         {
             InputTrackBar bar = (InputTrackBar)sender;
             mScanSettingsVM.ChannelGainChangeCommand((int)bar.Tag, bar.Value);
+            if (ChannelGainChangedEvent != null)
+            {
+                ChannelGainChangedEvent.Invoke((int)bar.Tag, bar.Value);
+            }
         }
 
         /// <summary>
@@ -460,6 +508,10 @@ namespace confocal_ui
         {
             InputTrackBar bar = (InputTrackBar)sender;
             mScanSettingsVM.ChannelOffsetChangeCommand((int)bar.Tag, bar.Value);
+            if (ChannelOffsetChangedEvent != null)
+            {
+                ChannelOffsetChangedEvent.Invoke((int)bar.Tag, bar.Value);
+            }
         }
 
         /// <summary>
@@ -471,6 +523,10 @@ namespace confocal_ui
         {
             InputTrackBar bar = (InputTrackBar)sender;
             mScanSettingsVM.ChannelPowerChangeCommand((int)bar.Tag, bar.Value);
+            if (ChannelPowerChangedEvent != null)
+            {
+                ChannelPowerChangedEvent.Invoke((int)bar.Tag, bar.Value);
+            }
         }
 
         /// <summary>
@@ -482,6 +538,10 @@ namespace confocal_ui
         {
             InputButton button = (InputButton)sender;
             mScanSettingsVM.ChannelActivateChangeCommand((int)button.Tag, button.Pressed);
+            if (ChannelActivateChangedEvent != null)
+            {
+                ChannelActivateChangedEvent.Invoke((int)button.Tag, button.Pressed);
+            }
         }
     }
 }

@@ -10,6 +10,35 @@ using System.Threading.Tasks;
 namespace confocal_core.Model
 {
     /// <summary>
+    /// 通道增益更新事件委托
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="gain"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ChannelGainChangedEventHandler(int id, int gain);
+    /// <summary>
+    /// 通道偏置更新事件委托
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="offset"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ChannelOffsetChangedEventHandler(int id, int offset);
+    /// <summary>
+    /// 通道功率更新事件委托
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="power"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ChannelPowerChangedEventHandler(int id, int power);
+    /// <summary>
+    /// 通道激活状态更新事件委托
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="activated"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ChannelActivateChangedEventHandler(int id, bool activated);
+
+    /// <summary>
     /// 扫描通道
     /// </summary>
     public class ScanChannelModel : ObservableObject

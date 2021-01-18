@@ -315,7 +315,7 @@
             this.dockTabOutput.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabOutput.TabsSpacing = 5;
             this.dockTabOutput.TabStyle = C1.Win.C1Command.TabStyleEnum.Office2010;
-            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Office2010Blue;
+            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.dockTabOutput.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
             // tpgLog

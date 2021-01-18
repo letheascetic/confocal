@@ -7,6 +7,42 @@ using System.Text;
 namespace confocal_core.Model
 {
     /// <summary>
+    /// 采集模式更新事件委托
+    /// </summary>
+    /// <param name="scanAcquisition"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ScanAcquisitionChangedEventHandler(ScanAcquisitionModel scanAcquisition);
+    /// <summary>
+    /// 扫描头更新事件委托
+    /// </summary>
+    /// <param name="scannerHead"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ScannerHeadModelChangedEventHandler(ScannerHeadModel scannerHead);
+    /// <summary>
+    /// 扫描方向更新事件委托
+    /// </summary>
+    /// <param name="scanDirection"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ScanDirectionChangedEventHandler(ScanDirectionModel scanDirection);
+    /// <summary>
+    /// 扫描模式更新事件委托
+    /// </summary>
+    /// <param name="scanMode"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE ScanModeChangedEventHandler(ScanModeModel scanMode);
+    /// <summary>
+    /// 跳行扫描使能更新事件委托
+    /// </summary>
+    /// <param name="lineSkipEnabled"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE LineSkipEnableChangedEventHandler(bool lineSkipEnabled);
+    /// <summary>
+    /// 跳行扫描参数更新事件委托
+    /// </summary>
+    /// <param name="lineSkip"></param>
+    /// <returns></returns>
+    public delegate API_RETURN_CODE LineSkipChangedEventHandler(ScanLineSkipModel lineSkip);
+    /// <summary>
     /// 扫描像素更新事件委托
     /// </summary>
     /// <param name="scanPixel"></param>
