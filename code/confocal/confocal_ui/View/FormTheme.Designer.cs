@@ -128,8 +128,8 @@
             this.ctdbgThemes.TabIndex = 4;
             this.c1ThemeController.SetTheme(this.ctdbgThemes, "(default)");
             this.ctdbgThemes.UseCompatibleTextRendering = false;
-            this.ctdbgThemes.DoubleClick += new System.EventHandler(this.ctdbgThemes_DoubleClick);
-            this.ctdbgThemes.Resize += new System.EventHandler(this.ctdbgThemes_Resize);
+            this.ctdbgThemes.DoubleClick += new System.EventHandler(this.ThemesDoubleClick);
+            this.ctdbgThemes.Resize += new System.EventHandler(this.ThemesResize);
             // 
             // btnApply
             // 
@@ -143,7 +143,7 @@
             this.c1ThemeController.SetTheme(this.btnApply, "(default)");
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.VisualStyleBaseStyle = C1.Win.C1Input.VisualStyle.Office2010Blue;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            this.btnApply.Click += new System.EventHandler(this.ApplyClick);
             // 
             // btnQuit
             // 
@@ -157,7 +157,7 @@
             this.c1ThemeController.SetTheme(this.btnQuit, "(default)");
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.VisualStyleBaseStyle = C1.Win.C1Input.VisualStyle.Office2010Blue;
-            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            this.btnQuit.Click += new System.EventHandler(this.QuitClick);
             // 
             // btnConfirm
             // 
@@ -171,7 +171,7 @@
             this.c1ThemeController.SetTheme(this.btnConfirm, "(default)");
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.VisualStyleBaseStyle = C1.Win.C1Input.VisualStyle.Office2010Blue;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            this.btnConfirm.Click += new System.EventHandler(this.ConfirmClick);
             // 
             // FormTheme
             // 
@@ -189,7 +189,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormTheme";
             this.Text = "主题管理器";
-            this.Load += new System.EventHandler(this.FormTheme_Load);
+            this.Load += new System.EventHandler(this.FormThemeLoad);
             ((System.ComponentModel.ISupportInitialize)(this.c1ThemeController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.label)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbApplicationTheme)).EndInit();

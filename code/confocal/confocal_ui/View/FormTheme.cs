@@ -46,7 +46,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ctdbgThemes_DoubleClick(object sender, EventArgs e)
+        private void ThemesDoubleClick(object sender, EventArgs e)
         {
             if (ctdbgThemes.Row >= 0 && ctdbgThemes.Row < ctdbgThemes.Rows.Count)
             {
@@ -55,7 +55,7 @@ namespace confocal_ui
             }
         }
 
-        private void ctdbgThemes_Resize(object sender, EventArgs e)
+        private void ThemesResize(object sender, EventArgs e)
         {
             ctdbgThemes.Splits[0].DisplayColumns[0].Width = ctdbgThemes.ClientSize.Width - ctdbgThemes.Splits[0].RecordSelectorWidth - 1;
         }
@@ -65,9 +65,9 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormTheme_Load(object sender, EventArgs e)
+        private void FormThemeLoad(object sender, EventArgs e)
         {
-            ctdbgThemes_Resize(null, EventArgs.Empty);
+            ThemesResize(null, EventArgs.Empty);
             ctdbgThemes.SetDataBinding();
             string[] themes = C1ThemeController.GetThemes();
             foreach (string s in themes)
@@ -81,7 +81,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnQuit_Click(object sender, EventArgs e)
+        private void QuitClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
@@ -91,7 +91,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void ConfirmClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
@@ -101,7 +101,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnApply_Click(object sender, EventArgs e)
+        private void ApplyClick(object sender, EventArgs e)
         {
             if (ctdbgThemes.Row >= 0 && ctdbgThemes.Row < ctdbgThemes.Rows.Count)
             {
