@@ -51,6 +51,8 @@
             this.cmdScanSettings = new C1.Win.C1Command.C1Command();
             this.cmdLinkScanImage = new C1.Win.C1Command.C1CommandLink();
             this.cmdScanImage = new C1.Win.C1Command.C1Command();
+            this.cmdLinkCfg = new C1.Win.C1Command.C1CommandLink();
+            this.cmdSysCfg = new C1.Win.C1Command.C1Command();
             this.cmdLinkFile = new C1.Win.C1Command.C1CommandLink();
             this.cmdLinkView = new C1.Win.C1Command.C1CommandLink();
             this.cmdLinkWindow = new C1.Win.C1Command.C1CommandLink();
@@ -62,8 +64,6 @@
             this.textLog = new System.Windows.Forms.TextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.snapFormExtender = new SnapFormExtender.SnapFormExtender(this.components);
-            this.cmdLinkCfg = new C1.Win.C1Command.C1CommandLink();
-            this.cmdConfig = new C1.Win.C1Command.C1Command();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -103,7 +103,7 @@
             this.cmdHolder.Commands.Add(this.cmdScanArea);
             this.cmdHolder.Commands.Add(this.cmdScanSettings);
             this.cmdHolder.Commands.Add(this.cmdScanImage);
-            this.cmdHolder.Commands.Add(this.cmdConfig);
+            this.cmdHolder.Commands.Add(this.cmdSysCfg);
             this.cmdHolder.Owner = this;
             // 
             // cmdFileNew
@@ -207,6 +207,7 @@
             // 
             // cmdScanArea
             // 
+            this.cmdScanArea.CheckAutoToggle = true;
             this.cmdScanArea.Name = "cmdScanArea";
             this.cmdScanArea.ShortcutText = "";
             this.cmdScanArea.Text = "扫描区域（&A）";
@@ -219,6 +220,7 @@
             // 
             // cmdScanSettings
             // 
+            this.cmdScanSettings.CheckAutoToggle = true;
             this.cmdScanSettings.Name = "cmdScanSettings";
             this.cmdScanSettings.ShortcutText = "";
             this.cmdScanSettings.Text = "扫描设置（&S）";
@@ -235,6 +237,19 @@
             this.cmdScanImage.ShortcutText = "";
             this.cmdScanImage.Text = "扫描图像（&I）";
             this.cmdScanImage.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanImageClick);
+            // 
+            // cmdLinkCfg
+            // 
+            this.cmdLinkCfg.Command = this.cmdSysCfg;
+            this.cmdLinkCfg.SortOrder = 3;
+            // 
+            // cmdSysCfg
+            // 
+            this.cmdSysCfg.CheckAutoToggle = true;
+            this.cmdSysCfg.Name = "cmdSysCfg";
+            this.cmdSysCfg.ShortcutText = "";
+            this.cmdSysCfg.Text = "系统设置（&C）";
+            this.cmdSysCfg.Click += new C1.Win.C1Command.ClickEventHandler(this.SysSettingsClick);
             // 
             // cmdLinkFile
             // 
@@ -341,18 +356,6 @@
             this.snapFormExtender.Distance = 10;
             this.snapFormExtender.Form = this;
             // 
-            // cmdLinkCfg
-            // 
-            this.cmdLinkCfg.Command = this.cmdConfig;
-            this.cmdLinkCfg.SortOrder = 3;
-            // 
-            // cmdConfig
-            // 
-            this.cmdConfig.Name = "cmdConfig";
-            this.cmdConfig.ShortcutText = "";
-            this.cmdConfig.Text = "系统设置（&C）";
-            this.cmdConfig.Click += new C1.Win.C1Command.ClickEventHandler(this.SysSettingsClick);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -362,6 +365,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dockToolBar);
             this.Controls.Add(this.mainMenu);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -420,6 +424,6 @@
         private C1.Win.C1Command.C1CommandLink cmdLinkScanImage;
         private C1.Win.C1Command.C1Command cmdScanImage;
         private C1.Win.C1Command.C1CommandLink cmdLinkCfg;
-        private C1.Win.C1Command.C1Command cmdConfig;
+        private C1.Win.C1Command.C1Command cmdSysCfg;
     }
 }

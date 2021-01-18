@@ -36,17 +36,42 @@ namespace confocal_ui
         /// </summary>
         private void Initialize()
         {
-            WindowState = FormWindowState.Maximized;
-
+            // 
             mFormScanSetting = new FormScanSettings();
             mFormScanSetting.MdiParent = this;
-            mFormScanSetting.Location = new Point(this.ClientRectangle.Right - mFormScanSetting.Width, 0);
             mFormScanSetting.Visible = true;
 
             mFormScanArea = new FormScanArea();
             mFormScanArea.MdiParent = this;
-            mFormScanArea.Location = new Point(mFormScanSetting.Location.X - mFormScanArea.Width, 0);
             mFormScanArea.Visible = true;
+
+            mFormSysSettings = new FormSysSettings();
+            mFormSysSettings.MdiParent = this;
+            mFormSysSettings.Visible = false;
+
+
+        }
+
+        private void InitAppearance()
+        {
+            WindowState = FormWindowState.Maximized;
+            mFormScanSetting.Location = new Point(this.ClientRectangle.Right - mFormScanSetting.Width, 0);
+            mFormScanArea.Location = new Point(mFormScanSetting.Location.X - mFormScanArea.Width, 0);
+
+            // menu strip
+            cmdScanArea.Checked = mFormScanArea.Visible;
+            cmdScanSettings.Checked = mFormScanSetting.Visible;
+            cmdSysCfg.Checked = mFormSysSettings.Visible;
+        }
+
+        /// <summary>
+        /// 设置数据绑定
+        /// </summary>
+        private void SetDataBindings()
+        {
+            // menu strip
+
+            // window
         }
 
         /// <summary>
@@ -96,6 +121,9 @@ namespace confocal_ui
         {
             // init variables & controlers
             // Initialize();
+            InitAppearance();
+
+            // set data bindings
 
             // register events
             RegisterEvents();
@@ -107,16 +135,12 @@ namespace confocal_ui
 
         private void ScanAreaClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            FormScanArea scanArea = new FormScanArea();
-            scanArea.MdiParent = this;
-            scanArea.Show();
+            mFormScanArea.Visible = cmdScanArea.Checked;
         }
 
         private void ScanSettingsClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            FormScanSettings mFormScanSettings = new FormScanSettings();
-            mFormScanSettings.MdiParent = this;
-            mFormScanSettings.Show();
+            mFormScanSetting.Visible = cmdScanSettings.Checked;
         }
 
         private void ScanImageClick(object sender, C1.Win.C1Command.ClickEventArgs e)
@@ -128,17 +152,7 @@ namespace confocal_ui
 
         private void SysSettingsClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            if (mFormSysSettings == null)
-            {
-                mFormSysSettings = new FormSysSettings();
-                mFormSysSettings.MdiParent = this;
-                mFormSysSettings.Show();
-            }
-            else
-            {
-                mFormSysSettings.Visible = true;
-                mFormSysSettings.Show();
-            }
+            mFormSysSettings.Visible = cmdSysCfg.Checked;
         }
     }
 }

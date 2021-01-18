@@ -254,9 +254,8 @@ namespace confocal_ui.View
 
         private void HidingForm(object sender, FormClosingEventArgs e)
         {
-            this.Visible = false;
-            this.Hide();
             e.Cancel = true;
+            Hide();
         }
 
         private void GalvoResponseTimeChanged(object sender, EventArgs e)
