@@ -86,7 +86,7 @@
             this.mainMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1163, 26);
+            this.mainMenu.Size = new System.Drawing.Size(1192, 26);
             this.mainMenu.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.mainMenu.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
@@ -273,7 +273,7 @@
             this.dockToolBar.Id = 3;
             this.dockToolBar.Location = new System.Drawing.Point(0, 26);
             this.dockToolBar.Name = "dockToolBar";
-            this.dockToolBar.Size = new System.Drawing.Size(1163, 26);
+            this.dockToolBar.Size = new System.Drawing.Size(1192, 26);
             // 
             // toolBar
             // 
@@ -293,9 +293,9 @@
             this.dockBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockBottom.Id = 1;
-            this.dockBottom.Location = new System.Drawing.Point(0, 522);
+            this.dockBottom.Location = new System.Drawing.Point(0, 607);
             this.dockBottom.Name = "dockBottom";
-            this.dockBottom.Size = new System.Drawing.Size(1163, 138);
+            this.dockBottom.Size = new System.Drawing.Size(1192, 138);
             // 
             // dockTabOutput
             // 
@@ -310,12 +310,12 @@
             this.dockTabOutput.Location = new System.Drawing.Point(0, 0);
             this.dockTabOutput.Name = "dockTabOutput";
             this.dockTabOutput.ShowCaption = true;
-            this.dockTabOutput.Size = new System.Drawing.Size(1163, 138);
+            this.dockTabOutput.Size = new System.Drawing.Size(1192, 138);
             this.dockTabOutput.TabIndex = 1;
             this.dockTabOutput.TabSizeMode = C1.Win.C1Command.TabSizeModeEnum.Fit;
             this.dockTabOutput.TabsSpacing = 5;
             this.dockTabOutput.TabStyle = C1.Win.C1Command.TabStyleEnum.Office2010;
-            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
+            this.dockTabOutput.VisualStyle = C1.Win.C1Command.VisualStyle.Office2010Blue;
             this.dockTabOutput.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
             // tpgLog
@@ -324,7 +324,7 @@
             this.tpgLog.Controls.Add(this.textLog);
             this.tpgLog.Location = new System.Drawing.Point(1, 4);
             this.tpgLog.Name = "tpgLog";
-            this.tpgLog.Size = new System.Drawing.Size(1161, 111);
+            this.tpgLog.Size = new System.Drawing.Size(1190, 111);
             this.tpgLog.TabIndex = 0;
             this.tpgLog.Text = "Log";
             // 
@@ -338,16 +338,16 @@
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
             this.textLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textLog.Size = new System.Drawing.Size(1161, 88);
+            this.textLog.Size = new System.Drawing.Size(1190, 88);
             this.textLog.TabIndex = 0;
             // 
             // statusStrip
             // 
             this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Location = new System.Drawing.Point(0, 660);
+            this.statusStrip.Location = new System.Drawing.Point(0, 745);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1163, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1192, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -360,7 +360,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 682);
+            this.ClientSize = new System.Drawing.Size(1192, 767);
             this.Controls.Add(this.dockBottom);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dockToolBar);
