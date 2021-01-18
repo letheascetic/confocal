@@ -351,7 +351,7 @@
             this.cmdConfig.Name = "cmdConfig";
             this.cmdConfig.ShortcutText = "";
             this.cmdConfig.Text = "系统设置（&C）";
-            this.cmdConfig.Click += new C1.Win.C1Command.ClickEventHandler(this.SysConfigClick);
+            this.cmdConfig.Click += new C1.Win.C1Command.ClickEventHandler(this.SysSettingsClick);
             // 
             // FormMain
             // 

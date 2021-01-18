@@ -23,6 +23,7 @@ namespace confocal_ui
 
         private FormScanSettings mFormScanSetting;
         private FormScanArea mFormScanArea;
+        private FormSysSettings mFormSysSettings;
 
         public FormMain()
         {
@@ -125,11 +126,19 @@ namespace confocal_ui
             mFormImage.Show();
         }
 
-        private void SysConfigClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        private void SysSettingsClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            FormSysSettings mFormSysSettings = new FormSysSettings();
-            mFormSysSettings.MdiParent = this;
-            mFormSysSettings.Show();
+            if (mFormSysSettings == null)
+            {
+                mFormSysSettings = new FormSysSettings();
+                mFormSysSettings.MdiParent = this;
+                mFormSysSettings.Show();
+            }
+            else
+            {
+                mFormSysSettings.Visible = true;
+                mFormSysSettings.Show();
+            }
         }
     }
 }

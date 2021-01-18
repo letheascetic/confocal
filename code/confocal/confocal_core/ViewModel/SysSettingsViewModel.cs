@@ -142,5 +142,155 @@ namespace confocal_core.ViewModel
             TriggerReceivers = NiDaq.GetPFIs();
         }
 
+        public PmtChannelModel FindPmtChannel(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    return Detector.PmtChannel405;
+                case 1:
+                    return Detector.PmtChannel488;
+                case 2:
+                    return Detector.PmtChannel561;
+                case 3:
+                    return Detector.PmtChannel640;
+                default:
+                    throw new ArgumentOutOfRangeException("ID Exception.");
+            }
+        }
+
+        public ApdChannelModel FindApdChannel(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    return Detector.ApdChannel405;
+                case 1:
+                    return Detector.ApdChannel488;
+                case 2:
+                    return Detector.ApdChannel561;
+                case 3:
+                    return Detector.ApdChannel640;
+                default:
+                    throw new ArgumentOutOfRangeException("ID Exception.");
+            }
+        }
+
+        public API_RETURN_CODE XGalvoChannelChangeCommand(string xGalvoChannel)
+        {
+            GalvoProperty.XGalvoAoChannel = xGalvoChannel;
+            Logger.Info(string.Format("X Galvo Ao Channel [{0}].", GalvoProperty.XGalvoAoChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE YGalvoChannelChangeCommand(string yGalvoChannel)
+        {
+            GalvoProperty.YGalvoAoChannel = yGalvoChannel;
+            Logger.Info(string.Format("Y Galvo Ao Channel [{0}].", GalvoProperty.YGalvoAoChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE Y2GalvoChannelChangeCommand(string y2GalvoChannel)
+        {
+            GalvoProperty.Y2GalvoAoChannel = y2GalvoChannel;
+            Logger.Info(string.Format("Y2 Galvo Ao Channel [{0}].", GalvoProperty.Y2GalvoAoChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE XGalvoOffsetVoltageChangeCommand(double offsetVoltage)
+        {
+            GalvoProperty.XGalvoOffsetVoltage = offsetVoltage;
+            Logger.Info(string.Format("X Galvo Offset Voltage [{0}].", GalvoProperty.XGalvoOffsetVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE XGalvoCalibrationVoltageChangeCommand(double calibrationVoltage)
+        {
+            GalvoProperty.XGalvoCalibrationVoltage = calibrationVoltage;
+            Logger.Info(string.Format("X Galvo Calibration Voltage [{0}].", GalvoProperty.XGalvoCalibrationVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE YGalvoOffsetVoltageChangeCommand(double offsetVoltage)
+        {
+            GalvoProperty.YGalvoOffsetVoltage = offsetVoltage;
+            Logger.Info(string.Format("Y Galvo Offset Voltage [{0}].", GalvoProperty.YGalvoOffsetVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE YGalvoCalibrationVoltageChangeCommand(double calibrationVoltage)
+        {
+            GalvoProperty.YGalvoCalibrationVoltage = calibrationVoltage;
+            Logger.Info(string.Format("Y Galvo Calibration Voltage [{0}].", GalvoProperty.YGalvoCalibrationVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE GalvoResponseTimeChangeCommand(double responseTime)
+        {
+            GalvoProperty.GalvoResponseTime = responseTime;
+            Logger.Info(string.Format("Galvo Response Time [{0}].", GalvoProperty.GalvoResponseTime));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE FullScanAreaChangeCommand(float scanRange)
+        {
+            FullScanArea.Update(new System.Drawing.RectangleF(scanRange / 2, scanRange / 2, scanRange, scanRange));
+            Logger.Info(string.Format("Full Scan Area [{0}].", FullScanArea.ScanRange));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE DetectorModeChangeCommand(bool pmtModeEnabled)
+        {
+            Detector.DetectorPmt.IsEnabled = pmtModeEnabled;
+            Detector.DetectorApd.IsEnabled = !pmtModeEnabled;
+            Logger.Info(string.Format("Detector Mode [{0}].", Detector.CurrentDetecor.Text));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE PmtChannelChangeCommand(int id, string pmtChannel)
+        {
+            PmtChannelModel channel = FindPmtChannel(id);
+            channel.AiChannel = pmtChannel;
+            Logger.Info(string.Format("Pmt [{0}] Ao Channel [{1}].", channel.ID, channel.AiChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ApdSourceChangeCommand(int id, string apdSource)
+        {
+            ApdChannelModel channel = FindApdChannel(id);
+            channel.CiSource = apdSource;
+            Logger.Info(string.Format("Apd [{0}] Ci Channel [{1}:{2}].", channel.ID, channel.CiSource, channel.CiChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ApdChannelChangeCommand(int id, string apdChannel)
+        {
+            ApdChannelModel channel = FindApdChannel(id);
+            channel.CiChannel = apdChannel;
+            Logger.Info(string.Format("Apd [{0}] Ci Channel [{1}:{2}].", channel.ID, channel.CiSource, channel.CiChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE StartTriggerChangeCommand(string startTrigger)
+        {
+            Detector.StartTrigger = startTrigger;
+            Logger.Info(string.Format("Start Trigger [{0}].", Detector.StartTrigger));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE TriggerSignalChangeCommand(string triggerSignal)
+        {
+            Detector.TriggerSignal = triggerSignal;
+            Logger.Info(string.Format("Trigger Signal [{0}].", Detector.TriggerSignal));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE TriggerReceiverChangeCommand(string triggerReceive)
+        {
+            Detector.TriggerReceive = triggerReceive;
+            Logger.Info(string.Format("Trigger Receiver [{0}].", Detector.TriggerReceive));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
     }
 }

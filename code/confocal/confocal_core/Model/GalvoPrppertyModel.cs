@@ -11,7 +11,7 @@ namespace confocal_core.Model
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;              // 振镜响应时间, us
-        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5 * 1000;   // 校准[标定]电压,V/um
+        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5 * 1000 * 1000;   // 校准[标定]电压,mV/um
         private static readonly double XOFFSET_VOLTAGE_DEFAULT = 0;                     // X=0位置对应的偏置电压
         private static readonly double YOFFSET_VOLTAGE_DEFAULT = 0;                     // Y=0位置对应的偏置电压
         ///////////////////////////////////////////////////////////////////////////////////////////

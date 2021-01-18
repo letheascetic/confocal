@@ -283,7 +283,7 @@
             this.btnUniDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnUniDirection.Name = "btnUniDirection";
             this.btnUniDirection.Text = "单向";
-            this.btnUniDirection.Click += new System.EventHandler(this.btnUniDirection_Click);
+            this.btnUniDirection.Click += new System.EventHandler(this.UniDirectionClick);
             // 
             // btnBiDirection
             // 
@@ -292,7 +292,7 @@
             this.btnBiDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnBiDirection.Name = "btnBiDirection";
             this.btnBiDirection.Text = "双向";
-            this.btnBiDirection.Click += new System.EventHandler(this.btnBiDirection_Click);
+            this.btnBiDirection.Click += new System.EventHandler(this.BiDirectionClick);
             // 
             // chbxLineSkip
             // 
@@ -877,7 +877,7 @@
             this.Name = "FormScanSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "扫描设置";
-            this.Load += new System.EventHandler(this.FormScanSettings_Load);
+            this.Load += new System.EventHandler(this.FormScanSettingsLoad);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
             this.ResumeLayout(false);
 

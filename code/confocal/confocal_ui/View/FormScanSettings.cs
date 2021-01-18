@@ -254,7 +254,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormScanSettings_Load(object sender, EventArgs e)
+        private void FormScanSettingsLoad(object sender, EventArgs e)
         {
             Initialize();
             RegisterEvents();
@@ -286,7 +286,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnUniDirection_Click(object sender, EventArgs e)
+        private void UniDirectionClick(object sender, EventArgs e)
         {
             if (mScanSettingsVM.ScanUniDirection.IsEnabled)
             {
@@ -302,7 +302,7 @@ namespace confocal_ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnBiDirection_Click(object sender, EventArgs e)
+        private void BiDirectionClick(object sender, EventArgs e)
         {
             if (mScanSettingsVM.ScanBiDirection.IsEnabled)
             {

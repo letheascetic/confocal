@@ -56,6 +56,10 @@ namespace confocal_core.Model
         private ApdChannelModel apdChannel561;
         private ApdChannelModel apdChannel640;
 
+        public DetectorTypeModel CurrentDetecor
+        {
+            get { return DetectorPmt.IsEnabled ? DetectorPmt : DetectorApd; }
+        }
         /// <summary>
         /// APD
         /// </summary>
