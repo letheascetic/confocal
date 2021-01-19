@@ -46,17 +46,35 @@
             this.lbTimeSpan = new System.Windows.Forms.ToolStripStatusLabel();
             this.sp6 = new System.Windows.Forms.ToolStripSeparator();
             this.lbCurrent = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pictureBox = new Emgu.CV.UI.ImageBox();
             this.c1CommandDock1 = new C1.Win.C1Command.C1CommandDock();
             this.c1ToolBar1 = new C1.Win.C1Command.C1ToolBar();
-            this.ibxColorMapping = new Emgu.CV.UI.ImageBox();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.pageAll = new System.Windows.Forms.TabPage();
+            this.page405 = new System.Windows.Forms.TabPage();
+            this.page488 = new System.Windows.Forms.TabPage();
+            this.page561 = new System.Windows.Forms.TabPage();
+            this.page640 = new System.Windows.Forms.TabPage();
+            this.imageAll = new Emgu.CV.UI.ImageBox();
+            this.image405 = new Emgu.CV.UI.ImageBox();
+            this.image488 = new Emgu.CV.UI.ImageBox();
+            this.image561 = new Emgu.CV.UI.ImageBox();
+            this.image640 = new Emgu.CV.UI.ImageBox();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1CommandDock1)).BeginInit();
             this.c1CommandDock1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).BeginInit();
+            this.tabControl.SuspendLayout();
+            this.pageAll.SuspendLayout();
+            this.page405.SuspendLayout();
+            this.page488.SuspendLayout();
+            this.page561.SuspendLayout();
+            this.page640.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageAll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image405)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image488)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image561)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image640)).BeginInit();
             this.SuspendLayout();
             // 
             // dockToolBar
@@ -182,18 +200,6 @@
             this.lbCurrent.Size = new System.Drawing.Size(101, 18);
             this.lbCurrent.Text = "[255, (512, 512)]";
             // 
-            // pictureBox
-            // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.RightClickMenu;
-            this.pictureBox.Location = new System.Drawing.Point(0, 26);
-            this.pictureBox.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(592, 520);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox.TabIndex = 15;
-            this.pictureBox.TabStop = false;
-            // 
             // c1CommandDock1
             // 
             this.c1CommandDock1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
@@ -217,24 +223,139 @@
             this.c1ToolBar1.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.c1ToolBar1.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
-            // ibxColorMapping
+            // tabControl
             // 
-            this.ibxColorMapping.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ibxColorMapping.Location = new System.Drawing.Point(0, 517);
-            this.ibxColorMapping.Margin = new System.Windows.Forms.Padding(4);
-            this.ibxColorMapping.Name = "ibxColorMapping";
-            this.ibxColorMapping.Size = new System.Drawing.Size(566, 29);
-            this.ibxColorMapping.TabIndex = 18;
-            this.ibxColorMapping.TabStop = false;
+            this.tabControl.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControl.Controls.Add(this.pageAll);
+            this.tabControl.Controls.Add(this.page405);
+            this.tabControl.Controls.Add(this.page488);
+            this.tabControl.Controls.Add(this.page561);
+            this.tabControl.Controls.Add(this.page640);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 26);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(566, 520);
+            this.tabControl.TabIndex = 15;
+            // 
+            // pageAll
+            // 
+            this.pageAll.BackColor = System.Drawing.Color.Transparent;
+            this.pageAll.Controls.Add(this.imageAll);
+            this.pageAll.Location = new System.Drawing.Point(4, 4);
+            this.pageAll.Margin = new System.Windows.Forms.Padding(0);
+            this.pageAll.Name = "pageAll";
+            this.pageAll.Size = new System.Drawing.Size(558, 494);
+            this.pageAll.TabIndex = 0;
+            this.pageAll.Text = "全部";
+            // 
+            // page405
+            // 
+            this.page405.BackColor = System.Drawing.Color.Transparent;
+            this.page405.Controls.Add(this.image405);
+            this.page405.Location = new System.Drawing.Point(4, 4);
+            this.page405.Margin = new System.Windows.Forms.Padding(0);
+            this.page405.Name = "page405";
+            this.page405.Size = new System.Drawing.Size(558, 494);
+            this.page405.TabIndex = 1;
+            this.page405.Text = "405nm";
+            // 
+            // page488
+            // 
+            this.page488.BackColor = System.Drawing.Color.Transparent;
+            this.page488.Controls.Add(this.image488);
+            this.page488.Location = new System.Drawing.Point(4, 4);
+            this.page488.Margin = new System.Windows.Forms.Padding(0);
+            this.page488.Name = "page488";
+            this.page488.Size = new System.Drawing.Size(558, 494);
+            this.page488.TabIndex = 2;
+            this.page488.Text = "488nm";
+            // 
+            // page561
+            // 
+            this.page561.BackColor = System.Drawing.Color.Transparent;
+            this.page561.Controls.Add(this.image561);
+            this.page561.Location = new System.Drawing.Point(4, 4);
+            this.page561.Margin = new System.Windows.Forms.Padding(0);
+            this.page561.Name = "page561";
+            this.page561.Size = new System.Drawing.Size(558, 494);
+            this.page561.TabIndex = 3;
+            this.page561.Text = "561nm";
+            // 
+            // page640
+            // 
+            this.page640.BackColor = System.Drawing.Color.Transparent;
+            this.page640.Controls.Add(this.image640);
+            this.page640.Location = new System.Drawing.Point(4, 4);
+            this.page640.Margin = new System.Windows.Forms.Padding(0);
+            this.page640.Name = "page640";
+            this.page640.Size = new System.Drawing.Size(558, 494);
+            this.page640.TabIndex = 4;
+            this.page640.Text = "640nm";
+            // 
+            // imageAll
+            // 
+            this.imageAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageAll.Location = new System.Drawing.Point(0, 0);
+            this.imageAll.Margin = new System.Windows.Forms.Padding(0);
+            this.imageAll.Name = "imageAll";
+            this.imageAll.Size = new System.Drawing.Size(558, 494);
+            this.imageAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imageAll.TabIndex = 2;
+            this.imageAll.TabStop = false;
+            // 
+            // image405
+            // 
+            this.image405.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image405.Location = new System.Drawing.Point(0, 0);
+            this.image405.Margin = new System.Windows.Forms.Padding(0);
+            this.image405.Name = "image405";
+            this.image405.Size = new System.Drawing.Size(558, 494);
+            this.image405.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.image405.TabIndex = 2;
+            this.image405.TabStop = false;
+            // 
+            // image488
+            // 
+            this.image488.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image488.Location = new System.Drawing.Point(0, 0);
+            this.image488.Margin = new System.Windows.Forms.Padding(0);
+            this.image488.Name = "image488";
+            this.image488.Size = new System.Drawing.Size(558, 494);
+            this.image488.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.image488.TabIndex = 2;
+            this.image488.TabStop = false;
+            // 
+            // image561
+            // 
+            this.image561.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image561.Location = new System.Drawing.Point(0, 0);
+            this.image561.Margin = new System.Windows.Forms.Padding(0);
+            this.image561.Name = "image561";
+            this.image561.Size = new System.Drawing.Size(558, 494);
+            this.image561.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.image561.TabIndex = 3;
+            this.image561.TabStop = false;
+            // 
+            // image640
+            // 
+            this.image640.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image640.Location = new System.Drawing.Point(0, 0);
+            this.image640.Margin = new System.Windows.Forms.Padding(0);
+            this.image640.Name = "image640";
+            this.image640.Size = new System.Drawing.Size(558, 494);
+            this.image640.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.image640.TabIndex = 2;
+            this.image640.TabStop = false;
             // 
             // FormImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 569);
-            this.Controls.Add(this.ibxColorMapping);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.c1CommandDock1);
-            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dockToolBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -245,10 +366,19 @@
             this.dockToolBar.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1CommandDock1)).EndInit();
             this.c1CommandDock1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ibxColorMapping)).EndInit();
+            this.tabControl.ResumeLayout(false);
+            this.pageAll.ResumeLayout(false);
+            this.page405.ResumeLayout(false);
+            this.page488.ResumeLayout(false);
+            this.page561.ResumeLayout(false);
+            this.page640.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imageAll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image405)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image488)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image561)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image640)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,9 +402,18 @@
         private System.Windows.Forms.ToolStripStatusLabel lbTimeSpan;
         private System.Windows.Forms.ToolStripSeparator sp6;
         private System.Windows.Forms.ToolStripStatusLabel lbCurrent;
-        private Emgu.CV.UI.ImageBox pictureBox;
         private C1.Win.C1Command.C1CommandDock c1CommandDock1;
         private C1.Win.C1Command.C1ToolBar c1ToolBar1;
-        private Emgu.CV.UI.ImageBox ibxColorMapping;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage pageAll;
+        private System.Windows.Forms.TabPage page405;
+        private System.Windows.Forms.TabPage page488;
+        private System.Windows.Forms.TabPage page561;
+        private System.Windows.Forms.TabPage page640;
+        private Emgu.CV.UI.ImageBox imageAll;
+        private Emgu.CV.UI.ImageBox image405;
+        private Emgu.CV.UI.ImageBox image488;
+        private Emgu.CV.UI.ImageBox image561;
+        private Emgu.CV.UI.ImageBox image640;
     }
 }
