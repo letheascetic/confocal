@@ -1,4 +1,5 @@
 ﻿using confocal_core.Model;
+using confocal_core.Properties;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using log4net;
@@ -531,8 +532,8 @@ namespace confocal_core.ViewModel
         public ScanSettingsViewModel()
         {
             // 采集模式
-            ScanLiveMode = ScanAcquisitionModel.Initialize(0);
-            ScanCaptureMode = ScanAcquisitionModel.Initialize(1);
+            ScanLiveMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.LIVE);
+            ScanCaptureMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.CAPTURE);
 
             // 扫描头
             ScannerHeadTwoGalv = ScannerHeadModel.Initialize(ScannerHeadModel.TWO_SCANNERS);
@@ -549,14 +550,14 @@ namespace confocal_core.ViewModel
             // 扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
             // 跳行扫描
-            ScanLineSkipEnabled = false;
+            ScanLineSkipEnabled = Settings.Default.ScanLineSkipEnabled;
             ScanLineSkipList = ScanLineSkipModel.Initialize();
-            SelectedScanLineSkip = ScanLineSkipList[0];
+            SelectedScanLineSkip = ScanLineSkipList.Where(p => p.ID == Settings.Default.ScanLineSkip).First();
             // 扫描通道
-            ScanChannel405 = ScanChannelModel.Initialize(0);
-            ScanChannel488 = ScanChannelModel.Initialize(1);
-            ScanChannel561 = ScanChannelModel.Initialize(2);
-            ScanChannel640 = ScanChannelModel.Initialize(3);
+            ScanChannel405 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL405);
+            ScanChannel488 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL488);
+            ScanChannel561 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL561);
+            ScanChannel640 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL640);
             // 小孔
             ScanPinHoleList = ScanPinHoleModel.Initialize();
             SelectedPinHole = ScanPinHoleList[0];

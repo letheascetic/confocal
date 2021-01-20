@@ -100,6 +100,8 @@
   <ItemGroup>
     <Compile Include="Common\GalvanoProperty.cs" />
     <Compile Include="Common\NiDaq.cs" />
+    <Compile Include="Common\Sequence.cs" />
+    <Compile Include="Model\Config.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="Model\AcquisitionPropertyModel.cs" />
     <Compile Include="Model\GalvoPrppertyModel.cs" />

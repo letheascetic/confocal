@@ -35,7 +35,7 @@ namespace confocal_core.Common
         public AiSamplesReceivedEventHandler AiSamplesReceived;
         public CiSamplesReceivedEventHandler CiSamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private SchedulerViewModel mConfig;
+        private Config mConfig;
         private Task mAoTask;
         private Task mDoTask;
         private Task mAiTask;
@@ -45,9 +45,9 @@ namespace confocal_core.Common
         private int[] mAiChannelIndex;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        public NiDaq(SchedulerViewModel config)
+        public NiDaq()
         {
-            mConfig = config;
+            mConfig = Config.GetConfig();
             mAoTask = null;
             mDoTask = null;
             mAiTask = null;
@@ -58,8 +58,6 @@ namespace confocal_core.Common
             int channelNum = mConfig.GetChannelNum();
             mAiChannelIndex = Enumerable.Repeat<int>(-1, channelNum).ToArray();
         }
-
-
 
 
         /// <summary>

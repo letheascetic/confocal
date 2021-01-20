@@ -22,15 +22,25 @@ namespace confocal_core.Model
     /// </summary>
     public class ScanAreaTypeModel : ScanPropertyBaseModel
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public static readonly int SQUARE = 0;
+        public static readonly int BANK = 1;
+        public static readonly int LINE = 2;
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
         public static ScanAreaTypeModel Initialize(int id)
         {
-            if (id == 0)
+            if (id == SQUARE)
             {
-                return new ScanAreaTypeModel() { ID = 0, Text = "方形", IsEnabled = true };
+                return new ScanAreaTypeModel() { ID = SQUARE, Text = "方形", IsEnabled = true };
             }
-            else if (id == 1)
+            else if (id == BANK)
             {
-                return new ScanAreaTypeModel() { ID = 1, Text = "矩形", IsEnabled = false };
+                return new ScanAreaTypeModel() { ID = BANK, Text = "矩形", IsEnabled = false };
+            }
+            else if (id == LINE)
+            {
+                return new ScanAreaTypeModel() { ID = LINE, Text = "线条", IsEnabled = false };
             }
             else
             {
