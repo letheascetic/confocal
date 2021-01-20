@@ -7,15 +7,12 @@ using System.Text;
 
 namespace confocal_core.ViewModel
 {
-    public class MainViemModel : ViewModelBase
+    public class ImageViewModel : ViewModelBase
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-
-        private SchedulerViewModel mSchedulerVM;
-
-
+        
 
     }
 }

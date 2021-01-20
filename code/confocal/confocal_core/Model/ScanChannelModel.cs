@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using confocal_core.Properties;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -43,6 +44,11 @@ namespace confocal_core.Model
     /// </summary>
     public class ScanChannelModel : ObservableObject
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public static readonly int CHANNEL405 = 0;
+        public static readonly int CHANNEL488 = 1;
+        public static readonly int CHANNEL561 = 2;
+        public static readonly int CHANNEL640 = 3;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private int id;                     // 通道ID
         private bool collapesd;             // 折叠
@@ -178,62 +184,62 @@ namespace confocal_core.Model
                 case 0:
                     return new ScanChannelModel()
                     {
-                        ID = 0,
+                        ID = CHANNEL405,
                         Collapsed = false,
                         Name = "通道1",
-                        LaserPower = 2.0,
-                        LaserColor = Color.MediumPurple,
+                        LaserPower = Settings.Default.ScanChannel405LaserPower,
+                        LaserColor = Settings.Default.ScanChannel561LaserColor,
                         LaserWaveLength = "405nm",
-                        Activated = false,
-                        Gain = 50,
-                        Offset = 0,
-                        Gamma = 50,
-                        PseudoColor = Color.MediumPurple
+                        Activated = Settings.Default.ScanChannel405Activated,
+                        Gain = Settings.Default.ScanChannel405Gain,
+                        Offset = Settings.Default.ScanChannel405Offset,
+                        Gamma = Settings.Default.ScanChannel405Gamma,
+                        PseudoColor = Settings.Default.ScanChannel405PseudoColor
                     };
                 case 1:
                     return new ScanChannelModel()
                     {
-                        ID = 1,
+                        ID = CHANNEL488,
                         Collapsed = false,
                         Name = "通道2",
-                        LaserPower = 2.0,
-                        LaserColor = Color.DarkCyan,
+                        LaserPower = Settings.Default.ScanChannel488LaserPower,
+                        LaserColor = Settings.Default.ScanChannel488LaserColor,
                         LaserWaveLength = "488nm",
-                        Activated = false,
-                        Gain = 50,
-                        Offset = 0,
-                        Gamma = 50,
-                        PseudoColor = Color.DarkCyan
+                        Activated = Settings.Default.ScanChannel488Activated,
+                        Gain = Settings.Default.ScanChannel488Gain,
+                        Offset = Settings.Default.ScanChannel488Offset,
+                        Gamma = Settings.Default.ScanChannel488Gamma,
+                        PseudoColor = Settings.Default.ScanChannel488PseudoColor
                     };
                 case 2:
                     return new ScanChannelModel()
                     {
-                        ID = 2,
+                        ID = CHANNEL561,
                         Collapsed = false,
                         Name = "通道3",
-                        LaserPower = 2.0,
-                        LaserColor = Color.YellowGreen,
+                        LaserPower = Settings.Default.ScanChannel561LaserPower,
+                        LaserColor = Settings.Default.ScanChannel561LaserColor,
                         LaserWaveLength = "561nm",
-                        Activated = false,
-                        Gain = 50,
-                        Offset = 0,
-                        Gamma = 50,
-                        PseudoColor = Color.YellowGreen
+                        Activated = Settings.Default.ScanChannel561Activated,
+                        Gain = Settings.Default.ScanChannel561Gain,
+                        Offset = Settings.Default.ScanChannel561Offset,
+                        Gamma = Settings.Default.ScanChannel561Gamma,
+                        PseudoColor = Settings.Default.ScanChannel561PseudoColor
                     };
                 case 3:
                     return new ScanChannelModel()
                     {
-                        ID = 3,
+                        ID = CHANNEL640,
                         Collapsed = false,
                         Name = "通道4",
-                        LaserPower = 2.0,
-                        LaserColor = Color.MediumVioletRed,
+                        LaserPower = Settings.Default.ScanChannel640LaserPower,
+                        LaserColor = Settings.Default.ScanChannel640LaserColor,
                         LaserWaveLength = "640nm",
-                        Activated = false,
-                        Gain = 50,
-                        Offset = 0,
-                        Gamma = 50,
-                        PseudoColor = Color.MediumVioletRed
+                        Activated = Settings.Default.ScanChannel640Activated,
+                        Gain = Settings.Default.ScanChannel640Gain,
+                        Offset = Settings.Default.ScanChannel640Offset,
+                        Gamma = Settings.Default.ScanChannel640Gamma,
+                        PseudoColor = Settings.Default.ScanChannel640PseudoColor
                     };
                 default:
                     throw new ArgumentOutOfRangeException("ID Exception");

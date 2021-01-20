@@ -1,7 +1,9 @@
 ﻿using C1.Win.C1InputPanel;
 using C1.Win.C1Ribbon;
 using C1.Win.C1Themes;
+using confocal_core;
 using confocal_core.Model;
+using confocal_core.ViewModel;
 using confocal_ui.View;
 using log4net;
 using System;
@@ -24,6 +26,8 @@ namespace confocal_ui
         private FormScanSettings mFormScanSetting;
         private FormScanArea mFormScanArea;
         private FormSysSettings mFormSysSettings;
+
+        private MainViemModel mMainVM;
 
         public FormMain()
         {
@@ -48,7 +52,6 @@ namespace confocal_ui
             mFormSysSettings = new FormSysSettings();
             mFormSysSettings.MdiParent = this;
             mFormSysSettings.Visible = false;
-
 
         }
 
@@ -79,9 +82,95 @@ namespace confocal_ui
         /// </summary>
         private void RegisterEvents()
         {
+            mFormScanSetting.ScanAcquisitionChangedEvent += ScanAcquisitionChangedHandler;
+
+
             mFormScanSetting.ScanPixelChangedEvent += mFormScanArea.ScanPixelChangedHandler;
             mFormScanArea.ScanPixelChangedEvent += mFormScanSetting.ScanPixelChangedHandler;
             mFormScanSetting.ScanPixelDwellChangedEvent += mFormScanArea.ScanPixelDwellChangedHandler;
+        }
+
+        /// <summary>
+        /// 采集模式更新处理函数
+        /// </summary>
+        /// <param name="scanAcquisition"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE ScanAcquisitionChangedHandler(ScanAcquisitionModel scanAcquisition)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 扫描头更新处理函数
+        /// </summary>
+        /// <param name="scannerHead"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE ScannerHeadModelChangedHandler(ScannerHeadModel scannerHead)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 扫描方向更新处理函数
+        /// </summary>
+        /// <param name="scanDirection"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE ScanDirectionChangedHandler(ScanDirectionModel scanDirection)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 扫描模式更新处理函数
+        /// </summary>
+        /// <param name="scanMode"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE ScanModeChangedHandler(ScanModeModel scanMode)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 跳行扫描使能更新处理函数
+        /// </summary>
+        /// <param name="lineSkipEnabled"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE LineSkipEnableChangedEventHandler(bool lineSkipEnabled)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 跳行扫描参数更新处理函数
+        /// </summary>
+        /// <param name="lineSkip"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE LineSkipChangedHandler(ScanLineSkipModel lineSkip)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 扫描像素更新处理函数
+        /// </summary>
+        /// <param name="scanPixel"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE ScanPixelChangedHandler(ScanPixelModel scanPixel)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 像素事件更新处理函数
+        /// </summary>
+        /// <param name="scanPixelDwell"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE ScanPixelDwellChangedHandler(ScanPixelDwellModel scanPixelDwell)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+        /// <summary>
+        /// 小孔孔径更新处理函数
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        private API_RETURN_CODE PinHoleChangedHandler(int id, int size)
+        {
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>

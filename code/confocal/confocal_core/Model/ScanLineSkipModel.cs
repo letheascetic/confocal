@@ -44,6 +44,11 @@ namespace confocal_core.Model
             };
         }
 
+        public static ScanLineSkipModel LoadDefault()
+        {
+            return new ScanLineSkipModel() { ID = 0, Text = "2x", Data = 2 };
+        }
+
     }
 
 }

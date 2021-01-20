@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Common\GalvanoProperty.cs" />
     <Compile Include="Common\NiDaq.cs" />
+    <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="Model\AcquisitionPropertyModel.cs" />
     <Compile Include="Model\GalvoPrppertyModel.cs" />
     <Compile Include="Model\ScanAreaModel.cs" />
@@ -112,6 +113,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ImageViewModel.cs" />
     <Compile Include="ViewModel\MainViemModel.cs" />
     <Compile Include="ViewModel\ScanAreaViewModel.cs" />
     <Compile Include="ViewModel\ScanSettingsViewModel.cs" />

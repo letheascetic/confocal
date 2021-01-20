@@ -90,10 +90,10 @@
             this.lbTimeSpan,
             this.sp6,
             this.lbCurrent});
-            this.statusStrip.Location = new System.Drawing.Point(0, 673);
+            this.statusStrip.Location = new System.Drawing.Point(0, 535);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip.Size = new System.Drawing.Size(784, 25);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip.Size = new System.Drawing.Size(588, 23);
             this.statusStrip.TabIndex = 3;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -101,78 +101,78 @@
             // 
             this.lbPixelSize.BackColor = System.Drawing.Color.Transparent;
             this.lbPixelSize.Name = "lbPixelSize";
-            this.lbPixelSize.Size = new System.Drawing.Size(79, 20);
+            this.lbPixelSize.Size = new System.Drawing.Size(64, 18);
             this.lbPixelSize.Text = "{0} um/px";
             // 
             // sp2
             // 
             this.sp2.Name = "sp2";
-            this.sp2.Size = new System.Drawing.Size(6, 25);
+            this.sp2.Size = new System.Drawing.Size(6, 23);
             // 
             // lbScanPixels
             // 
             this.lbScanPixels.BackColor = System.Drawing.Color.Transparent;
             this.lbScanPixels.Name = "lbScanPixels";
-            this.lbScanPixels.Size = new System.Drawing.Size(125, 20);
+            this.lbScanPixels.Size = new System.Drawing.Size(101, 18);
             this.lbScanPixels.Text = "512 x 512 pixels";
             // 
             // sp1
             // 
             this.sp1.Name = "sp1";
-            this.sp1.Size = new System.Drawing.Size(6, 25);
+            this.sp1.Size = new System.Drawing.Size(6, 23);
             // 
             // lbBitDepth
             // 
             this.lbBitDepth.BackColor = System.Drawing.Color.Transparent;
             this.lbBitDepth.Name = "lbBitDepth";
-            this.lbBitDepth.Size = new System.Drawing.Size(54, 20);
+            this.lbBitDepth.Size = new System.Drawing.Size(43, 18);
             this.lbBitDepth.Text = "16bits";
             // 
             // sp4
             // 
             this.sp4.Name = "sp4";
-            this.sp4.Size = new System.Drawing.Size(6, 25);
+            this.sp4.Size = new System.Drawing.Size(6, 23);
             // 
             // lbFps
             // 
             this.lbFps.BackColor = System.Drawing.Color.Transparent;
             this.lbFps.Name = "lbFps";
-            this.lbFps.Size = new System.Drawing.Size(66, 20);
+            this.lbFps.Size = new System.Drawing.Size(54, 18);
             this.lbFps.Text = "1.28 fps";
             // 
             // sp3
             // 
             this.sp3.Name = "sp3";
-            this.sp3.Size = new System.Drawing.Size(6, 25);
+            this.sp3.Size = new System.Drawing.Size(6, 23);
             // 
             // lbFrame
             // 
             this.lbFrame.BackColor = System.Drawing.Color.Transparent;
             this.lbFrame.Name = "lbFrame";
-            this.lbFrame.Size = new System.Drawing.Size(96, 20);
+            this.lbFrame.Size = new System.Drawing.Size(80, 18);
             this.lbFrame.Text = "NO. 1 frame";
             // 
             // sp5
             // 
             this.sp5.Name = "sp5";
-            this.sp5.Size = new System.Drawing.Size(6, 25);
+            this.sp5.Size = new System.Drawing.Size(6, 23);
             // 
             // lbTimeSpan
             // 
             this.lbTimeSpan.BackColor = System.Drawing.Color.Transparent;
             this.lbTimeSpan.Name = "lbTimeSpan";
-            this.lbTimeSpan.Size = new System.Drawing.Size(89, 20);
+            this.lbTimeSpan.Size = new System.Drawing.Size(72, 18);
             this.lbTimeSpan.Text = "xx seconds";
             // 
             // sp6
             // 
             this.sp6.Name = "sp6";
-            this.sp6.Size = new System.Drawing.Size(6, 25);
+            this.sp6.Size = new System.Drawing.Size(6, 23);
             // 
             // lbCurrent
             // 
             this.lbCurrent.Name = "lbCurrent";
-            this.lbCurrent.Size = new System.Drawing.Size(126, 20);
+            this.lbCurrent.Size = new System.Drawing.Size(101, 18);
             this.lbCurrent.Text = "[255, (512, 512)]";
             // 
             // m_timer
@@ -192,9 +192,9 @@
             this.btnOpen,
             this.ts2,
             this.btnSave});
-            this.toolStripTop.Location = new System.Drawing.Point(0, 645);
+            this.toolStripTop.Location = new System.Drawing.Point(0, 508);
             this.toolStripTop.Name = "toolStripTop";
-            this.toolStripTop.Size = new System.Drawing.Size(784, 28);
+            this.toolStripTop.Size = new System.Drawing.Size(588, 27);
             this.toolStripTop.TabIndex = 4;
             this.toolStripTop.Text = "toolStrip";
             // 
@@ -204,14 +204,14 @@
             this.cbxSelect.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.cbxSelect.IntegralHeight = false;
             this.cbxSelect.Name = "cbxSelect";
-            this.cbxSelect.Size = new System.Drawing.Size(99, 28);
+            this.cbxSelect.Size = new System.Drawing.Size(75, 27);
             this.cbxSelect.ToolTipText = "通道选择";
             this.cbxSelect.SelectedIndexChanged += new System.EventHandler(this.cbxSelect_SelectedIndexChanged);
             // 
             // ts1
             // 
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(6, 28);
+            this.ts1.Size = new System.Drawing.Size(6, 27);
             // 
             // btnColor
             // 
@@ -220,14 +220,14 @@
             this.btnColor.Image = ((System.Drawing.Image)(resources.GetObject("btnColor.Image")));
             this.btnColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(23, 25);
+            this.btnColor.Size = new System.Drawing.Size(23, 24);
             this.btnColor.ToolTipText = "选择伪彩色";
             this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // ts3
             // 
             this.ts3.Name = "ts3";
-            this.ts3.Size = new System.Drawing.Size(6, 28);
+            this.ts3.Size = new System.Drawing.Size(6, 27);
             // 
             // btnOpen
             // 
@@ -235,14 +235,14 @@
             this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
             this.btnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(24, 25);
+            this.btnOpen.Size = new System.Drawing.Size(24, 24);
             this.btnOpen.Text = "保存";
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // ts2
             // 
             this.ts2.Name = "ts2";
-            this.ts2.Size = new System.Drawing.Size(6, 28);
+            this.ts2.Size = new System.Drawing.Size(6, 27);
             // 
             // btnSave
             // 
@@ -250,7 +250,7 @@
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(24, 25);
+            this.btnSave.Size = new System.Drawing.Size(24, 24);
             this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -261,9 +261,9 @@
             this.toolStripRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnDisplayCenter,
             this.btnDisplayZoom});
-            this.toolStripRight.Location = new System.Drawing.Point(744, 0);
+            this.toolStripRight.Location = new System.Drawing.Point(556, 0);
             this.toolStripRight.Name = "toolStripRight";
-            this.toolStripRight.Size = new System.Drawing.Size(40, 645);
+            this.toolStripRight.Size = new System.Drawing.Size(32, 508);
             this.toolStripRight.TabIndex = 6;
             this.toolStripRight.Text = "toolStrip";
             // 
@@ -297,9 +297,8 @@
             this.pnlImage.Controls.Add(this.ibxColorMapping);
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlImage.Location = new System.Drawing.Point(0, 0);
-            this.pnlImage.Margin = new System.Windows.Forms.Padding(4);
             this.pnlImage.Name = "pnlImage";
-            this.pnlImage.Size = new System.Drawing.Size(744, 645);
+            this.pnlImage.Size = new System.Drawing.Size(556, 508);
             this.pnlImage.TabIndex = 7;
             // 
             // pictureBox
@@ -307,9 +306,8 @@
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.RightClickMenu;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(744, 616);
+            this.pictureBox.Size = new System.Drawing.Size(556, 485);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
@@ -317,10 +315,9 @@
             // ibxColorMapping
             // 
             this.ibxColorMapping.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ibxColorMapping.Location = new System.Drawing.Point(0, 616);
-            this.ibxColorMapping.Margin = new System.Windows.Forms.Padding(4);
+            this.ibxColorMapping.Location = new System.Drawing.Point(0, 485);
             this.ibxColorMapping.Name = "ibxColorMapping";
-            this.ibxColorMapping.Size = new System.Drawing.Size(744, 29);
+            this.ibxColorMapping.Size = new System.Drawing.Size(556, 23);
             this.ibxColorMapping.TabIndex = 2;
             this.ibxColorMapping.TabStop = false;
             // 
@@ -333,24 +330,24 @@
             this.tsStartAOI});
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(174, 76);
+            this.contextMenuStrip.Size = new System.Drawing.Size(148, 70);
             // 
             // tsResetZone
             // 
             this.tsResetZone.Name = "tsResetZone";
-            this.tsResetZone.Size = new System.Drawing.Size(173, 24);
+            this.tsResetZone.Size = new System.Drawing.Size(147, 22);
             this.tsResetZone.Text = "重置到视图全区域";
             // 
             // tsSelectZone
             // 
             this.tsSelectZone.Name = "tsSelectZone";
-            this.tsSelectZone.Size = new System.Drawing.Size(173, 24);
+            this.tsSelectZone.Size = new System.Drawing.Size(147, 22);
             this.tsSelectZone.Text = "选择指定扫描区域";
             // 
             // tsStartAOI
             // 
             this.tsStartAOI.Name = "tsStartAOI";
-            this.tsStartAOI.Size = new System.Drawing.Size(173, 24);
+            this.tsStartAOI.Size = new System.Drawing.Size(147, 22);
             this.tsStartAOI.Text = "扫描感兴趣区域";
             // 
             // m_cursorTimer
@@ -360,18 +357,17 @@
             // 
             // FormDisplay
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(784, 698);
+            this.ClientSize = new System.Drawing.Size(588, 558);
             this.Controls.Add(this.pnlImage);
             this.Controls.Add(this.toolStripRight);
             this.Controls.Add(this.toolStripTop);
             this.Controls.Add(this.statusStrip);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormDisplay";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "扫描图像";

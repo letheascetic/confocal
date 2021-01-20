@@ -96,15 +96,19 @@ namespace confocal_core.Model
     /// </summary>
     public class ScanAcquisitionModel : ScanPropertyBaseModel
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public static readonly int LIVE = 0;
+        public static readonly int CAPTURE = 1;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public static ScanAcquisitionModel Initialize(int id)
         {
-            if (id == 0)
+            if (id == LIVE)
             {
-                return new ScanAcquisitionModel() { ID = 0, IsEnabled = false, Text = "实时" };
+                return new ScanAcquisitionModel() { ID = LIVE, IsEnabled = false, Text = "实时" };
             }
-            else if (id == 1)
+            else if (id == CAPTURE)
             {
-                return new ScanAcquisitionModel() { ID = 1, IsEnabled = false, Text = "捕捉" };
+                return new ScanAcquisitionModel() { ID = CAPTURE, IsEnabled = false, Text = "捕捉" };
             }
             else
             {
@@ -212,6 +216,11 @@ namespace confocal_core.Model
                 new ScanPixelModel(){ ID = 6, IsEnabled = false, Text = "4096", Data = 4096 }
             };
         }
+    
+        public static ScanPixelModel LoadDefault()
+        {
+            return new ScanPixelModel() { ID = 3, IsEnabled = true, Text = "512", Data = 512 };
+        }
     }
 
     /// <summary>
@@ -233,6 +242,12 @@ namespace confocal_core.Model
                 new ScanPixelDwellModel(){ ID = 7, IsEnabled = false, Text = "100", Data = 100 }
             };
         }
+
+        public static ScanPixelDwellModel LoadDefault()
+        {
+            return new ScanPixelDwellModel() { ID = 3, IsEnabled = true, Text = "8", Data = 8 };
+        }
+
     }
 
 }

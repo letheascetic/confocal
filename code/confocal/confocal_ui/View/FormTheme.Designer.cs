@@ -119,7 +119,6 @@
             this.ctdbgThemes.PreviewInfo.Size = new System.Drawing.Size(0, 0);
             this.ctdbgThemes.PreviewInfo.ZoomFactor = 75D;
             this.ctdbgThemes.PrintInfo.PageSettings = ((System.Drawing.Printing.PageSettings)(resources.GetObject("ctdbgThemes.PrintInfo.PageSettings")));
-            this.ctdbgThemes.PropBag = resources.GetString("ctdbgThemes.PropBag");
             this.ctdbgThemes.RowDivider.Color = System.Drawing.Color.Gray;
             this.ctdbgThemes.RowDivider.Style = C1.Win.C1TrueDBGrid.LineStyleEnum.Single;
             this.ctdbgThemes.RowHeight = 15;
@@ -130,6 +129,7 @@
             this.ctdbgThemes.UseCompatibleTextRendering = false;
             this.ctdbgThemes.DoubleClick += new System.EventHandler(this.ThemesDoubleClick);
             this.ctdbgThemes.Resize += new System.EventHandler(this.ThemesResize);
+            this.ctdbgThemes.PropBag = resources.GetString("ctdbgThemes.PropBag");
             // 
             // btnApply
             // 
