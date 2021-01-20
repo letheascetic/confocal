@@ -14,14 +14,14 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private GalvoPrppertyModel mGalvoPrpperty;
+        private GalvoPropertyModel mGalvoPrpperty;
         private ScanAreaModel mFullScanArea;
         private DetectorModel mDetector;
 
         /// <summary>
         /// 振镜属性
         /// </summary>
-        public GalvoPrppertyModel GalvoProperty
+        public GalvoPropertyModel GalvoProperty
         {
             get { return mGalvoPrpperty; }
             set { mGalvoPrpperty = value; RaisePropertyChanged(() => GalvoProperty); }
@@ -108,7 +108,7 @@ namespace confocal_core.ViewModel
 
         public SysSettingsViewModel()
         {
-            GalvoProperty = new GalvoPrppertyModel();
+            GalvoProperty = new GalvoPropertyModel();
             FullScanArea = ScanAreaModel.CreateFullScanArea();
             Detector = new DetectorModel();
 
