@@ -18,6 +18,18 @@ namespace confocal_core.Model
         private volatile static Config pConfig = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
+        public bool Debugging { get; set; }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private string laserPortName;
+        /// <summary>
+        /// 激光端口
+        /// </summary>
+        public string LaserPortName
+        {
+            get { return laserPortName; }
+            set { laserPortName = value; RaisePropertyChanged(() => LaserPortName); }
+        }
 
         private ScanAcquisitionModel selectedAcquisitionMode;
         /// <summary>
@@ -198,6 +210,8 @@ namespace confocal_core.Model
             set { selectedScanArea = value; RaisePropertyChanged(() => SelectedScanArea); }
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
         public static Config GetConfig()
         {
             if (pConfig == null)
@@ -218,6 +232,20 @@ namespace confocal_core.Model
             return CHAN_NUM;
         }
 
+        /// <summary>
+        /// 当前激活的通道数
+        /// </summary>
+        /// <returns></returns>
+        public int GetActivatedChannelNum()
+        {
+            int activatedChannelNum = 0;
+            activatedChannelNum += ScanChannel405.Activated ? 1 : 0;
+            activatedChannelNum += ScanChannel488.Activated ? 1 : 0;
+            activatedChannelNum += ScanChannel561.Activated ? 1 : 0;
+            activatedChannelNum += ScanChannel640.Activated ? 1 : 0;
+            return activatedChannelNum;
+        }
+
         public ScanChannelModel FindScanChannel(int id)
         {
             switch (id)
@@ -235,8 +263,14 @@ namespace confocal_core.Model
             }
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         private Config()
         {
+            Debugging = true;
+            LaserPortName = Settings.Default.LaserPortName;
+
             SelectedAcquisitioMode = null;
             SelectedScannerHead = ScannerHeadModel.Initialize(Settings.Default.ScannerHead);
             SelectedScanDirection = ScanDirectionModel.Initialize(Settings.Default.ScanDirection);

@@ -113,5 +113,212 @@ namespace confocal_core.Model
             Y2GalvoAoChannel = string.Concat(deviceName, Settings.Default.Y2GalvoAoChannel);
         }
 
+        /// <summary>
+        /// X坐标->X振镜电压
+        /// </summary>
+        /// <param name="xCoordinate"></param>
+        /// <returns></returns>
+        public double XCoordinateToVoltage(double xCoordinate)
+        {
+            return xCoordinate * XGalvoCalibrationVoltage + XGalvoOffsetVoltage;
+        }
+
+        /// <summary>
+        /// X坐标序列->X振镜电压序列
+        /// </summary>
+        /// <param name="xCoordinates"></param>
+        /// <returns></returns>
+        public double[] XCoordinateToVoltage(double[] xCoordinates)
+        {
+            double[] xVoltages = new double[xCoordinates.Length];
+            for (int i = 0; i < xCoordinates.Length; i++)
+            {
+                xVoltages[i] = xCoordinates[i] * XGalvoCalibrationVoltage + XGalvoOffsetVoltage;
+            }
+            return xVoltages;
+        }
+
+        /// <summary>
+        /// Y坐标->Y振镜电压
+        /// </summary>
+        /// <param name="yCoordinate"></param>
+        /// <returns></returns>
+        public double YCoordinateToVoltage(double yCoordinate)
+        {
+            return yCoordinate * YGalvoCalibrationVoltage + YGalvoOffsetVoltage;
+        }
+
+        /// <summary>
+        /// Y坐标序列->Y振镜电压序列
+        /// </summary>
+        /// <param name="yCoordinates"></param>
+        /// <returns></returns>
+        public double[] YCoordinateToVoltage(double[] yCoordinates)
+        {
+            double[] yVoltages = new double[yCoordinates.Length];
+            for (int i = 0; i < yCoordinates.Length; i++)
+            {
+                yVoltages[i] = yCoordinates[i] * YGalvoCalibrationVoltage + YGalvoOffsetVoltage;
+            }
+            return yVoltages;
+        }
+
+        /// <summary>
+        /// X振镜电压->X坐标
+        /// </summary>
+        /// <param name="xVoltage"></param>
+        /// <returns></returns>
+        public double XVoltageToCoordinate(double xVoltage)
+        {
+            return (xVoltage - XGalvoOffsetVoltage) / XGalvoCalibrationVoltage;
+        }
+
+        /// <summary>
+        /// X振镜电压序列->X坐标序列
+        /// </summary>
+        /// <param name="xVoltages"></param>
+        /// <returns></returns>
+        public double[] XVoltageToCoordinate(double[] xVoltages)
+        {
+            double[] xCoordinates = new double[xVoltages.Length];
+            for (int i = 0; i < xVoltages.Length; i++)
+            {
+                xCoordinates[i] = (xVoltages[i] - XGalvoOffsetVoltage) / XGalvoCalibrationVoltage;
+            }
+            return xCoordinates;
+        }
+
+        /// <summary>
+        /// Y振镜电压->Y坐标
+        /// </summary>
+        /// <param name="yVoltage"></param>
+        /// <returns></returns>
+        public double YVoltageToCoordinate(double yVoltage)
+        {
+            return (yVoltage - YGalvoOffsetVoltage) / YGalvoCalibrationVoltage;
+        }
+
+        /// <summary>
+        /// Y振镜电压序列->Y坐标序列
+        /// </summary>
+        /// <param name="yVoltages"></param>
+        /// <returns></returns>
+        public double[] YVoltageToCoordinate(double[] yVoltages)
+        {
+            double[] yCoordinates = new double[yVoltages.Length];
+            for (int i = 0; i < yVoltages.Length; i++)
+            {
+                yCoordinates[i] = (yVoltages[i] - YGalvoOffsetVoltage) / YGalvoCalibrationVoltage;
+            }
+            return yCoordinates;
+        }
+
+        /// <summary>
+        /// X坐标->X振镜电压
+        /// </summary>
+        /// <param name="xCoordinate"></param>
+        /// <param name="galvoPrpperty"></param>
+        /// <returns></returns>
+        public static double XCoordinateToVoltage(double xCoordinate, GalvoPrppertyModel galvoPrpperty)
+        {
+            return xCoordinate * galvoPrpperty.xGalvoCalibrationVoltage + galvoPrpperty.XGalvoOffsetVoltage;
+        }
+
+        /// <summary>
+        /// X坐标序列->X振镜电压序列
+        /// </summary>
+        /// <param name="xCoordinates"></param>
+        /// <returns></returns>
+        public static double[] XCoordinateToVoltage(double[] xCoordinates, GalvoPrppertyModel galvoPrpperty)
+        {
+            double[] xVoltages = new double[xCoordinates.Length];
+            for (int i = 0; i < xCoordinates.Length; i++)
+            {
+                xVoltages[i] = xCoordinates[i] * galvoPrpperty.xGalvoCalibrationVoltage + galvoPrpperty.XGalvoOffsetVoltage;
+            }
+            return xVoltages;
+        }
+
+        /// <summary>
+        /// Y坐标->Y振镜电压
+        /// </summary>
+        /// <param name="yCoordinate"></param>
+        /// <param name="galvoPrpperty"></param>
+        /// <returns></returns>
+        public static double YCoordinateToVoltage(double yCoordinate, GalvoPrppertyModel galvoPrpperty)
+        {
+            return yCoordinate * galvoPrpperty.YGalvoCalibrationVoltage + galvoPrpperty.YGalvoOffsetVoltage;
+        }
+
+        /// <summary>
+        /// Y坐标序列->Y振镜电压序列
+        /// </summary>
+        /// <param name="yCoordinates"></param>
+        /// <param name="galvoPrpperty"></param>
+        /// <returns></returns>
+        public static double[] YCoordinateToVoltage(double[] yCoordinates, GalvoPrppertyModel galvoPrpperty)
+        {
+            double[] yVoltages = new double[yCoordinates.Length];
+            for (int i = 0; i < yCoordinates.Length; i++)
+            {
+                yVoltages[i] = yCoordinates[i] * galvoPrpperty.YGalvoCalibrationVoltage + galvoPrpperty.YGalvoOffsetVoltage;
+            }
+            return yVoltages;
+        }
+
+        /// <summary>
+        /// X振镜电压->X坐标
+        /// </summary>
+        /// <param name="xVoltage"></param>
+        /// <param name="galvoPrpperty"></param>
+        /// <returns></returns>
+        public static double XVoltageToCoordinate(double xVoltage, GalvoPrppertyModel galvoPrpperty)
+        {
+            return (xVoltage - galvoPrpperty.XGalvoOffsetVoltage) / galvoPrpperty.xGalvoCalibrationVoltage;
+        }
+
+        /// <summary>
+        /// X振镜电压序列->X坐标序列
+        /// </summary>
+        /// <param name="xVoltages"></param>
+        /// <param name="galvoPrpperty"></param>
+        /// <returns></returns>
+        public static double[] XVoltageToCoordinate(double[] xVoltages, GalvoPrppertyModel galvoPrpperty)
+        {
+            double[] xCoordinates = new double[xVoltages.Length];
+            for (int i = 0; i < xVoltages.Length; i++)
+            {
+                xCoordinates[i] = (xVoltages[i] - galvoPrpperty.XGalvoOffsetVoltage) / galvoPrpperty.xGalvoCalibrationVoltage;
+            }
+            return xCoordinates;
+        }
+
+        /// <summary>
+        /// Y振镜电压->Y坐标
+        /// </summary>
+        /// <param name="yVoltage"></param>
+        /// <param name="galvoPrpperty"></param>
+        /// <returns></returns>
+        public static double YVoltageToCoordinate(double yVoltage, GalvoPrppertyModel galvoPrpperty)
+        {
+            return (yVoltage - galvoPrpperty.YGalvoOffsetVoltage) / galvoPrpperty.yGalvoCalibrationVoltage;
+        }
+
+        /// <summary>
+        /// Y振镜电压序列->Y坐标序列
+        /// </summary>
+        /// <param name="yVoltages"></param>
+        /// <param name="galvoPrpperty"></param>
+        /// <returns></returns>
+        public static double[] YVoltageToCoordinate(double[] yVoltages, GalvoPrppertyModel galvoPrpperty)
+        {
+            double[] yCoordinates = new double[yVoltages.Length];
+            for (int i = 0; i < yVoltages.Length; i++)
+            {
+                yCoordinates[i] = (yVoltages[i] - galvoPrpperty.YGalvoOffsetVoltage) / galvoPrpperty.yGalvoCalibrationVoltage;
+            }
+            return yCoordinates;
+        }
+
     }
 }

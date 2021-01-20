@@ -634,5 +634,17 @@ namespace confocal_core.Properties {
                 this["TriggerReceive"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM1")]
+        public string LaserPortName {
+            get {
+                return ((string)(this["LaserPortName"]));
+            }
+            set {
+                this["LaserPortName"] = value;
+            }
+        }
     }
 }

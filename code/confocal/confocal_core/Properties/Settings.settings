@@ -155,5 +155,8 @@
     <Setting Name="TriggerReceive" Type="System.String" Scope="User">
       <Value Profile="(Default)">/PFI9</Value>
     </Setting>
+    <Setting Name="LaserPortName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
