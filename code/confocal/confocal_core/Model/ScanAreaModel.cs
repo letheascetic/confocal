@@ -58,10 +58,45 @@ namespace confocal_core.Model
         private static readonly int EXTEND_LINE_TIME_DEFAULT = 100;
         private static readonly int EXTEND_ROW_COUNT_DEFAULT = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// 行[X方向]扩展时间[单位：us]
+        /// </summary>
+        public static int ExtendLineTime { get; set; }
+        /// <summary>
+        /// [Y方向]扩展的行数
+        /// </summary>
+        public static int ExtendRowCount { get; set; }
+        /// <summary>
+        /// 行偏置时间[单位：us]
+        /// </summary>
+        public static int ExtendLineOffset { get; set; }
+        /// <summary>
+        /// [Y方向]的偏置
+        /// </summary>
+        public static int ExtendRowOffset { get; set; }
+        /// <summary>
+        /// 双向扫描中奇数偶数行错位的像素数
+        /// </summary>
+        public static int ScanPixelCalibration { get; set; }
+        /// <summary>
+        /// 行边缘区域除数因子
+        /// </summary>
+        public static double ExtendLineMarginDiv { get; set; }
+        /// <summary>
+        /// 扫描行起始时间[单双向有效]
+        /// </summary>
+        public static double ScanLineStartTime { get { return Settings.Default.GalvoResponseTime * 2; } }
+        /// <summary>
+        /// 扫描行保持时间[只对单向扫描有效]
+        /// </summary>
+        public static double ScanLineHoldTime { get { return Settings.Default.GalvoResponseTime; } }
+        /// <summary>
+        /// 扫描行结束时间[只对单向扫描有效]
+        /// </summary>
+        public static double ScanLineEndTime { get { return Settings.Default.GalvoResponseTime; } }
 
         private RectangleF scanRange;
         private string text;
-
         /// <summary>
         /// 扫描范围
         /// </summary>
@@ -70,11 +105,21 @@ namespace confocal_core.Model
             get { return scanRange; }
             set { scanRange = value; RaisePropertyChanged(() => ScanRange); }
         }
-
         public string Text
         {
             get { return text; }
             set { text = value; RaisePropertyChanged(() => Text); }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        static ScanAreaModel()
+        {
+            ExtendLineTime = EXTEND_LINE_TIME_DEFAULT;
+            ExtendRowCount = EXTEND_ROW_COUNT_DEFAULT;
+            ExtendLineOffset = 0;
+            ExtendRowOffset = 0;
+            ScanPixelCalibration = 0;
+            ExtendLineMarginDiv = 50;
         }
 
         public ScanAreaModel(RectangleF scanRange)

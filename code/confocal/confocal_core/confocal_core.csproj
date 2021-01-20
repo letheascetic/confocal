@@ -101,10 +101,10 @@
     <Compile Include="Common\GalvanoProperty.cs" />
     <Compile Include="Common\NiDaq.cs" />
     <Compile Include="Common\Sequence.cs" />
-    <Compile Include="Model\Config.cs" />
+    <Compile Include="Common\Config.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="Model\AcquisitionPropertyModel.cs" />
-    <Compile Include="Model\GalvoPrppertyModel.cs" />
+    <Compile Include="Model\GalvoPropertyModel.cs" />
     <Compile Include="Model\ScanAreaModel.cs" />
     <Compile Include="Model\ScanChannelModel.cs" />
     <Compile Include="Model\ScanLineSkipModel.cs" />

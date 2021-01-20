@@ -1,4 +1,5 @@
-﻿using confocal_core.Properties;
+﻿using confocal_core.Model;
+using confocal_core.Properties;
 using GalaSoft.MvvmLight;
 using log4net;
 using System;
@@ -6,20 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace confocal_core.Model
+namespace confocal_core.Common
 {
-
+    /// <summary>
+    /// 配置项
+    /// </summary>
     public class Config : ObservableObject
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly int CHAN_NUM = 4;
+        private static readonly double INPUT_SAMPLE_RATE_DEFAULT = 1e6;     // 像素采样速率
         private volatile static Config pConfig = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
         public bool Debugging { get; set; }
-
+        public double InputSampleRate { get; set; }                         // 像素速率[采样速率]
         ///////////////////////////////////////////////////////////////////////////////////////////
         private string laserPortName;
         /// <summary>
@@ -173,14 +177,14 @@ namespace confocal_core.Model
             set { scanPinHoleList = value; RaisePropertyChanged(() => ScanPinHoleList); }
         }
 
-        private GalvoPrppertyModel mGalvoPrpperty;
+        private GalvoPropertyModel mGalvoPrpperty;
         private ScanAreaModel mFullScanArea;
         private DetectorModel mDetector;
         private ScanAreaModel selectedScanArea;
         /// <summary>
         /// 振镜属性
         /// </summary>
-        public GalvoPrppertyModel GalvoProperty
+        public GalvoPropertyModel GalvoProperty
         {
             get { return mGalvoPrpperty; }
             set { mGalvoPrpperty = value; RaisePropertyChanged(() => GalvoProperty); }
@@ -227,6 +231,10 @@ namespace confocal_core.Model
             return pConfig;
         }
 
+        /// <summary>
+        /// 通道数量
+        /// </summary>
+        /// <returns></returns>
         public int GetChannelNum()
         {
             return CHAN_NUM;
@@ -244,6 +252,24 @@ namespace confocal_core.Model
             activatedChannelNum += ScanChannel561.Activated ? 1 : 0;
             activatedChannelNum += ScanChannel640.Activated ? 1 : 0;
             return activatedChannelNum;
+        }
+
+        /// <summary>
+        /// 像素尺寸
+        /// </summary>
+        /// <returns></returns>
+        public float GetPixelSize()
+        {
+            return SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
+        }
+
+        /// <summary>
+        /// 像素电压[单位：V/pixel]
+        /// </summary>
+        /// <returns></returns>
+        public double GetPixelVoltage()
+        {
+            return GetPixelSize() * GalvoProperty.XGalvoCalibrationVoltage / 1000;
         }
 
         public ScanChannelModel FindScanChannel(int id)
@@ -286,10 +312,12 @@ namespace confocal_core.Model
             ScanChannel640 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL640);
             ScanPinHoleList = ScanPinHoleModel.Initialize();
 
-            GalvoProperty = new GalvoPrppertyModel();
+            GalvoProperty = new GalvoPropertyModel();
             FullScanArea = ScanAreaModel.CreateFullScanArea();
             SelectedScanArea = ScanAreaModel.CreateFullScanArea();
             Detector = new DetectorModel();
+
+            InputSampleRate = INPUT_SAMPLE_RATE_DEFAULT;
         }
 
     }

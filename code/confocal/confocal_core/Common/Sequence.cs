@@ -98,6 +98,15 @@ namespace confocal_core.Common
         public static byte[] TriggerVoltages { get; set; }
         ///////////////////////////////////////////////////////////////////////////////////////////
 
+        public static void GenerateScanCoordinates()
+        {
+            
+            
+        }
+
+
+
+
 
         /// <summary>
         /// 生成线性序列
