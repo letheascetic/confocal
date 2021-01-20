@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using confocal_core.Properties;
+using GalaSoft.MvvmLight;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -237,18 +238,18 @@ namespace confocal_core.Model
         private Config()
         {
             SelectedAcquisitioMode = null;
-            SelectedScannerHead = ScannerHeadModel.Initialize(ScannerHeadModel.TWO_SCANNERS);
-            SelectedScanDirection = ScanDirectionModel.Initialize(ScanDirectionModel.UNIDIRECTION);
-            SelectedScanMode = ScanModeModel.Initialize(ScanModeModel.GALVANO);
-            SelectedScanPixel = ScanPixelModel.LoadDefault();
-            FastModeEnabled = false;
-            SelectedScanPixelDwell = ScanPixelDwellModel.LoadDefault();
-            ScanLineSkipEnabled = false;
-            SelectedScanLineSkip = ScanLineSkipModel.LoadDefault();
-            ScanChannel405 = ScanChannelModel.Initialize(0);
-            ScanChannel488 = ScanChannelModel.Initialize(1);
-            ScanChannel561 = ScanChannelModel.Initialize(2);
-            ScanChannel640 = ScanChannelModel.Initialize(3);
+            SelectedScannerHead = ScannerHeadModel.Initialize(Settings.Default.ScannerHead);
+            SelectedScanDirection = ScanDirectionModel.Initialize(Settings.Default.ScanDirection);
+            SelectedScanMode = ScanModeModel.Initialize(Settings.Default.ScanMode);
+            SelectedScanPixel = ScanPixelModel.Initialize(Settings.Default.ScanPixel);
+            FastModeEnabled = Settings.Default.FastModeEnabled;
+            SelectedScanPixelDwell = ScanPixelDwellModel.Initialize(Settings.Default.ScanPixelDwell);
+            ScanLineSkipEnabled = Settings.Default.ScanLineSkipEnabled;
+            SelectedScanLineSkip = ScanLineSkipModel.Initialize(Settings.Default.ScanLineSkip);
+            ScanChannel405 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL405);
+            ScanChannel488 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL488);
+            ScanChannel561 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL561);
+            ScanChannel640 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL640);
             ScanPinHoleList = ScanPinHoleModel.Initialize();
 
             GalvoProperty = new GalvoPrppertyModel();

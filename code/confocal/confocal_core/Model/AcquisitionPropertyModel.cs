@@ -1,4 +1,5 @@
 ﻿using confocal_core.Common;
+using confocal_core.Properties;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,11 @@ namespace confocal_core.Model
         {
             if (id == PMT)
             {
-                return new DetectorTypeModel() { ID = id, Text = "PMT", IsEnabled = true };
+                return new DetectorTypeModel() { ID = id, Text = "PMT", IsEnabled = Settings.Default.DetectorType == PMT ? true : false };
             }
             else if (id == APD)
             {
-                return new DetectorTypeModel() { ID = id, Text = "APD", IsEnabled = false };
+                return new DetectorTypeModel() { ID = id, Text = "APD", IsEnabled = Settings.Default.DetectorType == APD ? true : false };
             }
             else
             {
@@ -149,11 +150,11 @@ namespace confocal_core.Model
             DetectorPmt = DetectorTypeModel.Initialize(DetectorTypeModel.PMT);
 
             string[] devices = NiDaq.GetDeviceNames();
-            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+            string deviceName = devices.Length > 0 ? devices[0] : Settings.Default.NiDeviceName;
 
-            StartTrigger = string.Concat("/", deviceName, "/ao/StartTrigger");
-            TriggerSignal = string.Concat(deviceName, "/port0/line0");
-            TriggerReceive = string.Concat("/", deviceName, "/PFI9");
+            StartTrigger = string.Concat("/", deviceName, Settings.Default.StartTrigger);
+            TriggerSignal = string.Concat(deviceName, Settings.Default.TriggerSignal);
+            TriggerReceive = string.Concat("/", deviceName, Settings.Default.TriggerReceive);
 
             PmtChannel405 = new PmtChannelModel(0);
             PmtChannel488 = new PmtChannelModel(1);
@@ -222,7 +223,7 @@ namespace confocal_core.Model
         public PmtChannelModel(int id)
         {
             string[] devices = NiDaq.GetDeviceNames();
-            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+            string deviceName = devices.Length > 0 ? devices[0] : Settings.Default.NiDeviceName;
 
             if (id >= 0 && id <= 3)
             {
@@ -264,7 +265,7 @@ namespace confocal_core.Model
         public ApdChannelModel(int id)
         {
             string[] devices = NiDaq.GetDeviceNames();
-            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+            string deviceName = devices.Length > 0 ? devices[0] : Settings.Default.NiDeviceName;
 
             switch (id)
             {

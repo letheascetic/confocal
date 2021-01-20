@@ -1,4 +1,5 @@
-﻿using Emgu.CV;
+﻿using confocal_core.Properties;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using GalaSoft.MvvmLight;
 using System;
@@ -82,7 +83,7 @@ namespace confocal_core.Model
 
         public static ScanAreaModel CreateFullScanArea()
         {
-            float fullScanRange = confocal_core.Properties.Settings.Default.FullScanRange;
+            float fullScanRange = Settings.Default.FullScanRange;
             return new ScanAreaModel(new RectangleF(-fullScanRange / 2, -fullScanRange / 2, fullScanRange, fullScanRange));
         }
     }

@@ -4,16 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using confocal_core.Common;
+using confocal_core.Properties;
 
 namespace confocal_core.Model
 {
     public class GalvoPrppertyModel : ObservableObject
     {
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly double GALV_RESPONSE_TIME_DEFAULT = 200.0;              // 振镜响应时间, us
-        private static readonly double CALIBRATION_VOLTAGE_DEFAULT = 5.848e-5 * 1000 * 1000;   // 校准[标定]电压,mV/um
-        private static readonly double XOFFSET_VOLTAGE_DEFAULT = 0;                     // X=0位置对应的偏置电压
-        private static readonly double YOFFSET_VOLTAGE_DEFAULT = 0;                     // Y=0位置对应的偏置电压
         ///////////////////////////////////////////////////////////////////////////////////////////
         private double xGalvoOffsetVoltage;
         private double yGalvoOffsetVoltage;
@@ -102,19 +98,19 @@ namespace confocal_core.Model
 
         public GalvoPrppertyModel()
         {
-            XGalvoOffsetVoltage = XOFFSET_VOLTAGE_DEFAULT;
-            YGalvoOffsetVoltage = YOFFSET_VOLTAGE_DEFAULT;
-            Y2GalvoOffsetVoltage = YOFFSET_VOLTAGE_DEFAULT;
-            GalvoResponseTime = GALV_RESPONSE_TIME_DEFAULT;
-            XGalvoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
-            YGalvoCalibrationVoltage = CALIBRATION_VOLTAGE_DEFAULT;
+            XGalvoOffsetVoltage = Settings.Default.XGalvoOffsetVoltage;
+            YGalvoOffsetVoltage = Settings.Default.YGalvoOffsetVoltage;
+            Y2GalvoOffsetVoltage = Settings.Default.YGalvoOffsetVoltage;
+            GalvoResponseTime = Settings.Default.GalvoResponseTime;
+            XGalvoCalibrationVoltage = Settings.Default.XGalvoCalibrationVoltage;
+            YGalvoCalibrationVoltage = Settings.Default.YGalvoCalibrationVoltage;
 
             string[] devices = NiDaq.GetDeviceNames();
-            string deviceName = devices.Length > 0 ? devices[0] : "Dev1";
+            string deviceName = devices.Length > 0 ? devices[0] : Settings.Default.NiDeviceName;
 
-            XGalvoAoChannel = string.Concat(deviceName, "/ao0");
-            YGalvoAoChannel = string.Concat(deviceName, "/ao1");
-            Y2GalvoAoChannel = string.Concat(deviceName, "/ao2");
+            XGalvoAoChannel = string.Concat(deviceName, Settings.Default.XGalvoAoChannel);
+            YGalvoAoChannel = string.Concat(deviceName, Settings.Default.YGalvoAoChannel);
+            Y2GalvoAoChannel = string.Concat(deviceName, Settings.Default.Y2GalvoAoChannel);
         }
 
     }

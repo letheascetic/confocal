@@ -44,9 +44,9 @@ namespace confocal_core.Model
             };
         }
 
-        public static ScanLineSkipModel LoadDefault()
+        public static ScanLineSkipModel Initialize(int id)
         {
-            return new ScanLineSkipModel() { ID = 0, Text = "2x", Data = 2 };
+            return Initialize().Where(p => p.ID == id).First();
         }
 
     }

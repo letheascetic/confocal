@@ -73,7 +73,7 @@ namespace confocal_core.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int ScanMode {
             get {
                 return ((int)(this["ScanMode"]));
@@ -476,6 +476,162 @@ namespace confocal_core.Properties {
             }
             set {
                 this["ScanChannel640PseudoColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int DetectorType {
+            get {
+                return ((int)(this["DetectorType"]));
+            }
+            set {
+                this["DetectorType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double XGalvoOffsetVoltage {
+            get {
+                return ((double)(this["XGalvoOffsetVoltage"]));
+            }
+            set {
+                this["XGalvoOffsetVoltage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double YGalvoOffsetVoltage {
+            get {
+                return ((double)(this["YGalvoOffsetVoltage"]));
+            }
+            set {
+                this["YGalvoOffsetVoltage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public double GalvoResponseTime {
+            get {
+                return ((double)(this["GalvoResponseTime"]));
+            }
+            set {
+                this["GalvoResponseTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("58.48")]
+        public double XGalvoCalibrationVoltage {
+            get {
+                return ((double)(this["XGalvoCalibrationVoltage"]));
+            }
+            set {
+                this["XGalvoCalibrationVoltage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("58.48")]
+        public double YGalvoCalibrationVoltage {
+            get {
+                return ((double)(this["YGalvoCalibrationVoltage"]));
+            }
+            set {
+                this["YGalvoCalibrationVoltage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dev1")]
+        public string NiDeviceName {
+            get {
+                return ((string)(this["NiDeviceName"]));
+            }
+            set {
+                this["NiDeviceName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/ao0")]
+        public string XGalvoAoChannel {
+            get {
+                return ((string)(this["XGalvoAoChannel"]));
+            }
+            set {
+                this["XGalvoAoChannel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/ao1")]
+        public string YGalvoAoChannel {
+            get {
+                return ((string)(this["YGalvoAoChannel"]));
+            }
+            set {
+                this["YGalvoAoChannel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/ao2")]
+        public string Y2GalvoAoChannel {
+            get {
+                return ((string)(this["Y2GalvoAoChannel"]));
+            }
+            set {
+                this["Y2GalvoAoChannel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/ao/StartTrigger")]
+        public string StartTrigger {
+            get {
+                return ((string)(this["StartTrigger"]));
+            }
+            set {
+                this["StartTrigger"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/port0/line0")]
+        public string TriggerSignal {
+            get {
+                return ((string)(this["TriggerSignal"]));
+            }
+            set {
+                this["TriggerSignal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/PFI9")]
+        public string TriggerReceive {
+            get {
+                return ((string)(this["TriggerReceive"]));
+            }
+            set {
+                this["TriggerReceive"] = value;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using confocal_core.Properties;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -131,11 +132,11 @@ namespace confocal_core.Model
         {
             if (id == UNIDIRECTION)
             {
-                return new ScanDirectionModel() { ID = UNIDIRECTION, Text = "单向", IsEnabled = true };
+                return new ScanDirectionModel() { ID = UNIDIRECTION, Text = "单向", IsEnabled = Settings.Default.ScanDirection == UNIDIRECTION ? true : false };
             }
             else if (id == BIDIRECTION)
             {
-                return new ScanDirectionModel() { ID = BIDIRECTION, Text = "双向", IsEnabled = false };
+                return new ScanDirectionModel() { ID = BIDIRECTION, Text = "双向", IsEnabled = Settings.Default.ScanDirection == BIDIRECTION ? true : false };
             }
             else
             {
@@ -158,11 +159,11 @@ namespace confocal_core.Model
         {
             if (id == RESONANT)
             {
-                return new ScanModeModel() { ID = RESONANT, Text = "Resonant", IsEnabled = false };
+                return new ScanModeModel() { ID = RESONANT, Text = "Resonant", IsEnabled = Settings.Default.ScanMode == RESONANT ? true : false };
             }
             else if (id == GALVANO)
             {
-                return new ScanModeModel() { ID = GALVANO, Text = "Galvano", IsEnabled = true };
+                return new ScanModeModel() { ID = GALVANO, Text = "Galvano", IsEnabled = Settings.Default.ScanMode == GALVANO ? true : false };
             }
             else
             {
@@ -185,11 +186,11 @@ namespace confocal_core.Model
         {
             if (id == TWO_SCANNERS)
             {
-                return new ScannerHeadModel() { ID = TWO_SCANNERS, Text = "双镜", IsEnabled = true };
+                return new ScannerHeadModel() { ID = TWO_SCANNERS, Text = "双镜", IsEnabled = Settings.Default.ScannerHead == TWO_SCANNERS ? true : false };
             }
             else if (id == THREE_SCANNERS)
             {
-                return new ScannerHeadModel() { ID = THREE_SCANNERS, Text = "三镜", IsEnabled = false };
+                return new ScannerHeadModel() { ID = THREE_SCANNERS, Text = "三镜", IsEnabled = Settings.Default.ScannerHead == THREE_SCANNERS ? true : false };
             }
             else
             {
@@ -207,19 +208,19 @@ namespace confocal_core.Model
         {
             return new List<ScanPixelModel>()
             {
-                new ScanPixelModel(){ ID = 0, IsEnabled = false, Text = "64", Data = 64 },
-                new ScanPixelModel(){ ID = 1, IsEnabled = false, Text = "128", Data = 128 },
-                new ScanPixelModel(){ ID = 2, IsEnabled = false, Text = "256", Data = 256 },
-                new ScanPixelModel(){ ID = 3, IsEnabled = true, Text = "512", Data = 512 },
-                new ScanPixelModel(){ ID = 4, IsEnabled = false, Text = "1024", Data = 1024 },
-                new ScanPixelModel(){ ID = 5, IsEnabled = false, Text = "2048", Data = 2048 },
-                new ScanPixelModel(){ ID = 6, IsEnabled = false, Text = "4096", Data = 4096 }
+                new ScanPixelModel(){ ID = 0, IsEnabled = Settings.Default.ScanPixel == 0 ? true : false, Text = "64", Data = 64 },
+                new ScanPixelModel(){ ID = 1, IsEnabled = Settings.Default.ScanPixel == 1 ? true : false, Text = "128", Data = 128 },
+                new ScanPixelModel(){ ID = 2, IsEnabled = Settings.Default.ScanPixel == 2 ? true : false, Text = "256", Data = 256 },
+                new ScanPixelModel(){ ID = 3, IsEnabled = Settings.Default.ScanPixel == 3 ? true : false, Text = "512", Data = 512 },
+                new ScanPixelModel(){ ID = 4, IsEnabled = Settings.Default.ScanPixel == 4 ? true : false, Text = "1024", Data = 1024 },
+                new ScanPixelModel(){ ID = 5, IsEnabled = Settings.Default.ScanPixel == 5 ? true : false, Text = "2048", Data = 2048 },
+                new ScanPixelModel(){ ID = 6, IsEnabled = Settings.Default.ScanPixel == 6 ? true : false, Text = "4096", Data = 4096 }
             };
         }
     
-        public static ScanPixelModel LoadDefault()
+        public static ScanPixelModel Initialize(int id)
         {
-            return new ScanPixelModel() { ID = 3, IsEnabled = true, Text = "512", Data = 512 };
+            return new ScanPixelModel() { ID = id, IsEnabled = Settings.Default.ScanPixel == id ? true : false, Text = ((int)Math.Pow(2, Settings.Default.ScanPixel) * 64).ToString(), Data = (int)Math.Pow(2, Settings.Default.ScanPixel) * 64 };
         }
     }
 
@@ -232,20 +233,20 @@ namespace confocal_core.Model
         {
             return new List<ScanPixelDwellModel>()
             {
-                new ScanPixelDwellModel(){ ID = 0, IsEnabled = false, Text = "2", Data = 2 },
-                new ScanPixelDwellModel(){ ID = 1, IsEnabled = false, Text = "4", Data = 4 },
-                new ScanPixelDwellModel(){ ID = 2, IsEnabled = false, Text = "6", Data = 6 },
-                new ScanPixelDwellModel(){ ID = 3, IsEnabled = true, Text = "8", Data = 8 },
-                new ScanPixelDwellModel(){ ID = 4, IsEnabled = false, Text = "10", Data = 10 },
-                new ScanPixelDwellModel(){ ID = 5, IsEnabled = false, Text = "20", Data = 20 },
-                new ScanPixelDwellModel(){ ID = 6, IsEnabled = false, Text = "50", Data = 50 },
-                new ScanPixelDwellModel(){ ID = 7, IsEnabled = false, Text = "100", Data = 100 }
+                new ScanPixelDwellModel(){ ID = 0, IsEnabled = Settings.Default.ScanPixelDwell == 0 ? true : false, Text = "2", Data = 2 },
+                new ScanPixelDwellModel(){ ID = 1, IsEnabled = Settings.Default.ScanPixelDwell == 1 ? true : false, Text = "4", Data = 4 },
+                new ScanPixelDwellModel(){ ID = 2, IsEnabled = Settings.Default.ScanPixelDwell == 2 ? true : false, Text = "6", Data = 6 },
+                new ScanPixelDwellModel(){ ID = 3, IsEnabled = Settings.Default.ScanPixelDwell == 3 ? true : false, Text = "8", Data = 8 },
+                new ScanPixelDwellModel(){ ID = 4, IsEnabled = Settings.Default.ScanPixelDwell == 4 ? true : false, Text = "10", Data = 10 },
+                new ScanPixelDwellModel(){ ID = 5, IsEnabled = Settings.Default.ScanPixelDwell == 5 ? true : false, Text = "20", Data = 20 },
+                new ScanPixelDwellModel(){ ID = 6, IsEnabled = Settings.Default.ScanPixelDwell == 6 ? true : false, Text = "50", Data = 50 },
+                new ScanPixelDwellModel(){ ID = 7, IsEnabled = Settings.Default.ScanPixelDwell == 7 ? true : false, Text = "100", Data = 100 }
             };
         }
 
-        public static ScanPixelDwellModel LoadDefault()
+        public static ScanPixelDwellModel Initialize(int id)
         {
-            return new ScanPixelDwellModel() { ID = 3, IsEnabled = true, Text = "8", Data = 8 };
+            return Initialize().Where(p => p.ID == id).First();
         }
 
     }
