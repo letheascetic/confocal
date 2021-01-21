@@ -105,6 +105,7 @@ namespace confocal_core.Model
             get { return scanRange; }
             set { scanRange = value; RaisePropertyChanged(() => ScanRange); }
         }
+
         public string Text
         {
             get { return text; }

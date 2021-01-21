@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -272,6 +273,29 @@ namespace confocal_core.Common
             return GetPixelSize() * GalvoProperty.XGalvoCalibrationVoltage / 1000;
         }
 
+        /// <summary>
+        /// 扩展后的X像素数
+        /// </summary>
+        /// <returns></returns>
+        public int GetExtendScanXPixels()
+        {
+            return SelectedScanPixel.Data + (ScanAreaModel.ExtendLineTime >> 1) / SelectedScanPixelDwell.Data * 2;
+        }
+
+        /// <summary>
+        /// 扩展后的Y像素数
+        /// </summary>
+        /// <returns></returns>
+        public int GetExtendScanYPixels()
+        {
+            return SelectedScanPixel.Data + ScanAreaModel.ExtendRowCount;
+        }
+
+        /// <summary>
+        /// 查询对应的扫描通道
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ScanChannelModel FindScanChannel(int id)
         {
             switch (id)
@@ -287,6 +311,18 @@ namespace confocal_core.Common
                 default:
                     throw new ArgumentOutOfRangeException("ID Exception.");
             }
+        }
+
+        /// <summary>
+        /// 扩展后的扫描范围
+        /// </summary>
+        /// <returns></returns>
+        public ScanAreaModel GetExtendScanArea()
+        {
+            RectangleF scanRange = SelectedScanArea.ScanRange;
+            float xExtendRange = ScanAreaModel.ExtendLineTime * scanRange.Width / (SelectedScanPixelDwell.Data * SelectedScanPixel.Data);
+            float yExtendRange = ScanAreaModel.ExtendRowCount * GetPixelSize();
+            return new ScanAreaModel(new RectangleF(scanRange.X - xExtendRange / 2, scanRange.Y - yExtendRange / 2, scanRange.Width + xExtendRange, scanRange.Height + yExtendRange));
         }
 
         /// <summary>
