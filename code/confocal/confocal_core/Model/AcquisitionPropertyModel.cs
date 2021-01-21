@@ -22,11 +22,11 @@ namespace confocal_core.Model
         {
             if (id == PMT)
             {
-                return new DetectorTypeModel() { ID = id, Text = "PMT", IsEnabled = Settings.Default.DetectorType == PMT ? true : false };
+                return new DetectorTypeModel() { ID = id, Text = "PMT", IsEnabled = Settings.Default.DetectorType == PMT };
             }
             else if (id == APD)
             {
-                return new DetectorTypeModel() { ID = id, Text = "APD", IsEnabled = Settings.Default.DetectorType == APD ? true : false };
+                return new DetectorTypeModel() { ID = id, Text = "APD", IsEnabled = Settings.Default.DetectorType == APD };
             }
             else
             {

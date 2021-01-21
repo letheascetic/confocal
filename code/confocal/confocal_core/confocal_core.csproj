@@ -120,11 +120,6 @@
     <Compile Include="ViewModel\ScanAreaViewModel.cs" />
     <Compile Include="ViewModel\ScanSettingsViewModel.cs" />
     <Compile Include="ViewModel\SysSettingsViewModel.cs" />
-    <Compile Include="Z1Acquisition.cs" />
-    <Compile Include="Z1Config.cs" />
-    <Compile Include="Z1NiDaq.cs" />
-    <Compile Include="Z1Sequence.cs" />
-    <Compile Include="Z1Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

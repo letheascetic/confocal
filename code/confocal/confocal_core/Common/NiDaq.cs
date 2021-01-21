@@ -319,7 +319,6 @@ namespace confocal_core.Common
             mCiChannelReaders = new CounterSingleChannelReader[channelNum];
             for (int i = 0; i < channelNum; i++)
             {
-                CHAN_ID id = (CHAN_ID)i;
                 if (mConfig.ScanChannels[i].Activated)
                 {
                     ApdChannelModel apdChannel = mConfig.Detector.FindApdChannel(i);
@@ -383,8 +382,10 @@ namespace confocal_core.Common
                 ciTask.EveryNSamplesReadEventInterval = Sequence.InputSampleCountPerAcquisition;
                 ciTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(CiEveryNSamplesRead);
 
-                ciMultiChannelReader = new CounterSingleChannelReader(ciTask.Stream);
-                ciMultiChannelReader.SynchronizeCallbacks = false;
+                ciMultiChannelReader = new CounterSingleChannelReader(ciTask.Stream)
+                {
+                    SynchronizeCallbacks = false
+                };
             }
             catch (Exception e)
             {

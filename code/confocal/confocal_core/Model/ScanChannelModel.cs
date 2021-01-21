@@ -1,4 +1,5 @@
-﻿using confocal_core.Properties;
+﻿using confocal_core.Common;
+using confocal_core.Properties;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;

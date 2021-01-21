@@ -1,4 +1,5 @@
-﻿using confocal_core.Model;
+﻿using confocal_core.Common;
+using confocal_core.Model;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using GalaSoft.MvvmLight;

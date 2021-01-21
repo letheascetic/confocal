@@ -1,5 +1,6 @@
 ﻿using C1.Win.C1Ribbon;
 using confocal_core;
+using confocal_core.Common;
 using confocal_core.Model;
 using confocal_core.ViewModel;
 using log4net;

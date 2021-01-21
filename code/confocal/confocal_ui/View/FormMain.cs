@@ -2,6 +2,7 @@
 using C1.Win.C1Ribbon;
 using C1.Win.C1Themes;
 using confocal_core;
+using confocal_core.Common;
 using confocal_core.Model;
 using confocal_core.ViewModel;
 using confocal_ui.View;
@@ -41,17 +42,23 @@ namespace confocal_ui
         private void Initialize()
         {
             // 
-            mFormScanSetting = new FormScanSettings();
-            mFormScanSetting.MdiParent = this;
-            mFormScanSetting.Visible = true;
+            mFormScanSetting = new FormScanSettings
+            {
+                MdiParent = this,
+                Visible = true
+            };
 
-            mFormScanArea = new FormScanArea();
-            mFormScanArea.MdiParent = this;
-            mFormScanArea.Visible = true;
+            mFormScanArea = new FormScanArea
+            {
+                MdiParent = this,
+                Visible = true
+            };
 
-            mFormSysSettings = new FormSysSettings();
-            mFormSysSettings.MdiParent = this;
-            mFormSysSettings.Visible = false;
+            mFormSysSettings = new FormSysSettings
+            {
+                MdiParent = this,
+                Visible = false
+            };
 
         }
 
@@ -234,8 +241,10 @@ namespace confocal_ui
 
         private void ScanImageClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            FormImage mFormImage = new FormImage();
-            mFormImage.MdiParent = this;
+            FormImage mFormImage = new FormImage
+            {
+                MdiParent = this
+            };
             mFormImage.Show();
         }
 
