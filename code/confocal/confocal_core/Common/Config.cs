@@ -135,6 +135,7 @@ namespace confocal_core.Common
         private ScanChannelModel scanChannel488;
         private ScanChannelModel scanChannel561;
         private ScanChannelModel scanChannel640;
+        private ScanChannelModel[] scanChannels;
         /// <summary>
         /// 405nm通道
         /// </summary>
@@ -166,6 +167,11 @@ namespace confocal_core.Common
         {
             get { return scanChannel640; }
             set { scanChannel640 = value; RaisePropertyChanged(() => ScanChannel640); }
+        }
+        public ScanChannelModel[] ScanChannels
+        {
+            get { return scanChannels; }
+            set { scanChannels = value; }
         }
 
         private List<ScanPinHoleModel> scanPinHoleList;
@@ -346,6 +352,7 @@ namespace confocal_core.Common
             ScanChannel488 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL488);
             ScanChannel561 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL561);
             ScanChannel640 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL640);
+            ScanChannels = new ScanChannelModel[] { ScanChannel405, ScanChannel488, ScanChannel561, ScanChannel640 };
             ScanPinHoleList = ScanPinHoleModel.Initialize();
 
             GalvoProperty = new GalvoPropertyModel();
