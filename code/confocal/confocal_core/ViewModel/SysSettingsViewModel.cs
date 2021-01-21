@@ -111,6 +111,7 @@ namespace confocal_core.ViewModel
             GalvoProperty = new GalvoPropertyModel();
             FullScanArea = ScanAreaModel.CreateFullScanArea();
             Detector = new DetectorModel();
+            // Detector = Config.GetConfig().Detector;
 
             XGalvoAoChannels = NiDaq.GetAoChannels();
             YGalvoAoChannels = NiDaq.GetAoChannels();

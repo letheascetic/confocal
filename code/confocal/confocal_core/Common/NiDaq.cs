@@ -65,9 +65,7 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE Start()
         {
-            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
-
-            code = ConfigAoTask();
+            API_RETURN_CODE code = ConfigAoTask();
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
                 Stop();
@@ -437,8 +435,10 @@ namespace confocal_core.Common
                 mAiTask.EveryNSamplesReadEventInterval = Sequence.InputSampleCountPerAcquisition;
                 mAiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(AiEveryNSamplesRead);
 
-                mAiUnscaledReader = new AnalogUnscaledReader(mAiTask.Stream);
-                mAiUnscaledReader.SynchronizeCallbacks = false;
+                mAiUnscaledReader = new AnalogUnscaledReader(mAiTask.Stream)
+                {
+                    SynchronizeCallbacks = false
+                };
             }
             catch (Exception e)
             {
@@ -505,7 +505,7 @@ namespace confocal_core.Common
         /// <returns></returns>
         private string GetAoPhysicalChannelName()
         {
-            string physicalChannelName = string.Empty;
+            string physicalChannelName;
             if (mConfig.SelectedScannerHead.ID == ScannerHeadModel.THREE_SCANNERS)
             {
                 physicalChannelName = string.Concat(mConfig.GalvoProperty.XGalvoAoChannel, ",", mConfig.GalvoProperty.YGalvoAoChannel, ",", mConfig.GalvoProperty.Y2GalvoAoChannel);

@@ -221,7 +221,7 @@ namespace confocal_core.Model
     
         public static ScanPixelModel Initialize(int id)
         {
-            return new ScanPixelModel() { ID = id, IsEnabled = Settings.Default.ScanPixel == id ? true : false, Text = ((int)Math.Pow(2, Settings.Default.ScanPixel) * 64).ToString(), Data = (int)Math.Pow(2, Settings.Default.ScanPixel) * 64 };
+            return new ScanPixelModel() { ID = id, IsEnabled = Settings.Default.ScanPixel == id, Text = ((int)Math.Pow(2, Settings.Default.ScanPixel) * 64).ToString(), Data = (int)Math.Pow(2, Settings.Default.ScanPixel) * 64 };
         }
     }
 
