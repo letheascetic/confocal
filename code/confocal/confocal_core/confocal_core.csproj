@@ -102,6 +102,12 @@
     <Compile Include="Common\Sequence.cs" />
     <Compile Include="Common\Config.cs" />
     <Compile Include="Model\CommonModel.cs" />
+    <Compile Include="Model\ScanAcquisitionModel.cs" />
+    <Compile Include="Model\ScanDirectionModel.cs" />
+    <Compile Include="Model\ScanModeModel.cs" />
+    <Compile Include="Model\ScannerHeadModel.cs" />
+    <Compile Include="Model\ScanPixelDwellModel.cs" />
+    <Compile Include="Model\ScanPixelModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="Model\AcquisitionPropertyModel.cs" />
     <Compile Include="Model\GalvoPropertyModel.cs" />
@@ -109,7 +115,7 @@
     <Compile Include="Model\ScanChannelModel.cs" />
     <Compile Include="Model\ScanLineSkipModel.cs" />
     <Compile Include="Model\ScanPinHoleModel.cs" />
-    <Compile Include="Model\ScanPropertyModel.cs" />
+    <Compile Include="Model\ScanPropertyBaseModel.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
