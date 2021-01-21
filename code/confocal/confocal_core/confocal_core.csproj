@@ -98,7 +98,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\GalvanoProperty.cs" />
     <Compile Include="Common\NiDaq.cs" />
     <Compile Include="Common\Sequence.cs" />
     <Compile Include="Common\Config.cs" />
