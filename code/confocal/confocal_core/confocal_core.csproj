@@ -109,6 +109,7 @@
     <Compile Include="Model\ScannerHeadModel.cs" />
     <Compile Include="Model\ScanPixelDwellModel.cs" />
     <Compile Include="Model\ScanPixelModel.cs" />
+    <Compile Include="ViewModel\ConfigViewModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="Model\AcquisitionPropertyModel.cs" />
     <Compile Include="Model\GalvoPropertyModel.cs" />
