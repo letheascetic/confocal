@@ -18,6 +18,8 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private Config mConfig;
+
         private List<ScanAreaTypeModel> scanAreaTypeList;
 
         /// <summary>
@@ -176,6 +178,8 @@ namespace confocal_core.ViewModel
         
         public ScanAreaViewModel()
         {
+            mConfig = Config.GetConfig();
+
             // 初始化扫描区域类型
             ScaAreaTypeList = new List<ScanAreaTypeModel>()
             {
@@ -183,18 +187,19 @@ namespace confocal_core.ViewModel
                 ScanAreaTypeModel.Initialize(1)
             };
             // 初始化扫描范围
-            FullScanArea = ScanAreaModel.CreateFullScanArea();
-            SelectedScanArea = ScanAreaModel.CreateFullScanArea();
+            FullScanArea = mConfig.FullScanArea;
+            SelectedScanArea = mConfig.SelectedScanArea;
             // 初始化扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
-            SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
+            // SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
+            SelectedScanPixel = mConfig.SelectedScanPixel;
             // 初始化扫描宽度[X方向像素数]和高度[Y方向像素数]
             ScanWidth = SelectedScanPixel.Data;
             ScanHeight = SelectedScanPixel.Data;
             // 初始化像素停留时间、扫描图像、像素尺寸
-            ScanPixelDwell = 8;
+            ScanPixelDwell = mConfig.SelectedScanPixelDwell.Data;
             ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
-            ScanPixelSize = SelectedScanArea.ScanRange.Width / ScanWidth;
+            ScanPixelSize = mConfig.GetPixelSize();
 
             ZoomFactor = 5;
         }

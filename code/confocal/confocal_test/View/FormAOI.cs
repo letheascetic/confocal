@@ -1,4 +1,6 @@
-﻿using System;
+﻿using confocal_test.Model;
+using confocal_test.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +21,8 @@ namespace confocal_test.View
         private int zoom = 0;
         //鼠标移动矩形框次数，如果移动过矩形框则不从中心放大，以移动后的位置放大缩小，缩小为原大小，缩放数为0时，重置此数
         private int MoveCount = 0;
+
+        private AOIViewModel mAoiViewModel;
 
         public FormAOI()
         {
@@ -145,5 +149,38 @@ namespace confocal_test.View
             }
         }
 
+        private void FormAOI_Load(object sender, EventArgs e)
+        {
+            mAoiViewModel = new AOIViewModel();
+            textBox1.DataBindings.Add("Text", mAoiViewModel, "AID");
+            textBox2.DataBindings.Add("Text", mAoiViewModel, "CID");
+            numericUpDown1.DataBindings.Add("Value", mAoiViewModel, "AID");
+            numericUpDown2.DataBindings.Add("Value", mAoiViewModel, "CID");
+
+            textBox3.DataBindings.Add("Text", CommonModel.GetCommonModel(), "ID");
+            numericUpDown3.DataBindings.Add("Value", CommonModel.GetCommonModel(), "ID");
+            textBox4.DataBindings.Add("Text", AModel.GetAModel(), "ID");
+            numericUpDown4.DataBindings.Add("Value", AModel.GetAModel(), "ID");
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            CommonModel.GetCommonModel().ID = (int)numericUpDown3.Value;
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            AModel.GetAModel().ID = (int)numericUpDown4.Value;
+        }
     }
 }

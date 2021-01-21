@@ -101,6 +101,7 @@
     <Compile Include="Common\NiDaq.cs" />
     <Compile Include="Common\Sequence.cs" />
     <Compile Include="Common\Config.cs" />
+    <Compile Include="Model\CommonModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="Model\AcquisitionPropertyModel.cs" />
     <Compile Include="Model\GalvoPropertyModel.cs" />

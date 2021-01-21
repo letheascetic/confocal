@@ -1,4 +1,6 @@
-﻿using Emgu.CV;
+﻿using confocal_test.Model;
+using confocal_test.ViewModel;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,8 @@ namespace confocal_test.View
         //鼠标移动矩形框次数，如果移动过矩形框则不从中心放大，以移动后的位置放大缩小，缩小为原大小，缩放数为0时，重置此数
         private int MoveCount = 0;
 
+        private MainViewModel mMainVM;
+
         public FormMain()
         {
             InitializeComponent();
@@ -41,6 +45,17 @@ namespace confocal_test.View
         {
             scanImage = new Mat(512, 512, DepthType.Cv8U, 3);
             // imageBox1.Image = scanImage;
+            mMainVM = new MainViewModel();
+            textBox1.DataBindings.Add("Text", mMainVM, "AID");
+            textBox2.DataBindings.Add("Text", mMainVM, "CID");
+            numericUpDown1.DataBindings.Add("Value", mMainVM, "AID");
+            numericUpDown2.DataBindings.Add("Value", mMainVM, "CID");
+
+
+            textBox3.DataBindings.Add("Text", CommonModel.GetCommonModel(), "ID");
+            numericUpDown3.DataBindings.Add("Value", CommonModel.GetCommonModel(), "ID");
+            textBox4.DataBindings.Add("Text", AModel.GetAModel(), "ID");
+            numericUpDown4.DataBindings.Add("Value", AModel.GetAModel(), "ID");
         }
 
         private void this_MouseWheel(object sender, MouseEventArgs e)
@@ -154,6 +169,26 @@ namespace confocal_test.View
         {
             FormAOI form = new FormAOI();
             form.Show();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            mMainVM.AID = (int)numericUpDown1.Value;
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            mMainVM.CID = (int)numericUpDown2.Value;
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            CommonModel.GetCommonModel().ID = (int)numericUpDown3.Value;
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            AModel.GetAModel().ID = (int)numericUpDown4.Value;
         }
     }
 }
