@@ -7,7 +7,7 @@ using System.Text;
 
 namespace confocal_core.Model
 {
-    public delegate API_RETURN_CODE PinHoleChangedEventHandler(int id, int size);
+    public delegate API_RETURN_CODE PinHoleChangedEventHandler(ScanPinHoleModel pinHole);
 
     /// <summary>
     /// 小孔孔径

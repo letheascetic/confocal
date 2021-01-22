@@ -40,7 +40,7 @@ namespace confocal_core.Model
         public T Data
         {
             get { return data; }
-            set { this.data = value; RaisePropertyChanged(() => Data); }
+            set { data = value; RaisePropertyChanged(() => Data); }
         }
     }
 

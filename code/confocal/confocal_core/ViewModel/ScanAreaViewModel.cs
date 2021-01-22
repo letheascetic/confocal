@@ -18,114 +18,23 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private Config mConfig;
+        private readonly ConfigViewModel mConfig;
 
-        private List<ScanAreaTypeModel> scanAreaTypeList;
-
-        /// <summary>
-        /// 扫描区域类型列表
-        /// </summary>
-        public List<ScanAreaTypeModel> ScaAreaTypeList
+        public ConfigViewModel Config
         {
-            get { return scanAreaTypeList; }
-            set { scanAreaTypeList = value; RaisePropertyChanged(() => scanAreaTypeList); }
-        }
-        /// <summary>
-        /// 选择的扫描区域类型
-        /// </summary>
-        public ScanAreaTypeModel SelectedScanAreaType
-        {
-            get { return ScaAreaTypeList.Where(p => p.IsEnabled).First(); }
+            get { return mConfig; }
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        private List<ScanPixelModel> scanPixelList;
-        private ScanPixelModel selectedScanPixel;
-
-        /// <summary>
-        /// 扫描像素列表
-        /// </summary>
-        public List<ScanPixelModel> ScanPixelList
-        {
-            get { return scanPixelList; }
-            set { scanPixelList = value; RaisePropertyChanged(() => ScanPixelList); }
-        }
-        /// <summary>
-        /// 选择的扫描像素 
-        /// </summary>
-        public ScanPixelModel SelectedScanPixel
-        {
-            get { return selectedScanPixel; }
-            set { selectedScanPixel = value; RaisePropertyChanged(() => SelectedScanPixel); }
-        }
-
-        /// <summary>
-        /// 扫描像素切换事件
-        /// </summary>
-        /// <param name="selectedScanPixel"></param>
-        /// <returns></returns>
-        public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
-        {
-            foreach (ScanPixelModel scanPixel in ScanPixelList)
-            {
-                if (scanPixel.ID != selectedScanPixel.ID)
-                {
-                    scanPixel.IsEnabled = false;
-                }
-                else
-                {
-                    SelectedScanPixel = scanPixel;
-                    SelectedScanPixel.IsEnabled = true;
-                }
-            }
-            ScanWidth = SelectedScanPixel.Data;
-            ScanHeight = SelectedScanPixel.Data;
-            ScanPixelSize = SelectedScanArea.ScanRange.Width / ScanWidth;
-            Logger.Info(string.Format("Scan Pixel [{0}], Pixel Size [{1}].", SelectedScanPixel.Text, ScanPixelSize));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        private ScanAreaModel selectedScanArea;
-        private ScanAreaModel fullScanArea;
-        private Mat scanImage;
-        private float scanPixelSize;
-        private int scanPixelDwell;
+        private int pixelDwell;
         private int scanWidth;
         private int scanHeight;
-
         private int zoomFactor;
+        private Mat scanImage;
 
-        /// <summary>
-        /// 当前选择的扫描区域
-        /// </summary>
-        public ScanAreaModel SelectedScanArea
+        public int PixelDwell
         {
-            get { return selectedScanArea; }
-            set { selectedScanArea = value; RaisePropertyChanged(() => SelectedScanArea); }
-        }
-        /// <summary>
-        /// 全视场
-        /// </summary>
-        public ScanAreaModel FullScanArea
-        {
-            get { return fullScanArea; }
-            set { fullScanArea = value; RaisePropertyChanged(() => FullScanArea); }
-        }
-        /// <summary>
-        /// 扫描像素尺寸
-        /// </summary>
-        public float ScanPixelSize
-        {
-            get { return scanPixelSize; }
-            set { scanPixelSize = value; RaisePropertyChanged(() => ScanPixelSize); }
-        }
-        /// <summary>
-        /// 扫描像素时间
-        /// </summary>
-        public int ScanPixelDwell
-        {
-            get { return scanPixelDwell; }
-            set { scanPixelDwell = value; RaisePropertyChanged(() => ScanPixelDwell); }
+            get { return pixelDwell; }
+            set { pixelDwell = value; RaisePropertyChanged(() => PixelDwell); }
         }
         /// <summary>
         /// 扫描宽度
@@ -144,14 +53,6 @@ namespace confocal_core.ViewModel
             set { scanHeight = value; RaisePropertyChanged(() => ScanHeight); }
         }
         /// <summary>
-        /// 扫描图像
-        /// </summary>
-        public Mat ScanImage
-        {
-            get { return scanImage; }
-            set { scanImage = value; RaisePropertyChanged(() => ScanImage); }
-        }
-        /// <summary>
         /// 扫描区域缩放因子
         /// </summary>
         public int ZoomFactor
@@ -159,49 +60,32 @@ namespace confocal_core.ViewModel
             get { return zoomFactor; }
             set { zoomFactor = value; RaisePropertyChanged(() => ZoomFactor); }
         }
-
-        public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel scanPixelDwell)
+        /// <summary>
+        /// 扫描图像
+        /// </summary>
+        public Mat ScanImage
         {
-            ScanPixelDwell = scanPixelDwell.Data;
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE ScanRangeChangeCommand(ScanAreaModel scanRange)
-        {
-            SelectedScanArea.Update(scanRange.ScanRange);
-            ScanPixelSize = SelectedScanArea.ScanRange.Width / ScanWidth;
-            Logger.Info(string.Format("Selected Scan Range [{0}].", SelectedScanArea.ScanRange));
-            return API_RETURN_CODE.API_SUCCESS;
+            get { return scanImage; }
+            set { scanImage = value; RaisePropertyChanged(() => ScanImage); }
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
-        
+
         public ScanAreaViewModel()
         {
-            mConfig = Config.GetConfig();
+            mConfig = ConfigViewModel.GetConfig();
 
-            // 初始化扫描区域类型
-            ScaAreaTypeList = new List<ScanAreaTypeModel>()
-            {
-                ScanAreaTypeModel.Initialize(0),
-                ScanAreaTypeModel.Initialize(1)
-            };
-            // 初始化扫描范围
-            FullScanArea = mConfig.FullScanArea;
-            SelectedScanArea = mConfig.SelectedScanArea;
-            // 初始化扫描像素
-            ScanPixelList = ScanPixelModel.Initialize();
-            // SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
-            SelectedScanPixel = mConfig.SelectedScanPixel;
             // 初始化扫描宽度[X方向像素数]和高度[Y方向像素数]
-            ScanWidth = SelectedScanPixel.Data;
-            ScanHeight = SelectedScanPixel.Data;
-            // 初始化像素停留时间、扫描图像、像素尺寸
-            ScanPixelDwell = mConfig.SelectedScanPixelDwell.Data;
-            ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
-            ScanPixelSize = mConfig.GetPixelSize();
-
+            PixelDwell = mConfig.SelectedScanPixelDwell.Data;
+            ScanWidth = mConfig.SelectedScanPixel.Data;
+            ScanHeight = mConfig.SelectedScanPixel.Data;
+ 
             ZoomFactor = 5;
+            ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
+
+            // 绑定事件
+            mConfig.ScanPixelChangedEvent += ScanPixelChangedHandler;
+            mConfig.ScanPixelDwellChangedEvent += ScanPixelDwellChangedHandler;
         }
 
         /// <summary>
@@ -211,10 +95,10 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public RectangleF ScanPixelRangeToScanRange(Rectangle scanPixelRange)
         {
-            float x = SelectedScanArea.ScanRange.X + ScanPixelSize * scanPixelRange.X;
-            float y = SelectedScanArea.ScanRange.Y + ScanPixelSize * scanPixelRange.Y;
-            float width = ScanPixelSize * scanPixelRange.Width;
-            float height = ScanPixelSize * scanPixelRange.Height;
+            float x = Config.SelectedScanArea.ScanRange.X + Config.ScanPixelSize * scanPixelRange.X;
+            float y = Config.SelectedScanArea.ScanRange.Y + Config.ScanPixelSize * scanPixelRange.Y;
+            float width = Config.ScanPixelSize * scanPixelRange.Width;
+            float height = Config.ScanPixelSize * scanPixelRange.Height;
             return new RectangleF(x, y, width, height);
         }
 
@@ -225,11 +109,24 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public Rectangle ScanRangeToScanPixelRange(RectangleF scanRange)
         {
-            int x = (int)((scanRange.X - SelectedScanArea.ScanRange.X) / ScanPixelSize);
-            int y = (int)((scanRange.Y - SelectedScanArea.ScanRange.Y) / ScanPixelSize);
-            int width = (int)(scanRange.Width / ScanPixelSize);
-            int height = (int)(scanRange.Height / ScanPixelSize);
+            int x = (int)((scanRange.X - Config.SelectedScanArea.ScanRange.X) / Config.ScanPixelSize);
+            int y = (int)((scanRange.Y - Config.SelectedScanArea.ScanRange.Y) / Config.ScanPixelSize);
+            int width = (int)(scanRange.Width / Config.ScanPixelSize);
+            int height = (int)(scanRange.Height / Config.ScanPixelSize);
             return new Rectangle(x, y, width, height);
+        }
+
+        public API_RETURN_CODE ScanPixelChangedHandler(ScanPixelModel scanPixel)
+        {
+            ScanWidth = scanPixel.Data;
+            ScanHeight = scanPixel.Data;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ScanPixelDwellChangedHandler(ScanPixelDwellModel scanPixelDwell)
+        {
+            PixelDwell = scanPixelDwell.Data;
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
     }

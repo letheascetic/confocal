@@ -89,9 +89,7 @@ namespace confocal_ui
         /// </summary>
         private void RegisterEvents()
         {
-            mFormScanSetting.ScanAcquisitionChangedEvent += ScanAcquisitionChangedHandler;
-
-
+            // mFormScanSetting.ScanAcquisitionChangedEvent += ScanAcquisitionChangedHandler;
             // mFormScanSetting.ScanPixelChangedEvent += mFormScanArea.ScanPixelChangedHandler;
             // mFormScanArea.ScanPixelChangedEvent += mFormScanSetting.ScanPixelChangedHandler;
             //mFormScanSetting.ScanPixelDwellChangedEvent += mFormScanArea.ScanPixelDwellChangedHandler;

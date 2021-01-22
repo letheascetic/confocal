@@ -17,28 +17,28 @@ namespace confocal_core.Model
     /// <param name="id"></param>
     /// <param name="gain"></param>
     /// <returns></returns>
-    public delegate API_RETURN_CODE ChannelGainChangedEventHandler(int id, int gain);
+    public delegate API_RETURN_CODE ChannelGainChangedEventHandler(ScanChannelModel channel);
     /// <summary>
     /// 通道偏置更新事件委托
     /// </summary>
     /// <param name="id"></param>
     /// <param name="offset"></param>
     /// <returns></returns>
-    public delegate API_RETURN_CODE ChannelOffsetChangedEventHandler(int id, int offset);
+    public delegate API_RETURN_CODE ChannelOffsetChangedEventHandler(ScanChannelModel channel);
     /// <summary>
     /// 通道功率更新事件委托
     /// </summary>
     /// <param name="id"></param>
     /// <param name="power"></param>
     /// <returns></returns>
-    public delegate API_RETURN_CODE ChannelPowerChangedEventHandler(int id, int power);
+    public delegate API_RETURN_CODE ChannelPowerChangedEventHandler(ScanChannelModel channel);
     /// <summary>
     /// 通道激活状态更新事件委托
     /// </summary>
     /// <param name="id"></param>
     /// <param name="activated"></param>
     /// <returns></returns>
-    public delegate API_RETURN_CODE ChannelActivateChangedEventHandler(int id, bool activated);
+    public delegate API_RETURN_CODE ChannelActivateChangedEventHandler(ScanChannelModel channel);
 
     /// <summary>
     /// 扫描通道

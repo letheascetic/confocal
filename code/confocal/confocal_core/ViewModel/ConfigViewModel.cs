@@ -1,6 +1,7 @@
 ﻿using confocal_core.Common;
 using confocal_core.Model;
 using confocal_core.Properties;
+using Emgu.CV;
 using GalaSoft.MvvmLight;
 using log4net;
 using System;
@@ -16,6 +17,21 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         private volatile static ConfigViewModel pConfig = null;
         private static readonly object locker = new object();
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public event ScanRangeChangedEventHandler ScanRangeChangedEvent;
+        public event ScanAcquisitionChangedEventHandler ScanAcquisitionChangedEvent;
+        public event ScannerHeadModelChangedEventHandler ScannerHeadModelChangedEvent;
+        public event ScanDirectionChangedEventHandler ScanDirectionChangedEvent;
+        public event ScanModeChangedEventHandler ScanModeChangedEvent;
+        public event LineSkipEnableChangedEventHandler LineSkipEnableChangedEvent;
+        public event LineSkipChangedEventHandler LineSkipChangedEvent;
+        public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
+        public event ScanPixelDwellChangedEventHandler ScanPixelDwellChangedEvent;
+        public event PinHoleChangedEventHandler PinHoleChangedEvent;
+        public event ChannelGainChangedEventHandler ChannelGainChangedEvent;
+        public event ChannelOffsetChangedEventHandler ChannelOffsetChangedEvent;
+        public event ChannelPowerChangedEventHandler ChannelPowerChangedEvent;
+        public event ChannelActivateChangedEventHandler ChannelActivateChangedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ScanAcquisitionModel scanLiveMode;
         private ScanAcquisitionModel scanCaptureMode;
@@ -75,6 +91,12 @@ namespace confocal_core.ViewModel
             Logger.Info(string.Format("Scan Acquisition Mode [{0}:{1}].", IsScanning, IsScanning ? SelectedScanAcquisition.Text : "None"));
 
             AfterPropertyChanged();
+
+            if (ScanAcquisitionChangedEvent != null)
+            {
+                return ScanAcquisitionChangedEvent.Invoke(SelectedScanAcquisition);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -120,6 +142,12 @@ namespace confocal_core.ViewModel
             Logger.Info(string.Format("Scan Header [{0}].", SelectedScannerHead.Text));
 
             AfterPropertyChanged();
+
+            if (ScannerHeadModelChangedEvent != null)
+            {
+                return ScannerHeadModelChangedEvent.Invoke(SelectedScannerHead);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -165,6 +193,12 @@ namespace confocal_core.ViewModel
             Logger.Info(string.Format("Scan Direction [{0}].", SelectedScanDirection.Text));
 
             AfterPropertyChanged();
+
+            if (ScanDirectionChangedEvent != null)
+            {
+                return ScanDirectionChangedEvent.Invoke(SelectedScanDirection);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -211,11 +245,17 @@ namespace confocal_core.ViewModel
             Logger.Info(string.Format("Scan Mode [{0}].", SelectedScanMode.Text));
 
             AfterPropertyChanged();
+
+            if (ScanModeChangedEvent != null)
+            {
+                return ScanModeChangedEvent.Invoke(SelectedScanMode);
+            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         private List<ScanPixelModel> scanPixelList;
+        private ScanPixelModel selectedScanPixel;
 
         /// <summary>
         /// 扫描像素列表
@@ -230,7 +270,8 @@ namespace confocal_core.ViewModel
         /// </summary>
         public ScanPixelModel SelectedScanPixel
         {
-            get { return ScanPixelList.Where(p => p.IsEnabled).First(); }
+            get { return selectedScanPixel; }
+            set { selectedScanPixel = value; RaisePropertyChanged(() => SelectedScanPixel); }
         }
 
         /// <summary>
@@ -253,9 +294,16 @@ namespace confocal_core.ViewModel
                     scanPixel.IsEnabled = true;
                 }
             }
+            SelectedScanPixel = selectedScanPixel;
+            ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
 
             AfterPropertyChanged();
+
+            if (ScanPixelChangedEvent != null)
+            {
+                return ScanPixelChangedEvent.Invoke(SelectedScanPixel);
+            }
 
             return API_RETURN_CODE.API_SUCCESS;
         }
@@ -263,6 +311,7 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private bool fastModeEnabled;
         private List<ScanPixelDwellModel> scanPixelDwellList;
+        private ScanPixelDwellModel selectedScanPixelDwell;
 
         /// <summary>
         /// 快速模式使能
@@ -285,7 +334,8 @@ namespace confocal_core.ViewModel
         /// </summary>
         public ScanPixelDwellModel SelectedScanPixelDwell
         {
-            get { return scanPixelDwellList.Where(p => p.IsEnabled).First(); }
+            get { return selectedScanPixelDwell; }
+            set { selectedScanPixelDwell = value; RaisePropertyChanged(() => SelectedScanPixelDwell); }
         }
 
         /// <summary>
@@ -304,9 +354,16 @@ namespace confocal_core.ViewModel
                 }
             }
             selectedPixelDwell.IsEnabled = true;
+            SelectedScanPixelDwell = selectedPixelDwell;
             Logger.Info(string.Format("Scan Pixel Dwell [{0}].", SelectedScanPixelDwell.Text));
 
             AfterPropertyChanged();
+
+            if (ScanPixelDwellChangedEvent != null)
+            {
+                ScanPixelDwellChangedEvent.Invoke(SelectedScanPixelDwell);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -352,6 +409,12 @@ namespace confocal_core.ViewModel
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
 
             AfterPropertyChanged();
+
+            if (LineSkipEnableChangedEvent != null)
+            {
+                return LineSkipEnableChangedEvent.Invoke(ScanLineSkipEnabled);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -367,6 +430,12 @@ namespace confocal_core.ViewModel
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
 
             AfterPropertyChanged();
+
+            if (LineSkipChangedEvent != null)
+            {
+                LineSkipChangedEvent.Invoke(SelectedScanLineSkip);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -434,8 +503,13 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ChannelGainChangeCommand(int id, int gain)
         {
-            FindScanChannel(id).Gain = gain;
+            ScanChannelModel channel = FindScanChannel(id);
+            channel.Gain = gain;
             Logger.Info(string.Format("Channel Gain [{0}:{1}].", id, gain));
+            if (ChannelGainChangedEvent != null)
+            {
+                return ChannelGainChangedEvent.Invoke(channel);
+            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -447,8 +521,13 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ChannelOffsetChangeCommand(int id, int offset)
         {
-            FindScanChannel(id).Offset = offset;
+            ScanChannelModel channel = FindScanChannel(id);
+            channel.Offset = offset;
             Logger.Info(string.Format("Channel Offset [{0}:{1}].", id, offset));
+            if (ChannelOffsetChangedEvent != null)
+            {
+                return ChannelOffsetChangedEvent.Invoke(channel);
+            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -460,8 +539,13 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ChannelPowerChangeCommand(int id, int power)
         {
-            FindScanChannel(id).LaserPower = power;
+            ScanChannelModel channel = FindScanChannel(id);
+            channel.LaserPower = power;
             Logger.Info(string.Format("Channel Power [{0}:{1}].", id, power));
+            if (ChannelPowerChangedEvent != null)
+            {
+                ChannelPowerChangedEvent.Invoke(channel);
+            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -480,6 +564,10 @@ namespace confocal_core.ViewModel
             Logger.Info(string.Format("Channel Status [{0}:{1}].", id, activated));
 
             AfterPropertyChanged();
+            if (ChannelActivateChangedEvent != null)
+            {
+                ChannelActivateChangedEvent.Invoke(channel);
+            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -528,6 +616,68 @@ namespace confocal_core.ViewModel
 
             SelectedPinHole.Size = value;
             Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", SelectedPinHole.Name, SelectedPinHole.Size));
+
+            if (PinHoleChangedEvent != null)
+            {
+                PinHoleChangedEvent.Invoke(SelectedPinHole);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private List<ScanAreaTypeModel> scanAreaTypeList;
+
+        /// <summary>
+        /// 扫描区域类型列表
+        /// </summary>
+        public List<ScanAreaTypeModel> ScaAreaTypeList
+        {
+            get { return scanAreaTypeList; }
+            set { scanAreaTypeList = value; RaisePropertyChanged(() => scanAreaTypeList); }
+        }
+        /// <summary>
+        /// 选择的扫描区域类型
+        /// </summary>
+        public ScanAreaTypeModel SelectedScanAreaType
+        {
+            get { return ScaAreaTypeList.Where(p => p.IsEnabled).First(); }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private ScanAreaModel selectedScanArea;
+        private ScanAreaModel fullScanArea;
+        private float scanPixelSize;
+
+        /// <summary>
+        /// 当前选择的扫描区域
+        /// </summary>
+        public ScanAreaModel SelectedScanArea
+        {
+            get { return selectedScanArea; }
+            set { selectedScanArea = value; RaisePropertyChanged(() => SelectedScanArea); }
+        }
+        /// <summary>
+        /// 全视场
+        /// </summary>
+        public ScanAreaModel FullScanArea
+        {
+            get { return fullScanArea; }
+            set { fullScanArea = value; RaisePropertyChanged(() => FullScanArea); }
+        }
+        /// <summary>
+        /// 扫描像素尺寸
+        /// </summary>
+        public float ScanPixelSize
+        {
+            get { return scanPixelSize; }
+            set { scanPixelSize = value; RaisePropertyChanged(() => ScanPixelSize); }
+        }
+
+        public API_RETURN_CODE ScanRangeChangeCommand(ScanAreaModel scanRange)
+        {
+            SelectedScanArea.Update(scanRange.ScanRange);
+            ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
+            Logger.Info(string.Format("Selected Scan Range [{0}].", SelectedScanArea.ScanRange));
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -564,8 +714,10 @@ namespace confocal_core.ViewModel
             // 像素时间
             FastModeEnabled = false;
             ScanPixelDwellList = ScanPixelDwellModel.Initialize();
+            SelectedScanPixelDwell = ScanPixelDwellList.Where(p => p.IsEnabled).First();
             // 扫描像素
             ScanPixelList = ScanPixelModel.Initialize();
+            SelectedScanPixel = ScanPixelList.Where(p => p.IsEnabled).First();
             // 跳行扫描
             ScanLineSkipEnabled = Settings.Default.ScanLineSkipEnabled;
             ScanLineSkipList = ScanLineSkipModel.Initialize();
@@ -578,6 +730,16 @@ namespace confocal_core.ViewModel
             // 小孔
             ScanPinHoleList = ScanPinHoleModel.Initialize();
             SelectedPinHole = ScanPinHoleList[0];
+            // 扫描类型 & 范围
+            ScaAreaTypeList = new List<ScanAreaTypeModel>()
+            {
+                ScanAreaTypeModel.Initialize(ScanAreaTypeModel.SQUARE),
+                ScanAreaTypeModel.Initialize(ScanAreaTypeModel.BANK)
+            };
+            FullScanArea = ScanAreaModel.CreateFullScanArea();
+            SelectedScanArea = ScanAreaModel.CreateFullScanArea();
+            // 像素尺寸
+            ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
         }
 
         /// <summary>
