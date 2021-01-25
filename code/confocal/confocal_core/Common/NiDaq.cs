@@ -35,7 +35,7 @@ namespace confocal_core.Common
         public AiSamplesReceivedEventHandler AiSamplesReceived;
         public CiSamplesReceivedEventHandler CiSamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private Config mConfig;
+        private ConfigViewModel mConfig;
         private Task mAoTask;
         private Task mDoTask;
         private Task mAiTask;
@@ -47,7 +47,7 @@ namespace confocal_core.Common
 
         public NiDaq()
         {
-            mConfig = Config.GetConfig();
+            mConfig = ConfigViewModel.GetConfig();
             mAoTask = null;
             mDoTask = null;
             mAiTask = null;

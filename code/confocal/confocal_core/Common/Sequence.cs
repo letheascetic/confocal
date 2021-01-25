@@ -1,4 +1,5 @@
 ﻿using confocal_core.Model;
+using confocal_core.ViewModel;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -103,7 +104,7 @@ namespace confocal_core.Common
         /// </summary>
         public static void GenerateScanCoordinates()
         {
-            Config config = Config.GetConfig();
+            ConfigViewModel config = ConfigViewModel.GetConfig();
             ScanAreaModel extendScanArea = config.GetExtendScanArea();
 
             if (config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION)
@@ -191,11 +192,11 @@ namespace confocal_core.Common
             InputRoundTripCountPerFrame = OutputRoundTripCountPerFrame;
             if (config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION)
             {
-                InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.GetPixelSize()) * InputSampleCountPerPixel;
+                InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.ScanPixelSize) * InputSampleCountPerPixel;
             }
             else
             {
-                InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.GetPixelSize()) * InputSampleCountPerPixel * 2;
+                InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.ScanPixelSize) * InputSampleCountPerPixel * 2;
             }
             InputSampleCountPerFrame = InputRoundTripCountPerFrame * InputSampleCountPerRoundTrip;
 
@@ -225,7 +226,7 @@ namespace confocal_core.Common
         /// </summary>
         public static void GenerateFrameScanWaves()
         {
-            Config config = Config.GetConfig();
+            ConfigViewModel config = ConfigViewModel.GetConfig();
             WaveInitialize();
 
             if (config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION)
@@ -291,7 +292,7 @@ namespace confocal_core.Common
                 Y1Wave = new double[OutputSampleCountPerFrame];
             }
 
-            if (Config.GetConfig().SelectedScannerHead.ID == ScannerHeadModel.THREE_SCANNERS)
+            if (ConfigViewModel.GetConfig().SelectedScannerHead.ID == ScannerHeadModel.THREE_SCANNERS)
             {
                 if (Y2Wave == null || Y2Wave.Length != OutputSampleCountPerFrame)
                 {

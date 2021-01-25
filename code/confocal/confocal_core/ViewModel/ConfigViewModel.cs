@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -17,6 +18,10 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         private volatile static ConfigViewModel pConfig = null;
         private static readonly object locker = new object();
+        private static readonly int CHAN_NUM = 4;
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public bool Debugging { get; set; }
+        public double InputSampleRate { get; set; }                         // 像素速率[采样速率]
         ///////////////////////////////////////////////////////////////////////////////////////////
         public event ScanAreaChangedEventHandler ScanAreaChangedEvent;
         public event ScanAreaChangedEventHandler FullScanAreaChangedEvent;
@@ -445,6 +450,7 @@ namespace confocal_core.ViewModel
         private ScanChannelModel scanChannel488;
         private ScanChannelModel scanChannel561;
         private ScanChannelModel scanChannel640;
+        private ScanChannelModel[] scanChannels;
 
         /// <summary>
         /// 405nm通道
@@ -478,22 +484,10 @@ namespace confocal_core.ViewModel
             get { return scanChannel640; }
             set { scanChannel640 = value; RaisePropertyChanged(() => ScanChannel640); }
         }
-
-        private ScanChannelModel FindScanChannel(int id)
+        public ScanChannelModel[] ScanChannels
         {
-            switch (id)
-            {
-                case 0:
-                    return ScanChannel405;
-                case 1:
-                    return ScanChannel488;
-                case 2:
-                    return ScanChannel561;
-                case 3:
-                    return ScanChannel640;
-                default:
-                    throw new ArgumentOutOfRangeException("ID Exception.");
-            }
+            get { return scanChannels; }
+            set { scanChannels = value; }
         }
 
         /// <summary>
@@ -886,7 +880,79 @@ namespace confocal_core.ViewModel
             }
             return pConfig;
         }
-        
+
+        /// <summary>
+        /// 通道数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetChannelNum()
+        {
+            return CHAN_NUM;
+        }
+
+        /// <summary>
+        /// 当前激活的通道数
+        /// </summary>
+        /// <returns></returns>
+        public int GetActivatedChannelNum()
+        {
+            int activatedChannelNum = 0;
+            activatedChannelNum += ScanChannel405.Activated ? 1 : 0;
+            activatedChannelNum += ScanChannel488.Activated ? 1 : 0;
+            activatedChannelNum += ScanChannel561.Activated ? 1 : 0;
+            activatedChannelNum += ScanChannel640.Activated ? 1 : 0;
+            return activatedChannelNum;
+        }
+
+        public ScanChannelModel FindScanChannel(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    return ScanChannel405;
+                case 1:
+                    return ScanChannel488;
+                case 2:
+                    return ScanChannel561;
+                case 3:
+                    return ScanChannel640;
+                default:
+                    throw new ArgumentOutOfRangeException("ID Exception.");
+            }
+        }
+
+        /// <summary>
+        /// 扩展后的扫描范围
+        /// </summary>
+        /// <returns></returns>
+        public ScanAreaModel GetExtendScanArea()
+        {
+            RectangleF scanRange = SelectedScanArea.ScanRange;
+            float xExtendRange = ScanAreaModel.ExtendLineTime * scanRange.Width / (SelectedScanPixelDwell.Data * SelectedScanPixel.Data);
+            float yExtendRange = ScanAreaModel.ExtendRowCount * ScanPixelSize;
+            return new ScanAreaModel(new RectangleF(scanRange.X - xExtendRange / 2, scanRange.Y - yExtendRange / 2, scanRange.Width + xExtendRange, scanRange.Height + yExtendRange));
+        }
+
+        /// <summary>
+        /// 扩展后的X像素数
+        /// </summary>
+        /// <returns></returns>
+        public int GetExtendScanXPixels()
+        {
+            return SelectedScanPixel.Data + (ScanAreaModel.ExtendLineTime >> 1) / SelectedScanPixelDwell.Data * 2;
+        }
+
+        /// <summary>
+        /// 扩展后的Y像素数
+        /// </summary>
+        /// <returns></returns>
+        public int GetExtendScanYPixels()
+        {
+            return SelectedScanPixel.Data + ScanAreaModel.ExtendRowCount;
+        }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private ConfigViewModel()
         {
             // 采集模式
@@ -917,6 +983,7 @@ namespace confocal_core.ViewModel
             ScanChannel488 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL488);
             ScanChannel561 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL561);
             ScanChannel640 = ScanChannelModel.Initialize(ScanChannelModel.CHANNEL640);
+            ScanChannels = new ScanChannelModel[] { ScanChannel405, ScanChannel488, ScanChannel561, ScanChannel640 };
             // 小孔
             ScanPinHoleList = ScanPinHoleModel.Initialize();
             SelectedPinHole = ScanPinHoleList[0];
