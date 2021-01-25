@@ -146,9 +146,9 @@ namespace confocal_core.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public double ScanChannel405LaserPower {
+        public int ScanChannel405LaserPower {
             get {
-                return ((double)(this["ScanChannel405LaserPower"]));
+                return ((int)(this["ScanChannel405LaserPower"]));
             }
             set {
                 this["ScanChannel405LaserPower"] = value;
@@ -230,9 +230,9 @@ namespace confocal_core.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public double ScanChannel488LaserPower {
+        public int ScanChannel488LaserPower {
             get {
-                return ((double)(this["ScanChannel488LaserPower"]));
+                return ((int)(this["ScanChannel488LaserPower"]));
             }
             set {
                 this["ScanChannel488LaserPower"] = value;
@@ -314,9 +314,9 @@ namespace confocal_core.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
-        public double ScanChannel561LaserPower {
+        public int ScanChannel561LaserPower {
             get {
-                return ((double)(this["ScanChannel561LaserPower"]));
+                return ((int)(this["ScanChannel561LaserPower"]));
             }
             set {
                 this["ScanChannel561LaserPower"] = value;
@@ -398,9 +398,9 @@ namespace confocal_core.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public double ScanChannel640LaserPower {
+        public int ScanChannel640LaserPower {
             get {
-                return ((double)(this["ScanChannel640LaserPower"]));
+                return ((int)(this["ScanChannel640LaserPower"]));
             }
             set {
                 this["ScanChannel640LaserPower"] = value;

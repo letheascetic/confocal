@@ -120,6 +120,7 @@ namespace confocal_core.ViewModel
         {
             ScanWidth = scanPixel.Data;
             ScanHeight = scanPixel.Data;
+            ScanImage = new Mat(ScanWidth, ScanHeight, DepthType.Cv8U, 3);
             return API_RETURN_CODE.API_SUCCESS;
         }
 

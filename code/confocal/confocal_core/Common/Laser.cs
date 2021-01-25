@@ -32,6 +32,11 @@ namespace confocal_core.Common
             m_connected = false;
         }
 
+        public static bool IsConnected()
+        {
+            return m_connected;
+        }
+
         /// <summary>
         /// 连接激光端口
         /// </summary>
@@ -171,12 +176,12 @@ namespace confocal_core.Common
 
         public static int PowerToConfigValue(double power)
         {
-            return (int)(power * 100);
+            return (int)(power * 10.0);
         }
 
         public static double ConfigValueToPower(int configValue)
         {
-            return (double)configValue / 100.0;
+            return (double)configValue / 10.0;
         }
 
         private static int GetChannelIndex(int id)

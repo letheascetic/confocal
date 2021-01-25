@@ -32,7 +32,7 @@
     <Setting Name="ScanLineSkip" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ScanChannel405LaserPower" Type="System.Double" Scope="User">
+    <Setting Name="ScanChannel405LaserPower" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="ScanChannel405LaserColor" Type="System.Drawing.Color" Scope="User">
@@ -53,7 +53,7 @@
     <Setting Name="ScanChannel405PseudoColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">MediumPurple</Value>
     </Setting>
-    <Setting Name="ScanChannel488LaserPower" Type="System.Double" Scope="User">
+    <Setting Name="ScanChannel488LaserPower" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="ScanChannel488LaserColor" Type="System.Drawing.Color" Scope="User">
@@ -74,7 +74,7 @@
     <Setting Name="ScanChannel488PseudoColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">DarkCyan</Value>
     </Setting>
-    <Setting Name="ScanChannel561LaserPower" Type="System.Double" Scope="User">
+    <Setting Name="ScanChannel561LaserPower" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
     <Setting Name="ScanChannel561LaserColor" Type="System.Drawing.Color" Scope="User">
@@ -95,7 +95,7 @@
     <Setting Name="ScanChannel561PseudoColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">YellowGreen</Value>
     </Setting>
-    <Setting Name="ScanChannel640LaserPower" Type="System.Double" Scope="User">
+    <Setting Name="ScanChannel640LaserPower" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="ScanChannel640LaserColor" Type="System.Drawing.Color" Scope="User">

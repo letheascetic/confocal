@@ -55,7 +55,7 @@ namespace confocal_core.Model
         private bool collapesd;             // 折叠
         private string name;                // 通道名
 
-        private double laserPower;          // 激光功率
+        private int laserPower;          // 激光功率
         private Color laserColor;           // 激光颜色
         private string laserWaveLength;     // 激光波长
 
@@ -95,7 +95,7 @@ namespace confocal_core.Model
         /// <summary>
         /// 激光功率
         /// </summary>
-        public double LaserPower
+        public int LaserPower
         {
             get { return laserPower; }
             set { laserPower = value; RaisePropertyChanged(() => LaserPower); }
