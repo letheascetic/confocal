@@ -95,23 +95,25 @@ namespace confocal_core.ViewModel
             Scheduler scheduler = Scheduler.CreateInstance();
             scheduler.BeforePropertyChanged();
 
-            // 更新状态
-            ScanLiveMode.IsEnabled = liveModeEnabled;
-            ScanCaptureMode.IsEnabled = captureModeEnabled;
-            Logger.Info(string.Format("Scan Acquisition Mode [{0}:{1}].", IsScanning, IsScanning ? SelectedScanAcquisition.Text : "None"));
-
-            if (ScanLiveMode.IsEnabled)
+            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+            if (liveModeEnabled || captureModeEnabled)
             {
-                scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
-                scheduler.StartScanTask(scanTask);
+                code = scheduler.StartScanTask(0, "实时扫描");
+            }
+
+            if (code == API_RETURN_CODE.API_SUCCESS)
+            {
+                ScanLiveMode.IsEnabled = liveModeEnabled;
+                ScanCaptureMode.IsEnabled = captureModeEnabled;
+                Logger.Info(string.Format("Scan Acquisition Mode [{0}:{1}].", IsScanning, IsScanning ? SelectedScanAcquisition.Text : "None"));
+
+                if (ScanAcquisitionChangedEvent != null)
+                {
+                    return ScanAcquisitionChangedEvent.Invoke(SelectedScanAcquisition);
+                }
             }
             
-            if (ScanAcquisitionChangedEvent != null)
-            {
-                return ScanAcquisitionChangedEvent.Invoke(SelectedScanAcquisition);
-            }
-
-            return API_RETURN_CODE.API_SUCCESS;
+            return code;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -148,12 +150,18 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScannerHeadChangeCommand(bool twoGalvEnabled)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             // 更新扫描头
             ScannerHeadTwoGalv.IsEnabled = twoGalvEnabled;
             ScannerHeadThreeGalv.IsEnabled = !twoGalvEnabled;
             Logger.Info(string.Format("Scan Header [{0}].", SelectedScannerHead.Text));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (ScannerHeadModelChangedEvent != null)
             {
@@ -197,12 +205,18 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanDirectionChangeCommand(bool uniDirectionEnabled)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             // 更新扫描方向
             ScanUniDirection.IsEnabled = uniDirectionEnabled;
             ScanBiDirection.IsEnabled = !uniDirectionEnabled;
             Logger.Info(string.Format("Scan Direction [{0}].", SelectedScanDirection.Text));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (ScanDirectionChangedEvent != null)
             {
@@ -247,12 +261,18 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanModeChangeCommand(bool galvEnabled)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             // 更新扫描模式
             ScanModeGalavano.IsEnabled = galvEnabled;
             ScanModeResonant.IsEnabled = !galvEnabled;
             Logger.Info(string.Format("Scan Mode [{0}].", SelectedScanMode.Text));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (ScanModeChangedEvent != null)
             {
@@ -289,7 +309,8 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             foreach (ScanPixelModel scanPixel in ScanPixelList)
             {
@@ -305,6 +326,11 @@ namespace confocal_core.ViewModel
             SelectedScanPixel = selectedScanPixel;
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (ScanPixelChangedEvent != null)
             {
@@ -350,7 +376,8 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             foreach (ScanPixelDwellModel pixelDwell in ScanPixelDwellList)
             {
@@ -362,6 +389,11 @@ namespace confocal_core.ViewModel
             selectedPixelDwell.IsEnabled = true;
             SelectedScanPixelDwell = selectedPixelDwell;
             Logger.Info(string.Format("Scan Pixel Dwell [{0}].", SelectedScanPixelDwell.Text));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (ScanPixelDwellChangedEvent != null)
             {
@@ -407,10 +439,16 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE LineSkipEnableChangeCommand(bool lineSkipEnabled)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             ScanLineSkipEnabled = lineSkipEnabled;
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (LineSkipEnableChangedEvent != null)
             {
@@ -426,10 +464,16 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE LineSkipValueChangeCommand(ScanLineSkipModel lineSkip)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             SelectedScanLineSkip = lineSkip;
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (LineSkipChangedEvent != null)
             {
@@ -550,11 +594,22 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ChannelActivateChangeCommand(int id, bool activated)
         {
-            Scheduler.CreateInstance().BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             ScanChannelModel channel = FindScanChannel(id);
             channel.Activated = activated;
-            Logger.Info(string.Format("Channel Status [{0}:{1}].", id, activated));
+            if (IsScanning && GetActivatedChannelNum() == 0)    // 如果当前正在扫描，且关闭的激光是之前唯一开启的激光，则不应关闭该激光
+            {
+                channel.Activated = true;
+            }
+            
+            Logger.Info(string.Format("Channel Status [{0}:{1}].", id, channel.Activated));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (ChannelActivateChangedEvent != null)
             {
@@ -590,12 +645,9 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE PinHoleSelectChangeCommand(ScanPinHoleModel selected)
         {
-            // BeforePropertyChanged();
-
             SelectedPinHole = selected;
             Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", SelectedPinHole.Name, SelectedPinHole.Size));
 
-            // AfterPropertyChanged();
             return API_RETURN_CODE.API_SUCCESS;
         }
         /// <summary>
@@ -667,9 +719,17 @@ namespace confocal_core.ViewModel
 
         public API_RETURN_CODE ScanAreaChangeCommand(ScanAreaModel scanArea)
         {
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
+
             SelectedScanArea.Update(scanArea.ScanRange);
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Selected Scan Area [{0}].", SelectedScanArea.ScanRange));
+
+            if (IsScanning)
+            {
+                scheduler.StartScanTask(0, "实时扫描");
+            }
 
             if (ScanAreaChangedEvent != null)
             {
@@ -691,6 +751,14 @@ namespace confocal_core.ViewModel
 
             return API_RETURN_CODE.API_SUCCESS;
         }
+
+        public API_RETURN_CODE FullScanAreaChangeCommand(float scanRange)
+        {
+            FullScanArea.Update(new System.Drawing.RectangleF(-scanRange / 2, -scanRange / 2, scanRange, scanRange));
+            Logger.Info(string.Format("Full Scan Area [{0}].", FullScanArea.ScanRange));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private GalvoPropertyModel mGalvoPrpperty;
         private DetectorModel mDetector;
@@ -855,13 +923,6 @@ namespace confocal_core.ViewModel
             }
         }
 
-        public API_RETURN_CODE FullScanAreaChangeCommand(float scanRange)
-        {
-            FullScanArea.Update(new System.Drawing.RectangleF(-scanRange / 2, -scanRange / 2, scanRange, scanRange));
-            Logger.Info(string.Format("Full Scan Area [{0}].", FullScanArea.ScanRange));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
         ///////////////////////////////////////////////////////////////////////////////////////////
         private string mLaserPort;
 
@@ -962,6 +1023,7 @@ namespace confocal_core.ViewModel
         {
             // 调度器
             // mScheduler = Scheduler.CreateInstance();
+            InputSampleRate = 1e6;
             // 采集模式
             ScanLiveMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.LIVE);
             ScanCaptureMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.CAPTURE);

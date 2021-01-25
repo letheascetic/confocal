@@ -54,8 +54,12 @@ namespace confocal_core.Common
         {
             mConfig = ConfigViewModel.GetConfig();
             mNiDaq = new NiDaq();
+            ScanTasks = new List<ScanTask>();
+            ScanningTask = null;
             ConfigUsbDac();
             ConfigLaser();
+            mNiDaq.AiSamplesReceived += PmtReceiveSamples;
+            mNiDaq.CiSamplesReceived += ApdReceiveSamples;
         }
 
         public void Release()
@@ -64,36 +68,36 @@ namespace confocal_core.Common
             ReleaseUsbDac();
         }
 
-        public API_RETURN_CODE CreateScanTask(int taskId, string taskName, out ScanTask scanTask)
+        /// <summary>
+        /// 启动扫描任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="taskName"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE StartScanTask(int taskId, string taskName)
         {
-            scanTask = FindScanTask(taskId);
+            API_RETURN_CODE code;
+            if (mConfig.GetActivatedChannelNum() == 0)
+            {
+                code = API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
+                Logger.Info(string.Format("start scan task[{0}|{1}] failed: [{2}].", taskId, taskName, code));
+                return code;
+            }
+
+            ScanTask scanTask = FindScanTask(taskId);
+
             if (scanTask == null)
             {
                 scanTask = new ScanTask(taskId, taskName);
                 ScanTasks.Add(scanTask);
             }
 
-            Logger.Info(string.Format("create scan task[{0}|{1}].", taskId, taskName));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE StartScanTask(ScanTask scanTask)
-        {
-            if (scanTask == null)
-            {
-                return API_RETURN_CODE.API_FAILED_SCAN_TASK_INVALID;
-            }
-
-            if (FindScanTask(scanTask.TaskId) == null)
-            {
-                return API_RETURN_CODE.API_FAILED_SCAN_TASK_NOT_FOUND;
-            }
-
             ScanningTask = scanTask;
 
-            // TO DO: 
+            Sequence.GenerateScanCoordinates();         // 生成扫描范围序列和电压序列
+            Sequence.GenerateFrameScanWaves();          // 生成帧电压序列
+            code = mNiDaq.Start();      // 启动板卡
 
-            API_RETURN_CODE code = mNiDaq.Start();      // 启动板卡
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
                 Logger.Info(string.Format("start scan task[{0}|{1}] failed: [{2}].", scanTask.TaskId, scanTask.TaskName, code));
@@ -105,6 +109,10 @@ namespace confocal_core.Common
             return code;
         }
 
+        /// <summary>
+        /// 停止扫描任务
+        /// </summary>
+        /// <returns></returns>
         public API_RETURN_CODE StopScanTask()
         {
             if (ScanningTask == null)
@@ -117,14 +125,20 @@ namespace confocal_core.Common
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_NOT_FOUND;
             }
 
+            Logger.Info(string.Format("stop scan task[{0}|{1}].", ScanningTask.TaskId, ScanningTask.TaskName));
+
             mNiDaq.Stop();
             ScanningTask.Stop();
             ScanningTask = null;
 
-            Logger.Info(string.Format("stop scan task[{0}|{1}].", ScanningTask.TaskId, ScanningTask.TaskName));
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        /// <summary>
+        /// 查找任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
         public ScanTask FindScanTask(int taskId)
         {
             return ScanTasks.Where(p => p.TaskId == taskId).FirstOrDefault();
@@ -139,7 +153,6 @@ namespace confocal_core.Common
             // 如果当前正在采集(有任一采集模式使能)，则先停止采集
             if (ConfigViewModel.GetConfig().IsScanning)
             {
-                // TO DO：停止采集
                 return StopScanTask();
             }
             return API_RETURN_CODE.API_SUCCESS;
@@ -254,6 +267,16 @@ namespace confocal_core.Common
             {
                 UsbDac.Release();
             }
+        }
+
+        private void PmtReceiveSamples(object sender, short[][] samples, long acquisitionCount)
+        {
+            Logger.Info(string.Format("receive samples, acquisition [{0}] times.", acquisitionCount));
+        }
+
+        private void ApdReceiveSamples(object sender, int channelIndex, int[] samples, long acquisitionCount)
+        {
+            Logger.Info(string.Format("channel [{0}] receive samples, acquisition [{1}] times.", channelIndex, acquisitionCount));
         }
 
     }

@@ -241,7 +241,6 @@ namespace confocal_core.Common
                     {
                         Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n] * 2, OutputSampleCountPerRoundTrip).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip);
                     }
-                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, OutputSampleCountPerRoundTrip);
                 }
             }
             else
@@ -258,9 +257,10 @@ namespace confocal_core.Common
                         Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip >> 1);
                         Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index + (OutputSampleCountPerRoundTrip >> 1), OutputSampleCountPerRoundTrip >> 1);
                     }
-                    Array.Copy(TriggerVoltages, 0, TriggerWave, index, OutputSampleCountPerRoundTrip);
                 }
             }
+
+            Array.Copy(TriggerVoltages, TriggerWave, OutputSampleCountPerRoundTrip);
 
             int resetSampleCount = (int)(ScanAreaModel.ScanLineStartTime / config.SelectedScanPixelDwell.Data);
             double[] y1ResetVoltages = CreateLinearArray(YVoltaegs.Last(), YVoltaegs[0], resetSampleCount);

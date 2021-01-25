@@ -120,7 +120,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double XCoordinateToVoltage(double xCoordinate)
         {
-            return xCoordinate * XGalvoCalibrationVoltage + XGalvoOffsetVoltage;
+            return xCoordinate * XGalvoCalibrationVoltage / 1000 + XGalvoOffsetVoltage;
         }
 
         /// <summary>
@@ -130,10 +130,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double[] XCoordinateToVoltage(double[] xCoordinates)
         {
+            double calibrationVoltage = XGalvoCalibrationVoltage / 1000;
             double[] xVoltages = new double[xCoordinates.Length];
             for (int i = 0; i < xCoordinates.Length; i++)
             {
-                xVoltages[i] = xCoordinates[i] * XGalvoCalibrationVoltage + XGalvoOffsetVoltage;
+                xVoltages[i] = xCoordinates[i] * calibrationVoltage + XGalvoOffsetVoltage;
             }
             return xVoltages;
         }
@@ -145,7 +146,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double YCoordinateToVoltage(double yCoordinate)
         {
-            return yCoordinate * YGalvoCalibrationVoltage + YGalvoOffsetVoltage;
+            return yCoordinate * YGalvoCalibrationVoltage / 1000 + YGalvoOffsetVoltage;
         }
 
         /// <summary>
@@ -155,10 +156,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double[] YCoordinateToVoltage(double[] yCoordinates)
         {
+            double calibrationVoltage = YGalvoCalibrationVoltage / 1000;
             double[] yVoltages = new double[yCoordinates.Length];
             for (int i = 0; i < yCoordinates.Length; i++)
             {
-                yVoltages[i] = yCoordinates[i] * YGalvoCalibrationVoltage + YGalvoOffsetVoltage;
+                yVoltages[i] = yCoordinates[i] * calibrationVoltage + YGalvoOffsetVoltage;
             }
             return yVoltages;
         }
@@ -170,7 +172,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double XVoltageToCoordinate(double xVoltage)
         {
-            return (xVoltage - XGalvoOffsetVoltage) / XGalvoCalibrationVoltage;
+            return (xVoltage - XGalvoOffsetVoltage) / XGalvoCalibrationVoltage * 1000;
         }
 
         /// <summary>
@@ -180,10 +182,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double[] XVoltageToCoordinate(double[] xVoltages)
         {
+            double calibrationVoltage = XGalvoCalibrationVoltage / 1000;
             double[] xCoordinates = new double[xVoltages.Length];
             for (int i = 0; i < xVoltages.Length; i++)
             {
-                xCoordinates[i] = (xVoltages[i] - XGalvoOffsetVoltage) / XGalvoCalibrationVoltage;
+                xCoordinates[i] = (xVoltages[i] - XGalvoOffsetVoltage) / calibrationVoltage;
             }
             return xCoordinates;
         }
@@ -195,7 +198,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double YVoltageToCoordinate(double yVoltage)
         {
-            return (yVoltage - YGalvoOffsetVoltage) / YGalvoCalibrationVoltage;
+            return (yVoltage - YGalvoOffsetVoltage) / YGalvoCalibrationVoltage * 1000;
         }
 
         /// <summary>
@@ -205,10 +208,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public double[] YVoltageToCoordinate(double[] yVoltages)
         {
+            double calibrationVoltage = YGalvoCalibrationVoltage / 1000;
             double[] yCoordinates = new double[yVoltages.Length];
             for (int i = 0; i < yVoltages.Length; i++)
             {
-                yCoordinates[i] = (yVoltages[i] - YGalvoOffsetVoltage) / YGalvoCalibrationVoltage;
+                yCoordinates[i] = (yVoltages[i] - YGalvoOffsetVoltage) / calibrationVoltage;
             }
             return yCoordinates;
         }
@@ -221,7 +225,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double XCoordinateToVoltage(double xCoordinate, GalvoPropertyModel galvoPrpperty)
         {
-            return xCoordinate * galvoPrpperty.xGalvoCalibrationVoltage + galvoPrpperty.XGalvoOffsetVoltage;
+            return xCoordinate * galvoPrpperty.XGalvoCalibrationVoltage / 1000 + galvoPrpperty.XGalvoOffsetVoltage;
         }
 
         /// <summary>
@@ -231,10 +235,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double[] XCoordinateToVoltage(double[] xCoordinates, GalvoPropertyModel galvoPrpperty)
         {
+            double calibrationVoltage = galvoPrpperty.XGalvoCalibrationVoltage / 1000;
             double[] xVoltages = new double[xCoordinates.Length];
             for (int i = 0; i < xCoordinates.Length; i++)
             {
-                xVoltages[i] = xCoordinates[i] * galvoPrpperty.xGalvoCalibrationVoltage + galvoPrpperty.XGalvoOffsetVoltage;
+                xVoltages[i] = xCoordinates[i] * calibrationVoltage + galvoPrpperty.XGalvoOffsetVoltage;
             }
             return xVoltages;
         }
@@ -247,7 +252,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double YCoordinateToVoltage(double yCoordinate, GalvoPropertyModel galvoPrpperty)
         {
-            return yCoordinate * galvoPrpperty.YGalvoCalibrationVoltage + galvoPrpperty.YGalvoOffsetVoltage;
+            return yCoordinate * galvoPrpperty.YGalvoCalibrationVoltage / 1000 + galvoPrpperty.YGalvoOffsetVoltage;
         }
 
         /// <summary>
@@ -258,10 +263,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double[] YCoordinateToVoltage(double[] yCoordinates, GalvoPropertyModel galvoPrpperty)
         {
+            double calibrationVoltage = galvoPrpperty.YGalvoCalibrationVoltage / 1000;
             double[] yVoltages = new double[yCoordinates.Length];
             for (int i = 0; i < yCoordinates.Length; i++)
             {
-                yVoltages[i] = yCoordinates[i] * galvoPrpperty.YGalvoCalibrationVoltage + galvoPrpperty.YGalvoOffsetVoltage;
+                yVoltages[i] = yCoordinates[i] * calibrationVoltage + galvoPrpperty.YGalvoOffsetVoltage;
             }
             return yVoltages;
         }
@@ -274,7 +280,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double XVoltageToCoordinate(double xVoltage, GalvoPropertyModel galvoPrpperty)
         {
-            return (xVoltage - galvoPrpperty.XGalvoOffsetVoltage) / galvoPrpperty.xGalvoCalibrationVoltage;
+            return (xVoltage - galvoPrpperty.XGalvoOffsetVoltage) / galvoPrpperty.XGalvoCalibrationVoltage * 1000;
         }
 
         /// <summary>
@@ -285,10 +291,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double[] XVoltageToCoordinate(double[] xVoltages, GalvoPropertyModel galvoPrpperty)
         {
+            double calibrationVoltage = galvoPrpperty.XGalvoCalibrationVoltage / 1000;
             double[] xCoordinates = new double[xVoltages.Length];
             for (int i = 0; i < xVoltages.Length; i++)
             {
-                xCoordinates[i] = (xVoltages[i] - galvoPrpperty.XGalvoOffsetVoltage) / galvoPrpperty.xGalvoCalibrationVoltage;
+                xCoordinates[i] = (xVoltages[i] - galvoPrpperty.XGalvoOffsetVoltage) / calibrationVoltage;
             }
             return xCoordinates;
         }
@@ -301,7 +308,7 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double YVoltageToCoordinate(double yVoltage, GalvoPropertyModel galvoPrpperty)
         {
-            return (yVoltage - galvoPrpperty.YGalvoOffsetVoltage) / galvoPrpperty.yGalvoCalibrationVoltage;
+            return (yVoltage - galvoPrpperty.YGalvoOffsetVoltage) / galvoPrpperty.YGalvoCalibrationVoltage * 1000;
         }
 
         /// <summary>
@@ -312,10 +319,11 @@ namespace confocal_core.Model
         /// <returns></returns>
         public static double[] YVoltageToCoordinate(double[] yVoltages, GalvoPropertyModel galvoPrpperty)
         {
+            double calibrationVoltage = galvoPrpperty.YGalvoCalibrationVoltage / 1000;
             double[] yCoordinates = new double[yVoltages.Length];
             for (int i = 0; i < yVoltages.Length; i++)
             {
-                yCoordinates[i] = (yVoltages[i] - galvoPrpperty.YGalvoOffsetVoltage) / galvoPrpperty.yGalvoCalibrationVoltage;
+                yCoordinates[i] = (yVoltages[i] - galvoPrpperty.YGalvoOffsetVoltage) / galvoPrpperty.YGalvoCalibrationVoltage;
             }
             return yCoordinates;
         }

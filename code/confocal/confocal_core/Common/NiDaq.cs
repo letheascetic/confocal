@@ -15,14 +15,14 @@ namespace confocal_core.Common
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="samples"></param>
-    public delegate void AiSamplesReceivedEventHandler(object sender, short[][] samples);
+    public delegate void AiSamplesReceivedEventHandler(object sender, short[][] samples, long acquisitionCount);
     /// <summary>
     /// 计数器计数事件
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="channelIndex"></param>
     /// <param name="samples"></param>
-    public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, int[] samples);
+    public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, int[] samples, long acquisitionCount);
 
     /// <summary>
     /// NI板卡接口类
@@ -43,6 +43,7 @@ namespace confocal_core.Common
         private AnalogUnscaledReader mAiUnscaledReader;
         private CounterSingleChannelReader[] mCiChannelReaders;
         private int[] mAiChannelIndex;
+        private long[] mAcquisitionCount;
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         public NiDaq()
@@ -54,9 +55,9 @@ namespace confocal_core.Common
             mCiTasks = null;
             mAiUnscaledReader = null;
             mCiChannelReaders = null;
-
             int channelNum = mConfig.GetChannelNum();
             mAiChannelIndex = Enumerable.Repeat<int>(-1, channelNum).ToArray();
+            mAcquisitionCount = Enumerable.Repeat<long>(0, channelNum).ToArray();
         }
 
         /// <summary>
@@ -65,6 +66,8 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE Start()
         {
+            mAcquisitionCount = Enumerable.Repeat<long>(0, mConfig.GetChannelNum()).ToArray();
+
             API_RETURN_CODE code = ConfigAoTask();
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
@@ -402,6 +405,8 @@ namespace confocal_core.Common
         {
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
 
+            GenerateAiChannelIndex();
+
             try
             {
                 mAiTask = new Task();
@@ -415,10 +420,10 @@ namespace confocal_core.Common
                     mAiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    Sequence.InputSampleCountPerFrame);
+                    Sequence.InputSampleCountPerAcquisition);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
-                string source = mConfig.Detector.TriggerSignal;
+                string source = mConfig.Detector.TriggerReceive;
                 mAiTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
                 mAiTask.Triggers.StartTrigger.Retriggerable = true;        // 设置为允许重触发
 
@@ -464,7 +469,7 @@ namespace confocal_core.Common
 
                 if (CiSamplesReceived != null)
                 {
-                    CiSamplesReceived.Invoke(this, index, originSamples);
+                    CiSamplesReceived.Invoke(this, index, originSamples, ++mAcquisitionCount[index]);
                 }
             }
             catch (Exception err)
@@ -485,12 +490,20 @@ namespace confocal_core.Common
                 short[][] samples = new short[channelNum][];
                 for (int i = 0; i < channelNum; i++)
                 {
-                    samples[i] = GetLaserAiChannelIndex(i) >= 0 ? waves[GetLaserAiChannelIndex(i)].GetRawData() : null;
+                    if (GetLaserAiChannelIndex(i) >= 0)
+                    {
+                        samples[i] = waves[GetLaserAiChannelIndex(i)].GetRawData();
+                        mAcquisitionCount[i]++;
+                    }
+                    else
+                    {
+                        samples[i] = null;
+                    }
                 }
 
                 if (AiSamplesReceived != null)
                 {
-                    AiSamplesReceived.Invoke(this, samples);
+                    AiSamplesReceived.Invoke(this, samples, mAcquisitionCount.Where(p => p>0).First());
                 }
             }
             catch (Exception err)
@@ -566,7 +579,7 @@ namespace confocal_core.Common
             int channelNum = mConfig.GetChannelNum();
             for (int i = 0; i < channelNum; i++)
             {
-                mAiChannelIndex[i] = mConfig.FindScanChannel(i).Activated ? ++index : -1;
+                mAiChannelIndex[i] = mConfig.ScanChannels[i].Activated ? ++index : -1;
             }
         }
 

@@ -77,6 +77,7 @@
     <Reference Include="C1.Win.C1TouchToolKit.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=5e531fc0479701e7, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1TrueDBGrid.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=75ae3fb0e2b1e0da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Win7Pack.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.FlexChart.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=3aa2920c09e0aefd, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.FlexPivot.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.FlexViewer.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.ImportServices.4, Version=4.0.20163.212, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
