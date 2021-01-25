@@ -53,7 +53,7 @@ namespace confocal_core.Common
         public void Initialize()
         {
             mConfig = ConfigViewModel.GetConfig();
-
+            mNiDaq = new NiDaq();
             ConfigUsbDac();
             ConfigLaser();
         }
@@ -137,9 +137,10 @@ namespace confocal_core.Common
         public API_RETURN_CODE BeforePropertyChanged()
         {
             // 如果当前正在采集(有任一采集模式使能)，则先停止采集
-            if (mConfig.IsScanning)
+            if (ConfigViewModel.GetConfig().IsScanning)
             {
                 // TO DO：停止采集
+                return StopScanTask();
             }
             return API_RETURN_CODE.API_SUCCESS;
         }
@@ -196,7 +197,6 @@ namespace confocal_core.Common
 
         private Scheduler()
         {
-            mConfig = ConfigViewModel.GetConfig();
             Initialize();
         }
 
@@ -213,6 +213,7 @@ namespace confocal_core.Common
         /// </summary>
         private void ConfigLaser()
         {
+            ConfigViewModel mConfig = ConfigViewModel.GetConfig();
             string portName = mConfig.LaserPort;
             API_RETURN_CODE code = Laser.Connect(portName);
 
@@ -232,6 +233,7 @@ namespace confocal_core.Common
 
         private void ReleaseLaser()
         {
+            ConfigViewModel mConfig = ConfigViewModel.GetConfig();
             if (Laser.IsConnected())
             {
                 for (int i = 0; i < mConfig.GetChannelNum(); i++)

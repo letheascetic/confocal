@@ -39,7 +39,7 @@ namespace confocal_core.ViewModel
         public event ChannelPowerChangedEventHandler ChannelPowerChangedEvent;
         public event ChannelActivateChangedEventHandler ChannelActivateChangedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private Scheduler mScheduler;
+        // private Scheduler mScheduler;
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ScanAcquisitionModel scanLiveMode;
@@ -92,15 +92,20 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanAcquisitionChangeCommand(bool liveModeEnabled, bool captureModeEnabled)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler scheduler = Scheduler.CreateInstance();
+            scheduler.BeforePropertyChanged();
 
             // 更新状态
             ScanLiveMode.IsEnabled = liveModeEnabled;
             ScanCaptureMode.IsEnabled = captureModeEnabled;
             Logger.Info(string.Format("Scan Acquisition Mode [{0}:{1}].", IsScanning, IsScanning ? SelectedScanAcquisition.Text : "None"));
 
-            AfterPropertyChanged();
-
+            if (ScanLiveMode.IsEnabled)
+            {
+                scheduler.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+                scheduler.StartScanTask(scanTask);
+            }
+            
             if (ScanAcquisitionChangedEvent != null)
             {
                 return ScanAcquisitionChangedEvent.Invoke(SelectedScanAcquisition);
@@ -143,14 +148,12 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScannerHeadChangeCommand(bool twoGalvEnabled)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             // 更新扫描头
             ScannerHeadTwoGalv.IsEnabled = twoGalvEnabled;
             ScannerHeadThreeGalv.IsEnabled = !twoGalvEnabled;
             Logger.Info(string.Format("Scan Header [{0}].", SelectedScannerHead.Text));
-
-            AfterPropertyChanged();
 
             if (ScannerHeadModelChangedEvent != null)
             {
@@ -194,14 +197,12 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanDirectionChangeCommand(bool uniDirectionEnabled)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             // 更新扫描方向
             ScanUniDirection.IsEnabled = uniDirectionEnabled;
             ScanBiDirection.IsEnabled = !uniDirectionEnabled;
             Logger.Info(string.Format("Scan Direction [{0}].", SelectedScanDirection.Text));
-
-            AfterPropertyChanged();
 
             if (ScanDirectionChangedEvent != null)
             {
@@ -246,14 +247,12 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanModeChangeCommand(bool galvEnabled)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             // 更新扫描模式
             ScanModeGalavano.IsEnabled = galvEnabled;
             ScanModeResonant.IsEnabled = !galvEnabled;
             Logger.Info(string.Format("Scan Mode [{0}].", SelectedScanMode.Text));
-
-            AfterPropertyChanged();
 
             if (ScanModeChangedEvent != null)
             {
@@ -290,7 +289,7 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             foreach (ScanPixelModel scanPixel in ScanPixelList)
             {
@@ -306,8 +305,6 @@ namespace confocal_core.ViewModel
             SelectedScanPixel = selectedScanPixel;
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
-
-            AfterPropertyChanged();
 
             if (ScanPixelChangedEvent != null)
             {
@@ -353,7 +350,7 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             foreach (ScanPixelDwellModel pixelDwell in ScanPixelDwellList)
             {
@@ -365,8 +362,6 @@ namespace confocal_core.ViewModel
             selectedPixelDwell.IsEnabled = true;
             SelectedScanPixelDwell = selectedPixelDwell;
             Logger.Info(string.Format("Scan Pixel Dwell [{0}].", SelectedScanPixelDwell.Text));
-
-            AfterPropertyChanged();
 
             if (ScanPixelDwellChangedEvent != null)
             {
@@ -412,12 +407,10 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE LineSkipEnableChangeCommand(bool lineSkipEnabled)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             ScanLineSkipEnabled = lineSkipEnabled;
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
-
-            AfterPropertyChanged();
 
             if (LineSkipEnableChangedEvent != null)
             {
@@ -433,12 +426,10 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE LineSkipValueChangeCommand(ScanLineSkipModel lineSkip)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             SelectedScanLineSkip = lineSkip;
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
-
-            AfterPropertyChanged();
 
             if (LineSkipChangedEvent != null)
             {
@@ -503,7 +494,7 @@ namespace confocal_core.ViewModel
         {
             ScanChannelModel channel = FindScanChannel(id);
             channel.Gain = gain;
-            mScheduler.ChannelGainChangeCommand(channel);
+            Scheduler.CreateInstance().ChannelGainChangeCommand(channel);
             Logger.Info(string.Format("Channel Gain [{0}:{1}].", id, gain));        // 设置
 
             if (ChannelGainChangedEvent != null)
@@ -541,7 +532,7 @@ namespace confocal_core.ViewModel
         {
             ScanChannelModel channel = FindScanChannel(id);
             channel.LaserPower = power;
-            mScheduler.ChannelPowerChangeCommand(channel);
+            Scheduler.CreateInstance().ChannelPowerChangeCommand(channel);
             Logger.Info(string.Format("Channel Power [{0}:{1}].", id, power));
 
             if (ChannelPowerChangedEvent != null)
@@ -559,13 +550,12 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ChannelActivateChangeCommand(int id, bool activated)
         {
-            mScheduler.BeforePropertyChanged();
+            Scheduler.CreateInstance().BeforePropertyChanged();
 
             ScanChannelModel channel = FindScanChannel(id);
             channel.Activated = activated;
             Logger.Info(string.Format("Channel Status [{0}:{1}].", id, activated));
 
-            AfterPropertyChanged();
             if (ChannelActivateChangedEvent != null)
             {
                 ChannelActivateChangedEvent.Invoke(channel);
@@ -971,7 +961,7 @@ namespace confocal_core.ViewModel
         private ConfigViewModel()
         {
             // 调度器
-            mScheduler = Scheduler.CreateInstance();
+            // mScheduler = Scheduler.CreateInstance();
             // 采集模式
             ScanLiveMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.LIVE);
             ScanCaptureMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.CAPTURE);
@@ -1019,22 +1009,6 @@ namespace confocal_core.ViewModel
             Detector = new DetectorModel();
             // 激光端口
             LaserPort = "COM2";
-        }
-
-
-
-        /// <summary>
-        /// 在属性变化后执行
-        /// </summary>
-        /// <returns></returns>
-        private API_RETURN_CODE AfterPropertyChanged()
-        {
-            // 如果有任一采集模式使能，则重新开启采集
-            if (IsScanning)
-            {
-                // TO DO：开启指定的采集模式
-            }
-            return API_RETURN_CODE.API_SUCCESS;
         }
 
     }
