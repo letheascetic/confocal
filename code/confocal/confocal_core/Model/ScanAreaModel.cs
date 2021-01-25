@@ -14,9 +14,9 @@ namespace confocal_core.Model
     /// <summary>
     /// 扫描范围变化事件委托
     /// </summary>
-    /// <param name="scanRange"></param>
+    /// <param name="scanArea"></param>
     /// <returns></returns>
-    public delegate API_RETURN_CODE ScanRangeChangedEventHandler(ScanAreaModel scanRange);
+    public delegate API_RETURN_CODE ScanAreaChangedEventHandler(ScanAreaModel scanArea);
 
     /// <summary>
     /// 扫描区域类型

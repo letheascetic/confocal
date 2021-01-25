@@ -18,7 +18,8 @@ namespace confocal_core.ViewModel
         private volatile static ConfigViewModel pConfig = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public event ScanRangeChangedEventHandler ScanRangeChangedEvent;
+        public event ScanAreaChangedEventHandler ScanAreaChangedEvent;
+        public event ScanAreaChangedEventHandler FullScanAreaChangedEvent;
         public event ScanAcquisitionChangedEventHandler ScanAcquisitionChangedEvent;
         public event ScannerHeadModelChangedEventHandler ScannerHeadModelChangedEvent;
         public event ScanDirectionChangedEventHandler ScanDirectionChangedEvent;
@@ -673,11 +674,30 @@ namespace confocal_core.ViewModel
             set { scanPixelSize = value; RaisePropertyChanged(() => ScanPixelSize); }
         }
 
-        public API_RETURN_CODE ScanRangeChangeCommand(ScanAreaModel scanRange)
+        public API_RETURN_CODE ScanAreaChangeCommand(ScanAreaModel scanArea)
         {
-            SelectedScanArea.Update(scanRange.ScanRange);
+            SelectedScanArea.Update(scanArea.ScanRange);
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
-            Logger.Info(string.Format("Selected Scan Range [{0}].", SelectedScanArea.ScanRange));
+            Logger.Info(string.Format("Selected Scan Area [{0}].", SelectedScanArea.ScanRange));
+
+            if (ScanAreaChangedEvent != null)
+            {
+                ScanAreaChangedEvent.Invoke(SelectedScanArea);
+            }
+
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE FullScanAreaChangeCommand(ScanAreaModel fullScanArea)
+        {
+            FullScanArea.Update(fullScanArea.ScanRange);
+            Logger.Info(string.Format("Full Scan Area [{0}].", FullScanArea.ScanRange));
+
+            if (FullScanAreaChangedEvent != null)
+            {
+                FullScanAreaChangedEvent.Invoke(FullScanArea);
+            }
+
             return API_RETURN_CODE.API_SUCCESS;
         }
 

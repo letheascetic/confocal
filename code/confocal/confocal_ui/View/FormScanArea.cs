@@ -301,7 +301,7 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void FullRangeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            mScanAreaVM.Config.ScanRangeChangeCommand(mScanAreaVM.Config.FullScanArea);
+            mScanAreaVM.Config.ScanAreaChangeCommand(mScanAreaVM.Config.FullScanArea);
             mScanRange = mScanAreaVM.Config.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaVM.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
@@ -336,7 +336,7 @@ namespace confocal_ui.View
         {
             mScanPixelRange = CoordinateToScanPixelRange(mCoordinate);
             mScanRange = mScanAreaVM.ScanPixelRangeToScanRange(mScanPixelRange);
-            mScanAreaVM.Config.ScanRangeChangeCommand(new ScanAreaModel(mScanRange));
+            mScanAreaVM.Config.ScanAreaChangeCommand(new ScanAreaModel(mScanRange));
 
             mScanRange = mScanAreaVM.Config.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaVM.ScanRangeToScanPixelRange(mScanRange);
