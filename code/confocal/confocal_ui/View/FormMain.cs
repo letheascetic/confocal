@@ -41,6 +41,8 @@ namespace confocal_ui
         /// </summary>
         private void Initialize()
         {
+            mMainVM = new MainViemModel();
+
             // 
             mFormScanSetting = new FormScanSettings
             {
@@ -94,6 +96,7 @@ namespace confocal_ui
             // mFormScanArea.ScanPixelChangedEvent += mFormScanSetting.ScanPixelChangedHandler;
             //mFormScanSetting.ScanPixelDwellChangedEvent += mFormScanArea.ScanPixelDwellChangedHandler;
         }
+
 
         /// <summary>
         /// 采集模式更新处理函数

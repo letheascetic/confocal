@@ -13,9 +13,17 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        private SchedulerViewModel mSchedulerVM;
+        private readonly ConfigViewModel mConfig;
 
+        public ConfigViewModel Config
+        {
+            get { return mConfig; }
+        }
 
+        public MainViemModel()
+        {
+            mConfig = ConfigViewModel.GetConfig();
+        }
 
     }
 }

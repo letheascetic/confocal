@@ -316,7 +316,6 @@ namespace confocal_ui
                 
                 LaserDevice.SetChannelPower(id, (float)m_config.GetLaserPower(id));
             }
-
         }
 
         #region controlers event

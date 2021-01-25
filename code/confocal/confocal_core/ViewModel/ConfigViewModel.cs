@@ -500,7 +500,9 @@ namespace confocal_core.ViewModel
         {
             ScanChannelModel channel = FindScanChannel(id);
             channel.Gain = gain;
-            Logger.Info(string.Format("Channel Gain [{0}:{1}].", id, gain));
+            UsbDac.SetDacOut((uint)id, UsbDac.ConfigValueToVout(gain));
+            Logger.Info(string.Format("Channel Gain [{0}:{1}].", id, gain));        // 设置
+
             if (ChannelGainChangedEvent != null)
             {
                 return ChannelGainChangedEvent.Invoke(channel);
@@ -866,6 +868,15 @@ namespace confocal_core.ViewModel
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private string mLaserPort;
+
+        public string LaserPort
+        {
+            get { return mLaserPort; }
+            set { mLaserPort = value; RaisePropertyChanged(() => LaserPort); }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
         public static ConfigViewModel GetConfig()
         {
             if (pConfig == null)
@@ -951,7 +962,6 @@ namespace confocal_core.ViewModel
             return SelectedScanPixel.Data + ScanAreaModel.ExtendRowCount;
         }
 
-
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ConfigViewModel()
         {
@@ -997,10 +1007,11 @@ namespace confocal_core.ViewModel
             SelectedScanArea = ScanAreaModel.CreateFullScanArea();
             // 像素尺寸
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
-
-            // 
+            // 振镜参数和探测器参数
             GalvoProperty = new GalvoPropertyModel();
             Detector = new DetectorModel();
+            // 激光端口
+            LaserPort = "COM2";
         }
 
         /// <summary>
