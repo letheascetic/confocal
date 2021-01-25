@@ -36,7 +36,6 @@ namespace confocal_ui.View
             this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
-            this.panel = new System.Windows.Forms.Panel();
             this.inputPanel = new C1.Win.C1InputPanel.C1InputPanel();
             this.ghDevice = new C1.Win.C1InputPanel.InputGroupHeader();
             this.btnSearch = new C1.Win.C1InputPanel.InputButton();
@@ -101,12 +100,7 @@ namespace confocal_ui.View
             this.lb6402 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx640Ctr = new C1.Win.C1InputPanel.InputComboBox();
             this.cbx640Channel = new C1.Win.C1InputPanel.InputComboBox();
-            this.btnConfirm = new C1.Win.C1Input.C1Button();
-            this.btnQuit = new C1.Win.C1Input.C1Button();
-            this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnConfirm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnQuit)).BeginInit();
             this.SuspendLayout();
             // 
             // inputLabel1
@@ -142,16 +136,6 @@ namespace confocal_ui.View
             this.inputLabel5.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.inputLabel5.Name = "inputLabel5";
             this.inputLabel5.Text = "信息提示";
-            // 
-            // panel
-            // 
-            this.panel.Controls.Add(this.btnQuit);
-            this.panel.Controls.Add(this.btnConfirm);
-            this.panel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel.Location = new System.Drawing.Point(0, 614);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(272, 35);
-            this.panel.TabIndex = 1;
             // 
             // inputPanel
             // 
@@ -223,7 +207,7 @@ namespace confocal_ui.View
             this.inputPanel.Items.Add(this.cbx640Channel);
             this.inputPanel.Location = new System.Drawing.Point(0, 0);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(272, 614);
+            this.inputPanel.Size = new System.Drawing.Size(272, 619);
             this.inputPanel.TabIndex = 2;
             // 
             // ghDevice
@@ -749,52 +733,24 @@ namespace confocal_ui.View
             this.cbx640Channel.Name = "cbx640Channel";
             this.cbx640Channel.Width = 90;
             // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnConfirm.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.btnConfirm.Location = new System.Drawing.Point(104, 6);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnConfirm.TabIndex = 9;
-            this.btnConfirm.Text = "确认";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            this.btnConfirm.VisualStyleBaseStyle = C1.Win.C1Input.VisualStyle.Office2010Blue;
-            // 
-            // btnQuit
-            // 
-            this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnQuit.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.btnQuit.Location = new System.Drawing.Point(185, 6);
-            this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(75, 23);
-            this.btnQuit.TabIndex = 10;
-            this.btnQuit.Text = "退出";
-            this.btnQuit.UseVisualStyleBackColor = true;
-            this.btnQuit.VisualStyleBaseStyle = C1.Win.C1Input.VisualStyle.Office2010Blue;
-            // 
             // FormSysSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 649);
+            this.ClientSize = new System.Drawing.Size(272, 619);
             this.ControlBox = false;
             this.Controls.Add(this.inputPanel);
-            this.Controls.Add(this.panel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(280, 680);
+            this.MaximumSize = new System.Drawing.Size(280, 650);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(280, 680);
+            this.MinimumSize = new System.Drawing.Size(280, 650);
             this.Name = "FormSysSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "系统配置";
             this.Load += new System.EventHandler(this.FormSysSettingsLoad);
-            this.panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnConfirm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnQuit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -806,7 +762,6 @@ namespace confocal_ui.View
         private C1.Win.C1InputPanel.InputLabel inputLabel3;
         private C1.Win.C1InputPanel.InputLabel inputLabel4;
         private C1.Win.C1InputPanel.InputLabel inputLabel5;
-        private System.Windows.Forms.Panel panel;
         private C1.Win.C1InputPanel.C1InputPanel inputPanel;
         private C1.Win.C1InputPanel.InputGroupHeader ghDevice;
         private C1.Win.C1InputPanel.InputButton btnSearch;
@@ -871,7 +826,5 @@ namespace confocal_ui.View
         private C1.Win.C1InputPanel.InputLabel lb6402;
         private C1.Win.C1InputPanel.InputComboBox cbx640Ctr;
         private C1.Win.C1InputPanel.InputComboBox cbx640Channel;
-        private C1.Win.C1Input.C1Button btnConfirm;
-        private C1.Win.C1Input.C1Button btnQuit;
     }
 }
