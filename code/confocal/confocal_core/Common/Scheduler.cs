@@ -15,8 +15,25 @@ namespace confocal_core.Common
         private volatile static Scheduler pScheduler = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
-
+        private NiDaq mNiDaq;
         private ConfigViewModel mConfig;
+
+        private List<ScanTask> mScanTasks;
+        private ScanTask mScanningTask;
+
+        public List<ScanTask> ScanTasks
+        {
+            get { return mScanTasks; }
+            set { mScanTasks = value; }
+        }
+
+        public ScanTask ScanningTask
+        {
+            get { return mScanningTask; }
+            set { mScanningTask = value; }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
         public static Scheduler CreateInstance()
         {
@@ -47,58 +64,70 @@ namespace confocal_core.Common
             ReleaseUsbDac();
         }
 
-        /// <summary>
-        /// 初始化增益控制板卡
-        /// </summary>
-        public void ConfigUsbDac()
+        public API_RETURN_CODE CreateScanTask(int taskId, string taskName, out ScanTask scanTask)
         {
-            UsbDac.Connect();
+            scanTask = FindScanTask(taskId);
+            if (scanTask == null)
+            {
+                scanTask = new ScanTask(taskId, taskName);
+                ScanTasks.Add(scanTask);
+            }
+
+            Logger.Info(string.Format("create scan task[{0}|{1}].", taskId, taskName));
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
-        /// <summary>
-        /// 初始化激光器
-        /// </summary>
-        public void ConfigLaser()
+        public API_RETURN_CODE StartScanTask(ScanTask scanTask)
         {
-            string portName = mConfig.LaserPort;
-            API_RETURN_CODE code = Laser.Connect(portName);
-
-            for (int i = 0; i < mConfig.GetChannelNum(); i++)
+            if (scanTask == null)
             {
-                if (!mConfig.ScanChannels[i].Activated)
-                {
-                    continue;
-                }
-                if (Laser.OpenChannel(i) != API_RETURN_CODE.API_SUCCESS)
-                {
-                    mConfig.ScanChannels[i].Activated = false;
-                }
-                Laser.SetChannelPower(i, mConfig.ScanChannels[i].LaserPower);
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_INVALID;
             }
+
+            if (FindScanTask(scanTask.TaskId) == null)
+            {
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_NOT_FOUND;
+            }
+
+            ScanningTask = scanTask;
+
+            // TO DO: 
+
+            API_RETURN_CODE code = mNiDaq.Start();      // 启动板卡
+            if (code != API_RETURN_CODE.API_SUCCESS)
+            {
+                Logger.Info(string.Format("start scan task[{0}|{1}] failed: [{2}].", scanTask.TaskId, scanTask.TaskName, code));
+                StopScanTask();
+                return code;
+            }
+
+            Logger.Info(string.Format("start scan task[{0}|{1}] success.", scanTask.TaskId, scanTask.TaskName));
+            return code;
         }
 
-        public void ReleaseLaser()
+        public API_RETURN_CODE StopScanTask()
         {
-            if (Laser.IsConnected())
+            if (ScanningTask == null)
             {
-                for (int i = 0; i < mConfig.GetChannelNum(); i++)
-                {
-                    if (mConfig.ScanChannels[i].Activated)
-                    {
-                        Laser.CloseChannel(i);
-                        mConfig.ScanChannels[i].Activated = false;
-                    }
-                }
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_INVALID;
             }
-            Laser.Release();
+
+            if (FindScanTask(ScanningTask.TaskId) == null)
+            {
+                return API_RETURN_CODE.API_FAILED_SCAN_TASK_NOT_FOUND;
+            }
+
+            mNiDaq.Stop();
+            ScanningTask.Stop();
+            ScanningTask = null;
+
+            Logger.Info(string.Format("stop scan task[{0}|{1}].", ScanningTask.TaskId, ScanningTask.TaskName));
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
-        public void ReleaseUsbDac()
+        public ScanTask FindScanTask(int taskId)
         {
-            if (UsbDac.IsConnected())
-            {
-                UsbDac.Release();
-            }
+            return ScanTasks.Where(p => p.TaskId == taskId).FirstOrDefault();
         }
 
         /// <summary>
@@ -169,6 +198,60 @@ namespace confocal_core.Common
         {
             mConfig = ConfigViewModel.GetConfig();
             Initialize();
+        }
+
+        /// <summary>
+        /// 初始化增益控制板卡
+        /// </summary>
+        private void ConfigUsbDac()
+        {
+            UsbDac.Connect();
+        }
+
+        /// <summary>
+        /// 初始化激光器
+        /// </summary>
+        private void ConfigLaser()
+        {
+            string portName = mConfig.LaserPort;
+            API_RETURN_CODE code = Laser.Connect(portName);
+
+            for (int i = 0; i < mConfig.GetChannelNum(); i++)
+            {
+                if (!mConfig.ScanChannels[i].Activated)
+                {
+                    continue;
+                }
+                if (Laser.OpenChannel(i) != API_RETURN_CODE.API_SUCCESS)
+                {
+                    mConfig.ScanChannels[i].Activated = false;
+                }
+                Laser.SetChannelPower(i, mConfig.ScanChannels[i].LaserPower);
+            }
+        }
+
+        private void ReleaseLaser()
+        {
+            if (Laser.IsConnected())
+            {
+                for (int i = 0; i < mConfig.GetChannelNum(); i++)
+                {
+                    if (mConfig.ScanChannels[i].Activated)
+                    {
+                        Laser.CloseChannel(i);
+                        mConfig.ScanChannels[i].Activated = false;
+                    }
+                }
+            }
+            Laser.Release();
+        }
+
+        private void ReleaseUsbDac()
+        {
+            if (UsbDac.IsConnected())
+            {
+                UsbDac.Release();
+            }
         }
 
     }
