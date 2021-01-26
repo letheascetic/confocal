@@ -96,7 +96,7 @@ namespace confocal_core.Common
         public static double[] XCoordinates { get; set; }
         public static double[] YCoordinates { get; set; }
         public static double[] XVoltages { get; set; }
-        public static double[] YVoltaegs { get; set; }
+        public static double[] YVoltages { get; set; }
         public static byte[] TriggerVoltages { get; set; }
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -178,12 +178,12 @@ namespace confocal_core.Common
             }
 
             XVoltages = config.GalvoProperty.XCoordinateToVoltage(XCoordinates);
-            YVoltaegs = config.GalvoProperty.YCoordinateToVoltage(YCoordinates);
+            YVoltages = config.GalvoProperty.YCoordinateToVoltage(YCoordinates);
 
             // 计算输出相关参数
             OutputSampleRate = 1e6 / config.SelectedScanPixelDwell.Data;
             OutputSampleCountPerRoundTrip = XVoltages.Length;
-            OutputRoundTripCountPerFrame = config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION ? YVoltaegs.Length : YVoltaegs.Length / 2;
+            OutputRoundTripCountPerFrame = config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION ? YVoltages.Length : YVoltages.Length / 2;
             OutputSampleCountPerFrame = OutputSampleCountPerRoundTrip * OutputRoundTripCountPerFrame;
 
             // 计算采集相关参数
@@ -236,10 +236,10 @@ namespace confocal_core.Common
                 {
                     index += OutputSampleCountPerRoundTrip;
                     Array.Copy(XVoltages, 0, XWave, index, OutputSampleCountPerRoundTrip);
-                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n], OutputSampleCountPerRoundTrip).ToArray(), 0, Y1Wave, index, OutputSampleCountPerRoundTrip);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltages[n], OutputSampleCountPerRoundTrip).ToArray(), 0, Y1Wave, index, OutputSampleCountPerRoundTrip);
                     if (config.SelectedScannerHead.ID == ScannerHeadModel.THREE_SCANNERS)
                     {
-                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[n] * 2, OutputSampleCountPerRoundTrip).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip);
+                        Array.Copy(Enumerable.Repeat<double>(YVoltages[n] * 2, OutputSampleCountPerRoundTrip).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip);
                     }
                 }
             }
@@ -250,12 +250,12 @@ namespace confocal_core.Common
                 {
                     index += OutputSampleCountPerRoundTrip;
                     Array.Copy(XVoltages, 0, XWave, index, OutputSampleCountPerRoundTrip);
-                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n], OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y1Wave, index, OutputSampleCountPerRoundTrip >> 1);
-                    Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1], OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y1Wave, index + (OutputSampleCountPerRoundTrip >> 1), OutputSampleCountPerRoundTrip >> 1);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltages[2 * n], OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y1Wave, index, OutputSampleCountPerRoundTrip >> 1);
+                    Array.Copy(Enumerable.Repeat<double>(YVoltages[2 * n + 1], OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y1Wave, index + (OutputSampleCountPerRoundTrip >> 1), OutputSampleCountPerRoundTrip >> 1);
                     if (config.SelectedScannerHead.ID == ScannerHeadModel.THREE_SCANNERS)
                     {
-                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip >> 1);
-                        Array.Copy(Enumerable.Repeat<double>(YVoltaegs[2 * n + 1] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index + (OutputSampleCountPerRoundTrip >> 1), OutputSampleCountPerRoundTrip >> 1);
+                        Array.Copy(Enumerable.Repeat<double>(YVoltages[2 * n] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index, OutputSampleCountPerRoundTrip >> 1);
+                        Array.Copy(Enumerable.Repeat<double>(YVoltages[2 * n + 1] * 2, OutputSampleCountPerRoundTrip >> 1).ToArray(), 0, Y2Wave, index + (OutputSampleCountPerRoundTrip >> 1), OutputSampleCountPerRoundTrip >> 1);
                     }
                 }
             }
@@ -263,11 +263,11 @@ namespace confocal_core.Common
             Array.Copy(TriggerVoltages, TriggerWave, OutputSampleCountPerRoundTrip);
 
             int resetSampleCount = (int)(ScanAreaModel.ScanLineStartTime / config.SelectedScanPixelDwell.Data);
-            double[] y1ResetVoltages = CreateLinearArray(YVoltaegs.Last(), YVoltaegs[0], resetSampleCount);
+            double[] y1ResetVoltages = CreateLinearArray(YVoltages.Last(), YVoltages[0], resetSampleCount);
             Array.Copy(y1ResetVoltages, 0, Y1Wave, 0, resetSampleCount);
             if (config.SelectedScannerHead.ID == ScannerHeadModel.THREE_SCANNERS)
             {
-                double[] y2ResetVoltages = CreateLinearArray(YVoltaegs.Last() * 2, YVoltaegs[0] * 2, resetSampleCount);
+                double[] y2ResetVoltages = CreateLinearArray(YVoltages.Last() * 2, YVoltages[0] * 2, resetSampleCount);
                 Array.Copy(y2ResetVoltages, 0, Y2Wave, 0, resetSampleCount);
             }
         }
