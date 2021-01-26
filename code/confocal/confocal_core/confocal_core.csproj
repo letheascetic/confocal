@@ -102,7 +102,6 @@
     <Compile Include="Common\NiDaq.cs" />
     <Compile Include="Common\ScanTask.cs" />
     <Compile Include="Common\Scheduler.cs" />
-    <Compile Include="Common\Sequence.cs" />
     <Compile Include="Common\Statement.cs" />
     <Compile Include="Common\UsbDac.cs" />
     <Compile Include="Model\ScanAcquisitionModel.cs" />

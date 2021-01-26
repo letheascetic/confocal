@@ -36,6 +36,7 @@ namespace confocal_core.Common
         public CiSamplesReceivedEventHandler CiSamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private ConfigViewModel mConfig;
+        private SequenceModel mSequence;
         private Task mAoTask;
         private Task mDoTask;
         private Task mAiTask;
@@ -49,6 +50,7 @@ namespace confocal_core.Common
         public NiDaq()
         {
             mConfig = ConfigViewModel.GetConfig();
+            mSequence = SequenceModel.CreateInstance();
             mAoTask = null;
             mDoTask = null;
             mAiTask = null;
@@ -234,12 +236,12 @@ namespace confocal_core.Common
                 mAoTask.AOChannels.CreateVoltageChannel(GetAoPhysicalChannelName(), "", -10.0, 10.0, AOVoltageUnits.Volts);
                 mAoTask.Control(TaskAction.Verify);
 
-                mAoTask.Timing.SampleClockRate = Sequence.OutputSampleRate;
+                mAoTask.Timing.SampleClockRate = mSequence.OutputSampleRate;
                 mAoTask.Timing.ConfigureSampleClock("",
                     mAoTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    Sequence.OutputSampleCountPerFrame);
+                    mSequence.OutputSampleCountPerFrame);
 
                 //string source = mSettings.GetStartSyncSignal();
                 //m_aoTask.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeStartTriggerEdge.Rising);
@@ -250,14 +252,14 @@ namespace confocal_core.Common
                 if (mConfig.SelectedScannerHead.ID == ScannerHeadModel.THREE_SCANNERS)
                 {
                     waves = new AnalogWaveform<double>[3];
-                    waves[2] = AnalogWaveform<double>.FromArray1D(Sequence.Y2Wave);
+                    waves[2] = AnalogWaveform<double>.FromArray1D(mSequence.Y2Wave);
                 }
                 else
                 {
                     waves = new AnalogWaveform<double>[2];
                 }
-                waves[0] = AnalogWaveform<double>.FromArray1D(Sequence.XWave);
-                waves[1] = AnalogWaveform<double>.FromArray1D(Sequence.Y1Wave);
+                waves[0] = AnalogWaveform<double>.FromArray1D(mSequence.XWave);
+                waves[1] = AnalogWaveform<double>.FromArray1D(mSequence.Y1Wave);
                 writer.WriteWaveform(false, waves);
             }
             catch (Exception e)
@@ -282,12 +284,12 @@ namespace confocal_core.Common
                 mDoTask.DOChannels.CreateChannel(GetDoPhysicalChannelName(), "", ChannelLineGrouping.OneChannelForEachLine);
                 mDoTask.Control(TaskAction.Verify);
 
-                mDoTask.Timing.SampleClockRate = Sequence.OutputSampleRate;
+                mDoTask.Timing.SampleClockRate = mSequence.OutputSampleRate;
                 mDoTask.Timing.ConfigureSampleClock("",
                     mDoTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    Sequence.OutputSampleCountPerFrame);
+                    mSequence.OutputSampleCountPerFrame);
 
                 // 设置Do Start Trigger源为Ao Start Trigger[默认]，实现启动同步
                 string source = mConfig.Detector.StartTrigger;
@@ -296,7 +298,7 @@ namespace confocal_core.Common
                 mDoTask.Stream.WriteRegenerationMode = WriteRegenerationMode.AllowRegeneration;
 
                 DigitalSingleChannelWriter writer = new DigitalSingleChannelWriter(mDoTask.Stream);
-                DigitalWaveform wave = DigitalWaveform.FromPort(Sequence.TriggerWave, 0x01);
+                DigitalWaveform wave = DigitalWaveform.FromPort(mSequence.TriggerWave, 0x01);
                 writer.WriteWaveform(false, wave);
             }
             catch (Exception e)
@@ -358,14 +360,14 @@ namespace confocal_core.Common
                 ciTask.CIChannels.CreateCountEdgesChannel(ciChannel, "", CICountEdgesActiveEdge.Rising, 0, CICountEdgesCountDirection.Up);
                 ciTask.Control(TaskAction.Verify);
 
-                ciTask.Timing.SampleClockRate = Sequence.InputSampleRate;
+                ciTask.Timing.SampleClockRate = mSequence.InputSampleRate;
                 ciTask.Timing.ConfigureSampleClock(ciClock,
                     ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    Sequence.InputSampleCountPerFrame);
+                    mSequence.InputSampleCountPerFrame);
 
-                ciTask.Stream.ConfigureInputBuffer(Sequence.InputSampleCountPerFrame);
+                ciTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerFrame);
 
                 // CIDataTransferMechanism x = ciTask.CIChannels.All.DataTransferMechanism;
 
@@ -380,7 +382,7 @@ namespace confocal_core.Common
                 string source = mConfig.Detector.StartTrigger;
                 ciTask.Triggers.ArmStartTrigger.ConfigureDigitalEdgeTrigger(source, DigitalEdgeArmStartTriggerEdge.Rising);
 
-                ciTask.EveryNSamplesReadEventInterval = Sequence.InputSampleCountPerAcquisition;
+                ciTask.EveryNSamplesReadEventInterval = mSequence.InputSampleCountPerAcquisition;
                 ciTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(CiEveryNSamplesRead);
 
                 ciMultiChannelReader = new CounterSingleChannelReader(ciTask.Stream)
@@ -415,12 +417,12 @@ namespace confocal_core.Common
 
                 mAiTask.Control(TaskAction.Verify);
 
-                mAiTask.Timing.SampleClockRate = Sequence.InputSampleRate;
+                mAiTask.Timing.SampleClockRate = mSequence.InputSampleRate;
                 mAiTask.Timing.ConfigureSampleClock("",
                     mAiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    Sequence.InputSampleCountPerAcquisition);
+                    mSequence.InputSampleCountPerAcquisition);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = mConfig.Detector.TriggerReceive;
@@ -437,7 +439,7 @@ namespace confocal_core.Common
                 //    mAiTask.ExportSignals.AIConvertClockOutputTerminal = string.Concat("/" + NI_CARD_NAME_DEFAULT + "/PFI3"); ;
                 //}
 
-                mAiTask.EveryNSamplesReadEventInterval = Sequence.InputSampleCountPerAcquisition;
+                mAiTask.EveryNSamplesReadEventInterval = mSequence.InputSampleCountPerAcquisition;
                 mAiTask.EveryNSamplesRead += new EveryNSamplesReadEventHandler(AiEveryNSamplesRead);
 
                 mAiUnscaledReader = new AnalogUnscaledReader(mAiTask.Stream)
@@ -465,7 +467,7 @@ namespace confocal_core.Common
                     return;
                 }
 
-                int[] originSamples = mCiChannelReaders[index].ReadMultiSampleInt32(Sequence.InputSampleCountPerAcquisition);
+                int[] originSamples = mCiChannelReaders[index].ReadMultiSampleInt32(mSequence.InputSampleCountPerAcquisition);
 
                 if (CiSamplesReceived != null)
                 {
@@ -484,7 +486,7 @@ namespace confocal_core.Common
             {
                 // 读取16位原始数据，每次读取单次采集的像素数
                 int channelNum = mConfig.GetChannelNum();
-                short[,] originSamples = mAiUnscaledReader.ReadInt16(Sequence.InputSampleCountPerAcquisition);
+                short[,] originSamples = mAiUnscaledReader.ReadInt16(mSequence.InputSampleCountPerAcquisition);
                 AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
 
                 short[][] samples = new short[channelNum][];

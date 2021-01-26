@@ -16,6 +16,7 @@ namespace confocal_core.Common
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
         private NiDaq mNiDaq;
+        private SequenceModel mSequence;
         private ConfigViewModel mConfig;
 
         private List<ScanTask> mScanTasks;
@@ -54,6 +55,7 @@ namespace confocal_core.Common
         {
             mConfig = ConfigViewModel.GetConfig();
             mNiDaq = new NiDaq();
+            mSequence = SequenceModel.CreateInstance();
             ScanTasks = new List<ScanTask>();
             ScanningTask = null;
             ConfigUsbDac();
@@ -94,9 +96,9 @@ namespace confocal_core.Common
 
             ScanningTask = scanTask;
 
-            Sequence.GenerateScanCoordinates();         // 生成扫描范围序列和电压序列
-            Sequence.GenerateFrameScanWaves();          // 生成帧电压序列
-            code = mNiDaq.Start();      // 启动板卡
+            mSequence.GenerateScanCoordinates();         // 生成扫描范围序列和电压序列
+            mSequence.GenerateFrameScanWaves();          // 生成帧电压序列
+            code = mNiDaq.Start();                       // 启动板卡
 
             if (code != API_RETURN_CODE.API_SUCCESS)
             {
