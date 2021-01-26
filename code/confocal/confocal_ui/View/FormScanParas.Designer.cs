@@ -1,7 +1,7 @@
 ﻿
 namespace confocal_ui.View
 {
-    partial class FormParas
+    partial class FormScanParas
     {
         /// <summary>
         /// Required designer variable.
@@ -34,30 +34,30 @@ namespace confocal_ui.View
             C1.Win.Chart.Series series2 = new C1.Win.Chart.Series();
             C1.Win.Chart.Series series3 = new C1.Win.Chart.Series();
             C1.Win.Chart.Series series4 = new C1.Win.Chart.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormParas));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormScanParas));
             this.flexChart = new C1.Win.Chart.FlexChart();
             this.panel = new C1.Win.C1InputPanel.C1InputPanel();
             this.ghOutputPara = new C1.Win.C1InputPanel.InputGroupHeader();
             this.lbOutputSampleRate = new C1.Win.C1InputPanel.InputLabel();
-            this.lbOutputSampleCountPerRoundTrip = new C1.Win.C1InputPanel.InputLabel();
             this.tbxOutputSampleRate = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbOutputSampleCountPerRoundTrip = new C1.Win.C1InputPanel.InputLabel();
             this.tbxOutputSampleCountPerRoundTrip = new C1.Win.C1InputPanel.InputTextBox();
             this.lbOutputRoundTripPerFrame = new C1.Win.C1InputPanel.InputLabel();
-            this.lbOutputSampleCountPerFrame = new C1.Win.C1InputPanel.InputLabel();
             this.tbxOutputRoundTripPerFrame = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbOutputSampleCountPerFrame = new C1.Win.C1InputPanel.InputLabel();
             this.tbxOutputSampleCountPerFrame = new C1.Win.C1InputPanel.InputTextBox();
             this.ghInputPara = new C1.Win.C1InputPanel.InputGroupHeader();
             this.lbInputSampleRate = new C1.Win.C1InputPanel.InputLabel();
-            this.lbInputSampleCountPerRoundTrip = new C1.Win.C1InputPanel.InputLabel();
-            this.lbInputRoundTripCountPerFrame = new C1.Win.C1InputPanel.InputLabel();
-            this.lbInputSampleCountPerPixel = new C1.Win.C1InputPanel.InputLabel();
-            this.lbInputSampleCountPerAcquisition = new C1.Win.C1InputPanel.InputLabel();
-            this.lbInputSampleCountPerFrame = new C1.Win.C1InputPanel.InputLabel();
             this.tbxInputSampleRate = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbInputSampleCountPerRoundTrip = new C1.Win.C1InputPanel.InputLabel();
             this.tbxInputSampleCountPerRoundTrip = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbInputRoundTripCountPerFrame = new C1.Win.C1InputPanel.InputLabel();
             this.tbxInputRoundTripCountPerFrame = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbInputSampleCountPerFrame = new C1.Win.C1InputPanel.InputLabel();
             this.tbxInputSampleCountPerFrame = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbInputSampleCountPerPixel = new C1.Win.C1InputPanel.InputLabel();
             this.tbxInputSampleCountPerPixel = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbInputSampleCountPerAcquisition = new C1.Win.C1InputPanel.InputLabel();
             this.tbxInputSampleCountPerAcquisition = new C1.Win.C1InputPanel.InputTextBox();
             this.lbInputPixelCountPerAcquisition = new C1.Win.C1InputPanel.InputLabel();
             this.tbxInputPixelCountPerAcquisition = new C1.Win.C1InputPanel.InputTextBox();
@@ -197,18 +197,18 @@ namespace confocal_ui.View
             this.lbOutputSampleRate.Text = "样本输出速率：";
             this.lbOutputSampleRate.Width = 100;
             // 
-            // lbOutputSampleCountPerRoundTrip
-            // 
-            this.lbOutputSampleCountPerRoundTrip.Name = "lbOutputSampleCountPerRoundTrip";
-            this.lbOutputSampleCountPerRoundTrip.Text = "单次往返样本数：";
-            this.lbOutputSampleCountPerRoundTrip.Width = 100;
-            // 
             // tbxOutputSampleRate
             // 
             this.tbxOutputSampleRate.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.tbxOutputSampleRate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxOutputSampleRate.Name = "tbxOutputSampleRate";
             this.tbxOutputSampleRate.ReadOnly = true;
+            // 
+            // lbOutputSampleCountPerRoundTrip
+            // 
+            this.lbOutputSampleCountPerRoundTrip.Name = "lbOutputSampleCountPerRoundTrip";
+            this.lbOutputSampleCountPerRoundTrip.Text = "单次往返样本数：";
+            this.lbOutputSampleCountPerRoundTrip.Width = 100;
             // 
             // tbxOutputSampleCountPerRoundTrip
             // 
@@ -223,18 +223,18 @@ namespace confocal_ui.View
             this.lbOutputRoundTripPerFrame.Text = "单帧往返次数：";
             this.lbOutputRoundTripPerFrame.Width = 100;
             // 
-            // lbOutputSampleCountPerFrame
-            // 
-            this.lbOutputSampleCountPerFrame.Name = "lbOutputSampleCountPerFrame";
-            this.lbOutputSampleCountPerFrame.Text = "单帧样本数：";
-            this.lbOutputSampleCountPerFrame.Width = 100;
-            // 
             // tbxOutputRoundTripPerFrame
             // 
             this.tbxOutputRoundTripPerFrame.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.tbxOutputRoundTripPerFrame.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxOutputRoundTripPerFrame.Name = "tbxOutputRoundTripPerFrame";
             this.tbxOutputRoundTripPerFrame.ReadOnly = true;
+            // 
+            // lbOutputSampleCountPerFrame
+            // 
+            this.lbOutputSampleCountPerFrame.Name = "lbOutputSampleCountPerFrame";
+            this.lbOutputSampleCountPerFrame.Text = "单帧样本数：";
+            this.lbOutputSampleCountPerFrame.Width = 100;
             // 
             // tbxOutputSampleCountPerFrame
             // 
@@ -255,42 +255,18 @@ namespace confocal_ui.View
             this.lbInputSampleRate.Text = "样本采集速率：";
             this.lbInputSampleRate.Width = 100;
             // 
-            // lbInputSampleCountPerRoundTrip
-            // 
-            this.lbInputSampleCountPerRoundTrip.Name = "lbInputSampleCountPerRoundTrip";
-            this.lbInputSampleCountPerRoundTrip.Text = "单次往返样本数：";
-            this.lbInputSampleCountPerRoundTrip.Width = 100;
-            // 
-            // lbInputRoundTripCountPerFrame
-            // 
-            this.lbInputRoundTripCountPerFrame.Name = "lbInputRoundTripCountPerFrame";
-            this.lbInputRoundTripCountPerFrame.Text = "单帧往返次数：";
-            this.lbInputRoundTripCountPerFrame.Width = 100;
-            // 
-            // lbInputSampleCountPerPixel
-            // 
-            this.lbInputSampleCountPerPixel.Name = "lbInputSampleCountPerPixel";
-            this.lbInputSampleCountPerPixel.Text = "单像素样本数：";
-            this.lbInputSampleCountPerPixel.Width = 100;
-            // 
-            // lbInputSampleCountPerAcquisition
-            // 
-            this.lbInputSampleCountPerAcquisition.Name = "lbInputSampleCountPerAcquisition";
-            this.lbInputSampleCountPerAcquisition.Text = "单次采集样本数：";
-            this.lbInputSampleCountPerAcquisition.Width = 100;
-            // 
-            // lbInputSampleCountPerFrame
-            // 
-            this.lbInputSampleCountPerFrame.Name = "lbInputSampleCountPerFrame";
-            this.lbInputSampleCountPerFrame.Text = "单帧样本数：";
-            this.lbInputSampleCountPerFrame.Width = 100;
-            // 
             // tbxInputSampleRate
             // 
             this.tbxInputSampleRate.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.tbxInputSampleRate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxInputSampleRate.Name = "tbxInputSampleRate";
             this.tbxInputSampleRate.ReadOnly = true;
+            // 
+            // lbInputSampleCountPerRoundTrip
+            // 
+            this.lbInputSampleCountPerRoundTrip.Name = "lbInputSampleCountPerRoundTrip";
+            this.lbInputSampleCountPerRoundTrip.Text = "单次往返样本数：";
+            this.lbInputSampleCountPerRoundTrip.Width = 100;
             // 
             // tbxInputSampleCountPerRoundTrip
             // 
@@ -299,12 +275,24 @@ namespace confocal_ui.View
             this.tbxInputSampleCountPerRoundTrip.Name = "tbxInputSampleCountPerRoundTrip";
             this.tbxInputSampleCountPerRoundTrip.ReadOnly = true;
             // 
+            // lbInputRoundTripCountPerFrame
+            // 
+            this.lbInputRoundTripCountPerFrame.Name = "lbInputRoundTripCountPerFrame";
+            this.lbInputRoundTripCountPerFrame.Text = "单帧往返次数：";
+            this.lbInputRoundTripCountPerFrame.Width = 100;
+            // 
             // tbxInputRoundTripCountPerFrame
             // 
             this.tbxInputRoundTripCountPerFrame.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.tbxInputRoundTripCountPerFrame.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxInputRoundTripCountPerFrame.Name = "tbxInputRoundTripCountPerFrame";
             this.tbxInputRoundTripCountPerFrame.ReadOnly = true;
+            // 
+            // lbInputSampleCountPerFrame
+            // 
+            this.lbInputSampleCountPerFrame.Name = "lbInputSampleCountPerFrame";
+            this.lbInputSampleCountPerFrame.Text = "单帧样本数：";
+            this.lbInputSampleCountPerFrame.Width = 100;
             // 
             // tbxInputSampleCountPerFrame
             // 
@@ -313,12 +301,24 @@ namespace confocal_ui.View
             this.tbxInputSampleCountPerFrame.Name = "tbxInputSampleCountPerFrame";
             this.tbxInputSampleCountPerFrame.ReadOnly = true;
             // 
+            // lbInputSampleCountPerPixel
+            // 
+            this.lbInputSampleCountPerPixel.Name = "lbInputSampleCountPerPixel";
+            this.lbInputSampleCountPerPixel.Text = "单像素样本数：";
+            this.lbInputSampleCountPerPixel.Width = 100;
+            // 
             // tbxInputSampleCountPerPixel
             // 
             this.tbxInputSampleCountPerPixel.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.tbxInputSampleCountPerPixel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxInputSampleCountPerPixel.Name = "tbxInputSampleCountPerPixel";
             this.tbxInputSampleCountPerPixel.ReadOnly = true;
+            // 
+            // lbInputSampleCountPerAcquisition
+            // 
+            this.lbInputSampleCountPerAcquisition.Name = "lbInputSampleCountPerAcquisition";
+            this.lbInputSampleCountPerAcquisition.Text = "单次采集样本数：";
+            this.lbInputSampleCountPerAcquisition.Width = 100;
             // 
             // tbxInputSampleCountPerAcquisition
             // 
@@ -398,21 +398,24 @@ namespace confocal_ui.View
             this.tbxFrameTime.Name = "tbxFrameTime";
             this.tbxFrameTime.ReadOnly = true;
             // 
-            // FormParas
+            // FormScanParas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(272, 569);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.flexChart);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(280, 600);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(280, 400);
-            this.Name = "FormParas";
+            this.Name = "FormScanParas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "参数显示";
+            this.Load += new System.EventHandler(this.FormParasLoad);
             ((System.ComponentModel.ISupportInitialize)(this.flexChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).EndInit();
             this.ResumeLayout(false);

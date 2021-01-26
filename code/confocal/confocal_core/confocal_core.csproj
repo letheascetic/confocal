@@ -111,6 +111,7 @@
     <Compile Include="Model\ScannerHeadModel.cs" />
     <Compile Include="Model\ScanPixelDwellModel.cs" />
     <Compile Include="Model\ScanPixelModel.cs" />
+    <Compile Include="Model\SequenceModel.cs" />
     <Compile Include="ViewModel\ConfigViewModel.cs" />
     <Compile Include="Model\AcquisitionPropertyModel.cs" />
     <Compile Include="Model\GalvoPropertyModel.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="ViewModel\ImageViewModel.cs" />
     <Compile Include="ViewModel\MainViemModel.cs" />
     <Compile Include="ViewModel\ScanAreaViewModel.cs" />
+    <Compile Include="ViewModel\ScanParasViewModel.cs" />
     <Compile Include="ViewModel\ScanSettingsViewModel.cs" />
     <Compile Include="ViewModel\SysSettingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -253,5 +253,14 @@ namespace confocal_ui
         {
             mFormSysSettings.Visible = cmdSysCfg.Checked;
         }
+
+        private void ScanParasClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            FormScanParas mFormScanParas = new FormScanParas
+            {
+                MdiParent = this
+            };
+            mFormScanParas.Show();
+        }
     }
 }

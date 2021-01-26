@@ -126,6 +126,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="View\FormScanParas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormScanParas.Designer.cs">
+      <DependentUpon>FormScanParas.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormSysSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FormScanParas.resx">
+      <DependentUpon>FormScanParas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormSysSettings.resx">
       <DependentUpon>FormSysSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +202,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
