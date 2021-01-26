@@ -29,8 +29,6 @@ namespace confocal_ui.View
         private void Initialize()
         {
             mScanParasVM = new ScanParasViewModel();
-
-
         }
 
         private void RegisterEvents()
@@ -40,8 +38,23 @@ namespace confocal_ui.View
 
         private void SetDataBindings()
         {
-            // tbxOutputSampleRate.DataBindings.Add("Text", Sequence, "OutputSampleRate");
-            // tbxOutputRoundTripPerFrame.DataBindings.Add("Text", mScanParasVM, "OutputSampleCountPerRoundTrip");
+            tbxOutputSampleRate.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputSampleRate");
+            tbxOutputSampleCountPerRoundTrip.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputSampleCountPerRoundTrip");
+            tbxOutputRoundTripPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputRoundTripCountPerFrame");
+            tbxOutputSampleCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputSampleCountPerFrame");
+
+            tbxInputSampleRate.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleRate");
+            tbxInputSampleCountPerRoundTrip.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerRoundTrip");
+            tbxInputRoundTripCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "InputRoundTripCountPerFrame");
+            tbxInputSampleCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerFrame");
+            tbxInputSampleCountPerPixel.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerPixel");
+            tbxInputSampleCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerAcquisition");
+            tbxInputPixelCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Sequence, "InputPixelCountPerAcquisition");
+            tbxInputRoundTripCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Sequence, "InputRoundTripCountPerAcquisition");
+            tbxInputAcquisitionCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "InputAcquisitionCountPerFrame");
+
+            tbxFPS.DataBindings.Add("Text", mScanParasVM.Sequence, "FPS");
+            tbxFrameTime.DataBindings.Add("Text", mScanParasVM.Sequence, "FrameTime");
         }
 
         private void FormParasLoad(object sender, EventArgs e)

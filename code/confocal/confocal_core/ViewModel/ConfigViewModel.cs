@@ -158,10 +158,7 @@ namespace confocal_core.ViewModel
             ScannerHeadThreeGalv.IsEnabled = !twoGalvEnabled;
             Logger.Info(string.Format("Scan Header [{0}].", SelectedScannerHead.Text));
 
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
+            scheduler.ScannerHeadChangeCommand(SelectedScannerHead);
 
             if (ScannerHeadModelChangedEvent != null)
             {
@@ -213,10 +210,7 @@ namespace confocal_core.ViewModel
             ScanBiDirection.IsEnabled = !uniDirectionEnabled;
             Logger.Info(string.Format("Scan Direction [{0}].", SelectedScanDirection.Text));
 
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
+            scheduler.ScanDirectionChangeCommand(SelectedScanDirection);
 
             if (ScanDirectionChangedEvent != null)
             {
@@ -269,10 +263,7 @@ namespace confocal_core.ViewModel
             ScanModeResonant.IsEnabled = !galvEnabled;
             Logger.Info(string.Format("Scan Mode [{0}].", SelectedScanMode.Text));
 
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
+            scheduler.ScanModeChangeCommand(SelectedScanMode);
 
             if (ScanModeChangedEvent != null)
             {
@@ -327,10 +318,7 @@ namespace confocal_core.ViewModel
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
 
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
+            scheduler.ScanPixelChangeCommand(SelectedScanPixel);
 
             if (ScanPixelChangedEvent != null)
             {
@@ -390,10 +378,7 @@ namespace confocal_core.ViewModel
             SelectedScanPixelDwell = selectedPixelDwell;
             Logger.Info(string.Format("Scan Pixel Dwell [{0}].", SelectedScanPixelDwell.Text));
 
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
+            scheduler.ScanPixelDwellChangeCommand(SelectedScanPixelDwell);
 
             if (ScanPixelDwellChangedEvent != null)
             {
@@ -443,12 +428,8 @@ namespace confocal_core.ViewModel
             scheduler.BeforePropertyChanged();
 
             ScanLineSkipEnabled = lineSkipEnabled;
+            scheduler.LineSkipEnableChangeCommand(lineSkipEnabled);
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
-
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
 
             if (LineSkipEnableChangedEvent != null)
             {
@@ -468,12 +449,8 @@ namespace confocal_core.ViewModel
             scheduler.BeforePropertyChanged();
 
             SelectedScanLineSkip = lineSkip;
+            scheduler.LineSkipValueChangeCommand(SelectedScanLineSkip);
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
-
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
 
             if (LineSkipChangedEvent != null)
             {
@@ -599,17 +576,10 @@ namespace confocal_core.ViewModel
 
             ScanChannelModel channel = FindScanChannel(id);
             channel.Activated = activated;
-            if (IsScanning && GetActivatedChannelNum() == 0)    // 如果当前正在扫描，且关闭的激光是之前唯一开启的激光，则不应关闭该激光
-            {
-                channel.Activated = true;
-            }
-            
-            Logger.Info(string.Format("Channel Status [{0}:{1}].", id, channel.Activated));
 
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
+            scheduler.ChannelActivateChangeCommand(channel);
+
+            Logger.Info(string.Format("Channel Status [{0}:{1}].", id, channel.Activated));
 
             if (ChannelActivateChangedEvent != null)
             {
@@ -726,10 +696,7 @@ namespace confocal_core.ViewModel
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Selected Scan Area [{0}].", SelectedScanArea.ScanRange));
 
-            if (IsScanning)
-            {
-                scheduler.StartScanTask(0, "实时扫描");
-            }
+            scheduler.ScanAreaChangeCommand(SelectedScanArea);
 
             if (ScanAreaChangedEvent != null)
             {

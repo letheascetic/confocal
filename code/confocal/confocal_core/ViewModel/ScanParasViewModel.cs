@@ -1,4 +1,5 @@
 ﻿using confocal_core.Common;
+using confocal_core.Model;
 using GalaSoft.MvvmLight;
 using log4net;
 using System;
@@ -14,15 +15,22 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         private readonly ConfigViewModel mConfig;
+        private readonly SequenceModel mSequence;
 
         public ConfigViewModel Config
         {
             get { return mConfig; }
         }
 
+        public SequenceModel Sequence
+        {
+            get { return mSequence; }
+        }
+
         public ScanParasViewModel()
         {
             mConfig = ConfigViewModel.GetConfig();
+            mSequence = SequenceModel.CreateInstance();
         }
 
     }

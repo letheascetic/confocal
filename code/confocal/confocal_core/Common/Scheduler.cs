@@ -98,6 +98,7 @@ namespace confocal_core.Common
 
             mSequence.GenerateScanCoordinates();         // 生成扫描范围序列和电压序列
             mSequence.GenerateFrameScanWaves();          // 生成帧电压序列
+            OpenLaserChannels();                         // 打开激光器
             code = mNiDaq.Start();                       // 启动板卡
 
             if (code != API_RETURN_CODE.API_SUCCESS)
@@ -129,9 +130,11 @@ namespace confocal_core.Common
 
             Logger.Info(string.Format("stop scan task[{0}|{1}].", ScanningTask.TaskId, ScanningTask.TaskName));
 
+
             mNiDaq.Stop();
             ScanningTask.Stop();
             ScanningTask = null;
+            CloseLaserChannels();
 
             return API_RETURN_CODE.API_SUCCESS;
         }
@@ -193,19 +196,109 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE ChannelActivateChangeCommand(ScanChannelModel channel)
         {
-            if (Laser.IsConnected())
+            // 当前没有扫描，则直接返回
+            if (!mConfig.IsScanning)
             {
-                if (channel.Activated)
-                {
-                    Laser.OpenChannel(channel.ID);
-                    return Laser.SetChannelPower(channel.ID, Laser.ConfigValueToPower(channel.LaserPower));
-                }
-                else
-                {
-                    Laser.CloseChannel(channel.ID);
-                }
+                return API_RETURN_CODE.API_SUCCESS;
             }
-            return API_RETURN_CODE.API_SUCCESS;
+
+            // 当前正在扫描，这分两种情况：
+            // 1 原先没打开的激光器被打开了：打开该激光器，设置功率，启动扫描
+            // 2 原先已经打开的激光器被关闭了：
+            // 2.1 该激光器是唯一打开的激光器，则不应该被关闭，设置Activated为真，打开激光器，启动扫描
+            // 2.2 该激光器不是唯一打开的激光器，则可以被关闭，关闭该激光器，
+
+            if (channel.Activated)
+            {
+                return StartScanTask(0, "实时扫描");
+            }
+
+            if (!channel.Activated && mConfig.GetActivatedChannelNum() == 0)
+            {
+                channel.Activated = true;
+            }
+
+            return StartScanTask(0, "实时扫描");
+        }
+
+        /// <summary>
+        /// 切换扫描头[双镜or三镜]
+        /// </summary>
+        /// <param name="scannerHead"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScannerHeadChangeCommand(ScannerHeadModel scannerHead)
+        {
+            return AfterPropertyChanged();
+        }
+
+        /// <summary>
+        /// 切换扫描方向
+        /// </summary>
+        /// <param name="scanDirection"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanDirectionChangeCommand(ScanDirectionModel scanDirection)
+        {
+            return AfterPropertyChanged();
+        }
+
+        /// <summary>
+        /// 切换扫描模式
+        /// </summary>
+        /// <param name="scanMode"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanModeChangeCommand(ScanModeModel scanMode)
+        {
+            return AfterPropertyChanged();
+        }
+
+        /// <summary>
+        /// 切换扫描像素
+        /// </summary>
+        /// <param name="selectedScanPixel"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
+        {
+            return AfterPropertyChanged();
+        }
+
+        /// <summary>
+        /// 切换像素时间
+        /// </summary>
+        /// <param name="selectedPixelDwell"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
+        {
+            return AfterPropertyChanged();
+        }
+
+        /// <summary>
+        /// 切换扫描范围
+        /// </summary>
+        /// <param name="scanArea"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanAreaChangeCommand(ScanAreaModel scanArea)
+        {
+            return AfterPropertyChanged();
+        }
+
+        /// <summary>
+        /// 切换跳行扫描使能
+        /// </summary>
+        /// <param name="lineSkipEnabled"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE LineSkipEnableChangeCommand(bool lineSkipEnabled)
+        {
+            return AfterPropertyChanged();
+        }
+
+        /// <summary>
+        /// 切换跳行扫描
+        /// </summary>
+        /// <param name="lineSkip"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE LineSkipValueChangeCommand(ScanLineSkipModel lineSkip)
+        {
+            return AfterPropertyChanged();
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -279,6 +372,50 @@ namespace confocal_core.Common
         private void ApdReceiveSamples(object sender, int channelIndex, int[] samples, long acquisitionCount)
         {
             Logger.Info(string.Format("channel [{0}] receive samples, acquisition [{1}] times.", channelIndex, acquisitionCount));
+        }
+
+        private API_RETURN_CODE AfterPropertyChanged()
+        {
+            if (mConfig.IsScanning)
+            {
+                return StartScanTask(0, "实时扫描");
+            }
+            else
+            {
+                mSequence.GenerateScanCoordinates();
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 关闭所有的激光
+        /// </summary>
+        private void CloseLaserChannels()
+        {
+            for (int i = 0; i < mConfig.GetChannelNum(); i++)
+            {
+                Laser.CloseChannel(i);
+            }
+        }
+
+        /// <summary>
+        /// 打开对应的激光
+        /// </summary>
+        private void OpenLaserChannels()
+        {
+            if (!Laser.IsConnected())
+            {
+                Laser.Connect(mConfig.LaserPort);
+            }
+
+            for (int i = 0; i < mConfig.GetChannelNum(); i++)
+            {
+                if (mConfig.ScanChannels[i].Activated)
+                {
+                    Laser.OpenChannel(i);
+                    Laser.SetChannelPower(mConfig.ScanChannels[i].ID, Laser.ConfigValueToPower(mConfig.ScanChannels[i].LaserPower));
+                }
+            }
         }
 
     }

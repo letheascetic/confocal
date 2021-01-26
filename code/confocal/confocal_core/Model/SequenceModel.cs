@@ -187,7 +187,7 @@ namespace confocal_core.Model
         public double FPS
         {
             get { return fps; }
-            set { fps = value; }
+            set { fps = value; RaisePropertyChanged(() => FPS); }
         }
         /// <summary>
         /// 帧时间
@@ -372,7 +372,6 @@ namespace confocal_core.Model
             // 帧率和帧时间
             FrameTime = OutputSampleCountPerFrame * config.SelectedScanPixelDwell.Data / 1e6;
             FPS = 1.0 / FrameTime;
-
         }
 
         /// <summary>
