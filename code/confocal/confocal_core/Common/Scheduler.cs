@@ -323,7 +323,7 @@ namespace confocal_core.Common
         {
             ConfigViewModel mConfig = ConfigViewModel.GetConfig();
             string portName = mConfig.LaserPort;
-            API_RETURN_CODE code = Laser.Connect(portName);
+            Laser.Connect(portName);
 
             for (int i = 0; i < mConfig.GetChannelNum(); i++)
             {

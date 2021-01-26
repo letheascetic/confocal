@@ -44,9 +44,9 @@ namespace confocal_core.Common
         private static readonly int API_RETURN_SUCCESS = 0;
         private static bool m_connected;
         private static uint m_register;         // DAC寄存器值，两个DAC共用，配置为相同
-        private static ushort[] m_gainList;     // 各通道增益
-        private static short[] m_zeroList;      // 各通道零点
-        private static float[] m_voutList;      // 各通道输出
+        private static readonly ushort[] m_gainList;     // 各通道增益
+        private static readonly short[] m_zeroList;      // 各通道零点
+        private static readonly float[] m_voutList;      // 各通道输出
 
         static UsbDac()
         {

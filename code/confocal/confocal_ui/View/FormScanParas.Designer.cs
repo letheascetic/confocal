@@ -75,7 +75,7 @@ namespace confocal_ui.View
             // 
             // chart
             // 
-            this.chart.BackColor = System.Drawing.Color.SkyBlue;
+            this.chart.BackColor = System.Drawing.Color.Empty;
             chartArea1.Name = "ChartArea1";
             this.chart.ChartAreas.Add(chartArea1);
             this.chart.Dock = System.Windows.Forms.DockStyle.Top;

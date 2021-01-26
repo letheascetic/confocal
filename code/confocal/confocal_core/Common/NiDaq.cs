@@ -35,15 +35,15 @@ namespace confocal_core.Common
         public AiSamplesReceivedEventHandler AiSamplesReceived;
         public CiSamplesReceivedEventHandler CiSamplesReceived;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private ConfigViewModel mConfig;
-        private SequenceModel mSequence;
+        private readonly ConfigViewModel mConfig;
+        private readonly SequenceModel mSequence;
         private Task mAoTask;
         private Task mDoTask;
         private Task mAiTask;
         private Task[] mCiTasks;
         private AnalogUnscaledReader mAiUnscaledReader;
         private CounterSingleChannelReader[] mCiChannelReaders;
-        private int[] mAiChannelIndex;
+        private readonly int[] mAiChannelIndex;
         private long[] mAcquisitionCount;
         ///////////////////////////////////////////////////////////////////////////////////////////
 

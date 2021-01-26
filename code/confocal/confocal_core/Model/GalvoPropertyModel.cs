@@ -323,7 +323,7 @@ namespace confocal_core.Model
             double[] yCoordinates = new double[yVoltages.Length];
             for (int i = 0; i < yVoltages.Length; i++)
             {
-                yCoordinates[i] = (yVoltages[i] - galvoPrpperty.YGalvoOffsetVoltage) / galvoPrpperty.YGalvoCalibrationVoltage;
+                yCoordinates[i] = (yVoltages[i] - galvoPrpperty.YGalvoOffsetVoltage) / calibrationVoltage;
             }
             return yCoordinates;
         }
