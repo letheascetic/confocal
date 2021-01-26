@@ -377,7 +377,11 @@ namespace confocal_ui
             {
                 btnCapture.Pressed = false;
             }
-            mScanSettingsVM.Config.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed);
+            if (mScanSettingsVM.Config.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed) != API_RETURN_CODE.API_SUCCESS)
+            {
+                btnLive.Pressed = false;
+                btnCapture.Pressed = false;
+            }
         }
 
         /// <summary>
@@ -391,7 +395,11 @@ namespace confocal_ui
             {
                 btnLive.Pressed = false;
             }
-            mScanSettingsVM.Config.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed);
+            if (mScanSettingsVM.Config.ScanAcquisitionChangeCommand(btnLive.Pressed, btnCapture.Pressed) != API_RETURN_CODE.API_SUCCESS)
+            {
+                btnLive.Pressed = false;
+                btnCapture.Pressed = false;
+            }
         }
 
         /// <summary>

@@ -1023,7 +1023,7 @@ namespace confocal_core.ViewModel
         {
             // 调度器
             // mScheduler = Scheduler.CreateInstance();
-            InputSampleRate = 1e6;
+            InputSampleRate = 5e5;
             // 采集模式
             ScanLiveMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.LIVE);
             ScanCaptureMode = ScanAcquisitionModel.Initialize(ScanAcquisitionModel.CAPTURE);
