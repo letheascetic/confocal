@@ -33,7 +33,7 @@ namespace confocal_ui.View
 
         private void RegisterEvents()
         {
-            
+            tbxOutputSampleCountPerRoundTrip.TextChanged += ScanParasChanged;
         }
 
         private void SetDataBindings()
@@ -60,8 +60,17 @@ namespace confocal_ui.View
         private void FormParasLoad(object sender, EventArgs e)
         {
             Initialize();
-            SetDataBindings();
             RegisterEvents();
+            SetDataBindings();
         }
+
+        private void ScanParasChanged(object sender, EventArgs e)
+        {
+            mScanParasVM.UpdateChartValues();
+            chart.Series[0].Points.DataBindXY(mScanParasVM.TimeValues, mScanParasVM.XGalvoValues);
+            chart.Series[1].Points.DataBindXY(mScanParasVM.TimeValues, mScanParasVM.TriggerValues);
+            chart.Update();
+        }
+
     }
 }

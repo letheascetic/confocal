@@ -29,13 +29,12 @@ namespace confocal_ui.View
         /// </summary>
         private void InitializeComponent()
         {
-            C1.Chart.ElementSize elementSize1 = new C1.Chart.ElementSize();
-            C1.Win.Chart.Series series1 = new C1.Win.Chart.Series();
-            C1.Win.Chart.Series series2 = new C1.Win.Chart.Series();
-            C1.Win.Chart.Series series3 = new C1.Win.Chart.Series();
-            C1.Win.Chart.Series series4 = new C1.Win.Chart.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormScanParas));
-            this.flexChart = new C1.Win.Chart.FlexChart();
+            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel = new C1.Win.C1InputPanel.C1InputPanel();
             this.ghOutputPara = new C1.Win.C1InputPanel.InputGroupHeader();
             this.lbOutputSampleRate = new C1.Win.C1InputPanel.InputLabel();
@@ -70,77 +69,34 @@ namespace confocal_ui.View
             this.tbxFPS = new C1.Win.C1InputPanel.InputTextBox();
             this.lbFrameTime = new C1.Win.C1InputPanel.InputLabel();
             this.tbxFrameTime = new C1.Win.C1InputPanel.InputTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.flexChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
             this.SuspendLayout();
             // 
-            // flexChart
+            // chart
             // 
-            this.flexChart.AxisX.Chart = this.flexChart;
-            this.flexChart.AxisX.Position = C1.Chart.Position.Bottom;
-            this.flexChart.AxisY.AxisLine = false;
-            this.flexChart.AxisY.Chart = this.flexChart;
-            this.flexChart.AxisY.MajorGrid = true;
-            this.flexChart.AxisY.Position = C1.Chart.Position.Left;
-            this.flexChart.BackColor = System.Drawing.Color.Gainsboro;
-            this.flexChart.ChartType = C1.Chart.ChartType.Line;
-            this.flexChart.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flexChart.Legend.Orientation = C1.Chart.Orientation.Auto;
-            this.flexChart.Legend.Position = C1.Chart.Position.Bottom;
-            this.flexChart.Legend.Title = null;
-            this.flexChart.Location = new System.Drawing.Point(0, 0);
-            this.flexChart.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.flexChart.Name = "flexChart";
-            elementSize1.SizeType = C1.Chart.ElementSizeType.Percentage;
-            elementSize1.Value = 70D;
-            this.flexChart.Options.ClusterSize = elementSize1;
-            this.flexChart.PlotMargin = new System.Windows.Forms.Padding(0);
-            this.flexChart.SelectedSeries = null;
-            this.flexChart.SelectionMode = C1.Chart.ChartSelectionMode.Series;
-            this.flexChart.SelectionStyle.StrokeColor = System.Drawing.Color.DodgerBlue;
-            series1.Binding = "Y";
-            series1.BindingX = "X";
-            series1.DataSource = new System.Drawing.Point[] {
-        new System.Drawing.Point(1, 8),
-        new System.Drawing.Point(2, 12),
-        new System.Drawing.Point(3, 10),
-        new System.Drawing.Point(4, 12),
-        new System.Drawing.Point(5, 15)};
+            this.chart.BackColor = System.Drawing.Color.SkyBlue;
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            this.chart.Dock = System.Windows.Forms.DockStyle.Top;
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Name = "Legend1";
+            this.chart.Legends.Add(legend1);
+            this.chart.Location = new System.Drawing.Point(0, 0);
+            this.chart.Name = "chart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
             series1.Name = "X Galvo";
-            series1.Style.StrokeWidth = 2F;
-            series2.Binding = "Y";
-            series2.BindingX = "X";
-            series2.DataSource = new System.Drawing.Point[] {
-        new System.Drawing.Point(1, 10),
-        new System.Drawing.Point(2, 16),
-        new System.Drawing.Point(3, 17),
-        new System.Drawing.Point(4, 15),
-        new System.Drawing.Point(5, 23)};
-            series2.Name = "Y Galvo";
-            series2.Style.StrokeWidth = 2F;
-            series3.Name = "Y2 Galvo";
-            series3.Style.StrokeWidth = 2F;
-            series4.Binding = "Y";
-            series4.BindingX = "X";
-            series4.DataSource = new System.Drawing.Point[] {
-        new System.Drawing.Point(1, 16),
-        new System.Drawing.Point(2, 19),
-        new System.Drawing.Point(3, 15),
-        new System.Drawing.Point(4, 22),
-        new System.Drawing.Point(5, 18)};
-            series4.Name = "Trigger";
-            series4.Style.StrokeWidth = 2F;
-            this.flexChart.Series.Add(series1);
-            this.flexChart.Series.Add(series2);
-            this.flexChart.Series.Add(series3);
-            this.flexChart.Series.Add(series4);
-            this.flexChart.Size = new System.Drawing.Size(272, 146);
-            this.flexChart.TabIndex = 3;
-            this.flexChart.Text = "振镜控制信号";
-            // 
-            // 
-            // 
-            this.flexChart.ToolTip.Content = "{value}";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series2.Legend = "Legend1";
+            series2.Name = "Trigger";
+            this.chart.Series.Add(series1);
+            this.chart.Series.Add(series2);
+            this.chart.Size = new System.Drawing.Size(272, 138);
+            this.chart.TabIndex = 14;
+            this.chart.Text = "振镜控制曲线";
             // 
             // panel
             // 
@@ -180,10 +136,10 @@ namespace confocal_ui.View
             this.panel.Items.Add(this.tbxFPS);
             this.panel.Items.Add(this.lbFrameTime);
             this.panel.Items.Add(this.tbxFrameTime);
-            this.panel.Location = new System.Drawing.Point(0, 146);
+            this.panel.Location = new System.Drawing.Point(0, 138);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(272, 423);
-            this.panel.TabIndex = 4;
+            this.panel.Size = new System.Drawing.Size(272, 431);
+            this.panel.TabIndex = 15;
             // 
             // ghOutputPara
             // 
@@ -405,7 +361,7 @@ namespace confocal_ui.View
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(272, 569);
             this.Controls.Add(this.panel);
-            this.Controls.Add(this.flexChart);
+            this.Controls.Add(this.chart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -416,7 +372,7 @@ namespace confocal_ui.View
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "参数显示";
             this.Load += new System.EventHandler(this.FormParasLoad);
-            ((System.ComponentModel.ISupportInitialize)(this.flexChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).EndInit();
             this.ResumeLayout(false);
 
@@ -424,7 +380,7 @@ namespace confocal_ui.View
 
         #endregion
 
-        private C1.Win.Chart.FlexChart flexChart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private C1.Win.C1InputPanel.C1InputPanel panel;
         private C1.Win.C1InputPanel.InputGroupHeader ghOutputPara;
         private C1.Win.C1InputPanel.InputLabel lbOutputSampleRate;
@@ -437,16 +393,16 @@ namespace confocal_ui.View
         private C1.Win.C1InputPanel.InputTextBox tbxOutputSampleCountPerFrame;
         private C1.Win.C1InputPanel.InputGroupHeader ghInputPara;
         private C1.Win.C1InputPanel.InputLabel lbInputSampleRate;
-        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerRoundTrip;
-        private C1.Win.C1InputPanel.InputLabel lbInputRoundTripCountPerFrame;
-        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerPixel;
-        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerAcquisition;
-        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerFrame;
         private C1.Win.C1InputPanel.InputTextBox tbxInputSampleRate;
+        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerRoundTrip;
         private C1.Win.C1InputPanel.InputTextBox tbxInputSampleCountPerRoundTrip;
+        private C1.Win.C1InputPanel.InputLabel lbInputRoundTripCountPerFrame;
         private C1.Win.C1InputPanel.InputTextBox tbxInputRoundTripCountPerFrame;
+        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerFrame;
         private C1.Win.C1InputPanel.InputTextBox tbxInputSampleCountPerFrame;
+        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerPixel;
         private C1.Win.C1InputPanel.InputTextBox tbxInputSampleCountPerPixel;
+        private C1.Win.C1InputPanel.InputLabel lbInputSampleCountPerAcquisition;
         private C1.Win.C1InputPanel.InputTextBox tbxInputSampleCountPerAcquisition;
         private C1.Win.C1InputPanel.InputLabel lbInputPixelCountPerAcquisition;
         private C1.Win.C1InputPanel.InputTextBox tbxInputPixelCountPerAcquisition;

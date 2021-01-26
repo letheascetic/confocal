@@ -1,4 +1,5 @@
-﻿using confocal_core.ViewModel;
+﻿using confocal_core.Common;
+using confocal_core.ViewModel;
 using GalaSoft.MvvmLight;
 using log4net;
 using System;

@@ -27,6 +27,7 @@ namespace confocal_ui
         private FormScanSettings mFormScanSetting;
         private FormScanArea mFormScanArea;
         private FormSysSettings mFormSysSettings;
+        FormScanParas mFormScanParas;
 
         private MainViemModel mMainVM;
 
@@ -256,11 +257,14 @@ namespace confocal_ui
 
         private void ScanParasClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            FormScanParas mFormScanParas = new FormScanParas
+            if (mFormScanParas == null)
             {
-                MdiParent = this
-            };
-            mFormScanParas.Show();
+                mFormScanParas = new FormScanParas
+                {
+                    MdiParent = this
+                };
+                mFormScanParas.Show();
+            }
         }
     }
 }

@@ -53,6 +53,8 @@
             this.cmdScanImage = new C1.Win.C1Command.C1Command();
             this.cmdLinkCfg = new C1.Win.C1Command.C1CommandLink();
             this.cmdSysCfg = new C1.Win.C1Command.C1Command();
+            this.cmdLinkScanParas = new C1.Win.C1Command.C1CommandLink();
+            this.cmdScanParas = new C1.Win.C1Command.C1Command();
             this.cmdLinkFile = new C1.Win.C1Command.C1CommandLink();
             this.cmdLinkView = new C1.Win.C1Command.C1CommandLink();
             this.cmdLinkWindow = new C1.Win.C1Command.C1CommandLink();
@@ -69,8 +71,6 @@
             this.btnLaserRelease = new System.Windows.Forms.ToolStripButton();
             this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
             this.toolBar = new C1.Win.C1Command.C1ToolBar();
-            this.cmdLinkScanParas = new C1.Win.C1Command.C1CommandLink();
-            this.cmdScanParas = new C1.Win.C1Command.C1Command();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockBottom)).BeginInit();
             this.dockBottom.SuspendLayout();
@@ -261,6 +261,18 @@
             this.cmdSysCfg.Text = "系统设置（&C）";
             this.cmdSysCfg.Click += new C1.Win.C1Command.ClickEventHandler(this.SysSettingsClick);
             // 
+            // cmdLinkScanParas
+            // 
+            this.cmdLinkScanParas.Command = this.cmdScanParas;
+            this.cmdLinkScanParas.SortOrder = 4;
+            // 
+            // cmdScanParas
+            // 
+            this.cmdScanParas.Name = "cmdScanParas";
+            this.cmdScanParas.ShortcutText = "";
+            this.cmdScanParas.Text = "扫描参数（&P）";
+            this.cmdScanParas.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanParasClick);
+            // 
             // cmdLinkFile
             // 
             this.cmdLinkFile.Command = this.cmdMenuFile;
@@ -417,19 +429,6 @@
             this.toolBar.Text = "工具栏";
             this.toolBar.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.toolBar.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
-            // 
-            // cmdLinkScanParas
-            // 
-            this.cmdLinkScanParas.Command = this.cmdScanParas;
-            this.cmdLinkScanParas.SortOrder = 4;
-            // 
-            // cmdScanParas
-            // 
-            this.cmdScanParas.CheckAutoToggle = true;
-            this.cmdScanParas.Name = "cmdScanParas";
-            this.cmdScanParas.ShortcutText = "";
-            this.cmdScanParas.Text = "扫描参数（&P）";
-            this.cmdScanParas.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanParasClick);
             // 
             // FormMain
             // 
