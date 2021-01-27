@@ -56,6 +56,7 @@ namespace confocal_test.View
             numericUpDown3.DataBindings.Add("Value", CommonModel.GetCommonModel(), "ID");
             textBox4.DataBindings.Add("Text", AModel.GetAModel(), "ID");
             numericUpDown4.DataBindings.Add("Value", AModel.GetAModel(), "ID");
+
         }
 
         private void this_MouseWheel(object sender, MouseEventArgs e)

@@ -228,10 +228,6 @@
       <Project>{432aa977-3289-4711-8622-07c69da4ce08}</Project>
       <Name>confocal_core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\confocal_util\confocal_util.csproj">
-      <Project>{38e5177c-fa83-4b36-afb0-df90600fa986}</Project>
-      <Name>confocal_util</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fullrange.jpg" />
