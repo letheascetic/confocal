@@ -369,12 +369,12 @@ namespace confocal_core.Common
             }
         }
 
-        private void PmtReceiveSamples(object sender, short[][] samples, long acquisitionCount)
+        private void PmtReceiveSamples(object sender, ushort[][] samples, long acquisitionCount)
         {
             Logger.Info(string.Format("receive samples, acquisition [{0}] times.", acquisitionCount));
         }
 
-        private void ApdReceiveSamples(object sender, int channelIndex, int[] samples, long acquisitionCount)
+        private void ApdReceiveSamples(object sender, int channelIndex, uint[] samples, long acquisitionCount)
         {
             Logger.Info(string.Format("channel [{0}] receive samples, acquisition [{1}] times.", channelIndex, acquisitionCount));
         }

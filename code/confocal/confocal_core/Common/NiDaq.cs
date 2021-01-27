@@ -15,14 +15,14 @@ namespace confocal_core.Common
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="samples"></param>
-    public delegate void AiSamplesReceivedEventHandler(object sender, short[][] samples, long acquisitionCount);
+    public delegate void AiSamplesReceivedEventHandler(object sender, ushort[][] samples, long acquisitionCount);
     /// <summary>
     /// 计数器计数事件
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="channelIndex"></param>
     /// <param name="samples"></param>
-    public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, int[] samples, long acquisitionCount);
+    public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, uint[] samples, long acquisitionCount);
 
     /// <summary>
     /// NI板卡接口类
@@ -59,7 +59,7 @@ namespace confocal_core.Common
             mCiChannelReaders = null;
             int channelNum = mConfig.GetChannelNum();
             mAiChannelIndex = Enumerable.Repeat<int>(-1, channelNum).ToArray();
-            mAcquisitionCount = Enumerable.Repeat<long>(0, channelNum).ToArray();
+            mAcquisitionCount = Enumerable.Repeat<long>(-1, channelNum).ToArray();
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace confocal_core.Common
                     return;
                 }
 
-                int[] originSamples = mCiChannelReaders[index].ReadMultiSampleInt32(mSequence.InputSampleCountPerAcquisition);
+                uint[] originSamples = mCiChannelReaders[index].ReadMultiSampleUInt32(mSequence.InputSampleCountPerAcquisition);
 
                 if (CiSamplesReceived != null)
                 {
@@ -486,10 +486,10 @@ namespace confocal_core.Common
             {
                 // 读取16位原始数据，每次读取单次采集的像素数
                 int channelNum = mConfig.GetChannelNum();
-                short[,] originSamples = mAiUnscaledReader.ReadInt16(mSequence.InputSampleCountPerAcquisition);
-                AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
+                ushort[,] originSamples = mAiUnscaledReader.ReadUInt16(mSequence.InputSampleCountPerAcquisition);
+                AnalogWaveform<ushort>[] waves = AnalogWaveform<ushort>.FromArray2D(originSamples);
 
-                short[][] samples = new short[channelNum][];
+                ushort[][] samples = new ushort[channelNum][];
                 for (int i = 0; i < channelNum; i++)
                 {
                     if (GetLaserAiChannelIndex(i) >= 0)
@@ -505,7 +505,7 @@ namespace confocal_core.Common
 
                 if (AiSamplesReceived != null)
                 {
-                    AiSamplesReceived.Invoke(this, samples, mAcquisitionCount.Where(p => p>0).First());
+                    AiSamplesReceived.Invoke(this, samples, mAcquisitionCount.Where(p => p>=0).First());
                 }
             }
             catch (Exception err)

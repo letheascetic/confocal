@@ -28,7 +28,7 @@ namespace confocal_core.Common
         private CancellationTokenSource mCancelToken;
         private BlockingCollection<PmtSampleData> mPmtSampleQueue;
         private BlockingCollection<ApdSampleData> mApdSampleQueue;
-        private Task[] mConsumers;
+        private Task[] mSampleWorkers;
 
         /// <summary>
         /// 扫描任务ID
@@ -77,19 +77,19 @@ namespace confocal_core.Common
             if (mConfig.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT)
             {
                 mPmtSampleQueue = new BlockingCollection<PmtSampleData>(new ConcurrentQueue<PmtSampleData>());
-                mConsumers = new Task[PMT_TASK_COUNT];
-                for (int i = 0; i < mConsumers.Length; i++)
+                mSampleWorkers = new Task[PMT_TASK_COUNT];
+                for (int i = 0; i < mSampleWorkers.Length; i++)
                 {
-                    mConsumers[i] = Task.Run(() => PmtSampleConsumer(mPmtSampleQueue, mCancelToken.Token));
+                    mSampleWorkers[i] = Task.Run(() => PmtSampleWorker(mPmtSampleQueue, mCancelToken.Token));
                 }
             }
             else
             {
                 mApdSampleQueue = new BlockingCollection<ApdSampleData>(new ConcurrentQueue<ApdSampleData>());
-                mConsumers = new Task[APD_TASK_COUNT];
-                for (int i = 0; i < mConsumers.Length; i++)
+                mSampleWorkers = new Task[APD_TASK_COUNT];
+                for (int i = 0; i < mSampleWorkers.Length; i++)
                 {
-                    mConsumers[i] = Task.Run(() => ApdSampleConsumer(mApdSampleQueue, mCancelToken.Token));
+                    mSampleWorkers[i] = Task.Run(() => ApdSampleWorker(mApdSampleQueue, mCancelToken.Token));
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace confocal_core.Common
             {
                 mApdSampleQueue.CompleteAdding();
             }
-            Task.WaitAll(mConsumers);
+            Task.WaitAll(mSampleWorkers);
             Dispose();
         }
 
@@ -135,17 +135,27 @@ namespace confocal_core.Common
                 mPmtSampleQueue = null;
             }
 
-            foreach (Task consumer in mConsumers)
+            foreach (Task consumer in mSampleWorkers)
             {
                 if (consumer != null)
                 {
                     consumer.Dispose();
                 }
             }
-            mConsumers = null;
+            mSampleWorkers = null;
         }
 
-        private void PmtSampleConsumer(BlockingCollection<PmtSampleData> queue, CancellationToken token)
+        public void EnquenePmtSamples(short[][] samples, long acquisitionCount)
+        {
+
+        }
+
+        public void EnqueneApdSamples(int channelIndex, int[] samples, long acquisitionCount)
+        {
+            
+        }
+
+        private void PmtSampleWorker(BlockingCollection<PmtSampleData> queue, CancellationToken token)
         {
             while (!queue.IsCompleted)
             {
@@ -153,7 +163,7 @@ namespace confocal_core.Common
             }
         }
 
-        private void ApdSampleConsumer(BlockingCollection<ApdSampleData> queue, CancellationToken token)
+        private void ApdSampleWorker(BlockingCollection<ApdSampleData> queue, CancellationToken token)
         {
             while (!queue.IsCompleted)
             {
