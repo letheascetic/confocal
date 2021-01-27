@@ -189,7 +189,11 @@ namespace confocal_core.Common
             {
                 try
                 {
-                    mPmtSampleQueue.TryTake(out PmtSampleData sampleData, 20, mCancelToken.Token);
+                    if (mPmtSampleQueue.TryTake(out PmtSampleData sampleData, 20, mCancelToken.Token))
+                    {
+                        ScanInfo.UpdateScanInfo(sampleData.AcquisitionCount);
+                        Logger.Info(string.Format("Scan Info [{0}].", ScanInfo));
+                    }
                 }
                 catch (OperationCanceledException e)
                 {
@@ -207,6 +211,7 @@ namespace confocal_core.Common
                 try
                 {
                     mApdSampleQueue.TryTake(out ApdSampleData sampleData, 20, mCancelToken.Token);
+                    
                 }
                 catch (OperationCanceledException e)
                 {

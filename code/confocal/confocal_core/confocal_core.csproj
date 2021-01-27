@@ -106,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ApdSampleData.cs" />
-    <Compile Include="Common\BlockingQueue.cs" />
     <Compile Include="Common\Laser.cs" />
     <Compile Include="Common\NiDaq.cs" />
     <Compile Include="Common\PmtSampleData.cs" />

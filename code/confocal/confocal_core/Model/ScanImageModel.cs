@@ -44,7 +44,7 @@ namespace confocal_core.Model
 
         public ScanImageModel(int rows, int columns, DepthType type, int channels, int numOfBank)
         {
-            if (rows % NumOfBank == 0)
+            if (rows % numOfBank != 0)
             {
                 throw new ArgumentException(string.Format("Rows[{0}] % NumOfBank[{1}] != 0", rows, numOfBank));
             }

@@ -365,9 +365,9 @@ namespace confocal_core.Common
                     ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    mSequence.InputSampleCountPerFrame);
+                    mSequence.InputSampleCountPerAcquisition);
 
-                ciTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerFrame);
+                ciTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerAcquisition);
 
                 // CIDataTransferMechanism x = ciTask.CIChannels.All.DataTransferMechanism;
 
@@ -423,6 +423,8 @@ namespace confocal_core.Common
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
                     mSequence.InputSampleCountPerAcquisition);
+
+                mAiTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerAcquisition);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = mConfig.Detector.TriggerReceive;
