@@ -7,15 +7,15 @@ namespace confocal_core.Common
 {
     public class ApdSampleData
     {
-        public int[] NSamples { get; set; }
+        public uint[] NSamples { get; set; }
         public int ChannelIndex { get; set; }
-        public long AcquisitionIndex { get; }
+        public long AcquisitionCount { get; }
 
-        public ApdSampleData(int[] samples, int channelIndex, int acquisitionIndex)
+        public ApdSampleData(uint[] samples, int channelIndex, long acquisitionCount)
         {
             NSamples = samples;
             ChannelIndex = channelIndex;
-            AcquisitionIndex = acquisitionIndex;
+            AcquisitionCount = acquisitionCount;
         }
 
     }

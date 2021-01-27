@@ -371,12 +371,12 @@ namespace confocal_core.Common
 
         private void PmtReceiveSamples(object sender, ushort[][] samples, long acquisitionCount)
         {
-            Logger.Info(string.Format("receive samples, acquisition [{0}] times.", acquisitionCount));
+            ScanningTask.EnquenePmtSamples(samples, acquisitionCount);
         }
 
         private void ApdReceiveSamples(object sender, int channelIndex, uint[] samples, long acquisitionCount)
         {
-            Logger.Info(string.Format("channel [{0}] receive samples, acquisition [{1}] times.", channelIndex, acquisitionCount));
+            ScanningTask.EnqueneApdSamples(channelIndex, samples, acquisitionCount);
         }
 
         private API_RETURN_CODE AfterPropertyChanged()

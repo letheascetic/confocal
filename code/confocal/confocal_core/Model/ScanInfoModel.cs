@@ -12,6 +12,7 @@ namespace confocal_core.Model
     /// </summary>
     public class ScanInfoModel : ObservableObject
     {
+        private DateTime startTime;
         private double timeSpan;
         private double frameTime;
         private double fps;
@@ -19,6 +20,14 @@ namespace confocal_core.Model
         private int currentBank;
         private int numOfBank;
 
+        /// <summary>
+        /// 扫描开始时间
+        /// </summary>
+        public DateTime StartTime
+        {
+            get { return startTime; }
+            set { startTime = value; }
+        }
         /// <summary>
         /// 扫描时长
         /// </summary>
@@ -77,5 +86,6 @@ namespace confocal_core.Model
             CurrentBank = 0;
             NumOfBank = numOfBank;
         }
+        
     }
 }

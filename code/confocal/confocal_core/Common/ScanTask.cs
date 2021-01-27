@@ -20,6 +20,7 @@ namespace confocal_core.Common
         private static readonly int APD_TASK_COUNT = 2;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private readonly ConfigViewModel mConfig;
+        private readonly SequenceModel mSequence;
         private int mTaskId;
         private string mTaskName;
         private ScanInfoModel mScanInfo;
@@ -64,6 +65,7 @@ namespace confocal_core.Common
         public ScanTask(int taskId, string taskName)
         {
             mConfig = ConfigViewModel.GetConfig();
+            mSequence = SequenceModel.CreateInstance();
             TaskId = taskId;
             TaskName = taskName;
         }
@@ -73,6 +75,12 @@ namespace confocal_core.Common
         /// </summary>
         public void Start()
         {
+            bool[] statusOfChannels = mConfig.ScanChannels.Select(p => p.Activated).ToArray();
+
+            ScanInfo = new ScanInfoModel(mSequence.InputAcquisitionCountPerFrame);
+            ScanData = new ScanDataModel(mConfig.SelectedScanPixel.Data, mConfig.SelectedScanPixel.Data, mSequence.InputAcquisitionCountPerFrame,
+                mConfig.GetChannelNum(), statusOfChannels);
+
             mCancelToken = new CancellationTokenSource();
             if (mConfig.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT)
             {
@@ -80,7 +88,7 @@ namespace confocal_core.Common
                 mSampleWorkers = new Task[PMT_TASK_COUNT];
                 for (int i = 0; i < mSampleWorkers.Length; i++)
                 {
-                    mSampleWorkers[i] = Task.Run(() => PmtSampleWorker(mPmtSampleQueue, mCancelToken.Token));
+                    mSampleWorkers[i] = Task.Run(() => PmtSampleWorker());
                 }
             }
             else
@@ -89,7 +97,7 @@ namespace confocal_core.Common
                 mSampleWorkers = new Task[APD_TASK_COUNT];
                 for (int i = 0; i < mSampleWorkers.Length; i++)
                 {
-                    mSampleWorkers[i] = Task.Run(() => ApdSampleWorker(mApdSampleQueue, mCancelToken.Token));
+                    mSampleWorkers[i] = Task.Run(() => ApdSampleWorker());
                 }
             }
         }
@@ -145,29 +153,67 @@ namespace confocal_core.Common
             mSampleWorkers = null;
         }
 
-        public void EnquenePmtSamples(short[][] samples, long acquisitionCount)
+        public void EnquenePmtSamples(ushort[][] samples, long acquisitionCount)
         {
-
-        }
-
-        public void EnqueneApdSamples(int channelIndex, int[] samples, long acquisitionCount)
-        {
-            
-        }
-
-        private void PmtSampleWorker(BlockingCollection<PmtSampleData> queue, CancellationToken token)
-        {
-            while (!queue.IsCompleted)
+            try
             {
-
+                PmtSampleData sampleData = new PmtSampleData(samples, acquisitionCount);
+                mPmtSampleQueue.TryAdd(sampleData, 50, mCancelToken.Token);
+                Logger.Info(string.Format("Enqueue Pmt Samples [{0}].", acquisitionCount));
+            }
+            catch (OperationCanceledException e)
+            {
+                Logger.Info(string.Format("Enqueue Pmt Smaples [{0}] Canceled [{1}].", acquisitionCount, e));
+                mPmtSampleQueue.CompleteAdding();
             }
         }
 
-        private void ApdSampleWorker(BlockingCollection<ApdSampleData> queue, CancellationToken token)
+        public void EnqueneApdSamples(int channelIndex, uint[] samples, long acquisitionCount)
         {
-            while (!queue.IsCompleted)
+            try
             {
+                ApdSampleData sampleData = new ApdSampleData(samples, channelIndex, acquisitionCount);
+                mApdSampleQueue.TryAdd(sampleData, 50, mCancelToken.Token);
+                Logger.Info(string.Format("Enqueue Apd Samples [{0}][{1}].", channelIndex, acquisitionCount));
+            }
+            catch (OperationCanceledException e)
+            {
+                Logger.Info(string.Format("Enqueue Apd Smaples [{0}][{1}] Canceled [{2}].", channelIndex, acquisitionCount, e));
+                mPmtSampleQueue.CompleteAdding();
+            }
+        }
 
+        private void PmtSampleWorker()
+        {
+            while (!mPmtSampleQueue.IsCompleted)
+            {
+                try
+                {
+                    mPmtSampleQueue.TryTake(out PmtSampleData sampleData, 20, mCancelToken.Token);
+                }
+                catch (OperationCanceledException e)
+                {
+                    Logger.Info(string.Format("Pmt Sample Worker Canceled [{0}].", e));
+                    break;
+                }
+            }
+            Logger.Info(string.Format("Pmt Sample Worker Finished."));
+        }
+
+        private void ApdSampleWorker()
+        {
+            while (!mApdSampleQueue.IsCompleted)
+            {
+                try
+                {
+                    mApdSampleQueue.TryTake(out ApdSampleData sampleData, 20, mCancelToken.Token);
+                }
+                catch (OperationCanceledException e)
+                {
+                    Logger.Info(string.Format("Apd Sample Worker Canceled [{0}].", e));
+                    break;
+                }
+                Logger.Info(string.Format("Apd Sample Worker Finished."));
             }
         }
 

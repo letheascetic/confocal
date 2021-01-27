@@ -20,10 +20,10 @@ namespace confocal_core.Model
         /// <summary>
         /// 扫描图像
         /// </summary>
-        public Mat MatImage
+        public Mat Image
         {
             get { return matImage; }
-            set { matImage = value; RaisePropertyChanged(() => MatImage); }
+            set { matImage = value; RaisePropertyChanged(() => Image); }
         }
         /// <summary>
         /// 扫描图像块
@@ -50,7 +50,7 @@ namespace confocal_core.Model
             }
             
             NumOfBank = numOfBank;
-            MatImage = new Mat(rows, columns, type, channels);
+            Image = new Mat(rows, columns, type, channels);
 
             int rowIndex;
             int rowsOfBank = rows / NumOfBank;
@@ -58,9 +58,15 @@ namespace confocal_core.Model
             for (int i = 0; i < NumOfBank; i++)
             {
                 rowIndex = i * rowsOfBank;
-                Banks[i] = new ScanBankModel(rowsOfBank, columns, type, channels, MatImage.Row(rowIndex).DataPointer, MatImage.Step, i);
+                Banks[i] = new ScanBankModel(rowsOfBank, columns, type, channels, Image.Row(rowIndex).DataPointer, Image.Step, i);
             }
         }
+
+        public void Dispose()
+        {
+            Image.Dispose();
+        }
+
     }
 
     /// <summary>
