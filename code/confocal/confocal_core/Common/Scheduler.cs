@@ -2,9 +2,12 @@
 using confocal_core.ViewModel;
 using log4net;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace confocal_core.Common
 {
@@ -15,6 +18,7 @@ namespace confocal_core.Common
         private volatile static Scheduler pScheduler = null;
         private static readonly object locker = new object();
         ///////////////////////////////////////////////////////////////////////////////////////////
+
         private NiDaq mNiDaq;
         private SequenceModel mSequence;
         private ConfigViewModel mConfig;
@@ -99,6 +103,7 @@ namespace confocal_core.Common
             mSequence.GenerateScanCoordinates();         // 生成扫描范围序列和电压序列
             mSequence.GenerateFrameScanWaves();          // 生成帧电压序列
             OpenLaserChannels();                         // 打开激光器
+            ScanningTask.Start();                        
             code = mNiDaq.Start();                       // 启动板卡
 
             if (code != API_RETURN_CODE.API_SUCCESS)
