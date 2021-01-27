@@ -18,6 +18,7 @@ namespace confocal_core.Common
             mSemaphore = new Semaphore(0, Int32.MaxValue);
 
             BlockingCollection<T> x = new BlockingCollection<T>();
+
         }
 
         /// <summary>
