@@ -37,6 +37,7 @@ namespace confocal_core.Model
         private int inputPixelCountPerAcquisition;
         private int inputRoundTripCountPerAcquisition;
         private int inputAcquisitionCountPerFrame;
+        private int inputSampleCountPerRow;
         private double fps;
         private double frameTime;
 
@@ -181,6 +182,14 @@ namespace confocal_core.Model
         {
             get { return inputAcquisitionCountPerFrame; }
             set { inputAcquisitionCountPerFrame = value; RaisePropertyChanged(() => InputAcquisitionCountPerFrame); }
+        }
+        /// <summary>
+        /// 每行采集的样本数
+        /// </summary>
+        public int InputSampleCountPerRow
+        {
+            get { return inputSampleCountPerRow; }
+            set { inputSampleCountPerRow = value; RaisePropertyChanged(() => InputSampleCountPerRow); }
         }
         /// <summary>
         /// 帧率
@@ -348,10 +357,12 @@ namespace confocal_core.Model
             if (config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION)
             {
                 InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.ScanPixelSize) * InputSampleCountPerPixel;
+                InputSampleCountPerRow = InputSampleCountPerRoundTrip;
             }
             else
             {
                 InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.ScanPixelSize) * InputSampleCountPerPixel * 2;
+                InputSampleCountPerRow = InputSampleCountPerRoundTrip / 2;
             }
             InputSampleCountPerFrame = InputRoundTripCountPerFrame * InputSampleCountPerRoundTrip;
 

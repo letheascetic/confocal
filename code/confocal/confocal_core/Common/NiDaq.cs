@@ -365,7 +365,7 @@ namespace confocal_core.Common
                     ciTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    mSequence.InputSampleCountPerAcquisition);
+                    mSequence.InputSampleCountPerRow);
 
                 ciTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerAcquisition);
 
@@ -422,7 +422,7 @@ namespace confocal_core.Common
                     mAiTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.FiniteSamples,
-                    mSequence.InputSampleCountPerAcquisition);
+                    mSequence.InputSampleCountPerRow);
 
                 mAiTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerAcquisition);
 
