@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>confocal_test</RootNamespace>
     <AssemblyName>confocal_test</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />

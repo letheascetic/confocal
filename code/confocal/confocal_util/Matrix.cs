@@ -7,9 +7,10 @@ namespace confocal_util
     public class Matrix
     {
 
-        public static Mat ConvertToMatrix(ushort[] samples, int samplesPerPixel, int samplesPerRow, int sampleCount)
+        public static Mat ConvertToMatrix(ushort[] samples, int samplesPerPixel, int pixelsPerRow, int pixelsPerCol)
         {
-            var nd = np.array(samples);
+            var origin = np.array(samples).reshape(samplesPerPixel, pixelsPerRow, pixelsPerCol);
+            var x = origin.sum(0);
             return new Mat();
         }
 

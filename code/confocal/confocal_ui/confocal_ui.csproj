@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>confocal_ui</RootNamespace>
     <AssemblyName>confocal_ui</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>False</Deterministic>
     <TargetFrameworkProfile />
