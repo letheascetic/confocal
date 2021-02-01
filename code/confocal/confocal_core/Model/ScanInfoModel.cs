@@ -19,7 +19,7 @@ namespace confocal_core.Model
         private long currentFrame;
         private int currentBank;
         private int numOfBank;
-        private long acquisitionCount; 
+        private long acquisitionCount;
 
         /// <summary>
         /// 扫描开始时间
@@ -101,11 +101,11 @@ namespace confocal_core.Model
         public void UpdateScanInfo(long acquisitionCount)
         {
             AcquisitionCount = acquisitionCount;
-            TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
             CurrentBank = (int)(AcquisitionCount % NumOfBank);
             CurrentFrame = AcquisitionCount / NumOfBank;
             if (CurrentBank == 0 && CurrentFrame > 0)
             {
+                TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
                 FrameTime = TimeSpan / CurrentFrame;
                 FPS = 1.0 / FrameTime;
             }

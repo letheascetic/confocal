@@ -161,9 +161,9 @@ namespace confocal_core.Common
                 mPmtSampleQueue.TryAdd(sampleData, 50, mCancelToken.Token);
                 Logger.Info(string.Format("Enqueue Pmt Samples [{0}].", acquisitionCount));
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException)
             {
-                Logger.Info(string.Format("Enqueue Pmt Smaples [{0}] Canceled [{1}].", acquisitionCount, e));
+                Logger.Info(string.Format("Enqueue Pmt Smaples [{0}] Canceled.", acquisitionCount));
                 mPmtSampleQueue.CompleteAdding();
             }
         }
@@ -176,9 +176,9 @@ namespace confocal_core.Common
                 mApdSampleQueue.TryAdd(sampleData, 50, mCancelToken.Token);
                 Logger.Info(string.Format("Enqueue Apd Samples [{0}][{1}].", channelIndex, acquisitionCount));
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException)
             {
-                Logger.Info(string.Format("Enqueue Apd Smaples [{0}][{1}] Canceled [{2}].", channelIndex, acquisitionCount, e));
+                Logger.Info(string.Format("Enqueue Apd Smaples [{0}][{1}] Canceled.", channelIndex, acquisitionCount));
                 mPmtSampleQueue.CompleteAdding();
             }
         }
@@ -195,9 +195,9 @@ namespace confocal_core.Common
                         Logger.Info(string.Format("Scan Info [{0}].", ScanInfo));
                     }
                 }
-                catch (OperationCanceledException e)
+                catch (OperationCanceledException)
                 {
-                    Logger.Info(string.Format("Pmt Sample Worker Canceled [{0}].", e));
+                    Logger.Info(string.Format("Pmt Sample Worker Canceled."));
                     break;
                 }
             }
@@ -211,15 +211,19 @@ namespace confocal_core.Common
                 try
                 {
                     mApdSampleQueue.TryTake(out ApdSampleData sampleData, 20, mCancelToken.Token);
-                    
                 }
-                catch (OperationCanceledException e)
+                catch (OperationCanceledException)
                 {
-                    Logger.Info(string.Format("Apd Sample Worker Canceled [{0}].", e));
+                    Logger.Info(string.Format("Apd Sample Worker Canceled."));
                     break;
                 }
                 Logger.Info(string.Format("Apd Sample Worker Finished."));
             }
+        }
+
+        private void ConvertPmtSamples(PmtSampleData sampleData)
+        {
+            
         }
 
     }

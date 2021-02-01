@@ -15,6 +15,7 @@ namespace confocal_core.Common
             NSamples = samples;
             AcquisitionCount = acquisitionCount;
         }
+       
     }
 
 }
