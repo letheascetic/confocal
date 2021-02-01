@@ -13,7 +13,5 @@ namespace confocal_util
             var x = origin.sum(0);
             return new Mat();
         }
-
-
     }
 }
