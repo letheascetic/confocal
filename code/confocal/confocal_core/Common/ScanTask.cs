@@ -159,6 +159,7 @@ namespace confocal_core.Common
             {
                 PmtSampleData sampleData = new PmtSampleData(samples, acquisitionCount);
                 mPmtSampleQueue.TryAdd(sampleData, 50, mCancelToken.Token);
+                ConvertPmtSamples(sampleData);
                 Logger.Info(string.Format("Enqueue Pmt Samples [{0}].", acquisitionCount));
             }
             catch (OperationCanceledException)
@@ -223,7 +224,10 @@ namespace confocal_core.Common
 
         private void ConvertPmtSamples(PmtSampleData sampleData)
         {
-            
+            int samplesPerPixel = mSequence.InputSampleCountPerPixel;
+            int pixelsPerRow = mSequence.InputSampleCountPerRow / mSequence.InputSampleCountPerPixel;
+            int pixelsPerCol = mSequence.InputPixelCountPerAcquisition / pixelsPerRow;
+            Matrix.ConvertToMatrix(sampleData.NSamples[0], samplesPerPixel, pixelsPerRow, pixelsPerCol);
         }
 
     }

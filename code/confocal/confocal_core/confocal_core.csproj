@@ -90,6 +90,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\NationalInstruments.DAQmx.dll</HintPath>
     </Reference>
+    <Reference Include="NumSharp.Core">
+      <HintPath>..\dll\NumSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -109,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Common\ApdSampleData.cs" />
     <Compile Include="Common\Laser.cs" />
+    <Compile Include="Common\Matrix.cs" />
     <Compile Include="Common\NiDaq.cs" />
     <Compile Include="Common\PmtSampleData.cs" />
     <Compile Include="Common\ScanTask.cs" />
@@ -154,12 +158,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\confocal_util\confocal_util.csproj">
-      <Project>{e138ebfd-b9cb-40d2-958d-322888398e7a}</Project>
-      <Name>confocal_util</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
