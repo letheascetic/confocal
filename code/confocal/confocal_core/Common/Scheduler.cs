@@ -381,7 +381,7 @@ namespace confocal_core.Common
             }
         }
 
-        private void PmtReceiveSamples(object sender, ushort[][] samples, long acquisitionCount)
+        private void PmtReceiveSamples(object sender, short[][] samples, long acquisitionCount)
         {
             ScanningTask.EnquenePmtSamples(samples, acquisitionCount);
         }

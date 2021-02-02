@@ -7,10 +7,10 @@ namespace confocal_core.Common
 {
     public class PmtSampleData
     {
-        public ushort[][] NSamples { get; set; }
+        public short[][] NSamples { get; set; }
         public long AcquisitionCount { get; }
 
-        public PmtSampleData(ushort[][] samples, long acquisitionCount)
+        public PmtSampleData(short[][] samples, long acquisitionCount)
         {
             NSamples = samples;
             AcquisitionCount = acquisitionCount;

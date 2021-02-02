@@ -26,15 +26,20 @@ namespace confocal_core.Common
             }
         }
 
-
         /// <summary>
-        /// 将单次采集的样本转换成矩阵数据
+        /// 负电压转正电压
         /// </summary>
-        /// <param name="samples">单次采集的样本</param>
-        /// <param name="samplesPerPixel">单像素包含的样本数，每个像素等于多个样本的和</param>
-        /// <param name="pixelsPerRow">矩阵单行包含的像素数</param>
-        /// <param name="pixelsPerCol">矩阵包含的行数</param>
-        /// <returns></returns>
+        /// <param name="samples"></param>
+        public static void ToPositive(ref short[] samples)
+        {
+            for (int i = 0; i < samples.Length; i++)
+            {
+                if (samples[i] < 0)
+                {
+                    samples[i] = (short)(-samples[i]);
+                }
+            }
+        }
 
         /// <summary>
         /// 将单次采集的样本转换成矩阵数据
@@ -83,7 +88,6 @@ namespace confocal_core.Common
         {
             image.SetTo<int>(matrix.ToArray<int>());
         }
-
 
     }
 }

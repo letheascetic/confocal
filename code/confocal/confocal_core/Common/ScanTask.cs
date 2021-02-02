@@ -1,6 +1,8 @@
 ﻿using confocal_core.Model;
 using confocal_core.ViewModel;
+using Emgu.CV;
 using log4net;
+using NumSharp;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -224,9 +226,20 @@ namespace confocal_core.Common
 
         private void ConvertPmtSamples(PmtSampleData sampleData)
         {
-            int samplesPerPixel = mSequence.InputSampleCountPerPixel;
-            int pixelsPerRow = mSequence.InputSampleCountPerRow / mSequence.InputSampleCountPerPixel;
-            int pixelsPerCol = mSequence.InputPixelCountPerAcquisition / pixelsPerRow;
+            for (int i = 0; i < mConfig.GetChannelNum(); i++)
+            {
+                if (sampleData.NSamples[i] != null)
+                {
+                    Matrix.ToPositive(ref sampleData.NSamples[i]);
+                    NDArray matrix = Matrix.ToMatrix(sampleData.NSamples[i], mSequence.InputSampleCountPerPixel, mSequence.InputPixelCountPerRow,
+                        mSequence.InputPixelCountPerAcquisition / mSequence.InputPixelCountPerRow, mConfig.SelectedScanDirection.ID,
+                        mConfig.SelectedScanPixelDwell.ScanPixelOffset, mConfig.SelectedScanPixelDwell.ScanPixelCalibration,
+                        mConfig.SelectedScanPixel.Data);
+                    Mat bankImage = ScanData.OriginImages[i].Banks[ScanInfo.CurrentBank].Bank;
+                    Matrix.ToBankImage(matrix, ref bankImage);
+                }
+            }
+            
             // Matrix.ToMatrix(sampleData.NSamples[0], samplesPerPixel, pixelsPerRow, pixelsPerCol, mConfig.SelectedScanDirection.ID);
         }
 

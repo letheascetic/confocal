@@ -56,7 +56,7 @@ namespace confocal_core.Model
             {
                 if (statusOfChannels[i])
                 {
-                    OriginImages[i] = new ScanImageModel(rows, columns, Emgu.CV.CvEnum.DepthType.Cv16U, 1, numOfBank);
+                    OriginImages[i] = new ScanImageModel(rows, columns, Emgu.CV.CvEnum.DepthType.Cv32S, 1, numOfBank);
                     GrayImages[i] = new ScanImageModel(rows, columns, Emgu.CV.CvEnum.DepthType.Cv8U, 1, numOfBank);
                     Gray3Images[i] = new ScanImageModel(rows, columns, Emgu.CV.CvEnum.DepthType.Cv8U, 3, numOfBank);
                     BGRImages[i] = new ScanImageModel(rows, columns, Emgu.CV.CvEnum.DepthType.Cv8U, 3, numOfBank);

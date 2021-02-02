@@ -15,7 +15,7 @@ namespace confocal_core.Common
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="samples"></param>
-    public delegate void AiSamplesReceivedEventHandler(object sender, ushort[][] samples, long acquisitionCount);
+    public delegate void AiSamplesReceivedEventHandler(object sender, short[][] samples, long acquisitionCount);
     /// <summary>
     /// 计数器计数事件
     /// </summary>
@@ -488,10 +488,10 @@ namespace confocal_core.Common
             {
                 // 读取16位原始数据，每次读取单次采集的像素数
                 int channelNum = mConfig.GetChannelNum();
-                ushort[,] originSamples = mAiUnscaledReader.ReadUInt16(mSequence.InputSampleCountPerAcquisition);
-                AnalogWaveform<ushort>[] waves = AnalogWaveform<ushort>.FromArray2D(originSamples);
+                short[,] originSamples = mAiUnscaledReader.ReadInt16(mSequence.InputSampleCountPerAcquisition);
+                AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
 
-                ushort[][] samples = new ushort[channelNum][];
+                short[][] samples = new short[channelNum][];
                 for (int i = 0; i < channelNum; i++)
                 {
                     if (GetLaserAiChannelIndex(i) >= 0)
