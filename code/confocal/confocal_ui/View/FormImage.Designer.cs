@@ -50,6 +50,7 @@
             this.c1ToolBar1 = new C1.Win.C1Command.C1ToolBar();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pageAll = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.imageAll = new Emgu.CV.UI.ImageBox();
             this.page405 = new System.Windows.Forms.TabPage();
             this.image405 = new Emgu.CV.UI.ImageBox();
@@ -59,7 +60,6 @@
             this.image561 = new Emgu.CV.UI.ImageBox();
             this.page640 = new System.Windows.Forms.TabPage();
             this.image640 = new Emgu.CV.UI.ImageBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -81,6 +81,7 @@
             // dockToolBar
             // 
             this.dockToolBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
+            this.dockToolBar.Controls.Add(this.button1);
             this.dockToolBar.Controls.Add(this.toolBar);
             this.dockToolBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.dockToolBar.Id = 3;
@@ -243,7 +244,6 @@
             // pageAll
             // 
             this.pageAll.BackColor = System.Drawing.Color.Transparent;
-            this.pageAll.Controls.Add(this.button1);
             this.pageAll.Controls.Add(this.imageAll);
             this.pageAll.Location = new System.Drawing.Point(4, 4);
             this.pageAll.Margin = new System.Windows.Forms.Padding(0);
@@ -251,6 +251,16 @@
             this.pageAll.Size = new System.Drawing.Size(558, 494);
             this.pageAll.TabIndex = 0;
             this.pageAll.Text = "全部";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(128, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // imageAll
             // 
@@ -350,16 +360,6 @@
             this.image640.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.image640.TabIndex = 2;
             this.image640.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(8, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // FormImage
             // 
