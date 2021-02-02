@@ -1,6 +1,9 @@
 ﻿using C1.Win.C1Ribbon;
 using confocal_core.Common;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
 using log4net;
+using NumSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,13 +28,14 @@ namespace confocal_ui.View
 
         private void ButtonClick(object sender, EventArgs e)
         {
-            ushort[] data = new ushort[2 * 10 * 5];
+            short[] data = new short[2 * 20 * 10];
             for (int i = 0; i < data.Length; i++)
             {
-                //int j = i / 8;
-                data[i] = (ushort)i;
+                data[i] = (short)i;
             }
-            Matrix.ToMatrix(data, 2, 10, 5, 0);
+            NDArray matrix = Matrix.ToMatrix(data, 2, 20, 10, 1, 4, 2, 16);
+            Mat image = new Mat(10, 16, DepthType.Cv32S, 1);
+            Matrix.ToBankImage(matrix, ref image);
         }
     }
 }
