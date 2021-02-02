@@ -155,7 +155,7 @@ namespace confocal_core.Common
             mSampleWorkers = null;
         }
 
-        public void EnquenePmtSamples(ushort[][] samples, long acquisitionCount)
+        public void EnquenePmtSamples(short[][] samples, long acquisitionCount)
         {
             try
             {
