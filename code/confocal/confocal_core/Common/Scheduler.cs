@@ -101,6 +101,7 @@ namespace confocal_core.Common
             ScanningTask = scanTask;
 
             mSequence.GenerateScanCoordinates();         // 生成扫描范围序列和电压序列
+            
             mSequence.GenerateFrameScanWaves();          // 生成帧电压序列
             OpenLaserChannels();                         // 打开激光器
             ScanningTask.Start();                        
@@ -273,7 +274,15 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
         {
-            return AfterPropertyChanged();
+            API_RETURN_CODE code = AfterPropertyChanged();
+
+            return code;
+        }
+
+        public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
+        {
+            mConfig.SelectedScanPixelDwell.ScanPixelCalibration = scanPixelCalibration;
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>

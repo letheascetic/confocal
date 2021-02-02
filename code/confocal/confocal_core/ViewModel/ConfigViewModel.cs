@@ -388,6 +388,11 @@ namespace confocal_core.ViewModel
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
+        {
+            return Scheduler.CreateInstance().ScanPixelCalibrationChangeCommand(scanPixelCalibration);
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private bool scanLineSkipEnabled;
         private ScanLineSkipModel selectedScanLineSkip;

@@ -38,6 +38,7 @@ namespace confocal_core.Model
         private int inputRoundTripCountPerAcquisition;
         private int inputAcquisitionCountPerFrame;
         private int inputSampleCountPerRow;
+        private int inputPixelCountPerRow;
         private double fps;
         private double frameTime;
 
@@ -191,6 +192,15 @@ namespace confocal_core.Model
             get { return inputSampleCountPerRow; }
             set { inputSampleCountPerRow = value; RaisePropertyChanged(() => InputSampleCountPerRow); }
         }
+        /// <summary>
+        /// 每行采集的像素数
+        /// </summary>
+        public int InputPixelCountPerRow
+        {
+            get { return inputPixelCountPerRow; }
+            set { inputPixelCountPerRow = value; RaisePropertyChanged(() => InputPixelCountPerRow); }
+        }
+
         /// <summary>
         /// 帧率
         /// </summary>
@@ -356,12 +366,12 @@ namespace confocal_core.Model
             InputRoundTripCountPerFrame = OutputRoundTripCountPerFrame;
             if (config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION)
             {
-                InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.ScanPixelSize) * InputSampleCountPerPixel;
+                InputSampleCountPerRoundTrip = config.GetExtendScanXPixels() * InputSampleCountPerPixel;
                 InputSampleCountPerRow = InputSampleCountPerRoundTrip;
             }
             else
             {
-                InputSampleCountPerRoundTrip = (int)(extendScanArea.ScanRange.Width / config.ScanPixelSize) * InputSampleCountPerPixel * 2;
+                InputSampleCountPerRoundTrip = config.GetExtendScanXPixels() * InputSampleCountPerPixel * 2;
                 InputSampleCountPerRow = InputSampleCountPerRoundTrip / 2;
             }
             InputSampleCountPerFrame = InputRoundTripCountPerFrame * InputSampleCountPerRoundTrip;
@@ -384,6 +394,8 @@ namespace confocal_core.Model
             // 帧率和帧时间
             FrameTime = OutputSampleCountPerFrame * config.SelectedScanPixelDwell.Data / 1e6;
             FPS = 1.0 / FrameTime;
+
+            InputPixelCountPerRow = InputSampleCountPerRow / InputSampleCountPerPixel;
         }
 
         /// <summary>

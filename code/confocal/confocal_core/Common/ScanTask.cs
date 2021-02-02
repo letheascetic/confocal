@@ -227,7 +227,7 @@ namespace confocal_core.Common
             int samplesPerPixel = mSequence.InputSampleCountPerPixel;
             int pixelsPerRow = mSequence.InputSampleCountPerRow / mSequence.InputSampleCountPerPixel;
             int pixelsPerCol = mSequence.InputPixelCountPerAcquisition / pixelsPerRow;
-            Matrix.ConvertToMatrix(sampleData.NSamples[0], samplesPerPixel, pixelsPerRow, pixelsPerCol);
+            Matrix.ToMatrix(sampleData.NSamples[0], samplesPerPixel, pixelsPerRow, pixelsPerCol, mConfig.SelectedScanDirection.ID);
         }
 
     }

@@ -39,6 +39,7 @@
             this.separator6 = new C1.Win.C1InputPanel.InputSeparator();
             this.btnUniDirection = new C1.Win.C1InputPanel.InputButton();
             this.btnBiDirection = new C1.Win.C1InputPanel.InputButton();
+            this.nbScanPixelCalibration = new C1.Win.C1InputPanel.InputNumericBox();
             this.chbxLineSkip = new C1.Win.C1InputPanel.InputCheckBox();
             this.cbxLineSkip = new C1.Win.C1InputPanel.InputComboBox();
             this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
@@ -135,6 +136,7 @@
             this.inputPanel.Items.Add(this.separator6);
             this.inputPanel.Items.Add(this.btnUniDirection);
             this.inputPanel.Items.Add(this.btnBiDirection);
+            this.inputPanel.Items.Add(this.nbScanPixelCalibration);
             this.inputPanel.Items.Add(this.chbxLineSkip);
             this.inputPanel.Items.Add(this.cbxLineSkip);
             this.inputPanel.Items.Add(this.separator1);
@@ -287,12 +289,19 @@
             // 
             // btnBiDirection
             // 
-            this.btnBiDirection.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.btnBiDirection.Break = C1.Win.C1InputPanel.BreakType.None;
             this.btnBiDirection.CheckOnClick = true;
             this.btnBiDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnBiDirection.Name = "btnBiDirection";
             this.btnBiDirection.Text = "双向";
             this.btnBiDirection.Click += new System.EventHandler(this.BiDirectionClick);
+            // 
+            // nbScanPixelCalibration
+            // 
+            this.nbScanPixelCalibration.Break = C1.Win.C1InputPanel.BreakType.Column;
+            this.nbScanPixelCalibration.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nbScanPixelCalibration.Name = "nbScanPixelCalibration";
+            this.nbScanPixelCalibration.Width = 40;
             // 
             // chbxLineSkip
             // 
@@ -974,5 +983,6 @@
         private C1.Win.C1InputPanel.InputTrackBar tbar640Power;
         private C1.Win.C1InputPanel.InputTextBox tbx640Power;
         private C1.Win.C1InputPanel.InputComboBox cbxLineSkip;
+        private C1.Win.C1InputPanel.InputNumericBox nbScanPixelCalibration;
     }
 }

@@ -124,6 +124,8 @@ namespace confocal_ui
                 mPixelDwellButtons[i].Click += ScanPixelDwellChanged;
             }
 
+            nbScanPixelCalibration.ValueChanged += ScanPixelCalibrationChanged;
+
             for (int i = 0; i < mScanPixelButtons.Length; i++)
             {
                 mScanPixelButtons[i].Tag = mScanSettingsVM.Config.ScanPixelList[i];
@@ -172,6 +174,11 @@ namespace confocal_ui
             this.btnUniDirection.DataBindings.Add("Pressed", mScanSettingsVM.Config.ScanUniDirection, "IsEnabled");
             this.btnBiDirection.DataBindings.Add("Text", mScanSettingsVM.Config.ScanBiDirection, "Text");
             this.btnBiDirection.DataBindings.Add("Pressed", mScanSettingsVM.Config.ScanBiDirection, "IsEnabled");
+
+            this.nbScanPixelCalibration.DataBindings.Add("Enabled", mScanSettingsVM.Config.ScanBiDirection, "IsEnabled");
+            this.nbScanPixelCalibration.DataBindings.Add("Maximum", mScanSettingsVM, "ScanPixelCalibrationMaximum");
+            this.nbScanPixelCalibration.DataBindings.Add("Value", mScanSettingsVM, "ScanPixelCalibration");
+
             // 像素时间
             // 快速模式使能
             this.rbtnFastMode.DataBindings.Add("Pressed", mScanSettingsVM.Config, "FastModeEnabled");
@@ -476,5 +483,11 @@ namespace confocal_ui
             InputButton button = (InputButton)sender;
             mScanSettingsVM.Config.ChannelActivateChangeCommand((int)button.Tag, button.Pressed);
         }
+
+        private void ScanPixelCalibrationChanged(object sender, EventArgs e)
+        {
+            mScanSettingsVM.ScanPixelCalibrationChangeCommand((int)nbScanPixelCalibration.Value);
+        }
+
     }
 }
