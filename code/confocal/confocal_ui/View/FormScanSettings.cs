@@ -195,6 +195,9 @@ namespace confocal_ui
                 button.DataBindings.Add("Text", model, "Text");
                 button.DataBindings.Add("Pressed", model, "IsEnabled");
             }
+            // 帧率 & 帧时间
+            this.lbFPSValue.DataBindings.Add("Text", mScanSettingsVM.Sequence, "FPS", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.000 fps");
+            this.lbFrameTimeValue.DataBindings.Add("Text", mScanSettingsVM.Sequence, "FrameTime", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.000 sec");
             // 跳行扫描
             this.chbxLineSkip.DataBindings.Add("Checked", mScanSettingsVM.Config, "ScanLineSkipEnabled");
             this.cbxLineSkip.DataSource = mScanSettingsVM.Config.ScanLineSkipList;
@@ -484,6 +487,11 @@ namespace confocal_ui
             mScanSettingsVM.Config.ChannelActivateChangeCommand((int)button.Tag, button.Pressed);
         }
 
+        /// <summary>
+        /// 双向扫描像素补偿更新事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScanPixelCalibrationChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.ScanPixelCalibrationChangeCommand((int)nbScanPixelCalibration.Value);

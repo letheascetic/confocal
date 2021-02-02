@@ -68,7 +68,7 @@
             this.btnIntegrate = new C1.Win.C1InputPanel.InputSplitButton();
             this.chbxSequence = new C1.Win.C1InputPanel.InputCheckBox();
             this.btnSequence = new C1.Win.C1InputPanel.InputSplitButton();
-            this.lbFrame = new C1.Win.C1InputPanel.InputLabel();
+            this.lbFPS = new C1.Win.C1InputPanel.InputLabel();
             this.lbFrameTime = new C1.Win.C1InputPanel.InputLabel();
             this.separator4 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbPinHoleSelect = new C1.Win.C1InputPanel.InputLabel();
@@ -118,6 +118,8 @@
             this.btn640Power = new C1.Win.C1InputPanel.InputButton();
             this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
+            this.lbFPSValue = new C1.Win.C1InputPanel.InputLabel();
+            this.lbFrameTimeValue = new C1.Win.C1InputPanel.InputLabel();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,8 +167,10 @@
             this.inputPanel.Items.Add(this.btnIntegrate);
             this.inputPanel.Items.Add(this.chbxSequence);
             this.inputPanel.Items.Add(this.btnSequence);
-            this.inputPanel.Items.Add(this.lbFrame);
+            this.inputPanel.Items.Add(this.lbFPS);
+            this.inputPanel.Items.Add(this.lbFPSValue);
             this.inputPanel.Items.Add(this.lbFrameTime);
+            this.inputPanel.Items.Add(this.lbFrameTimeValue);
             this.inputPanel.Items.Add(this.separator4);
             this.inputPanel.Items.Add(this.lbPinHoleSelect);
             this.inputPanel.Items.Add(this.cbxPinHoleSelect);
@@ -516,18 +520,15 @@
             this.btnSequence.Name = "btnSequence";
             this.btnSequence.Text = "序列";
             // 
-            // lbFrame
+            // lbFPS
             // 
-            this.lbFrame.Name = "lbFrame";
-            this.lbFrame.Text = "帧率：";
-            this.lbFrame.Width = 80;
+            this.lbFPS.Name = "lbFPS";
+            this.lbFPS.Text = "帧率：";
             // 
             // lbFrameTime
             // 
-            this.lbFrameTime.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.lbFrameTime.Name = "lbFrameTime";
             this.lbFrameTime.Text = "帧时间：";
-            this.lbFrameTime.Width = 80;
             // 
             // separator4
             // 
@@ -869,6 +870,17 @@
             this.tbx640Power.Name = "tbx640Power";
             this.tbx640Power.Width = 40;
             // 
+            // lbFPSValue
+            // 
+            this.lbFPSValue.Name = "lbFPSValue";
+            this.lbFPSValue.Width = 60;
+            // 
+            // lbFrameTimeValue
+            // 
+            this.lbFrameTimeValue.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbFrameTimeValue.Name = "lbFrameTimeValue";
+            this.lbFrameTimeValue.Width = 60;
+            // 
             // FormScanSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -932,7 +944,7 @@
         private C1.Win.C1InputPanel.InputSplitButton btnIntegrate;
         private C1.Win.C1InputPanel.InputCheckBox chbxSequence;
         private C1.Win.C1InputPanel.InputSplitButton btnSequence;
-        private C1.Win.C1InputPanel.InputLabel lbFrame;
+        private C1.Win.C1InputPanel.InputLabel lbFPS;
         private C1.Win.C1InputPanel.InputLabel lbFrameTime;
         private C1.Win.C1InputPanel.InputSeparator separator4;
         private C1.Win.C1InputPanel.InputLabel lbPinHoleSelect;
@@ -984,5 +996,7 @@
         private C1.Win.C1InputPanel.InputTextBox tbx640Power;
         private C1.Win.C1InputPanel.InputComboBox cbxLineSkip;
         private C1.Win.C1InputPanel.InputNumericBox nbScanPixelCalibration;
+        private C1.Win.C1InputPanel.InputLabel lbFPSValue;
+        private C1.Win.C1InputPanel.InputLabel lbFrameTimeValue;
     }
 }

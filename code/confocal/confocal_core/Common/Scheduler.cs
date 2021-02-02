@@ -274,11 +274,14 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
         {
-            API_RETURN_CODE code = AfterPropertyChanged();
-
-            return code;
+            return AfterPropertyChanged();
         }
 
+        /// <summary>
+        /// 更新双向像素补偿
+        /// </summary>
+        /// <param name="scanPixelCalibration"></param>
+        /// <returns></returns>
         public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
         {
             mConfig.SelectedScanPixelDwell.ScanPixelCalibration = scanPixelCalibration;

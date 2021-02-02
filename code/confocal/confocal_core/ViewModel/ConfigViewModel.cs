@@ -388,6 +388,11 @@ namespace confocal_core.ViewModel
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        /// <summary>
+        /// 双向扫描像素补偿变更事件
+        /// </summary>
+        /// <param name="scanPixelCalibration"></param>
+        /// <returns></returns>
         public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
         {
             return Scheduler.CreateInstance().ScanPixelCalibrationChangeCommand(scanPixelCalibration);
