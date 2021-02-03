@@ -16,12 +16,6 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         private readonly Scheduler mScheduler;
-        // private readonly ConfigViewModel mConfig;
-
-        //public ConfigViewModel Config
-        //{
-        //    get { return mConfig; }
-        //}
 
         public Scheduler Engine
         {
@@ -94,7 +88,6 @@ namespace confocal_core.ViewModel
         public SysSettingsViewModel()
         {
             mScheduler = Scheduler.CreateInstance();
-            // mConfig = ConfigViewModel.GetConfig();
 
             XGalvoAoChannels = NiDaq.GetAoChannels();
             YGalvoAoChannels = NiDaq.GetAoChannels();

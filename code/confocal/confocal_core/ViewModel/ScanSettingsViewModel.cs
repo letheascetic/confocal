@@ -17,8 +17,6 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         private readonly Scheduler mScheduler;
-        // private readonly SequenceModel mSequence;
-        // private readonly ConfigViewModel mConfig;
 
         private int scanPixelCalibration;
         private int scanPixelOffset;
@@ -29,16 +27,6 @@ namespace confocal_core.ViewModel
         {
             get { return mScheduler; }
         }
-
-        //public ConfigViewModel Config
-        //{
-        //    get { return mConfig; }
-        //}
-
-        //public SequenceModel Sequence
-        //{
-        //    get { return mSequence; }
-        //}
 
         /// <summary>
         /// 扫描像素补偿
@@ -76,8 +64,6 @@ namespace confocal_core.ViewModel
         public ScanSettingsViewModel()
         {
             mScheduler = Scheduler.CreateInstance();
-            // mConfig = ConfigViewModel.GetConfig();
-            // mSequence = SequenceModel.CreateInstance();
             ScanPixelCalibrationMaximum = mScheduler.Config.SelectedScanPixelDwell.ScanPixelCalibrationMaximum;
             ScanPixelCalibration = mScheduler.Config.SelectedScanPixelDwell.ScanPixelCalibration;
             ScanPixelOffset = mScheduler.Config.SelectedScanPixelDwell.ScanPixelOffset;

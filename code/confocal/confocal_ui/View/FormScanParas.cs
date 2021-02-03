@@ -38,23 +38,23 @@ namespace confocal_ui.View
 
         private void SetDataBindings()
         {
-            tbxOutputSampleRate.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputSampleRate");
-            tbxOutputSampleCountPerRoundTrip.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputSampleCountPerRoundTrip");
-            tbxOutputRoundTripPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputRoundTripCountPerFrame");
-            tbxOutputSampleCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "OutputSampleCountPerFrame");
+            tbxOutputSampleRate.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "OutputSampleRate");
+            tbxOutputSampleCountPerRoundTrip.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "OutputSampleCountPerRoundTrip");
+            tbxOutputRoundTripPerFrame.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "OutputRoundTripCountPerFrame");
+            tbxOutputSampleCountPerFrame.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "OutputSampleCountPerFrame");
 
-            tbxInputSampleRate.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleRate");
-            tbxInputSampleCountPerRoundTrip.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerRoundTrip");
-            tbxInputRoundTripCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "InputRoundTripCountPerFrame");
-            tbxInputSampleCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerFrame");
-            tbxInputSampleCountPerPixel.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerPixel");
-            tbxInputSampleCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Sequence, "InputSampleCountPerAcquisition");
-            tbxInputPixelCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Sequence, "InputPixelCountPerAcquisition");
-            tbxInputRoundTripCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Sequence, "InputRoundTripCountPerAcquisition");
-            tbxInputAcquisitionCountPerFrame.DataBindings.Add("Text", mScanParasVM.Sequence, "InputAcquisitionCountPerFrame");
+            tbxInputSampleRate.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputSampleRate");
+            tbxInputSampleCountPerRoundTrip.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputSampleCountPerRoundTrip");
+            tbxInputRoundTripCountPerFrame.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputRoundTripCountPerFrame");
+            tbxInputSampleCountPerFrame.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputSampleCountPerFrame");
+            tbxInputSampleCountPerPixel.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputSampleCountPerPixel");
+            tbxInputSampleCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputSampleCountPerAcquisition");
+            tbxInputPixelCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputPixelCountPerAcquisition");
+            tbxInputRoundTripCountPerAcquisition.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputRoundTripCountPerAcquisition");
+            tbxInputAcquisitionCountPerFrame.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "InputAcquisitionCountPerFrame");
 
-            tbxFPS.DataBindings.Add("Text", mScanParasVM.Sequence, "FPS");
-            tbxFrameTime.DataBindings.Add("Text", mScanParasVM.Sequence, "FrameTime");
+            tbxFPS.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "FPS");
+            tbxFrameTime.DataBindings.Add("Text", mScanParasVM.Engine.Sequence, "FrameTime");
         }
 
         private void FormParasLoad(object sender, EventArgs e)

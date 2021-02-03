@@ -15,8 +15,8 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         private static readonly int SAMPLE_COUNT_FACTOR = 2;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private readonly ConfigViewModel mConfig;
-        private readonly SequenceModel mSequence;
+
+        private readonly Scheduler mScheduler;
 
         private double[] timeValues;
         private double[] xGalvoValues;
@@ -54,26 +54,20 @@ namespace confocal_core.ViewModel
             set { triggerVlaues = value; RaisePropertyChanged(() => TriggerValues); }
         }
 
-        public ConfigViewModel Config
+        public Scheduler Engine
         {
-            get { return mConfig; }
-        }
-
-        public SequenceModel Sequence
-        {
-            get { return mSequence; }
+            get { return mScheduler; }
         }
 
         public ScanParasViewModel()
         {
-            mConfig = ConfigViewModel.GetConfig();
-            mSequence = SequenceModel.CreateInstance();
+            mScheduler = Scheduler.CreateInstance();
         }
 
         public void UpdateChartValues()
         {
-            double sampleTime = 1e3 / Sequence.OutputSampleRate;
-            int sampleCount = Sequence.OutputSampleCountPerRoundTrip * SAMPLE_COUNT_FACTOR;
+            double sampleTime = 1e3 / Engine.Sequence.OutputSampleRate;
+            int sampleCount = Engine.Sequence.OutputSampleCountPerRoundTrip * SAMPLE_COUNT_FACTOR;
 
             TimeValues = new double[sampleCount];
             TimeValues[0] = sampleTime;
@@ -82,8 +76,8 @@ namespace confocal_core.ViewModel
                 TimeValues[i] = TimeValues[i - 1] + sampleTime;
             }
 
-            XGalvoValues = Enumerable.Concat(Sequence.XVoltages, Sequence.XVoltages).ToArray();
-            TriggerValues = Enumerable.Concat(Sequence.TriggerVoltages, Sequence.TriggerVoltages).ToArray();
+            XGalvoValues = Enumerable.Concat(Engine.Sequence.XVoltages, Engine.Sequence.XVoltages).ToArray();
+            TriggerValues = Enumerable.Concat(Engine.Sequence.TriggerVoltages, Engine.Sequence.TriggerVoltages).ToArray();
         }
     }
 }

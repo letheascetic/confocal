@@ -26,11 +26,6 @@ namespace confocal_core.ViewModel
             get { return mScheduler; }
         }
 
-        //public ConfigViewModel Config
-        //{
-        //    get { return mConfig; }
-        //}
-
         private int pixelDwell;
         private int scanWidth;
         private int scanHeight;
@@ -79,7 +74,6 @@ namespace confocal_core.ViewModel
 
         public ScanAreaViewModel()
         {
-            // mConfig = ConfigViewModel.GetConfig();
             mScheduler = Scheduler.CreateInstance();
 
             // 初始化扫描宽度[X方向像素数]和高度[Y方向像素数]
