@@ -21,6 +21,8 @@ namespace confocal_core.Common
         private static readonly int PMT_TASK_COUNT = 1;
         private static readonly int APD_TASK_COUNT = 2;
         ///////////////////////////////////////////////////////////////////////////////////////////
+        public event ScanImageUpdatedEventHandler ScanImageUpdatedEvent;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private readonly ConfigViewModel mConfig;
         private readonly SequenceModel mSequence;
         private int mTaskId;
@@ -32,7 +34,7 @@ namespace confocal_core.Common
         private BlockingCollection<PmtSampleData> mPmtSampleQueue;
         private BlockingCollection<ApdSampleData> mApdSampleQueue;
         private Task[] mSampleWorkers;
-
+        
         /// <summary>
         /// 扫描任务ID
         /// </summary>
@@ -161,8 +163,7 @@ namespace confocal_core.Common
             {
                 PmtSampleData sampleData = new PmtSampleData(samples, acquisitionCount);
                 mPmtSampleQueue.TryAdd(sampleData, 50, mCancelToken.Token);
-                ConvertPmtSamples(sampleData);
-                Logger.Info(string.Format("Enqueue Pmt Samples [{0}].", acquisitionCount));
+                // Logger.Info(string.Format("Enqueue Pmt Samples [{0}].", acquisitionCount));
             }
             catch (OperationCanceledException)
             {
@@ -195,7 +196,7 @@ namespace confocal_core.Common
                     if (mPmtSampleQueue.TryTake(out PmtSampleData sampleData, 20, mCancelToken.Token))
                     {
                         ScanInfo.UpdateScanInfo(sampleData.AcquisitionCount);
-                        Logger.Info(string.Format("Scan Info [{0}].", ScanInfo));
+                        ConvertPmtSamples(sampleData);
                     }
                 }
                 catch (OperationCanceledException)
@@ -230,17 +231,22 @@ namespace confocal_core.Common
             {
                 if (sampleData.NSamples[i] != null)
                 {
+                    // 负电压转换
                     Matrix.ToPositive(ref sampleData.NSamples[i]);
+                    // 生成Bank数据矩阵[截断/双向扫描偶数行翻转和错位补偿]
                     NDArray matrix = Matrix.ToMatrix(sampleData.NSamples[i], mSequence.InputSampleCountPerPixel, mSequence.InputPixelCountPerRow,
                         mSequence.InputPixelCountPerAcquisition / mSequence.InputPixelCountPerRow, mConfig.SelectedScanDirection.ID,
                         mConfig.SelectedScanPixelDwell.ScanPixelOffset, mConfig.SelectedScanPixelDwell.ScanPixelCalibration,
                         mConfig.SelectedScanPixel.Data);
-                    Mat bankImage = ScanData.OriginImages[i].Banks[ScanInfo.CurrentBank].Bank;
-                    Matrix.ToBankImage(matrix, ref bankImage);
+                    // Bank数据矩阵更新到OriginImages对应的BankImage
+                    Mat originImage = ScanData.OriginImages[i].Banks[ScanInfo.CurrentBank].Bank;
+                    Matrix.ToBankImage(matrix, ref originImage);
+                    // Origin的BankImage更新到Gray
+                    Mat grayImage = ScanData.GrayImages[i].Banks[ScanInfo.CurrentBank].Bank;
+                    double scale = 1.0 / Math.Pow(2, mConfig.SelectedScanPixelDwell.ScanPixelScale);
+                    Matrix.ToGrayImage(originImage, ref grayImage, scale, mConfig.ScanChannels[i].Offset);
                 }
             }
-            
-            // Matrix.ToMatrix(sampleData.NSamples[0], samplesPerPixel, pixelsPerRow, pixelsPerCol, mConfig.SelectedScanDirection.ID);
         }
 
     }

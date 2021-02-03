@@ -1,4 +1,5 @@
-﻿using Emgu.CV;
+﻿using confocal_core.Common;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using GalaSoft.MvvmLight;
 using System;
@@ -8,6 +9,8 @@ using System.Text;
 
 namespace confocal_core.Model
 {
+    public delegate API_RETURN_CODE ScanImageUpdatedEventHandler(int channelIndex, ScanImageModel scanImage, ScanBankModel scanBank);
+
     /// <summary>
     /// 扫描图像
     /// </summary>

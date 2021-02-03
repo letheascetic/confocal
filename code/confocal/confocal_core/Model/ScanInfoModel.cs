@@ -12,6 +12,9 @@ namespace confocal_core.Model
     /// </summary>
     public class ScanInfoModel : ObservableObject
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        private static readonly ILog Logger = LogManager.GetLogger("info");
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private DateTime startTime;
         private double timeSpan;
         private double frameTime;
@@ -108,6 +111,7 @@ namespace confocal_core.Model
                 TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
                 FrameTime = TimeSpan / CurrentFrame;
                 FPS = 1.0 / FrameTime;
+                Logger.Info(string.Format("Scan Info [{0}].", this));
             }
         }
 

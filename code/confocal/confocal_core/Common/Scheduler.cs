@@ -289,6 +289,17 @@ namespace confocal_core.Common
         }
 
         /// <summary>
+        /// 更新扫描像素缩放系数
+        /// </summary>
+        /// <param name="scanPixelScale"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanPixelScaleChangeCommand(int scanPixelScale)
+        {
+            mConfig.SelectedScanPixelDwell.ScanPixelScale = scanPixelScale;
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
         /// 切换扫描范围
         /// </summary>
         /// <param name="scanArea"></param>

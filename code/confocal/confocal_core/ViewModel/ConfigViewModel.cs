@@ -398,6 +398,16 @@ namespace confocal_core.ViewModel
             return Scheduler.CreateInstance().ScanPixelCalibrationChangeCommand(scanPixelCalibration);
         }
 
+        /// <summary>
+        /// 扫描像素缩放系数更新事件
+        /// </summary>
+        /// <param name="scanPixelScale"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ScanPixelScaleChangeCommand(int scanPixelScale)
+        {
+            return Scheduler.CreateInstance().ScanPixelScaleChangeCommand(scanPixelScale);
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         private bool scanLineSkipEnabled;
         private ScanLineSkipModel selectedScanLineSkip;

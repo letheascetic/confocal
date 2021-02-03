@@ -23,6 +23,7 @@ namespace confocal_core.ViewModel
         private int scanPixelCalibration;
         private int scanPixelOffset;
         private int scanPixelCalibrationMaximum;
+        private int scanPixelScale;
 
         public ConfigViewModel Config
         {
@@ -58,6 +59,14 @@ namespace confocal_core.ViewModel
             get { return scanPixelCalibrationMaximum; }
             set { scanPixelCalibrationMaximum = value; RaisePropertyChanged(() => ScanPixelCalibrationMaximum); }
         }
+        /// <summary>
+        /// 扫描像素缩放系数
+        /// </summary>
+        public int ScanPixelScale
+        {
+            get { return scanPixelScale; }
+            set { scanPixelScale = value; RaisePropertyChanged(() => ScanPixelScale); }
+        }
 
         public ScanSettingsViewModel()
         {
@@ -66,6 +75,7 @@ namespace confocal_core.ViewModel
             ScanPixelCalibrationMaximum = mConfig.SelectedScanPixelDwell.ScanPixelCalibrationMaximum;
             ScanPixelCalibration = mConfig.SelectedScanPixelDwell.ScanPixelCalibration;
             ScanPixelOffset = mConfig.SelectedScanPixelDwell.ScanPixelOffset;
+            ScanPixelScale = mConfig.SelectedScanPixelDwell.ScanPixelScale;
             // 绑定事件
             mConfig.ScanPixelDwellChangedEvent += ScanPixelDwellChangedHandler;
         }
@@ -75,6 +85,7 @@ namespace confocal_core.ViewModel
             ScanPixelCalibrationMaximum = scanPixelDwell.ScanPixelCalibrationMaximum;
             ScanPixelCalibration = scanPixelDwell.ScanPixelCalibration;
             ScanPixelOffset = scanPixelDwell.ScanPixelOffset;
+            ScanPixelScale = scanPixelDwell.ScanPixelScale;
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -82,6 +93,13 @@ namespace confocal_core.ViewModel
         {
             ScanPixelCalibration = scanPixelCalibration;
             mConfig.ScanPixelCalibrationChangeCommand(ScanPixelCalibration);
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ScanPixelScaleChangeCommand(int scanPixelScale)
+        {
+            ScanPixelScale = scanPixelScale;
+            mConfig.ScanPixelScaleChangeCommand(scanPixelScale);
             return API_RETURN_CODE.API_SUCCESS;
         }
 

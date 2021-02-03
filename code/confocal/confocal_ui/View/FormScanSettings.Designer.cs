@@ -69,7 +69,9 @@
             this.chbxSequence = new C1.Win.C1InputPanel.InputCheckBox();
             this.btnSequence = new C1.Win.C1InputPanel.InputSplitButton();
             this.lbFPS = new C1.Win.C1InputPanel.InputLabel();
+            this.lbFPSValue = new C1.Win.C1InputPanel.InputLabel();
             this.lbFrameTime = new C1.Win.C1InputPanel.InputLabel();
+            this.lbFrameTimeValue = new C1.Win.C1InputPanel.InputLabel();
             this.separator4 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbPinHoleSelect = new C1.Win.C1InputPanel.InputLabel();
             this.cbxPinHoleSelect = new C1.Win.C1InputPanel.InputComboBox();
@@ -118,8 +120,7 @@
             this.btn640Power = new C1.Win.C1InputPanel.InputButton();
             this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
-            this.lbFPSValue = new C1.Win.C1InputPanel.InputLabel();
-            this.lbFrameTimeValue = new C1.Win.C1InputPanel.InputLabel();
+            this.nbScanPixelScale = new C1.Win.C1InputPanel.InputNumericBox();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,6 +144,7 @@
             this.inputPanel.Items.Add(this.cbxLineSkip);
             this.inputPanel.Items.Add(this.separator1);
             this.inputPanel.Items.Add(this.lbPixelDwell);
+            this.inputPanel.Items.Add(this.nbScanPixelScale);
             this.inputPanel.Items.Add(this.rbtnFastMode);
             this.inputPanel.Items.Add(this.btnPixelDwell2);
             this.inputPanel.Items.Add(this.btnPixelDwell4);
@@ -325,16 +327,18 @@
             // 
             // separator1
             // 
+            this.separator1.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.separator1.Height = 10;
             this.separator1.Name = "separator1";
             this.separator1.Width = 240;
             // 
             // lbPixelDwell
             // 
-            this.lbPixelDwell.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbPixelDwell.Break = C1.Win.C1InputPanel.BreakType.Column;
             this.lbPixelDwell.Height = 20;
             this.lbPixelDwell.Name = "lbPixelDwell";
             this.lbPixelDwell.Text = "像素时间（us）";
+            this.lbPixelDwell.Width = 190;
             // 
             // rbtnFastMode
             // 
@@ -525,10 +529,21 @@
             this.lbFPS.Name = "lbFPS";
             this.lbFPS.Text = "帧率：";
             // 
+            // lbFPSValue
+            // 
+            this.lbFPSValue.Name = "lbFPSValue";
+            this.lbFPSValue.Width = 60;
+            // 
             // lbFrameTime
             // 
             this.lbFrameTime.Name = "lbFrameTime";
             this.lbFrameTime.Text = "帧时间：";
+            // 
+            // lbFrameTimeValue
+            // 
+            this.lbFrameTimeValue.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.lbFrameTimeValue.Name = "lbFrameTimeValue";
+            this.lbFrameTimeValue.Width = 60;
             // 
             // separator4
             // 
@@ -870,16 +885,17 @@
             this.tbx640Power.Name = "tbx640Power";
             this.tbx640Power.Width = 40;
             // 
-            // lbFPSValue
+            // nbScanPixelScale
             // 
-            this.lbFPSValue.Name = "lbFPSValue";
-            this.lbFPSValue.Width = 60;
-            // 
-            // lbFrameTimeValue
-            // 
-            this.lbFrameTimeValue.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.lbFrameTimeValue.Name = "lbFrameTimeValue";
-            this.lbFrameTimeValue.Width = 60;
+            this.nbScanPixelScale.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.nbScanPixelScale.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nbScanPixelScale.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.nbScanPixelScale.Name = "nbScanPixelScale";
+            this.nbScanPixelScale.Width = 40;
             // 
             // FormScanSettings
             // 
@@ -998,5 +1014,6 @@
         private C1.Win.C1InputPanel.InputNumericBox nbScanPixelCalibration;
         private C1.Win.C1InputPanel.InputLabel lbFPSValue;
         private C1.Win.C1InputPanel.InputLabel lbFrameTimeValue;
+        private C1.Win.C1InputPanel.InputNumericBox nbScanPixelScale;
     }
 }

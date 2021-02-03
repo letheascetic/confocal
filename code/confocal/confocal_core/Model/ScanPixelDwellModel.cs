@@ -22,6 +22,7 @@ namespace confocal_core.Model
         private int scanPixelCalibration;
         private int scanPixelOffset;
         private int scanPixelCalibrationMaximum;
+        private int scanPixelScale;
 
         public int ScanPixelCalibration
         {
@@ -44,27 +45,35 @@ namespace confocal_core.Model
             get { return scanPixelCalibrationMaximum; }
             set { scanPixelCalibrationMaximum = value; RaisePropertyChanged(() => ScanPixelCalibrationMaximum); }
         }
+        /// <summary>
+        /// 扫描像素缩放系数
+        /// </summary>
+        public int ScanPixelScale
+        {
+            get { return scanPixelScale; }
+            set { scanPixelScale = value; RaisePropertyChanged(() => ScanPixelScale); }
+        }
 
         public static List<ScanPixelDwellModel> Initialize()
         {
             return new List<ScanPixelDwellModel>()
             {
                 new ScanPixelDwellModel(){ ID = 0, IsEnabled = Settings.Default.ScanPixelDwell == 0, Text = "2", Data = 2,
-                    ScanPixelCalibrationMaximum = 50, ScanPixelOffset = 25, ScanPixelCalibration = 25},
+                    ScanPixelCalibrationMaximum = 50, ScanPixelOffset = 25, ScanPixelCalibration = 25, ScanPixelScale = 7},
                 new ScanPixelDwellModel(){ ID = 1, IsEnabled = Settings.Default.ScanPixelDwell == 1, Text = "4", Data = 4,
-                    ScanPixelCalibrationMaximum = 24, ScanPixelOffset = 12, ScanPixelCalibration = 12},
+                    ScanPixelCalibrationMaximum = 24, ScanPixelOffset = 12, ScanPixelCalibration = 12, ScanPixelScale = 7},
                 new ScanPixelDwellModel(){ ID = 2, IsEnabled = Settings.Default.ScanPixelDwell == 2, Text = "6", Data = 6,
-                    ScanPixelCalibrationMaximum = 16, ScanPixelOffset = 8, ScanPixelCalibration = 8},
+                    ScanPixelCalibrationMaximum = 16, ScanPixelOffset = 8, ScanPixelCalibration = 8, ScanPixelScale = 7},
                 new ScanPixelDwellModel(){ ID = 3, IsEnabled = Settings.Default.ScanPixelDwell == 3, Text = "8", Data = 8,
-                    ScanPixelCalibrationMaximum = 12, ScanPixelOffset = 6, ScanPixelCalibration = 6},
+                    ScanPixelCalibrationMaximum = 12, ScanPixelOffset = 6, ScanPixelCalibration = 6, ScanPixelScale = 7},
                 new ScanPixelDwellModel(){ ID = 4, IsEnabled = Settings.Default.ScanPixelDwell == 4, Text = "10", Data = 10,
-                    ScanPixelCalibrationMaximum = 10, ScanPixelOffset = 5, ScanPixelCalibration = 5},
+                    ScanPixelCalibrationMaximum = 10, ScanPixelOffset = 5, ScanPixelCalibration = 5, ScanPixelScale = 7},
                 new ScanPixelDwellModel(){ ID = 5, IsEnabled = Settings.Default.ScanPixelDwell == 5, Text = "20", Data = 20,
-                    ScanPixelCalibrationMaximum = 4, ScanPixelOffset = 2, ScanPixelCalibration = 2},
+                    ScanPixelCalibrationMaximum = 4, ScanPixelOffset = 2, ScanPixelCalibration = 2, ScanPixelScale = 7},
                 new ScanPixelDwellModel(){ ID = 6, IsEnabled = Settings.Default.ScanPixelDwell == 6, Text = "50", Data = 50,
-                    ScanPixelCalibrationMaximum = 2, ScanPixelOffset = 1, ScanPixelCalibration = 1},
+                    ScanPixelCalibrationMaximum = 2, ScanPixelOffset = 1, ScanPixelCalibration = 1, ScanPixelScale = 7},
                 new ScanPixelDwellModel(){ ID = 7, IsEnabled = Settings.Default.ScanPixelDwell == 7, Text = "100", Data = 100,
-                    ScanPixelCalibrationMaximum = 0, ScanPixelOffset = 0, ScanPixelCalibration = 0}
+                    ScanPixelCalibrationMaximum = 0, ScanPixelOffset = 0, ScanPixelCalibration = 0, ScanPixelScale = 7}
             };
         }
 

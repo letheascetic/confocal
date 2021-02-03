@@ -125,6 +125,7 @@ namespace confocal_ui
             }
 
             nbScanPixelCalibration.ValueChanged += ScanPixelCalibrationChanged;
+            nbScanPixelScale.ValueChanged += ScanPixelScaleChanged;
 
             for (int i = 0; i < mScanPixelButtons.Length; i++)
             {
@@ -174,11 +175,12 @@ namespace confocal_ui
             this.btnUniDirection.DataBindings.Add("Pressed", mScanSettingsVM.Config.ScanUniDirection, "IsEnabled");
             this.btnBiDirection.DataBindings.Add("Text", mScanSettingsVM.Config.ScanBiDirection, "Text");
             this.btnBiDirection.DataBindings.Add("Pressed", mScanSettingsVM.Config.ScanBiDirection, "IsEnabled");
-
+            // 双向补偿
             this.nbScanPixelCalibration.DataBindings.Add("Enabled", mScanSettingsVM.Config.ScanBiDirection, "IsEnabled");
             this.nbScanPixelCalibration.DataBindings.Add("Maximum", mScanSettingsVM, "ScanPixelCalibrationMaximum");
             this.nbScanPixelCalibration.DataBindings.Add("Value", mScanSettingsVM, "ScanPixelCalibration");
-
+            // 像素缩放
+            this.nbScanPixelScale.DataBindings.Add("Value", mScanSettingsVM, "ScanPixelScale");
             // 像素时间
             // 快速模式使能
             this.rbtnFastMode.DataBindings.Add("Pressed", mScanSettingsVM.Config, "FastModeEnabled");
@@ -495,6 +497,16 @@ namespace confocal_ui
         private void ScanPixelCalibrationChanged(object sender, EventArgs e)
         {
             mScanSettingsVM.ScanPixelCalibrationChangeCommand((int)nbScanPixelCalibration.Value);
+        }
+
+        /// <summary>
+        /// 扫描像素缩放系数更新事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScanPixelScaleChanged(object sender, EventArgs e)
+        {
+            mScanSettingsVM.ScanPixelScaleChangeCommand((int)nbScanPixelScale.Value);
         }
 
     }

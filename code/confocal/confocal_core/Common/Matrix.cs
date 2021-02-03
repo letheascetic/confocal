@@ -1,5 +1,6 @@
 ﻿using confocal_core.Model;
 using Emgu.CV;
+using Emgu.CV.CvEnum;
 using NumSharp;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,11 @@ namespace confocal_core.Common
         public static void ToBankImage(NDArray matrix, ref Mat image)
         {
             image.SetTo<int>(matrix.ToArray<int>());
+        }
+        
+        public static void ToGrayImage(Mat originImage, ref Mat grayImage, double scale, int offset)
+        {
+            originImage.ConvertTo(grayImage, DepthType.Cv8U, scale, offset);
         }
 
     }
