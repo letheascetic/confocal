@@ -23,6 +23,22 @@ namespace confocal_core.Common
         private static readonly int PMT_TASK_COUNT = 1;
         private static readonly int APD_TASK_COUNT = 2;
         ///////////////////////////////////////////////////////////////////////////////////////////
+        public event ScanAreaChangedEventHandler ScanAreaChangedEvent;
+        public event ScanAreaChangedEventHandler FullScanAreaChangedEvent;
+        public event ScanAcquisitionChangedEventHandler ScanAcquisitionChangedEvent;
+        public event ScannerHeadModelChangedEventHandler ScannerHeadModelChangedEvent;
+        public event ScanDirectionChangedEventHandler ScanDirectionChangedEvent;
+        public event ScanModeChangedEventHandler ScanModeChangedEvent;
+        public event LineSkipEnableChangedEventHandler LineSkipEnableChangedEvent;
+        public event LineSkipChangedEventHandler LineSkipChangedEvent;
+        public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
+        public event ScanPixelDwellChangedEventHandler ScanPixelDwellChangedEvent;
+        public event PinHoleChangedEventHandler PinHoleChangedEvent;
+        public event ChannelGainChangedEventHandler ChannelGainChangedEvent;
+        public event ChannelOffsetChangedEventHandler ChannelOffsetChangedEvent;
+        public event ChannelPowerChangedEventHandler ChannelPowerChangedEvent;
+        public event ChannelActivateChangedEventHandler ChannelActivateChangedEvent;
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private NiDaq mNiDaq;
         private SequenceModel mSequence;
         private ConfigViewModel mConfig;
@@ -45,6 +61,16 @@ namespace confocal_core.Common
         {
             get { return mScanningTask; }
             set { mScanningTask = value; }
+        }
+
+        public SequenceModel Sequence
+        {
+            get { return mSequence; }
+        }
+
+        public ConfigViewModel Config
+        {
+            get { return mConfig; }
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -211,112 +237,125 @@ namespace confocal_core.Common
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        /// <summary>
-        /// 改变通道激光功率
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="power"></param>
-        /// <returns></returns>
-        public API_RETURN_CODE ChannelPowerChangeCommand(ScanChannelModel channel)
-        {
-            if (Laser.IsConnected())
-            {
-                return Laser.SetChannelPower(channel.ID, Laser.ConfigValueToPower(channel.LaserPower));
-            }
-            return API_RETURN_CODE.API_SUCCESS;
-        }
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>
-        /// 改变通道增益
+        /// 采集模式状态[启动、切换、停止]变化事件处理
         /// </summary>
-        /// <param name="channel"></param>
+        /// <param name="liveModeEnabled"></param>
+        /// <param name="captureModeEnabled"></param>
         /// <returns></returns>
-        public API_RETURN_CODE ChannelGainChangeCommand(ScanChannelModel channel)
+        public API_RETURN_CODE ScanAcquisitionChangeCommand(bool liveModeEnabled, bool captureModeEnabled)
         {
-            return UsbDac.SetDacOut((uint)channel.ID, UsbDac.ConfigValueToVout(channel.Gain));
-        }
+            BeforePropertyChanged();
 
-        /// <summary>
-        /// 打开或关闭通道激光
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="activated"></param>
-        /// <returns></returns>
-        public API_RETURN_CODE ChannelActivateChangeCommand(ScanChannelModel channel)
-        {
-            // 当前没有扫描，则直接返回
-            if (!mConfig.IsScanning)
+            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+            if (liveModeEnabled || captureModeEnabled)
             {
-                return API_RETURN_CODE.API_SUCCESS;
+                code = StartScanTask(0, "实时扫描");
             }
 
-            // 当前正在扫描，这分两种情况：
-            // 1 原先没打开的激光器被打开了：打开该激光器，设置功率，启动扫描
-            // 2 原先已经打开的激光器被关闭了：
-            // 2.1 该激光器是唯一打开的激光器，则不应该被关闭，设置Activated为真，打开激光器，启动扫描
-            // 2.2 该激光器不是唯一打开的激光器，则可以被关闭，关闭该激光器，
-
-            if (channel.Activated)
+            if (code == API_RETURN_CODE.API_SUCCESS)
             {
-                return StartScanTask(0, "实时扫描");
+                mConfig.ScanAcquisitionChangeCommand(liveModeEnabled, captureModeEnabled);
+                if (ScanAcquisitionChangedEvent != null)
+                {
+                    return ScanAcquisitionChangedEvent.Invoke(mConfig.SelectedScanAcquisition);
+                }
             }
 
-            if (!channel.Activated && mConfig.GetActivatedChannelNum() == 0)
-            {
-                channel.Activated = true;
-            }
-
-            return StartScanTask(0, "实时扫描");
+            return code;
         }
 
         /// <summary>
         /// 切换扫描头[双镜or三镜]
         /// </summary>
-        /// <param name="scannerHead"></param>
+        /// <param name="twoGalvEnabled"></param>
         /// <returns></returns>
-        public API_RETURN_CODE ScannerHeadChangeCommand(ScannerHeadModel scannerHead)
+        public API_RETURN_CODE ScannerHeadChangeCommand(bool twoGalvEnabled)
         {
-            return AfterPropertyChanged();
+            BeforePropertyChanged();
+            mConfig.ScannerHeadChangeCommand(twoGalvEnabled);
+            AfterPropertyChanged();
+
+            if (ScannerHeadModelChangedEvent != null)
+            {
+                return ScannerHeadModelChangedEvent.Invoke(mConfig.SelectedScannerHead);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
-        /// 切换扫描方向
+        /// 扫描方向切换事件
         /// </summary>
-        /// <param name="scanDirection"></param>
         /// <returns></returns>
-        public API_RETURN_CODE ScanDirectionChangeCommand(ScanDirectionModel scanDirection)
+        public API_RETURN_CODE ScanDirectionChangeCommand(bool uniDirectionEnabled)
         {
-            return AfterPropertyChanged();
+            BeforePropertyChanged();
+            mConfig.ScanDirectionChangeCommand(uniDirectionEnabled);
+            AfterPropertyChanged();
+
+            if (ScanDirectionChangedEvent != null)
+            {
+                return ScanDirectionChangedEvent.Invoke(mConfig.SelectedScanDirection);
+            }
+
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
-        /// 切换扫描模式
+        /// 扫描模式切换事件
         /// </summary>
-        /// <param name="scanMode"></param>
+        /// <param name="galvEnabled"></param>
         /// <returns></returns>
-        public API_RETURN_CODE ScanModeChangeCommand(ScanModeModel scanMode)
+        public API_RETURN_CODE ScanModeChangeCommand(bool galvEnabled)
         {
-            return AfterPropertyChanged();
+            BeforePropertyChanged();
+            mConfig.ScanModeChangeCommand(galvEnabled);
+            AfterPropertyChanged();
+
+            if (ScanModeChangedEvent != null)
+            {
+                return ScanModeChangedEvent.Invoke(mConfig.SelectedScanMode);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
-        /// 切换扫描像素
+        /// 扫描像素切换事件
         /// </summary>
         /// <param name="selectedScanPixel"></param>
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
         {
-            return AfterPropertyChanged();
+            BeforePropertyChanged();
+            mConfig.ScanPixelChangeCommand(selectedScanPixel);
+            AfterPropertyChanged();
+
+            if (ScanPixelChangedEvent != null)
+            {
+                return ScanPixelChangedEvent.Invoke(mConfig.SelectedScanPixel);
+            }
+
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
-        /// 切换像素时间
+        /// 像素时间变更事件
         /// </summary>
-        /// <param name="selectedPixelDwell"></param>
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
         {
-            return AfterPropertyChanged();
+            BeforePropertyChanged();
+            mConfig.ScanPixelDwellChangeCommand(selectedPixelDwell);
+            AfterPropertyChanged();
+
+            if (ScanPixelDwellChangedEvent != null)
+            {
+                ScanPixelDwellChangedEvent.Invoke(mConfig.SelectedScanPixelDwell);
+            }
+
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
@@ -326,18 +365,174 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
         {
-            mConfig.SelectedScanPixelDwell.ScanPixelCalibration = scanPixelCalibration;
-            return API_RETURN_CODE.API_SUCCESS;
+            return mConfig.ScanPixelCalibrationChangeCommand(scanPixelCalibration);
         }
 
         /// <summary>
-        /// 更新扫描像素缩放系数
+        /// 扫描像素缩放系数更新事件
         /// </summary>
         /// <param name="scanPixelScale"></param>
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelScaleChangeCommand(int scanPixelScale)
         {
-            mConfig.SelectedScanPixelDwell.ScanPixelScale = scanPixelScale;
+            return mConfig.ScanPixelScaleChangeCommand(scanPixelScale);
+        }
+
+        /// <summary>
+        /// 跳行扫描使能变更事件
+        /// </summary>
+        /// <param name="lineSkipEnabled"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE LineSkipEnableChangeCommand(bool lineSkipEnabled)
+        {
+            BeforePropertyChanged();
+            mConfig.LineSkipEnableChangeCommand(lineSkipEnabled);
+            AfterPropertyChanged();
+
+            if (LineSkipEnableChangedEvent != null)
+            {
+                return LineSkipEnableChangedEvent.Invoke(mConfig.ScanLineSkipEnabled);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 跳行扫描值变更事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE LineSkipValueChangeCommand(ScanLineSkipModel lineSkip)
+        {
+            BeforePropertyChanged();
+            mConfig.LineSkipValueChangeCommand(lineSkip);
+            AfterPropertyChanged();
+
+            if (LineSkipChangedEvent != null)
+            {
+                return LineSkipChangedEvent.Invoke(mConfig.SelectedScanLineSkip);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 通道增益更新事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="gain"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelGainChangeCommand(int id, int gain)
+        {
+            mConfig.ChannelGainChangeCommand(id, gain);
+            ScanChannelModel channel = mConfig.FindScanChannel(id);
+            API_RETURN_CODE code = UsbDac.SetDacOut((uint)channel.ID, UsbDac.ConfigValueToVout(channel.Gain));
+
+            if (ChannelGainChangedEvent != null)
+            {
+                return ChannelGainChangedEvent.Invoke(channel);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 通道偏置更新事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelOffsetChangeCommand(int id, int offset)
+        {
+            mConfig.ChannelOffsetChangeCommand(id, offset);
+            if (ChannelOffsetChangedEvent != null)
+            {
+                return ChannelOffsetChangedEvent.Invoke(mConfig.FindScanChannel(id));
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 通道功率更新事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="power"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelPowerChangeCommand(int id, int power)
+        {
+            mConfig.ChannelPowerChangeCommand(id, power);
+            ScanChannelModel channel = mConfig.FindScanChannel(id);
+            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+            if (Laser.IsConnected())
+            {
+                code = Laser.SetChannelPower(channel.ID, Laser.ConfigValueToPower(channel.LaserPower));
+            }
+
+            if (ChannelPowerChangedEvent != null)
+            {
+                return ChannelPowerChangedEvent.Invoke(channel);
+            }
+            return code;
+        }
+
+        /// <summary>
+        /// 通道激光开关事件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="activated"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE ChannelActivateChangeCommand(int id, bool activated)
+        {
+            BeforePropertyChanged();
+            mConfig.ChannelActivateChangeCommand(id, activated);
+            ScanChannelModel channel = mConfig.FindScanChannel(id);
+
+            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+            if (mConfig.IsScanning)
+            {
+                // 当前正在扫描，这分两种情况：
+                // 1 原先没打开的激光器被打开了：打开该激光器，设置功率，启动扫描
+                // 2 原先已经打开的激光器被关闭了：
+                // 2.1 该激光器是唯一打开的激光器，则不应该被关闭，设置Activated为真，打开激光器，启动扫描
+                // 2.2 该激光器不是唯一打开的激光器，则可以被关闭，关闭该激光器，
+                
+                if (channel.Activated)
+                {
+                    return StartScanTask(0, "实时扫描");
+                }
+
+                if (!channel.Activated && mConfig.GetActivatedChannelNum() == 0)
+                {
+                    channel.Activated = true;
+                }
+
+                code = StartScanTask(0, "实时扫描");
+            }
+
+            if (ChannelActivateChangedEvent != null)
+            {
+                return ChannelActivateChangedEvent.Invoke(channel);
+            }
+            return code;
+        }
+
+        /// <summary>
+        /// 小孔切换事件
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE PinHoleSelectChangeCommand(ScanPinHoleModel scanPinHole)
+        {
+            return mConfig.PinHoleSelectChangeCommand(scanPinHole);
+        }
+
+        /// <summary>
+        /// 小孔孔径变化事件
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE PinHoleValueChangeCommand(int value)
+        {
+            mConfig.PinHoleValueChangeCommand(value);
+            if (PinHoleChangedEvent != null)
+            {
+                return PinHoleChangedEvent.Invoke(mConfig.SelectedPinHole);
+            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -348,27 +543,157 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE ScanAreaChangeCommand(ScanAreaModel scanArea)
         {
-            return AfterPropertyChanged();
+            BeforePropertyChanged();
+            mConfig.ScanAreaChangeCommand(scanArea);
+            AfterPropertyChanged();
+
+            if (ScanAreaChangedEvent != null)
+            {
+                return ScanAreaChangedEvent.Invoke(mConfig.SelectedScanArea);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
-        /// 切换跳行扫描使能
+        /// 切换全扫描范围
         /// </summary>
-        /// <param name="lineSkipEnabled"></param>
+        /// <param name="fullScanArea"></param>
         /// <returns></returns>
-        public API_RETURN_CODE LineSkipEnableChangeCommand(bool lineSkipEnabled)
+        public API_RETURN_CODE FullScanAreaChangeCommand(ScanAreaModel fullScanArea)
         {
-            return AfterPropertyChanged();
+            mConfig.FullScanAreaChangeCommand(fullScanArea);
+
+            if (FullScanAreaChangedEvent != null)
+            {
+                return FullScanAreaChangedEvent.Invoke(mConfig.FullScanArea);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
-        /// 切换跳行扫描
+        /// 切换全扫描范围
         /// </summary>
-        /// <param name="lineSkip"></param>
+        /// <param name="scanRange"></param>
         /// <returns></returns>
-        public API_RETURN_CODE LineSkipValueChangeCommand(ScanLineSkipModel lineSkip)
+        public API_RETURN_CODE FullScanAreaChangeCommand(float scanRange)
         {
-            return AfterPropertyChanged();
+            mConfig.FullScanAreaChangeCommand(scanRange);
+            if (FullScanAreaChangedEvent != null)
+            {
+                return FullScanAreaChangedEvent.Invoke(mConfig.FullScanArea);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
+        public API_RETURN_CODE XGalvoChannelChangeCommand(string xGalvoChannel)
+        {
+            mConfig.GalvoProperty.XGalvoAoChannel = xGalvoChannel;
+            Logger.Info(string.Format("X Galvo Ao Channel [{0}].", mConfig.GalvoProperty.XGalvoAoChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE YGalvoChannelChangeCommand(string yGalvoChannel)
+        {
+            mConfig.GalvoProperty.YGalvoAoChannel = yGalvoChannel;
+            Logger.Info(string.Format("Y Galvo Ao Channel [{0}].", mConfig.GalvoProperty.YGalvoAoChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE Y2GalvoChannelChangeCommand(string y2GalvoChannel)
+        {
+            mConfig.GalvoProperty.Y2GalvoAoChannel = y2GalvoChannel;
+            Logger.Info(string.Format("Y2 Galvo Ao Channel [{0}].", mConfig.GalvoProperty.Y2GalvoAoChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE XGalvoOffsetVoltageChangeCommand(double offsetVoltage)
+        {
+            mConfig.GalvoProperty.XGalvoOffsetVoltage = offsetVoltage;
+            Logger.Info(string.Format("X Galvo Offset Voltage [{0}].", mConfig.GalvoProperty.XGalvoOffsetVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE XGalvoCalibrationVoltageChangeCommand(double calibrationVoltage)
+        {
+            mConfig.GalvoProperty.XGalvoCalibrationVoltage = calibrationVoltage;
+            Logger.Info(string.Format("X Galvo Calibration Voltage [{0}].", mConfig.GalvoProperty.XGalvoCalibrationVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE YGalvoOffsetVoltageChangeCommand(double offsetVoltage)
+        {
+            mConfig.GalvoProperty.YGalvoOffsetVoltage = offsetVoltage;
+            Logger.Info(string.Format("Y Galvo Offset Voltage [{0}].", mConfig.GalvoProperty.YGalvoOffsetVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE YGalvoCalibrationVoltageChangeCommand(double calibrationVoltage)
+        {
+            mConfig.GalvoProperty.YGalvoCalibrationVoltage = calibrationVoltage;
+            Logger.Info(string.Format("Y Galvo Calibration Voltage [{0}].", mConfig.GalvoProperty.YGalvoCalibrationVoltage));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE GalvoResponseTimeChangeCommand(double responseTime)
+        {
+            mConfig.GalvoProperty.GalvoResponseTime = responseTime;
+            Logger.Info(string.Format("Galvo Response Time [{0}].", mConfig.GalvoProperty.GalvoResponseTime));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE DetectorModeChangeCommand(bool pmtModeEnabled)
+        {
+            mConfig.Detector.DetectorPmt.IsEnabled = pmtModeEnabled;
+            mConfig.Detector.DetectorApd.IsEnabled = !pmtModeEnabled;
+            Logger.Info(string.Format("Detector Mode [{0}].", mConfig.Detector.CurrentDetecor.Text));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE PmtChannelChangeCommand(int id, string pmtChannel)
+        {
+            PmtChannelModel channel = mConfig.FindPmtChannel(id);
+            channel.AiChannel = pmtChannel;
+            Logger.Info(string.Format("Pmt [{0}] Ao Channel [{1}].", channel.ID, channel.AiChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ApdSourceChangeCommand(int id, string apdSource)
+        {
+            ApdChannelModel channel = mConfig.FindApdChannel(id);
+            channel.CiSource = apdSource;
+            Logger.Info(string.Format("Apd [{0}] Ci Channel [{1}:{2}].", channel.ID, channel.CiSource, channel.CiChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE ApdChannelChangeCommand(int id, string apdChannel)
+        {
+            ApdChannelModel channel = mConfig.FindApdChannel(id);
+            channel.CiChannel = apdChannel;
+            Logger.Info(string.Format("Apd [{0}] Ci Channel [{1}:{2}].", channel.ID, channel.CiSource, channel.CiChannel));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE StartTriggerChangeCommand(string startTrigger)
+        {
+            mConfig.Detector.StartTrigger = startTrigger;
+            Logger.Info(string.Format("Start Trigger [{0}].", mConfig.Detector.StartTrigger));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE TriggerSignalChangeCommand(string triggerSignal)
+        {
+            mConfig.Detector.TriggerSignal = triggerSignal;
+            Logger.Info(string.Format("Trigger Signal [{0}].", mConfig.Detector.TriggerSignal));
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        public API_RETURN_CODE TriggerReceiverChangeCommand(string triggerReceive)
+        {
+            mConfig.Detector.TriggerReceive = triggerReceive;
+            Logger.Info(string.Format("Trigger Receiver [{0}].", mConfig.Detector.TriggerReceive));
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////

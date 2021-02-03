@@ -16,24 +16,29 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly SequenceModel mSequence;
-        private readonly ConfigViewModel mConfig;
+        private readonly Scheduler mScheduler;
+        // private readonly SequenceModel mSequence;
+        // private readonly ConfigViewModel mConfig;
 
         private int scanPixelCalibration;
         private int scanPixelOffset;
         private int scanPixelCalibrationMaximum;
         private int scanPixelScale;
 
-        public ConfigViewModel Config
+        public Scheduler Engine
         {
-            get { return mConfig; }
+            get { return mScheduler; }
         }
 
-        public SequenceModel Sequence
-        {
-            get { return mSequence; }
-        }
+        //public ConfigViewModel Config
+        //{
+        //    get { return mConfig; }
+        //}
+
+        //public SequenceModel Sequence
+        //{
+        //    get { return mSequence; }
+        //}
 
         /// <summary>
         /// 扫描像素补偿
@@ -70,14 +75,15 @@ namespace confocal_core.ViewModel
 
         public ScanSettingsViewModel()
         {
-            mConfig = ConfigViewModel.GetConfig();
-            mSequence = SequenceModel.CreateInstance();
-            ScanPixelCalibrationMaximum = mConfig.SelectedScanPixelDwell.ScanPixelCalibrationMaximum;
-            ScanPixelCalibration = mConfig.SelectedScanPixelDwell.ScanPixelCalibration;
-            ScanPixelOffset = mConfig.SelectedScanPixelDwell.ScanPixelOffset;
-            ScanPixelScale = mConfig.SelectedScanPixelDwell.ScanPixelScale;
+            mScheduler = Scheduler.CreateInstance();
+            // mConfig = ConfigViewModel.GetConfig();
+            // mSequence = SequenceModel.CreateInstance();
+            ScanPixelCalibrationMaximum = mScheduler.Config.SelectedScanPixelDwell.ScanPixelCalibrationMaximum;
+            ScanPixelCalibration = mScheduler.Config.SelectedScanPixelDwell.ScanPixelCalibration;
+            ScanPixelOffset = mScheduler.Config.SelectedScanPixelDwell.ScanPixelOffset;
+            ScanPixelScale = mScheduler.Config.SelectedScanPixelDwell.ScanPixelScale;
             // 绑定事件
-            mConfig.ScanPixelDwellChangedEvent += ScanPixelDwellChangedHandler;
+            mScheduler.ScanPixelDwellChangedEvent += ScanPixelDwellChangedHandler;
         }
 
         public API_RETURN_CODE ScanPixelDwellChangedHandler(ScanPixelDwellModel scanPixelDwell)
@@ -92,14 +98,14 @@ namespace confocal_core.ViewModel
         public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
         {
             ScanPixelCalibration = scanPixelCalibration;
-            mConfig.ScanPixelCalibrationChangeCommand(ScanPixelCalibration);
+            mScheduler.ScanPixelCalibrationChangeCommand(ScanPixelCalibration);
             return API_RETURN_CODE.API_SUCCESS;
         }
 
         public API_RETURN_CODE ScanPixelScaleChangeCommand(int scanPixelScale)
         {
             ScanPixelScale = scanPixelScale;
-            mConfig.ScanPixelScaleChangeCommand(scanPixelScale);
+            mScheduler.ScanPixelScaleChangeCommand(scanPixelScale);
             return API_RETURN_CODE.API_SUCCESS;
         }
 

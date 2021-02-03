@@ -57,7 +57,7 @@ namespace confocal_ui.View
             contextMenu.CommandLinks.Add(cmdLinkConfirm);
 
             mScanAreaVM = new ScanAreaViewModel();
-            mScanRange = mScanAreaVM.Config.SelectedScanArea.ScanRange;
+            mScanRange = mScanAreaVM.Engine.Config.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaVM.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
             mCoordinateChanged = false;
@@ -80,7 +80,7 @@ namespace confocal_ui.View
         private void RegisterEvents()
         {
             // Scheduler.CreateInstance().ScanImageUpdatedEvent += ScanImageUpdatedEventHandler;
-            mScanAreaVM.Config.ScanAcquisitionChangedEvent += ScanAcquisitionChangedEventHandler;
+            mScanAreaVM.Engine.ScanAcquisitionChangedEvent += ScanAcquisitionChangedEventHandler;
             cbxScanPixel.ChangeCommitted += ScanPixelChanged;
             pbxScanArea.MouseEnter += MouseEnterImage;
             pbxScanArea.MouseLeave += MouseLeaveImage;
@@ -113,19 +113,19 @@ namespace confocal_ui.View
         private void SetDataBindings()
         {
             // 扫描像素
-            cbxScanPixel.DataSource = mScanAreaVM.Config.ScanPixelList;
+            cbxScanPixel.DataSource = mScanAreaVM.Engine.Config.ScanPixelList;
             cbxScanPixel.DisplayMember = "Text";
             cbxScanPixel.ValueMember = "Data";
-            cbxScanPixel.DataBindings.Add("SelectedItem", mScanAreaVM.Config, "SelectedScanPixel");
+            cbxScanPixel.DataBindings.Add("SelectedItem", mScanAreaVM.Engine.Config, "SelectedScanPixel");
 
             // 显示的数据
             lbScanWidth.DataBindings.Add("Text", mScanAreaVM, "ScanWidth");
             lbScanHeight.DataBindings.Add("Text", mScanAreaVM, "ScanHeight");
             lbPixelDwellValue.DataBindings.Add("Text", mScanAreaVM, "PixelDwell", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.0 us");
-            lbPixelSizeValue.DataBindings.Add("Text", mScanAreaVM.Config, "ScanPixelSize", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.00 um");
+            lbPixelSizeValue.DataBindings.Add("Text", mScanAreaVM.Engine.Config, "ScanPixelSize", true, DataSourceUpdateMode.OnPropertyChanged, null, "0.00 um");
 
-            lbScanRangeValue.DataBindings.Add("Text", mScanAreaVM.Config.SelectedScanArea, "Text");
-            lbMaxScanRangeValue.DataBindings.Add("Text", mScanAreaVM.Config.FullScanArea, "Text");
+            lbScanRangeValue.DataBindings.Add("Text", mScanAreaVM.Engine.Config.SelectedScanArea, "Text");
+            lbMaxScanRangeValue.DataBindings.Add("Text", mScanAreaVM.Engine.Config.FullScanArea, "Text");
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace confocal_ui.View
             {
                 return;
             }
-            mScanAreaVM.Config.ScanPixelChangeCommand(scanPixel);
+            mScanAreaVM.Engine.ScanPixelChangeCommand(scanPixel);
         }
 
         /// <summary>
@@ -324,8 +324,8 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void FullRangeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            mScanAreaVM.Config.ScanAreaChangeCommand(mScanAreaVM.Config.FullScanArea);
-            mScanRange = mScanAreaVM.Config.SelectedScanArea.ScanRange;
+            mScanAreaVM.Engine.ScanAreaChangeCommand(mScanAreaVM.Engine.Config.FullScanArea);
+            mScanRange = mScanAreaVM.Engine.Config.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaVM.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
             mCoordinateChanged = false;
@@ -341,7 +341,7 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void LastScanRangeClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            mScanRange = mScanAreaVM.Config.SelectedScanArea.ScanRange;
+            mScanRange = mScanAreaVM.Engine.Config.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaVM.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
             mCoordinateChanged = false;
@@ -359,9 +359,9 @@ namespace confocal_ui.View
         {
             mScanPixelRange = CoordinateToScanPixelRange(mCoordinate);
             mScanRange = mScanAreaVM.ScanPixelRangeToScanRange(mScanPixelRange);
-            mScanAreaVM.Config.ScanAreaChangeCommand(new ScanAreaModel(mScanRange));
+            mScanAreaVM.Engine.ScanAreaChangeCommand(new ScanAreaModel(mScanRange));
 
-            mScanRange = mScanAreaVM.Config.SelectedScanArea.ScanRange;
+            mScanRange = mScanAreaVM.Engine.Config.SelectedScanArea.ScanRange;
             mScanPixelRange = mScanAreaVM.ScanRangeToScanPixelRange(mScanRange);
             mCoordinate = ScanPixelRangeToCoordinate(mScanPixelRange);
             mCoordinateChanged = false;
@@ -374,7 +374,7 @@ namespace confocal_ui.View
         private void ImageToUpdate(object sender, EventArgs e)
         {
             Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            mScanAreaVM.ScanImage = mScanAreaVM.ScanEngine.ScanningTask.ScanData.GrayImages[0].Image;
+            mScanAreaVM.ScanImage = mScanAreaVM.Engine.ScanningTask.ScanData.GrayImages[0].Image;
             pictureBox.Image = mScanAreaVM.ScanImage;
         }
     }

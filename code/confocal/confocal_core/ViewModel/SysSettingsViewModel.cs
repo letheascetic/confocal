@@ -15,11 +15,17 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly ConfigViewModel mConfig;
+        private readonly Scheduler mScheduler;
+        // private readonly ConfigViewModel mConfig;
 
-        public ConfigViewModel Config
+        //public ConfigViewModel Config
+        //{
+        //    get { return mConfig; }
+        //}
+
+        public Scheduler Engine
         {
-            get { return mConfig; }
+            get { return mScheduler; }
         }
 
         private string[] mXGalvoChannels;
@@ -87,7 +93,8 @@ namespace confocal_core.ViewModel
 
         public SysSettingsViewModel()
         {
-            mConfig = ConfigViewModel.GetConfig();
+            mScheduler = Scheduler.CreateInstance();
+            // mConfig = ConfigViewModel.GetConfig();
 
             XGalvoAoChannels = NiDaq.GetAoChannels();
             YGalvoAoChannels = NiDaq.GetAoChannels();

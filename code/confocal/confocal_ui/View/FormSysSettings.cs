@@ -72,37 +72,37 @@ namespace confocal_ui.View
             cbxYGalvo2.DataSource = mSysSettingsViewModel.Y2GalvoAoChannels;
 
             
-            cbxXGalvo.SelectedItem = mSysSettingsViewModel.Config.GalvoProperty.XGalvoAoChannel;
-            cbxYGalvo.SelectedItem = mSysSettingsViewModel.Config.GalvoProperty.YGalvoAoChannel;
-            cbxYGalvo2.SelectedItem = mSysSettingsViewModel.Config.GalvoProperty.Y2GalvoAoChannel;
+            cbxXGalvo.SelectedItem = mSysSettingsViewModel.Engine.Config.GalvoProperty.XGalvoAoChannel;
+            cbxYGalvo.SelectedItem = mSysSettingsViewModel.Engine.Config.GalvoProperty.YGalvoAoChannel;
+            cbxYGalvo2.SelectedItem = mSysSettingsViewModel.Engine.Config.GalvoProperty.Y2GalvoAoChannel;
 
             // 振镜偏置电压和校准电压
-            nbXGalvoOffset.DataBindings.Add("Value", mSysSettingsViewModel.Config.GalvoProperty, "XGalvoOffsetVoltage");
-            nbYGalvoOffset.DataBindings.Add("Value", mSysSettingsViewModel.Config.GalvoProperty, "YGalvoOffsetVoltage");
+            nbXGalvoOffset.DataBindings.Add("Value", mSysSettingsViewModel.Engine.Config.GalvoProperty, "XGalvoOffsetVoltage");
+            nbYGalvoOffset.DataBindings.Add("Value", mSysSettingsViewModel.Engine.Config.GalvoProperty, "YGalvoOffsetVoltage");
 
-            nbXGalvoCalibration.DataBindings.Add("Value", mSysSettingsViewModel.Config.GalvoProperty, "XGalvoCalibrationVoltage");
-            nbYGalvoCalibration.DataBindings.Add("Value", mSysSettingsViewModel.Config.GalvoProperty, "YGalvoCalibrationVoltage");
+            nbXGalvoCalibration.DataBindings.Add("Value", mSysSettingsViewModel.Engine.Config.GalvoProperty, "XGalvoCalibrationVoltage");
+            nbYGalvoCalibration.DataBindings.Add("Value", mSysSettingsViewModel.Engine.Config.GalvoProperty, "YGalvoCalibrationVoltage");
 
             // 振镜响应时间和视场大小
-            nbGalvoResponseTime.DataBindings.Add("Value", mSysSettingsViewModel.Config.GalvoProperty, "GalvoResponseTime");
-            nbScanRange.DataBindings.Add("Value", mSysSettingsViewModel.Config.FullScanArea.ScanRange, "Width");
+            nbGalvoResponseTime.DataBindings.Add("Value", mSysSettingsViewModel.Engine.Config.GalvoProperty, "GalvoResponseTime");
+            nbScanRange.DataBindings.Add("Value", mSysSettingsViewModel.Engine.Config.FullScanArea.ScanRange, "Width");
 
             // 采集控制
-            rbtnPMT.DataBindings.Add("Checked", mSysSettingsViewModel.Config.Detector.DetectorPmt, "IsEnabled");
-            rbtnAPD.DataBindings.Add("Checked", mSysSettingsViewModel.Config.Detector.DetectorApd, "IsEnabled");
+            rbtnPMT.DataBindings.Add("Checked", mSysSettingsViewModel.Engine.Config.Detector.DetectorPmt, "IsEnabled");
+            rbtnAPD.DataBindings.Add("Checked", mSysSettingsViewModel.Engine.Config.Detector.DetectorApd, "IsEnabled");
             cbxStartSync.DataSource = mSysSettingsViewModel.StartTriggers;
-            cbxStartSync.SelectedItem = mSysSettingsViewModel.Config.Detector.StartTrigger;
+            cbxStartSync.SelectedItem = mSysSettingsViewModel.Engine.Config.Detector.StartTrigger;
             cbxTrigger.DataSource = mSysSettingsViewModel.TriggerSignals;
-            cbxTrigger.SelectedItem = mSysSettingsViewModel.Config.Detector.TriggerSignal;
+            cbxTrigger.SelectedItem = mSysSettingsViewModel.Engine.Config.Detector.TriggerSignal;
             cbxTriggerR.DataSource = mSysSettingsViewModel.TriggerReceivers;
-            cbxTriggerR.SelectedItem = mSysSettingsViewModel.Config.Detector.TriggerReceive;
+            cbxTriggerR.SelectedItem = mSysSettingsViewModel.Engine.Config.Detector.TriggerReceive;
 
             // PMT
             for (int i = 0; i < mPmtChannelCbx.Length; i++)
             {
                 mPmtChannelCbx[i].Tag = i;
                 mPmtChannelCbx[i].DataSource = mSysSettingsViewModel.AiChannels[i];
-                mPmtChannelCbx[i].SelectedItem = mSysSettingsViewModel.Config.FindPmtChannel(i).AiChannel;
+                mPmtChannelCbx[i].SelectedItem = mSysSettingsViewModel.Engine.Config.FindPmtChannel(i).AiChannel;
             }
 
             // APD
@@ -110,14 +110,14 @@ namespace confocal_ui.View
             {
                 mApdSourceCbx[i].Tag = i;
                 mApdSourceCbx[i].DataSource = mSysSettingsViewModel.CiSources[i];
-                mApdSourceCbx[i].SelectedItem = mSysSettingsViewModel.Config.FindApdChannel(i).CiSource;
+                mApdSourceCbx[i].SelectedItem = mSysSettingsViewModel.Engine.Config.FindApdChannel(i).CiSource;
             }
 
             for (int i = 0; i < mApdChannelCbx.Length; i++)
             {
                 mApdChannelCbx[i].Tag = i;
                 mApdChannelCbx[i].DataSource = mSysSettingsViewModel.CiChannels[i];
-                mApdChannelCbx[i].SelectedItem = mSysSettingsViewModel.Config.FindApdChannel(i).CiChannel;
+                mApdChannelCbx[i].SelectedItem = mSysSettingsViewModel.Engine.Config.FindApdChannel(i).CiChannel;
             }
         }
 
@@ -178,7 +178,7 @@ namespace confocal_ui.View
         private void PmtChannelChanged(object sender, EventArgs e)
         {
             InputComboBox cbx = (InputComboBox)sender;
-            mSysSettingsViewModel.Config.PmtChannelChangeCommand((int)cbx.Tag, cbx.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.PmtChannelChangeCommand((int)cbx.Tag, cbx.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace confocal_ui.View
         private void ApdSourceChanged(object sender, EventArgs e)
         {
             InputComboBox cbx = (InputComboBox)sender;
-            mSysSettingsViewModel.Config.ApdSourceChangeCommand((int)cbx.Tag, cbx.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.ApdSourceChangeCommand((int)cbx.Tag, cbx.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace confocal_ui.View
         private void ApdChannelChanged(object sender, EventArgs e)
         {
             InputComboBox cbx = (InputComboBox)sender;
-            mSysSettingsViewModel.Config.ApdChannelChangeCommand((int)cbx.Tag, cbx.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.ApdChannelChangeCommand((int)cbx.Tag, cbx.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void XGalvoChannelChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.XGalvoChannelChangeCommand(cbxXGalvo.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.XGalvoChannelChangeCommand(cbxXGalvo.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void YGalvoChannelChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.YGalvoChannelChangeCommand(cbxYGalvo.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.YGalvoChannelChangeCommand(cbxYGalvo.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -230,27 +230,27 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void Y2GalvoChannelChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.Y2GalvoChannelChangeCommand(cbxYGalvo2.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.Y2GalvoChannelChangeCommand(cbxYGalvo2.SelectedItem.ToString());
         }
 
         private void XGalvoOffsetVoltageChaned(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.XGalvoOffsetVoltageChangeCommand((double)nbXGalvoOffset.Value);
+            mSysSettingsViewModel.Engine.XGalvoOffsetVoltageChangeCommand((double)nbXGalvoOffset.Value);
         }
 
         private void YGalvoOffsetVoltageChaned(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.YGalvoOffsetVoltageChangeCommand((double)nbYGalvoOffset.Value);
+            mSysSettingsViewModel.Engine.YGalvoOffsetVoltageChangeCommand((double)nbYGalvoOffset.Value);
         }
 
         private void XGalvoCalibrationVoltageChaned(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.XGalvoCalibrationVoltageChangeCommand((double)nbXGalvoCalibration.Value);
+            mSysSettingsViewModel.Engine.XGalvoCalibrationVoltageChangeCommand((double)nbXGalvoCalibration.Value);
         }
 
         private void YGalvoCalibrationVoltageChaned(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.YGalvoCalibrationVoltageChangeCommand((double)nbYGalvoCalibration.Value);
+            mSysSettingsViewModel.Engine.YGalvoCalibrationVoltageChangeCommand((double)nbYGalvoCalibration.Value);
         }
 
         private void HidingForm(object sender, FormClosingEventArgs e)
@@ -261,32 +261,32 @@ namespace confocal_ui.View
 
         private void GalvoResponseTimeChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.GalvoResponseTimeChangeCommand((double)nbGalvoResponseTime.Value);
+            mSysSettingsViewModel.Engine.GalvoResponseTimeChangeCommand((double)nbGalvoResponseTime.Value);
         }
 
         private void FullScanAreaChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.FullScanAreaChangeCommand((float)nbScanRange.Value);
+            mSysSettingsViewModel.Engine.FullScanAreaChangeCommand((float)nbScanRange.Value);
         }
 
         private void DetectorModeChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.DetectorModeChangeCommand(rbtnPMT.Checked);
+            mSysSettingsViewModel.Engine.DetectorModeChangeCommand(rbtnPMT.Checked);
         }
 
         private void StartTriggerChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.StartTriggerChangeCommand(cbxStartSync.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.StartTriggerChangeCommand(cbxStartSync.SelectedItem.ToString());
         }
 
         private void TriggerSignalChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.TriggerSignalChangeCommand(cbxTrigger.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.TriggerSignalChangeCommand(cbxTrigger.SelectedItem.ToString());
         }
 
         private void TriggerReceiveChanged(object sender, EventArgs e)
         {
-            mSysSettingsViewModel.Config.TriggerReceiverChangeCommand(cbxTriggerR.SelectedItem.ToString());
+            mSysSettingsViewModel.Engine.TriggerReceiverChangeCommand(cbxTriggerR.SelectedItem.ToString());
         }
 
     }

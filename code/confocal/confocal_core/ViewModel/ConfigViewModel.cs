@@ -23,22 +23,6 @@ namespace confocal_core.ViewModel
         public bool Debugging { get; set; }
         public double InputSampleRate { get; set; }                         // 像素速率[采样速率]
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public event ScanAreaChangedEventHandler ScanAreaChangedEvent;
-        public event ScanAreaChangedEventHandler FullScanAreaChangedEvent;
-        public event ScanAcquisitionChangedEventHandler ScanAcquisitionChangedEvent;
-        public event ScannerHeadModelChangedEventHandler ScannerHeadModelChangedEvent;
-        public event ScanDirectionChangedEventHandler ScanDirectionChangedEvent;
-        public event ScanModeChangedEventHandler ScanModeChangedEvent;
-        public event LineSkipEnableChangedEventHandler LineSkipEnableChangedEvent;
-        public event LineSkipChangedEventHandler LineSkipChangedEvent;
-        public event ScanPixelChangedEventHandler ScanPixelChangedEvent;
-        public event ScanPixelDwellChangedEventHandler ScanPixelDwellChangedEvent;
-        public event PinHoleChangedEventHandler PinHoleChangedEvent;
-        public event ChannelGainChangedEventHandler ChannelGainChangedEvent;
-        public event ChannelOffsetChangedEventHandler ChannelOffsetChangedEvent;
-        public event ChannelPowerChangedEventHandler ChannelPowerChangedEvent;
-        public event ChannelActivateChangedEventHandler ChannelActivateChangedEvent;
-        ///////////////////////////////////////////////////////////////////////////////////////////
         private ScanAcquisitionModel scanLiveMode;
         private ScanAcquisitionModel scanCaptureMode;
 
@@ -89,28 +73,10 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanAcquisitionChangeCommand(bool liveModeEnabled, bool captureModeEnabled)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
-            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
-            if (liveModeEnabled || captureModeEnabled)
-            {
-                code = scheduler.StartScanTask(0, "实时扫描");
-            }
-
-            if (code == API_RETURN_CODE.API_SUCCESS)
-            {
-                ScanLiveMode.IsEnabled = liveModeEnabled;
-                ScanCaptureMode.IsEnabled = captureModeEnabled;
-                Logger.Info(string.Format("Scan Acquisition Mode [{0}:{1}].", IsScanning, IsScanning ? SelectedScanAcquisition.Text : "None"));
-
-                if (ScanAcquisitionChangedEvent != null)
-                {
-                    return ScanAcquisitionChangedEvent.Invoke(SelectedScanAcquisition);
-                }
-            }
-            
-            return code;
+            ScanLiveMode.IsEnabled = liveModeEnabled;
+            ScanCaptureMode.IsEnabled = captureModeEnabled;
+            Logger.Info(string.Format("Scan Acquisition Mode [{0}:{1}].", IsScanning, IsScanning ? SelectedScanAcquisition.Text : "None"));
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -147,21 +113,10 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScannerHeadChangeCommand(bool twoGalvEnabled)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             // 更新扫描头
             ScannerHeadTwoGalv.IsEnabled = twoGalvEnabled;
             ScannerHeadThreeGalv.IsEnabled = !twoGalvEnabled;
             Logger.Info(string.Format("Scan Header [{0}].", SelectedScannerHead.Text));
-
-            scheduler.ScannerHeadChangeCommand(SelectedScannerHead);
-
-            if (ScannerHeadModelChangedEvent != null)
-            {
-                return ScannerHeadModelChangedEvent.Invoke(SelectedScannerHead);
-            }
-
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -199,20 +154,10 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanDirectionChangeCommand(bool uniDirectionEnabled)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             // 更新扫描方向
             ScanUniDirection.IsEnabled = uniDirectionEnabled;
             ScanBiDirection.IsEnabled = !uniDirectionEnabled;
             Logger.Info(string.Format("Scan Direction [{0}].", SelectedScanDirection.Text));
-
-            scheduler.ScanDirectionChangeCommand(SelectedScanDirection);
-
-            if (ScanDirectionChangedEvent != null)
-            {
-                return ScanDirectionChangedEvent.Invoke(SelectedScanDirection);
-            }
 
             return API_RETURN_CODE.API_SUCCESS;
         }
@@ -252,20 +197,10 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanModeChangeCommand(bool galvEnabled)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             // 更新扫描模式
             ScanModeGalavano.IsEnabled = galvEnabled;
             ScanModeResonant.IsEnabled = !galvEnabled;
             Logger.Info(string.Format("Scan Mode [{0}].", SelectedScanMode.Text));
-
-            scheduler.ScanModeChangeCommand(SelectedScanMode);
-
-            if (ScanModeChangedEvent != null)
-            {
-                return ScanModeChangedEvent.Invoke(SelectedScanMode);
-            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -315,13 +250,6 @@ namespace confocal_core.ViewModel
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Scan Pixel [{0}].", SelectedScanPixel.Text));
 
-            scheduler.ScanPixelChangeCommand(SelectedScanPixel);
-
-            if (ScanPixelChangedEvent != null)
-            {
-                return ScanPixelChangedEvent.Invoke(SelectedScanPixel);
-            }
-
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -361,9 +289,6 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelDwellChangeCommand(ScanPixelDwellModel selectedPixelDwell)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             foreach (ScanPixelDwellModel pixelDwell in ScanPixelDwellList)
             {
                 if (pixelDwell.ID != selectedPixelDwell.ID)
@@ -375,13 +300,6 @@ namespace confocal_core.ViewModel
             SelectedScanPixelDwell = selectedPixelDwell;
             Logger.Info(string.Format("Scan Pixel Dwell [{0}].", SelectedScanPixelDwell.Text));
 
-            scheduler.ScanPixelDwellChangeCommand(SelectedScanPixelDwell);
-
-            if (ScanPixelDwellChangedEvent != null)
-            {
-                ScanPixelDwellChangedEvent.Invoke(SelectedScanPixelDwell);
-            }
-
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -392,7 +310,8 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
         {
-            return Scheduler.CreateInstance().ScanPixelCalibrationChangeCommand(scanPixelCalibration);
+            SelectedScanPixelDwell.ScanPixelCalibration = scanPixelCalibration;
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
@@ -402,7 +321,8 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelScaleChangeCommand(int scanPixelScale)
         {
-            return Scheduler.CreateInstance().ScanPixelScaleChangeCommand(scanPixelScale);
+            SelectedScanPixelDwell.ScanPixelScale = scanPixelScale;
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -441,18 +361,8 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE LineSkipEnableChangeCommand(bool lineSkipEnabled)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             ScanLineSkipEnabled = lineSkipEnabled;
-            scheduler.LineSkipEnableChangeCommand(lineSkipEnabled);
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
-
-            if (LineSkipEnableChangedEvent != null)
-            {
-                return LineSkipEnableChangedEvent.Invoke(ScanLineSkipEnabled);
-            }
-
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -462,18 +372,8 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE LineSkipValueChangeCommand(ScanLineSkipModel lineSkip)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             SelectedScanLineSkip = lineSkip;
-            scheduler.LineSkipValueChangeCommand(SelectedScanLineSkip);
             Logger.Info(string.Format("Scan Line Skip [{0}:{1}].", ScanLineSkipEnabled, SelectedScanLineSkip.Text));
-
-            if (LineSkipChangedEvent != null)
-            {
-                LineSkipChangedEvent.Invoke(SelectedScanLineSkip);
-            }
-
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -532,13 +432,7 @@ namespace confocal_core.ViewModel
         {
             ScanChannelModel channel = FindScanChannel(id);
             channel.Gain = gain;
-            Scheduler.CreateInstance().ChannelGainChangeCommand(channel);
             Logger.Info(string.Format("Channel Gain [{0}:{1}].", id, gain));        // 设置
-
-            if (ChannelGainChangedEvent != null)
-            {
-                return ChannelGainChangedEvent.Invoke(channel);
-            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -553,10 +447,6 @@ namespace confocal_core.ViewModel
             ScanChannelModel channel = FindScanChannel(id);
             channel.Offset = offset;
             Logger.Info(string.Format("Channel Offset [{0}:{1}].", id, offset));
-            if (ChannelOffsetChangedEvent != null)
-            {
-                return ChannelOffsetChangedEvent.Invoke(channel);
-            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -570,13 +460,7 @@ namespace confocal_core.ViewModel
         {
             ScanChannelModel channel = FindScanChannel(id);
             channel.LaserPower = power;
-            Scheduler.CreateInstance().ChannelPowerChangeCommand(channel);
             Logger.Info(string.Format("Channel Power [{0}:{1}].", id, power));
-
-            if (ChannelPowerChangedEvent != null)
-            {
-                ChannelPowerChangedEvent.Invoke(channel);
-            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -588,20 +472,9 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ChannelActivateChangeCommand(int id, bool activated)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             ScanChannelModel channel = FindScanChannel(id);
             channel.Activated = activated;
-
-            scheduler.ChannelActivateChangeCommand(channel);
-
             Logger.Info(string.Format("Channel Status [{0}:{1}].", id, channel.Activated));
-
-            if (ChannelActivateChangedEvent != null)
-            {
-                ChannelActivateChangedEvent.Invoke(channel);
-            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -630,13 +503,13 @@ namespace confocal_core.ViewModel
         /// 小孔切换事件
         /// </summary>
         /// <returns></returns>
-        public API_RETURN_CODE PinHoleSelectChangeCommand(ScanPinHoleModel selected)
+        public API_RETURN_CODE PinHoleSelectChangeCommand(ScanPinHoleModel scanPinHole)
         {
-            SelectedPinHole = selected;
+            SelectedPinHole = scanPinHole;
             Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", SelectedPinHole.Name, SelectedPinHole.Size));
-
             return API_RETURN_CODE.API_SUCCESS;
         }
+
         /// <summary>
         /// 小孔孔径变化事件
         /// </summary>
@@ -647,11 +520,6 @@ namespace confocal_core.ViewModel
 
             SelectedPinHole.Size = value;
             Logger.Info(string.Format("Scan Pin Hole [{0}:{1}].", SelectedPinHole.Name, SelectedPinHole.Size));
-
-            if (PinHoleChangedEvent != null)
-            {
-                PinHoleChangedEvent.Invoke(SelectedPinHole);
-            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -706,20 +574,9 @@ namespace confocal_core.ViewModel
 
         public API_RETURN_CODE ScanAreaChangeCommand(ScanAreaModel scanArea)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             SelectedScanArea.Update(scanArea.ScanRange);
             ScanPixelSize = SelectedScanArea.ScanRange.Width / SelectedScanPixel.Data;
             Logger.Info(string.Format("Selected Scan Area [{0}].", SelectedScanArea.ScanRange));
-
-            scheduler.ScanAreaChangeCommand(SelectedScanArea);
-
-            if (ScanAreaChangedEvent != null)
-            {
-                ScanAreaChangedEvent.Invoke(SelectedScanArea);
-            }
-
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -727,12 +584,6 @@ namespace confocal_core.ViewModel
         {
             FullScanArea.Update(fullScanArea.ScanRange);
             Logger.Info(string.Format("Full Scan Area [{0}].", FullScanArea.ScanRange));
-
-            if (FullScanAreaChangedEvent != null)
-            {
-                FullScanAreaChangedEvent.Invoke(FullScanArea);
-            }
-
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -762,115 +613,6 @@ namespace confocal_core.ViewModel
         {
             get { return mDetector; }
             set { mDetector = value; RaisePropertyChanged(() => Detector); }
-        }
-
-        public API_RETURN_CODE XGalvoChannelChangeCommand(string xGalvoChannel)
-        {
-            GalvoProperty.XGalvoAoChannel = xGalvoChannel;
-            Logger.Info(string.Format("X Galvo Ao Channel [{0}].", GalvoProperty.XGalvoAoChannel));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE YGalvoChannelChangeCommand(string yGalvoChannel)
-        {
-            GalvoProperty.YGalvoAoChannel = yGalvoChannel;
-            Logger.Info(string.Format("Y Galvo Ao Channel [{0}].", GalvoProperty.YGalvoAoChannel));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE Y2GalvoChannelChangeCommand(string y2GalvoChannel)
-        {
-            GalvoProperty.Y2GalvoAoChannel = y2GalvoChannel;
-            Logger.Info(string.Format("Y2 Galvo Ao Channel [{0}].", GalvoProperty.Y2GalvoAoChannel));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE XGalvoOffsetVoltageChangeCommand(double offsetVoltage)
-        {
-            GalvoProperty.XGalvoOffsetVoltage = offsetVoltage;
-            Logger.Info(string.Format("X Galvo Offset Voltage [{0}].", GalvoProperty.XGalvoOffsetVoltage));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE XGalvoCalibrationVoltageChangeCommand(double calibrationVoltage)
-        {
-            GalvoProperty.XGalvoCalibrationVoltage = calibrationVoltage;
-            Logger.Info(string.Format("X Galvo Calibration Voltage [{0}].", GalvoProperty.XGalvoCalibrationVoltage));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE YGalvoOffsetVoltageChangeCommand(double offsetVoltage)
-        {
-            GalvoProperty.YGalvoOffsetVoltage = offsetVoltage;
-            Logger.Info(string.Format("Y Galvo Offset Voltage [{0}].", GalvoProperty.YGalvoOffsetVoltage));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE YGalvoCalibrationVoltageChangeCommand(double calibrationVoltage)
-        {
-            GalvoProperty.YGalvoCalibrationVoltage = calibrationVoltage;
-            Logger.Info(string.Format("Y Galvo Calibration Voltage [{0}].", GalvoProperty.YGalvoCalibrationVoltage));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE GalvoResponseTimeChangeCommand(double responseTime)
-        {
-            GalvoProperty.GalvoResponseTime = responseTime;
-            Logger.Info(string.Format("Galvo Response Time [{0}].", GalvoProperty.GalvoResponseTime));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE DetectorModeChangeCommand(bool pmtModeEnabled)
-        {
-            Detector.DetectorPmt.IsEnabled = pmtModeEnabled;
-            Detector.DetectorApd.IsEnabled = !pmtModeEnabled;
-            Logger.Info(string.Format("Detector Mode [{0}].", Detector.CurrentDetecor.Text));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE PmtChannelChangeCommand(int id, string pmtChannel)
-        {
-            PmtChannelModel channel = FindPmtChannel(id);
-            channel.AiChannel = pmtChannel;
-            Logger.Info(string.Format("Pmt [{0}] Ao Channel [{1}].", channel.ID, channel.AiChannel));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE ApdSourceChangeCommand(int id, string apdSource)
-        {
-            ApdChannelModel channel = FindApdChannel(id);
-            channel.CiSource = apdSource;
-            Logger.Info(string.Format("Apd [{0}] Ci Channel [{1}:{2}].", channel.ID, channel.CiSource, channel.CiChannel));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE ApdChannelChangeCommand(int id, string apdChannel)
-        {
-            ApdChannelModel channel = FindApdChannel(id);
-            channel.CiChannel = apdChannel;
-            Logger.Info(string.Format("Apd [{0}] Ci Channel [{1}:{2}].", channel.ID, channel.CiSource, channel.CiChannel));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE StartTriggerChangeCommand(string startTrigger)
-        {
-            Detector.StartTrigger = startTrigger;
-            Logger.Info(string.Format("Start Trigger [{0}].", Detector.StartTrigger));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE TriggerSignalChangeCommand(string triggerSignal)
-        {
-            Detector.TriggerSignal = triggerSignal;
-            Logger.Info(string.Format("Trigger Signal [{0}].", Detector.TriggerSignal));
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
-        public API_RETURN_CODE TriggerReceiverChangeCommand(string triggerReceive)
-        {
-            Detector.TriggerReceive = triggerReceive;
-            Logger.Info(string.Format("Trigger Receiver [{0}].", Detector.TriggerReceive));
-            return API_RETURN_CODE.API_SUCCESS;
         }
 
         public PmtChannelModel FindPmtChannel(int id)
