@@ -368,7 +368,7 @@ namespace confocal_core.Common
                     SampleQuantityMode.ContinuousSamples,
                     mSequence.InputSampleCountPerRow);
 
-                ciTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerAcquisition);
+                ciTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerFrame);
 
                 // CIDataTransferMechanism x = ciTask.CIChannels.All.DataTransferMechanism;
 
