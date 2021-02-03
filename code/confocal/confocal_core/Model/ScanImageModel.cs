@@ -9,7 +9,7 @@ using System.Text;
 
 namespace confocal_core.Model
 {
-    public delegate API_RETURN_CODE ScanImageUpdatedEventHandler(int channelIndex, ScanImageModel scanImage, ScanBankModel scanBank);
+    public delegate API_RETURN_CODE ScanImageUpdatedEventHandler(ScanImageModel[] scanImages);
 
     /// <summary>
     /// 扫描图像

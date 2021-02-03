@@ -20,6 +20,7 @@ namespace confocal_ui.View
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
+        
         private Point mMouseDownPosition;    // 鼠标在图像区域按下时的坐标
 
         private Point mMousePosition;        // 鼠标在图像区域的坐标
@@ -78,10 +79,32 @@ namespace confocal_ui.View
         /// </summary>
         private void RegisterEvents()
         {
+            // Scheduler.CreateInstance().ScanImageUpdatedEvent += ScanImageUpdatedEventHandler;
+            mScanAreaVM.Config.ScanAcquisitionChangedEvent += ScanAcquisitionChangedEventHandler;
             cbxScanPixel.ChangeCommitted += ScanPixelChanged;
             pbxScanArea.MouseEnter += MouseEnterImage;
             pbxScanArea.MouseLeave += MouseLeaveImage;
             pbxScanArea.MouseWheel += ScanRangeZoomed;
+        }
+
+        private API_RETURN_CODE ScanAcquisitionChangedEventHandler(ScanAcquisitionModel scanAcquisition)
+        {
+            if (scanAcquisition != null)
+            {
+                mImageTimer.Start();
+            }
+            else
+            {
+                mImageTimer.Stop();
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        private API_RETURN_CODE ScanImageUpdatedEventHandler(ScanImageModel[] scanImages)
+        {
+            mScanAreaVM.ScanImage = scanImages[0].Image;
+            pictureBox.Image = mScanAreaVM.ScanImage;
+            return API_RETURN_CODE.API_SUCCESS;
         }
 
         /// <summary>
@@ -185,7 +208,7 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void MouseEnterImage(object sender, EventArgs e)
         {
-            timer.Start();
+            mCursorTimer.Start();
             this.Cursor = Cursors.Hand;
         }
 
@@ -196,7 +219,7 @@ namespace confocal_ui.View
         /// <param name="e"></param>
         private void MouseLeaveImage(object sender, EventArgs e)
         {
-            timer.Stop();
+            mCursorTimer.Stop();
             this.Cursor = Cursors.Default;
         }
 
@@ -346,6 +369,13 @@ namespace confocal_ui.View
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
 
+        }
+
+        private void ImageToUpdate(object sender, EventArgs e)
+        {
+            Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            mScanAreaVM.ScanImage = Scheduler.CreateInstance().ScanningTask.ScanData.GrayImages[0].Image;
+            pictureBox.Image = mScanAreaVM.ScanImage;
         }
     }
 }

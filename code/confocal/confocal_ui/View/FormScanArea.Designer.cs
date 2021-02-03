@@ -52,7 +52,7 @@ namespace confocal_ui.View
             this.lbScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
             this.lbMaxScanRange = new C1.Win.C1InputPanel.InputLabel();
             this.lbMaxScanRangeValue = new C1.Win.C1InputPanel.InputLabel();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.mCursorTimer = new System.Windows.Forms.Timer(this.components);
             this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
             this.toolBar = new C1.Win.C1Command.C1ToolBar();
             this.cmdLinkSquare = new C1.Win.C1Command.C1CommandLink();
@@ -69,6 +69,7 @@ namespace confocal_ui.View
             this.c1CommandHolder = new C1.Win.C1Command.C1CommandHolder();
             this.pbxScanArea = new System.Windows.Forms.PictureBox();
             this.pictureBox = new Emgu.CV.UI.ImageBox();
+            this.mImageTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockToolBar)).BeginInit();
             this.dockToolBar.SuspendLayout();
@@ -208,10 +209,10 @@ namespace confocal_ui.View
             this.lbMaxScanRangeValue.Name = "lbMaxScanRangeValue";
             this.lbMaxScanRangeValue.Text = "xxxx";
             // 
-            // timer
+            // mCursorTimer
             // 
-            this.timer.Interval = 250;
-            this.timer.Tick += new System.EventHandler(this.TimerTick);
+            this.mCursorTimer.Interval = 250;
+            this.mCursorTimer.Tick += new System.EventHandler(this.TimerTick);
             // 
             // dockToolBar
             // 
@@ -342,6 +343,10 @@ namespace confocal_ui.View
             this.pictureBox.TabIndex = 16;
             this.pictureBox.TabStop = false;
             // 
+            // mImageTimer
+            // 
+            this.mImageTimer.Tick += new System.EventHandler(this.ImageToUpdate);
+            // 
             // FormScanArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -389,7 +394,7 @@ namespace confocal_ui.View
         private InputLabel lbScanHeight;
         private InputLabel lbPosition;
         private InputLabel lbPixelPosition;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer mCursorTimer;
         private C1.Win.C1Command.C1CommandDock dockToolBar;
         private C1.Win.C1Command.C1ToolBar toolBar;
         private System.Windows.Forms.PictureBox pbxScanArea;
@@ -409,5 +414,6 @@ namespace confocal_ui.View
         private InputLabel lbScanRangeValue;
         private InputLabel lbMaxScanRange;
         private InputLabel lbMaxScanRangeValue;
+        private System.Windows.Forms.Timer mImageTimer;
     }
 }

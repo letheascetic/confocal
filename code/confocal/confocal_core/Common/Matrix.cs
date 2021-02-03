@@ -58,6 +58,7 @@ namespace confocal_core.Common
         {
             // create NDArray，no copy
             var origin = np.array(samples, false).reshape(samplesPerPixel, pixelsPerRow, pixelsPerCol);
+            origin = origin.astype(NPTypeCode.Int32);
             // integrate pixels 样本累加，计算像素值，并转置
             var matrix = origin.sum(0).T;
             // 如果是单向扫描，则直接截取Bank数据矩阵
