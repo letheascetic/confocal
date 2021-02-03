@@ -103,10 +103,10 @@ namespace confocal_core.Common
                         mConfig.SelectedScanPixelDwell.ScanPixelOffset, mConfig.SelectedScanPixelDwell.ScanPixelCalibration,
                         mConfig.SelectedScanPixel.Data);
                     // Bank数据矩阵更新到OriginImages对应的BankImage
-                    Mat originImage = ScanData.OriginImages[i].Banks[ScanInfo.CurrentBank].Bank;
+                    Mat originImage = ScanData.OriginImages[i].Banks[ScanInfo.CurrentBank[i]].Bank;
                     Matrix.ToBankImage(matrix, ref originImage);
                     // Origin的BankImage更新到Gray
-                    Mat grayImage = ScanData.GrayImages[i].Banks[ScanInfo.CurrentBank].Bank;
+                    Mat grayImage = ScanData.GrayImages[i].Banks[ScanInfo.CurrentBank[i]].Bank;
                     double scale = 1.0 / Math.Pow(2, mConfig.SelectedScanPixelDwell.ScanPixelScale);
                     Matrix.ToGrayImage(originImage, ref grayImage, scale, mConfig.ScanChannels[i].Offset);
                 }
@@ -124,9 +124,9 @@ namespace confocal_core.Common
                 mSequence.InputPixelCountPerAcquisition / mSequence.InputPixelCountPerRow, mConfig.SelectedScanDirection.ID,
                 mConfig.SelectedScanPixelDwell.ScanPixelOffset, mConfig.SelectedScanPixelDwell.ScanPixelCalibration,
                 mConfig.SelectedScanPixel.Data);
-            Mat originImage = ScanData.OriginImages[sampleData.ChannelIndex].Banks[ScanInfo.CurrentBank].Bank;
+            Mat originImage = ScanData.OriginImages[sampleData.ChannelIndex].Banks[ScanInfo.CurrentBank[sampleData.ChannelIndex]].Bank;
             Matrix.ToBankImage(matrix, ref originImage);
-            Mat grayImage = ScanData.GrayImages[sampleData.ChannelIndex].Banks[ScanInfo.CurrentBank].Bank;
+            Mat grayImage = ScanData.GrayImages[sampleData.ChannelIndex].Banks[ScanInfo.CurrentBank[sampleData.ChannelIndex]].Bank;
             double scale = 1.0 / Math.Pow(2, mConfig.SelectedScanPixelDwell.ScanPixelScale);
             Matrix.ToGrayImage(originImage, ref grayImage, scale, mConfig.ScanChannels[sampleData.ChannelIndex].Offset);
         }

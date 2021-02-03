@@ -21,7 +21,7 @@ namespace confocal_core.Common
         public event ScanImageUpdatedEventHandler ScanImageUpdatedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly int PMT_TASK_COUNT = 1;
-        private static readonly int APD_TASK_COUNT = 2;
+        private static readonly int APD_TASK_COUNT = 4;
         ///////////////////////////////////////////////////////////////////////////////////////////
         public event ScanAreaChangedEventHandler ScanAreaChangedEvent;
         public event ScanAreaChangedEventHandler FullScanAreaChangedEvent;
@@ -759,7 +759,7 @@ namespace confocal_core.Common
             }
         }
 
-        private void PmtReceiveSamples(object sender, short[][] samples, long acquisitionCount)
+        private void PmtReceiveSamples(object sender, short[][] samples, long[] acquisitionCount)
         {
             try
             {
@@ -841,7 +841,7 @@ namespace confocal_core.Common
                 {
                     if (mPmtSampleQueue.TryTake(out PmtSampleData sampleData, 20, mCancelToken.Token))
                     {
-                        ScanningTask.ScanInfo.UpdateScanInfo(sampleData.AcquisitionCount);
+                        ScanningTask.ScanInfo.UpdateScanInfo(sampleData);
                         ScanningTask.ConvertSamples(sampleData);
                         if (ScanImageUpdatedEvent != null)
                         {
@@ -866,7 +866,7 @@ namespace confocal_core.Common
                 {
                     if (mApdSampleQueue.TryTake(out ApdSampleData sampleData, 20, mCancelToken.Token))
                     {
-                        ScanningTask.ScanInfo.UpdateScanInfo(sampleData.AcquisitionCount);
+                        ScanningTask.ScanInfo.UpdateScanInfo(sampleData);
                         ScanningTask.ConvertSamples(sampleData);
                         if (ScanImageUpdatedEvent != null)
                         {

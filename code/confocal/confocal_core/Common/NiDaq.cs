@@ -15,7 +15,7 @@ namespace confocal_core.Common
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="samples"></param>
-    public delegate void AiSamplesReceivedEventHandler(object sender, short[][] samples, long acquisitionCount);
+    public delegate void AiSamplesReceivedEventHandler(object sender, short[][] samples, long[] acquisitionCount);
     /// <summary>
     /// 计数器计数事件
     /// </summary>
@@ -509,7 +509,7 @@ namespace confocal_core.Common
 
                 if (AiSamplesReceived != null)
                 {
-                    AiSamplesReceived.Invoke(this, samples, mAcquisitionCount.Where(p => p>=0).First());
+                    AiSamplesReceived.Invoke(this, samples, mAcquisitionCount);
                 }
             }
             catch (Exception err)

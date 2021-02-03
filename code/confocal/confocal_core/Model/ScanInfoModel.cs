@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using confocal_core.Common;
+using GalaSoft.MvvmLight;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,10 @@ namespace confocal_core.Model
         private double timeSpan;
         private double frameTime;
         private double fps;
-        private long currentFrame;
-        private int currentBank;
+        private long[] currentFrame;
+        private int[] currentBank;
         private int numOfBank;
-        private long acquisitionCount;
+        private long[] acquisitionCount;
 
         /// <summary>
         /// 扫描开始时间
@@ -59,7 +60,7 @@ namespace confocal_core.Model
         /// <summary>
         /// 当前帧
         /// </summary>
-        public long CurrentFrame
+        public long[] CurrentFrame
         {
             get { return currentFrame; }
             set { currentFrame = value; RaisePropertyChanged(() => CurrentFrame); }
@@ -67,7 +68,7 @@ namespace confocal_core.Model
         /// <summary>
         /// 当前Bank
         /// </summary>
-        public int CurrentBank
+        public int[] CurrentBank
         {
             get { return currentBank; }
             set { currentBank = value; }
@@ -83,7 +84,7 @@ namespace confocal_core.Model
         /// <summary>
         /// 采集次数
         /// </summary>
-        public long AcquisitionCount
+        public long[] AcquisitionCount
         {
             get { return acquisitionCount; }
             set { acquisitionCount = value; }
@@ -95,29 +96,48 @@ namespace confocal_core.Model
             TimeSpan = 0.0;
             FPS = 0.0;
             FrameTime = 0.0;
-            CurrentFrame = 0;
-            CurrentBank = 0;
+            CurrentFrame = new long[] { -1, -1, -1, -1};
+            CurrentBank = new int[] { -1, -1, -1, -1 };
             NumOfBank = numOfBank;
-            AcquisitionCount = 0;
+            AcquisitionCount = new long[] { -1, -1, -1, -1 };
         }
 
-        public void UpdateScanInfo(long acquisitionCount)
+        public void UpdateScanInfo(PmtSampleData sampleData)
         {
-            AcquisitionCount = acquisitionCount;
-            CurrentBank = (int)(AcquisitionCount % NumOfBank);
-            CurrentFrame = AcquisitionCount / NumOfBank;
-            if (CurrentBank == NumOfBank -1)
+            AcquisitionCount = sampleData.AcquisitionCount;
+            for (int i = 0; i < AcquisitionCount.Length; i++)
+            {
+                if (AcquisitionCount[i] >= 0)
+                {
+                    CurrentBank[i] = (int)(AcquisitionCount[i] % NumOfBank);
+                    CurrentFrame[i] = AcquisitionCount[i] / NumOfBank;
+                }
+            }
+
+            int bank = CurrentBank.Where(p => p >= 0).First();
+            long frame = CurrentFrame.Where(p => p >= 0).First();
+            if (bank == NumOfBank - 1)
             {
                 TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
-                FrameTime = TimeSpan / (CurrentFrame + 1);
+                FrameTime = TimeSpan / (frame + 1);
                 FPS = 1.0 / FrameTime;
-                Logger.Info(string.Format("Scan Info [{0}].", this));
+                Logger.Info(string.Format("TimeSpan[{0}] Frame[{1}] Bank[{2}] FPS[{3}] FrameTime[{4}].", TimeSpan, frame, bank, FPS, FrameTime));
             }
         }
 
-        public override string ToString()
+        public void UpdateScanInfo(ApdSampleData sampleData)
         {
-            return string.Format("TimeSpan[{0}] Frame[{1}] Bank[{2}] FPS[{3}] FrameTime[{4}].", TimeSpan, CurrentFrame, CurrentBank, FPS, FrameTime);
+            AcquisitionCount[sampleData.ChannelIndex] = sampleData.AcquisitionCount;
+            CurrentBank[sampleData.ChannelIndex] = (int)(AcquisitionCount[sampleData.ChannelIndex] % NumOfBank);
+            CurrentFrame[sampleData.ChannelIndex] = AcquisitionCount[sampleData.ChannelIndex] / NumOfBank;
+
+            if (CurrentBank[sampleData.ChannelIndex] == NumOfBank - 1)
+            {
+                TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
+                FrameTime = TimeSpan / (CurrentFrame[sampleData.ChannelIndex] + 1);
+                FPS = 1.0 / FrameTime;
+                Logger.Info(string.Format("TimeSpan[{0}] Frame[{1}] Bank[{2}] FPS[{3}] FrameTime[{4}].", TimeSpan, CurrentFrame[sampleData.ChannelIndex], CurrentBank[sampleData.ChannelIndex], FPS, FrameTime));
+            }
         }
 
     }
