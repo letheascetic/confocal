@@ -374,7 +374,7 @@ namespace confocal_ui.View
         private void ImageToUpdate(object sender, EventArgs e)
         {
             Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            mScanAreaVM.ScanImage = Scheduler.CreateInstance().ScanningTask.ScanData.GrayImages[0].Image;
+            mScanAreaVM.ScanImage = mScanAreaVM.ScanEngine.ScanningTask.ScanData.GrayImages[0].Image;
             pictureBox.Image = mScanAreaVM.ScanImage;
         }
     }

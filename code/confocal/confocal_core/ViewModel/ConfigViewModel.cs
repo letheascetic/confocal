@@ -39,9 +39,6 @@ namespace confocal_core.ViewModel
         public event ChannelPowerChangedEventHandler ChannelPowerChangedEvent;
         public event ChannelActivateChangedEventHandler ChannelActivateChangedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        // private Scheduler mScheduler;
-
-        ///////////////////////////////////////////////////////////////////////////////////////////
         private ScanAcquisitionModel scanLiveMode;
         private ScanAcquisitionModel scanCaptureMode;
 

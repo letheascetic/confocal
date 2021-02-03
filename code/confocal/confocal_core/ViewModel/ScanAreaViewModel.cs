@@ -19,6 +19,12 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
         private readonly ConfigViewModel mConfig;
+        private readonly Scheduler mScheduler;
+
+        public Scheduler ScanEngine
+        {
+            get { return mScheduler; }
+        }
 
         public ConfigViewModel Config
         {
@@ -74,6 +80,7 @@ namespace confocal_core.ViewModel
         public ScanAreaViewModel()
         {
             mConfig = ConfigViewModel.GetConfig();
+            mScheduler = Scheduler.CreateInstance();
 
             // 初始化扫描宽度[X方向像素数]和高度[Y方向像素数]
             PixelDwell = mConfig.SelectedScanPixelDwell.Data;
