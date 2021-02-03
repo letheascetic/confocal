@@ -84,15 +84,13 @@ namespace confocal_core.ViewModel
         public API_RETURN_CODE ScanPixelCalibrationChangeCommand(int scanPixelCalibration)
         {
             ScanPixelCalibration = scanPixelCalibration;
-            mScheduler.ScanPixelCalibrationChangeCommand(ScanPixelCalibration);
-            return API_RETURN_CODE.API_SUCCESS;
+            return mScheduler.ScanPixelCalibrationChangeCommand(ScanPixelCalibration);
         }
 
         public API_RETURN_CODE ScanPixelScaleChangeCommand(int scanPixelScale)
         {
             ScanPixelScale = scanPixelScale;
-            mScheduler.ScanPixelScaleChangeCommand(scanPixelScale);
-            return API_RETURN_CODE.API_SUCCESS;
+            return mScheduler.ScanPixelScaleChangeCommand(scanPixelScale);
         }
 
     }
