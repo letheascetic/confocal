@@ -22,7 +22,7 @@ namespace confocal_core.Common
     /// <param name="sender"></param>
     /// <param name="channelIndex"></param>
     /// <param name="samples"></param>
-    public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, uint[] samples, long acquisitionCount);
+    public delegate void CiSamplesReceivedEventHandler(object sender, int channelIndex, int[] samples, long acquisitionCount);
 
     /// <summary>
     /// NI板卡接口类
@@ -68,7 +68,7 @@ namespace confocal_core.Common
         /// <returns></returns>
         public API_RETURN_CODE Start()
         {
-            mAcquisitionCount = Enumerable.Repeat<long>(0, mConfig.GetChannelNum()).ToArray();
+            mAcquisitionCount = Enumerable.Repeat<long>(-1, mConfig.GetChannelNum()).ToArray();
 
             API_RETURN_CODE code = ConfigAoTask();
             if (code != API_RETURN_CODE.API_SUCCESS)
@@ -284,12 +284,13 @@ namespace confocal_core.Common
                 mDoTask.DOChannels.CreateChannel(GetDoPhysicalChannelName(), "", ChannelLineGrouping.OneChannelForEachLine);
                 mDoTask.Control(TaskAction.Verify);
 
-                mDoTask.Timing.SampleClockRate = mSequence.OutputSampleRate;
+                int samplesPerChannel = mConfig.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT ? mSequence.OutputSampleCountPerFrame : mSequence.OutputSampleCountPerFrame * 2;
+                mDoTask.Timing.SampleClockRate = mSequence.TriggerOutputSampleRate;
                 mDoTask.Timing.ConfigureSampleClock("",
                     mDoTask.Timing.SampleClockRate,
                     SampleClockActiveEdge.Rising,
                     SampleQuantityMode.ContinuousSamples,
-                    mSequence.OutputSampleCountPerFrame);
+                    samplesPerChannel);
 
                 // 设置Do Start Trigger源为Ao Start Trigger[默认]，实现启动同步
                 string source = mConfig.Detector.StartTrigger;
@@ -469,7 +470,7 @@ namespace confocal_core.Common
                     return;
                 }
 
-                uint[] originSamples = mCiChannelReaders[index].ReadMultiSampleUInt32(mSequence.InputSampleCountPerAcquisition);
+                int[] originSamples = mCiChannelReaders[index].ReadMultiSampleInt32(mSequence.InputSampleCountPerAcquisition);
 
                 if (CiSamplesReceived != null)
                 {
@@ -488,6 +489,7 @@ namespace confocal_core.Common
             {
                 // 读取16位原始数据，每次读取单次采集的像素数
                 int channelNum = mConfig.GetChannelNum();
+
                 short[,] originSamples = mAiUnscaledReader.ReadInt16(mSequence.InputSampleCountPerAcquisition);
                 AnalogWaveform<short>[] waves = AnalogWaveform<short>.FromArray2D(originSamples);
 

@@ -28,6 +28,7 @@ namespace confocal_core.Model
         private int outputRoundTripCountPerFrame;
         private int outputSampleCountPerRoundTrip;
         private double outputSampleRate;
+        private double triggerOutputSampleRate;
         private double inputSampleRate;
         private int inputSampleCountPerRoundTrip;
         private int inputRoundTripCountPerFrame;
@@ -111,6 +112,14 @@ namespace confocal_core.Model
         {
             get { return outputSampleRate; }
             set { outputSampleRate = value; RaisePropertyChanged(() => OutputSampleRate); }
+        }
+        /// <summary>
+        /// 触发输出速率
+        /// </summary>
+        public double TriggerOutputSampleRate
+        {
+            get { return triggerOutputSampleRate; }
+            set { triggerOutputSampleRate = value; RaisePropertyChanged(() => TriggerOutputSampleRate); }
         }
         /// <summary>
         /// 样本采样速率
@@ -308,10 +317,23 @@ namespace confocal_core.Model
                 int ySamplesCount = config.GetExtendScanYPixels();
                 YCoordinates = CreateLinearArray(extendScanArea.ScanRange.Y, extendScanArea.ScanRange.Bottom, ySamplesCount);
 
-                TriggerVoltages = Enumerable.Repeat<byte>(0x00, lineSamples).ToArray();
-                for (int n = 0; n < TRIGGER_WIDTH_DEFAULT; n++)
+                if (config.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT)
                 {
-                    TriggerVoltages[lineStartSampleCount + n] = 0x01;
+                    TriggerVoltages = Enumerable.Repeat<byte>(0x00, lineSamples).ToArray();
+                    for (int n = 0; n < TRIGGER_WIDTH_DEFAULT; n++)
+                    {
+                        TriggerVoltages[lineStartSampleCount + n] = 0x01;
+                    }
+                }
+                else
+                {
+                    TriggerVoltages = Enumerable.Repeat<byte>(0x00, lineSamples * 2).ToArray();
+                    int start = lineStartSampleCount * 2;
+                    int end = (lineStartSampleCount + lineScanSampleCount) * 2;
+                    for (int i = start; i < end; i += 2)
+                    {
+                        TriggerVoltages[i] = 0x01;
+                    }
                 }
             }
             else
@@ -343,11 +365,30 @@ namespace confocal_core.Model
                 int ySamplesCount = config.GetExtendScanYPixels();
                 YCoordinates = CreateLinearArray(extendScanArea.ScanRange.Y, extendScanArea.ScanRange.Bottom, ySamplesCount);
 
-                TriggerVoltages = Enumerable.Repeat<byte>(0x00, lineSamples).ToArray();
-                for (int n = 0; n < TRIGGER_WIDTH_DEFAULT; n++)
+                if (config.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT)
                 {
-                    TriggerVoltages[lineStartSampleCount + n] = 0x01;
-                    TriggerVoltages[lineSamples - lineEndSampleCount + n] = 0x01;
+                    TriggerVoltages = Enumerable.Repeat<byte>(0x00, lineSamples).ToArray();
+                    for (int n = 0; n < TRIGGER_WIDTH_DEFAULT; n++)
+                    {
+                        TriggerVoltages[lineStartSampleCount + n] = 0x01;
+                        TriggerVoltages[lineSamples - lineEndSampleCount + n] = 0x01;
+                    }
+                }
+                else
+                {
+                    TriggerVoltages = Enumerable.Repeat<byte>(0x00, lineSamples * 2).ToArray();
+                    int start = lineStartSampleCount * 2;
+                    int end = (lineStartSampleCount + lineScanSampleCount) * 2;
+                    for (int i = start; i < end; i += 2)
+                    {
+                        TriggerVoltages[i] = 0x01;
+                    }
+                    start = (lineStartSampleCount + lineHoldSampleCount + lineScanSampleCount) * 2;
+                    end = lineSamples * 2;
+                    for (int i = start; i < end; i += 2)
+                    {
+                        TriggerVoltages[i] = 0x01;
+                    }
                 }
             }
 
@@ -356,12 +397,13 @@ namespace confocal_core.Model
 
             // 计算输出相关参数
             OutputSampleRate = 1e6 / config.SelectedScanPixelDwell.Data;
+            TriggerOutputSampleRate = config.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT ? OutputSampleRate : OutputSampleRate * 2;
             OutputSampleCountPerRoundTrip = XVoltages.Length;
             OutputRoundTripCountPerFrame = config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION ? YVoltages.Length : YVoltages.Length / 2;
             OutputSampleCountPerFrame = OutputSampleCountPerRoundTrip * OutputRoundTripCountPerFrame;
 
             // 计算采集相关参数
-            InputSampleRate = config.InputSampleRate;
+            InputSampleRate = config.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT ? config.InputSampleRate : OutputSampleRate;
             InputSampleCountPerPixel = (int)(InputSampleRate / OutputSampleRate);
             InputRoundTripCountPerFrame = OutputRoundTripCountPerFrame;
             if (config.SelectedScanDirection.ID == ScanDirectionModel.UNIDIRECTION)
@@ -437,7 +479,7 @@ namespace confocal_core.Model
                 }
             }
 
-            Array.Copy(TriggerVoltages, TriggerWave, OutputSampleCountPerRoundTrip);
+            Array.Copy(TriggerVoltages, TriggerWave, TriggerVoltages.Length);
 
             int resetSampleCount = (int)(ScanAreaModel.ScanLineStartTime / config.SelectedScanPixelDwell.Data);
             double[] y1ResetVoltages = CreateLinearArray(YVoltages.Last(), YVoltages[0], resetSampleCount);
@@ -489,9 +531,9 @@ namespace confocal_core.Model
         /// </summary>
         private void WaveInitialize()
         {
-            if (TriggerWave == null || TriggerWave.Length != OutputSampleCountPerRoundTrip)
+            if (TriggerWave == null || TriggerWave.Length != TriggerVoltages.Length)
             {
-                TriggerWave = new byte[OutputSampleCountPerRoundTrip];
+                TriggerWave = new byte[TriggerVoltages.Length];
             }
 
             if (XWave == null || XWave.Length != OutputSampleCountPerFrame)

@@ -68,7 +68,7 @@ namespace confocal_ui.View
         {
             mScanParasVM.UpdateChartValues();
             chart.Series[0].Points.DataBindXY(mScanParasVM.TimeValues, mScanParasVM.XGalvoValues);
-            chart.Series[1].Points.DataBindXY(mScanParasVM.TimeValues, mScanParasVM.TriggerValues);
+            chart.Series[1].Points.DataBindXY(mScanParasVM.TriggerTimeValues, mScanParasVM.TriggerValues);
             chart.Update();
         }
         

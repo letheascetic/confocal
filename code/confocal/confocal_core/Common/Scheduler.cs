@@ -765,7 +765,7 @@ namespace confocal_core.Common
             {
                 PmtSampleData sampleData = new PmtSampleData(samples, acquisitionCount);
                 mPmtSampleQueue.TryAdd(sampleData, 50, mCancelToken.Token);
-                // Logger.Info(string.Format("Enqueue Pmt Samples [{0}].", acquisitionCount));
+                // Logger.Info(string.Format("Enqueue Pmt Samples [{0}][{1}].", acquisitionCount, samples[0].Length));
             }
             catch (OperationCanceledException)
             {
@@ -774,7 +774,7 @@ namespace confocal_core.Common
             }
         }
 
-        private void ApdReceiveSamples(object sender, int channelIndex, uint[] samples, long acquisitionCount)
+        private void ApdReceiveSamples(object sender, int channelIndex, int[] samples, long acquisitionCount)
         {
             try
             {
@@ -842,7 +842,7 @@ namespace confocal_core.Common
                     if (mPmtSampleQueue.TryTake(out PmtSampleData sampleData, 20, mCancelToken.Token))
                     {
                         ScanningTask.ScanInfo.UpdateScanInfo(sampleData.AcquisitionCount);
-                        ScanningTask.ConvertPmtSamples(sampleData);
+                        ScanningTask.ConvertSamples(sampleData);
                         if (ScanImageUpdatedEvent != null)
                         {
                             ScanImageUpdatedEvent.Invoke(ScanningTask.ScanData.GrayImages);
@@ -864,15 +864,23 @@ namespace confocal_core.Common
             {
                 try
                 {
-                    mApdSampleQueue.TryTake(out ApdSampleData sampleData, 20, mCancelToken.Token);
+                    if (mApdSampleQueue.TryTake(out ApdSampleData sampleData, 20, mCancelToken.Token))
+                    {
+                        ScanningTask.ScanInfo.UpdateScanInfo(sampleData.AcquisitionCount);
+                        ScanningTask.ConvertSamples(sampleData);
+                        if (ScanImageUpdatedEvent != null)
+                        {
+                            ScanImageUpdatedEvent.Invoke(ScanningTask.ScanData.GrayImages);
+                        }
+                    }
                 }
                 catch (OperationCanceledException)
                 {
                     Logger.Info(string.Format("Apd Sample Worker Canceled."));
                     break;
                 }
-                Logger.Info(string.Format("Apd Sample Worker Finished."));
             }
+            Logger.Info(string.Format("Apd Sample Worker Finished."));
         }
 
         private void Dispose()

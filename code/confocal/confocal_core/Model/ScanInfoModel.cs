@@ -106,10 +106,10 @@ namespace confocal_core.Model
             AcquisitionCount = acquisitionCount;
             CurrentBank = (int)(AcquisitionCount % NumOfBank);
             CurrentFrame = AcquisitionCount / NumOfBank;
-            if (CurrentBank == 0 && CurrentFrame > 0)
+            if (CurrentBank == NumOfBank -1)
             {
                 TimeSpan = (DateTime.Now - StartTime).TotalSeconds;
-                FrameTime = TimeSpan / CurrentFrame;
+                FrameTime = TimeSpan / (CurrentFrame + 1);
                 FPS = 1.0 / FrameTime;
                 Logger.Info(string.Format("Scan Info [{0}].", this));
             }

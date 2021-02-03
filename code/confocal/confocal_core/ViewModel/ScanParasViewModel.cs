@@ -18,6 +18,7 @@ namespace confocal_core.ViewModel
 
         private readonly Scheduler mScheduler;
 
+        private double[] triggerTimeValues;
         private double[] timeValues;
         private double[] xGalvoValues;
         private double[] yGalvoValues;
@@ -28,6 +29,12 @@ namespace confocal_core.ViewModel
         {
             get { return timeValues; }
             set { timeValues = value; RaisePropertyChanged(() => TimeValues); }
+        }
+
+        public double[] TriggerTimeValues
+        {
+            get { return triggerTimeValues; }
+            set { triggerTimeValues = value; RaisePropertyChanged(() => TriggerTimeValues); }
         }
 
         public double[] XGalvoValues
@@ -74,6 +81,21 @@ namespace confocal_core.ViewModel
             for (int i = 1; i < sampleCount; i++)
             {
                 TimeValues[i] = TimeValues[i - 1] + sampleTime;
+            }
+
+            if (Engine.Config.Detector.CurrentDetecor.ID == DetectorTypeModel.PMT)
+            {
+                TriggerTimeValues = TimeValues;
+            }
+            else
+            {
+                sampleTime /= 2;
+                sampleCount *= 2;
+                TriggerTimeValues = new double[sampleCount];
+                for (int i = 1; i < sampleCount; i++)
+                {
+                    TriggerTimeValues[i] = TriggerTimeValues[i - 1] + sampleTime;
+                }
             }
 
             XGalvoValues = Enumerable.Concat(Engine.Sequence.XVoltages, Engine.Sequence.XVoltages).ToArray();

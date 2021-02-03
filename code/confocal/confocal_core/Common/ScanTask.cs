@@ -89,7 +89,7 @@ namespace confocal_core.Common
         /// 更新Bank图像
         /// </summary>
         /// <param name="sampleData"></param>
-        public void ConvertPmtSamples(PmtSampleData sampleData)
+        public void ConvertSamples(PmtSampleData sampleData)
         {
             for (int i = 0; i < mConfig.GetChannelNum(); i++)
             {
@@ -111,6 +111,24 @@ namespace confocal_core.Common
                     Matrix.ToGrayImage(originImage, ref grayImage, scale, mConfig.ScanChannels[i].Offset);
                 }
             }
+        }
+
+        /// <summary>
+        /// 更新Bank图像
+        /// </summary>
+        /// <param name="sampleData"></param>
+        public void ConvertSamples(ApdSampleData sampleData)
+        {
+            Matrix.ToCounter(sampleData.NSamples, mSequence.InputSampleCountPerRow);
+            NDArray matrix = Matrix.ToMatrix(sampleData.NSamples, mSequence.InputSampleCountPerPixel, mSequence.InputPixelCountPerRow,
+                mSequence.InputPixelCountPerAcquisition / mSequence.InputPixelCountPerRow, mConfig.SelectedScanDirection.ID,
+                mConfig.SelectedScanPixelDwell.ScanPixelOffset, mConfig.SelectedScanPixelDwell.ScanPixelCalibration,
+                mConfig.SelectedScanPixel.Data);
+            Mat originImage = ScanData.OriginImages[sampleData.ChannelIndex].Banks[ScanInfo.CurrentBank].Bank;
+            Matrix.ToBankImage(matrix, ref originImage);
+            Mat grayImage = ScanData.GrayImages[sampleData.ChannelIndex].Banks[ScanInfo.CurrentBank].Bank;
+            double scale = 1.0 / Math.Pow(2, mConfig.SelectedScanPixelDwell.ScanPixelScale);
+            Matrix.ToGrayImage(originImage, ref grayImage, scale, mConfig.ScanChannels[sampleData.ChannelIndex].Offset);
         }
 
     }
