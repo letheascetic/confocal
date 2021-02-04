@@ -16,6 +16,12 @@ namespace confocal_ui.View
             InitializeComponent();
         }
 
+        private void ImageToUpdate(object sender, EventArgs e)
+        {
+            
+        }
+
+
 
     }
 }

@@ -29,6 +29,7 @@ namespace confocal_ui
         private FormSysSettings mFormSysSettings;
         private FormScanParas mFormScanParas;
         private FormScanImage mFormScanImage;
+        private FormHistogram mFormHistogram;
 
         private MainViemModel mMainVM;
 
@@ -75,6 +76,13 @@ namespace confocal_ui
                 MdiParent = this,
                 Visible = false
             };
+
+            mFormHistogram = new FormHistogram
+            {
+                MdiParent = this,
+                Visible = false
+            };
+            
         }
 
         private void InitAppearance()
@@ -196,6 +204,11 @@ namespace confocal_ui
         private void ScanParasClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
             mFormScanParas.Visible = cmdScanParas.Checked;
+        }
+
+        private void HistogramClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            mFormHistogram.Visible = cmdHistogram.Checked;
         }
     }
 }

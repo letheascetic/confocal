@@ -71,6 +71,8 @@
             this.btnLaserRelease = new System.Windows.Forms.ToolStripButton();
             this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
             this.toolBar = new C1.Win.C1Command.C1ToolBar();
+            this.cmdLinkHistogram = new C1.Win.C1Command.C1CommandLink();
+            this.cmdHistogram = new C1.Win.C1Command.C1Command();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockBottom)).BeginInit();
             this.dockBottom.SuspendLayout();
@@ -113,6 +115,7 @@
             this.cmdHolder.Commands.Add(this.cmdScanImage);
             this.cmdHolder.Commands.Add(this.cmdSysCfg);
             this.cmdHolder.Commands.Add(this.cmdScanParas);
+            this.cmdHolder.Commands.Add(this.cmdHistogram);
             this.cmdHolder.Owner = this;
             // 
             // cmdFileNew
@@ -205,7 +208,8 @@
             this.cmdLinkScanSettings,
             this.cmdLinkScanImage,
             this.cmdLinkCfg,
-            this.cmdLinkScanParas});
+            this.cmdLinkScanParas,
+            this.cmdLinkHistogram});
             this.cmdMenuWindow.HideNonRecentLinks = false;
             this.cmdMenuWindow.Name = "cmdMenuWindow";
             this.cmdMenuWindow.ShortcutText = "";
@@ -432,6 +436,18 @@
             this.toolBar.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.toolBar.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
+            // cmdLinkHistogram
+            // 
+            this.cmdLinkHistogram.Command = this.cmdHistogram;
+            this.cmdLinkHistogram.SortOrder = 5;
+            // 
+            // cmdHistogram
+            // 
+            this.cmdHistogram.Name = "cmdHistogram";
+            this.cmdHistogram.ShortcutText = "";
+            this.cmdHistogram.Text = "直方图分布（&H）";
+            this.cmdHistogram.Click += new C1.Win.C1Command.ClickEventHandler(this.HistogramClick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -511,5 +527,7 @@
         private System.Windows.Forms.ToolStripButton btnLaserRelease;
         private C1.Win.C1Command.C1CommandLink cmdLinkScanParas;
         private C1.Win.C1Command.C1Command cmdScanParas;
+        private C1.Win.C1Command.C1CommandLink cmdLinkHistogram;
+        private C1.Win.C1Command.C1Command cmdHistogram;
     }
 }
