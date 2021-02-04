@@ -491,11 +491,6 @@ namespace confocal_core.Common
                 // 2 原先已经打开的激光器被关闭了：
                 // 2.1 该激光器是唯一打开的激光器，则不应该被关闭，设置Activated为真，打开激光器，启动扫描
                 // 2.2 该激光器不是唯一打开的激光器，则可以被关闭，关闭该激光器，
-                
-                if (channel.Activated)
-                {
-                    return StartScanTask(0, "实时扫描");
-                }
 
                 if (!channel.Activated && mConfig.GetActivatedChannelNum() == 0)
                 {

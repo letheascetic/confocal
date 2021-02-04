@@ -27,7 +27,8 @@ namespace confocal_ui
         private FormScanSettings mFormScanSetting;
         private FormScanArea mFormScanArea;
         private FormSysSettings mFormSysSettings;
-        FormScanParas mFormScanParas;
+        private FormScanParas mFormScanParas;
+        private FormScanImage mFormScanImage;
 
         private MainViemModel mMainVM;
 
@@ -44,7 +45,6 @@ namespace confocal_ui
         {
             mMainVM = new MainViemModel();
 
-            // 
             mFormScanSetting = new FormScanSettings
             {
                 MdiParent = this,
@@ -58,6 +58,18 @@ namespace confocal_ui
             };
 
             mFormSysSettings = new FormSysSettings
+            {
+                MdiParent = this,
+                Visible = false
+            };
+
+            mFormScanParas = new FormScanParas
+            {
+                MdiParent = this,
+                Visible = false
+            };
+
+            mFormScanImage = new FormScanImage
             {
                 MdiParent = this,
                 Visible = false
@@ -83,6 +95,8 @@ namespace confocal_ui
         private void SetDataBindings()
         {
             // menu strip
+            
+
 
             // window
         }
@@ -92,12 +106,8 @@ namespace confocal_ui
         /// </summary>
         private void RegisterEvents()
         {
-            // mFormScanSetting.ScanAcquisitionChangedEvent += ScanAcquisitionChangedHandler;
-            // mFormScanSetting.ScanPixelChangedEvent += mFormScanArea.ScanPixelChangedHandler;
-            // mFormScanArea.ScanPixelChangedEvent += mFormScanSetting.ScanPixelChangedHandler;
-            //mFormScanSetting.ScanPixelDwellChangedEvent += mFormScanArea.ScanPixelDwellChangedHandler;
+            mMainVM.Engine.ScanAcquisitionChangedEvent += ScanAcquisitionChangedHandler;
         }
-
 
         /// <summary>
         /// 采集模式更新处理函数
@@ -106,79 +116,11 @@ namespace confocal_ui
         /// <returns></returns>
         private API_RETURN_CODE ScanAcquisitionChangedHandler(ScanAcquisitionModel scanAcquisition)
         {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 扫描头更新处理函数
-        /// </summary>
-        /// <param name="scannerHead"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE ScannerHeadModelChangedHandler(ScannerHeadModel scannerHead)
-        {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 扫描方向更新处理函数
-        /// </summary>
-        /// <param name="scanDirection"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE ScanDirectionChangedHandler(ScanDirectionModel scanDirection)
-        {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 扫描模式更新处理函数
-        /// </summary>
-        /// <param name="scanMode"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE ScanModeChangedHandler(ScanModeModel scanMode)
-        {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 跳行扫描使能更新处理函数
-        /// </summary>
-        /// <param name="lineSkipEnabled"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE LineSkipEnableChangedEventHandler(bool lineSkipEnabled)
-        {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 跳行扫描参数更新处理函数
-        /// </summary>
-        /// <param name="lineSkip"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE LineSkipChangedHandler(ScanLineSkipModel lineSkip)
-        {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 扫描像素更新处理函数
-        /// </summary>
-        /// <param name="scanPixel"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE ScanPixelChangedHandler(ScanPixelModel scanPixel)
-        {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 像素事件更新处理函数
-        /// </summary>
-        /// <param name="scanPixelDwell"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE ScanPixelDwellChangedHandler(ScanPixelDwellModel scanPixelDwell)
-        {
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-        /// <summary>
-        /// 小孔孔径更新处理函数
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
-        private API_RETURN_CODE PinHoleChangedHandler(int id, int size)
-        {
+            if (scanAcquisition != null)
+            {
+                mFormScanImage.Visible = true;
+                cmdScanImage.Checked = mFormScanImage.Visible;
+            }
             return API_RETURN_CODE.API_SUCCESS;
         }
 
@@ -243,11 +185,7 @@ namespace confocal_ui
 
         private void ScanImageClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            FormImage mFormImage = new FormImage
-            {
-                MdiParent = this
-            };
-            mFormImage.Show();
+            mFormScanImage.Visible = cmdScanImage.Checked;
         }
 
         private void SysSettingsClick(object sender, C1.Win.C1Command.ClickEventArgs e)
@@ -257,14 +195,7 @@ namespace confocal_ui
 
         private void ScanParasClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
-            if (mFormScanParas == null)
-            {
-                mFormScanParas = new FormScanParas
-                {
-                    MdiParent = this
-                };
-                mFormScanParas.Show();
-            }
+            mFormScanParas.Visible = cmdScanParas.Checked;
         }
     }
 }

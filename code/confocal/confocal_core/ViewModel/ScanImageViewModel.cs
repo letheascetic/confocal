@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using confocal_core.Common;
+using GalaSoft.MvvmLight;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,23 @@ using System.Text;
 
 namespace confocal_core.ViewModel
 {
-    public class ImageViewModel : ViewModelBase
+    public class ScanImageViewModel : ViewModelBase
     {
         ///////////////////////////////////////////////////////////////////////////////////////////
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
-        
+
+        private readonly Scheduler mScheduler;
+
+        public Scheduler Engine
+        {
+            get { return mScheduler; }
+        }
+
+        public ScanImageViewModel()
+        {
+            mScheduler = Scheduler.CreateInstance();
+        }
 
     }
 }

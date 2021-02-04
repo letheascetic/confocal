@@ -142,7 +142,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ImageViewModel.cs" />
+    <Compile Include="ViewModel\ScanImageViewModel.cs" />
     <Compile Include="ViewModel\MainViemModel.cs" />
     <Compile Include="ViewModel\ScanAreaViewModel.cs" />
     <Compile Include="ViewModel\ScanParasViewModel.cs" />

@@ -243,6 +243,7 @@
             // 
             // cmdScanImage
             // 
+            this.cmdScanImage.CheckAutoToggle = true;
             this.cmdScanImage.Name = "cmdScanImage";
             this.cmdScanImage.ShortcutText = "";
             this.cmdScanImage.Text = "扫描图像（&I）";
@@ -268,6 +269,7 @@
             // 
             // cmdScanParas
             // 
+            this.cmdScanParas.CheckAutoToggle = true;
             this.cmdScanParas.Name = "cmdScanParas";
             this.cmdScanParas.ShortcutText = "";
             this.cmdScanParas.Text = "扫描参数（&P）";

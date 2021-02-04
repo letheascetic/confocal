@@ -110,6 +110,8 @@
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="NationalInstruments.Common, Version=19.0.40.49152, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL" />
+    <Reference Include="NationalInstruments.NetworkVariable, Version=19.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4, processorArchitecture=MSIL" />
     <Reference Include="NumSharp.Core, Version=0.20.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="SnapFormExtender">
       <HintPath>..\dll\SnapFormExtender.dll</HintPath>
@@ -148,11 +150,11 @@
     <Compile Include="View\FormSysSettings.Designer.cs">
       <DependentUpon>FormSysSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FormImage.cs">
+    <Compile Include="View\FormScanImage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormImage.Designer.cs">
-      <DependentUpon>FormImage.cs</DependentUpon>
+    <Compile Include="View\FormScanImage.Designer.cs">
+      <DependentUpon>FormScanImage.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
@@ -186,8 +188,8 @@
     <EmbeddedResource Include="View\FormSysSettings.resx">
       <DependentUpon>FormSysSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\FormImage.resx">
-      <DependentUpon>FormImage.cs</DependentUpon>
+    <EmbeddedResource Include="View\FormScanImage.resx">
+      <DependentUpon>FormScanImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using confocal_core.Common;
+using GalaSoft.MvvmLight;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace confocal_core.ViewModel
         private static readonly ILog Logger = LogManager.GetLogger("info");
         ///////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly ConfigViewModel mConfig;
+        private readonly Scheduler mScheduler;
 
-        public ConfigViewModel Config
+        public Scheduler Engine
         {
-            get { return mConfig; }
+            get { return mScheduler; }
         }
 
         public MainViemModel()
         {
-            mConfig = ConfigViewModel.GetConfig();
+            mScheduler = Scheduler.CreateInstance();
         }
 
     }
