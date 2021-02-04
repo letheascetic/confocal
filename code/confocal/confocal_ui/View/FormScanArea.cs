@@ -368,12 +368,10 @@ namespace confocal_ui.View
 
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
             DrawScanArea(mCoordinate, mScanAreaGra, pbxScanArea);
-
         }
 
         private void ImageToUpdate(object sender, EventArgs e)
         {
-            //Logger.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             mScanAreaVM.ScanImage = mScanAreaVM.Engine.ScanningTask.ScanData.GrayImages[0].Image;
             pictureBox.Image = mScanAreaVM.ScanImage;
         }

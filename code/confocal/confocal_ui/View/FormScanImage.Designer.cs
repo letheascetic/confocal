@@ -233,6 +233,7 @@
             // imageAll
             // 
             this.imageAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageAll.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.imageAll.Location = new System.Drawing.Point(0, 0);
             this.imageAll.Margin = new System.Windows.Forms.Padding(0);
             this.imageAll.Name = "imageAll";
@@ -257,6 +258,7 @@
             // image405
             // 
             this.image405.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image405.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.image405.Location = new System.Drawing.Point(0, 0);
             this.image405.Margin = new System.Windows.Forms.Padding(0);
             this.image405.Name = "image405";
@@ -281,6 +283,7 @@
             // image488
             // 
             this.image488.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image488.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.image488.Location = new System.Drawing.Point(0, 0);
             this.image488.Margin = new System.Windows.Forms.Padding(0);
             this.image488.Name = "image488";
@@ -305,6 +308,7 @@
             // image561
             // 
             this.image561.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image561.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.image561.Location = new System.Drawing.Point(0, 0);
             this.image561.Margin = new System.Windows.Forms.Padding(0);
             this.image561.Name = "image561";
@@ -329,6 +333,7 @@
             // image640
             // 
             this.image640.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image640.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.image640.Location = new System.Drawing.Point(0, 0);
             this.image640.Margin = new System.Windows.Forms.Padding(0);
             this.image640.Name = "image640";

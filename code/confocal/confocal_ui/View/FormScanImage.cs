@@ -42,6 +42,20 @@ namespace confocal_ui.View
             mTabPages = new TabPage[] { pageAll, page405, page488, page561, page640 };
             mImages = new ImageBox[] { imageAll, image405, image488, image561, image640 };
             InitializeTabPages();
+
+            lbPixelSize.Text = string.Format("{0} um/px", mScanImageVM.Engine.Config.ScanPixelSize.ToString("F3"));
+            lbScanPixel.Text = string.Format("{0} x {1} pixels", mScanImageVM.Engine.Config.SelectedScanPixel.Data, mScanImageVM.Engine.Config.SelectedScanPixel.Data);
+            lbFps.Text = string.Format("{0} fps", mScanImageVM.Engine.Sequence.FPS.ToString("F3"));
+            if (mScanImageVM.Engine.Config.IsScanning)
+            {
+                lbFrame.Text = string.Format("NO. {0} frame", mScanImageVM.Engine.ScanningTask.ScanInfo.CurrentFrame);
+                lbTimeSpan.Text = string.Format("{0} secs", mScanImageVM.Engine.ScanningTask.ScanInfo.TimeSpan.ToString("F1"));
+            }
+            else
+            {
+                lbFrame.Text = string.Format("NO. 0 frame");
+                lbTimeSpan.Text = string.Format("0.0 secs");
+            }
         }
 
         /// <summary>
@@ -51,6 +65,7 @@ namespace confocal_ui.View
         {
             mScanImageVM.Engine.ChannelActivateChangedEvent += ChannelActivateChangedEventHandler;
             mScanImageVM.Engine.ScanAcquisitionChangedEvent += ScanAcquisitionChangedEventHandler;
+            mScanImageVM.Engine.ScanPixelChangedEvent += ScanPixelChangedEventHandler;
         }
 
         /// <summary>
@@ -104,11 +119,22 @@ namespace confocal_ui.View
             return API_RETURN_CODE.API_SUCCESS;
         }
 
+        private API_RETURN_CODE ScanPixelChangedEventHandler(ScanPixelModel scanPixel)
+        {
+            lbPixelSize.Text = string.Format("{0} um/px", mScanImageVM.Engine.Config.ScanPixelSize.ToString("F3"));
+            lbFps.Text = string.Format("{0} fps", mScanImageVM.Engine.Sequence.FPS.ToString("F3"));
+            lbScanPixel.Text = string.Format("{0} x {1} pixels", mScanImageVM.Engine.Config.SelectedScanPixel.Data, mScanImageVM.Engine.Config.SelectedScanPixel.Data);
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
         private void ImageToUpdate(object sender, EventArgs e)
         {
+            int id = mScanImageVM.Engine.Config.ScanChannels.Where(p => p.Activated).First().ID;
+            lbFrame.Text = string.Format("NO. {0} frame", mScanImageVM.Engine.ScanningTask.ScanInfo.CurrentFrame[id]);
+            lbTimeSpan.Text = string.Format("{0} secs", mScanImageVM.Engine.ScanningTask.ScanInfo.TimeSpan.ToString("F1"));
             foreach (TabPage page in tabControl.TabPages)
             {
-                int id = int.Parse(page.Tag.ToString());
+                id = int.Parse(page.Tag.ToString());
                 if (id >= 0)
                 {
                     ImageBox imageBox = mImages.Where(p => int.Parse(p.Tag.ToString()) == id).First();
