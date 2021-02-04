@@ -44,6 +44,7 @@
             this.cbxLineSkip = new C1.Win.C1InputPanel.InputComboBox();
             this.separator1 = new C1.Win.C1InputPanel.InputSeparator();
             this.lbPixelDwell = new C1.Win.C1InputPanel.InputLabel();
+            this.nbScanPixelScale = new C1.Win.C1InputPanel.InputNumericBox();
             this.rbtnFastMode = new C1.Win.C1InputPanel.InputButton();
             this.btnPixelDwell2 = new C1.Win.C1InputPanel.InputButton();
             this.btnPixelDwell4 = new C1.Win.C1InputPanel.InputButton();
@@ -120,7 +121,6 @@
             this.btn640Power = new C1.Win.C1InputPanel.InputButton();
             this.tbar640Power = new C1.Win.C1InputPanel.InputTrackBar();
             this.tbx640Power = new C1.Win.C1InputPanel.InputTextBox();
-            this.nbScanPixelScale = new C1.Win.C1InputPanel.InputNumericBox();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -339,6 +339,23 @@
             this.lbPixelDwell.Name = "lbPixelDwell";
             this.lbPixelDwell.Text = "像素时间（us）";
             this.lbPixelDwell.Width = 190;
+            // 
+            // nbScanPixelScale
+            // 
+            this.nbScanPixelScale.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.nbScanPixelScale.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nbScanPixelScale.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.nbScanPixelScale.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            -2147483648});
+            this.nbScanPixelScale.Name = "nbScanPixelScale";
+            this.nbScanPixelScale.Width = 40;
             // 
             // rbtnFastMode
             // 
@@ -884,18 +901,6 @@
             this.tbx640Power.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbx640Power.Name = "tbx640Power";
             this.tbx640Power.Width = 40;
-            // 
-            // nbScanPixelScale
-            // 
-            this.nbScanPixelScale.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.nbScanPixelScale.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.nbScanPixelScale.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.nbScanPixelScale.Name = "nbScanPixelScale";
-            this.nbScanPixelScale.Width = 40;
             // 
             // FormScanSettings
             // 

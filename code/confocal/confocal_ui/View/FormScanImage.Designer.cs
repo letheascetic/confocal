@@ -258,7 +258,7 @@
             // image405
             // 
             this.image405.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.image405.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
+            this.image405.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.RightClickMenu;
             this.image405.Location = new System.Drawing.Point(0, 0);
             this.image405.Margin = new System.Windows.Forms.Padding(0);
             this.image405.Name = "image405";
