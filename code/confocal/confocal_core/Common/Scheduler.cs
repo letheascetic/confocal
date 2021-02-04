@@ -20,7 +20,7 @@ namespace confocal_core.Common
         ///////////////////////////////////////////////////////////////////////////////////////////
         public event ScanImageUpdatedEventHandler ScanImageUpdatedEvent;
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private static readonly int PMT_TASK_COUNT = 1;
+        private static readonly int PMT_TASK_COUNT = 4;
         private static readonly int APD_TASK_COUNT = 4;
         ///////////////////////////////////////////////////////////////////////////////////////////
         public event ScanAreaChangedEventHandler ScanAreaChangedEvent;
@@ -694,6 +694,17 @@ namespace confocal_core.Common
             mConfig.Detector.TriggerReceive = triggerReceive;
             Logger.Info(string.Format("Trigger Receiver [{0}].", mConfig.Detector.TriggerReceive));
             return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 控制振镜偏转到其偏置电压对应的角度
+        /// </summary>
+        /// <returns></returns>
+        public API_RETURN_CODE GalvoCalibrationCommand()
+        {
+            API_RETURN_CODE code = mNiDaq.GalvoCalibration(Config.GalvoProperty.XGalvoAoChannel, Config.GalvoProperty.XGalvoOffsetVoltage);
+            mNiDaq.GalvoCalibration(Config.GalvoProperty.YGalvoAoChannel, Config.GalvoProperty.YGalvoOffsetVoltage);
+            return code;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////

@@ -186,6 +186,26 @@ namespace confocal_core.Common
 
         }
 
+        public API_RETURN_CODE GalvoCalibration(string channelName, double offsetVoltage)
+        {
+            API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
+            try
+            {
+                using (Task myTask = new Task())
+                {
+                    myTask.AOChannels.CreateVoltageChannel(channelName, "", -10.0, 10.0, AOVoltageUnits.Volts);
+                    AnalogSingleChannelWriter writer = new AnalogSingleChannelWriter(myTask.Stream);
+                    writer.WriteSingleSample(true, offsetVoltage);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(string.Format("galvo calibration exception: [{0}].", e));
+                code = API_RETURN_CODE.API_FAILED_NI_CONFIG_AO_TASK_EXCEPTION;
+            }
+            return code;
+        }
+
         /// <summary>
         /// 启动所有任务
         /// </summary>
@@ -425,7 +445,7 @@ namespace confocal_core.Common
                     SampleQuantityMode.FiniteSamples,
                     mSequence.InputSampleCountPerRow);
 
-                mAiTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerAcquisition);
+                mAiTask.Stream.ConfigureInputBuffer(mSequence.InputSampleCountPerFrame);
 
                 // 设置Ai Start Trigger源为PFIx，PFIx与Acq Trigger[一般是Do]物理直连，接收Do的输出信号，作为触发
                 string source = mConfig.Detector.TriggerReceive;

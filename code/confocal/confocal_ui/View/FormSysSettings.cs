@@ -289,5 +289,9 @@ namespace confocal_ui.View
             mSysSettingsViewModel.Engine.TriggerReceiverChangeCommand(cbxTriggerR.SelectedItem.ToString());
         }
 
+        private void GalvoCalibration(object sender, EventArgs e)
+        {
+            mSysSettingsViewModel.Engine.GalvoCalibrationCommand();
+        }
     }
 }

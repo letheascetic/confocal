@@ -100,6 +100,7 @@ namespace confocal_ui.View
             this.lb6402 = new C1.Win.C1InputPanel.InputLabel();
             this.cbx640Ctr = new C1.Win.C1InputPanel.InputComboBox();
             this.cbx640Channel = new C1.Win.C1InputPanel.InputComboBox();
+            this.lbCalibration = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.inputPanel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,6 +145,7 @@ namespace confocal_ui.View
             this.inputPanel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.inputPanel.Items.Add(this.ghDevice);
             this.inputPanel.Items.Add(this.btnSearch);
+            this.inputPanel.Items.Add(this.lbCalibration);
             this.inputPanel.Items.Add(this.lbInfo);
             this.inputPanel.Items.Add(this.ghScanControl);
             this.inputPanel.Items.Add(this.lbXGalvo);
@@ -228,7 +230,7 @@ namespace confocal_ui.View
             this.lbInfo.Break = C1.Win.C1InputPanel.BreakType.Group;
             this.lbInfo.ForeColor = System.Drawing.Color.Red;
             this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Text = "                        没有发现NI设备！";
+            this.lbInfo.Text = "               没有发现NI设备！";
             this.lbInfo.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Far;
             this.lbInfo.Visibility = C1.Win.C1InputPanel.Visibility.Hidden;
             // 
@@ -733,6 +735,14 @@ namespace confocal_ui.View
             this.cbx640Channel.Name = "cbx640Channel";
             this.cbx640Channel.Width = 90;
             // 
+            // lbCalibration
+            // 
+            this.lbCalibration.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.lbCalibration.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbCalibration.Name = "lbCalibration";
+            this.lbCalibration.Text = "校准";
+            this.lbCalibration.Click += new System.EventHandler(this.GalvoCalibration);
+            // 
             // FormSysSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -826,5 +836,6 @@ namespace confocal_ui.View
         private C1.Win.C1InputPanel.InputLabel lb6402;
         private C1.Win.C1InputPanel.InputComboBox cbx640Ctr;
         private C1.Win.C1InputPanel.InputComboBox cbx640Channel;
+        private C1.Win.C1InputPanel.InputButton lbCalibration;
     }
 }
