@@ -16,6 +16,14 @@ namespace confocal_core.ViewModel
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         private readonly Scheduler mScheduler;
+        private ScanTask mScanTask;
+
+        private ScanTask Task
+        {
+            get { return mScanTask; }
+            set { mScanTask = value; RaisePropertyChanged(() => Task); }
+        }
+
         private Mat mScanImageAll;
         private Mat mScanImage405;
         private Mat mScanImage488;
@@ -57,7 +65,7 @@ namespace confocal_core.ViewModel
             set { mScanImage640 = value; RaisePropertyChanged(() => ScanImage640); }
         }
 
-        public ScanImageViewModel()
+        public ScanImageViewModel(ScanTask scanTask)
         {
             mScheduler = Scheduler.CreateInstance();
         }

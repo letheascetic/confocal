@@ -69,12 +69,12 @@ namespace confocal_ui
                 Visible = false
             };
 
-            mFormScanImage = new FormScanImage
+            mMainVM.Engine.CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+            mFormScanImage = new FormScanImage(scanTask)
             {
                 MdiParent = this,
                 Visible = false
             };
-
         }
 
         private void InitAppearance()

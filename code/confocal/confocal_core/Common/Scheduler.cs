@@ -110,27 +110,47 @@ namespace confocal_core.Common
         }
 
         /// <summary>
+        /// 创建指定TaskID的扫描任务，若已经存在，则返回已经存在的
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="taskName"></param>
+        /// <param name="scanTask"></param>
+        /// <returns></returns>
+        public API_RETURN_CODE CreateScanTask(int taskId, string taskName, out ScanTask scanTask)
+        {
+            scanTask = GetScanTask(taskId);
+            if(scanTask == null)
+            {
+                scanTask = new ScanTask(taskId, taskName);
+                ScanTasks.Add(scanTask);
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 获取指定TaskId的扫描任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        public ScanTask GetScanTask(int taskId)
+        {
+            return ScanTasks.Where(p => p.TaskId == taskId).FirstOrDefault();
+        }
+
+        /// <summary>
         /// 启动扫描任务
         /// </summary>
         /// <param name="taskId"></param>
         /// <param name="taskName"></param>
         /// <returns></returns>
-        public API_RETURN_CODE StartScanTask(int taskId, string taskName)
+        public API_RETURN_CODE StartScanTask(ScanTask scanTask)
         {
             API_RETURN_CODE code;
             if (mConfig.GetActivatedChannelNum() == 0)
             {
                 code = API_RETURN_CODE.API_FAILED_NI_NO_AI_CHANNEL_ACTIVATED;
-                Logger.Info(string.Format("start scan task[{0}|{1}] failed: [{2}].", taskId, taskName, code));
+                Logger.Info(string.Format("start scan task[{0}|{1}] failed: [{2}].", scanTask.TaskId, scanTask.TaskName, code));
                 return code;
-            }
-
-            ScanTask scanTask = FindScanTask(taskId);
-
-            if (scanTask == null)
-            {
-                scanTask = new ScanTask(taskId, taskName);
-                ScanTasks.Add(scanTask);
             }
 
             ScanningTask = scanTask;
@@ -184,7 +204,7 @@ namespace confocal_core.Common
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_INVALID;
             }
 
-            if (FindScanTask(ScanningTask.TaskId) == null)
+            if (GetScanTask(ScanningTask.TaskId) == null)
             {
                 return API_RETURN_CODE.API_FAILED_SCAN_TASK_NOT_FOUND;
             }
@@ -213,30 +233,6 @@ namespace confocal_core.Common
             return API_RETURN_CODE.API_SUCCESS;
         }
 
-        /// <summary>
-        /// 查找任务
-        /// </summary>
-        /// <param name="taskId"></param>
-        /// <returns></returns>
-        public ScanTask FindScanTask(int taskId)
-        {
-            return ScanTasks.Where(p => p.TaskId == taskId).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// 在属性变化前执行
-        /// </summary>
-        /// <returns></returns>
-        public API_RETURN_CODE BeforePropertyChanged()
-        {
-            // 如果当前正在采集(有任一采集模式使能)，则先停止采集
-            if (ConfigViewModel.GetConfig().IsScanning)
-            {
-                return StopScanTask();
-            }
-            return API_RETURN_CODE.API_SUCCESS;
-        }
-
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>
@@ -252,7 +248,8 @@ namespace confocal_core.Common
             API_RETURN_CODE code = API_RETURN_CODE.API_SUCCESS;
             if (liveModeEnabled || captureModeEnabled)
             {
-                code = StartScanTask(0, "实时扫描");
+                CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+                code = StartScanTask(scanTask);
             }
 
             if (code == API_RETURN_CODE.API_SUCCESS)
@@ -497,7 +494,8 @@ namespace confocal_core.Common
                     channel.Activated = true;
                 }
 
-                code = StartScanTask(0, "实时扫描");
+                CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+                code = StartScanTask(scanTask);
             }
 
             if (ChannelActivateChangedEvent != null)
@@ -799,11 +797,26 @@ namespace confocal_core.Common
         {
             if (mConfig.IsScanning)
             {
-                return StartScanTask(0, "实时扫描");
+                CreateScanTask(0, "实时扫描", out ScanTask scanTask);
+                return StartScanTask(scanTask);
             }
             else
             {
                 mSequence.GenerateScanCoordinates();
+            }
+            return API_RETURN_CODE.API_SUCCESS;
+        }
+
+        /// <summary>
+        /// 在属性变化前执行
+        /// </summary>
+        /// <returns></returns>
+        private API_RETURN_CODE BeforePropertyChanged()
+        {
+            // 如果当前正在采集(有任一采集模式使能)，则先停止采集
+            if (ConfigViewModel.GetConfig().IsScanning)
+            {
+                return StopScanTask();
             }
             return API_RETURN_CODE.API_SUCCESS;
         }

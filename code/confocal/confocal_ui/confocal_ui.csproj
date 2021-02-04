@@ -144,6 +144,12 @@
     <Compile Include="View\FormScanParas.Designer.cs">
       <DependentUpon>FormScanParas.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormHistogram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormHistogram.Designer.cs">
+      <DependentUpon>FormHistogram.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormSysSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +190,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="View\FormScanParas.resx">
       <DependentUpon>FormScanParas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormHistogram.resx">
+      <DependentUpon>FormHistogram.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormSysSettings.resx">
       <DependentUpon>FormSysSettings.cs</DependentUpon>

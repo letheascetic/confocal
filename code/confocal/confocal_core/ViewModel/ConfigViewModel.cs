@@ -232,9 +232,6 @@ namespace confocal_core.ViewModel
         /// <returns></returns>
         public API_RETURN_CODE ScanPixelChangeCommand(ScanPixelModel selectedScanPixel)
         {
-            Scheduler scheduler = Scheduler.CreateInstance();
-            scheduler.BeforePropertyChanged();
-
             foreach (ScanPixelModel scanPixel in ScanPixelList)
             {
                 if (scanPixel.ID != selectedScanPixel.ID)

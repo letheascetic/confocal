@@ -28,9 +28,10 @@ namespace confocal_ui.View
         private TabPage[] mTabPages;
         private ImageBox[] mImages;
 
-        public FormScanImage()
+        public FormScanImage(ScanTask scanTask)
         {
             InitializeComponent();
+            mScanImageVM = new ScanImageViewModel(scanTask);
         }
 
         /// <summary>
@@ -38,7 +39,6 @@ namespace confocal_ui.View
         /// </summary>
         private void Initialize()
         {
-            mScanImageVM = new ScanImageViewModel();
             mTabPages = new TabPage[] { pageAll, page405, page488, page561, page640 };
             mImages = new ImageBox[] { imageAll, image405, image488, image561, image640 };
             InitializeTabPages();
