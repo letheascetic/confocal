@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="FullScanRange" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="AcquisitionMode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
