@@ -55,6 +55,8 @@
             this.cmdSysCfg = new C1.Win.C1Command.C1Command();
             this.cmdLinkScanParas = new C1.Win.C1Command.C1CommandLink();
             this.cmdScanParas = new C1.Win.C1Command.C1Command();
+            this.cmdLinkHistogram = new C1.Win.C1Command.C1CommandLink();
+            this.cmdHistogram = new C1.Win.C1Command.C1Command();
             this.cmdLinkFile = new C1.Win.C1Command.C1CommandLink();
             this.cmdLinkView = new C1.Win.C1Command.C1CommandLink();
             this.cmdLinkWindow = new C1.Win.C1Command.C1CommandLink();
@@ -71,8 +73,8 @@
             this.btnLaserRelease = new System.Windows.Forms.ToolStripButton();
             this.dockToolBar = new C1.Win.C1Command.C1CommandDock();
             this.toolBar = new C1.Win.C1Command.C1ToolBar();
-            this.cmdLinkHistogram = new C1.Win.C1Command.C1CommandLink();
-            this.cmdHistogram = new C1.Win.C1Command.C1Command();
+            this.cmdLinkPI = new C1.Win.C1Command.C1CommandLink();
+            this.cmdPI = new C1.Win.C1Command.C1Command();
             ((System.ComponentModel.ISupportInitialize)(this.cmdHolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockBottom)).BeginInit();
             this.dockBottom.SuspendLayout();
@@ -116,6 +118,7 @@
             this.cmdHolder.Commands.Add(this.cmdSysCfg);
             this.cmdHolder.Commands.Add(this.cmdScanParas);
             this.cmdHolder.Commands.Add(this.cmdHistogram);
+            this.cmdHolder.Commands.Add(this.cmdPI);
             this.cmdHolder.Owner = this;
             // 
             // cmdFileNew
@@ -209,7 +212,8 @@
             this.cmdLinkScanImage,
             this.cmdLinkCfg,
             this.cmdLinkScanParas,
-            this.cmdLinkHistogram});
+            this.cmdLinkHistogram,
+            this.cmdLinkPI});
             this.cmdMenuWindow.HideNonRecentLinks = false;
             this.cmdMenuWindow.Name = "cmdMenuWindow";
             this.cmdMenuWindow.ShortcutText = "";
@@ -278,6 +282,18 @@
             this.cmdScanParas.ShortcutText = "";
             this.cmdScanParas.Text = "扫描参数（&P）";
             this.cmdScanParas.Click += new C1.Win.C1Command.ClickEventHandler(this.ScanParasClick);
+            // 
+            // cmdLinkHistogram
+            // 
+            this.cmdLinkHistogram.Command = this.cmdHistogram;
+            this.cmdLinkHistogram.SortOrder = 5;
+            // 
+            // cmdHistogram
+            // 
+            this.cmdHistogram.Name = "cmdHistogram";
+            this.cmdHistogram.ShortcutText = "";
+            this.cmdHistogram.Text = "直方图分布（&H）";
+            this.cmdHistogram.Click += new C1.Win.C1Command.ClickEventHandler(this.HistogramClick);
             // 
             // cmdLinkFile
             // 
@@ -436,17 +452,17 @@
             this.toolBar.VisualStyle = C1.Win.C1Command.VisualStyle.Custom;
             this.toolBar.VisualStyleBase = C1.Win.C1Command.VisualStyle.Office2010Blue;
             // 
-            // cmdLinkHistogram
+            // cmdLinkPI
             // 
-            this.cmdLinkHistogram.Command = this.cmdHistogram;
-            this.cmdLinkHistogram.SortOrder = 5;
+            this.cmdLinkPI.Command = this.cmdPI;
+            this.cmdLinkPI.SortOrder = 6;
             // 
-            // cmdHistogram
+            // cmdPI
             // 
-            this.cmdHistogram.Name = "cmdHistogram";
-            this.cmdHistogram.ShortcutText = "";
-            this.cmdHistogram.Text = "直方图分布（&H）";
-            this.cmdHistogram.Click += new C1.Win.C1Command.ClickEventHandler(this.HistogramClick);
+            this.cmdPI.Name = "cmdPI";
+            this.cmdPI.ShortcutText = "";
+            this.cmdPI.Text = "压电平台（&P）";
+            this.cmdPI.Click += new C1.Win.C1Command.ClickEventHandler(this.PIClick);
             // 
             // FormMain
             // 
@@ -529,5 +545,7 @@
         private C1.Win.C1Command.C1Command cmdScanParas;
         private C1.Win.C1Command.C1CommandLink cmdLinkHistogram;
         private C1.Win.C1Command.C1Command cmdHistogram;
+        private C1.Win.C1Command.C1CommandLink cmdLinkPI;
+        private C1.Win.C1Command.C1Command cmdPI;
     }
 }

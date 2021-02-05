@@ -7,6 +7,7 @@ using confocal_core.Model;
 using confocal_core.ViewModel;
 using confocal_ui.View;
 using log4net;
+using PIControlDLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -209,6 +210,12 @@ namespace confocal_ui
         private void HistogramClick(object sender, C1.Win.C1Command.ClickEventArgs e)
         {
             mFormHistogram.Visible = cmdHistogram.Checked;
+        }
+
+        private void PIClick(object sender, C1.Win.C1Command.ClickEventArgs e)
+        {
+            PIControlWidget widget = new PIControlWidget();
+            widget.Show();
         }
     }
 }

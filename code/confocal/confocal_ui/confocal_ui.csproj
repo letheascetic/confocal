@@ -249,6 +249,10 @@
       <Project>{432aa977-3289-4711-8622-07c69da4ce08}</Project>
       <Name>confocal_core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PIControlDLL\PIControlDLL.csproj">
+      <Project>{4fb92177-7776-44f8-a208-c5d1859b7150}</Project>
+      <Name>PIControlDLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fullrange.jpg" />
