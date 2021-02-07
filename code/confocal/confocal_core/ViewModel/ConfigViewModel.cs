@@ -526,7 +526,7 @@ namespace confocal_core.ViewModel
         /// <summary>
         /// 扫描区域类型列表
         /// </summary>
-        public List<ScanAreaTypeModel> ScaAreaTypeList
+        public List<ScanAreaTypeModel> ScanAreaTypeList
         {
             get { return scanAreaTypeList; }
             set { scanAreaTypeList = value; RaisePropertyChanged(() => scanAreaTypeList); }
@@ -536,7 +536,7 @@ namespace confocal_core.ViewModel
         /// </summary>
         public ScanAreaTypeModel SelectedScanAreaType
         {
-            get { return ScaAreaTypeList.Where(p => p.IsEnabled).First(); }
+            get { return ScanAreaTypeList.Where(p => p.IsEnabled).First(); }
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -780,7 +780,7 @@ namespace confocal_core.ViewModel
             ScanPinHoleList = ScanPinHoleModel.Initialize();
             SelectedPinHole = ScanPinHoleList[0];
             // 扫描类型 & 范围
-            ScaAreaTypeList = new List<ScanAreaTypeModel>()
+            ScanAreaTypeList = new List<ScanAreaTypeModel>()
             {
                 ScanAreaTypeModel.Initialize(ScanAreaTypeModel.SQUARE),
                 ScanAreaTypeModel.Initialize(ScanAreaTypeModel.BANK)
