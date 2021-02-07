@@ -82,6 +82,9 @@
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.15.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="NationalInstruments.Common, Version=19.1.40.49152, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\NationalInstruments.Common.dll</HintPath>
@@ -112,7 +115,7 @@
   <ItemGroup>
     <Compile Include="Common\ApdSampleData.cs" />
     <Compile Include="Common\Laser.cs" />
-    <Compile Include="Common\Matrix.cs" />
+    <Compile Include="Common\NMatrix.cs" />
     <Compile Include="Common\NiDaq.cs" />
     <Compile Include="Common\PmtSampleData.cs" />
     <Compile Include="Common\ScanTask.cs" />

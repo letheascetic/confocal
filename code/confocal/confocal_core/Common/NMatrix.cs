@@ -1,6 +1,7 @@
 ﻿using confocal_core.Model;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
+using MathNet.Numerics.LinearAlgebra.Double;
 using NumSharp;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,22 @@ using System.Threading.Tasks;
 
 namespace confocal_core.Common
 {
-    public class Matrix
+    public class NMatrix
     {
+        /// <summary>
+        /// 求解矩阵
+        /// </summary>
+        /// <param name="matrixData">矩阵A</param>
+        /// <param name="matrixResult">矩阵结果</param>
+        /// <returns></returns>
+        public static double[] SolveMatrix(double[,] matrixData, double[] matrixResult)
+        {
+            DenseMatrix a = DenseMatrix.OfArray(matrixData);
+            DenseVector b = new DenseVector(matrixResult);
+            var x = a.LU().Solve(b);
+            return x.AsArray();
+        }
+
         /// <summary>
         /// 负电压转换成正电压
         /// </summary>

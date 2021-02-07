@@ -150,9 +150,9 @@ namespace confocal_ui.View
             {
                 data[i] = (short)i;
             }
-            NDArray matrix = Matrix.ToMatrix(data, 2, 20, 10, 1, 4, 2, 16);
+            NDArray matrix = NMatrix.ToMatrix(data, 2, 20, 10, 1, 4, 2, 16);
             Mat image = new Mat(10, 16, DepthType.Cv32S, 1);
-            Matrix.ToBankImage(matrix, ref image);
+            NMatrix.ToBankImage(matrix, ref image);
         }
 
     }
